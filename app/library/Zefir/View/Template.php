@@ -99,11 +99,11 @@ class Zefir_View_Template extends Zend_View
 	{
 		
 		$template = new Application_Model_TemplateSettings();
-		$template = $template->getDbTable()->findTemplateByName($template, $name);
+		//$template = $template->getDbTable()->findTemplateByName($template, $name);
 				
 		return (is_readable(APPLICATION_PATH.'/views/'.$name) 
 			&& file_exists(APPLICATION_PATH.'/layouts/scripts/'.$name.'_layout.tpl')
-			&& $template->_template_name != NULL
+			//&& $template->_template_name != NULL
 			);
 		 
 	}

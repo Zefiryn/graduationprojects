@@ -98,6 +98,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		require_once 'Zend/Acl/Role.php';
 		require_once 'Zend/Acl/Resource.php';
+		
+		$acl = new Zend_Acl();
+		$guestRole = new Zend_Acl_Role(new Zend_Acl_Role('guest'));
+		
+		$acl->addRole($guestRole);
+			//->addRole(new Zend_Acl_Role('user'), $guestRole);
+
+		//resources
+		$acl->addResource(new Zend_Acl_Resource('error'));
+		$acl->addResource(new Zend_Acl_Resource('index'));
+		
+		//clearance
+		$acl->allow(null, array('error', 'index'), null);
+		$acl->allow('guest', array('index', 'error'), array('index', 'show'));
+		
+		Zend_Registry::set('acl', $acl);
+		
+		return $acl;
 	}
 	
 	/**
