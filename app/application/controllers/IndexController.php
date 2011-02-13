@@ -5,12 +5,14 @@ class IndexController extends Zefir_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+		parent::init();  
     }
 
     public function indexAction()
     {
-        // action body
+        $main = $this->view->translations;
+		ksort($main);
+		$this->view->main = $main;
     }
 
 

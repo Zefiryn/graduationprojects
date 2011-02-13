@@ -19,7 +19,29 @@
         <modelFile modelName="TemplateSettings"/>
         <dbTableDirectory>
           <dbTableFile dbTableName="TemplateSettings"/>
+          <dbTableFile dbTableName="Settings"/>
+          <dbTableFile dbTableName="Files"/>
+          <dbTableFile dbTableName="Applications"/>
+          <dbTableFile dbTableName="WorkTypes"/>
+          <dbTableFile dbTableName="Degrees"/>
+          <dbTableFile dbTableName="Schools"/>
+          <dbTableFile dbTableName="Users"/>
+          <dbTableFile dbTableName="Editions"/>
+          <dbTableFile dbTableName="Localizations"/>
+          <dbTableFile dbTableName="Regulations"/>
+          <dbTableFile dbTableName="Faqs"/>
         </dbTableDirectory>
+        <modelFile modelName="Editions"/>
+        <modelFile modelName="Users"/>
+        <modelFile modelName="Schools"/>
+        <modelFile modelName="Degrees"/>
+        <modelFile modelName="WorkTypes"/>
+        <modelFile modelName="Applications"/>
+        <modelFile modelName="Files"/>
+        <modelFile modelName="Settings"/>
+        <modelFile modelName="Localizations"/>
+        <modelFile modelName="Regualtions"/>
+        <modelFile modelName="Faqs"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

@@ -3,6 +3,12 @@
 class ErrorController extends Zefir_Controller_Action
 {
 
+	public function init()
+	{
+		parent::init();
+		
+	}
+	
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
