@@ -1,12 +1,11 @@
 <?php
 
-class Application_Model_DbTable_TemplateSettings extends Zefir_Application_Model_DbTable
+class Application_Model_DbTable_WorkTypes extends Zefir_Application_Model_DbTable
 {
 
-    protected $_raw_name = 'template_settings';
-    protected $_primary = ''; 
-    protected $_name;
-
+    protected $_raw_name = 'work_types';
+	protected $_name = '';
+    protected $_primary = 'work_type_id';
 
     /**
      * An array of child tables information

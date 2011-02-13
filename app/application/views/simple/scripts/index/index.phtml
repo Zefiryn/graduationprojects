@@ -1,43 +1,26 @@
-<style>
-    a:link,
-    a:visited
-    {
-        color: #0398CA;
-    }
-
-    span#zf-name
-    {
-        color: #91BE3F;
-    }
-
-    div#welcome
-    {
-        color: #FFFFFF;
-        background-image: url(http://framework.zend.com/images/bkg_header.jpg);
-        width:  600px;
-        height: 400px;
-        border: 2px solid #444444;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    div#more-information
-    {
-        background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
-        height: 100%;
-    }
-</style>
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
-
-    <h3>This is your project's main page</h3>
-
-    <div id="more-information">
-        <p><img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" /></p>
-        <p>
-            Helpful Links: <br />
-            <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework Manual</a>
-        </p>
-    </div>
+<?php foreach($this->main as $lang => $texts): ?>
+<div class="main_column column_<?php echo $lang;?>">
+	<h2><?php echo $texts['main_page_header']?></h2>
+	<p class="column_text">
+		<?php echo $texts['main_page_text']?>
+		<br /><br />
+		<a href="">&gt; <?php echo $texts['main_page_more_link']?></a>
+	</p>
 </div>
+<?php endforeach;?>
+<p class="spacer_small">&nbsp;</p>
+
+<?php foreach ($this->main as $lang => $texts): ?>
+<div class="main_column_button column_<?php echo $lang;?>" >
+	<p class="column_button">
+	<a href="<?php echo $this->baseUrl;?>regulations" class="button_link"><?php echo $texts['regulation_link']?></a>
+	
+	<a href="<?php echo $this->baseUrl;?>application/new" class="button_link"><?php echo $texts['form_link']?></a>
+	
+	<a href="<?php echo $this->baseUrl;?>results" class="button_link"><?php echo $texts['result_link']?></a>			
+	
+	<a href="<?php echo $this->baseUrl;?>contact" class="button_link"><?php echo $texts['contact_link']?></a>
+	</p>
+</div>
+<?php endforeach;?>
+<p class="spacer_small" style="height:35px">&nbsp;</p>

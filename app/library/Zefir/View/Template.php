@@ -56,12 +56,12 @@ class Zefir_View_Template extends Zend_View
 		$templateSession = new Zend_Session_Namespace('template');
 		
 		//set template name
-		if(isset($_POST['template'])) 
-			$send_tpl = $_POST['template'];
+		if (isset($_POST['template_name']))
+			$send_tpl = $_POST['template_name'];
 		
-		elseif(isset($_GET['template']))
-			$send_tpl = $_GET['template'];
-		
+		elseif (isset($_GET['template_name']))
+			$send_tpl = $_GET['template_name'];
+			
 		elseif (isset($_COOKIE['template_name']))
 			$send_tpl = $_COOKIE['template_name'];
 		

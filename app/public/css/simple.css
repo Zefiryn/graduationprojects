@@ -1,0 +1,521 @@
+@CHARSET "UTF-8";
+body
+{
+	font-family: 'Droid Serif Pro', Rockwell, Georgia, serif;
+	background: #c71e1e; 
+	background-image: url(../img/simple/background.png);
+	background-repeat: repeat-x;
+	color: #000000;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.main
+{
+	width: 1200px;
+	border: 0px solid green;
+	margin: 0px auto 0px auto;
+	text-align: center;
+	padding: 0px;	
+}
+#header
+{
+	margin: 40px auto 40px 20px;
+	border: 0px solid black;
+	text-align: left;
+	float: left;
+}
+
+#content
+{
+	width: 1008px; 
+	margin: 0px auto 0px auto;
+	background: url(../img/simple/main_bg.png);
+	color: black;
+	border-bottom: 0px solid black;
+}
+
+/*main triple columns*/
+div.main_column
+{
+	width: 300px;
+	margin: 30px 10px 10px 10px;
+	padding: 0px;
+	text-align: left;
+	float: left;
+}
+p.column_text
+{
+	margin: 0px;
+	padding-left: 8px;
+	padding-top: 35px;
+	border-left: 1px solid black;
+}
+div.main_column_button
+{
+	width: 300px;
+	margin: 10px 10px 0px 10px;
+	padding: 0px;
+	text-align: left;
+	float: left;
+}
+div.column_cz
+{
+	margin-left: 35px;
+}	
+p.column_button
+{
+	border: 0px solid;
+	margin: 5px 0px 0px 0px;
+}
+a.button_link:link, a.button_link:visited
+{
+	color: #ffffff;
+	display: block;
+	width: 135px;
+	height: 22px;
+	margin: 5px 0px 0px 8px;
+	padding: 3px 0px 0px 8px;
+	background: url(../img/simple/button.png);
+	background-repeat: no-repeat;
+	font-family: Rockwell, Georgia, serif;
+	font-size: 12px;
+	text-decoration: none;
+	border: 0px solid;
+}
+a.button_link:hover
+{
+	background: url(../img/simple/button_over.png);
+	background-repeat: no-repeat;
+}
+
+/*APPLICATION FORM*/
+form.entry_form
+{
+	border-left: 1px solid black;
+	width: 700px;
+	padding: 0px 0px 0px 30px;
+	margin: 30px 0px 50px 35px;
+	float: left;
+	font-family: 'Trebuchet MS', sans-serif;
+	text-align: left;
+}
+form.entry_form h1
+{
+	margin: 0px;
+	padding: 0px;
+}
+p.readme
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #f03434;
+	font-style: italic;
+	margin: 10px 0px 45px 0px;
+}
+form.contact
+{
+	border: 0px solid black;
+	width: 700px;
+	padding: 0px 0px 0px 10px;
+	margin: 0px;
+	float: left;
+	font-family: 'Trebuchet MS', sans-serif;
+	text-align: left;
+}
+form p
+{
+	font-size: 13px;
+	margin: 15px 0px 0px 0px;
+	padding: 0px;
+}
+input.width1, select.width1
+{
+	width: 300px;
+	height: 20px;
+	font-size: 12px;
+	border: 1px solid red;
+}
+input.width2, select.width2
+{
+	width: 600px;
+	height: 20px;
+	font-size: 12px;
+	border: 1px solid red;
+}
+textarea.width2
+{
+	width: 600px;
+	height: 30px;
+	font-size: 12px;
+	border: 1px solid red;
+}
+img.error
+{
+	position: relative;
+	left: 5px;
+	top: 7px;
+}
+img.error2
+{
+	position: relative;
+	left: 5px;
+	top: 7px;
+}
+img.error_file
+{
+	position: absolute;
+	margin-left: 5px;
+	margin-top: 0px;
+}
+img.error_text
+{
+	position: absolute;
+	margin-top: 0px;
+}
+img.error_agreement
+{
+	position: absolute;
+	margin-left: 700px;
+	margin-top: 24px;
+}
+span.error_info
+{
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 11px;
+	color: red;
+	font-weight: bold;
+}
+input.radio, input.checkbox
+{
+	border: 1px solid red;
+	background: white;
+}
+textarea
+{
+	width: 600px;
+	height: 150px;
+	border: 1px solid red;
+}
+#word_count
+{
+	margin: 0px 0px 10px 0px;
+}
+input.file
+{
+	width: 540px;
+	height: 20px;
+	font-size: 13px;
+	border: 0px;
+	border-bottom: 1px solid red;
+	background: white;
+}
+p.file
+{
+	line-height: 26px;
+}
+p.file span
+{
+	font-size: 14px;
+}
+input.submit
+{
+	background: gray;
+	border: 1px solid #555555; 
+	padding: 3px 6px 3px 6px;
+	color: white;
+	font-family: 'Trebuchet MS', sans-serif;
+}
+/*RESULT INFO*/
+div.adding_error
+{
+	width: 650px;
+	border: 0px solid red;
+	margin: 0px 0px 0px 0px;
+	padding-left: 0px;
+}
+p.adding_info
+{
+	font-size: 18px;
+	margin: 70px 0px 0px 0px;
+	border: 0px solid;
+	text-align: center;
+	width: 650px;
+}
+p.mail_info
+{
+	font-size: 14px;
+	font-weight: normal;
+	margin: 15px 0px 0px 0px;
+	border: 0px solid;
+	text-align: center;
+	width: 650px;
+}
+ul.result
+{
+	font-size: 22px;
+	margin: 10px 0px 0px 0px;
+	border: 0px solid;
+	text-align: center;
+	width: 680px;
+}
+li.result_data
+{
+	font-size: 14px;
+	text-align: left;
+	margin-top: 10px;
+}
+span.mail_error
+{
+	font-size: 12px;
+}
+/*REGULATION PAGE*/
+div.regulation, div.faq, div.contact, div.about, div.confirm, div.result, div.db_error
+{
+	border-left: 1px solid black;
+	width: 700px;
+	padding: 0px 0px 0px 20px;
+	margin: 30px 0px 50px 35px;
+	float: left;
+	font-family: 'Trebuchet MS', sans-serif;
+	text-align: justify;
+}
+p.rule, p.about, p.faq, p.db_error
+{
+	width: 620px;
+	margin: 15px 0px 0px 10px;
+	padding: 5px 0px 5px 0px;
+	font-size: 13px;
+	text-align: left;
+	border: 0px solid; 
+}
+p.early_result
+{
+	color: red;
+	text-align: center;
+	font-size: 16px;
+}
+p.submenu
+{
+	position: relative;
+	margin: 30px 0px 0px 760px;
+	padding: 90px 0px 0px 0px;
+	border: 0px solid green;
+	text-align: left;
+}
+p.previous
+{
+	margin: 0px 0px 0px 25px;
+	padding: 0px 0px 30px 0px;
+	text-align: left;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 12px;	
+}
+
+/*general classes for all tags*/
+h1
+{
+	font-family: Rockwell, Georgia, serif;
+	font-size: 32px;
+	font-weight: normal; 
+	text-align: left;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 10px;
+}
+h2
+{
+	padding: 0px;
+	padding-left: 8px;
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	border-left: 1px solid black;
+	font-family: Rockwell, Georgia, serif;
+	font-weight: normal;
+	font-size: 26px;
+}
+p
+{
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	color: #000000;
+}
+a:link, a:visited
+{
+	color: #e20404;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #ff8080;
+	text-decoration: underline;
+}
+input, select
+{
+	background: white;
+	border: 1px solid red;
+	margin: 0px;
+	padding: 0px;
+}
+span
+{
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 12px;
+}
+img
+{
+	border: 0px;
+}
+.spacer
+{
+	clear: left;
+	margin:0px;
+	height: 40px;
+}
+.spacer_small
+{
+	clear: left;
+	margin: 0px;
+	height: 0px;
+}
+
+
+p.language_bar
+{
+	text-align: right;
+	margin: 0px 20px 0px 0px;
+	padding: 0px;
+	font-size: 14px;
+}
+p.language_bar a:link, p.language_bar a:visited
+{
+	color: black;
+	font-size: 13px;
+}
+p.language_bar a:hover
+{
+	color: red;
+} 
+
+/*footer*/
+#content_spacer
+{
+	width: 1008px;
+	height: 28px;
+	border: 0px solid;
+	padding: 0px;
+	margin: 0px auto 0px auto;
+	background: url(../img/simple/content_shadow.png);
+	background-repeat: no-repeat;
+}
+.partners
+{
+	border: 0px solid;
+	width: 990px;
+	margin: 0px auto 5px auto;
+	padding: 0px;
+	text-align: left;
+	color: #ffffff;
+}
+#footer
+{
+	background: #300607;
+	background-image: url(../img/simple/background_footer.png);
+	width: 1000px;
+	margin: 0px auto 0px auto;
+}
+p.footer_paragraph
+{
+	border-left: 1px solid white;
+	padding: 0px 0px 0px 10px;
+	margin: 10px 8px 0px 0px;
+	width: 300px;
+	min-height: 40px;
+	float: left;
+	display: table-column;
+	vertical-align: bottom;
+	text-align: left;
+	font-size: 11px;
+	color: white;
+}
+p.footer_paragraph img
+{
+	margin-top: 20px;
+	margin-right: 25px;
+	vertical-align: bottom;
+}
+img.visegradfund
+{
+	border: 0px solid;
+	margin: 0px 0px 20px 0px;
+}
+p.subfooter
+{
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 11px;
+	margin: 0px;
+	padding: 20px 0px 15px 0px;
+	color: white;
+}
+
+/*mail*/
+div.mainMail
+{
+	width: 100%;
+	border: 0px solid green;
+	margin: 0px auto 0px auto;
+	text-align: center;
+	padding: 0px;	
+}
+#contentMail
+{
+	width: 90%; 
+	margin: 0px auto 0px auto;
+	background: white;
+	color: black;
+	border-bottom: 0px solid black;
+}
+div.mail
+{
+	border-left: 1px solid black;
+	width: 900px;
+	padding: 0px 0px 0px 20px;
+	margin: 30px 0px 50px 35px;
+	float: left;
+	font-family: 'Trebuchet MS', sans-serif;
+	text-align: justify;
+}
+p.mail
+{
+	font-weight: bold;
+	margin: 20px 0px 0px 10px;
+	font-size: 14px;
+}
+p.send_data
+{
+	font-size: 14px;
+	margin: 5px 0px 0px 10px;
+}
+#flash
+{
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	text-align: center;	
+	display: none;
+}
+p.flash
+{
+	width: 300px;
+	padding: 5px 15px 5px 0px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: "Palatino Linotype", Georgia, "Book Antiqua", Garamond, serif;
+	font-size: 16px;
+	-moz-border-radius-bottomright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+}
