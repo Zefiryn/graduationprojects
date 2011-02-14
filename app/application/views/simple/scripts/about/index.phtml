@@ -1,0 +1,26 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'about',
+						'lang' => $this->lang));
+?>
+
+<div class="about">
+	<h1><?php echo $this->translation('about_header');?></h1>
+	<p class="spacer">&nbsp;</p>
+	 
+	<?php foreach ($this->about as $text):?>
+	<p class="about">
+		<?php echo $text;?>
+	</p>
+	<?php endforeach;?>
+	
+</div>	
+<?php echo $this->partial('partials/submenu.phtml', 
+			array(	'baseUrl' => $this->baseUrl));
+?>
+
+	<p class="spacer_small">&nbsp;</p> 
+	<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; Poprzednia strona</a></p>
+
+<p class="spacer_small" style="height:35px">&nbsp;</p>

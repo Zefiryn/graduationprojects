@@ -1,0 +1,27 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'regulations',
+						'lang' => $this->lang));
+?>
+<div class="regulation">
+	<h1><?php echo $this->translation('regulation_header');?></h1>
+	<p class="spacer">&nbsp;</p>
+	
+	<?php foreach($this->regulations as $paragraph => $text):?>
+	<p class="rule">
+		<span style="font-weight: bold">&sect; <?php echo $paragraph;?></span><br />
+		<?php echo $text;?>
+	</p> 
+	<?php endforeach; ?>
+</div>
+
+<?php echo $this->partial('partials/submenu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'regulations' => TRUE));
+?>
+
+	<p class="spacer_small">&nbsp;</p> 
+	<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; Poprzednia strona</a></p>
+
+<p class="spacer_small" style="height:35px">&nbsp;</p>

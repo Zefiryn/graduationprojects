@@ -118,10 +118,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		//resources
 		$acl->addResource(new Zend_Acl_Resource('error'));
 		$acl->addResource(new Zend_Acl_Resource('index'));
+		$acl->addResource(new Zend_Acl_Resource('about'));
+		$acl->addResource(new Zend_Acl_Resource('regulations'));
+		$acl->addResource(new Zend_Acl_Resource('faq'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
-		$acl->allow('guest', array('index', 'error'), array('index', 'show'));
+		$acl->allow('guest', array('about', 'regulations', 'faq'), array('index'));
 		
 		Zend_Registry::set('acl', $acl);
 		
