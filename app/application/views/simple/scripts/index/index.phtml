@@ -4,7 +4,7 @@
 	<p class="column_text">
 		<?php echo $texts['main_page_text']?>
 		<br /><br />
-		<a href="">&gt; <?php echo $texts['main_page_more_link']?></a>
+		<a href="<?php echo $this->baseUrl.$lang;?>/about">&gt; <?php echo $texts['main_page_more_link']?></a>
 	</p>
 </div>
 <?php endforeach;?>
@@ -13,13 +13,13 @@
 <?php foreach ($this->main as $lang => $texts): ?>
 <div class="main_column_button column_<?php echo $lang;?>" >
 	<p class="column_button">
-	<a href="<?php echo $this->baseUrl;?>regulations" class="button_link"><?php echo $texts['regulation_link']?></a>
+	<a href="<?php echo $this->baseUrl.$lang;?>/regulations" class="button_link"><?php echo $texts['regulation_link']?></a>
 	
-	<a href="<?php echo $this->baseUrl;?>application/new" class="button_link"><?php echo $texts['form_link']?></a>
+	<a href="<?php echo $this->baseUrl.$lang;?>/application/new" class="button_link"><?php echo $texts['form_link']?></a>
 	
-	<a href="<?php echo $this->baseUrl;?>results" class="button_link"><?php echo $texts['result_link']?></a>			
+	<a href="<?php echo $this->baseUrl.$lang;?>/results" class="button_link"><?php echo $texts['result_link']?></a>			
 	
-	<a href="<?php echo $this->baseUrl;?>contact" class="button_link"><?php echo $texts['contact_link']?></a>
+	<a href="<?php echo $this->baseUrl.$lang;?>/contact" class="button_link"><?php echo $texts['contact_link']?></a>
 	</p>
 </div>
 <?php endforeach;?>
