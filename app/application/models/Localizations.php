@@ -17,8 +17,8 @@ class Application_Model_Localizations extends GP_Application_Model
 	{
 	    parent::__construct($options);
 	}
-
-	public function getTranslationTables()
+	
+	public function getTranslationFromDb()
 	{
 		$translation = array();
 		

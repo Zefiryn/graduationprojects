@@ -1,0 +1,22 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'auth',
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+<h1><?php echo $this->translate('login_header'); ?></h1>
+<p class="spacer">&nbsp;</p>
+
+<?php if ($this->wrongLogin == TRUE):?>
+<br /><br />
+<div class="error-div">
+	<p class="error"><?php $this->translate('login_error'); ?>.</p>
+</div>
+<?php endif;?>
+
+<?php echo $this->loginForm;?>
+</div>
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

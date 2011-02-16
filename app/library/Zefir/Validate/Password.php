@@ -70,7 +70,7 @@ class Zefir_Validate_Password extends Zend_Validate_Abstract {
 	 * @param int $maximum
 	 * @return void
 	 */
-	public function __construct($minimum=8, $maximum=16) {
+	public function __construct($minimum=5, $maximum=16) {
 		$this->_minimum = (integer) $minimum;
 		$this->_maximum = (integer) $maximum;
 	}

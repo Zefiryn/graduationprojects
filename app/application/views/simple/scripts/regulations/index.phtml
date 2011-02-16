@@ -4,14 +4,14 @@
 						'link' => 'regulations',
 						'lang' => $this->lang));
 ?>
-<div class="regulation">
-	<h1><?php echo $this->translation('regulation_header');?></h1>
+<div class="content">
+	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->regulations as $paragraph => $text):?>
+	<?php foreach($this->regulations as $regulation):?>
 	<p class="rule">
-		<span style="font-weight: bold">&sect; <?php echo $paragraph;?></span><br />
-		<?php echo $text;?>
+		<span style="font-weight: bold">&sect; <?php echo $regulation->_paragraph_no;?></span><br />
+		<?php echo  $regulation->_paragraph_text;?>
 	</p> 
 	<?php endforeach; ?>
 </div>
@@ -21,7 +21,5 @@
 						'regulations' => TRUE));
 ?>
 
-	<p class="spacer_small">&nbsp;</p> 
-	<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; Poprzednia strona</a></p>
-
-<p class="spacer_small" style="height:35px">&nbsp;</p>
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

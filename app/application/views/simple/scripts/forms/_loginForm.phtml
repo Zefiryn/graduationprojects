@@ -1,0 +1,19 @@
+<?php $form = $this->element; ?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+      method="<?php echo $this->escape($form->getMethod()); ?>">
+
+	<?php echo $form->csrf->renderViewHelper(); ?> 
+
+		<p class="label"><?php  echo $this->translate($form->nick->getLabel());?>:&nbsp;</p>
+		<?php echo $form->nick;?>
+		
+		<p class="label"><?php  echo $this->translate($form->password->getLabel());?>:&nbsp;</p>
+		<?php echo $form->password;?>
+  
+		
+		<p class="submit center">
+			<?php echo $form->submit; ?>
+		</p>
+		
+</form>

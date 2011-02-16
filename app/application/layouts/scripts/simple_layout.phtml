@@ -6,15 +6,16 @@
 	<meta name="Description" content="Skrypt pozwalający w łatwy sposób zarządzać własnym księgozbiorem" />
 	<meta name="author" content="Artur Jewuła" />
 	<link href="http://webfonts.fontslive.com/css/ebf21b27-0dc5-4085-9c64-175f9395fa6a.css" rel="stylesheet" type="text/css" />
-	<?php echo $this->headTitle()?>
+	<?php echo $this->headTitle();?>
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
-	<?php echo $this->headScript() ?>
+	<?php echo $this->headScript(); ?>
+	<?php echo $this->headScript()->appendFile($this->baseUrl.'js/simple/script.js'); ?>
 	
 </head>
 <body>
 	<div id="flash">
-		<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->flash?></p>
+		<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->translation($this->flash);?></p>
 	</div>
 	
 	<div class="main">
@@ -22,17 +23,18 @@
 			<img src="<?php echo $this->baseUrl;?>img/simple/logo_<?php echo strtoupper($this->lang);?>.png" id="header" alt="logo" />
 		</a>
 		<p class="spacer_small">&nbsp;</p>
-		
+
 		<div id="content">
 			<?php echo $this->layout()->content; ?>
+			<p class="spacer_small">&nbsp;</p>
 		</div>
 		
 		<p id="content_spacer">&nbsp;</p>
 				
 		<p class="partners">
-			<?php echo $this->translation('Partners', 'cz');?> 
-			| <?php echo $this->translation('Partners');?> | 
-			<?php echo $this->translation('Partners', 'sk');?>
+			<?php echo $this->translate('Partners', 'cz');?> 
+			| <?php echo $this->translate('Partners');?> | 
+			<?php echo $this->translate('Partners', 'sk');?>
 		</p>
 		
 		<div id="footer">
@@ -57,7 +59,7 @@
 			<p class="spacer">&nbsp;</p>
 			
 			<p class="footer_paragraph" style="margin-left: 35px;">
-				<?php echo $this->translations['cz']['footer_visegrad'];?>
+				<?php echo $this->translations['cs']['footer_visegrad'];?>
 			</p>
 			<p class="footer_paragraph">
 				<?php echo $this->translations['pl']['footer_visegrad'];?>

@@ -52,20 +52,16 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 		$view = $this->_getView();
 
 		if (!$auth->hasIdentity())
-		{ 
-			$user_status = 'Niezalogowany';
 			$role = 'guest';
-    		
-		}
+
     	else
     	{
-    		$user_status = 'Zalogowany';
     		$user = new Application_Model_Users();
     		$role = $user->getDbTable()->getUserRole($auth->getIdentity(), $user);
 		}
     	
     	Zend_Registry::set('role', $role);
-    	$view->userStatus = $user_status;
+    	$view->userStatus = $role;
     	$view->logged = $auth->hasIdentity();
 	}
 	
@@ -90,7 +86,7 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 				$options = Zend_Registry::get('options');
 				$authNamespace->redirect = 
 					str_replace($options['resources']['frontController']['baseUrl'], '/', $request->getRequestUri());				
-				$this->getActionController()->flashMe('Dostęp do tej części wymaga zalogowania', 'FAILURE');
+				$this->getActionController()->flashMe('access_denied', 'FAILURE');
 				
 				//save post data
 				$request = $this->getRequest();

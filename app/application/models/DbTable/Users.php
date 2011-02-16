@@ -19,5 +19,19 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
 	 */
 	protected $_dependentTables = array(
 		'_applications' => 'Application_Model_DbTable_Applications');
+	
+	/**
+	 * Get user role  
+	 * @param string $nick
+	 * @param Application_Model_Users $user
+	 */
+	public function getUserRole($nick, $user)
+    {
+    	$select = $this->select()->where('nick = ?', $nick);
+    	$row = $this->fetchRow($select);
+    	
+    	return ($row->role);
+    }
+
 }
 

@@ -133,3 +133,15 @@ CREATE TABLE settings(
 		REFERENCES template_settings(template_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE news(
+	news_id int not null auto_increment,
+	news_title varchar(100) not null,
+	news_text text not null,
+	added int not null default current_timestamp,
+	current_edition smallint(6),
+	PRIMARY KEY(current_edition),
+	FOREIGN KEY(current_edition)
+		REFERENCES editions(edition_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
