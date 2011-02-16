@@ -68,11 +68,6 @@ class Zefir_View_Template extends Zend_View
 		elseif (isset($templateSession->template_name))
 			$send_tpl = $templateSession->template_name;
 
-		elseif ($auth->hasIdentity())
-		{
-			$user = new Application_Model_Users();
-			$send_tpl = $user->getDbTable()->getUserTemplate($auth->getIdentity());
-		}
 		else
 			$send_tpl = $options['view']['default_template'];
 		

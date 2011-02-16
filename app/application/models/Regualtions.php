@@ -22,13 +22,14 @@ class Application_Model_Regualtions extends GP_Application_Model
 	
 	public function getRegulations()
 	{
-		$lang = new Zend_Session_Namespace('lang');
-		$rowset = $this->getDbTable()->getRegulations($lang->lang);
+		$lang = Zend_Registry::get('Zend_Translate');
+		$rowset = $this->getDbTable()->getRegulations($lang->getLocale());
 		
 		$regulations = array();
 		foreach($rowset as $row)
 		{
-			$regulations[$row->paragraph_no] = $row->paragraph_text;
+			$paragraph = new $this;
+			$regulations[] = $paragraph->populate($row);
 		}
 		
 		return($regulations);

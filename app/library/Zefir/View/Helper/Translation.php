@@ -27,8 +27,14 @@ class Zefir_View_Helper_Translation extends Zend_View_Helper_Abstract
 		$this->_setLang();
 		$this->_setTranslations();
 		
+		//set the language
 		$lang = $lang != NULL && array_key_exists($lang, $this->_translations) ? 
 			$lang : $this->_lang; 
-		return ($this->_translations[$lang][$key]);
+		
+		//check if $key exist
+		$text = array_key_exists($key, $this->_translations[$lang]) ?
+			$this->_translations[$lang][$key] : $key;
+		
+		return $text;
 	}
 }

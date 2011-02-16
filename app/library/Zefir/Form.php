@@ -25,10 +25,10 @@ class Zefir_Form extends Zend_Form
 	);
 	
 	/**
-	 * default bib decorators
+	 * default additional decorators
 	 * @var array
 	 */
-	protected $_bibDecoratorsStandard = array(
+	protected $_additionalDecorators = array(
 				array('TextField'),
 				array('ErrorMsg'),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
@@ -47,14 +47,14 @@ class Zefir_Form extends Zend_Form
 	
 	public function init()
 	{
-		$this->addElementPrefixPath('Bib_Decorator', 'Bib/Form/Decorator', 'decorator');
-		$this->addPrefixPath('Bib_Decorator', 'Bib/Form/Decorator', 'decorator');
+		$this->addElementPrefixPath('Zefir_Decorator', 'Zefir/Form/Decorator', 'decorator');
+		$this->addPrefixPath('Zefir_Decorator', 'Zefir/Form/Decorator', 'decorator');
 	}
 	
-	protected function _getStandardDecorators($bib = TRUE)
+	protected function _getStandardDecorators($additional = TRUE)
 	{
-		if ($bib)
-			return $this->_bibDecoratorsStandard;
+		if ($additional)
+			return $this->_additionalDecorators;
 		else
 			return $this->_decoratorsStandard;
 	}

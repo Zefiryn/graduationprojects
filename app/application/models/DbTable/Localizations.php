@@ -22,7 +22,7 @@ class Application_Model_DbTable_Localizations extends Zefir_Application_Model_Db
 	public function isLocalization($lang)
 	{
 		$select = $this->select()->where('lang_code = ?', $lang);
-		return $this->fetchAll($select);
+		return $this->fetchAll($select)->count();
 	}
 }
 

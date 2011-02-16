@@ -112,8 +112,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl = new Zend_Acl();
 		$guestRole = new Zend_Acl_Role(new Zend_Acl_Role('guest'));
 		
-		$acl->addRole($guestRole);
-			//->addRole(new Zend_Acl_Role('user'), $guestRole);
+		$acl->addRole($guestRole)
+			->addRole(new Zend_Acl_Role('user'), $guestRole)
+			->addRole(new Zend_Acl_Role('juror'), 'user')
+			->addRole(new Zend_Acl_Role('admin'), 'juror');
 
 		//resources
 		$acl->addResource(new Zend_Acl_Resource('error'));
@@ -121,10 +123,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('about'));
 		$acl->addResource(new Zend_Acl_Resource('regulations'));
 		$acl->addResource(new Zend_Acl_Resource('faq'));
+		$acl->addResource(new Zend_Acl_Resource('auth'));
+		$acl->addResource(new Zend_Acl_Resource('contact'));
+		$acl->addResource(new Zend_Acl_Resource('applications'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
-		$acl->allow('guest', array('about', 'regulations', 'faq'), array('index'));
+		$acl->allow(null, array('about', 'regulations', 'faq'), array('index'));
+		$acl->allow(null, array('auth'), array('index', 'login'));
+		$acl->allow(null, array('contact'), null);
+		$acl->allow('user', array('auth'), array('logout'));
+		
+		$acl->allow(null, array('applications'), array('index', 'new'));
+		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
+		$acl->allow('juror', array('applications'), array('vote'));
+		$acl->deny('juror', array('applications'), array('edit', 'update'));
+		$acl->allow('admin', array('applications'), null);
 		
 		Zend_Registry::set('acl', $acl);
 		
@@ -148,6 +162,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			new Zefir_Action_Helper_Localization()
 			);
 	}
-
+	
 }
 

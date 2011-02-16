@@ -21,8 +21,9 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 	 */
 	public function preDispatch()
 	{
-		$this->_setLanguage();
-		$this->_getTranslationTable();
+		$request = $this->getRequest();
+		
+		$this->_setLanguage($request);
 	}
 	
 	/**
@@ -41,15 +42,15 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 				
 	}
 	
-	private function _setLanguage()
+	private function _setLanguage($request)
 	{
 		$options = Zend_Registry::get('options');
 		$auth = Zend_Auth::getInstance();
 		$langSession = new Zend_Session_Namespace('lang');
-		$request = $this->getRequest();
 		
 		$lang = $request->getParam('lang', '');
 		
+		//get locale
 		if ($lang != NULL)	
 			$lang = substr($lang, 0, strrpos($lang, '/'));
 		
@@ -66,16 +67,23 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		}
 		else
 			$lang = $options['i18n']['default_language'];
-			
-		//check if the template is correct
+	
+		//check if the language exist
 		if ($this->_langExists($lang))
 			$lang = $lang;
 		else
 			$lang = $options['i18n']['default_language'];
 
+		
 		//set current value in cookie and in session
 		setcookie("lang",$lang, time() + (60*60*24*14) , '/');
 		$langSession->lang = $lang;
+		
+		//set locale
+		$this->_setLocale($lang);
+		
+		//set translate object
+		$this->_setTranslation($lang);
 		
 		return $lang;	
 	}
@@ -86,16 +94,30 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		return ($localization->getDbTable()->isLocalization($lang));	
 	}
 	
-	private function _getTranslationTable()
+	private function _setLocale($lang)
+	{
+		$array = array('pl' => 'pl_PL', 'cs' => 'cs_CZ', 'sk' => 'sk_SK');
+		
+		//locale object
+		$zl = new Zend_Locale();
+    	$zl->setLocale($array[$lang]);
+    	Zend_Registry::set('Zend_Locale', $zl);
+	}
+
+	private function _setTranslation($language)
 	{
 		$view = $this->_getView();
 		$langSession = new Zend_Session_Namespace('lang');
 		
 		$lang = new Application_Model_Localizations();
-		$translations = $lang->getTranslationTables();
+		$translations = $lang->getTranslationFromDb();
 		
 		Zend_Registry::set('translations', $translations);
 		$view->translations = $translations;
 		$view->lang = $langSession->lang;
+		
+		//set translation object
+		$translate = new Zend_Translate('array',  $translations[$language], $language);
+    	Zend_Registry::set('Zend_Translate', $translate);
 	}
 }

@@ -59,7 +59,7 @@ div.main_column_button
 	text-align: left;
 	float: left;
 }
-div.column_cz
+div.column_cs
 {
 	margin-left: 35px;
 }	
@@ -270,7 +270,7 @@ span.mail_error
 	font-size: 12px;
 }
 /*REGULATION PAGE*/
-div.regulation, div.faq, div.contact, div.about, div.confirm, div.result, div.db_error
+div.content
 {
 	border-left: 1px solid black;
 	width: 700px;

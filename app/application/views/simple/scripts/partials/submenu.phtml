@@ -1,19 +1,23 @@
 <p class="submenu"> 
 	<br /> 
 		<?php if (!isset($this->regulations)): ?>
-		<a href="<?php echo $this->baseUrl;?>regulations" class="button_link"><?php echo $this->translation('regulation_link')?></a>
+		<a href="<?php echo $this->baseUrl;?>regulations" class="button_link"><?php echo $this->translate('regulation_link')?></a>
+		<?php endif; ?>
+		
+		<?php if (!isset($this->faq)): ?>
+		<a href="<?php echo $this->baseUrl;?>faq" class="button_link"><?php echo $this->translate('faq_link')?></a>
 		<?php endif; ?>
 		
 		<?php if (!isset($this->applications)): ?>
-		<a href="<?php echo $this->baseUrl;?>application/new" class="button_link"><?php echo $this->translation('form_link')?></a>
+		<a href="<?php echo $this->baseUrl;?>application/new" class="button_link"><?php echo $this->translate('form_link')?></a>
 		<?php endif; ?>
 		
 		<?php if (!isset($this->results)): ?>
-		<a href="<?php echo $this->baseUrl;?>results" class="button_link"><?php echo $this->translation('result_link')?></a>
+		<a href="<?php echo $this->baseUrl;?>results" class="button_link"><?php echo $this->translate('result_link')?></a>
 		<?php endif; ?>
 		
 		<?php if (!isset($this->contact)): ?>			
-		<a href="<?php echo $this->baseUrl;?>contact" class="button_link"><?php echo $this->translation('contact_link')?></a>
+		<a href="<?php echo $this->baseUrl;?>contact" class="button_link"><?php echo $this->translate('contact_link')?></a>
 		<?php endif; ?>
 	</p> 
 	<p class="spacer_small">&nbsp;</p>
