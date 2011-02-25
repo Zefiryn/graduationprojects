@@ -19,5 +19,6 @@ class Application_Model_DbTable_TemplateSettings extends Zefir_Application_Model
 	 * @var array
 	 */
 	protected $_dependentTables = array();
+	
 }
 

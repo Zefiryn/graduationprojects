@@ -1,7 +1,7 @@
 <br />
 <?php echo $this->partial('partials/lang_menu.phtml', 
 			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'regulations',
+						'link' => 'regulations/edit',
 						'lang' => $this->lang));
 ?>
 <div class="content">
@@ -9,13 +9,8 @@
 	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->regulations as $regulation):?>
-	<p class="rule">
-		<span style="font-weight: bold">&sect; <?php echo $regulation->_paragraph_no;?></span>
-		<br />
-		<?php echo  $regulation->_paragraph_text;?>
-	</p> 
-	<?php endforeach; ?>
+	<?php echo $this->regulations;?>
+	
 </div>
 
 <?php echo $this->partial('partials/submenu.phtml', 
@@ -26,6 +21,6 @@
 <p class="spacer_small">&nbsp;</p> 
 <p class="previous">
 	<a href="<?php echo $this->baseUrl;?>">
-	&lt; <?php echo $this->translate('previous_page');?>
+		&lt; <?php echo $this->translate('previous_page');?>
 	</a>
 </p>

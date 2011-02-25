@@ -47,6 +47,7 @@
         <formFile formName="Contact"/>
         <formFile formName="Application"/>
         <formFile formName="Vote"/>
+        <formFile formName="Regulations"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

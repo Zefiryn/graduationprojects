@@ -18,5 +18,16 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 	 * @var array
 	 */
 	protected $_dependentTables = array();
+	
+	public function findEdition($edition)
+	{
+		if (ctype_digit($edition))
+			$row = $this->find($edition);
+		
+		else 
+			$row = $this->fetchRow($this->select()->where('edition_name = ? ', $edition));
+		
+		return $row;
+	}
 }
 

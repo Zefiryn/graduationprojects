@@ -3,15 +3,16 @@
 class Application_Model_Regualtions extends GP_Application_Model
 {
 	protected $_paragraph_id;
+	protected $_edition;
 	protected $_regulation_lang;
 	protected $_paragraph_no;
 	protected $_paragraph_text;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Regulations';
 	
-	protected $_set_vars = array('_paragraph_id', '_regulation_lang', 
+	protected $_set_vars = array('_paragraph_id', '_edition', '_regulation_lang', 
 								'_paragraph_no', '_paragraph_text'); 
-	protected $_get_vars = array('_paragraph_id', '_regulation_lang', 
+	protected $_get_vars = array('_paragraph_id', '_edition', '_regulation_lang', 
 								'_paragraph_no', '_paragraph_text'); 
 	
 	
@@ -20,10 +21,14 @@ class Application_Model_Regualtions extends GP_Application_Model
 	    parent::__construct($options);
 	}
 	
-	public function getRegulations()
+	public function getRegulations($edition)
 	{
 		$lang = Zend_Registry::get('Zend_Translate');
-		$rowset = $this->getDbTable()->getRegulations($lang->getLocale());
+		
+		$editions = new Application_Model_Editions();
+		$edition = $editions->getDbTable()->findEdition($edition);
+
+		$rowset = $this->getDbTable()->getRegulations($lang->getLocale(), $edition->edition_id);
 		
 		$regulations = array();
 		foreach($rowset as $row)
@@ -32,9 +37,77 @@ class Application_Model_Regualtions extends GP_Application_Model
 			$regulations[] = $paragraph->populate($row);
 		}
 		
-		return($regulations);
-		
+		return($regulations);	
 	}
 
+	public function saveRegulations($data)
+	{
+		$data = $this->_prepareDataFromForm($data);
+		if (isset($data['new']))
+		{
+			$newdata = $data['new'];
+			unset($data['new']);
+		}
+		
+		//get editing edition and language
+		$current_edition = Zend_Registry::get('edition');
+		$edition = new Application_Model_Editions();
+		$edition->populate($edition->getDbTable()->findEdition($current_edition));
+		$lang = new Zend_Session_Namespace('lang');
+		
+		//update existing one
+		foreach($data as $number => $regulation)
+		{			
+			$reg = new $this;
+			$reg->_paragraph_id = $number; 
+			$reg->_edition = $edition->_edition_id;
+			$reg->_regulation_lang = $lang->lang;  
+			$reg->_paragraph_no = $regulation['paragraph_no'];
+			$reg->_paragraph_text = $regulation['paragraph_text'];
+			
+			if ($regulation['paragraph_remove'] == '1')
+			{
+				$this->getDbTable()->deleteParagraph($reg);
+			}	
+			else
+			{
+				
+				$this->getDbTable()->saveParagraph($reg);
+			}
+		}
+	}
+	
+	protected function _prepareDataFromForm($data)
+	{
+		foreach($data as $key => $value)
+		{
+			if (!strstr($key, 'new'))
+			{
+				$no = substr($key, strrpos($key, '_')+1);
+				$key = substr($key, 0, strrpos($key, '_'));
+				$save[$no][$key] = $value;
+			}
+			else
+			{
+				if ($value != '')
+				{
+					$no = substr($key, strrpos($key, '_')+1);
+					$key = substr($key, 0, strrpos($key, '_'));
+					$save['new'][$no][$key] = $value;
+				}
+			}
+		}
+		
+		return ($save);
+	}
+	
+	public function getValues()
+	{
+		return array('paragraph_id' => $this->_paragraph_id,
+					'paragraph_no' => $this->_paragraph_no,
+					'paragraph_text' => $this->_paragraph_text,
+					'edition' => $this->_edition,
+					'regulation_lang' => $this->_regulation_lang); 	
+	}
 }
 

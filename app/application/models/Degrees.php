@@ -16,6 +16,18 @@ class Application_Model_Degrees extends GP_Application_Model
 	    parent::__construct($options);
 	}
 	
+	public function getDegrees()
+	{
+		$rowset = $this->getDbTable()->fetchAll();
+		
+		$select[0] = 'empty_degree';
+		foreach ($rowset as $row)
+		{
+			$select[$row->degree_id] = $row->degree_name; 
+		}
+		
+		return $select;
+	}
 
 }
 

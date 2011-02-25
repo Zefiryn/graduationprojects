@@ -15,7 +15,19 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function newAction()
     {
-        // action body
+        $form = new Application_Form_Application();
+		$form->setDecorators(array(
+						array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
+		));
+		$this->view->form = $form;
+		
+		$request = $this->getRequest();
+		
+		if ($request->isPost())
+		{
+			if ($form->isValid($request->getPost()))
+			{}					
+		}
     }
 
     public function editAction()
