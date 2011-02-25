@@ -16,6 +16,19 @@ class Application_Model_Schools extends GP_Application_Model
 	    parent::__construct($options);
 	}
 	
+	public function getSchools()
+	{
+		$rowset = $this->getDbTable()->fetchAll();
+		
+		$select = array(0 => 'add_new_school');
+		foreach ($rowset as $row)
+		{
+			$select[$row->school_id] = $row->school_name; 
+		}
+		
+		return $select;
+	}
+	
 
 }
 

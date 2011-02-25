@@ -1,1 +1,27 @@
-<br /><br /><center>View script for controller <b>Contact</b> and script/action name <b>send</b></center>
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'contact',
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+	<h1><?php echo $this->translate('contact_header'); ?></h1>
+	<p class="spacer">&nbsp;</p>
+	
+	<?php if (isset($this->error)):?>
+	<h3><?php echo $this->translate('mail_error_header');?></h3>
+	<p class="mailError"><?php echo $this->translate($this->error); ?></p>
+	<?php else:?>
+	<h3><?php echo $this->translate('mail_success_header');?></h3>
+	<p class="mailSuccess"><?php echo $this->translate('mail_success'); ?></p>
+	<?php endif;?>
+</div>
+
+<?php echo $this->partial('partials/submenu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'contact' => TRUE));
+?>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

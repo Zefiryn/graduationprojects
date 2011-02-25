@@ -1,0 +1,63 @@
+<?php
+/**
+ * @package GP_Action_Helper_UserSession
+ */
+
+/**
+ * Get settings from the database
+ * @author Zefiryn
+ * @since Jan 2011
+ * @package GP_Action_Helper_UserSession
+ */
+class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstract
+{
+	
+	/**
+	 * @see Zend_Controller_Action_Helper_Abstract::preDispatch()
+	 */
+	public function preDispatch()
+	{
+    	$settings = new Application_Model_Settings();
+    	$settings = $settings->getDbTable()->getSettings($settings);
+
+    	/*
+    	$tplSettings = new Application_Model_TemplateSettings();
+		$tpl = new Zend_Session_Namespace('template');
+    	$tplSettings = $tplSettings->getDbTable()->findTemplateByName($tplSettings, $tpl->template_name);
+    	*/
+    	
+		Zend_Registry::set('appSettings', $settings);
+		
+		$this->_setEdition($settings);
+		
+	}
+	
+	protected function _setEdition($settings)
+	{
+		$request =	$this->getRequest();
+		$edition = $request->getParam('edition', '');
+		
+		if (strstr($edition, '-'))
+		{
+			$edition = str_replace('-', '/', $edition);
+		}
+		
+		$editions = new Application_Model_Editions();
+		if (!$editions->editionExists($edition))
+			$edition = FALSE;
+		
+		//if the edition not exist try to get the one saved in session 
+		if (!$edition)
+		{
+			$session = new Zend_Session_Namespace('edition');
+			if (isset($session->edition))
+				$edition =  $session->edition;
+			else 
+				$edition =  $settings->_current_edition->_edition_name;
+		}
+		 
+		Zend_Registry::set('edition', $edition);
+		$session = new Zend_Session_Namespace('edition');
+		$session->edition = $edition;
+	}
+}

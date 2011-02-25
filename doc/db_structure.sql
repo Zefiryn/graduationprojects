@@ -1,5 +1,11 @@
-DROP TABLE IF EXISTS template_settings, settings, editions, users, schools, degrees, work_types,
-files, applications, localozations, regulations, faq;
+DROP TABLE IF EXISTS files, applications, template_settings, work_types, degrees, schools, users, 
+regulations, faq, localizations, editions, settings;
+
+CREATE TABLE editions (
+	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
+	edition_name char(10) NOT NULL,
+	PRIMARY KEY (edition_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE localizations (
 	item_id int NOT NULL AUTO_INCREMENT,
@@ -11,10 +17,14 @@ CREATE TABLE localizations (
 
 CREATE TABLE ragulations (
 	paragraph_id int NOT NULL AUTO_INCREMENT,
+	edition_id smallint(6) not null,
 	regulation_lang char(4) not null,
 	paragraph_no smallint(6) not null,
 	paragraph_text text not null,
-	PRIMARY KEY (paragraph_id)
+	PRIMARY KEY (paragraph_id),
+	FOREIGN KEY(edition_id)
+		REFERENCES editions(edition_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE faq (
@@ -23,12 +33,6 @@ CREATE TABLE faq (
 	faq_question varchar(300) not null,
 	faq_answer text not null,
 	PRIMARY KEY (faq_id)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-CREATE TABLE editions (
-	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
-	edition_name char(10) NOT NULL,
-	PRIMARY KEY (edition_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE users(

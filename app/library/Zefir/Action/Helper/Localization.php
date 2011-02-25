@@ -52,8 +52,8 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		
 		//get locale
 		if ($lang != NULL)	
-			$lang = substr($lang, 0, strrpos($lang, '/'));
-		
+			$lang = strstr($lang, '/' ) ? substr($lang, 0, strrpos($lang, '/')) : $lang;
+
 		elseif (isset($_COOKIE['lang']))
 			$lang = $_COOKIE['lang'];
 		

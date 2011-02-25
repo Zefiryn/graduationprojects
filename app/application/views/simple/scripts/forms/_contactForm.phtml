@@ -1,0 +1,25 @@
+<?php $form = $this->element; ?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+      method="<?php echo $this->escape($form->getMethod()); ?>"
+      class="contact">
+
+	<?php echo $form->csrf->renderViewHelper(); ?> 
+
+	<?php echo $form->name;?>
+	
+	<?php echo $form->email;?>
+
+	<?php echo $form->mail_title;?>
+	
+	<p class="label"><?php echo $this->translate($form->mail_text->getLabel());?>:&nbsp;
+	<span style="color: #987878;"><?php echo $this->translate('mail_text_count');?></span>
+	</p>
+	<?php echo $form->mail_text->renderTextField();?>
+	<p id="word_count"><?php echo $this->translate('counter');?>: <span id="word_counter">0</span></p>
+	
+	<p class="submit center">
+		<?php echo $form->submit; ?>
+	</p>
+		
+</form>

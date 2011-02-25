@@ -33,7 +33,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
 			'onDelete' => self::CASCADE,
 			'onUpdate' => self::RESTRICT
 		),
-		'Users' => array(
+		'TemplateSettings' => array(
     		'objProperty' => '_template_default',
 			'columns' => array('template_default'),
 			'refTableClass' => 'Application_Model_DbTable_TemplateSettings',
@@ -47,9 +47,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array(
-		'_files' => 'Application_Model_DbTable_Files',
-	);
+	protected $_dependentTables = array();
 	
 	/**
 	 * constructor
@@ -60,6 +58,16 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     public function __construct($config = array())
     {
       parent::__construct(array());
+    }
+    
+    public function getSettings(Application_Model_Settings $settings)
+    {
+    	$select = $this->select()->order('current_edition DESC')->limit('1');
+    	$row = $this->fetchRow($select);
+    	$settings->populate($row);
+    	$settings = $this->getParents($row, $settings);
+    	
+    	return $settings;
     }
 
 }

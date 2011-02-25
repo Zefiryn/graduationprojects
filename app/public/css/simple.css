@@ -129,6 +129,11 @@ form p
 	margin: 15px 0px 0px 0px;
 	padding: 0px;
 }
+p.description
+{
+	margin: 0px;
+	color: #aaaaaa;
+}
 input.width1, select.width1
 {
 	width: 300px;
@@ -149,6 +154,17 @@ textarea.width2
 	height: 30px;
 	font-size: 12px;
 	border: 1px solid red;
+}
+input.width3, select.width3
+{
+	width: 100px;
+	height: 20px;
+	font-size: 12px;
+	border: 1px solid red;
+}
+input.error, textarea.error
+{
+	background: #ffafaf;
 }
 img.error
 {
@@ -179,17 +195,20 @@ img.error_agreement
 	margin-left: 700px;
 	margin-top: 24px;
 }
-span.error_info
+p.error
 {
 	font-family: 'Trebuchet MS', sans-serif;
 	font-size: 11px;
 	color: red;
 	font-weight: bold;
+	margin: 0px;
 }
 input.radio, input.checkbox
 {
 	border: 1px solid red;
 	background: white;
+	margin-top: 0px;
+	margin-bottom: 25px;
 }
 textarea
 {
@@ -221,10 +240,26 @@ p.file span
 input.submit
 {
 	background: gray;
-	border: 1px solid #555555; 
+	border: 1px solid #555; 
 	padding: 3px 6px 3px 6px;
 	color: white;
 	font-family: 'Trebuchet MS', sans-serif;
+}
+input.unprefered
+{
+	background: #888;
+}
+input.prefered
+{
+	background: #333;
+	font-weight: bold;
+}
+fieldset.submit
+{
+	border: 0px;
+	margin: 30px 0px 0px 0px;
+	width: 600px;
+	text-align: center;
 }
 /*RESULT INFO*/
 div.adding_error
@@ -518,4 +553,30 @@ p.flash
 	-moz-border-radius-bottomleft: 15px;
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
+}
+
+p.admin
+{
+	float: right;
+	margin: 5px 5px 0px 0px;
+	font-size: 10px;
+}
+img.no-block
+{
+	display: inline-block;
+	border: 0px;
+}
+p.img_hint
+{
+	position: absolute;
+	font-size: 10px;
+	font-family: "Trebuchet MS", sans-serif;
+	background: #fafafa;
+	padding: 3px;
+	border: 1px solid #999;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 3px 2px 3px 1px #999;
+	-webkit-box-shadow: 3px 2px 3px 1px #999;
+	-moz-box-shadow: 3px 2px 3px 1px #999;	
 }

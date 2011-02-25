@@ -1,0 +1,51 @@
+<?php $form = $this->element; ?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+      method="<?php echo $this->escape($form->getMethod()); ?>"
+      class="contact">
+
+	<?php echo $form->csrf->renderViewHelper(); ?> 
+
+	<?php echo $form->country;?>
+	
+	<?php echo $form->user_name;?>
+	
+	<?php echo $form->user_surname;?>
+	
+	<?php echo $form->nick;?>
+	
+	<?php echo $form->address;?>
+	
+	<?php echo $form->phone;?>
+	
+	<?php echo $form->email;?>
+	
+	<?php echo $form->email_repeat;?>
+	
+	<?php echo $form->school;?>
+	<?php echo $form->new_school;?>
+	
+	<?php echo $form->department;?>
+	
+	<?php echo $form->degree;?>
+	
+	<?php echo $form->work_subject;?>
+	
+	<?php echo $form->work_type;?>
+	
+	<p class="label"><?php echo $this->translate($form->work_desc->getLabel());?>:&nbsp;
+	<span style="color: #987878;"><?php echo $this->translate($form->work_desc->getDescription());?></span>
+	</p>
+	<?php echo $form->work_desc->renderTextField();?>
+	<p id="word_count"><?php echo $this->translate('counter');?>: <span id="word_counter">0</span></p>
+	
+	<?php echo $form->supervisor_degree;?>
+	<?php echo $form->supervisor;?>
+	
+	<?php echo $form->graduation_time;?>
+
+	<p class="submit center">
+		<?php echo $form->submit; ?>
+	</p>
+		
+</form>

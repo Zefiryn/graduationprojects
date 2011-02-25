@@ -74,6 +74,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
       	//set the js files
       	$options = Zend_Registry::get('options');
      	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.easing.1.3.js');
+     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-ui-1.8.9.custom.min.js');
      	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.min.js');
      	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.fancybox-1.3.1.pack.js');
      	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.mousewheel-3.0.2.pack.js');
@@ -96,7 +97,49 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			array(	1 => 'lang', 
     					2 => 'controller',
     					3 => 'action'));
-    	$router->addRoute('books', $route);
+    	$router->addRoute('def', $route);
+    	
+    	/**
+    	 * regulation routing
+    	 */
+    	$route = new Zend_Controller_Router_Route(
+    			'regulations/:edition',
+    			array(
+    				'controller' => 'regulations',
+    				'action' => 'show'    				
+    			),
+    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
+    	$router->addRoute('regulation', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'regulations/edit/:edition',
+    			array(
+    				'controller' => 'regulations',
+    				'action' => 'edit'    				
+    			),
+    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
+    	$router->addRoute('regulation', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/regulations/:edition',
+    			array(
+    				'controller' => 'regulations',
+    				'action' => 'show'    				
+    			),
+    			array('edition' => '^[0-9]{4}-[0-9]{4}$',
+    				  'lang' => '^[a-z]{2}$'));
+    	$router->addRoute('regulation_lang', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/regulations/edit/:edition',
+    			array(
+    				'controller' => 'regulations',
+    				'action' => 'edit'    				
+    			),
+    			array('edition' => '^[0-9]{4}-[0-9]{4}$',
+    			'lang' => '^[a-z]{2}$'));
+    	$router->addRoute('regulation', $route);
+    	
 	}
 	
 	/**
@@ -129,7 +172,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
-		$acl->allow(null, array('about', 'regulations', 'faq'), array('index'));
+		$acl->allow(null, array('about', 'regulations', 'faq'), array('index', 'show'));
 		$acl->allow(null, array('auth'), array('index', 'login'));
 		$acl->allow(null, array('contact'), null);
 		$acl->allow('user', array('auth'), array('logout'));
@@ -138,7 +181,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
 		$acl->allow('juror', array('applications'), array('vote'));
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
-		$acl->allow('admin', array('applications'), null);
+		$acl->allow('admin', array('applications', 'regulations', 'faq'), null);
+
+		
 		
 		Zend_Registry::set('acl', $acl);
 		
@@ -161,6 +206,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Controller_Action_HelperBroker::addHelper(
 			new Zefir_Action_Helper_Localization()
 			);
+		Zend_Controller_Action_HelperBroker::addHelper(
+			new GP_Action_Helper_AppSettings()
+			);
+	}
+	
+	protected function _initMail()
+	{
+		
+		$options = Zend_Registry::get('options');
+		
+		$transport = new Zend_Mail_Transport_Smtp($options['mail']['host'], $options['mail']['smtp']);
+		Zend_Mail::setDefaultTransport($transport);
 	}
 	
 }

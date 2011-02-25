@@ -17,20 +17,31 @@ class Zefir_Form extends Zend_Form
 	 * default decorators
 	 * @var array
 	 */
-	protected $_decoratorsStandard = array(
+	protected $_standardDecorators = array(
 				array('ViewHelper'),
-				array('ErrorMsg'),
+				array('ErrorMsg', array('image' => TRUE)),
+				array('MyLabel', array('placement' => 'prepend')),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
 				
 	);
 	
 	/**
+	 * Zefir decorators
+	 * @var array
+	 */
+	protected $_completeZefirDecorators = array(
+				array('TextField'),
+				array('MyLabel', array('placement' => 'prepend')),
+				array('ErrorMsg', array('image' => TRUE)),
+				array('UnderDescription', array('class' => 'description', 'placement' => 'append')));
+				
+	/**
 	 * default additional decorators
 	 * @var array
 	 */
-	protected $_additionalDecorators = array(
+	protected $_basicZefirDecorators = array(
 				array('TextField'),
-				array('ErrorMsg'),
+				array('ErrorMsg', array('image' => TRUE)),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
 				
 	);
@@ -53,14 +64,19 @@ class Zefir_Form extends Zend_Form
 	
 	protected function _getStandardDecorators($additional = TRUE)
 	{
-		if ($additional)
-			return $this->_additionalDecorators;
+		return $this->_standardDecorators;
+	}
+	
+	protected function _getZefirDecorators($full = TRUE)
+	{
+		if ($full)
+			return $this->_completeZefirDecorators;
 		else
-			return $this->_decoratorsStandard;
+			return $this->_basicZefirDecorators;
 	}
 	
 	
-	public function getRadioDecorators()
+	protected function getRadioDecorators()
 	{
 		return $this->_decoratorsRadio;
 	}
@@ -76,8 +92,8 @@ class Zefir_Form extends Zend_Form
 		
 		$submit = $this->createElement('submit', 'leave', array(
 			'ignore' => true,
-			'label' => 'Zrezygnuj',
-			'class' => 'unprefered'
+			'label' => 'leave',
+			'class' => 'submit unprefered'
 		));	 
 		$submit->setDecorators(array(
 							array('ViewHelper')
@@ -88,7 +104,7 @@ class Zefir_Form extends Zend_Form
 		$submit = $this->createElement('submit', 'submit', array(
 			'ignore' => true,
 			'label' => $submit_label,
-			'class' => 'prefered'
+			'class' => 'submit prefered'
 		));	 
 		$submit->setDecorators(array(
 							array('ViewHelper')

@@ -19,8 +19,9 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
      	$name 			= $form->getFullyQualifiedName();
      	$errors 		= $form->getErrors();
 		$messages 		= $form->getMessages();
-		$tag			= isset($attribs['tag']) ?  $attribs['tag'] : 'div';
-		$errorMsgTag 	= isset($attribs['errorMsgTag']) ?  $attribs['errorMsgTag'] : 'p';
+		$tag			= $this->getOption('tag') ?  $this->getOption('tag') : 'div';
+		$errorMsgTag 	= $this->getOption('errorMsgTag') ?  $this->getOption('errorMsgTag') : 'p';
+		$image 			= $this->getOption('image') ?  TRUE : FALSE;
 		$class			= 'error-div';
 		$errorMsgClass	= 'error';
 		
@@ -29,8 +30,9 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
 
 		if ($form->hasErrors())
         {
+
         	$errorContent = '';
-        	
+			
         	foreach($messages as $error => $errorMsg)
         	{
         		$errorContent .= $this->_createErrorMsg($errorMsgTag, $errorMsgClass, $errorMsg);
@@ -38,11 +40,13 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
         	
         	$errorContent = sprintf($this->_errorContener, $errorContent);
         	
+        	$imageContent =  ($image) ? $this->_createImage() : NULL;
+        	
 	    	switch ($this->getPlacement()) {
 	            case self::APPEND:
-	                return $content . $this->getSeparator() . $errorContent;
+	                return $content . $imageContent . $this->getSeparator() . $errorContent;
 	            case self::PREPEND:
-	                return $errorContent . $this->getSeparator() . $content;
+	                return $errorContent . $this->getSeparator() . $content . $imageContent;
 	        }
         }
         else
@@ -57,5 +61,14 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
 	protected function _createErrorMsg($tag, $class, $msg)
     {
     	return '<'.$tag.' class="'.$class.'">'.$msg.'</'.$tag.'>';
+    }
+    
+    protected function _createImage()
+    {
+    	$session = new Zend_Session_Namespace('template');
+    	$options = Zend_Registry::get('options');
+    	$baseUrl = $options['resources']['frontController']['baseUrl'];
+    	
+		return '<img src="'.$baseUrl.'../img/'.$session->template_name.'/error_mark.png" class="error">';    
     }
 }
