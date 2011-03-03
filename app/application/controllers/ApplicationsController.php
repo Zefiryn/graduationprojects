@@ -26,7 +26,12 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($request->isPost())
 		{
 			if ($form->isValid($request->getPost()))
-			{}					
+			{}				
+			else
+			{
+				var_dump($form->getValues());
+				var_dump($form->getErrors());
+			}	
 		}
     }
 

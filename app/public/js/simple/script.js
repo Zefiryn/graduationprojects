@@ -19,6 +19,8 @@ $(document).ready(function(){
 	hintImages();
 	
 	setDateFields();
+	
+	checkbox();
 });
 
 function add_regulation_paragraph()
@@ -105,5 +107,35 @@ function setPosition(obj, e)
 
 function setDateFields()
 {
-	$('.date').datepicker();
+	
+	$('.date').datepicker({ dateFormat: 'dd-mm-yy',
+		 					showAnim: 'slideDown'});
+	 $('.date').datepicker( "option", $.datepicker.regional[ getLang() ] );
+}
+
+function getLang()
+{
+	return $('#header').attr('name');
+}
+
+function checkbox()
+{
+	$( "#show_email" ).button({
+        icons: {primary: "ui-icon-closethick"}});
+	$('.ui-widget').addClass('ui-state-white');
+	
+	$('#show_email').change(function(){
+		if ($('.ui-button-icon-primary').hasClass('ui-icon-check'))
+		{
+			$('.ui-button-icon-primary').removeClass('ui-icon-check');
+			$('.ui-widget').removeClass('ui-state-default').addClass('ui-state-white');
+			$('.ui-button-icon-primary').addClass('ui-icon-closethick');
+		}
+		else if ($('.ui-button-icon-primary').hasClass('ui-icon-closethick'))
+		{
+			$('.ui-button-icon-primary').removeClass('ui-icon-closethick');
+			$('.ui-widget').removeClass('ui-state-white').addClass('ui-state-default');
+			$('.ui-button-icon-primary').addClass('ui-icon-check');
+		}
+	});
 }

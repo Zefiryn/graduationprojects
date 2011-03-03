@@ -38,7 +38,8 @@ class Zefir_Decorator_MyLabel extends Zend_Form_Decorator_Abstract
 		}
 		else 
 		{
-			$content = $content.' <span class="checkbox_option">'.$label.'</span>';
+			
+			$content = $content.' <label for="'.$name.'" class="checkbox_option">'.$label.'</label>';
 			$content = '<p>'.$content.'</p>';
 			
 		}

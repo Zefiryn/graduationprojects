@@ -17,5 +17,17 @@ class Application_Model_WorkTypes extends GP_Application_Model
 	}
 	
 
+	public function getWorkTypes()
+	{
+		$rowset = $this->getDbTable()->fetchAll();
+		
+		$select[0] = 'empty_type';
+		foreach ($rowset as $row)
+		{
+			$select[$row->work_type_id] = $row->work_type_name; 
+		}
+		
+		return $select;
+	}
 }
 

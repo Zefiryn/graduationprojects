@@ -5,6 +5,11 @@
       class="contact">
 
 	<?php echo $form->csrf->renderViewHelper(); ?> 
+	<?php echo $form->csrf->renderErrorMsg(); ?>
+	
+	<?php echo $form->nick;?>
+	<?php echo $form->password;?>
+	<?php echo $form->password_check;?>
 
 	<?php echo $form->country;?>
 	
@@ -12,13 +17,12 @@
 	
 	<?php echo $form->user_surname;?>
 	
-	<?php echo $form->nick;?>
-	
 	<?php echo $form->address;?>
 	
 	<?php echo $form->phone;?>
 	
 	<?php echo $form->email;?>
+	<?php echo $form->show_email;?>
 	
 	<?php echo $form->email_repeat;?>
 	
@@ -37,6 +41,7 @@
 	<span style="color: #987878;"><?php echo $this->translate($form->work_desc->getDescription());?></span>
 	</p>
 	<?php echo $form->work_desc->renderTextField();?>
+	<?php echo $form->work_desc->renderErrorMsg();?>
 	<p id="word_count"><?php echo $this->translate('counter');?>: <span id="word_counter">0</span></p>
 	
 	<?php echo $form->supervisor_degree;?>
