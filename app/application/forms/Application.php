@@ -5,6 +5,11 @@ class Application_Form_Application extends Zefir_Form
 
     public function init()
     {
+    	$L = $this->_regex['L'];
+    	$N = $this->_regex['N'];
+    	$S = $this->_regex['S'];
+    	$E = $this->_regex['E'];
+    	$B = $this->_regex['B'];
         parent::init();
         
         $this->setMethod('post');
@@ -14,8 +19,7 @@ class Application_Form_Application extends Zefir_Form
 		
 		$this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
-		
-		
+
 		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic');
 		$element = $this->createElement('select', 'country');
 		$element->setAttribs(array('class' => 'width1', 'size' => 1))
@@ -31,7 +35,7 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
+						new Zend_Validate_Regex('/^['.$L.'\- ]+$/')
 					));	
 		$this->addElement($element);
 		
@@ -41,17 +45,36 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
+						new Zend_Validate_Regex('/^['.$L.'\- ]+$/')
 					));	
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'nick');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('nick')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
+						new Zend_Validate_Regex('/^['.$L.'\- ]+$/')
+					));	
+		$this->addElement($element);
+
+		$element = $this->createElement('password', 'password');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('password')
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					));	
+		$this->addElement($element);
+		
+		$element = $this->createElement('password', 'password_check');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('password_repeat')
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+						new Zefir_Validate_IdenticalField('password')
 					));	
 		$this->addElement($element);
 		
@@ -61,7 +84,7 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
+						new Zend_Validate_Regex('/^['.$L.$N.$S.' ]+$/')
 					));	
 		$this->addElement($element);
 		
@@ -72,7 +95,7 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
+						new Zend_Validate_Regex('/^\+[0-9]{2,3}( )?[0-9]{4,9}$/')
 					));	
 		$this->addElement($element);
 		
@@ -86,21 +109,10 @@ class Application_Form_Application extends Zefir_Form
 					));	
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'email_repeat');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('email_repeat')
-				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE)
-				->addValidators(array(
-						
-					));	
-		$this->addElement($element);
-		
-		
 		$element = $this->createElement('checkbox', 'show_email');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('show_email')
-				->setDecorators($this->_getZefirDecorators(FALSE))
+		$element->setAttribs(array('class' => 'checkbox'))
+				->setLabel('show_email', array('tag' => 'label'))
+				->setDecorators($this->_getStandardDecorators())
 				->setRequired(FALSE)
 				->addValidators(array(
 						
@@ -113,20 +125,30 @@ class Application_Form_Application extends Zefir_Form
 				->setLabel('school')
 				->setDecorators($this->_getStandardDecorators())
 				->setMultiOptions($school->getSchools())
-				->setRequired(FALSE);	
+				->setRequired(FALSE)
+				->addValidators(array(
+					new Zend_Validate_Digits()
+				));
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'new_school');
 		$element->setAttribs(array('class' => 'width2'))
-				->setDecorators($this->_getZefirDecorators())
-				->setRequired(FALSE);	
+				->setDecorators($this->_getZefirDecorators(FALSE))
+				->setAllowEmpty(FALSE)
+				->addValidators(array(
+					new Zefir_Validate_NotEmptyCombo('school'),
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/')
+				));
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'department');
 		$element->setAttribs(array('class' => 'width2'))
 				->setLabel('department')
 				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/')
+				));
 		$this->addElement($element);
 		
 		$degree = new Application_Model_Degrees();
@@ -135,21 +157,34 @@ class Application_Form_Application extends Zefir_Form
 				->setLabel('degree')
 				->setMultiOptions($degree->getDegrees())
 				->setDecorators($this->_getStandardDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
+					new Zend_Validate_Digits()
+				));
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'work_subject');
 		$element->setAttribs(array('class' => 'width2'))
 				->setLabel('work_subject')
 				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/')
+				));
 		$this->addElement($element);
 		
+		$work_type = new Application_Model_WorkTypes();
 		$element = $this->createElement('select', 'work_type');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('work_type')
+				->setMultiOptions($work_type->getWorkTypes())
 				->setDecorators($this->_getStandardDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
+					new Zend_Validate_Digits()
+				));
 		$this->addElement($element);
 		
 		$element = $this->createElement('textarea', 'work_desc');
@@ -157,7 +192,10 @@ class Application_Form_Application extends Zefir_Form
 				->setLabel('work_desc')
 				->setDescription('work_desc_count')
 				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/')
+				));
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'supervisor_degree');
@@ -178,7 +216,10 @@ class Application_Form_Application extends Zefir_Form
 		$element->setAttribs(array('class' => 'width1 date'))
 				->setLabel('graduation_time')
 				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE);
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zefir_Validate_DatePeriod('1259622000', '1291071600')
+				));
 		$this->addElement($element);
 		
 		

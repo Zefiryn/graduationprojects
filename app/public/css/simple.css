@@ -162,7 +162,7 @@ input.width3, select.width3
 	font-size: 12px;
 	border: 1px solid red;
 }
-input.error, textarea.error
+input.error, textarea.error, select.error
 {
 	background: #ffafaf;
 }
@@ -205,10 +205,17 @@ p.error
 }
 input.radio, input.checkbox
 {
+	
 	border: 1px solid red;
 	background: white;
 	margin-top: 0px;
 	margin-bottom: 25px;
+	margin-right: 5px;
+}
+label
+{
+	font-size: 12px;
+	font-family: 'Trebuchet MS', sans-serif;
 }
 textarea
 {

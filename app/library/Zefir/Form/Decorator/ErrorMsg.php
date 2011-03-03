@@ -30,7 +30,8 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
 
 		if ($form->hasErrors())
         {
-
+			$content = str_replace('class="width1"', 'class="width1 error"', $content);
+			$content = str_replace('class="width2"', 'class="width2 error"', $content);
         	$errorContent = '';
 			
         	foreach($messages as $error => $errorMsg)

@@ -244,6 +244,7 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
         }
 
         $elementContent = $view->$helper($name, $value, $attribs, $element->options);
+
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;
