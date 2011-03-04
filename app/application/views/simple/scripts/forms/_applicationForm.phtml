@@ -2,10 +2,16 @@
 
 <form action="<?php echo $this->escape($form->getAction()); ?>"
       method="<?php echo $this->escape($form->getMethod()); ?>"
+      enctype="<?php echo $form->getEnctype(); ?>"
       class="contact">
 
+	<?php if ($form->csrf->hasErrors()):?>
+		<div id="error-csrf" class="error-div">
+			<p class="error"><?php echo $this->translate('csrf_error')?></p>
+		</div>
+	<?php endif;?>
 	<?php echo $form->csrf->renderViewHelper(); ?> 
-	<?php echo $form->csrf->renderErrorMsg(); ?>
+	<?php echo $form->edition;?>
 	
 	<?php echo $form->nick;?>
 	<?php echo $form->password;?>
@@ -13,9 +19,9 @@
 
 	<?php echo $form->country;?>
 	
-	<?php echo $form->user_name;?>
+	<?php echo $form->name;?>
 	
-	<?php echo $form->user_surname;?>
+	<?php echo $form->surname;?>
 	
 	<?php echo $form->address;?>
 	
@@ -48,6 +54,10 @@
 	<?php echo $form->supervisor;?>
 	
 	<?php echo $form->graduation_time;?>
+	
+	<?php echo $form->miniature;?>
+	
+	<?php echo $form->personal_data_agreement;?>
 
 	<p class="submit center">
 		<?php echo $form->submit; ?>

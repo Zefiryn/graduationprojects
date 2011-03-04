@@ -220,5 +220,25 @@ class Zefir_Application_Model {
 
 		return (($this->$id_var == NULL) ? TRUE : FALSE);
 	}
+	
+	public function populateFromForm($data)
+	{
+		foreach ($data as $key => $value)
+		{
+			$var = '_'.$key;
+			if (in_array($var, $this->_set_vars))
+				$this->$var = $value;
+		}
+	}
+	
+	public function save()
+	{
+		return $this->getDbTable()->save($this);
+	}
+	
+	public function delete()
+	{
+		$this->getDbTable()->delete($this);
+	}
 }
 ?>

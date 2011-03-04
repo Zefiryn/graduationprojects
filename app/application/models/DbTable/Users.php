@@ -32,6 +32,55 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	
     	return ($row->role);
     }
+    
+    /**
+     * Save or update user data in the database 
+     * 
+     * @param Application_Model_Users $user
+     * @throws Zend_Exception
+     * @return Application_Model_Users $user
+     */
+    public function save(Application_Model_Users $user)
+    {
+    	$id = $user->_user_id;
+    	
+    	if ($id != null)
+    		$row = $this->find($id);
+    	
+    	else
+    	{
+    		if ($id != null)
+    			throw new Zend_Exception('Incorrect user');
+    		else
+    			$row = $this->createRow();
+    	}
+    	
+    	$row->nick 			= $user->_nick;
+    	$row->password 		= sha1($user->_password);
+    	$row->name 			= $user->_name;
+    	$row->surname		= $user->_surname;
+    	$row->address		= $user->_address;
+    	$row->phone			= $user->_phone;
+    	$row->email			= $user->_email;
+    	$row->show_email	= $user->_show_email;
+    	$row->role			= $user->_role;
+    	
+    	if ($row->save())
+    	{
+    		if (!$id)
+    			$user->_user_id = $id = $this->getAdapter()->lastInsertId();
+    	}
+    	else 
+    		throw new Zend_Exception('Couldn\'t save data');
+    	
+    	return $user;
+    }
+    
+    public function delete(Application_Model_Users $user)
+    {
+    	$where = $this->getAdapter()->quoteInto('user_id = ?', $user->_user_id);
+    	parent::delete($where);
+    }
 
 }
 

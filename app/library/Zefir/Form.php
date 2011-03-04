@@ -8,9 +8,9 @@ class Zefir_Form extends Zend_Form
 	protected $_regex = array(
 		'L' => 'a-zA-ZÁáČčĎďÉéĚěÍíŇňÓóŘřŠšŤťÚúŮůÝýŽžÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëíìíîïñòóôõöùúûüýÿĂĄăąĆćĈĉĊċČčĎĕĘęĚěĜĝĞğĠġĢģĤĥĴĵĶķĸĹĺĻļŁłŃŅńņŇňŎŏŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŨũŬŭŮŰůűŲųŴŵŶŸŷýŹźŻżŽž',
 		'N' => '0-9',
-		'S' => '&\.\-_;,":!?\(\)\/\'@ ',
+		'S' => '&\.\-_;,"”„–:!?\(\)\/\'@ ',
 		'E' => '\s\n\r',
-		'B' => '\[\]~\/#='
+		'B' => '\[\]~\/#=+'
 	);
 	
 	/**
@@ -19,8 +19,8 @@ class Zefir_Form extends Zend_Form
 	 */
 	protected $_standardDecorators = array(
 				array('ViewHelper'),
-				array('ErrorMsg', array('image' => TRUE)),
 				array('MyLabel', array('placement' => 'prepend')),
+				array('ErrorMsg', array('image' => TRUE)),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
 				
 	);

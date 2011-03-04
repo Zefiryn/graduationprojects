@@ -31,7 +31,7 @@ class Zefir_Decorator_UnderDescription extends Zend_Form_Decorator_Abstract
 	            case self::APPEND:
 	                return $content . $this->getSeparator() . $this->_createDescription($tag, $class, $name, $description);
 	            case self::PREPEND:
-	                return $description . $this->getSeparator() . $content;
+	                return $this->_createDescription($tag, $class, $name, $description). $this->getSeparator() . $content;
 	        }
         }
         else
