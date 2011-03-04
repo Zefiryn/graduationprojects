@@ -195,12 +195,21 @@ INSERT INTO localizations VALUES
 	(null,'supervisor','pl','Promotor'),
 	(null,'supervisor_degree','pl','Tytuł naukowy promotora'),
 	(null,'graduation_time','pl','Data obrony pracy'),
+	(null,'miniature','pl','Miniatura'),
+	(null,'miniature_description','pl','Jeden obrazek prezentujący pracę w rozmiarze 800x800 pikseli'),
+	(null,'personal_data_agreement','pl','Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w formularzu dla potrzeb przeprowadzenia konkursu, zgodnie z ustawą z dnia 29.08.1997 r.  o ochronie danych osobowych. (Dz. U. z 2002 r. nr 101, poz. 926 ze zm.)'),
 	(null,'empty_type','pl','-- Wybierz typ pracy --'),  
 	(null,'isEmptyCombo','pl','Jedno z pól musi zostać podane'),
 	(null,'missingField','pl','Nie podano pola do sprawdzenia'),
 	(null,'notMatchField','pl','Powtórzenie jest błędne'),
 	(null,'dateToLate','pl','Podana data jest późniejsza niż maksymalny dopuszczalny termin'),
-	(null,'dateToEarly','pl','Podana data jest wcześniejsza niż pierwszy dopuszczalny termin')
+	(null,'dateToEarly','pl','Podana data jest wcześniejsza niż pierwszy dopuszczalny termin'),
+	(null,'wrongDate','pl','To nie jest poprawna data'),
+	(null,'userExist','pl','Podana nazwa użytkownika została już wykorzystana'),
+	(null,'emailExist','pl','Podany e-mail został już wykorzystany'),
+	(null,'fileUploadErrorNoFile','pl','Ten plik jest wymagany'),
+	(null,'csrf_error','pl','Formularz nie został został poprawnie rozpoznay. Spróbuj przesłać ponownie.')
+	
 	;
 	
 	

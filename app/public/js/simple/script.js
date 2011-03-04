@@ -120,22 +120,35 @@ function getLang()
 
 function checkbox()
 {
-	$( "#show_email" ).button({
-        icons: {primary: "ui-icon-closethick"}});
-	$('.ui-widget').addClass('ui-state-white');
+	bindCheckbox('show_email');
+	bindCheckbox('personal_data_agreement');
+}
+
+function bindCheckbox(field)
+{
+	$( "#"+field ).button();
+	if ($('#'+field).is(':checked'))
+	{
+		$( "#"+field ).button("option", "icons", {primary: 'ui-icon-check'});
+	}
+	else
+	{
+		$("label[for='"+field+"']").addClass('ui-state-white');
+		$( "#"+field ).button("option", "icons", {primary: 'ui-icon-closethick'});
+	}
 	
-	$('#show_email').change(function(){
-		if ($('.ui-button-icon-primary').hasClass('ui-icon-check'))
+	$('#'+field).change(function(){
+		if ($("label[for='"+field+"'] span:first-child").hasClass('ui-icon-check'))
 		{
-			$('.ui-button-icon-primary').removeClass('ui-icon-check');
-			$('.ui-widget').removeClass('ui-state-default').addClass('ui-state-white');
-			$('.ui-button-icon-primary').addClass('ui-icon-closethick');
+			$("label[for='"+field+"'] span:first-child").removeClass('ui-icon-check');
+			$("label[for='"+field+"']").removeClass('ui-state-default').addClass('ui-state-white');
+			$("label[for='"+field+"'] span:first-child").addClass('ui-icon-closethick');
 		}
-		else if ($('.ui-button-icon-primary').hasClass('ui-icon-closethick'))
+		else if ($("label[for='"+field+"'] span:first-child").hasClass('ui-icon-closethick'))
 		{
-			$('.ui-button-icon-primary').removeClass('ui-icon-closethick');
-			$('.ui-widget').removeClass('ui-state-white').addClass('ui-state-default');
-			$('.ui-button-icon-primary').addClass('ui-icon-check');
+			$("label[for='"+field+"'] span:first-child").removeClass('ui-icon-closethick');
+			$("label[for='"+field+"']").removeClass('ui-state-white').addClass('ui-state-default');
+			$("label[for='"+field+"'] span:first-child").addClass('ui-icon-check');
 		}
 	});
 }

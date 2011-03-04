@@ -87,5 +87,72 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     {
       parent::__construct(array());
     }
+    
+	/**
+     * Save or update application data in the database 
+     * 
+     * @param Application_Model_Applications $application
+     * @throws Zend_Exception
+     * @return Application_Model_Applications $application
+     */
+    public function save(Application_Model_Applications $application)
+    {
+    	
+    	//add new school if any was given
+    	if (!is_int($application->_school))
+    	{
+    		$school = new Application_Model_Schools();
+    		$school->_school_name = $application->_school;
+    		$school->save();
+    		if ($school->_school_id != null)
+    			$application->_school = $school->_school_id;
+    		else
+    			throw new Zend_Exception('Couldn\'t add new school');
+    	}
+    	
+    	$id = $application->_application_id;
+    	
+    	if ($id != null)
+    		$row = $this->find($id);
+    	
+    	else
+    	{
+    		if ($id != null)
+    			throw new Zend_Exception('Incorrect application');
+    		else
+    			$row = $this->createRow();
+    	}
+    	
+    	$row->edition_id 		= $application->_edition;
+    	$row->user_id 			= $application->_user;
+    	$row->country			= $application->_country;
+    	$row->school_id			= $application->_school;
+    	$row->department		= $application->_department;
+    	$row->degree_id			= $application->_degree;
+    	$row->work_subject		= $application->_work_subject;
+    	$row->work_type_id		= $application->_work_type;
+    	$row->work_desc			= $application->_work_desc;
+    	$row->supervisor		= $application->_supervisor;
+    	$row->supervisor_degree	= $application->_supervisor_degree;
+    	$row->graduation_time	= $application->_graduation_time;
+    	$row->application_date	= $application->_application_date;
+    	$row->active			= $application->_active;
+    	
+    	if ($row->save())
+    	{
+    		if (!$id)
+    			$application->_application_id = $id = $this->getAdapter()->lastInsertId();
+    	}
+    	else 
+    	{
+    		//delete new user
+    		$user = new Application_Model_Users();
+    		$user->_user_id = $application->_user;
+    		$user->delete();
+    		
+    		throw new Zend_Exception('Couldn\'t save data');
+    	}
+    	return $application;
+    }
 }
 

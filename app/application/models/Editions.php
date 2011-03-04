@@ -27,5 +27,6 @@ class Application_Model_Editions extends GP_Application_Model
 		
 		return $check;
 	}
+	
 }
 
