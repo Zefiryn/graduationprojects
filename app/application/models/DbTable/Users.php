@@ -81,6 +81,23 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	$where = $this->getAdapter()->quoteInto('user_id = ?', $user->_user_id);
     	parent::delete($where);
     }
+    
+    /**
+     * 
+     * @param int $id
+     * @param Application_Model_Users $user
+     */
+    public function findUser($id, Application_Model_Users $user)
+    {
+    	$row = $this->find($id)->current();
+    	
+    	$user->populate($row);
+    	$this->getParents($row, $user);
+    	$this->getChildren($row, $user);
+    	
+    	return $user;
+    	
+    }
 
 }
 

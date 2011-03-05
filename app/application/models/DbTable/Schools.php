@@ -54,5 +54,24 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     	}
     	return $school;
     }
+    
+    /**
+     * Find rows by the name column
+     * @param string $name
+     * @param Application_Model_Schools $school
+     * @return Application_Model_Schools $school
+     */
+    public function findByName($name, $school)
+    {
+    	$row = $this->fetchRow($this->select()->where('school_name = ?', $name));
+    	
+    	if ($row)
+    	{
+	    	$school->populate($row);
+    		$this->getChildren($row, $school);
+    	}
+    	
+    	return $school;
+    }
 }
 

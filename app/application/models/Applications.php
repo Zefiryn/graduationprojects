@@ -61,6 +61,8 @@ class Application_Model_Applications extends GP_Application_Model
 		
 		if ($this->_active == null)
 			$this->_active = 1;
+		
+		$this->_miniature = $data['miniatureCache'];
 	}
 
 }

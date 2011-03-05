@@ -35,8 +35,8 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	}
   	
 	/**
-	 * 
 	 * Get data from parent table
+	 * 
 	 * @param Zend_Db_Table_Row $result
 	 * @param Zefir_Application_Model $object
 	 * @return Zefir_Appication_Model $object
@@ -54,8 +54,8 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	}
 	
 	/**
-	 * 
 	 * Get data from dependent tables
+	 * 
 	 * @param Zend_Db_Table_Row $result
 	 * @param Zefir_Application_Model $object
 	 * @return Zefir_Appication_Model $object
@@ -146,8 +146,68 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		
 	}
 	
+	/**
+	 * Get the name of the assosiated table in the database
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function getTableName()
 	{
 		return $this->_name;
+	}
+	
+	/**
+	 * Create new object of a given model
+	 * 
+	 * @param Zefir_Application_Model $model
+	 * @return Zefir_Application_Model
+	 */
+	private function _createNewModel(Zefir_Application_Model $model)
+    {
+        $class = get_class($model);
+        return new $class;
+    }
+    
+	/**
+	 * Copy file from the cache folder
+	 * 
+	 * @access private
+	 * @param string $source
+	 * @param string $destination
+	 * @return boolean
+	 */
+	protected function _copy($source, $destination)
+	{
+		$options = Zend_Registry::get('options');
+		$dir = substr($options['upload']['cache'], -1) == '/' ? $options['upload']['cache'] : $options['upload']['cache'].'/';
+		$source = APPLICATION_PATH.'/../public'.$dir.$source;
+		
+		$destination = APPLICATION_PATH.'/../public'.$destination;
+		
+		return rename($source, $destination);
+	}
+	
+	/**
+	 * Select new name for an existing file
+	 * @access private
+	 * @param string $dir
+	 * @param string $file
+	 * @return string $name
+	 */
+	protected function _getNewName($dir, $file)
+	{
+		$ext = substr($file, strrpos($file, '.'));
+		$rawname = substr($file, 0, strrpos($file, '.'));
+		$name = '';
+		
+		for($i = 1; $name == ''; $i++)
+		{
+			$tryname = $rawname.'_'.$i.$ext;
+			if (!file_exists($dir.$tryname))
+				$name = $tryname;
+		}
+		
+		return $name;
 	}
 }
