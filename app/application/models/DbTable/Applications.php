@@ -102,12 +102,36 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	if (!is_int($application->_school))
     	{
     		$school = new Application_Model_Schools();
-    		$school->_school_name = $application->_school;
-    		$school->save();
-    		if ($school->_school_id != null)
-    			$application->_school = $school->_school_id;
-    		else
-    			throw new Zend_Exception('Couldn\'t add new school');
+    		$school->getSchoolByName($application->_school);
+    		if ($school->_school_id == NULL)
+    		{
+	    		$school->_school_name = $application->_school;
+    			$school->save();
+    			if ($school->_school_id == null)
+    				throw new Zend_Exception('Couldn\'t add new school');
+    		}
+   			$application->_school = $school->_school_id;
+    	}
+    	
+    	//copy miniature
+    	$user = new Application_Model_Users();
+    	$user->getUser($application->_user);
+    	
+    	$options = Zend_Registry::get('options');
+    	$extension = Zefir_Filter::getExtension($application->_miniature);
+		$dirName = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/';
+    	$fileName = $user->getUserUrlName().'.'.$extension;
+    	$fileName = $this->_getNewName($dirName , $fileName);
+    	$dir = substr($options['upload']['miniatures'], -1) == '/' ? $options['upload']['miniatures'] : $options['upload']['miniatures'].'/';
+    	
+    	if ($this->_copy($application->_miniature, $dir.$fileName))
+    	{
+    		$application->_miniature = $fileName;
+    	}
+    	else
+    	{
+    		$user->delete();
+    		throw new Zend_Exception('Couldn\'t save miniature file');
     	}
     	
     	$id = $application->_application_id;
@@ -136,6 +160,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	$row->supervisor_degree	= $application->_supervisor_degree;
     	$row->graduation_time	= $application->_graduation_time;
     	$row->application_date	= $application->_application_date;
+    	$row->miniature			= $application->_miniature;
     	$row->active			= $application->_active;
     	
     	if ($row->save())
@@ -146,8 +171,6 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	else 
     	{
     		//delete new user
-    		$user = new Application_Model_Users();
-    		$user->_user_id = $application->_user;
     		$user->delete();
     		
     		throw new Zend_Exception('Couldn\'t save data');

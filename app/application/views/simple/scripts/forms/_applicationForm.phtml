@@ -55,6 +55,12 @@
 	
 	<?php echo $form->graduation_time;?>
 	
+	<?php if ($form->miniatureCache->getValue() != null): ?>
+	<p class="label"><?php echo $this->translate('miniature');?></p>
+	<img src="<?php echo $this->baseUrl('/assets/cache/'.$form->miniatureCache->getValue());?>" 
+		width="300" height="300"/>
+	<?php endif;?>
+	<?php echo $form->miniatureCache;?>
 	<?php echo $form->miniature;?>
 	
 	<?php echo $form->personal_data_agreement;?>

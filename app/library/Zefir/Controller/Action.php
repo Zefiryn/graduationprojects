@@ -87,4 +87,32 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 		
 		return $name;
 	}
+	
+	/**
+     * Set configuration for receiving uploaded file
+     * @access private
+     * @param string $cache_folder
+     * @param Application_Book_Form $form
+     * @param string $element
+     * @return Zend_File_Transfer|FALSE return FALSE if 
+     */
+    protected function _cacheFile($cache_folder, $form, $element)
+    {
+    	//get the book
+		$upload = $form->getElement($element);
+
+		if(count($upload->getErrors()) == 0 && !is_array($upload->getFileName()))
+		{
+			$file = basename($upload->getFileName());
+			$dir = APPLICATION_PATH.'/../public'.$cache_folder.'/';
+			
+			//rename uploaded file if there is another with the same name
+			$name = $this->_getNewName($dir, $file);
+			$upload->addFilter('Rename', $dir.$name);
+			$upload->receive();
+			$form->getElement($element.'Cache')->setValue($name);
+		}
+
+		return $form;
+    }
 }

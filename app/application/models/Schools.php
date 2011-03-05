@@ -4,11 +4,12 @@ class Application_Model_Schools extends GP_Application_Model
 {
 	protected $_school_id;
 	protected $_school_name;
+	protected $_appliations;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Schools';
 	
-	protected $_set_vars = array('_school_id', '_school_name');
-	protected $_get_vars = array('_school_id', '_school_name');
+	protected $_set_vars = array('_school_id', '_school_name', '_applications');
+	protected $_get_vars = array('_school_id', '_school_name', '_applications');
 	
 	
 	public function __construct(array $options = null) 
@@ -27,6 +28,18 @@ class Application_Model_Schools extends GP_Application_Model
 		}
 		
 		return $select;
+	}
+	
+	/**
+	 * Find school according to its name 
+	 * @param string $name
+	 * @param 
+	 */
+	public function getSchoolByName($name)
+	{
+		$this->getDbTable()->findByName($name, $this);
+		
+		return $this;
 	}
 	
 

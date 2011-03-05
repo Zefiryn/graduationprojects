@@ -274,9 +274,13 @@ class Application_Form_Application extends Zefir_Form
 				->setAttribs(array('class' => 'file'))
 				->setRequired(TRUE)
 				->addValidators(array(
-					'Size' => array($appSettings->_max_file_size),
-					'Extension' => array(false, 'jpg,png,jpeg'),
-					'MimeType'=> array(false, 'image')
+					array('Extension', true, array(false, 'jpg,png,jpeg')),
+					array('MimeType', true, array(false, 'image')),
+					array('Size', false, array('min' => 100, 'max' => $appSettings->_max_file_size)),
+					array('ImageSize', false, array('minwidth' => 800,
+                            						'maxwidth' => 800,
+                            						'minheight' => 800,
+                            						'maxheight' => 800))
 				))
 				->setDecorators(array(
 					array('File'),
@@ -286,6 +290,11 @@ class Application_Form_Application extends Zefir_Form
 				));
 		$this->addElement($element);
         
+		$element = $this->createElement('hidden', 'miniatureCache', array(
+						'decorators' => array('ViewHelper')
+		));
+		$this->addElement($element);
+		
 		/**
 		 * SUBMIT
 		 */
