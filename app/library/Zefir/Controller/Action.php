@@ -94,11 +94,11 @@ class Zefir_Controller_Action extends Zend_Controller_Action
      * @param string $cache_folder
      * @param Application_Book_Form $form
      * @param string $element
-     * @return Zend_File_Transfer|FALSE return FALSE if 
+     * @return Zend_Form $form 
      */
     protected function _cacheFile($cache_folder, $form, $element)
     {
-    	//get the book
+    	//get the file element
 		$upload = $form->getElement($element);
 
 		if(count($upload->getErrors()) == 0 && !is_array($upload->getFileName()))

@@ -169,6 +169,9 @@ INSERT INTO localizations VALUES
 	(null,'application_header','pl','Zgłoś pracę'),
 	(null,'application_header','cs','Remove this paragraph'),
 	(null,'application_header','sk','Remove this paragrap'),
+	(null,'applications_header','pl','Zgłoszenia'),
+	(null,'applications_header','cs','Applications'),
+	(null,'applications_header','sk','Applications'),
 	(null,'add_new_school','pl','-- Wybierz swoją uczelnię --'),
 	(null,'add_new_school','cs','Add new school'),
 	(null,'add_new_school','sk','Add new school'),
@@ -198,6 +201,12 @@ INSERT INTO localizations VALUES
 	(null,'miniature','pl','Miniatura'),
 	(null,'new_miniature','pl','Zmień obrazek miniatury'),
 	(null,'miniature_description','pl','Jeden obrazek prezentujący pracę w rozmiarze 800x800 pikseli'),
+	(null,'file','pl','Plik'),
+	(null,'new_file','pl','Zmień plik'),
+	(null,'file_uploaded','pl','Przesłany plik'),
+	(null,'file_description','pl','Dodaj pliki JPG lub PNG'),
+	(null,'file_annotation','pl','Opis ilustracji'),
+	(null,'application_added','pl','Zgłoszenie zostało przyjęte'),
 	(null,'personal_data_agreement','pl','Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w formularzu dla potrzeb przeprowadzenia konkursu, zgodnie z ustawą z dnia 29.08.1997 r.  o ochronie danych osobowych. (Dz. U. z 2002 r. nr 101, poz. 926 ze zm.)'),
 	(null,'empty_type','pl','-- Wybierz typ pracy --'),  
 	(null,'isEmptyCombo','pl','Jedno z pól musi zostać podane'),
@@ -217,7 +226,16 @@ INSERT INTO localizations VALUES
 	(null,'fileImageSizeWidthTooSmall','pl','Szerokość tego obrazka jest mniejsza niż %minwidth%px.'),
 	(null,'fileImageSizeHeightTooBig','pl','Wysokość tego obrazka jest większa niż %maxheight%px.'),
 	(null,'fileImageSizeHeightTooSmall','pl','Wysokość tego obrazka jest mniejsza niż %minheight%px.'),
-	(null,'application_added','pl','Zgłoszenie zostało przyjęte')
+	(null,'files','pl','Pliki w formacie JPG lub PNG'),
+	(null,'max_files','pl','Maksymalnie plików'),
+	(null,'max_file_size','pl','Maksymalny rozmiar pliku'),
+	(null,'edition_choice','pl','Edycja'),
+	(null,'sort_type','pl','Pokaż zgłoszenia'),
+	(null,'user_name_and_surname','pl','Imię i nazwisko'),
+	(null,'application_files','pl','Pliki'),
+	(null,'vote','pl','Oceny')
+	
+	
 	
 	;
 	

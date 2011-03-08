@@ -140,6 +140,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			'lang' => '^[a-z]{2}$'));
     	$router->addRoute('regulation', $route);
     	
+    	/**
+    	 * LOGIN
+    	 */
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/login',
+    			array(
+    				'controller' => 'auth',
+    				'action' => 'login'    				
+    			),
+    			array('lang' => '^[a-z]{2}$'));
+    	$router->addRoute('langLogin', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'login',
+    			array(
+    				'controller' => 'auth',
+    				'action' => 'login'    				
+    			));
+    	$router->addRoute('login', $route);
+    	
+    	
 	}
 	
 	/**
@@ -177,9 +198,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('contact'), null);
 		$acl->allow('user', array('auth'), array('logout'));
 		
-		$acl->allow(null, array('applications'), array('index', 'new'));
+		$acl->allow(null, array('applications'), array('new'));
 		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
-		$acl->allow('juror', array('applications'), array('vote'));
+		$acl->allow('juror', array('applications'), array('index', 'vote'));
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
 		$acl->allow('admin', array('applications', 'regulations', 'faq'), null);
 

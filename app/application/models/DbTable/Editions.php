@@ -17,7 +17,9 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array();
+	protected $_dependentTables = array(
+		'_applications' => 'Application_Model_DbTable_Applications',
+	);
 	
 	public function findEdition($edition)
 	{

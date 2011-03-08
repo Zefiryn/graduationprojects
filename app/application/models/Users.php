@@ -53,6 +53,11 @@ class Application_Model_Users extends GP_Application_Model
 		return $this;
 	}
 	
+	public function getUserFullName()
+	{
+		return $this->_name.' '.$this->_surname;
+	}
+	
 	
 }
 

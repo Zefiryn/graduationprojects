@@ -21,6 +21,22 @@ $(document).ready(function(){
 	setDateFields();
 	
 	checkbox();
+	
+	hideFileFields();
+	
+	highlightField();
+	
+	if ($('a.form_file').length )
+	{
+		runFancyBox('a.form_file', true);
+	}
+	
+	if ($('a.miniature').length )
+	{
+		runFancyBox('a.miniature', true);
+	}
+	
+	scrollToError();
 });
 
 function add_regulation_paragraph()
@@ -151,4 +167,78 @@ function bindCheckbox(field)
 			$("label[for='"+field+"'] span:first-child").addClass('ui-icon-check');
 		}
 	});
+}
+
+function hideFileFields()
+{
+	$('.fileFieldset').hide();
+	$('.fileFieldset:first').show();
+	
+	$('a.form_file').each(function(){
+		$(this).parent().parent().show();
+	});
+	$('.fileFieldset div.error-div').each(function(){
+		$(this).parent().show();
+	});
+	
+	$('.fileFieldset').each(function(){
+		var input = $(this).find('input[type="file"]');
+		var no = input.attr('name');
+		no = no.substring(no.lastIndexOf("_")+1);
+		var legend = $(this).find('legend');
+		legend.text(legend.text() + " " + no);
+	});
+	
+	$('.fileFieldset').change(function(){
+		if ($(this).next().length != null)
+			$(this).next().show();
+	});
+}
+
+function highlightField()
+{
+	$('input, textarea, select').focusin(function(){
+		$(this).css('-webkit-box-shadow', '0px 0px 8px 3px #880000');
+		$(this).css('-moz-box-shadow', '0px 0px 8px 3px #880000');
+		$(this).css('box-shadow', '0px 0px 8px 3px #880000');
+	});
+	$('input, textarea, select').focusout(function(){
+		$(this).css('-webkit-box-shadow', '');
+		$(this).css('-moz-box-shadow', '');
+		$(this).css('box-shadow', '');
+	});
+}
+
+function runFancyBox(obj, autoScale)
+{
+		$(obj).click(function(e){
+			e.preventDefault();
+		});
+		
+		$(obj).fancybox({
+			'transitionIn'	:	'elastic',
+			'transitionOut'	:	'elastic',
+			'titlePosition'	: 	'over',
+			'speedIn'		:	600, 
+			'speedOut'		:	200, 
+			'autoScale' 	: 	autoScale,
+			'overlayShow'	:	false
+		});
+
+}
+
+function scrollToError()
+{
+	var errorPos = $('div.error-div:first').offset().top - 70;
+	
+	if($.browser.webkit)
+	{
+		$("body").scrollTop(errorPos);
+	}
+	else
+	{
+		$(document).scrollTop(errorPos);
+	}
+		
+	
 }

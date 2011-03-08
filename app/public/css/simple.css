@@ -267,49 +267,27 @@ fieldset.submit
 	width: 600px;
 	text-align: center;
 }
-/*RESULT INFO*/
-div.adding_error
+fieldset.fileFieldset
 {
-	width: 650px;
-	border: 0px solid red;
-	margin: 0px 0px 0px 0px;
-	padding-left: 0px;
+	border-top: 0px solid red;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding: 3px;
+	margin: 40px 0px 10px 0px;
 }
-p.adding_info
+
+fieldset.fileFieldset legend
 {
-	font-size: 18px;
-	margin: 70px 0px 0px 0px;
-	border: 0px solid;
-	text-align: center;
-	width: 650px;
+	font-family: 'Droid Serif Pro', Rockwell, Georgia, serif;
+	font-size: 16px; 
 }
-p.mail_info
+
+p.uploaded_file a
 {
-	font-size: 14px;
-	font-weight: normal;
-	margin: 15px 0px 0px 0px;
-	border: 0px solid;
-	text-align: center;
-	width: 650px;
+	font-size: 13px;
 }
-ul.result
-{
-	font-size: 22px;
-	margin: 10px 0px 0px 0px;
-	border: 0px solid;
-	text-align: center;
-	width: 680px;
-}
-li.result_data
-{
-	font-size: 14px;
-	text-align: left;
-	margin-top: 10px;
-}
-span.mail_error
-{
-	font-size: 12px;
-}
+
 /*REGULATION PAGE*/
 div.content
 {
@@ -393,7 +371,7 @@ a:hover
 	color: #ff8080;
 	text-decoration: underline;
 }
-input, select
+input, select, textarea
 {
 	background: white;
 	border: 1px solid red;
@@ -408,6 +386,12 @@ span
 img
 {
 	border: 0px;
+}
+.clear
+{
+	clear: both;
+	height: 10px;
+	margin: 10px 0px 10px 0px;	
 }
 .spacer
 {
@@ -554,6 +538,7 @@ p.flash
 	padding: 5px 15px 5px 0px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 0px;
 	font-family: "Palatino Linotype", Georgia, "Book Antiqua", Garamond, serif;
 	font-size: 16px;
 	-moz-border-radius-bottomright: 15px;
@@ -586,4 +571,85 @@ p.img_hint
 	box-shadow: 3px 2px 3px 1px #999;
 	-webkit-box-shadow: 3px 2px 3px 1px #999;
 	-moz-box-shadow: 3px 2px 3px 1px #999;	
+}
+
+table.applications
+{
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+	width: 930px;
+	font-size: 12px;	
+	text-align: left;
+	border-collapse: collapse;
+}
+tr.normal, td.normal, th.normal
+{
+	margin: 0px;
+	padding: 15px 0px 15px 5px;
+	border-right: 1px solid #a0a0a0;
+	border-left: 1px solid #a0a0a0;
+}
+td.left, th.left, th.left
+{
+	margin: 0px;
+	padding: 15px 0px 15px 5px;
+	border-right: 1px solid #a0a0a0;
+	border-left: 0px;
+}
+td.right, th.right, th.right
+{
+	margin: 0px;
+	padding: 15px 0px 15px 5px;
+	border-left: 1px solid #a0a0a0;
+}
+
+tr.grey
+{
+	background: #d5deeb;
+}
+tr.nonactive
+{
+	background: #e0e0e0;
+	border-bottom: 1px solid #ffffff;
+}
+th
+{
+	margin: 0px 10px 0px 10px;
+	padding: 5px 0px 15px 0px;	 
+}
+th a:hover
+{
+	text-decoration: none;
+}
+td.submit
+{
+	margin: 0px;
+	padding: 35px 20px 15px 0px;
+	text-align: left;
+}
+
+form.application_sort
+{
+	width: 940px;
+	text-align: right;
+	font-size: 13px;
+	border: 0px solid blue;
+	margin: 15px 0px 0px 0px;
+	padding: 0px 0px 10px 0px;
+}
+form.application_sort select
+{
+	font-size: 12px;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-weight: normal;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+form.search
+{
+	width: 940px;
+	font-size: 13px;
+	margin: 0px 0px 20px 0px;
+	padding: 10px 0px 0px 0px; 
+	text-align: right;
 }

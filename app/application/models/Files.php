@@ -18,6 +18,10 @@ class Application_Model_Files extends GP_Application_Model
 	    parent::__construct($options);
 	}
 	
+	public function save()
+	{
+		return $this->getDbTable()->save($this);
+	}
 
 }
 

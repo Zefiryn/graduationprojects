@@ -1,4 +1,6 @@
-<?php $form = $this->element; ?>
+<?php $form = $this->element; 
+	$appSettings = Zend_Registry::get('appSettings');
+?>
 
 <form action="<?php echo $this->escape($form->getAction()); ?>"
       method="<?php echo $this->escape($form->getMethod()); ?>"
@@ -62,6 +64,17 @@
 	<?php endif;?>
 	<?php echo $form->miniatureCache;?>
 	<?php echo $form->miniature;?>
+	<p class="clear">&nbsp;</p>
+	<p style="margin: 30px 0px 0px 0px;">
+		<?php echo $this->translate('files')?><br />
+		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->_max_files;?><br />
+		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->_max_file_size/1024/1024);?>mb<br />
+	</p>
+	<?php for ($i = 1; $i <= $appSettings->_max_files; $i++) 
+			echo $form->getSubForm('file_'.$i);
+	?>
+	
+	<p class="clear">&nbsp;</p>
 	
 	<?php echo $form->personal_data_agreement;?>
 

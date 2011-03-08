@@ -76,12 +76,6 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	return $user;
     }
     
-    public function delete(Application_Model_Users $user)
-    {
-    	$where = $this->getAdapter()->quoteInto('user_id = ?', $user->_user_id);
-    	parent::delete($where);
-    }
-    
     /**
      * 
      * @param int $id

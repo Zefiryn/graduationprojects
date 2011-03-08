@@ -29,5 +29,15 @@ class Application_Model_WorkTypes extends GP_Application_Model
 		
 		return $select;
 	}
+	
+	public function getWorkType($type_id)
+	{
+		$row = $this->getDbTable()->find($type_id)->current();
+		
+		if ($row)
+			$this->populate($row);
+
+		return $this;
+	}
 }
 
