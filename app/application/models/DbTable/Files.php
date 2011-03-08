@@ -53,6 +53,44 @@ class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
     {
       parent::__construct(array());
     }
-
+    
+    /**
+     * Save or update file data in the database 
+     * 
+     * @param Application_Model_Files $file
+     * @throws Zend_Exception
+     * @return Application_Model_Files $file
+     */
+    public function save(Application_Model_Files $file)
+    {
+    	$id = $file->_file_id;
+    	
+    	if ($id != null)
+    		$row = $this->find($id);
+    	
+    	else
+    	{
+    		if ($id != null)
+    			throw new Zend_Exception('Incorrect file');
+    		else
+    			$row = $this->createRow();
+    	}
+    	
+    	$row->application_id = $file->_application;
+    	$row->path = $file->_path;
+    	$row->file_desc = $file->_file_desc;
+    	
+    	if ($row->save())
+    	{
+    		if (!$id)
+    			$file->_file_id = $id = $this->getAdapter()->lastInsertId();
+    	}
+    	else
+    	{
+    		throw new Zend_Exception('Couldn\'t save file data');
+    	}
+    	
+    	return $file;
+    }
 }
 

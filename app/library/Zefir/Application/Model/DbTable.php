@@ -185,7 +185,12 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		
 		$destination = APPLICATION_PATH.'/../public'.$destination;
 		
-		return rename($source, $destination);
+		$copied = rename($source, $destination);
+		
+		if ($copied)
+			chmod($destination, 0666);
+			
+		return $copied;
 	}
 	
 	/**
@@ -210,4 +215,11 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		
 		return $name;
 	}
+	
+	public function delete(Zefir_Application_Model $object)
+    {
+    	$column = $this->_primary;
+       	$where = $this->getAdapter()->quoteInto($column.' = ?', $obj->$column);
+    	parent::delete($where);
+    }
 }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package Application_Form_Application
+ */
+/**
+ * Declaration of the application form
+ * @author zefiryn
+ * @since Feb 2011
+ */
 
 class Application_Form_Application extends Zefir_Form
 {
@@ -299,23 +307,14 @@ class Application_Form_Application extends Zefir_Form
 		 * SUBMIT
 		 */
 	
+		for ($i = 1; $i <= $appSettings->_max_files; $i++)
+		{
+			$subForm = new Application_Form_File($i);
+			$this->addSubForm($subForm, 'file_'.$i);
+		}
 		
-		$this->addElement('hash', 'csrf', array(
-			'ignore' => true,
-			'decorators' => array(	array('ViewHelper'),
-									array('ErrorMsg'))	
-		));		 
-
-		$submit = $this->createElement('submit', 'submit', array(
-			'ignore' => true,
-			'label' => 'application_submit',
-			'attribs' => array('class' => 'submit')
-		));		 
-		$submit->setDecorators(array(
-							array('TextField'),
-							array('HtmlTag', array('tag' => 'p', 'class' => 'center'))
-            				));
-      $this->addElement($submit);
+		$this->_createCsrfElement();	 
+		$this->_createStandardSubmit('application_submit');
     }
 
 

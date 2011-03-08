@@ -1,6 +1,14 @@
 <?php
-class Zefir_Form extends Zend_Form
+/**
+ * @package Zefir_Form_SubForm
+ */
+/**
+ * @author zefiryn
+ *
+ */
+class Zefir_Form_SubForm extends Zend_Form_SubForm
 {
+	
 	/**
 	 * vars for validators regex
 	 * @var array
@@ -79,40 +87,5 @@ class Zefir_Form extends Zend_Form
 	protected function getRadioDecorators()
 	{
 		return $this->_decoratorsRadio;
-	}
-	
-	
-	protected function _createStandardSubmit($submit_label)
-	{
-		$submit = $this->createElement('submit', 'leave', array(
-			'ignore' => true,
-			'label' => 'leave',
-			'class' => 'submit unprefered'
-		));	 
-		$submit->setDecorators(array(
-							array('ViewHelper')
-            				));
-     	$this->addElement($submit);
-
-
-		$submit = $this->createElement('submit', 'submit', array(
-			'ignore' => true,
-			'label' => $submit_label,
-			'class' => 'submit prefered'
-		));	 
-		$submit->setDecorators(array(
-							array('ViewHelper')
-            				));
-            				
-      	$this->addElement($submit);
-	}
-	
-	protected function _createCsrfElement()
-	{
-		$this->addElement('hash', 'csrf', array(
-			'ignore' => true,
-			'decorators' => array(	array('ViewHelper'),
-									array('ErrorMsg'))	
-		));
 	}
 }

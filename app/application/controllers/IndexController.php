@@ -13,6 +13,7 @@ class IndexController extends Zefir_Controller_Action
         $main = $this->view->translations;
 		ksort($main);
 		$this->view->main = $main;
+		
     }
 
 

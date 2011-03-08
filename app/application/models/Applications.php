@@ -44,6 +44,7 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function populateFromForm($data)
 	{
+		$appSettings = Zend_Registry::get('appSettings');
 		parent::populateFromForm($data);
 		
 		if (isset($data['new_school']) && $data['new_school'] != null)
@@ -63,6 +64,46 @@ class Application_Model_Applications extends GP_Application_Model
 			$this->_active = 1;
 		
 		$this->_miniature = $data['miniatureCache'];
+		
+		for($i = 1; $i <= $appSettings->_max_files; $i++)
+		{//add uploaded files
+			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
+			{
+				$this->_files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
+				$this->_files[$i]['description'] = $data['file_'.$i]['file_annotation'];
+			}  
+		}
+	}
+	
+	public function delete()
+	{
+		return $this->getDbTable()->delete($this);
+	}
+	
+	public function getApplications($select, $arg)
+	{
+		switch($select)
+		{
+			case 'edition':
+				return $this->_getApplicationsByEdition($arg);
+			break;
+		}
+		
+	}
+	
+	protected function _getApplicationsByEdition($id)
+	{
+		$where = $this->getDbTable()->select()->where('edition_id = ?', $id)->order('application_date');
+		$rowset = $this->getDbTable()->fetchAll($where);
+		
+		$applications = array();
+		foreach($rowset as $row)
+		{
+			$application = new $this;
+			$applications[] = $application->populateWithReference($row, $application);
+		}
+		
+		return $applications;
 	}
 
 }

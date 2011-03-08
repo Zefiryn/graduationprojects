@@ -1,1 +1,90 @@
-<br /><br /><center>View script for controller <b>Applications</b> and script/action name <b>index</b></center>
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'applications',
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+	<h1><?php echo $this->translate('applications_header'); ?></h1>
+	<p class="spacer">&nbsp;</p>
+
+	<?php echo $this->sortForm;?>
+	
+	<table class="applications">
+		<!--TABLE HEADERS-->
+		<tr class="header">
+			<!--CHECKBOX FOR MANAGING-->
+			<th class="left" style="width: 15px;">
+				&nbsp;
+			</th>
+			<!-- MINIATURE -->
+			<th class="normal" style="width: 90px;">
+				<?php echo $this->translate('miniature');?>
+			</th>
+			<!--ID-->	
+			<th class="normal" style="width: 20px;">
+				#
+			</th>
+			<!--NAME-->
+			<th class="normal" style="width: 100px;">
+				<?php echo $this->translate('user_name_and_surname');?>
+			</th>
+			<!--COUNTRY-->
+			<th class="normal" style="width: 20px;">
+				<?php echo $this->translate('country');?>
+			</th>
+			<!--SUBJECT-->
+			<th class="normal" style="width: 85px;">
+				<?php echo $this->translate('work_subject');?>
+			</th>
+			<!--2d/3d-->
+			<th class="normal" style="width: 35px;">
+			<?php echo $this->translate('work_type');?>
+			</th>
+			<!--FILES LIST-->
+			<th class="normal" style="width: 50px;">
+				<?php echo $this->translate('application_files');?>
+			</th>
+			<!--VOTE LINK-->
+			<th class="normal" style="width: 90px;">
+				<?php echo $this->translate('vote');?>
+			</th>
+			<!--ANNOTATIONS-->
+			<th class="right" style="width: 40px;">
+				<?php echo $this->translate('annotations');?>
+			</th>
+		</tr>
+		<!--END OF TABLE HEADERS-->
+		
+		<!--APPLICATIONS DATA -->
+		<?php foreach ($this->applications as $no => $application):?>
+		<tr class="grey">
+			<td class="left" style="width: 15px;">
+				
+			</td>
+			<td class="normal" style="width: 90px;">
+				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 
+					class="miniature" rel="miniature_<?php echo $application->_application_id?>" 
+					title="<?php echo $application->_user->getUserFullName();?>">
+					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" width="100px" height="100px" alt="thumbnail" />
+				</a>
+				</td>
+			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
+			<td class="normal" style="width: 100px;"><?php echo $application->_user->getUserFullName();?></td>
+			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->_country);?></td>
+			<td class="normal" style="width: 85px;"><?php echo $application->_work_subject;?></td>
+			<td class="normal" style="width: 35px;"><?php echo $application->_work_type->_work_type_name;?></td>
+			<td class="normal" style="width: 50px;"><?php echo $application->_files;?></td>
+			
+			<!-- VOTES -->
+			<td class="normal" style="width: 90px;"></td>
+			<td class="right" style="width: 40px;text-align:left;">	</td>
+		</tr>
+		<?php endforeach;?>
+	</table>
+	
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

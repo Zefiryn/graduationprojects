@@ -186,6 +186,24 @@ class Zefir_Application_Model {
 		return $this;
 	}
 	
+	public function populateWithReference($row)
+	{
+		foreach ($this->_set_vars as $var)
+		{
+			$var_raw = substr($var, 1);
+			if (isset($row->$var_raw))
+				$this->$var = $row->$var_raw;
+				
+			if 	(isset($row[$var_raw]))
+				$this->$var = $row[$var_raw];
+		}
+		
+		$this->getDbTable()->getChildren($row, $this);
+		$this->getDbTable()->getParents($row, $this);
+		
+		return $this;
+	}
+	
 	/**
 	 * Compare function used with usort function
 	 * @access private

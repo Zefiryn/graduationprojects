@@ -19,7 +19,7 @@ class Zefir_Decorator_MyLabel extends Zend_Form_Decorator_Abstract
      	$name 			= $element->getFullyQualifiedName();
      	$label 			= $element->getLabel();
      	$type			= $element->getType();
-		$tag			= isset($attribs['tag']) ?  $attribs['tag'] : 'p';
+		$tag			= $this->getOption('tag') != null ?  $this->getOption('tag') : 'p';
 		$class			= $this->getOption('class') != null ?  $this->getOption('class') : 'label';
 		$separator		= $this->getOption('separator') != null ? $this->getOption('separator') : $this->getSeparator();
 		
