@@ -202,7 +202,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
 		$acl->allow('juror', array('applications'), array('index', 'vote'));
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
-		$acl->allow('admin', array('applications', 'regulations', 'faq'), null);
+		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about'), null);
 
 		
 		

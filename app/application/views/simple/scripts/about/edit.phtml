@@ -1,24 +1,15 @@
 <br />
 <?php echo $this->partial('partials/lang_menu.phtml', 
 			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'about',
+						'link' => 'about/edit',
 						'lang' => $this->lang));
 ?>
 
 <div class="content">
-	<p class="admin">
-		<a href="<?php $this->baseUrl?>/about/edit">
-			<img class="ui-icon ui-icon-pencil no-block" alt="<?php echo $this->translate('edit');?>" title="<?php echo $this->translate('edit');?>">
-		</a>
-	</p>
 	<h1><?php echo $this->translate('about_header');?></h1>
 	<p class="spacer">&nbsp;</p>
-	 
-	<?php foreach ($this->about as $text):?>
-	<p class="about">
-		<?php echo $text;?>
-	</p>
-	<?php endforeach;?>
+	
+	<?php echo $this->form;?>
 	
 </div>	
 <?php echo $this->partial('partials/submenu.phtml', 

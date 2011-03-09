@@ -27,14 +27,14 @@ class Application_Form_Regulations extends Zefir_Form
         	$paragraph->setLabel('paragraph_no')
         			->setAttribs(array('class' => 'width3'))
         			->setValue($regulation->_paragraph_no)
-        			->setDecorators($this->_getBasicDecorators(TRUE));
+        			->setDecorators($this->_getZefirDecorators(TRUE));
         	$this->addElement($paragraph);
         	
         	$paragraph = $this->createElement('textarea', 'paragraph_text_'.$regulation->_paragraph_id);
         	$paragraph->setLabel('paragraph_text')
         			->setAttribs(array('class' => 'width1'))
         			->setValue($regulation->_paragraph_text)
-        			->setDecorators($this->_getBasicDecorators(TRUE));
+        			->setDecorators($this->_getZefirDecorators(TRUE));
         	$this->addElement($paragraph);
         	
         	$paragraph = $this->createElement('checkbox', 'paragraph_remove_'.$regulation->_paragraph_id);
@@ -56,13 +56,13 @@ class Application_Form_Regulations extends Zefir_Form
 	        $paragraph = $this->createElement('text', 'new_paragraph_no_'.$i);
 	        $paragraph->setLabel('paragraph_no')
 	        		->setAttribs(array('class' => 'width3'))
-	        		->setDecorators($this->_getBasicDecorators(TRUE));
+	        		->setDecorators($this->_getZefirDecorators(TRUE));
 	        $this->addElement($paragraph);
 	        	
 	        $paragraph = $this->createElement('textarea', 'new_paragraph_text_'.$i);
 	        $paragraph->setLabel('paragraph_text')
 	        		->setAttribs(array('class' => 'width1'))
-	        		->setDecorators($this->_getBasicDecorators(TRUE));
+	        		->setDecorators($this->_getZefirDecorators(TRUE));
 	        $this->addElement($paragraph);
         }
         
