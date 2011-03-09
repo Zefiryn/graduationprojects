@@ -65,7 +65,8 @@
 			</td>
 			<td class="normal" style="width: 90px;">
 				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 
-					class="miniature" rel="miniature_<?php echo $application->_application_id?>" 
+					class="miniature"
+					rel="application_<?php echo $application->_application_id;?>" 
 					title="<?php echo $application->_user->getUserFullName();?>">
 					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" width="100px" height="100px" alt="thumbnail" />
 				</a>
@@ -75,7 +76,17 @@
 			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->_country);?></td>
 			<td class="normal" style="width: 85px;"><?php echo $application->_work_subject;?></td>
 			<td class="normal" style="width: 35px;"><?php echo $application->_work_type->_work_type_name;?></td>
-			<td class="normal" style="width: 50px;"><?php echo $application->_files;?></td>
+			<td class="normal" style="width: 50px;">
+				<?php foreach($application->_files as $id => $file):?>
+				<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->_path);?>"
+					class="application"
+					rel="application_<?php echo $application->_application_id;?>"
+					title="<?php echo $file->_file_desc;?>">
+					<?php echo $this->translate('file').' '.++$id;?>, 
+				</a>
+				<?php endforeach;?>
+			
+			</td>
 			
 			<!-- VOTES -->
 			<td class="normal" style="width: 90px;"></td>

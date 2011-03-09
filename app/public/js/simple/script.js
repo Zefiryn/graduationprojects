@@ -36,6 +36,11 @@ $(document).ready(function(){
 		runFancyBox('a.miniature', true);
 	}
 	
+	if ($('a.application').length )
+	{
+		runFancyBox('a.application', true);
+	}
+	
 	scrollToError();
 });
 

@@ -34,5 +34,12 @@ class Application_Model_Localizations extends GP_Application_Model
 
 		return $translation;
 	}
+	
+	public function populateFromForm($data)
+	{
+		$this->_name = $data['name'];
+		$this->_lang_code = $data['lang_code'];
+		$this->_text = $data['text'];
+	}
 }
 
