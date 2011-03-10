@@ -511,7 +511,7 @@
 			$("<img />").attr({
 				'id'	: 'fancybox-img',
 				'src'	: imgPreloader.src,
-				'alt'	: selectedOpts.title
+				'alt'	: selectedOpts.title,
 			}).appendTo( tmp );
 
 			fancybox_show();

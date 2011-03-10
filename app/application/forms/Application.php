@@ -34,6 +34,9 @@ class Application_Form_Application extends Zefir_Form
 		$element = $this->createElement('hidden', 'edition');	
 		$this->addElement($element);
 		
+		$element = $this->createElement('hidden', 'application_id');	
+		$this->addElement($element);
+		
 		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic');
 		$element = $this->createElement('select', 'country');
 		$element->setAttribs(array('class' => 'width1', 'size' => 1))

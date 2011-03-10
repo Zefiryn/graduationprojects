@@ -115,4 +115,10 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 
 		return $form;
     }
+    
+    protected function _redirectToRoute($options, $route)
+    {
+    	$this->_redirector = $this->_helper->getHelper('Redirector');
+		$this->_redirector->gotoRoute($options, $route);
+    }
 }

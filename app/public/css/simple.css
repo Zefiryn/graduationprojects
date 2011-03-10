@@ -205,10 +205,11 @@ img.error_agreement
 p.error
 {
 	font-family: 'Trebuchet MS', sans-serif;
-	font-size: 11px;
+	font-size: 12px;
 	color: red;
 	font-weight: bold;
-	margin: 0px;
+	margin: 5px 0px 0px 0px;
+	text-align: left;
 }
 input.radio, input.checkbox
 {
@@ -311,6 +312,28 @@ div.content
 	font-family: 'Trebuchet MS', sans-serif;
 	text-align: justify;
 }
+div.user
+{
+	padding: 8px;
+	margin: 5px 0px 15px 0px;
+	border: 0px solid #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+div.user p
+{
+	padding: 4px;
+	margin: 0px;
+	line-height: 18px;
+}
+div.user p span
+{
+	font-weight: bold;
+}
+div.error
+{
+	width: inherit;
+}
 p.rule, p.about, p.faq, p.db_error
 {
 	width: 620px;
@@ -319,6 +342,12 @@ p.rule, p.about, p.faq, p.db_error
 	font-size: 13px;
 	text-align: left;
 	border: 0px solid; 
+}
+p.application
+{
+	clear: both;
+	margin: 5px 0px 5px 0px;
+	text-align: left;
 }
 p.early_result
 {
@@ -364,6 +393,18 @@ h2
 	font-weight: normal;
 	font-size: 26px;
 }
+h4
+{
+	margin: 0px;
+	padding: 4px 0px 4px 0px;
+}
+h4 a:link, h4 a:visited
+{
+	font-size: 15px;
+	color: black;
+	
+}
+
 p
 {
 	font-family: 'Trebuchet MS', sans-serif;
@@ -394,6 +435,12 @@ span
 {
 	font-family: 'Trebuchet MS', sans-serif;
 	font-size: 12px;
+}
+span.application_field
+{
+	font-size: inherit;
+	font-weight: bold;
+	color: #666;
 }
 img
 {
@@ -569,6 +616,32 @@ img.no-block
 {
 	display: inline-block;
 	border: 0px;
+}
+img.files
+{
+	border: 1px solid #c8c8c8;
+}
+img.hide
+{
+	display: none;
+}
+a.images
+{
+	display: block;
+	width: 15px;
+	height: 15px;
+	
+	color: black;
+	text-align: center;
+	padding: 0px;
+	margin: 0px 5px 0px 0px;
+	float: left;
+}
+a.images:hover
+{
+	text-decoration: none;
+	border: 0px solid #ccc;
+	background: #ffcbcb;
 }
 p.img_hint
 {

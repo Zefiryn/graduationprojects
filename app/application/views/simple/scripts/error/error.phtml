@@ -1,18 +1,28 @@
-  <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+<br />
+<div class="content error">
+  <h1><?php echo $this->translate('error_occured');?></h1>
+  <h3><?php echo $this->translate($this->message);?></h3>
 
   <?php if (isset($this->exception)): ?>
 
-  <h3>Exception information:</h3>
+  <h3><?php echo $this->translate('exception_information')?>:</h3>
   <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+      <b><?php echo $this->translate('message')?>:</b> <?php echo $this->exception->getMessage() ?>
   </p>
 
-  <h3>Stack trace:</h3>
-  <p><?php echo $this->exception->getTraceAsString() ?></p>
+  <h3><?php echo $this->translate('stack_trace')?>:</h3>
+  <?php foreach ($this->exception->getTrace() as $no => $line):?>
+  	<p class="error">
+  		#<?php echo $no;?>
+  		<?php echo $line['class'].$line['type'].$line['function'];?>()<br />
+  		<?php echo $line['file'];?> (<?php echo $line['line']?>)
+  	</p>
+  <?php endforeach;?>
+  
   
 
-  <h3>Request Parameters:</h3>
+  <h3><?php echo $this->translate('request_parameters')?>:</h3>
   <pre><?php echo var_export($this->request->getParams(), true) ?>
   </pre>
   <?php endif ?>
+</div>

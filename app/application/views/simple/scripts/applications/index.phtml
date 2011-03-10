@@ -72,7 +72,11 @@
 				</a>
 				</td>
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
-			<td class="normal" style="width: 100px;"><?php echo $application->_user->getUserFullName();?></td>
+			<td class="normal" style="width: 100px;">
+				<a href="<?php echo $this->url(array('id' => $application->_application_id, 'lang' => $this->lang), 'lang_application');?>">
+					<?php echo $application->_user->getUserFullName();?>
+				</a>
+			</td>
 			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->_country);?></td>
 			<td class="normal" style="width: 85px;"><?php echo $application->_work_subject;?></td>
 			<td class="normal" style="width: 35px;"><?php echo $application->_work_type->_work_type_name;?></td>

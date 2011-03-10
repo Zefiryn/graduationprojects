@@ -1,0 +1,37 @@
+<?php $form = $this->element; ?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+      method="<?php echo $this->escape($form->getMethod()); ?>"
+      class="contact">
+	<br />
+	<?php if ($form->csrf->hasErrors()):?>
+		<div id="error-csrf" class="error-div">
+			<p class="error"><?php echo $this->translate('csrf_error')?></p>
+		</div>
+	<?php endif;?>
+	<?php echo $form->csrf->renderViewHelper(); ?>
+	<?php echo $form->user_id; ?> 
+	
+	<?php echo $form->nick;?>
+	<?php echo $form->password;?>
+	<?php echo $form->password_check;?>
+
+	<?php echo $form->name;?>
+	
+	<?php echo $form->surname;?>
+	
+	<?php echo $form->address;?>
+	
+	<?php echo $form->phone;?>
+	
+	<?php echo $form->email;?>
+	<?php echo $form->show_email;?>
+	
+	<?php echo $form->role;?>
+
+	<p class="submit center">
+		<?php echo $form->submit; ?>
+		<?php echo $form->leave; ?>
+	</p>
+		
+</form>

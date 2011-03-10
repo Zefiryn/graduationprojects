@@ -160,7 +160,138 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			));
     	$router->addRoute('login', $route);
     	
+    	/**
+    	 * APPLICATIONS
+    	 */
     	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/application/:id',
+    			array(
+    				'controller' => 'applications',
+    				'action' => 'show'    				
+    				),
+    			array(	'lang' => '^[a-z]{2}$',
+    					'id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('lang_application', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'application/:id',
+    			array(
+    				'controller' => 'applications',
+    				'action' => 'show'    				
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('application', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'application/edit/:id',
+    			array(
+    				'controller' => 'applications',
+    				'action' => 'edit'    				
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('edit_application', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'application/delete/:id',
+    			array(
+    				'controller' => 'applications',
+    				'action' => 'delete'    				
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('delete_application', $route);
+    	
+    	/**
+    	 * user
+    	 */
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/user/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'show'    				
+    				),
+    			array(	'lang' => '^[a-z]{2}$',
+    					'id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('lang_user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'user/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'show'
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'user/edit/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'edit'
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('edit_user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/user/edit/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'edit'
+    				),
+    			array(	'id' => '^[0-9]+$',
+    					'lang' => '^[a-z]{2}$')
+    			
+    			);
+    	$router->addRoute('lang_edit_user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'user/delete/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'delete'
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('delete_user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/user/delete/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'delete'
+    				),
+    			array(	'id' => '^[0-9]+$',
+    					'lang' => '^[a-z]{2}$')
+    			
+    			);
+    	$router->addRoute('lang_delete_user', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'user/promote/:id',
+    			array(
+    				'controller' => 'users',
+    				'action' => 'promote'
+    				),
+    			array('id' => '^[0-9]+$')
+    			
+    			);
+    	$router->addRoute('promote_user', $route);
 	}
 	
 	/**
@@ -190,19 +321,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('auth'));
 		$acl->addResource(new Zend_Acl_Resource('contact'));
 		$acl->addResource(new Zend_Acl_Resource('applications'));
+		$acl->addResource(new Zend_Acl_Resource('users'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
 		$acl->allow(null, array('about', 'regulations', 'faq'), array('index', 'show'));
 		$acl->allow(null, array('auth'), array('index', 'login'));
+		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
 		$acl->allow('user', array('auth'), array('logout'));
 		
 		$acl->allow(null, array('applications'), array('new'));
 		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
 		$acl->allow('juror', array('applications'), array('index', 'vote'));
+		$acl->allow('juror', array('users'), array('index'));
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
-		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about'), null);
+		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about', 'users'), null);
 
 		
 		

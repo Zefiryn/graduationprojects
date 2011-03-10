@@ -1,0 +1,43 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'users',
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+	<h1><?php echo $this->translate('users_header');?></h1>
+	<p class="clear">&nbsp;</p>
+	<?php foreach ($this->users as $role => $groupedUsers):?>
+		<h3><?php echo $this->translate($role.'s');?></h3>
+		<?php foreach($groupedUsers as $user):?>
+		<div class="user">
+			<p class="admin">
+				<a href="<?php echo $this->url(array('id' => $user->_user_id), 'edit_user');?>">
+					<img class="ui-icon ui-icon-pencil no-block" alt="Edytuj" title="Edytuj" />
+				</a>
+				<a href="<?php echo $this->url(array('id' => $user->_user_id), 'delete_user');?>"> 
+					<img class="ui-icon ui-icon-trash no-block" del="Usuń" alt="Usuń" title="Usuń" />
+				</a>
+			</p>
+			<h4>
+				<a href="<?php echo $this->url(array('id' => $user->_user_id), 'user');?>">
+					<?php echo $user->getUserFullName();?>
+				</a>
+			</h4>
+			<p>
+				<span><?php echo $this->translate('nick');?></span>: 
+				<?php echo $user->_nick;?>
+			</p>
+			<p>
+				<span><?php echo $this->translate('email');?></span>: 
+				<?php echo $user->_email;?>
+			</p>
+			
+		</div>
+		<?php endforeach;?>		
+	<?php endforeach;?>
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>
