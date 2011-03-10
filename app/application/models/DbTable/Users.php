@@ -45,7 +45,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	$id = $user->_user_id;
     	
     	if ($id != null)
-    		$row = $this->find($id);
+    		$row = $this->find($id)->current();
     	
     	else
     	{
@@ -56,7 +56,6 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	}
     	
     	$row->nick 			= $user->_nick;
-    	$row->password 		= sha1($user->_password);
     	$row->name 			= $user->_name;
     	$row->surname		= $user->_surname;
     	$row->address		= $user->_address;
@@ -64,6 +63,8 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	$row->email			= $user->_email;
     	$row->show_email	= $user->_show_email;
     	$row->role			= $user->_role;
+    	if ($user->_password != null)
+    		$row->password = sha1($user->_password);
     	
     	if ($row->save())
     	{
@@ -85,9 +86,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     {
     	$row = $this->find($id)->current();
     	
-    	$user->populate($row);
-    	$this->getParents($row, $user);
-    	$this->getChildren($row, $user);
+    	$user->populateWithReference($row);
     	
     	return $user;
     	

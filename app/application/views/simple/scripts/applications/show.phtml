@@ -1,1 +1,95 @@
-<br /><br /><center>View script for controller <b>Applications</b> and script/action name <b>show</b></center>
+<?php $settings = Zend_Registry::get('appSettings');?>
+<br />
+
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'application/'.$this->application->_application_id,
+						'lang' => $this->lang));
+?>
+
+
+<div class="content">
+
+	<p class="admin">
+		<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'edit_application');?>">
+			<img class="ui-icon ui-icon-pencil no-block" alt="Edytuj" title="Edytuj" />
+		</a>
+		<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'delete_application');?>"> 
+			<img class="ui-icon ui-icon-trash no-block" del="Usuń" alt="Usuń" title="Usuń" />
+		</a>
+	</p>
+	
+	<h1><?php echo $this->application->_user->getUserFullName();?></h1>
+	<p class="spacer">&nbsp;</p>
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('work_subject');?>:</span>
+	 	<?php echo $this->application->_work_subject;?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('work_type');?>:</span>
+	 	<?php echo $this->application->_work_type->_work_type_name;?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('country');?>:</span>
+	 	<?php echo $this->translate($this->application->_country);?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('school');?>:</span>
+	 	<?php echo $this->application->_school->_school_name;?>, <?php echo $this->translate('department');?> <?php echo $this->application->_department;?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('supervisor');?>:</span>
+	 	<?php echo $this->application->getSupervisor();?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('degree');?>:</span>
+	 	<?php echo $this->translate($this->application->_degree->_degree_name);?>
+	</p>
+	
+
+	<div id="files_slider">	
+		<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->_miniature)?>" 
+					class="files" rel="files" 
+					title="<?php echo $this->application->_work_subject;?>">
+					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->_miniature)?>" width="400px" height="400px" alt="thumbnail" />
+				</a>
+		<br />
+		<span style="display: block; float: left;"><?php echo $this->translate('files')?>:</span>
+		<?php foreach ($this->application->_files as $id => $file):?>
+		<a href="/assets/applications/<?php echo $file->_path?>" 
+			title="<?php echo $file->_file_desc;?>" 
+			class="files images" rel="files">
+			<span class="file_box"><?php echo ++$id;?></span>
+		</a>
+		<?php endforeach;?>
+	</div>
+	<p class="clear">&nbsp;</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('email');?>:</span>
+		<?php echo $this->application->_user->_email;?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('work_desc');?>:</span><br />
+		<?php echo $this->application->_work_desc;?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('graduation_time');?>:</span>
+	 	<?php echo date($settings->_date_format, $this->application->_graduation_time);?>
+	</p>
+	
+	<p class="application">
+		<span class="application_field"><?php echo $this->translate('application_date');?>:</span>
+	 	<?php echo date($settings->_date_format, $this->application->_application_date);?>
+	</p>
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl('/applications');?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

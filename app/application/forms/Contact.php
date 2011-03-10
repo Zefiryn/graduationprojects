@@ -30,7 +30,7 @@ class Application_Form_Contact extends Zefir_Form
 								'maxlength' => 16,
 								'class' => 'width2'))
 				->setLabel('contact_name')
-				->setDecorators($this->_getBasicDecorators())
+				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
 						new Zend_Validate_Regex('/^['.$this->_regex['L'].'\- ]+$/')
 					));	
@@ -42,7 +42,7 @@ class Application_Form_Contact extends Zefir_Form
 								'class' => 'width2'))
 				->setLabel('contact_email')
 				->setRequired(true)
-				->setDecorators($this->_getBasicDecorators())
+				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
 						new Zend_Validate_EmailAddress()
 					));
@@ -54,7 +54,7 @@ class Application_Form_Contact extends Zefir_Form
 								'class' => 'width2'))
 				->setLabel('mail_title')
 				->setRequired(true)
-				->setDecorators($this->_getBasicDecorators())				
+				->setDecorators($this->_getZefirDecorators())				
 				->addValidators(array(
 						new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
 					));	
@@ -65,7 +65,7 @@ class Application_Form_Contact extends Zefir_Form
 										'cols' => 'auto',
 										'rows' => 'auto'))
 					->setLabel('mail_text')
-					->setdecorators($this->_getBasicDecorators())
+					->setdecorators($this->_getZefirDecorators())
 					->setRequired(TRUE)
 					->addValidators(array(
 						new Zend_Validate_NotEmpty(),

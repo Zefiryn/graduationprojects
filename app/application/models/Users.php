@@ -58,6 +58,37 @@ class Application_Model_Users extends GP_Application_Model
 		return $this->_name.' '.$this->_surname;
 	}
 	
+	public function getUsers($order = 'role')
+	{
+		$select = $this->getDbTable()->select()->order(array($order, 'surname', 'name'));
+		$rowset = $this->getDbTable()->fetchAll($select);
+		
+		$users = array();
+		foreach($rowset as $row)
+		{
+			$user = new $this;
+			$users[] = $user->populateWithReference($row);
+		}
+		
+		return $users;
+	}
 	
+	public function prepareFormArray()
+	{
+		$data = array(
+			'user_id' => $this->_user_id,
+			'name' => $this->_name,
+			'surname' => $this->_surname,
+			'nick' => $this->_nick,
+			'phone' => $this->_phone,
+			'address' => $this->_address,
+			'email' => $this->_email,
+			'show_email' => $this->_show_email,
+			'role' => $this->_role
+		);
+		
+		return $data;
+	}	
 }
+
 

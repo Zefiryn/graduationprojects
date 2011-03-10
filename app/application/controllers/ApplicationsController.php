@@ -95,7 +95,28 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function editAction()
     {
-        // action body
+        $appSettings = Zend_Registry::get('appSettings');
+    	$options = Zend_Registry::get('options');
+        $form = new Application_Form_Application();
+		$form->setDecorators(array(
+			array('ViewScript', array('viewScript' => 'forms/_applicationEditForm.phtml'))
+		));
+		
+		$request = $this->getRequest();
+		
+		if ($request->isPost())
+		{
+		}
+		else
+		{
+			$id = $request->getParam('id', '');
+			$application = new Application_Model_Applications();
+			$application->getApplicationById($id);
+			$form->populate($application->prepareFormArray());
+			
+		}
+		
+		$this->view->form = $form;
     }
 
     public function deleteAction()
@@ -105,7 +126,15 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function showAction()
     {
-        // action body
+		$request = $this->getRequest();
+		
+		$id = $request->getParam('id', '');
+		
+		if ($id == null)
+			throw new Zend_Exception('Wrong id parameter');
+		
+		$application = new Application_Model_Applications();
+		$this->view->application = $application->getApplicationById($id);
     }
 
     public function updateAction()

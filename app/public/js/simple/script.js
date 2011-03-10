@@ -41,6 +41,13 @@ $(document).ready(function(){
 		runFancyBox('a.application', true);
 	}
 	
+	if ($('a.files').length )
+	{
+		runFancyBox('a.files', true);
+	}
+	
+	
+	
 	scrollToError();
 });
 
@@ -227,7 +234,7 @@ function runFancyBox(obj, autoScale)
 			'speedIn'		:	600, 
 			'speedOut'		:	200, 
 			'autoScale' 	: 	autoScale,
-			'overlayShow'	:	false
+			'overlayShow'	:	true
 		});
 
 }

@@ -105,6 +105,42 @@ class Application_Model_Applications extends GP_Application_Model
 		
 		return $applications;
 	}
+	
+	public function getApplicationById($id)
+	{
+		$row = $this->getDbTable()->find($id)->current();	
+		return $this->populateWithReference($row);
+	}
+	
+	public function getSupervisor()
+	{
+		return $this->_supervisor_degree.' '.$this->_supervisor;
+	}
+	
+	public function getApplicationSchool()
+	{
+		return $this->_school->_school_name.', '.$this->_department;
+	}
+	
+	public function prepareFormArray()
+	{
+		$data = array(
+				'application_id' => $this->_application_id,
+				'school' => $this->_school->_school_id,
+				'department' => $this->_department,
+				'degree' => $this->_degree->_degree_id,
+				'work_subject' => $this->_work_subject,
+				'work_type' => $this->_work_type->_work_type_id,
+				'work_desc' => $this->_work_desc,
+				'supervisor_degree' => $this->_supervisor_degree,
+				'supervisor' => $this->_supervisor,
+				'graduation_time' => date('d-m-Y', $this->_graduation_time),
+				'miniatureCache' => $this->_miniature,
+				'personal_data_agreement' => TRUE
+		);
+		
+		return $data;
+	}
 
 }
 

@@ -1,0 +1,59 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'user/'.$this->user->_user_id,
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+	<h1><?php echo $this->user->getUserFullName();?></h1>
+	<p class="clear">&nbsp;</p>
+	<div class="user">
+		<p class="admin">
+			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'promote_user');?>"> 
+				<img class="ui-icon ui-icon-key no-block" del="Zmień uprawnienia" alt="Zmień uprawnienia" title="Zmień uprawnienia" />
+			</a>
+			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'edit_user');?>">
+				<img class="ui-icon ui-icon-pencil no-block" alt="Edytuj" title="Edytuj" />
+			</a>
+			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'delete_user');?>"> 
+				<img class="ui-icon ui-icon-trash no-block" del="Usuń" alt="Usuń" title="Usuń" />
+			</a>
+		</p>
+		<p>
+			<span><?php echo $this->translate('nick');?></span>: 
+			<?php echo $this->user->_nick;?>
+		</p>
+		
+		<p>
+			<span><?php echo $this->translate('email');?></span>: 
+			<?php echo $this->user->_email;?>
+		</p>
+		
+		<?php if ($this->user->_phone != null):?>
+		<p>
+			<span><?php echo $this->translate('phone');?></span>: 
+			<?php echo $this->user->_phone;?>
+		</p>
+		<?php endif;?>
+		
+		<?php if ($this->user->_address != null):?>
+		<p>
+			<span><?php echo $this->translate('address');?></span>: 
+			<?php echo $this->user->_address;?>
+		</p>
+		<?php endif; ?>
+		
+		<?php if ($this->user->_applications != null):?>
+		<p>
+			<span><?php echo $this->translate('application');?></span>:
+			<a href="<?php echo $this->url(array('id' => $this->user->_applications[0]->_application_id), 'application');?>"> 
+				<?php echo $this->user->_applications[0]->_work_subject;?>
+			</a>
+		</p>
+		<?php endif;?>
+	</div>
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous"><a href="<?php echo $this->baseUrl('/users');?>">&lt; <?php echo $this->translate('previous_page');?></a></p>
