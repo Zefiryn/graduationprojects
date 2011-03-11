@@ -17,9 +17,9 @@ class Application_Model_Editions extends GP_Application_Model
 	    parent::__construct($options);
 	}
 
-	public function editionExists($edition)
+	public function editionExists($edition, $onlyName = FALSE)
 	{
-		$row = $this->getDbTable()->findEdition($edition);
+		$row = $this->getDbTable()->findEdition($edition, $onlyName);
 
 		if ($row != NULL)
 			$check = TRUE;

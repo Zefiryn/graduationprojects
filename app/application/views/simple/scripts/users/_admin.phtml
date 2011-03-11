@@ -1,0 +1,18 @@
+<p class="admin">
+	<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'promote_user');?>"> 
+		<img class="ui-icon ui-icon-key no-block" 
+			alt="<?php echo $this->translate('promote');?>" 
+			title="<?php echo $this->translate('promote');?>" />
+	</a>
+	<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'edit_user');?>">
+		<img class="ui-icon ui-icon-pencil no-block" 
+			alt="<?php echo $this->translate('edit');?>" 
+			title="<?php echo $this->translate('edit');?>" />
+	</a>
+	<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'delete_user');?>"> 
+		<img class="ui-icon ui-icon-trash no-block" 
+			del="<?php echo $this->translate('delete');?>" 
+			alt="<?php echo $this->translate('delete');?>" 
+			title="<?php echo $this->translate('delete');?>" />
+	</a>
+</p>

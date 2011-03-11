@@ -59,10 +59,14 @@
 		
 		<!--APPLICATIONS DATA -->
 		<?php foreach ($this->applications as $no => $application):?>
-		<tr class="grey">
-			<td class="left" style="width: 15px;">
-				
-			</td>
+		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
+			<td class="left" style="width: 15px;vertical-align: top;">
+				<input type="checkbox" id="app<?php echo $application->_application_id?>" name="app[<?php echo $application->_application_id?>]" class="admin_button" />
+				<img class="ui-icon ui-icon-check no-block" 
+					alt="<?php echo $this->translate('check');?>" 
+					title="<?php echo $this->translate('check');?>"/>
+				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application));?>
+			</td>	
 			<td class="normal" style="width: 90px;">
 				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 
 					class="miniature"

@@ -9,17 +9,9 @@
 	<h1><?php echo $this->user->getUserFullName();?></h1>
 	<p class="clear">&nbsp;</p>
 	<div class="user">
-		<p class="admin">
-			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'promote_user');?>"> 
-				<img class="ui-icon ui-icon-key no-block" del="Zmień uprawnienia" alt="Zmień uprawnienia" title="Zmień uprawnienia" />
-			</a>
-			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'edit_user');?>">
-				<img class="ui-icon ui-icon-pencil no-block" alt="Edytuj" title="Edytuj" />
-			</a>
-			<a href="<?php echo $this->url(array('id' => $this->user->_user_id), 'delete_user');?>"> 
-				<img class="ui-icon ui-icon-trash no-block" del="Usuń" alt="Usuń" title="Usuń" />
-			</a>
-		</p>
+		<?php echo $this->partial(
+							'users/_admin.phtml', 
+							array('user' => $this->user));	?>
 		<p>
 			<span><?php echo $this->translate('nick');?></span>: 
 			<?php echo $this->user->_nick;?>

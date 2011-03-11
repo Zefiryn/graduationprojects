@@ -64,8 +64,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     {
     	$select = $this->select()->order('current_edition DESC')->limit('1');
     	$row = $this->fetchRow($select);
-    	$settings->populate($row);
-    	$settings = $this->getParents($row, $settings);
+    	$settings->populateWithReference($row);
     	
     	return $settings;
     }

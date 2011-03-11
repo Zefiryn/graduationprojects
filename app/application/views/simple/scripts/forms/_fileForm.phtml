@@ -9,11 +9,20 @@
 	<?php echo $form->$cache;?>
 	<p class="uploaded_file">
 		<?php if ($form->$cache->getValue() != null): ?>
+		<?php if ($form->application_id->getValue() == null):?>
 		<a 	class="form_file"
 			href="<?php echo $this->baseUrl('/assets/cache/'.$form->$cache->getValue());?>"
 			rel="cache" >
 			<?php echo $this->translate('file_uploaded');?>
 		</a>
+		<?php else: ?>
+		<a 	class="form_file"
+			href="<?php echo $this->baseUrl('/assets/applications/'.$form->$cache->getValue());?>"
+			rel="cache" >
+			<?php echo $this->translate('file_uploaded');?>
+		</a>
+		<?php endif;?>
+		
 		<?php endif;?>		
 	</p>
 

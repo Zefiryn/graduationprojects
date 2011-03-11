@@ -109,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				'action' => 'show'    				
     			),
     			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
-    	$router->addRoute('regulation', $route);
+    	$router->addRoute('regulation_edition', $route);
     	
     	$route = new Zend_Controller_Router_Route(
     			'regulations/edit/:edition',
@@ -118,7 +118,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				'action' => 'edit'    				
     			),
     			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
-    	$router->addRoute('regulation', $route);
+    	$router->addRoute('regulation_edit_edition', $route);
     	
     	$route = new Zend_Controller_Router_Route(
     			':lang/regulations/:edition',
@@ -128,7 +128,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			),
     			array('edition' => '^[0-9]{4}-[0-9]{4}$',
     				  'lang' => '^[a-z]{2}$'));
-    	$router->addRoute('regulation_lang', $route);
+    	$router->addRoute('lang_regulation_edition', $route);
     	
     	$route = new Zend_Controller_Router_Route(
     			':lang/regulations/edit/:edition',
@@ -138,7 +138,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     			),
     			array('edition' => '^[0-9]{4}-[0-9]{4}$',
     			'lang' => '^[a-z]{2}$'));
-    	$router->addRoute('regulation', $route);
+    	$router->addRoute('lang_regulation_edit_edition', $route);
     	
     	/**
     	 * LOGIN
@@ -159,6 +159,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				'action' => 'login'    				
     			));
     	$router->addRoute('login', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/logout',
+    			array(
+    				'controller' => 'auth',
+    				'action' => 'logout'    				
+    			),
+    			array('lang' => '^[a-z]{2}$'));
+    	$router->addRoute('langLogut', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'logout',
+    			array(
+    				'controller' => 'auth',
+    				'action' => 'logout'    				
+    			));
+    	$router->addRoute('logut', $route);
     	
     	/**
     	 * APPLICATIONS
@@ -322,6 +339,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('contact'));
 		$acl->addResource(new Zend_Acl_Resource('applications'));
 		$acl->addResource(new Zend_Acl_Resource('users'));
+		$acl->addResource(new Zend_Acl_Resource('admin'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
@@ -337,7 +355,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('juror', array('users'), array('index'));
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
 		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about', 'users'), null);
-
+		$acl->deny('user', array('admin'), null);
+		$acl->allow('admin', array('admin'), null);
 		
 		
 		Zend_Registry::set('acl', $acl);

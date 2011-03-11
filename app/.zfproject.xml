@@ -50,6 +50,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="restore"/>
         </controllerFile>
+        <controllerFile controllerName="Admin">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Login"/>
@@ -162,6 +165,9 @@
           <viewControllerScriptsDirectory forControllerName="Users">
             <viewScriptFile forActionName="restore"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Admin">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -204,6 +210,7 @@
           <testApplicationControllerFile filesystemName="ApplicationsControllerTest.php"/>
           <testApplicationControllerFile filesystemName="PressControllerTest.php"/>
           <testApplicationControllerFile filesystemName="UsersControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="AdminControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>

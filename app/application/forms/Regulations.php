@@ -17,7 +17,6 @@ class Application_Form_Regulations extends Zefir_Form
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
         $edition = Zend_Registry::get('edition');
     	
-        
         $regulations = new Application_Model_Regualtions();
         $regulationsData = $regulations->getRegulations($edition);
         

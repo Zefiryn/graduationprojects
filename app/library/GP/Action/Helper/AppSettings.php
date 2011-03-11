@@ -36,12 +36,12 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 	{
 		$request =	$this->getRequest();
 		$edition = $request->getParam('edition', '');
-		
+
 		if (strstr($edition, '-'))
 		{
 			$edition = str_replace('-', '/', $edition);
 		}
-		
+
 		$editions = new Application_Model_Editions();
 		if (!$editions->editionExists($edition))
 			$edition = FALSE;
@@ -50,12 +50,18 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 		if (!$edition)
 		{
 			$session = new Zend_Session_Namespace('edition');
+
 			if (isset($session->edition))
+			{
 				$edition =  $session->edition;
+				if (!$editions->editionExists($edition, TRUE))
+					$edition =  $settings->_current_edition->_edition_name;
+			}
 			else 
 				$edition =  $settings->_current_edition->_edition_name;
 		}
 		 
+
 		Zend_Registry::set('edition', $edition);
 		$session = new Zend_Session_Namespace('edition');
 		$session->edition = $edition;
