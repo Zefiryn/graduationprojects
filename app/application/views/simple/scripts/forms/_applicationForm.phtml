@@ -15,21 +15,22 @@
 	<?php echo $form->csrf->renderViewHelper(); ?> 
 	<?php echo $form->edition;?>
 	
-	<?php echo $form->nick;?>
-	<?php echo $form->password;?>
-	<?php echo $form->password_check;?>
-
-	<?php echo $form->name;?>
+	<?php echo $form->getSubForm('user')->nick;?>
 	
-	<?php echo $form->surname;?>
+	<?php echo $form->getSubForm('user')->password;?>
 	
-	<?php echo $form->address;?>
+	<?php echo $form->getSubForm('user')->password_check;?>
 	
-	<?php echo $form->phone;?>
+	<?php echo $form->getSubForm('user')->name;?>
 	
-	<?php echo $form->email;?>
-	<?php echo $form->show_email;?>
+	<?php echo $form->getSubForm('user')->surname;?>
 	
+	<?php echo $form->getSubForm('user')->address;?>
+	
+	<?php echo $form->getSubForm('user')->phone;?>
+	
+	<?php echo $form->getSubForm('user')->email;?>
+		
 	<?php echo $form->country;?>
 	
 	<?php echo $form->school;?>
@@ -57,7 +58,7 @@
 	
 	<?php if ($form->miniatureCache->getValue() != null): ?>
 	<p class="label"><?php echo $this->translate('miniature');?></p>
-	<?php if ($form->application_id == null):?>
+	<?php if ($form->application_id->getValue() == null):?>
 	<img src="<?php echo $this->baseUrl('/assets/cache/'.$form->miniatureCache->getValue());?>" 
 		width="300" height="300"/>
 	<?php else: ?>

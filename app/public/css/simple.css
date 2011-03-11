@@ -220,6 +220,14 @@ input.radio, input.checkbox
 	margin-bottom: 25px;
 	margin-right: 5px;
 }
+input.admin_button
+{
+	display: none;
+}
+img.checked
+{
+	background-color: #c00;
+}
 label
 {
 	font-size: 12px;
@@ -594,7 +602,7 @@ p.flash
 {
 	background: #02be00;
 	width: 300px;
-	padding: 5px 15px 5px 0px;
+	padding: 5px 0px 5px 0px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
@@ -609,13 +617,14 @@ p.flash
 p.admin
 {
 	float: right;
-	margin: 5px 5px 0px 0px;
+	margin: 0px;
 	font-size: 10px;
 }
 img.no-block
 {
 	display: inline-block;
 	border: 0px;
+	cursor: pointer;
 }
 img.files
 {

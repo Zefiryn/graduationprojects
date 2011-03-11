@@ -139,6 +139,13 @@ class Application_Model_Applications extends GP_Application_Model
 				'personal_data_agreement' => TRUE
 		);
 		
+		foreach($this->_files as $no => $file)
+		{
+			$i = ++$no;
+			$data['file_'.$i]['file_'.$i.'Cache'] = $file->_path;
+			$data['file_'.$i]['file_annotation'] = $file->_file_desc;
+		}
+		
 		return $data;
 	}
 

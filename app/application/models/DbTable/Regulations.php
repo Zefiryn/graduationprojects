@@ -43,7 +43,7 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 		if ($id)
 			$row = $this->find($id)->current();
 
-		if (!$row || $id == NULL)
+		if ($id == NULL || !$row)
 			$row = $this->createRow();
 		
 		$row->paragraph_id = $data->_paragraph_id;

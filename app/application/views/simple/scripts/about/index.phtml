@@ -6,11 +6,7 @@
 ?>
 
 <div class="content">
-	<p class="admin">
-		<a href="<?php $this->baseUrl?>/about/edit">
-			<img class="ui-icon ui-icon-pencil no-block" alt="<?php echo $this->translate('edit');?>" title="<?php echo $this->translate('edit');?>">
-		</a>
-	</p>
+	<?php echo $this->partial('about/_admin.phtml');?>
 	<h1><?php echo $this->translate('about_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	 

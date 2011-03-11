@@ -149,3 +149,14 @@ CREATE TABLE news(
 		REFERENCES editions(edition_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE jurors(
+	juror_id int not null auto_increment,
+	user_id int(6) not null,
+	max_point smallint not null,
+	country char(2) not null,
+	PRIMARY KEY(juror_id),
+	FOREIGN KEY(user_id)
+		REFERENCES users(user_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+) ENGINE=INNODB DEFAULT CHARSET=utf8;

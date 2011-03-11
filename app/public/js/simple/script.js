@@ -150,6 +150,22 @@ function checkbox()
 {
 	bindCheckbox('show_email');
 	bindCheckbox('personal_data_agreement');
+	
+	//application index
+	$('.admin_button').next().click(function(){
+		if ($(this).prev().is(':checked'))
+		{
+			$(this).prev().attr('checked', false);
+			$(this).toggleClass('checked');
+			$(this).toggleClass('ui-icon-white');
+		}
+		else
+		{
+			$(this).prev().attr('checked', true);
+			$(this).toggleClass('checked');
+			$(this).toggleClass('ui-icon-white');
+		}
+	});
 }
 
 function bindCheckbox(field)

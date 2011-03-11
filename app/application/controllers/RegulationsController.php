@@ -21,7 +21,6 @@ class RegulationsController extends Zefir_Controller_Action
 		
 		$this->view->regulations = $regulations->getRegulations($edition);
 		$this->_helper->viewRenderer('index');
-		var_dump($edition);
     }
     
     public function editAction()
@@ -36,7 +35,6 @@ class RegulationsController extends Zefir_Controller_Action
     	if ($request->isPost())
     	{
     		$data = $request->getPost();
-    		var_dump($data);
     		if (isset($data['leave']))
     		{
     			$this->flashMe('cancel_edit', 'SUCCESS');
@@ -49,7 +47,6 @@ class RegulationsController extends Zefir_Controller_Action
 	    		$i--;
 	    		
 	    		$form = new Application_Form_Regulations($i);
-	    		$form->removeElement('csrf');
 	    		
 	    		//add validators to new fields
 	    		for($x=1; $x <= $i; $x++)
@@ -64,6 +61,9 @@ class RegulationsController extends Zefir_Controller_Action
 	    			//save form
 	    			$regulations = new Application_Model_Regualtions();
 	    			$regulations->saveRegulations($form->getValues());
+	    			
+	    			$this->flashMe('regulation_edited', 'SUCCESS');
+	    			$this->_redirectToRoute(array('edition' => str_replace('/', '-', $edition)), 'regulation_edition');
 	    		}
 	    		else 
 	    		{

@@ -9,16 +9,9 @@
 
 
 <div class="content">
-
 	<p class="admin">
-		<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'edit_application');?>">
-			<img class="ui-icon ui-icon-pencil no-block" alt="Edytuj" title="Edytuj" />
-		</a>
-		<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'delete_application');?>"> 
-			<img class="ui-icon ui-icon-trash no-block" del="Usuń" alt="Usuń" title="Usuń" />
-		</a>
+		<?php echo $this->partial('applications/_admin.phtml', array('application' => $this->application));?>
 	</p>
-	
 	<h1><?php echo $this->application->_user->getUserFullName();?></h1>
 	<p class="spacer">&nbsp;</p>
 	<p class="application">

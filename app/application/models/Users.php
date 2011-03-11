@@ -55,7 +55,11 @@ class Application_Model_Users extends GP_Application_Model
 	
 	public function getUserFullName()
 	{
-		return $this->_name.' '.$this->_surname;
+		if ($this->_name != null || $this->_surname != null)
+			$name = $this->_name.' '.$this->_surname;
+		else
+			$name = $this->_nick;
+		return $name;
 	}
 	
 	public function getUsers($order = 'role')

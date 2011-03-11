@@ -21,9 +21,9 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 		'_applications' => 'Application_Model_DbTable_Applications',
 	);
 	
-	public function findEdition($edition)
+	public function findEdition($edition, $onlyName = FALSE)
 	{
-		if (ctype_digit($edition))
+		if (ctype_digit($edition) && !$onlyName)
 			$row = $this->find($edition);
 		
 		else 

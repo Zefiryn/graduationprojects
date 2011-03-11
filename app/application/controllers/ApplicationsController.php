@@ -23,7 +23,6 @@ class ApplicationsController extends Zefir_Controller_Action
     	$this->view->sortForm = $sortForm;
     	
     	$application = new Application_Model_Applications();
-    	$application->getApplications('edition', $edition->_edition_id);
     	$applications = $application->getApplications('edition', $edition->_edition_id);;
     	$this->view->applications = $applications;
     }
@@ -32,7 +31,7 @@ class ApplicationsController extends Zefir_Controller_Action
     {
     	$appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
-        $form = new Application_Form_Application();
+        $form = new Application_Form_Application('new');
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
 		));
@@ -55,7 +54,8 @@ class ApplicationsController extends Zefir_Controller_Action
 				if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
 				{
 					$user = new Application_Model_Users();
-					$user->populateFromForm($form->getValues());
+					$data = $form->getValues();
+					$user->populateFromForm($data['user']);
 					$user->save();
 					
 					if ($user->_user_id != null)
@@ -73,7 +73,6 @@ class ApplicationsController extends Zefir_Controller_Action
 			}				
 			else
 			{//form has errors
-				
 				$form = $this->_cacheFile($options['upload']['cache'], $form, 'miniature');
 				$form = $this->_handleFiles($form, $cached);
 				
@@ -97,7 +96,7 @@ class ApplicationsController extends Zefir_Controller_Action
     {
         $appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
-        $form = new Application_Form_Application();
+        $form = new Application_Form_Application('edit');
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationEditForm.phtml'))
 		));

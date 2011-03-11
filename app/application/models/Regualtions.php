@@ -42,38 +42,36 @@ class Application_Model_Regualtions extends GP_Application_Model
 
 	public function saveRegulations($data)
 	{
+		
 		$data = $this->_prepareDataFromForm($data);
-		if (isset($data['new']))
-		{
-			$newdata = $data['new'];
-			unset($data['new']);
-		}
 		
 		//get editing edition and language
 		$current_edition = Zend_Registry::get('edition');
 		$edition = new Application_Model_Editions();
 		$edition->populate($edition->getDbTable()->findEdition($current_edition));
 		$lang = new Zend_Session_Namespace('lang');
+
 		
 		//update existing one
 		foreach($data as $number => $regulation)
-		{			
+		{	
 			$reg = new $this;
-			$reg->_paragraph_id = $number; 
+			if (!strstr($number, 'new_'))
+				$reg->_paragraph_id = $number; 
 			$reg->_edition = $edition->_edition_id;
 			$reg->_regulation_lang = $lang->lang;  
 			$reg->_paragraph_no = $regulation['paragraph_no'];
 			$reg->_paragraph_text = $regulation['paragraph_text'];
 			
-			if ($regulation['paragraph_remove'] == '1')
+			if (isset($regulation['paragraph_remove']) && $regulation['paragraph_remove'] == '1')
 			{
 				$this->getDbTable()->deleteParagraph($reg);
 			}	
 			else
 			{
-				
 				$this->getDbTable()->saveParagraph($reg);
 			}
+			
 		}
 	}
 	
@@ -81,7 +79,8 @@ class Application_Model_Regualtions extends GP_Application_Model
 	{
 		foreach($data as $key => $value)
 		{
-			if (!strstr($key, 'new'))
+			
+			if (!strstr($key, 'new_paragraph'))
 			{
 				$no = substr($key, strrpos($key, '_')+1);
 				$key = substr($key, 0, strrpos($key, '_'));
@@ -93,7 +92,8 @@ class Application_Model_Regualtions extends GP_Application_Model
 				{
 					$no = substr($key, strrpos($key, '_')+1);
 					$key = substr($key, 0, strrpos($key, '_'));
-					$save['new'][$no][$key] = $value;
+					$key = str_replace('new_', '', $key);
+					$save['new_'.$no][$key] = $value;
 				}
 			}
 		}
