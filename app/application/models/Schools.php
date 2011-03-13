@@ -42,6 +42,27 @@ class Application_Model_Schools extends GP_Application_Model
 		return $this;
 	}
 	
+	/**
+	 * Find school by id 
+	 * @param string $name
+	 * @param 
+	 */
+	public function getSchool($id)
+	{
+		$row = $this->getDbTable()->find($id)->current();
+		
+		$this->populate($row);
+		
+		return $this;
+	}
+	
+	public function prepareFormArray()
+	{
+		$data = array(	'school_id' => $this->_school_id,
+						'school_name' => $this->_school_name);
+		
+		return $data;
+	}
 
 }
 

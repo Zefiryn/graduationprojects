@@ -1,0 +1,38 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'work-types',
+						'lang' => $this->lang));
+?>
+<div class="content">
+	<h1><?php echo $this->translate('work-types');?></h1>
+	<br />
+	<?php foreach ($this->work_types as $id => $type):?>
+	<p>
+		<?php echo $type;?>
+	
+		<span class="admin">
+		<a href="<?php echo $this->url(array('id' => $id), 'edit_type');?>">
+			<img class="ui-icon ui-icon-pencil no-block" 
+				alt="<?php echo $this->translate('edit');?>" 
+				title="<?php echo $this->translate('edit');?>" />
+		</a>
+		<a href="<?php echo $this->url(array('id' => $id), 'delete_type');?>"> 
+			<img class="ui-icon ui-icon-trash no-block" 
+				del="<?php echo $this->translate('delete');?>" 
+				alt="<?php echo $this->translate('delete');?>" 
+				title="<?php echo $this->translate('delete');?>" />
+		</a>
+		</span>
+	</p>
+	
+	<?php endforeach;?>
+
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous">
+	<a href="<?php echo $this->baseUrl('/admin');?>">
+	&lt; <?php echo $this->translate('previous_page');?>
+	</a>
+</p>

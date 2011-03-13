@@ -68,6 +68,29 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     	
     	return $settings;
     }
+    
+    
+    public function save(Application_Model_Settings $settings)
+    {
+    	$row = $this->fetchAll()->current();
+    	
+    	$row->current_edition 		= $settings->_current_edition;
+    	$row->template_default 		= $settings->_template_default;
+    	$row->max_file_size 		= $settings->_max_file_size;
+    	$row->date_format 			= $settings->_date_format;
+    	$row->max_files 			= $settings->_max_files;
+    	$row->work_start_date 		= $settings->_work_start_date;
+    	$row->work_end_date 		= $settings->_work_end_date;
+    	$row->application_deadline 	= $settings->_application_deadline;
+    	$row->result_date	 		= $settings->_result_date;
+    	
+    	if (!$row->save())
+    	{
+    		throw new Zend_Exception('Couldn\'t save settings');
+    	}
+
+    	return $settings;
+    }
 
 }
 

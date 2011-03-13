@@ -1,0 +1,14 @@
+<br />
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array(	'baseUrl' => $this->baseUrl,
+						'link' => 'settings/edit',
+						'lang' => $this->lang));
+?>
+
+<div class="content">
+	<h1><?php echo $this->translate('settings');?></h1>
+	
+	<?php echo $this->form;?>
+	
+	<p class="clear"></p>
+</div>

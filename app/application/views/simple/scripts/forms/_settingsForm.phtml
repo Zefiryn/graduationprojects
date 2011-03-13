@@ -1,0 +1,37 @@
+<?php $form = $this->element;?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+      method="<?php echo $this->escape($form->getMethod()); ?>"
+      class="contact">
+
+	<?php if ($form->csrf->hasErrors()):?>
+		<div id="error-csrf" class="error-div">
+			<p class="error"><?php echo $this->translate('csrf_error')?></p>
+		</div>
+	<?php endif;?>
+	<?php echo $form->csrf->renderViewHelper(); ?> 
+
+	<?php echo $form->current_edition;?>
+	
+	<?php echo $form->template_default;?>
+	
+	<?php echo $form->max_file_size;?>
+	
+	<?php echo $form->date_format;?>
+	
+	<?php echo $form->max_files;?>
+	
+	<?php echo $form->work_start_date;?>
+	
+	<?php echo $form->work_end_date;?>
+	
+	<?php echo $form->application_deadline;?>
+	
+	<?php echo $form->result_date;?>
+	
+	<p class="submit center">
+		<?php echo $form->submit; ?>
+		<?php echo $form->leave; ?>
+	</p>
+		
+</form>

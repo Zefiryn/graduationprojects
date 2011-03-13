@@ -88,9 +88,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 */
 	protected function _initRouting()
 	{
-		$this->bootstrap('frontController');
+		$frontController = $this->bootstrap('frontController');
 		$router = $this->getResource('frontController')->getRouter();
-		
+
 		$route = new Zend_Controller_Router_Route_Regex(
     			'^([a-z]{2}/)?([a-z]+)/?([a-z]+)?$',
     			array(),
@@ -100,215 +100,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$router->addRoute('def', $route);
     	
     	/**
-    	 * regulation routing
-    	 */
-    	$route = new Zend_Controller_Router_Route(
-    			'regulations/:edition',
-    			array(
-    				'controller' => 'regulations',
-    				'action' => 'show'    				
-    			),
-    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
-    	$router->addRoute('regulation_edition', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'regulations/edit/:edition',
-    			array(
-    				'controller' => 'regulations',
-    				'action' => 'edit'    				
-    			),
-    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
-    	$router->addRoute('regulation_edit_edition', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/regulations/:edition',
-    			array(
-    				'controller' => 'regulations',
-    				'action' => 'show'    				
-    			),
-    			array('edition' => '^[0-9]{4}-[0-9]{4}$',
-    				  'lang' => '^[a-z]{2}$'));
-    	$router->addRoute('lang_regulation_edition', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/regulations/edit/:edition',
-    			array(
-    				'controller' => 'regulations',
-    				'action' => 'edit'    				
-    			),
-    			array('edition' => '^[0-9]{4}-[0-9]{4}$',
-    			'lang' => '^[a-z]{2}$'));
-    	$router->addRoute('lang_regulation_edit_edition', $route);
-    	
-    	/**
-    	 * LOGIN
-    	 */
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/login',
-    			array(
-    				'controller' => 'auth',
-    				'action' => 'login'    				
-    			),
-    			array('lang' => '^[a-z]{2}$'));
-    	$router->addRoute('langLogin', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'login',
-    			array(
-    				'controller' => 'auth',
-    				'action' => 'login'    				
-    			));
-    	$router->addRoute('login', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/logout',
-    			array(
-    				'controller' => 'auth',
-    				'action' => 'logout'    				
-    			),
-    			array('lang' => '^[a-z]{2}$'));
-    	$router->addRoute('langLogut', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'logout',
-    			array(
-    				'controller' => 'auth',
-    				'action' => 'logout'    				
-    			));
-    	$router->addRoute('logut', $route);
-    	
-    	/**
-    	 * APPLICATIONS
+    	 * add routing from the ini file
     	 */
     	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/application/:id',
-    			array(
-    				'controller' => 'applications',
-    				'action' => 'show'    				
-    				),
-    			array(	'lang' => '^[a-z]{2}$',
-    					'id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('lang_application', $route);
+    	$route_config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/route.ini', 'production');
+    	$router->addConfig($route_config, 'routes');
     	
-    	$route = new Zend_Controller_Router_Route(
-    			'application/:id',
-    			array(
-    				'controller' => 'applications',
-    				'action' => 'show'    				
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('application', $route);
     	
-    	$route = new Zend_Controller_Router_Route(
-    			'application/edit/:id',
-    			array(
-    				'controller' => 'applications',
-    				'action' => 'edit'    				
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('edit_application', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'application/delete/:id',
-    			array(
-    				'controller' => 'applications',
-    				'action' => 'delete'    				
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('delete_application', $route);
-    	
-    	/**
-    	 * user
-    	 */
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/user/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'show'    				
-    				),
-    			array(	'lang' => '^[a-z]{2}$',
-    					'id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('lang_user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'user/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'show'
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'user/edit/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'edit'
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('edit_user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/user/edit/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'edit'
-    				),
-    			array(	'id' => '^[0-9]+$',
-    					'lang' => '^[a-z]{2}$')
-    			
-    			);
-    	$router->addRoute('lang_edit_user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'user/delete/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'delete'
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('delete_user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			':lang/user/delete/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'delete'
-    				),
-    			array(	'id' => '^[0-9]+$',
-    					'lang' => '^[a-z]{2}$')
-    			
-    			);
-    	$router->addRoute('lang_delete_user', $route);
-    	
-    	$route = new Zend_Controller_Router_Route(
-    			'user/promote/:id',
-    			array(
-    				'controller' => 'users',
-    				'action' => 'promote'
-    				),
-    			array('id' => '^[0-9]+$')
-    			
-    			);
-    	$router->addRoute('promote_user', $route);
 	}
 	
 	/**
@@ -340,6 +138,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('applications'));
 		$acl->addResource(new Zend_Acl_Resource('users'));
 		$acl->addResource(new Zend_Acl_Resource('admin'));
+		$acl->addResource(new Zend_Acl_Resource('work-types'));
+		$acl->addResource(new Zend_Acl_Resource('schools'));
+		$acl->addResource(new Zend_Acl_Resource('settings'));
+		$acl->addResource(new Zend_Acl_Resource('localizations'));
+		$acl->addResource(new Zend_Acl_Resource('editions'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
@@ -352,11 +155,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('applications'), array('new'));
 		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
 		$acl->allow('juror', array('applications'), array('index', 'vote'));
+		
 		$acl->allow('juror', array('users'), array('index'));
+		
 		$acl->deny('juror', array('applications'), array('edit', 'update'));
 		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about', 'users'), null);
 		$acl->deny('user', array('admin'), null);
-		$acl->allow('admin', array('admin'), null);
+		$acl->allow('juror', array('admin'), null);
+		
+		$acl->allow('admin', null, null);
 		
 		
 		Zend_Registry::set('acl', $acl);

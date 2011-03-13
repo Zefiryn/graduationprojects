@@ -50,18 +50,16 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 	{
 		$auth = Zend_Auth::getInstance();
 		$view = $this->_getView();
-
+		$user = new Application_Model_Users();
+		
 		if (!$auth->hasIdentity())
-			$role = 'guest';
+			$user->_role = 'guest';
 
     	else
-    	{
-    		$user = new Application_Model_Users();
-    		$role = $user->getDbTable()->getUserRole($auth->getIdentity(), $user);
-		}
-    	
-    	Zend_Registry::set('role', $role);
-    	$view->userStatus = $role;
+    		$user->getUser($auth->getIdentity(), TRUE);
+		
+    	Zend_Registry::set('role', $user->_role);
+    	$view->user= $user;
     	$view->logged = $auth->hasIdentity();
 	}
 	

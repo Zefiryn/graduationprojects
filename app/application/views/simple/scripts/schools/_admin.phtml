@@ -1,0 +1,13 @@
+<p class="admin">
+	<a href="<?php echo $this->url(array('id' => $this->school_id), 'edit_school');?>">
+		<img class="ui-icon ui-icon-pencil no-block" 
+			alt="<?php echo $this->translate('edit');?>" 
+			title="<?php echo $this->translate('edit');?>" />
+	</a>
+	<a href="<?php echo $this->url(array('id' => $this->school_id), 'delete_school');?>"> 
+		<img class="ui-icon ui-icon-trash no-block" 
+			del="<?php echo $this->translate('delete');?>" 
+			alt="<?php echo $this->translate('delete');?>" 
+			title="<?php echo $this->translate('delete');?>" />
+	</a>
+</p>

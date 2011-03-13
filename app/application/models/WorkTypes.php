@@ -39,5 +39,15 @@ class Application_Model_WorkTypes extends GP_Application_Model
 
 		return $this;
 	}
+	
+	public function prepareFormArray()
+	{
+		$data = array(
+			'work_type_id' => $this->_work_type_id,
+			'work_type_name' => $this->_work_type_name
+		);
+		
+		return $data;
+	}
 }
 
