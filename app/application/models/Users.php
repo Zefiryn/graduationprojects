@@ -37,6 +37,12 @@ class Application_Model_Users extends GP_Application_Model
 			$this->_role = 'user';
 	}
 	
+	/**
+	 * Convert user's name into url safe string
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function getUserUrlName()
 	{
 		return Zefir_Filter::strToUrl($this->_name.'_'.$this->_surname);
@@ -44,21 +50,36 @@ class Application_Model_Users extends GP_Application_Model
 	
 	/**
 	 * Get user data
-	 * @param int $id
+	 *
+	 * @access public
+	 * @param int|string $id
+	 * @param boolean $safe
+	 * @return Application_Model_Users
 	 */
-	public function getUser($id)
+	public function getUser($id, $safe = FALSE)
 	{
 		$this->getDbTable()->findUser($id, $this);
 
+		if ($safe)
+		{
+			$this->_password = null;
+		}
 		return $this;
 	}
 	
+	/**
+	 * Get user name and surname or nick if the previous is not present
+	 * 
+	 * @access public
+	 * @return string $name
+	 */
 	public function getUserFullName()
 	{
 		if ($this->_name != null || $this->_surname != null)
 			$name = $this->_name.' '.$this->_surname;
 		else
 			$name = $this->_nick;
+			
 		return $name;
 	}
 	

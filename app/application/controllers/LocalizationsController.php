@@ -1,6 +1,6 @@
 <?php
 
-class PressController extends Zefir_Controller_Action
+class LocalizationsController extends Zefir_Controller_Action
 {
 
     public function init()

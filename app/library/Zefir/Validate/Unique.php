@@ -37,12 +37,16 @@ class Zefir_Validate_Unique extends Zend_Validate_Db_Abstract
         $this->_setValue($value);
 
         $result = $this->_query($value);
-        if ($result) {
+        if ($result) 
+        {
             $valid = false;
+
             if ($this->getField() == 'nick')
             	$this->_error(self::ERROR_USER_EXIST);
             elseif ($this->getField() == 'email')
             	$this->_error(self::ERROR_EMAIL_EXIST);
+            else
+            	$this->_error(self::ERROR_RECORD_FOUND);
         }
 
         return $valid;

@@ -31,7 +31,7 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     	$id = $school->_school_id;
     	
     	if ($id != null)
-    		$row = $this->find($id);
+    		$row = $this->find($id)->current();
     	
     	else
     	{
@@ -41,7 +41,7 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     			$row = $this->createRow();
     	}
     	
-    	$row->school_name	= $school->_school_name;
+    	$row->school_name = $school->_school_name;
     	
     	if ($row->save())
     	{

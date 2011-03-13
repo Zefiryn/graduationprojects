@@ -620,6 +620,17 @@ p.admin
 	margin: 0px;
 	font-size: 10px;
 }
+p.login_form
+{
+	text-align: right;
+	padding: 5px 20px 0px 0px;
+	font-size: 11px;
+	color: #ccc;
+}
+p.login_form a:link
+{
+	font-size: 11px;
+}
 img.no-block
 {
 	display: inline-block;

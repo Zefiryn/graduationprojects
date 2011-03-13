@@ -39,8 +39,7 @@ class UsersController extends Zefir_Controller_Action
 			
 			if($form->leave->isChecked())
 			{
-				$this->_redirector = $this->_helper->getHelper('Redirector');
-				$this->_redirector->gotoRoute(array('id' => $form->getElement('user_id')->getValue()), 'user');	
+				$this->_redirect('/admin');	
 			}
 			
     		elseif ($form->isValid($request->getPost()))

@@ -84,8 +84,11 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
      */
     public function findUser($id, Application_Model_Users $user)
     {
-    	$row = $this->find($id)->current();
-    	
+    	if (ctype_digit($id))
+    		$row = $this->find($id)->current();
+    	else
+    		$row = $this->fetchRow($this->select()->where('nick = ?', $id));
+    		
     	$user->populateWithReference($row);
     	
     	return $user;
