@@ -11,9 +11,9 @@ class Application_Model_WorkTypes extends GP_Application_Model
 	protected $_get_vars = array('_work_type_id', '_work_type_name');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 

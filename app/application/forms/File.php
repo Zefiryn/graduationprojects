@@ -10,12 +10,12 @@
 
 class Application_Form_File extends Zefir_Form_SubForm
 {
-	public function __construct($number)
+	public function __construct($number, $type)
 	{
-		$this->init($number);
+		$this->init($number, $type);
 	}
 	
-    public function init($number)
+    public function init($number, $type)
     {
     	$L = $this->_regex['L'];
     	$N = $this->_regex['N'];
@@ -45,6 +45,12 @@ class Application_Form_File extends Zefir_Form_SubForm
 		
 		$element = $this->createElement('hidden', 'file_'.$number.'Cache', array(
 						'decorators' => array('ViewHelper')
+		));
+		$this->addElement($element);
+		
+		$element = $this->createElement('hidden', 'file_type', array(
+						'decorators' => array('ViewHelper'),
+						'value' => $type
 		));
 		$this->addElement($element);
 		

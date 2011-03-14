@@ -106,7 +106,7 @@ class AuthController extends Zefir_Controller_Action
 		$templateSession = new Zend_Session_Namespace('template');
 		$templateSession->template_name = NULL;
 		setcookie("template_name", null, time() - 60*60 , '/');
-		$this->flashMe('logut', 'SUCCESS');
+		$this->flashMe('logout_success', 'SUCCESS');
 		$this->_redirect('/index');
     }
 

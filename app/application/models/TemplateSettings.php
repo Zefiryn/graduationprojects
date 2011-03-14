@@ -10,9 +10,9 @@ class Application_Model_TemplateSettings extends GP_Application_Model
 	protected $_set_vars = array('_template_name', '_template_id');
 	protected $_get_vars = array('_template_name', '_template_id');
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getTemplates()

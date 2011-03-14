@@ -72,6 +72,6 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     	}
     	
     	return $school;
-    }
+    }    
 }
 

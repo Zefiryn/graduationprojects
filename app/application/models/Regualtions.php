@@ -16,9 +16,9 @@ class Application_Model_Regualtions extends GP_Application_Model
 								'_paragraph_no', '_paragraph_text'); 
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getRegulations($edition)

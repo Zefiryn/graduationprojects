@@ -18,6 +18,7 @@ class Application_Model_DbTable_Degrees extends Zefir_Application_Model_DbTable
 	 * @var array
 	 */
 	protected $_dependentTables = array();
+	
 
 }
 

@@ -10,6 +10,9 @@
  */
 class GP_Application_Model extends Zefir_Application_Model
 {
-	
+	public function __construct($id = null, $options = null)
+	{
+		return parent::__construct($id, $options);
+	}
 	
 }

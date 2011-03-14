@@ -1,7 +1,5 @@
-<?php $settings = Zend_Registry::get('appSettings');?>
-<br />
-
-<?php echo $this->partial('partials/lang_menu.phtml', 
+<?php $settings = Zend_Registry::get('appSettings');
+echo $this->partial('partials/lang_menu.phtml', 
 			array(	'baseUrl' => $this->baseUrl,
 						'link' => 'application/'.$this->application->_application_id,
 						'lang' => $this->lang));

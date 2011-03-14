@@ -12,7 +12,8 @@
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>
 		</div>
 	<?php endif;?>
-	<?php echo $form->csrf; ?> 
+	<?php echo $form->csrf->renderViewHelper(); ?>
+	<?php echo $form->application_id; ?>  
 
 	<?php echo $form->country;?>
 	
@@ -67,6 +68,7 @@
 
 	<p class="submit center">
 		<?php echo $form->submit; ?>
+		<?php echo $form->leave; ?>
 	</p>
 		
 </form>

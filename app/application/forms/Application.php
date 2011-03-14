@@ -27,7 +27,6 @@ class Application_Form_Application extends Zefir_Form
         
         $this->setMethod('post');
 		$this->setName('PageForm');
-		$this->setAction('/applications/new');
 		$this->setTranslator(Zend_Registry::get('Zend_Translate'));
 		$this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
 		
@@ -224,7 +223,7 @@ class Application_Form_Application extends Zefir_Form
 		for ($i = 1; $i <= $appSettings->_max_files; $i++)
 		{
 			$subForm = new Application_Form_File($i);
-			$this->addSubForm($subForm, 'file_'.$i);
+			$this->addSubForm($subForm, 'file_'.$i, $type);
 		}
 		
 		$this->_createCsrfElement();	 

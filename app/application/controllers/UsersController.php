@@ -18,9 +18,9 @@ class UsersController extends Zefir_Controller_Action
     public function showAction()
     {
     	$id = $this->getRequest()->getParam('id', '');
-		$user = new Application_Model_Users();
+		$user = new Application_Model_Users($id);
 		
-		$this->view->user = $user->getUser($id);
+		$this->view->user = $user;
     }
 
     public function newAction()
@@ -89,8 +89,7 @@ class UsersController extends Zefir_Controller_Action
     	else
     	{
     		$id = $request->getParam('id', '');
-    		$user = new Application_Model_Users();
-    		$user->getUser($id);
+    		$user = new Application_Model_Users($id);
     		$form->populate($user->prepareFormArray());
     	}
     	
@@ -104,14 +103,19 @@ class UsersController extends Zefir_Controller_Action
 
     public function deleteAction()
     {
-        // action body
+    	$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+    	$user = new Application_Model_Users($id);
+    	$user->delete();
+		$this->flashMe('user_deleted', 'SUCCESS');
+		$this->_redirect('users');
     }
 
     public function restoreAction()
     {
         // action body
     }
-
+    
 	private function sortByRole($users)
 	{ 
 		foreach ($users as $user)
@@ -121,4 +125,6 @@ class UsersController extends Zefir_Controller_Action
 		
 		return $sorted;
 	}
+	
+	
 }

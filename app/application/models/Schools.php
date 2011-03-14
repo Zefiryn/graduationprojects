@@ -12,9 +12,9 @@ class Application_Model_Schools extends GP_Application_Model
 	protected $_get_vars = array('_school_id', '_school_name', '_applications');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getSchools()

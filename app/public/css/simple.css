@@ -210,6 +210,15 @@ p.error
 	font-weight: bold;
 	margin: 5px 0px 0px 0px;
 	text-align: left;
+	border: 0px solid;
+	width: 90%;
+}
+p.empty
+{
+	font-size: 18px;
+	font-family: inherit;
+	text-align: center;
+	color: #c00;
 }
 input.radio, input.checkbox
 {
@@ -620,12 +629,49 @@ p.admin
 	margin: 0px;
 	font-size: 10px;
 }
+p.edition
+{
+	
+	float: left;
+	border: 0px solid;
+	padding: 5px 0px 0px 20px;
+	margin: 0px;
+	font-size: 11px;
+	color: #aaa;
+}
+#edition_select
+{
+	font-size: 11px;
+	color: #444;
+	list-style-type: none;
+	position: absolute;
+	border-left: 1px solid #666;
+	border-right: 1px solid #666;
+	margin: 25px 0px 0px 130px;
+	padding: 5px;
+	display: none;
+	background: #fff;
+}
+#edition_select li
+{
+	line-height: 18px;
+}
+#edition_select li a:link, #edition_select li a:visited
+{
+	color: #811;
+	font-size: 11px;
+	font-family: inherit;
+}
+#edition_change
+{
+	cursor: pointer;	
+}
 p.login_form
 {
 	text-align: right;
 	padding: 5px 20px 0px 0px;
 	font-size: 11px;
-	color: #ccc;
+	color: #aaa;
 }
 p.login_form a:link
 {

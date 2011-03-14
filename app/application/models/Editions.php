@@ -12,9 +12,9 @@ class Application_Model_Editions extends GP_Application_Model
 	protected $_get_vars = array('_edition_id', '_edition_name', '_applications');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 
 	public function editionExists($edition, $onlyName = FALSE)
@@ -29,13 +29,14 @@ class Application_Model_Editions extends GP_Application_Model
 		return $check;
 	}
 	
-	public function getEditions()
+	public function getEditions($order = 'ASC')
 	{
-		$rowset = $this->getDbTable()->fetchAll();
+		$select = $this->getDbTable()->select()->order('edition_name '.$order);
+		$rowset = $this->getDbTable()->fetchAll($select);
 		
 		$editions = array();
 		foreach($rowset as $row)
-		{
+		{ 
 			$editions[$row->edition_id] = $row->edition_name;
 		}
 		
@@ -56,5 +57,14 @@ class Application_Model_Editions extends GP_Application_Model
 		return $this;
 	}
 	
+	public function prepareFormArray()
+	{
+		$data = array(
+			'edition_id' => $this->_edition_id,
+			'edition_name' => $this->_edition_name
+		);
+		
+		return $data;
+	}
 }
 

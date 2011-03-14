@@ -13,9 +13,9 @@ class Application_Model_Faqs extends GP_Application_Model
 	protected $_get_vars = array('_faq_id',	'_faq_lang', '_faq_question', '_faq_answer'); 
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getFaqs()

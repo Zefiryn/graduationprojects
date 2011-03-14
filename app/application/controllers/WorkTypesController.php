@@ -18,7 +18,40 @@ class WorkTypesController extends Zefir_Controller_Action
 
 	public function newAction()
     {
-        // action body
+    	$request = $this->getRequest();
+		$form = new Application_Form_WorkType('new');
+		$form->setDecorators(array(
+			array('ViewScript', array('viewScript' => 'forms/_worktypeForm.phtml'))
+		));
+		
+		if ($request->isPost())
+		{
+			$form->populate($request->getPost());
+			
+			if($form->leave->isChecked())
+			{
+				$this->_redirect('/schools');	
+			}
+			
+    		elseif ($form->isValid($request->getPost()))
+    		{
+    			$type = new Application_Model_WorkTypes();
+    			$type->populateFromForm($form->getValues());
+    			$type->save();
+    			
+    			$this->flashMe('type_added', 'SUCCESS');
+    			$this->_redirect('/work-types');
+    		}
+		}
+		else
+		{
+			$id = $request->getParam('id', '');
+			$type = new Application_Model_WorkTypes($id);
+			$form->populate($type->prepareFormArray());
+			
+		}
+		
+		$this->view->form = $form;
     }
     
     public function editAction()
@@ -50,9 +83,8 @@ class WorkTypesController extends Zefir_Controller_Action
 		}
 		else
 		{
-			$type = new Application_Model_WorkTypes();
 			$id = $request->getParam('id', '');
-			$type->getWorkType($id);
+			$type = new Application_Model_WorkTypes($id);
 			$form->populate($type->prepareFormArray());
 			
 		}
@@ -62,7 +94,13 @@ class WorkTypesController extends Zefir_Controller_Action
 
     public function deleteAction()
     {
-        // action body
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+
+		$type = new Application_Model_WorkTypes($id);
+		$type->delete();
+		$this->flashMe('work_type_deleted', 'SUCCESS');
+		$this->_redirect('work-types');
     }
   
 }

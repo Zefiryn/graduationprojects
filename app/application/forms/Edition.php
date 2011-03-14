@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_School extends Zefir_Form
+class Application_Form_Edition extends Zefir_Form
 {
 	protected $_type;
 	
@@ -20,34 +20,32 @@ class Application_Form_School extends Zefir_Form
         parent::init();
         
         $this->setMethod('post');
-		$this->setName('SchoolForm');
+		$this->setName('EditionForm');
 		$this->setTranslator(Zend_Registry::get('Zend_Translate'));
 		
 		$this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		
-		$element = $this->createElement('hidden', 'school_id');	
+		$element = $this->createElement('hidden', 'edition_id');	
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'school_name');
+		$element = $this->createElement('text', 'edition_name');
 		$element->setAttribs(array('class' => 'width2'))
-				->setLabel('school_name')
+				->setLabel('edition_name')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
+					new Zend_Validate_Regex('/^[0-9]{4}\/[0-9]{4}$/'),
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 10))
 				));
 		if ($this->_type == 'new')
 			$element->addValidator(new Zefir_Validate_Unique(array(
-        							'table' => 'schools',
-        							'field' => 'school_name')));
+        							'table' => 'editions',
+        							'field' => 'edition_name')));
 		$this->addElement($element);
 		
 		$this->_createCsrfElement();	 
 		$this->_createStandardSubmit('submit');
+		
     }
-
-
 }
-

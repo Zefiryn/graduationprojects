@@ -87,6 +87,7 @@
         <formFile formName="Settings"/>
         <formFile formName="School"/>
         <formFile formName="WorkType"/>
+        <formFile formName="Edition"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

@@ -1,4 +1,3 @@
-<br />
 <?php echo $this->partial('partials/lang_menu.phtml', 
 			array(	'baseUrl' => $this->baseUrl,
 						'link' => 'regulations',
@@ -16,6 +15,13 @@
 		<?php echo  $regulation->_paragraph_text;?>
 	</p> 
 	<?php endforeach; ?>
+	
+	<?php if (count($this->regulations) == 0):?>
+	<p class="empty">
+		<?php echo $this->translate('no_regulation_defined');?>
+		<br /><br /><br /><br />
+	</p>
+	<?php endif;?>
 </div>
 
 <?php echo $this->partial('partials/submenu.phtml', 
