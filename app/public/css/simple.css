@@ -804,3 +804,8 @@ form.search
 	padding: 10px 0px 0px 0px; 
 	text-align: right;
 }
+
+#dialog_delete
+{
+	visibility: hidden;
+}

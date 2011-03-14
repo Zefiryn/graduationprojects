@@ -1,6 +1,10 @@
 <?php echo $this->partial('partials/lang_menu.phtml', 
 			array('link' => 'schools', 'lang' => $this->lang));
 ?>
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'editions', 'delete_confirm' => $this->translate('school_delete_confirm')));
+?>
+
 <div class="content">
 	<h1><?php echo $this->translate('schools');?></h1>
 	<br />
@@ -14,7 +18,8 @@
 				alt="<?php echo $this->translate('edit');?>" 
 				title="<?php echo $this->translate('edit');?>" />
 		</a>
-		<a href="<?php echo $this->url(array('id' => $id), 'delete_school');?>"> 
+		<a href="<?php echo $this->url(array('id' => $id), 'delete_school');?>"
+			class="delete"> 
 			<img class="ui-icon ui-icon-trash no-block" 
 				del="<?php echo $this->translate('delete');?>" 
 				alt="<?php echo $this->translate('delete');?>" 
