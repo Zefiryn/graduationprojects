@@ -24,13 +24,17 @@
 	</div>
 	
 	<div class="main">
-		<a href="<?php echo $this->baseUrl;?>">
+		<a href="<?php echo $this->baseUrl('index');?>">
 			<img src="<?php echo $this->baseUrl('img/simple/logo_'.strtoupper($this->lang).'.png')?>" id="header" name="<?php echo $this->lang;?>" alt="logo" />
 		</a>
 		<p class="spacer_small">&nbsp;</p>
 
 		<div id="content">
-			<?php echo $this->partial('partials/login_form.phtml', array('user' => $this->user));?>
+			<?php echo $this->partial('partials/login_form.phtml', 
+										array(	'user' => $this->user, 
+												'edition' => $this->edition, 
+												'editions' => $this->edition_list)
+			);?>
 			
 			<?php echo $this->layout()->content; ?>
 			

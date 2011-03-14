@@ -22,9 +22,9 @@ class Application_Model_Settings extends GP_Application_Model
 								'_application_deadline', '_result_date');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function prepareFormArray()

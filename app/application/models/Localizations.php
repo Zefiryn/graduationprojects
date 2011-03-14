@@ -13,9 +13,9 @@ class Application_Model_Localizations extends GP_Application_Model
 	protected $_get_vars = array('_item_id', '_name', '_lang_code', '_text'); 
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getTranslationFromDb()

@@ -27,10 +27,11 @@ class Zefir_Application_Model {
 	 * Constructor
 	 * @access public
 	 * @param array $options
+	 * @param int $id
 	 * @throws Exception
 	 * @return void
 	 */
-	public function __construct($options) 
+	public function __construct($id = NULL, $options = NULL) 
 	{
 	    if ( null != $this->_dbTableModelName ) 
 	    {
@@ -41,10 +42,19 @@ class Zefir_Application_Model {
 	    	if (FALSE == $this->_externalModel)
 				throw new Exception('Invalid table data gateway provided');
 	    }
+	    
 		if (is_array($options)) 
 	    {
 			$this->setOptions($options);
 	    }
+	    
+	    if ($id != null)
+	    {
+	    	$row = $this->getDbTable()->find($id)->current();
+	    	$this->populateWithReference($row);	
+	    }
+	    
+	    return $this;
 	}
 	
 	
@@ -198,9 +208,11 @@ class Zefir_Application_Model {
 				$this->$var = $row[$var_raw];
 		}
 		
-		$this->getDbTable()->getChildren($row, $this);
-		$this->getDbTable()->getParents($row, $this);
-		
+		if ($row)
+		{
+			$this->getDbTable()->getChildren($row, $this);
+			$this->getDbTable()->getParents($row, $this);
+		}
 		return $this;
 	}
 	

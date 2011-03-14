@@ -32,6 +32,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	$appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
         $form = new Application_Form_Application('new');
+        $form->setAction('/applications/new');
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
 		));
@@ -97,6 +98,7 @@ class ApplicationsController extends Zefir_Controller_Action
         $appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
         $form = new Application_Form_Application('edit');
+        $form->setAction('/applications/edit');
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationEditForm.phtml'))
 		));
@@ -105,14 +107,32 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		if ($request->isPost())
 		{
+			$form->populate($request->getPost());
+			if($form->leave->isChecked())
+			{
+				$this->_redirect('/applications');	
+			}
+			
+			//handle miniature file
+			$form = $this->_checkMiniatureCache($form, 'edit');
+			//$cached = $this->_checkFileCache('edit');
+			
+    		if ($form->isValid($request->getPost()))
+    		{
+
+    		}
 		}
 		else
 		{
 			$id = $request->getParam('id', '');
-			$application = new Application_Model_Applications();
-			$application->getApplicationById($id);
-			$form->populate($application->prepareFormArray());
 			
+			if ($id != null)
+			{
+				$application = new Application_Model_Applications($id);
+				$form->populate($application->prepareFormArray());
+			}
+			else
+				throw new Zend_Exception('Wrong id given');	
 		}
 		
 		$this->view->form = $form;
@@ -120,7 +140,13 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function deleteAction()
     {
-        // action body
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+
+		$application = new Application_Model_Applications($id);
+		$application->delete();
+		$this->flashMe('application_deleted', 'SUCCESS');
+		$this->_redirect('applications');
     }
 
     public function showAction()
@@ -141,14 +167,17 @@ class ApplicationsController extends Zefir_Controller_Action
         // action body
     }
     
-    protected function _checkMiniatureCache($form)
+    protected function _checkMiniatureCache($form, $type = 'new')
     {
     	$request = $this->getRequest();
     	$options = Zend_Registry::get('options');
     	
     	$miniatureCache = $request->getParam('miniatureCache', '');
-    	$miniatureFile = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$miniatureCache;
-
+    	if ($type == 'new')
+    		$miniatureFile = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$miniatureCache;
+		else 
+			$miniatureFile = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$miniatureCache;
+    		
     	if ($miniatureCache != null	&& file_exists($miniatureFile))
 			$form->getElement('miniature')->setRequired(FALSE);
 		else
@@ -157,7 +186,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		return $form;
     }
 
-    protected function _checkFileCache()
+    protected function _checkFileCache($type = 'new')
     {
     	$params = $this->getRequest()->getParams();
     	$options = Zend_Registry::get('options');

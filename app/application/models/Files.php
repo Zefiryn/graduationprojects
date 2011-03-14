@@ -13,16 +13,11 @@ class Application_Model_Files extends GP_Application_Model
 	protected $_get_vars = array('_file_id', '_application', '_path', '_file_desc');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
-	public function save()
-	{
-		return $this->getDbTable()->save($this);
-	}
-
 	public function resize($orientation, $size)
 	{
 		$path = APPLICATION_PATH.'/../public/assets/applications/'.$this->_path;

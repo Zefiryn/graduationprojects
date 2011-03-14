@@ -65,5 +65,9 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 		Zend_Registry::set('edition', $edition);
 		$session = new Zend_Session_Namespace('edition');
 		$session->edition = $edition;
+		$this->getActionController()->view->edition = $edition;
+		
+		$editions = new Application_Model_Editions();
+		$this->getActionController()->view->edition_list = $editions->getEditions('DESC');
 	}
 }

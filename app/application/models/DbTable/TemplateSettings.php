@@ -4,7 +4,7 @@ class Application_Model_DbTable_TemplateSettings extends Zefir_Application_Model
 {
 
     protected $_raw_name = 'template_settings';
-    protected $_primary = ''; 
+    protected $_primary = 'template_id'; 
     protected $_name;
 
 

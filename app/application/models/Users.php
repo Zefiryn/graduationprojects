@@ -24,9 +24,9 @@ class Application_Model_Users extends GP_Application_Model
 								'_applications');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function populateFromForm($data)

@@ -90,7 +90,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$frontController = $this->bootstrap('frontController');
 		$router = $this->getResource('frontController')->getRouter();
-
+		$router->removeDefaultRoutes();
+		
 		$route = new Zend_Controller_Router_Route_Regex(
     			'^([a-z]{2}/)?([a-z]+)/?([a-z]+)?$',
     			array(),

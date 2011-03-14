@@ -49,7 +49,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			$parentObject = new $model_name; 
 			$object->$tableData['objProperty'] = $parentObject->populate($result->findParentRow($tableData['refTableClass']));
 		}
-		
+			
 		return $object;
 	}
 	
@@ -62,7 +62,6 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	 */
 	public function getChildren(Zend_Db_Table_Row $result, Zefir_Application_Model $object)
 	{
-
 		foreach($this->getDependentTables() as $property => $class)
 		{
 			$rowset = $result->findDependentRowset($class);				
@@ -219,7 +218,49 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	public function delete(Zefir_Application_Model $object)
     {
     	$column = $this->_primary;
-       	$where = $this->getAdapter()->quoteInto($column.' = ?', $obj->$column);
+
+    	$column = is_array($column) ? $column : array($column);
+    	
+    	foreach($column as $col)
+    	{
+    		$property = '_'.$col;
+       		$where = $this->getAdapter()->quoteInto($col.' = ?', $object->$property);
+       		var_dump($where);
+    	}
+
     	parent::delete($where);
+    }
+    
+    public function save(Zefir_Application_Model $object)
+    {
+    	$primary = $this->_primary;
+    	$var_primary = '_'.$primary;
+    	$id = $object->$var_primary;
+    	
+    	$row = $this->find($id)->current();
+    	
+    	if (!$row)
+    		$row = $this->createRow();
+    	
+    	$columns = $row->toArray();
+    	unset($columns[$primary]);
+    	
+    	foreach($columns as $name => $value)
+    	{
+    		$variable = '_'.$name;
+    		$row->$name = $object->$variable;
+    	}
+    	
+    	if ($row->save())
+    	{
+    		if ($id == null)
+    			$object->$var_primary = $id = $this->getAdapter()->lastInsertId();
+    	}
+    	else 
+    	{
+    		throw new Zend_Exception('Couldn\'t save data');
+    	}
+    	
+    	return $object;
     }
 }

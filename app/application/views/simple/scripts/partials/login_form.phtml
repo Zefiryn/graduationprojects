@@ -1,10 +1,30 @@
-<p class="login_form">
-	<?php if ($this->user->_role != 'guest'):?>
-	<?php echo $this->translate('logged_as')?>: <?php echo $this->translate($this->user->_role);?>
+<p class="edition">
+	<?php echo $this->translate('edition')?>: <?php echo $this->edition;?>
 	&nbsp;|&nbsp;
-	<a href="<?php echo $this->url(array(), 'logout');?>">
-		<?php echo $this->translate('logout')?>
-	</a>
+	<span id="edition_change"><?php echo $this->translate('change')?> &#9660;</span>
+	<ul id="edition_select">
+		<?php foreach ($this->editions as $edition):?>
+		<li>	
+			<a href="<?php echo $this->url(array('edition' => str_replace('/', '-', $edition)), 'edition');?>">
+			<?php echo $edition;?>
+			</a>
+		</li>
+		<?php endforeach;?>
+	</ul>
+</p>	
+<p class="login_form">
+	
+	<?php if ($this->user->_role != 'guest'):?>
+	<?php echo $this->translate('logged_as')?>: 
+		<?php if ($this->user->_role == 'admin'):?>
+		<a href="<?php echo $this->baseUrl('admin');?>"><?php echo $this->translate('admin');?></a>
+		<?php else:?>
+		<?php echo $this->translate($this->user->_role);?>
+		<?php endif;?>
+	
+	&nbsp;|&nbsp;
+	<a href="<?php echo $this->url(array(), 'logout');?>"><?php echo $this->translate('logout')?></a>
+		
 	<?php else:?>
 	<?php echo $this->translate('not_logged')?>
 	&nbsp;|&nbsp;

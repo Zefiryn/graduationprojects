@@ -37,9 +37,9 @@ class Application_Model_Applications extends GP_Application_Model
 								'_update');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function populateFromForm($data)

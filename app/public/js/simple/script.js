@@ -47,6 +47,8 @@ $(document).ready(function(){
 	}
 	
 	
+	showEditionChoice();
+	
 	
 	scrollToError();
 });
@@ -268,5 +270,29 @@ function scrollToError()
 		$(document).scrollTop(errorPos);
 	}
 		
+	
+}
+
+function showEditionChoice()
+{
+	$('#edition_change').click(function(){
+		
+		if ($('#edition_select').css('display') == 'block')
+		{
+			var h = $('#edition_select').height();
+			$('#edition_select').animate({height: 0}, 1000, 'jswing', function(){
+				$('#edition_select').height(h);
+				$('#edition_select').hide();
+			});
+			
+		}
+		else
+		{
+			$('#edition_select').show();
+			var h = $('#edition_select').height();
+			
+			$('#edition_select').height(0).animate({height: h}, 1000, 'jswing');
+		}
+	});
 	
 }

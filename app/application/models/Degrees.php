@@ -11,9 +11,9 @@ class Application_Model_Degrees extends GP_Application_Model
 	protected $_get_vars = array('_degree_id', '_degree_name');
 	
 	
-	public function __construct(array $options = null) 
+	public function __construct($id = null, array $options = null) 
 	{
-	    parent::__construct($options);
+	    return parent::__construct($id, $options);
 	}
 	
 	public function getDegrees()

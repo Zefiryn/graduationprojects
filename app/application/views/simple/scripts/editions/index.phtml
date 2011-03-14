@@ -1,1 +1,42 @@
-<br /><br /><center>View script for controller <b>Editions</b> and script/action name <b>index</b></center>
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array('link' => 'editions', 'lang' => $this->lang));
+?>
+<div class="content">
+	<h1><?php echo $this->translate('editions');?></h1>
+	<br />
+	<?php foreach ($this->editions as $id => $edition):?>
+	<p>
+		<?php echo $edition;?>
+	
+		<span class="admin">
+		<a href="<?php echo $this->url(array('id' => $id), 'edit_edition');?>">
+			<img class="ui-icon ui-icon-pencil no-block" 
+				alt="<?php echo $this->translate('edit');?>" 
+				title="<?php echo $this->translate('edit');?>" />
+		</a>
+		<a href="<?php echo $this->url(array('id' => $id), 'archive_edition');?>"> 
+			<img class="ui-icon ui-icon-disk no-block" 
+				del="<?php echo $this->translate('archive');?>" 
+				alt="<?php echo $this->translate('archive');?>" 
+				title="<?php echo $this->translate('archive');?>" />
+		</a>
+		<a href="<?php echo $this->url(array('id' => $id), 'delete_edition');?>"> 
+			<img class="ui-icon ui-icon-trash no-block" 
+				del="<?php echo $this->translate('delete');?>" 
+				alt="<?php echo $this->translate('delete');?>" 
+				title="<?php echo $this->translate('delete');?>" />
+		</a>
+		
+		</span>
+	</p>
+	
+	<?php endforeach;?>
+
+</div>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous">
+	<a href="<?php echo $this->baseUrl('/admin');?>">
+	&lt; <?php echo $this->translate('previous_page');?>
+	</a>
+</p>

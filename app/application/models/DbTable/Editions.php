@@ -31,5 +31,6 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 		
 		return $row;
 	}
+	
 }
 

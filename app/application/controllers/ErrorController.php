@@ -42,6 +42,7 @@ class ErrorController extends Zefir_Controller_Action
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
+            $this->view->exceptionTrace = explode("\n", $errors->exception->getTraceAsString());
         }
         
         $this->view->request   = $errors->request;

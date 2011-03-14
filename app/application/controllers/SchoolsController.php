@@ -75,9 +75,8 @@ class SchoolsController extends Zefir_Controller_Action
 		}
 		else
 		{
-			$school = new Application_Model_Schools();
 			$id = $request->getParam('id', '');
-			$school->getSchool($id);
+			$school = new Application_Model_Schools($id);
 			$form->populate($school->prepareFormArray());
 			
 		}
@@ -87,7 +86,13 @@ class SchoolsController extends Zefir_Controller_Action
     
     public function deleteAction()
     {
-        // action body
+    	$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+
+		$school = new Application_Model_Schools($id);
+		$school->delete();
+		$this->flashMe('school_deleted', 'SUCCESS');
+		$this->_redirect('schools');
     }
 
 }
