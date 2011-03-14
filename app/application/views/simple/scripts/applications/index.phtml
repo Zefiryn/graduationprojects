@@ -1,7 +1,9 @@
 <?php echo $this->partial('partials/lang_menu.phtml', 
-			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'applications',
-						'lang' => $this->lang));
+			array('link' => 'applications', 'lang' => $this->lang));
+?>
+
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
 ?>
 
 <div class="content">

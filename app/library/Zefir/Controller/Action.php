@@ -33,6 +33,7 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 					$_POST[$key] = $value;
 	    	}	
     	}
+    	
 	}
 	
 	/**

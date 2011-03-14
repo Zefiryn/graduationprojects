@@ -49,8 +49,11 @@ $(document).ready(function(){
 	
 	showEditionChoice();
 	
+	if ($('div.error-div').length)
+		scrollToError();
 	
-	scrollToError();
+	
+	ajaxLinks();
 });
 
 function add_regulation_paragraph()

@@ -90,7 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$frontController = $this->bootstrap('frontController');
 		$router = $this->getResource('frontController')->getRouter();
-		$router->removeDefaultRoutes();
+		//router->removeDefaultRoutes();
 		
 		$route = new Zend_Controller_Router_Route_Regex(
     			'^([a-z]{2}/)?([a-z]+)/?([a-z]+)?$',
@@ -100,6 +100,38 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     					3 => 'action'));
     	$router->addRoute('def', $route);
     	
+    	$route = new Zend_Controller_Router_Route(
+    			':edition',
+    			array(	'controller' => 'index',
+    					'action' => 'index'),
+    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
+    	$router->addRoute('edition', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'login',
+    			array(	'controller' => 'auth',
+    					'action' => 'login'));
+    	$router->addRoute('login', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/login',
+    			array(	'controller' => 'auth',
+    					'action' => 'login'),
+    			array('lang' => '^[a-z]{2}$'));
+    	$router->addRoute('lang_login', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			'logout',
+    			array(	'controller' => 'auth',
+    					'action' => 'logut'));
+    	$router->addRoute('logout', $route);
+    	
+    	$route = new Zend_Controller_Router_Route(
+    			':lang/logout',
+    			array(	'controller' => 'auth',
+    					'action' => 'logut'),
+    			array('lang' => '^[a-z]{2}$'));
+    	$router->addRoute('lang_logout', $route);
     	/**
     	 * add routing from the ini file
     	 */
