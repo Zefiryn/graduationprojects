@@ -215,6 +215,13 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		return $name;
 	}
 	
+	/**
+	 * Prepare delete where string and call Zend_Db_Table_Abstract delete method
+	 * 
+	 * @access public
+	 * @param Zefir_Application_Model $object
+	 * @return void
+	 */
 	public function delete(Zefir_Application_Model $object)
     {
     	$column = $this->_primary;
@@ -225,29 +232,42 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
     	{
     		$property = '_'.$col;
        		$where = $this->getAdapter()->quoteInto($col.' = ?', $object->$property);
-       		var_dump($where);
     	}
 
     	parent::delete($where);
     }
     
+    
+    /**
+     * Save object data in the database
+     *	
+     * @access public
+     * @param Zefir_Application_Model $object
+     * @return Zefir_Application_Model $object
+     */
     public function save(Zefir_Application_Model $object)
     {
+    	//get the name of the primary column
     	$primary = $this->_primary;
+    	
+    	//create name of the property that holds primary column data
     	$var_primary = '_'.$primary;
     	$id = $object->$var_primary;
     	
+    	//get the row from the databases
     	$row = $this->find($id)->current();
     	
     	if (!$row)
     		$row = $this->createRow();
     	
+    	//get table columns but remove primary column
     	$columns = $row->toArray();
     	unset($columns[$primary]);
     	
     	foreach($columns as $name => $value)
     	{
-    		$variable = '_'.$name;
+    		//all references in the db are made with _id but in the model without
+    		$variable = '_'.str_replace('_id', null, $name);
     		$row->$name = $object->$variable;
     	}
     	

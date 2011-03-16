@@ -20,7 +20,16 @@ class UsersController extends Zefir_Controller_Action
     	$id = $this->getRequest()->getParam('id', '');
 		$user = new Application_Model_Users($id);
 		
-		$this->view->user = $user;
+		if ($this->view->user->_role == 'admin' 
+			|| $this->view->user->_user_id == $user->_user_id)
+		{
+			$this->view->account = $user;
+		}
+		else 
+		{
+			$this->flashMe('not_allowed', 'FAILURE');
+			$this->_redirect('index');
+		}
     }
 
     public function newAction()

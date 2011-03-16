@@ -13,9 +13,6 @@ class SettingsController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$appSettings = Zend_Registry::get('appSettings');
 		$form = new Application_Form_Settings();
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_settingsForm.phtml'))
-		));
 		
 		if ($request->isPost())
 		{

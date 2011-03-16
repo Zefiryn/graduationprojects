@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS files, applications, template_settings, work_types, degrees, schools, users, 
+DROP TABLE IF EXISTS files, applications, result_files, results, template_settings, work_types, degrees, schools, users, 
 regulations, faq, localizations, editions, settings;
 
 CREATE TABLE editions (
@@ -110,6 +110,46 @@ CREATE TABLE files(
 	PRIMARY KEY (file_id),
 	FOREIGN KEY(application_id)
 		REFERENCES applications(application_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE results (
+	result_id smallint(6) NOT NULL AUTO_INCREMENT,
+	edition_id smallint(6),
+	name char(150) NOT NULL,
+	surname char(200) NOT NULL,
+	email varchar(35) NOT NULL,
+	country char(2) NOT NULL,
+	school varchar(60) NOT NULL,
+	department varchar(60) NOT NULL,
+	degree_id smallint(6),
+	work_subject varchar(300) NOT NULL,
+	work_type_id smallint(6),
+	work_desc text NOT NULL,
+	supervisor varchar(60) NOT NULL,
+	supervisor_degree varchar(15) NOT NULL,
+	graduation_time INT NOT NULL,	
+	miniature VARCHAR(35),
+	PRIMARY KEY (result_id),
+	FOREIGN KEY(edition_id)
+		REFERENCES editions(edition_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(degree_id)
+		REFERENCES degrees(degree_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(work_type_id)
+		REFERENCES work_types(work_type_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE result_files(
+	file_id smallint(6) NOT NULL AUTO_INCREMENT,
+	result_id smallint(6) NOT NULL,
+	path varchar(150) NOT NULL,
+	file_desc varchar(150),
+	PRIMARY KEY (file_id),
+	FOREIGN KEY(result_id)
+		REFERENCES results(result_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

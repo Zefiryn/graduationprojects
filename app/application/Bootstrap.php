@@ -123,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$route = new Zend_Controller_Router_Route(
     			'logout',
     			array(	'controller' => 'auth',
-    					'action' => 'logut'));
+    					'action' => 'logout'));
     	$router->addRoute('logout', $route);
     	
     	$route = new Zend_Controller_Router_Route(

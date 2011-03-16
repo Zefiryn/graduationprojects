@@ -10,7 +10,7 @@ class AdminController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-
+		//show admin page
     }
 
 

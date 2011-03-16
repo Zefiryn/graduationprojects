@@ -107,6 +107,15 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		if ($request->isPost())
 		{
+			$id = $request->getParam('application_id', '');
+			if ($this->user->_role != 'admin' 
+				|| $this->user->_applications[0]->_application_id != $id)
+			{
+				$this->flashMe('not_allowed', 'FAILURE');
+				$this->_redirect('/index');
+			}
+			
+			
 			$form->populate($request->getPost());
 			if($form->leave->isChecked())
 			{
@@ -125,6 +134,12 @@ class ApplicationsController extends Zefir_Controller_Action
 		else
 		{
 			$id = $request->getParam('id', '');
+			if ($this->user->_role != 'admin' 
+				&& $this->user->_applications[0]->_application_id != $id)
+			{
+				$this->flashMe('not_allowed', 'FAILURE');
+				$this->_redirect('/index');
+			}
 			
 			if ($id != null)
 			{
@@ -143,6 +158,12 @@ class ApplicationsController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$id = $request->getParam('id', '');
 
+    	if ($this->user->_role != 'admin' 
+    		|| $this->user->_applications[0]->_application_id != $id)
+		{
+			$this->flashMe('not_allowed', 'FAILURE');
+			$this->_redirect('/index');
+		}
 		$application = new Application_Model_Applications($id);
 		$application->delete();
 		$this->flashMe('application_deleted', 'SUCCESS');
@@ -158,8 +179,18 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($id == null)
 			throw new Zend_Exception('Wrong id parameter');
 		
-		$application = new Application_Model_Applications();
-		$this->view->application = $application->getApplicationById($id);
+			
+		if ($this->user->_role == 'admin' 
+			|| $this->user->_applications[0]->_application_id == $id)
+		{
+			$application = new Application_Model_Applications($id);
+			$this->view->application = $application;
+		}
+		else
+		{
+			$this->flashMe('not_allowed', 'FAILURE');
+			$this->_redirect('/index');
+		}
     }
 
     public function updateAction()

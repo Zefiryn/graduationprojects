@@ -28,10 +28,7 @@ class RegulationsController extends Zefir_Controller_Action
     	$request = $this->getRequest();
     	
     	$edition = Zend_Registry::get('edition');
-    	$regulations = new Application_Model_Regualtions();
-        $regulationsData = $regulations->getRegulations($edition);
-        $form = new Application_Form_Regulations();
-    	
+       
     	if ($request->isPost())
     	{
     		$data = $request->getPost();
@@ -42,39 +39,78 @@ class RegulationsController extends Zefir_Controller_Action
     		}
     		else 
     		{
-	    		//get number of new paragraphs 
-	    		for($i=1; isset($data['new_paragraph_no_'.$i]); $i++);
-	    		$i--;
-	    		
-	    		$form = new Application_Form_Regulations($i);
-	    		
-	    		//add validators to new fields
-	    		for($x=1; $x <= $i; $x++)
-	    		{
-	    			if ($data['new_paragraph_text_'.$x] != NULL)
-	    				$form->getElement('new_paragraph_no_'.$x)->setRequired(TRUE);
-	    		}
-	    		
-	    		//validate form
-	    		if ($form->isValid($data))
-	    		{
-	    			//save form
-	    			$regulations = new Application_Model_Regualtions();
-	    			$regulations->saveRegulations($form->getValues());
-	    			
-	    			$this->flashMe('regulation_edited', 'SUCCESS');
-	    			$this->_redirectToRoute(array('edition' => str_replace('/', '-', $edition)), 'regulation_edition');
-	    		}
-	    		else 
-	    		{
-	    			$this->view->regulations = $form;
-	    		}
+    			$new_paragraphs = $this->_countNewParagraphs();
+    			$form = new Application_Form_Regulations($new_paragraphs);
+				$form = $this->_addNewValidators($form, $new_paragraphs);
+    			if ($form->isValid($request->getPost()))
+    			{
+		    		foreach ($form->getValues() as $id => $paragraphData)
+		    		{
+		    			if (!strstr($id, 'new_paragraph_'))
+		    			{//process existing paragraphs
+		    				$paragraph = new Application_Model_Regualtions();
+		    				$paragraph->populateFromForm($paragraphData);
+		    				
+		    				if (isset($paragraphData['paragraph_remove']) && 
+		    					$paragraphData['paragraph_remove'] == '1')
+		    					$paragraph->delete();
+		    				else
+		    					$paragraph->save();
+		    			}
+		    			else
+		    			{//add new paragraphs
+		    				$paragraph = new Application_Model_Regualtions();
+		    				$paragraph->populateFromForm($paragraphData);
+		    				
+		    				if ($paragraph->_paragraph_no != null)
+	    						$paragraph->save();
+		    			}
+		    		}
+		    		
+		    		$this->flashMe('regulations_saved');
+		    		$this->_redirect('/regulations');
+    			}
     		}	
     	}
     	else
+    		$form = new Application_Form_Regulations();
+    		
+    		
+    	$this->view->regulations = $form;
+    }
+    
+    public function deleteAction()
+    {
+    	$edition = Zend_Registry::get('edition');
+    	$regulation = new Application_Model_Regualtions();
+    	$regulation->deleteRegulations($edition);
+    }
+    
+    protected function _countNewParagraphs()
+    {
+    	$data = $this->getRequest()->getPost();
+    	for($i = 1; isset($data['new_paragraph_'.$i]); $i++);
+    	
+    	return --$i; 
+    }
+    
+    protected function _addNewValidators($form, $count)
+    {
+    	$data = $this->getRequest()->getPost();
+    	
+    	for($i = 1; $i <= $count; $i++)
     	{
-    		$this->view->regulations = $form;
+    		$par_no = $data['new_paragraph_'.$i]['paragraph_no'];
+    		$par_text = $data['new_paragraph_'.$i]['paragraph_text'];
+    		
+    		if ($par_no != null || $par_text != null)
+    		{
+    			$form->getSubform('new_paragraph_'.$i)->getElement('paragraph_no')->setRequired(TRUE);
+    			$form->getSubform('new_paragraph_'.$i)->getElement('paragraph_text')->setRequired(TRUE);
+    		}
     	}
+    	
+    	return $form;
     }
 }
 

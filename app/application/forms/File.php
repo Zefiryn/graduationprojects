@@ -10,18 +10,26 @@
 
 class Application_Form_File extends Zefir_Form_SubForm
 {
-	public function __construct($number, $type)
+	protected $_number;
+	protected $_type;
+	
+	public function __construct($number, $type = 'new')
 	{
-		$this->init($number, $type);
+		$this->_number = $number;
+		$this->_type = $type;
+		parent::__construct();
+		
 	}
 	
-    public function init($number, $type)
+    public function init()
     {
     	$L = $this->_regex['L'];
     	$N = $this->_regex['N'];
     	$S = $this->_regex['S'];
     	$E = $this->_regex['E'];
     	$B = $this->_regex['B'];
+    	$number = $this->_number;
+    	$type = $this->_type;
         parent::init();
         
 		$this->setName('FileForm');

@@ -45,13 +45,9 @@ jQuery.fn.deleteWithAjax = function() {
 		var confirmText = '<span class="ui-icon ui-icon-alert" style="float:left; margin:20px 7px 20px 0px;"></span>' + $('#dialog-confirm p').text();
 		$('#dialog-confirm p').html(confirmText);
 		
-		var titleText = $('#ui-dialog-title-dialog-confirm').text()
-		var title = $(this).children('.ui-icon').attr('del');
-		if (title != '')
-			titleText = title;
-		
-		var deleteButton = $('#button_conf').text()
-		var cancelButton = $('#button_close').text()
+		var titleText = $('#ui-dialog-title-dialog-confirm').text();
+		var deleteButton = $('#button_conf').text();
+		var cancelButton = $('#button_close').text();
 
 		$( "#dialog-confirm" ).dialog({
 				draggable: true,

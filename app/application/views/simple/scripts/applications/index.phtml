@@ -66,7 +66,7 @@
 				<img class="ui-icon ui-icon-check no-block" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
-				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application));?>
+				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
 			</td>	
 			<td class="normal" style="width: 90px;">
 				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 

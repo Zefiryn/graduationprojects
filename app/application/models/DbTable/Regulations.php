@@ -37,34 +37,6 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 		return $this->fetchAll($select);
 	}
 	
-	public function saveParagraph($data)
-	{
-		$id = $data->_paragraph_id;
-		if ($id)
-			$row = $this->find($id)->current();
-
-		if ($id == NULL || !$row)
-			$row = $this->createRow();
-		
-		$row->paragraph_id = $data->_paragraph_id;
-		$row->edition_id = $data->_edition;
-		$row->regulation_lang = $data->_regulation_lang;
-		$row->paragraph_no = $data->_paragraph_no;
-		$row->paragraph_text = $data->_paragraph_text;
-		
-		if ($row->save())
-		{
-			if ($id == NULL)
-				$data->_paragraph_id = $this->getAdapter()->lastInsertId();
-		}
-		else
-			throw new Zend_Exception('Unable to save data');
-		
-		return $data;
-	}
 	
-	public function deleteParagraph($data)
-	{
-	}
 }
 

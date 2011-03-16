@@ -5,8 +5,10 @@
 			array('title' => 'editions', 'delete_confirm' => $this->translate('regulation_delete_confirm')));
 ?>
 
+
 <div class="content">
-	<?php echo $this->partial('regulations/_admin.phtml', array('baseUrl' => $this->baseUrl));?>
+	<?php if ($this->user->_role == 'admin') 
+			echo $this->partial('regulations/_admin.phtml');?>
 	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
@@ -14,7 +16,7 @@
 	<p class="rule">
 		<span style="font-weight: bold">&sect; <?php echo $regulation->_paragraph_no;?></span>
 		<br />
-		<?php echo  $regulation->_paragraph_text;?>
+		<?php echo  nl2br($regulation->_paragraph_text);?>
 	</p> 
 	<?php endforeach; ?>
 	

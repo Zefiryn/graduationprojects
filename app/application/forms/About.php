@@ -55,6 +55,11 @@ class Application_Form_About extends Zefir_Form
 		
 		$this->_createCsrfElement();
 		$this->_createStandardSubmit('submit');
+		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
+        	->setDisplayGroupDecorators(array(
+						'FormElements', 
+						array('Fieldset', array('class' => 'submit'))
+			));
 		
 		
     }

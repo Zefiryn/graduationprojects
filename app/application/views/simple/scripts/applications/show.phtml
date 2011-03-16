@@ -1,14 +1,14 @@
 <?php $settings = Zend_Registry::get('appSettings');
 echo $this->partial('partials/lang_menu.phtml', 
-			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'application/'.$this->application->_application_id,
-						'lang' => $this->lang));
+			array('link' => 'application/'.$this->application->_application_id,	'lang' => $this->lang));
 ?>
 
 
 <div class="content">
 	<p class="admin">
-		<?php echo $this->partial('applications/_admin.phtml', array('application' => $this->application));?>
+		<?php echo $this->partial('applications/_admin.phtml', 
+			array('application' => $this->application,
+					'user' => $this->user));?>
 	</p>
 	<h1><?php echo $this->application->_user->getUserFullName();?></h1>
 	<p class="spacer">&nbsp;</p>
