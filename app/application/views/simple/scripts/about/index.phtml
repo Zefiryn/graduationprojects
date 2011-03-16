@@ -5,7 +5,8 @@
 ?>
 
 <div class="content">
-	<?php echo $this->partial('about/_admin.phtml');?>
+	<?php if ($this->user->_role == 'admin')
+			echo $this->partial('about/_admin.phtml');?>
 	<h1><?php echo $this->translate('about_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	 

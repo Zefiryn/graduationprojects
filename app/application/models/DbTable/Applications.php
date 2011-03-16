@@ -150,6 +150,16 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	//create folder for user's files
     	$uploadDir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/';
+    	
+    	//create edition dir
+    	$edition = new Application_Model_Editions($application->_edition);
+    	if (!is_dir($uploadDir.$edition->_edition_name))
+    	{
+    		mkdir($uploadDir.$edition->_edition_name);
+   			chmod($uploadDir.$edition->_edition_name, 0777);
+    	}
+    	$uploadDir = $uploadDir.$edition->_edition_name;
+    	
    		$type = new Application_Model_WorkTypes();
    		$type->getWorkType($application->_work_type);
    		$userDir = strtoupper($application->_country).'_'.$type->_work_type_name.'_'.$user->getUserUrlName().$id;

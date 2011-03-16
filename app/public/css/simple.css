@@ -285,12 +285,16 @@ input.prefered
 	background: #333;
 	font-weight: bold;
 }
+input.right
+{
+	float: right;
+}
 fieldset.submit
 {
 	border: 0px;
 	margin: 30px 0px 0px 0px;
 	width: 600px;
-	text-align: center;
+	text-align: left;
 }
 fieldset.fileFieldset
 {

@@ -1,45 +1,45 @@
 <?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'user/'.$this->user->_user_id, 'lang' => $this->lang));
+			array('link' => 'account/'.$this->account->_user_id, 'lang' => $this->lang));
 ?>
 <?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('user_delete_confirm')));
+			array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
 ?>
 <div class="content">
-	<h1><?php echo $this->user->getUserFullName();?></h1>
+	<h1><?php echo $this->account->getUserFullName();?></h1>
 	<p class="clear">&nbsp;</p>
-	<div class="user">
+	<div class="account">
 		<?php echo $this->partial(
 							'users/_admin.phtml', 
-							array('user' => $this->user));	?>
+							array('user' => $this->account));	?>
 		<p>
 			<span><?php echo $this->translate('nick');?></span>: 
-			<?php echo $this->user->_nick;?>
+			<?php echo $this->account->_nick;?>
 		</p>
 		
 		<p>
 			<span><?php echo $this->translate('email');?></span>: 
-			<?php echo $this->user->_email;?>
+			<?php echo $this->account->_email;?>
 		</p>
 		
-		<?php if ($this->user->_phone != null):?>
+		<?php if ($this->account->_phone != null):?>
 		<p>
 			<span><?php echo $this->translate('phone');?></span>: 
-			<?php echo $this->user->_phone;?>
+			<?php echo $this->account->_phone;?>
 		</p>
 		<?php endif;?>
 		
-		<?php if ($this->user->_address != null):?>
+		<?php if ($this->account->_address != null):?>
 		<p>
 			<span><?php echo $this->translate('address');?></span>: 
-			<?php echo $this->user->_address;?>
+			<?php echo $this->account->_address;?>
 		</p>
 		<?php endif; ?>
 		
-		<?php if ($this->user->_applications != null):?>
+		<?php if ($this->account->_applications != null):?>
 		<p>
 			<span><?php echo $this->translate('application');?></span>:
-			<a href="<?php echo $this->url(array('id' => $this->user->_applications[0]->_application_id), 'application');?>"> 
-				<?php echo $this->user->_applications[0]->_work_subject;?>
+			<a href="<?php echo $this->url(array('id' => $this->account->_applications[0]->_application_id), 'application');?>"> 
+				<?php echo $this->account->_applications[0]->_work_subject;?>
 			</a>
 		</p>
 		<?php endif;?>

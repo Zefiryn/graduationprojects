@@ -11,12 +11,15 @@
 class Application_Form_Application extends Zefir_Form
 {
 
+	protected $_type;
 	public function __construct($type)
 	{
-		$this->init($type);
+		$this->_type = $type;
+		parent::__construct();
+		
 	}
 	
-    public function init($type)
+    public function init()
     {
     	$L = $this->_regex['L'];
     	$N = $this->_regex['N'];
@@ -35,10 +38,12 @@ class Application_Form_Application extends Zefir_Form
 
 		
 		$appSettings = Zend_Registry::get('appSettings');
-		$element = $this->createElement('hidden', 'edition');	
+		$element = $this->createElement('hidden', 'edition');
+		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
-		$element = $this->createElement('hidden', 'application_id');	
+		$element = $this->createElement('hidden', 'application_id');
+		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
 		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic');
@@ -50,7 +55,7 @@ class Application_Form_Application extends Zefir_Form
 				->setRequired(TRUE);	
 		$this->addElement($element);
 
-		if ($type == 'new')
+		if ($this->_type == 'new')
 		{
 			$userSubForm = new Application_Form_User('new');
 			$userSubForm->removeDecorator('form');
@@ -223,11 +228,16 @@ class Application_Form_Application extends Zefir_Form
 		for ($i = 1; $i <= $appSettings->_max_files; $i++)
 		{
 			$subForm = new Application_Form_File($i);
-			$this->addSubForm($subForm, 'file_'.$i, $type);
+			$this->addSubForm($subForm, 'file_'.$i, $this->_type);
 		}
 		
 		$this->_createCsrfElement();	 
 		$this->_createStandardSubmit('application_submit');
+		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
+        	->setDisplayGroupDecorators(array(
+						'FormElements', 
+						array('Fieldset', array('class' => 'submit'))
+			));
     }
 
 

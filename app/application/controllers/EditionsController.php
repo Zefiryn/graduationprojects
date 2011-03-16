@@ -20,9 +20,7 @@ class EditionsController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$form = new Application_Form_Edition('new');
 		$form->setAction($this->view->baseUrl('editions/new'));
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_editionForm.phtml'))
-		));
+	
 		
 		if ($request->isPost())
 		{
@@ -54,9 +52,7 @@ class EditionsController extends Zefir_Controller_Action
 		$edition = new Application_Model_Editions($id);
 		$form = new Application_Form_Edition('edit');
 		$form->setAction($this->view->baseUrl('editions/edit'));
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_editionForm.phtml'))
-		));
+		
 		
 		if ($request->isPost())
 		{

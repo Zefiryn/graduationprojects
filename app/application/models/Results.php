@@ -2,9 +2,11 @@
 
 class Application_Model_Applications extends GP_Application_Model
 {
-	protected $_application_id;
+	protected $_result_id;
 	protected $_edition;
-	protected $_user;
+	protected $_name;
+	protected $_surname;
+	protected $_email;
 	protected $_country;
 	protected $_school;
 	protected $_department;
@@ -14,27 +16,19 @@ class Application_Model_Applications extends GP_Application_Model
 	protected $_work_desc;
 	protected $_supervisor;
 	protected $_supervisor_degree;
-	protected $_graduation_time;
-	protected $_application_date;
 	protected $_miniature;
 	protected $_files;
-	protected $_active;	
-	protected $_update = FALSE;
 	
-	protected $_dbTableModelName = 'Application_Model_DbTable_Applications';
+	protected $_dbTableModelName = 'Application_Model_DbTable_Results';
 	
-	protected $_set_vars = array('_application_id', '_edition', '_user', '_country', 
-								'_school', '_department', '_degree', '_work_subject', 
-								'_work_type', '_work_desc', '_supervisor', 
-								'_supervisor_degree', '_files', '_graduation_time', 
-								'_application_date', '_miniature', '_active', 
-								'_update');
-	protected $_get_vars = array('_application_id', '_edition', '_user', '_country', 
-								'_school', '_department', '_degree', '_work_subject', 
-								'_work_type', '_work_desc', '_supervisor', 
-								'_supervisor_degree', '_files', '_graduation_time', 
-								'_application_date', '_miniature', '_active', 
-								'_update');
+	protected $_set_vars = array('_result_id', '_edition', '_name', '_surname', '_email', 
+								'_country', '_school', '_department', '_degree', 
+								'_work_subject', '_work_type', '_work_desc', '_supervisor', 
+								'_supervisor_degree', '_files', '_miniature');
+	protected $_get_vars = array('_result_id', '_edition', '_name', '_surname', '_email', 
+								'_country', '_school', '_department', '_degree', 
+								'_work_subject', '_work_type', '_work_desc', '_supervisor', 
+								'_supervisor_degree', '_files', '_miniature');
 	
 	
 	public function __construct($id = null, array $options = null) 
@@ -46,22 +40,6 @@ class Application_Model_Applications extends GP_Application_Model
 	{
 		$appSettings = Zend_Registry::get('appSettings');
 		parent::populateFromForm($data);
-		
-		if (isset($data['new_school']) && $data['new_school'] != null)
-			$this->_school = $data['new_school'];
-		else
-			$this->_school = (int) $this->_school;
-		
-		if ($this->_application_date == null)
-			$this->_application_date = time();
-		
-		if ($this->_graduation_time != null)
-		{
-			$this->_graduation_time = strtotime($this->_graduation_time);
-		}
-		
-		if ($this->_active == null)
-			$this->_active = 1;
 		
 		$this->_miniature = $data['miniatureCache'];
 		
@@ -113,14 +91,14 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function getApplicationSchool()
 	{
-		return $this->_school->_school_name.', '.$this->_department;
+		return $this->_school.', '.$this->_department;
 	}
 	
 	public function prepareFormArray()
 	{
 		$data = array(
-				'application_id' => $this->_application_id,
-				'school' => $this->_school->_school_id,
+				'result_id' => $this->_application_id,
+				'school' => $this->_school,
 				'department' => $this->_department,
 				'degree' => $this->_degree->_degree_id,
 				'work_subject' => $this->_work_subject,
@@ -128,9 +106,7 @@ class Application_Model_Applications extends GP_Application_Model
 				'work_desc' => $this->_work_desc,
 				'supervisor_degree' => $this->_supervisor_degree,
 				'supervisor' => $this->_supervisor,
-				'graduation_time' => date('d-m-Y', $this->_graduation_time),
 				'miniatureCache' => $this->_miniature,
-				'personal_data_agreement' => TRUE
 		);
 		
 		foreach($this->_files as $no => $file)

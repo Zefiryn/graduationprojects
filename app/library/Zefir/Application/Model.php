@@ -25,6 +25,7 @@ class Zefir_Application_Model {
      
 	/**
 	 * Constructor
+	 * 
 	 * @access public
 	 * @param array $options
 	 * @param int $id
@@ -60,6 +61,7 @@ class Zefir_Application_Model {
 	
 	/**
 	 * Set Zend_Db_Table object for current model
+	 * 
 	 * @access public
 	 * @param Zend_Db_Table_Abstract $dbTable
 	 * @throws Exception
@@ -81,6 +83,7 @@ class Zefir_Application_Model {
      
 	/**
 	 * Get current Zend_Db_Table object
+	 * 
 	 * @access public
 	 * @return Zend_Db_Table $_dbTable
 	 */
@@ -95,6 +98,7 @@ class Zefir_Application_Model {
  
 	/**
 	 * Magic function for setting properties of the object
+	 * 
 	 * @access public
 	 * @param string $name
 	 * @param mixed $value
@@ -115,6 +119,7 @@ class Zefir_Application_Model {
  
 	/**
 	 * Magic function for getting properties of the object
+	 * 
 	 * @access public
 	 * @param string $name
 	 * @throws Exception
@@ -135,6 +140,7 @@ class Zefir_Application_Model {
  
 	/**
 	 * Set multiple object properties at once
+	 * 
 	 * @access public
 	 * @param array $options
 	 * @return Zefirn_Application_Model $this
@@ -152,6 +158,7 @@ class Zefir_Application_Model {
 	       
 	/**
 	 * Convert the object to an array
+	 * 
 	 * @access public
 	 * @return array $array
 	 */
@@ -159,8 +166,7 @@ class Zefir_Application_Model {
 	{
             
     	$array = array();
-	    $class = new Zend_Reflection_Class($this);
-    	$properties = $class->getProperties();
+    	$properties = $this->getProperties();
             
 	    foreach($properties as $property) 
 	    {
@@ -177,8 +183,9 @@ class Zefir_Application_Model {
 	
 	/**
 	 * Populate object with data from the Zend_Db_Table_Row
+	 * 
 	 * @access public
-	 * @param Zend_Db_Row|array $row
+	 * @param Zend_Db_Table_Row|array $row
 	 * @return Zefir_Application_Model $this
 	 */
 	public function populate($row)
@@ -196,6 +203,13 @@ class Zefir_Application_Model {
 		return $this;
 	}
 	
+	/**
+	 * Populate object with data from row and perform
+	 * 
+	 * @access public
+	 * @param Zend_Db_Table_Row $row
+	 * @return Zefir_Application_Model
+	 */
 	public function populateWithReference($row)
 	{
 		foreach ($this->_set_vars as $var)
@@ -218,6 +232,7 @@ class Zefir_Application_Model {
 	
 	/**
 	 * Compare function used with usort function
+	 * 
 	 * @access private
 	 * @param mixed $a
 	 * @param mixed $b
@@ -251,6 +266,14 @@ class Zefir_Application_Model {
 		return (($this->$id_var == NULL) ? TRUE : FALSE);
 	}
 	
+	/**
+	 * Get form data and populate object with it; references are not objects but id's of 
+	 * rows in associated tables
+	 * 
+	 * @access public
+	 * @param array $data
+	 * @return Zefir_Application_Model
+	 */
 	public function populateFromForm($data)
 	{
 		foreach ($data as $key => $value)
@@ -259,13 +282,27 @@ class Zefir_Application_Model {
 			if (in_array($var, $this->_set_vars))
 				$this->$var = $value;
 		}
+		
+		return $this;
 	}
 	
+	/**
+	 * Save object in the database
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function save()
 	{
 		return $this->getDbTable()->save($this);
 	}
 	
+	/**
+	 * Delete object from the database
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function delete()
 	{
 		$this->getDbTable()->delete($this);

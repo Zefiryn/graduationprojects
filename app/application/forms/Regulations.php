@@ -17,60 +17,60 @@ class Application_Form_Regulations extends Zefir_Form
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
         $edition = Zend_Registry::get('edition');
     	
+        $this->_createCsrfElement();
+        
+        
         $regulations = new Application_Model_Regualtions();
         $regulationsData = $regulations->getRegulations($edition);
         
         foreach($regulationsData as $regulation)
         {
-        	$paragraph = $this->createElement('text', 'paragraph_no_'.$regulation->_paragraph_id);
-        	$paragraph->setLabel('paragraph_no')
-        			->setAttribs(array('class' => 'width3'))
-        			->setValue($regulation->_paragraph_no)
-        			->setDecorators($this->_getZefirDecorators(TRUE));
-        	$this->addElement($paragraph);
-        	
-        	$paragraph = $this->createElement('textarea', 'paragraph_text_'.$regulation->_paragraph_id);
-        	$paragraph->setLabel('paragraph_text')
-        			->setAttribs(array('class' => 'width1'))
-        			->setValue($regulation->_paragraph_text)
-        			->setDecorators($this->_getZefirDecorators(TRUE));
-        	$this->addElement($paragraph);
-        	
-        	$paragraph = $this->createElement('checkbox', 'paragraph_remove_'.$regulation->_paragraph_id);
-        	$paragraph->setLabel('paragraph_remove')
-        		->setAttribs(array('class' => 'checkbox'))
-        		->setValue('Remove paragraph')
-        		->setDecorators(array(
-					array('ViewHelper'),
-					array('ErrorMsg'),
-					array('MyLabel', array('placement' => 'prepend', 'class' => 'label checkbox'))
-					)        			
-        		);
-        	$this->addElement($paragraph);
-        
+        	$paragraph = new Application_Form_Paragraph();
+        	$paragraph->removeDecorator('form');		
+        	$paragraph->removeElement('csrf');
+        	$paragraph->removeDisplayGroup('submitFields');
+        	$paragraph->removeElement('submit');
+        	$paragraph->removeElement('leave');
+        	$paragraph->setIsArray(TRUE);
+        	$paragraph->populate($regulation->prepareFormArray());
+			$this->addSubForm($paragraph, 'paragraph_'.$regulation->_paragraph_id); 
         }
         
-        for ($i=1; $i <= $this->_new; $i++)
+        
+        $edition = $regulationsData[0]->_edition->_edition_id;
+        $regulation_lang = $regulationsData[0]->_regulation_lang;
+        for($i= 1; $i <= $this->_new; $i++)
         {
-	        $paragraph = $this->createElement('text', 'new_paragraph_no_'.$i);
-	        $paragraph->setLabel('paragraph_no')
-	        		->setAttribs(array('class' => 'width3'))
-	        		->setDecorators($this->_getZefirDecorators(TRUE));
-	        $this->addElement($paragraph);
-	        	
-	        $paragraph = $this->createElement('textarea', 'new_paragraph_text_'.$i);
-	        $paragraph->setLabel('paragraph_text')
-	        		->setAttribs(array('class' => 'width1'))
-	        		->setDecorators($this->_getZefirDecorators(TRUE));
-	        $this->addElement($paragraph);
+        	$paragraph = new Application_Form_Paragraph();
+        	$paragraph->removeDecorator('form');		
+        	$paragraph->removeElement('csrf');
+        	$paragraph->removeElement('paragraph_remove');
+        	$paragraph->removeDisplayGroup('submitFields');
+        	$paragraph->removeElement('submit');
+        	$paragraph->removeElement('leave');
+        	$paragraph->setIsArray(TRUE);
+        	$paragraph->getElement('edition')->setValue($edition);
+        	$paragraph->getElement('regulation_lang')->setValue($regulation_lang);
+        	$this->addSubForm($paragraph, 'new_paragraph_'.$i);
         }
         
+        
+        $submit = $this->createElement('submit', 'add_new_paragraph', array(
+			'ignore' => true,
+			'label' => 'add_new_paragraph',
+			'class' => 'submit unprefered right'
+		));	 
+		$submit->setDecorators(array(
+							array('ViewHelper')
+            				));
+     	$this->addElement($submit);
+     	
         $this->_createStandardSubmit('regulation_submit');
         $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
         ->setDisplayGroupDecorators(array(
 						'FormElements', 
 						array('Fieldset', array('class' => 'submit'))
-			));;
+			));
     }
 
 

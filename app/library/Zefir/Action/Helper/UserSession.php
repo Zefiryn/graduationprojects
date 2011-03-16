@@ -60,6 +60,7 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 		
     	Zend_Registry::set('role', $user->_role);
     	$view->user= $user;
+    	$this->getActionController()->user = $user;
     	$view->logged = $auth->hasIdentity();
 	}
 	

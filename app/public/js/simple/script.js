@@ -4,6 +4,7 @@
 
 //SCROLL BIND HANDLER
 $(document).ready(function(){
+	
 	//flash messages
 	flashMessage();
 	
@@ -13,8 +14,8 @@ $(document).ready(function(){
 	if ($('#work_desc').length )
 		letterCounter('work_desc', 'word_counter');
 	
-	if ($('#new_paragraph_text_1').length )
-		add_regulation_paragraph();
+	if ($('#add_new_paragraph').length )
+		addNewParagraph();
 	
 	hintImages();
 	
@@ -55,28 +56,6 @@ $(document).ready(function(){
 	
 	ajaxLinks();
 });
-
-function add_regulation_paragraph()
-{
-	//get html of the elements to copy
-	label_no = $('#new_paragraph_no_1').prev().clone();
-	input_no = $('#new_paragraph_no_1').clone().removeAttr('id'); 
-	label_text = $('#new_paragraph_text_1').prev().clone();
-	input_text = $('#new_paragraph_text_1').clone().removeAttr('id');
-	
-	$('textarea:last').change(function(){
-		no = $(this).attr('name');
-		no = parseInt(no.substring(no.lastIndexOf('_')+1, no.length)) + 1;
-		no.toString();
-		input_new_no = input_no;
-		input_new_no.attr('name', 'new_paragraph_no_'+no);
-		
-		input_new_text = input_text;
-		input_new_text.attr('name', 'new_paragraph_text_'+no);
-
-		$(this).after(input_new_text).after(label_text).after(input_new_no).after(label_no);
-	});	
-}
 
 function flashMessage()
 {
@@ -155,7 +134,7 @@ function checkbox()
 {
 	bindCheckbox('show_email');
 	bindCheckbox('personal_data_agreement');
-	
+		
 	//application index
 	$('.admin_button').next().click(function(){
 		if ($(this).prev().is(':checked'))
@@ -298,4 +277,39 @@ function showEditionChoice()
 		}
 	});
 	
+}
+
+function addNewParagraph()
+{
+	$('#add_new_paragraph').click(function(e) {
+		e.preventDefault(); 
+		
+		var no = $('textarea:last').attr('name').split('_');
+		no = parseInt(no[2].substring(0, no[2].indexOf('['))) + 1;
+
+		var inputId = $('#new_paragraph_1-paragraph_id').clone();
+		inputId.attr('name', inputId.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputId.attr('id', inputId.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		
+		var inputLang = $('#new_paragraph_1-regulation_lang').clone();
+		inputLang.attr('name', inputLang.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputLang.attr('id', inputLang.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		
+		var inputEdition = $('#new_paragraph_1-edition').clone();
+		inputEdition.attr('name', inputEdition.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputEdition.attr('id', inputEdition.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		
+		var labelNo = $('#new_paragraph_1-paragraph_no').prev().clone();
+		var inputNo = $('#new_paragraph_1-paragraph_no').clone();
+		inputNo.attr('name', inputNo.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputNo.attr('id', inputNo.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		
+		var labelText = $('#new_paragraph_1-paragraph_text').prev().clone();
+		var inputText = $('#new_paragraph_1-paragraph_text').clone();
+		inputText.attr('name', inputText.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputText.attr('id', inputText.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		
+		$('#add_new_paragraph').before(inputLang).before(inputId).before(inputEdition).before(labelNo).before(inputNo).before(labelText).before(inputText);
+		
+	});
 }

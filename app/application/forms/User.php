@@ -15,7 +15,7 @@ class Application_Form_User extends Zefir_Form
 	public function __construct($type = 'new')
 	{
 		$this->_type = $type;
-		$this->init();
+		parent::__construct();
 	}
 
 	public function init()
@@ -151,5 +151,10 @@ class Application_Form_User extends Zefir_Form
 		
 		$this->_createCsrfElement();
 		$this->_createStandardSubmit('submit');
+		 $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
+        		->setDisplayGroupDecorators(array(
+						'FormElements', 
+						array('Fieldset', array('class' => 'submit'))
+			));
     }
 }
