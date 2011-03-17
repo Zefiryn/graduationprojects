@@ -19,13 +19,13 @@ class SchoolsController extends Zefir_Controller_Action
     public function newAction()
     {
     	$request = $this->getRequest();
-		$form = new Application_Form_School('new');
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_schoolForm.phtml'))
-		));
+		$form = new Application_Form_School();
+		
 		
     	if ($request->isPost())
 		{
+			$form->populate($request->getPost());
+			
 			if($form->leave->isChecked())
 			{
 				$this->_redirect('/schools');	
@@ -33,7 +33,6 @@ class SchoolsController extends Zefir_Controller_Action
 			
     		elseif ($form->isValid($request->getPost()))
     		{
-    			var_dump('test');
     			$school = new Application_Model_Schools();
     			$school->populateFromForm($form->getValues());
     			$school->save();
@@ -49,11 +48,8 @@ class SchoolsController extends Zefir_Controller_Action
     public function editAction()
     {
     	$request = $this->getRequest();
-		$form = new Application_Form_School('edit');
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_schoolForm.phtml'))
-		));
-		
+		$form = new Application_Form_School();
+				
 		if ($request->isPost())
 		{
 			$form->populate($request->getPost());

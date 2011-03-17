@@ -14,7 +14,9 @@
 	<?php endif;?>
 	<?php echo $form->csrf->renderViewHelper(); ?>
 	<?php echo $form->application_id; ?>  
-
+	<?php echo $form->edition; ?>
+	<?php echo $form->user; ?>
+	  
 	<?php echo $form->country;?>
 	
 	<?php echo $form->school;?>
@@ -43,10 +45,10 @@
 	<?php if ($form->miniatureCache->getValue() != null): ?>
 	<p class="label"><?php echo $this->translate('miniature');?></p>
 	<?php if ($form->application_id == null):?>
-	<img src="<?php echo $this->baseUrl('/assets/cache/'.$form->miniatureCache->getValue());?>" 
+	<img src="<?php echo $this->baseUrl('/assets/cache/'.$form->miniatureCache->getValue());?>?<?php echo time();?>" 
 		width="300" height="300"/>
 	<?php else: ?>
-	<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$form->miniatureCache->getValue());?>" 
+	<img src="<?php echo $this->baseUrl('/assets/'.$form->miniatureCache->getValue());?>?<?php echo time();?>" 
 		width="300" height="300"/>
 	<?php endif;?>
 	<?php endif;?>

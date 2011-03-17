@@ -44,21 +44,19 @@ class Application_Form_File extends Zefir_Form_SubForm
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		
 		$appSettings = Zend_Registry::get('appSettings');
-		$element = $this->createElement('hidden', 'application_id');	
+		
+		$element = $this->createElement('hidden', 'application_id');
+		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
-		
+		$element = $this->createElement('hidden', 'file_id');
+		$element->setDecorators(array('ViewHelper'));	
+		$this->addElement($element);
 		
 		$options = Zend_Registry::get('options');
 		
 		$element = $this->createElement('hidden', 'file_'.$number.'Cache', array(
 						'decorators' => array('ViewHelper')
-		));
-		$this->addElement($element);
-		
-		$element = $this->createElement('hidden', 'file_type', array(
-						'decorators' => array('ViewHelper'),
-						'value' => $type
 		));
 		$this->addElement($element);
 		
@@ -93,10 +91,7 @@ class Application_Form_File extends Zefir_Form_SubForm
 				))
 				->setDecorators($this->_getZefirDecorators());
 		$this->addElement($element);
-		
-		/**
-		 * SUBMIT
-		 */
+	
 	
     }
 

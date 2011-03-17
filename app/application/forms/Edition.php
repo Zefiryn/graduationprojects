@@ -36,14 +36,12 @@ class Application_Form_Edition extends Zefir_Form
 				->setRequired(TRUE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^[0-9]{4}\/[0-9]{4}$/'),
-					new Zend_Validate_StringLength(array('min' => 0, 'max' => 10))
-				));
-		if ($this->_type == 'new')
-		{
-			$element->addValidator(new Zefir_Validate_Unique(array(
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 10)),
+					new Zefir_Validate_Unique(array(
         							'table' => 'editions',
-        							'field' => 'edition_name')));
-		}
+        							'field' => 'edition_name',
+									'id' => 'edition_id'))
+					));
 		$this->addElement($element);
 		
     	if ($this->_type == 'new')

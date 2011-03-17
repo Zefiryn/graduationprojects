@@ -8,8 +8,8 @@
 
 <div class="content">
 	<h1><?php echo $this->translate('applications_header'); ?></h1>
-	<p class="spacer">&nbsp;</p>
-
+	
+	<?php if (count($this->applications) > 0):?>
 	<?php echo $this->sortForm;?>
 	
 	<table class="applications">
@@ -104,6 +104,14 @@
 		<?php endforeach;?>
 	</table>
 	
+	<?php else:?>
+	<p class="empty">
+		<br />
+		<?php echo $this->translate('no_applications');?>
+		<br /><br /><br />
+	</p>
+		
+	<?php endif;?>
 </div>
 
 <p class="spacer_small">&nbsp;</p> 

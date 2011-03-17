@@ -21,7 +21,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
   	{
     	$options = Zend_Registry::get('options');
     	$this->_name = $options['resources']['db']['params']['prefix'].$this->_raw_name;
-    	parent::__construct();
+    	parent::__construct($config);
   	}
 
   	/**
@@ -248,7 +248,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
     public function save(Zefir_Application_Model $object)
     {
     	//get the name of the primary column
-    	$primary = $this->_primary;
+    	$primary = is_array($this->_primary) ? $this->_primary[1] : $this->_primary;
     	
     	//create name of the property that holds primary column data
     	$var_primary = '_'.$primary;

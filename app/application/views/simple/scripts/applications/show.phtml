@@ -2,7 +2,9 @@
 echo $this->partial('partials/lang_menu.phtml', 
 			array('link' => 'application/'.$this->application->_application_id,	'lang' => $this->lang));
 ?>
-
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'application', 'delete_confirm' => $this->translate('application_delete_confirm')));
+?>
 
 <div class="content">
 	<p class="admin">

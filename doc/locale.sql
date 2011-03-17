@@ -214,10 +214,13 @@ Zaprszamy do udziału w przeglądzie!'),
 	(null,'type_added','pl','Dodano nowy typ pracy'),
 	(null,'type_edited','pl','Dane rodzaju pracy zostały zapisane'),
 	(null,'work_type_deleted','pl','Dane rodzaju pracy zostały usunięte'),
-	
-	
-	
-	
+	(null,'new_school','pl','Dodaj szkołę'),
+	(null,'edit_school','pl','Edytuj szkołę'),
+	(null,'school_name','pl','Nazwa szkoły'),
+	(null,'new_worktype','pl','Dodaj rodzaj pracy'),
+	(null,'edit_worktype','pl','Edytuj rodzaj pracy'),
+	(null,'work_type_name','pl','Nazwa'),
+	(null,'no_applications','pl','Wybrana edycja nie ma przypisanych zgłoszeń'),
 		
 	(null,'Partners','cs','Partneři'),
 	(null,'meta_title','cs','Central European Review – Graduation Projects'),

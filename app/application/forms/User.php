@@ -12,12 +12,12 @@ class Application_Form_User extends Zefir_Form
 {
 	protected $_type;
 	
-	public function __construct($type = 'new')
+	public function __construct($type = 'form', $options = null)
 	{
 		$this->_type = $type;
-		parent::__construct();
+		parent::__construct($options);
 	}
-
+	
 	public function init()
     {
     	$L = $this->_regex['L'];
@@ -37,7 +37,43 @@ class Application_Form_User extends Zefir_Form
         $element = $this->createElement('hidden', 'user_id');	
 		$this->addElement($element);
 		
-        $element = $this->createElement('text', 'name');
+        $element = $this->createElement('text', 'nick');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('nick')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
+						new Zend_Validate_StringLength(array('min' => 3, 'max' => 50)),
+						new Zefir_Validate_Unique(array(
+        							'table' => 'users',
+        							'field' => 'nick',
+									'id' => 'user_id'))
+					));	
+		$this->addElement($element);
+
+		$element = $this->createElement('password', 'password');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('password')
+				->setDecorators($this->_getStandardDecorators())
+				->addValidators(array(
+					));	
+		if ($this->_type == 'new' || $this->_type == 'subform')
+			$element->setRequired(TRUE);
+		$this->addElement($element);
+		
+		$element = $this->createElement('password', 'password_check');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('password_repeat')
+				->setDecorators($this->_getStandardDecorators())
+				->addValidators(array(
+						new Zefir_Validate_IdenticalField('password')
+					));	
+		if ($this->_type == 'new' || $this->_type == 'subform')
+			$element->setRequired(TRUE);
+		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'name');
 		$element->setAttribs(array('class' => 'width2'))
 				->setLabel('user_name')
 				->setDecorators($this->_getZefirDecorators())
@@ -55,43 +91,6 @@ class Application_Form_User extends Zefir_Form
 						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
 						new Zend_Validate_StringLength(array('min' => 3, 'max' => 200))
 					));	
-		$this->addElement($element);
-		
-		
-		$element = $this->createElement('text', 'nick');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('nick')
-				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE)
-				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
-						new Zend_Validate_StringLength(array('min' => 3, 'max' => 50))
-					));	
-		if ($this->_type == 'new')
-			$element->addValidator(new Zefir_Validate_Unique(array(
-        							'table' => 'users',
-        							'field' => 'nick')));
-		$this->addElement($element);
-
-		$element = $this->createElement('password', 'password');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('password')
-				->setDecorators($this->_getStandardDecorators())
-				->addValidators(array(
-					));	
-		if ($this->_type == 'new')
-			$element->setRequired(TRUE);
-		$this->addElement($element);
-		
-		$element = $this->createElement('password', 'password_check');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('password_repeat')
-				->setDecorators($this->_getStandardDecorators())
-				->addValidators(array(
-						new Zefir_Validate_IdenticalField('password')
-					));	
-		if ($this->_type == 'new')
-			$element->setRequired(TRUE);
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'address');
@@ -122,12 +121,12 @@ class Application_Form_User extends Zefir_Form
 				->setRequired(TRUE)
 				->addValidators(array(
 						new Zend_Validate_EmailAddress(),
-						new Zend_Validate_StringLength(array('min' => 3, 'max' => 35))
-					));	
-		if ($this->_type == 'new')
-			$element->addValidator(new Zefir_Validate_Unique(array(
+						new Zend_Validate_StringLength(array('min' => 3, 'max' => 35)),
+						new Zefir_Validate_Unique(array(
         							'table' => 'users',
-        							'field' => 'email')));
+        							'field' => 'email',
+									'id' => 'user_id'))
+					));	
 		$this->addElement($element);
 		
 		$element = $this->createElement('checkbox', 'show_email');
@@ -149,12 +148,15 @@ class Application_Form_User extends Zefir_Form
 				->setRequired(TRUE);	
 		$this->addElement($element);
 		
-		$this->_createCsrfElement();
-		$this->_createStandardSubmit('submit');
-		 $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
-        		->setDisplayGroupDecorators(array(
-						'FormElements', 
-						array('Fieldset', array('class' => 'submit'))
-			));
+		if($this->_type == 'form')
+		{
+			$this->_createCsrfElement();
+			$this->_createStandardSubmit('submit');
+			$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
+	        		->setDisplayGroupDecorators(array(
+							'FormElements', 
+							array('Fieldset', array('class' => 'submit'))
+				));
+		}
     }
 }

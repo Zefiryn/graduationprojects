@@ -97,115 +97,46 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
      */
     public function save(Application_Model_Applications $application)
     {
+    	if ($application->_application_id != null)
+    		$oldData = new Application_Model_Applications($application->_application_id);
+    	else 
+    		$oldData = null;
+    		
     	//add new school if any was given
-    	if (!is_int($application->_school))
-    	{
-    		$school = new Application_Model_Schools();
-    		$school->getSchoolByName($application->_school);
-    		if ($school->_school_id == NULL)
-    		{
-	    		$school->_school_name = $application->_school;
-    			$school->save();
-    			if ($school->_school_id == null)
-    				throw new Zend_Exception('Couldn\'t add new school');
-    		}
-   			$application->_school = $school->_school_id;
-    	}
+    	$application = $this->_addNewSchool($application);
     	
-    	//copy miniature
     	$user = new Application_Model_Users();
     	$user->getUser($application->_user);
     	
-    	$options = Zend_Registry::get('options');
-    	$extension = Zefir_Filter::getExtension($application->_miniature);
-		$dirName = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/';
-    	$fileName = $user->getUserUrlName().'.'.$extension;
-    	$fileName = $this->_getNewName($dirName , $fileName);
-    	$dir = substr($options['upload']['miniatures'], -1) == '/' ? $options['upload']['miniatures'] : $options['upload']['miniatures'].'/';
+    	//copy miniature
+    	$this->_copyMiniature($user, $application, $oldData);
     	
-    	if ($this->_copy($application->_miniature, $dir.$fileName))
-    	{
-    		$application->_miniature = $fileName;
-    	}
-    	else
-    	{
-    		$user->delete();
-    		throw new Zend_Exception('Couldn\'t save miniature file');
-    	}
-    	
+    	//save application data
     	try {
     		parent::save($application);
     			
     	} catch (Zend_Exception $e) {
-    		//delete new user
-    		$user->delete();
     		
-    		//delete miniature
-			$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->_miniature;
-			unlink($miniature);
-			
+    		if ($oldData != null)
+    		{//delete data only after failing add new application
+    			 
+	    		//delete new user
+	    		$user->delete();
+	    		
+	    		//delete miniature
+				$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->_miniature;
+				unlink($miniature);
+    		}
     		throw $e;
     	}
     	
+    	//create user directory
+    	$userDir = $this->_getUserDir($application, $user, $oldData);
     	
-    	//create folder for user's files
-    	$uploadDir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/';
-    	
-    	//create edition dir
-    	$edition = new Application_Model_Editions($application->_edition);
-    	if (!is_dir($uploadDir.$edition->_edition_name))
-    	{
-    		mkdir($uploadDir.$edition->_edition_name);
-   			chmod($uploadDir.$edition->_edition_name, 0777);
-    	}
-    	$uploadDir = $uploadDir.$edition->_edition_name;
-    	
-   		$type = new Application_Model_WorkTypes();
-   		$type->getWorkType($application->_work_type);
-   		$userDir = strtoupper($application->_country).'_'.$type->_work_type_name.'_'.$user->getUserUrlName().$id;
-   		if (!is_dir($uploadDir.'/'.$userDir))
-   		{
-   			mkdir($uploadDir.'/'.$userDir);
-   			chmod($uploadDir.'/'.$userDir, 0777);
-   		}	
-    		
    		//copy uploaded files
-   		$files = array();
-   		foreach($application->_files as $key => $uploaded_file)
-   		{
-   			$fileName = 'file_'.$key.'.'.Zefir_Filter::getExtension($uploaded_file['file']);
-	    	if ($this->_copy($uploaded_file['file'], $options['upload']['applications'].'/'.$userDir.'/'.$fileName))
-   			{
-   				$file = new Application_Model_Files();
-   				$file->_path = $userDir.'/'.$fileName;
-   				$file->_file_desc = $uploaded_file['description'];
-   				$file->_application = $application->_application_id;
-    				
-   				$file->save();
-   				$files[] = $file;
-   			}
-   			else
-   			{
-   				//delete new user
-   				$user->delete();
-   				
-   				//delete files and user directory
-   				$this->_deleteApplicationFiles($files);
-   				unlink($uploadDir.'/'.$userDir);
-   				
-   				//delete miniature
-   				$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->_miniature;
-   				unlink($miniature);
-   				
-   				//delete application entry
-   				$application->delete();
-   				
-   				//throw error
-   				throw new Zend_Exception('Couldn\'t copy pictures');
-   			}
-   		}
+   		$this->_saveUserFiles($application, $user, $userDir, $oldData);
    		
-   		$application->_files = $files;
+   		//$application->_files = $files;
 
     	return $application;
     	
@@ -227,6 +158,198 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	//remove application
     	parent::delete($application);
+    }
+    
+    protected function _addNewSchool($application)
+    {
+    	if (!is_int($application->_school))
+    	{
+    		$school = new Application_Model_Schools();
+    		$school->getSchoolByName($application->_school);
+    		if ($school->_school_id == NULL)
+    		{
+	    		$school->_school_name = $application->_school;
+    			$school->save();
+    			if ($school->_school_id == null)
+    				throw new Zend_Exception('Couldn\'t add new school');
+    		}
+   			$application->_school = $school->_school_id;
+    	}
+    	
+    	return $application;
+    }
+    
+    protected function _copyMiniature($user, $application, $oldData)
+    {
+    	$copy = TRUE;
+    	
+    	$cachedMiniature = strstr($application->_miniature, '/') ? 
+    		substr($application->_miniature, strpos($application->_miniature, '/') + 1) :
+    		$application->_miniature;
+
+    	if ($oldData != null)
+    	{
+    		//no new miniature has been sent
+    		if ($oldData->_miniature == $cachedMiniature)
+    			$copy = FALSE;
+    	}
+    	
+    	if ($copy)
+    	{
+	    	$options = Zend_Registry::get('options');
+	    	$extension = Zefir_Filter::getExtension($application->_miniature);
+			$dirName = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/';
+	    	
+	    	if ($oldData == null)
+	    	{//get new name only if new application is being processed
+	    		$fileName = $user->getUserUrlName().'.'.$extension;
+	    		$fileName = $this->_getNewName($dirName , $fileName);
+	    	}
+	    	else
+	    		$fileName = $oldData->_miniature;
+	    	$dir = substr($options['upload']['miniatures'], -1) == '/' ? $options['upload']['miniatures'] : $options['upload']['miniatures'].'/';
+	    	
+	    	
+	    	if ($this->_copy($cachedMiniature, $dir.$fileName))
+	    	{
+	    		$application->_miniature = $fileName;
+	    	}
+	    	else
+	    	{
+	    		if ($oldData != null)
+	    		{//delete data only after failing add new application
+	    			$user->delete();
+	    			throw new Zend_Exception('Couldn\'t save miniature file');
+	    		}
+	    	}
+    	}
+    	else
+    	{
+    		$application->_miniature = substr($application->_miniature, strpos($application->_miniature, '/') + 1); 
+    	}
+    	
+    	return $application;
+    }
+    
+    protected function _getUserDir($application, $user, $oldData)
+    {
+    	$id = $application->_application_id;
+    	$options = Zend_Registry::get('options');
+    	
+    	//create folder for user's files
+    	$uploadDir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/';
+    	
+    	//create edition dir
+    	$edition = new Application_Model_Editions($application->_edition);
+    	$editionName = str_replace('/', '-', $edition->_edition_name);
+    	if (!is_dir($uploadDir.$editionName))
+    	{
+    		mkdir($uploadDir.$editionName );
+   			chmod($uploadDir.$editionName, 0777);
+    	}
+    	
+    	$uploadDir = $uploadDir.$editionName;
+    	
+    	$type = new Application_Model_WorkTypes();
+   		$type->getWorkType($application->_work_type);
+   		$userDir = strtoupper($application->_country).'_'.$type->_work_type_name.'_'.$user->getUserUrlName().'_'.$id;
+   		if (!is_dir($uploadDir.'/'.$userDir) && $oldData == null)
+   		{//create new user dir
+   			mkdir($uploadDir.'/'.$userDir);
+   			chmod($uploadDir.'/'.$userDir, 0777);
+   		}
+   		elseif ($oldData != NULL)
+   		{//rename old dir if necessary
+   			$oldDir = $this->_getOldUserDir($oldData);
+	   		
+	   		if ($userDir != $oldDir)
+	   		{
+	   			$this->_renameOldUserDir($oldDir, $userDir, $editionName);
+	   		}
+   		}
+   		
+   		return $editionName.'/'.$userDir;
+    }
+    
+    protected function _getOldUserDir($application)
+    {
+    	$file_path = $application->_files[0]->_path;
+    	$strippedEdition = substr($file_path, strpos($file_path, '/')+1);
+    	$dir = substr($strippedEdition, 0, strpos($strippedEdition, '/'));
+    	return $dir;
+    }
+    
+    protected function _renameOldUserDir($oldDir, $newDir, $edition)
+    {
+    	$options = Zend_Registry::get('options');
+    	$dirPath = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$edition.'/';
+
+    	rename($dirPath.$oldDir, $dirPath.$newDir);
+    }
+    
+    protected function _saveUserFiles($application, $user, $userDir, $oldData)
+    {
+    	$options = Zend_Registry::get('options');
+    	$files = array();
+   		
+    	foreach($application->_files as $key => $uploaded_file)
+   		{
+   			if (strstr($uploaded_file['file'], 'cache'))
+   			{
+   				$uploaded_file['file'] = substr($uploaded_file['file'], strpos($uploaded_file['file'], '/') + 1);
+   				$fileName = 'file_'.$key.'.'.Zefir_Filter::getExtension($uploaded_file['file']);
+   				if ($this->_copy($uploaded_file['file'], $options['upload']['applications'].'/'.$userDir.'/'.$fileName))
+   				{
+   					if ($uploaded_file['file_id'] != null)
+   						$file = new Application_Model_Files($uploaded_file['file_id']);
+   					else
+   						$file = new Application_Model_Files();
+   					$file->_path = $userDir.'/'.$fileName;
+   					$file->_file_desc = $uploaded_file['description'];
+   					$file->_application = $application->_application_id;
+   					$file->save();
+   					$files[] = $file;
+   				}
+	   			else
+	   			{
+	   				if ($oldData == null)
+	   				{
+		   				//delete new user
+		   				$user->delete();
+		   				
+		   				//delete files and user directory
+		   				$this->_deleteApplicationFiles($files);
+		   				$uploadDir = APPLICATION_PATH.'/..public/'.$options['upload']['applications'].'/';
+		   				unlink($uploadDir.$userDir);
+		   				
+		   				//delete miniature
+		   				$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->_miniature;
+		   				unlink($miniature);
+		   				
+		   				//delete application entry
+		   				$application->delete();
+	   				}
+	   				//throw error
+	   				throw new Zend_Exception('Couldn\'t copy pictures');
+	   			}
+   				
+   			}
+   			else 
+   			{//update path if necessary
+   				if (!strstr($uploaded_file['file'], $userDir))
+   				{
+   					$file = new Application_Model_Files($uploaded_file['file_id']);
+   					$path = substr($file->_path, 0, strrpos($file->_path, '/'));
+   					
+   					$file->_path = str_replace($path, $userDir, $file->_path);
+   					$file->update();
+   					$files[] = $file;
+   				}
+   			}
+   			
+   		}
+    	
+   		return $files;
     }
     
     protected function _deleteApplicationFiles($files)

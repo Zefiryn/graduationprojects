@@ -307,5 +307,23 @@ class Zefir_Application_Model {
 	{
 		$this->getDbTable()->delete($this);
 	}
+	
+	public function update()
+	{
+		$this->getDbTable()->save($this->_prepareUpdate());	
+	}
+	
+	protected function _prepareUpdate()
+	{
+		$map = $this->getDbTable()->getReferenceMap();
+		
+		foreach($map as $reference)
+		{
+			$id = '_'.$reference['refColumns'][0];
+			$this->$reference['objProperty'] = $this->$reference['objProperty']->$id;
+		}
+		
+		return $this;
+	}
 }
 ?>

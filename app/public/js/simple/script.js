@@ -184,14 +184,15 @@ function bindCheckbox(field)
 function hideFileFields()
 {
 	$('.fileFieldset').hide();
-	$('.fileFieldset:first').show();
-	
+
 	$('a.form_file').each(function(){
 		$(this).parent().parent().show();
 	});
 	$('.fileFieldset div.error-div').each(function(){
 		$(this).parent().show();
 	});
+	
+	$('.fileFieldset:hidden:first').show();
 	
 	$('.fileFieldset').each(function(){
 		var input = $(this).find('input[type="file"]');

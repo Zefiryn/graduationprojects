@@ -7,21 +7,15 @@
 	<legend><?php echo $this->translate('file');?></legend	>
 	
 	<?php echo $form->$cache;?>
+	<?php echo $form->application_id;?>
+	<?php echo $form->file_id;?>
 	<p class="uploaded_file">
 		<?php if ($form->$cache->getValue() != null): ?>
-			<?php if ($form->file_type->getValue() == 'new'):?>
 			<a 	class="form_file"
-				href="<?php echo $this->baseUrl('/assets/cache/'.$form->$cache->getValue());?>"
+				href="<?php echo $this->baseUrl('/assets/'.$form->$cache->getValue());?>"
 				rel="cache" >
 				<?php echo $this->translate('file_uploaded');?>
 			</a>
-			<?php else:?>
-			<a 	class="form_file"
-				href="<?php echo $this->baseUrl('/assets/applications/'.$form->$cache->getValue());?>"
-				rel="cache" >
-				<?php echo $this->translate('file_uploaded');?>
-			</a>
-			<?php endif;?>
 		<?php endif;?>		
 	</p>
 
