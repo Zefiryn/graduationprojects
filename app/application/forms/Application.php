@@ -46,6 +46,10 @@ class Application_Form_Application extends Zefir_Form
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
+		$element = $this->createElement('hidden', 'user');
+		$element->setDecorators(array('ViewHelper'));	
+		$this->addElement($element);
+		
 		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic');
 		$element = $this->createElement('select', 'country');
 		$element->setAttribs(array('class' => 'width1', 'size' => 1))
@@ -57,9 +61,8 @@ class Application_Form_Application extends Zefir_Form
 
 		if ($this->_type == 'new')
 		{
-			$userSubForm = new Application_Form_User('new');
+			$userSubForm = new Application_Form_User('subform');
 			$userSubForm->removeDecorator('form');
-			$userSubForm->removeElement('csrf');
 			$userSubForm->removeElement('role');
 			$this->addSubForm($userSubForm, 'user');
 		}
@@ -227,8 +230,8 @@ class Application_Form_Application extends Zefir_Form
 	
 		for ($i = 1; $i <= $appSettings->_max_files; $i++)
 		{
-			$subForm = new Application_Form_File($i);
-			$this->addSubForm($subForm, 'file_'.$i, $this->_type);
+			$subForm = new Application_Form_File($i, $this->_type);
+			$this->addSubForm($subForm, 'file_'.$i);
 		}
 		
 		$this->_createCsrfElement();	 

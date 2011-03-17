@@ -19,10 +19,7 @@ class WorkTypesController extends Zefir_Controller_Action
 	public function newAction()
     {
     	$request = $this->getRequest();
-		$form = new Application_Form_WorkType('new');
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_worktypeForm.phtml'))
-		));
+		$form = new Application_Form_WorkType();
 		
 		if ($request->isPost())
 		{
@@ -57,10 +54,7 @@ class WorkTypesController extends Zefir_Controller_Action
     public function editAction()
     {
 		$request = $this->getRequest();
-		$form = new Application_Form_WorkType('edit');
-		$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_worktypeForm.phtml'))
-		));
+		$form = new Application_Form_WorkType();
 		
 		if ($request->isPost())
 		{

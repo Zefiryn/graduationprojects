@@ -17,9 +17,6 @@ class AboutController extends Zefir_Controller_Action
     public function editAction()
     {
     	$form = new Application_Form_About();
-    	$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_aboutForm.phtml'))
-		));
     	$request = $this->getRequest();
     	
     	if ($request->isPost())

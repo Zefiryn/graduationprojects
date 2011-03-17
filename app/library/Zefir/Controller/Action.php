@@ -111,7 +111,7 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 			$name = $this->_getNewName($dir, $file);
 			$upload->addFilter('Rename', $dir.$name);
 			$upload->receive();
-			$form->getElement($element.'Cache')->setValue($name);
+			$form->getElement($element.'Cache')->setValue('cache/'.$name);
 		}
 
 		return $form;

@@ -2,15 +2,7 @@
 
 class Application_Form_School extends Zefir_Form
 {
-	protected $_type;
-	
-	public function __construct($type)
-	{
-		$this->_type = $type;
-		parent::__construct();
-	}
-
-    public function init()
+	public function init()
     {
         $L = $this->_regex['L'];
     	$N = $this->_regex['N'];
@@ -36,12 +28,12 @@ class Application_Form_School extends Zefir_Form
 				->setRequired(TRUE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
-				));
-		if ($this->_type == 'new')
-			$element->addValidator(new Zefir_Validate_Unique(array(
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60)),
+					new Zefir_Validate_Unique(array(
         							'table' => 'schools',
-        							'field' => 'school_name')));
+        							'field' => 'school_name',
+									'id' => 'school_id'))
+				));
 		$this->addElement($element);
 		
 		$this->_createCsrfElement();	 

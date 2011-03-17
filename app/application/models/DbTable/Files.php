@@ -51,7 +51,7 @@ class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
 	 */
     public function __construct($config = array())
     {
-      parent::__construct(array());
+      parent::__construct($config);
     }
     
     /**

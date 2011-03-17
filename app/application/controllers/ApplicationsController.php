@@ -41,10 +41,19 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		if ($request->isPost())
 		{//form has been submited
-
+			
+			$form->populate($request->getPost());
+			$form->getSubForm('user')->populate($request->getPost());
+			
+			if($form->leave->isChecked())
+			{
+				$this->_deleteCachedFiles($request->getPost());
+				$this->_redirect('/index');	
+			}
+			
 			//handle miniature file
-			$this->_checkMiniatureCache($form);
-			$cached = $this->_checkFileCache($form);
+			$form = $this->_checkMiniatureCache($form);
+			$cached = $this->_checkFileCache('new');
 			
 			if ($form->isValid($request->getPost()))
 			{//form is valid
@@ -109,7 +118,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 			$id = $request->getParam('application_id', '');
 			if ($this->user->_role != 'admin' 
-				|| $this->user->_applications[0]->_application_id != $id)
+				&& $this->user->_applications[0]->_application_id != $id)
 			{
 				$this->flashMe('not_allowed', 'FAILURE');
 				$this->_redirect('/index');
@@ -124,16 +133,34 @@ class ApplicationsController extends Zefir_Controller_Action
 			
 			//handle miniature file
 			$form = $this->_checkMiniatureCache($form, 'edit');
-			//$cached = $this->_checkFileCache('edit');
+			$cached = $this->_checkFileCache('edit');
 			
     		if ($form->isValid($request->getPost()))
     		{
-
+    			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
+				$this->_handleFiles($form, $cached, 'edit');
+    			if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
+				{
+					$application = new Application_Model_Applications();
+					$application->populateFromForm($form->getValues());
+					$application->save();
+					
+					$this->flashMe('application_edited', 'SUCCESS');
+					$this->_redirectToRoute(array('id' => $application->_application_id), 'application');
+				}
+				
+    		}
+    		else
+    		{
+    			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
+    			$this->_handleFiles($form, $cached, 'edit');
     		}
 		}
 		else
 		{
 			$id = $request->getParam('id', '');
+			
+			//check privileges
 			if ($this->user->_role != 'admin' 
 				&& $this->user->_applications[0]->_application_id != $id)
 			{
@@ -141,10 +168,16 @@ class ApplicationsController extends Zefir_Controller_Action
 				$this->_redirect('/index');
 			}
 			
+			//populate form
 			if ($id != null)
 			{
 				$application = new Application_Model_Applications($id);
-				$form->populate($application->prepareFormArray());
+				if ($application->_application_id != null)
+					$form->populate($application->prepareFormArray());
+				else 
+				{
+					throw new Zend_Exception('Wrong id given');
+				}
 			}
 			else
 				throw new Zend_Exception('Wrong id given');	
@@ -159,7 +192,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$id = $request->getParam('id', '');
 
     	if ($this->user->_role != 'admin' 
-    		|| $this->user->_applications[0]->_application_id != $id)
+    		&& $this->user->_applications[0]->_application_id != $id)
 		{
 			$this->flashMe('not_allowed', 'FAILURE');
 			$this->_redirect('/index');
@@ -193,23 +226,15 @@ class ApplicationsController extends Zefir_Controller_Action
 		}
     }
 
-    public function updateAction()
-    {
-        // action body
-    }
-    
-    protected function _checkMiniatureCache($form, $type = 'new')
+	protected function _checkMiniatureCache($form)
     {
     	$request = $this->getRequest();
     	$options = Zend_Registry::get('options');
     	
     	$miniatureCache = $request->getParam('miniatureCache', '');
-    	if ($type == 'new')
-    		$miniatureFile = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$miniatureCache;
-		else 
-			$miniatureFile = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$miniatureCache;
-    		
-    	if ($miniatureCache != null	&& file_exists($miniatureFile))
+		$miniatureFile = APPLICATION_PATH.'/../public/assets/'.$miniatureCache;
+
+		if ($miniatureCache != null	&& file_exists($miniatureFile))
 			$form->getElement('miniature')->setRequired(FALSE);
 		else
 			$form->getElement('miniatureCache')->setValue(null);
@@ -227,7 +252,10 @@ class ApplicationsController extends Zefir_Controller_Action
     	for($i = 1; $i <= $appSettings->_max_files; $i++)
     	{
     		$fileCache = $params['file_'.$i]['file_'.$i.'Cache'];
-    		$file = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$fileCache;
+    		if ($type == 'new')
+    			$file = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$fileCache;
+    		else
+    			$file = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$fileCache;
     		if ($fileCache != null && file_exists($file))
     			$cached = TRUE;
     	}
@@ -235,7 +263,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	return $cached;
     }
     
-    protected function _handleFiles($form, $cached)
+    protected function _handleFiles($form, $cached, $type = 'new')
     {
     	$appSettings = Zend_Registry::get('appSettings');
     	$options  = Zend_Registry::get('options');
@@ -243,7 +271,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	for($i = 1; $i <= $appSettings->_max_files; $i++)
 		{
 			$sf = $form->getSubForm('file_'.$i);
-			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i);
+			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i, 'edit');
 			if ($sf->getElement('file_'.$i.'Cache')->getValue() != null)
 			{
 				$sf->getElement('file_'.$i)->setLabel('new_file');
@@ -257,5 +285,24 @@ class ApplicationsController extends Zefir_Controller_Action
 		}
 		
 		return $form;
+    }
+    
+    protected function _deleteCachedFiles($data)
+    {
+    	$dir = APPLICATION_PATH.'/../public/assets/';
+    	
+    	if ($data['miniatureCache'] != null && file_exists($dir.$data['miniatureCache']))
+    	{
+    		unlink($dir.$data['miniatureCache']);
+    	}
+    	
+    	for($i = 1; $i <= 10; $i++)
+    	{
+    		if ($data['file_'.$i]['file_'.$i.'Cache'] != null &&
+    			file_exists($dir.$data['file_'.$i]['file_'.$i.'Cache']))
+    		{
+    			unlink($dir.$data['file_'.$i]['file_'.$i.'Cache']);
+    		}
+    	}
     }
 }

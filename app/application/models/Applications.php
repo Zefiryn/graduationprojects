@@ -69,6 +69,8 @@ class Application_Model_Applications extends GP_Application_Model
 		{//add uploaded files
 			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
 			{
+				$this->_files[$i]['file_id'] = $data['file_'.$i]['file_id'];
+				$this->_files[$i]['application_id'] = $data['file_'.$i]['application_id'];
 				$this->_files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
 				$this->_files[$i]['description'] = $data['file_'.$i]['file_annotation'];
 			}  
@@ -119,7 +121,10 @@ class Application_Model_Applications extends GP_Application_Model
 	public function prepareFormArray()
 	{
 		$data = array(
+				'country' => $this->_country,
 				'application_id' => $this->_application_id,
+				'edition' => $this->_edition->_edition_id,
+				'user' => $this->_user->_user_id,
 				'school' => $this->_school->_school_id,
 				'department' => $this->_department,
 				'degree' => $this->_degree->_degree_id,
@@ -129,14 +134,16 @@ class Application_Model_Applications extends GP_Application_Model
 				'supervisor_degree' => $this->_supervisor_degree,
 				'supervisor' => $this->_supervisor,
 				'graduation_time' => date('d-m-Y', $this->_graduation_time),
-				'miniatureCache' => $this->_miniature,
+				'miniatureCache' => 'miniatures/'.$this->_miniature,
 				'personal_data_agreement' => TRUE
 		);
 		
 		foreach($this->_files as $no => $file)
 		{
 			$i = ++$no;
-			$data['file_'.$i]['file_'.$i.'Cache'] = $file->_path;
+			$data['file_'.$i]['application_id'] = $this->_application_id;
+			$data['file_'.$i]['file_id'] = $file->_file_id; 
+			$data['file_'.$i]['file_'.$i.'Cache'] = 'applications/'.$file->_path;
 			$data['file_'.$i]['file_annotation'] = $file->_file_desc;
 		}
 		

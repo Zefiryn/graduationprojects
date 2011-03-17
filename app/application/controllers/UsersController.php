@@ -79,7 +79,7 @@ class UsersController extends Zefir_Controller_Action
     	if ($request->isPost())
     	{
     		$form->populate($request->getPost());
-			
+    		
 			if($form->leave->isChecked())
 			{
 				$this->_redirect('/users');	

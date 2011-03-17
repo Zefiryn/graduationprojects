@@ -8,6 +8,7 @@
       class="contact">
 
 	<?php if ($form->csrf->hasErrors()):?>
+		<p class="spacer">&nbsp;</p>
 		<div id="error-csrf" class="error-div">
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>
 		</div>
@@ -15,21 +16,7 @@
 	<?php echo $form->csrf->renderViewHelper(); ?> 
 	<?php echo $form->edition;?>
 	
-	<?php echo $form->getSubForm('user')->nick;?>
-	
-	<?php echo $form->getSubForm('user')->password;?>
-	
-	<?php echo $form->getSubForm('user')->password_check;?>
-	
-	<?php echo $form->getSubForm('user')->name;?>
-	
-	<?php echo $form->getSubForm('user')->surname;?>
-	
-	<?php echo $form->getSubForm('user')->address;?>
-	
-	<?php echo $form->getSubForm('user')->phone;?>
-	
-	<?php echo $form->getSubForm('user')->email;?>
+	<?php echo $form->getSubForm('user');?>
 		
 	<?php echo $form->country;?>
 	
@@ -58,13 +45,8 @@
 	
 	<?php if ($form->miniatureCache->getValue() != null): ?>
 	<p class="label"><?php echo $this->translate('miniature');?></p>
-	<?php if ($form->application_id->getValue() == null):?>
-	<img src="<?php echo $this->baseUrl('/assets/cache/'.$form->miniatureCache->getValue());?>" 
+	<img src="<?php echo $this->baseUrl('/assets/'.$form->miniatureCache->getValue());?>" 
 		width="300" height="300"/>
-	<?php else: ?>
-	<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$form->miniatureCache->getValue());?>" 
-		width="300" height="300"/>
-	<?php endif;?>
 	<?php endif;?>
 	<?php echo $form->miniatureCache;?>
 	<?php echo $form->miniature;?>
@@ -82,8 +64,11 @@
 	
 	<?php echo $form->personal_data_agreement;?>
 
-	<p class="submit center">
-		<?php echo $form->submit; ?>
-	</p>
+	<fieldset class="submit">
+		<p class="submit center">
+			<?php echo $form->submit; ?>
+			<?php echo $form->leave; ?>
+		</p>
+	</fieldset>
 		
 </form>
