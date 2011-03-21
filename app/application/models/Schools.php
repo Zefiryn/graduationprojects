@@ -21,7 +21,7 @@ class Application_Model_Schools extends GP_Application_Model
 	{
 		$rowset = $this->getDbTable()->fetchAll();
 		
-		$select = array(0 => 'add_new_school');
+		$select = array(0 => 'choose_new_school');
 		foreach ($rowset as $row)
 		{
 			$select[$row->school_id] = $row->school_name; 

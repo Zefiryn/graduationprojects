@@ -148,7 +148,7 @@ class Application_Form_User extends Zefir_Form
 				->setRequired(TRUE);	
 		$this->addElement($element);
 		
-		if($this->_type == 'form')
+		if($this->_type == 'form' || $this->_type == 'new')
 		{
 			$this->_createCsrfElement();
 			$this->_createStandardSubmit('submit');

@@ -6,7 +6,15 @@
 ?>
 
 <div class="content">
-	<h1><?php echo $this->translate('users_header');?></h1>
+	<h1>
+		<?php echo $this->translate('users_header');?>
+		<a href="<?php echo $this->baseUrl('/users/new');?>">
+			<img class="ui-icon ui-icon-plusthick no-block"
+				alt="<?php echo $this->translate('add_new_user');?>" 
+				title="<?php echo $this->translate('add_new_user');?>" />
+		</a>
+	
+	</h1>
 	<p class="clear">&nbsp;</p>
 	<?php foreach ($this->users as $role => $groupedUsers):?>
 		<h3><?php echo $this->translate($role.'s');?></h3>

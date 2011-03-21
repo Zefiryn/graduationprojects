@@ -28,7 +28,6 @@ class SettingsController extends Zefir_Controller_Action
     			$settings = new Application_Model_Settings();
     			$settings->populateFromForm($form->getValues());
     			$settings->save();
-    			
     			$this->flashMe('settings_saved', 'SUCCESS');
     			$this->_redirect('/admin');
     		}

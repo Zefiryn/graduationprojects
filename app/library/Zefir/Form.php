@@ -111,8 +111,7 @@ class Zefir_Form extends Zend_Form
 	{
 		$this->addElement('hash', 'csrf', array(
 			'ignore' => true,
-			'decorators' => array(	array('ViewHelper'),
-									array('ErrorMsg'))	
+			'decorators' => array(	array('ViewHelper'))	
 		));
 	}
 }
