@@ -37,8 +37,10 @@ class Application_Form_Regulations extends Zefir_Form
         }
         
         
-        $edition = $regulationsData[0]->_edition->_edition_id;
-        $regulation_lang = $regulationsData[0]->_regulation_lang;
+        $editionName = Zend_Registry::get('edition');
+        $edition = new Application_Model_Editions();
+        $regulation_lang = new Zend_Session_Namespace('lang');
+        
         for($i= 1; $i <= $this->_new; $i++)
         {
         	$paragraph = new Application_Form_Paragraph();
@@ -49,8 +51,8 @@ class Application_Form_Regulations extends Zefir_Form
         	$paragraph->removeElement('submit');
         	$paragraph->removeElement('leave');
         	$paragraph->setIsArray(TRUE);
-        	$paragraph->getElement('edition')->setValue($edition);
-        	$paragraph->getElement('regulation_lang')->setValue($regulation_lang);
+        	$paragraph->getElement('edition')->setValue($edition->_edition_id);
+        	$paragraph->getElement('regulation_lang')->setValue($regulation_lang->lang);
         	$this->addSubForm($paragraph, 'new_paragraph_'.$i);
         }
         
@@ -65,6 +67,7 @@ class Application_Form_Regulations extends Zefir_Form
             				));
      	$this->addElement($submit);
      	
+     	$this->_createCsrfElement();
         $this->_createStandardSubmit('regulation_submit');
         $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
         ->setDisplayGroupDecorators(array(

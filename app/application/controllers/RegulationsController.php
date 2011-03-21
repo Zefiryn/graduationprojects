@@ -75,7 +75,6 @@ class RegulationsController extends Zefir_Controller_Action
     	else
     		$form = new Application_Form_Regulations();
     		
-    		
     	$this->view->regulations = $form;
     }
     
