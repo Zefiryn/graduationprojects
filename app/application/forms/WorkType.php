@@ -32,7 +32,7 @@ class Application_Form_WorkType extends Zefir_Form
 					new Zend_Validate_StringLength(array('min' => 0, 'max' => 10)),
 					new Zefir_Validate_Unique(array(
         							'table' => 'work_types',
-        							'field' => 'work_types_name',
+        							'field' => 'work_type_name',
 									'id' => 'work_type_id'))
 				));
 		$this->addElement($element);
