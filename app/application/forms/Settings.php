@@ -41,7 +41,7 @@ class Application_Form_Settings extends Zefir_Form
 				->setDescription('max_file_size_desc')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
-				->addValidator(new Zend_Validate_Regex('/^[0-9]+(,[0-9]+)?$/'));	
+				->addValidator(new Zend_Validate_Regex('/^[0-9]+(.[0-9]+)?$/'));	
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'date_format');
