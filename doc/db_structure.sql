@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS files, applications, result_files, results, template_settings, work_types, degrees, schools, users, 
-regulations, faq, localizations, editions, settings;
+DROP TABLE IF EXISTS files, result_files, applications, results, degrees, schools, work_types,
+jurors, faq, regulations, news, settings, template_settings, users,editions, localizations;
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE localizations (
 	PRIMARY KEY (item_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE ragulations (
+CREATE TABLE regulations (
 	paragraph_id int NOT NULL AUTO_INCREMENT,
 	edition_id smallint(6) not null,
 	regulation_lang char(4) not null,
@@ -24,7 +24,7 @@ CREATE TABLE ragulations (
 	PRIMARY KEY (paragraph_id),
 	FOREIGN KEY(edition_id)
 		REFERENCES editions(edition_id)
-		ON DELETE CASCADE ON UPDATE CASCADE,
+		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE faq (
@@ -182,12 +182,12 @@ CREATE TABLE news(
 	news_id int not null auto_increment,
 	news_title varchar(100) not null,
 	news_text text not null,
-	added int not null default current_timestamp,
+	added int not null,
 	current_edition smallint(6),
-	PRIMARY KEY(current_edition),
+	PRIMARY KEY(news_id),
 	FOREIGN KEY(current_edition)
 		REFERENCES editions(edition_id)
-		ON DELETE CASCADE ON UPDATE CASCADE,
+		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE jurors(
@@ -198,5 +198,5 @@ CREATE TABLE jurors(
 	PRIMARY KEY(juror_id),
 	FOREIGN KEY(user_id)
 		REFERENCES users(user_id)
-		ON DELETE CASCADE ON UPDATE CASCADE,
+		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
