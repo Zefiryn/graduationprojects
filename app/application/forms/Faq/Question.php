@@ -1,7 +1,8 @@
 <?php
 
-class Application_Form_Paragraph extends Zefir_Form
+class Application_Form_Faq_Question extends Zefir_Form
 {
+
     public function init()
     {
     	$L = $this->_regex['L'];
@@ -14,58 +15,56 @@ class Application_Form_Paragraph extends Zefir_Form
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
         $this->setDecorators(array('FormElements'));
     	
-        $paragraph = $this->createElement('hidden', 'paragraph_id');
-        $paragraph->setDecorators(array('ViewHelper'));
-        $this->addElement($paragraph);
+        $question = $this->createElement('hidden', 'faq_id');
+        $question->setDecorators(array('ViewHelper'));
+        $this->addElement($question);
         
-        $paragraph = $this->createElement('hidden', 'regulation_lang');
-        $paragraph->setDecorators(array('ViewHelper'));
-        $this->addElement($paragraph);
+        $question = $this->createElement('hidden', 'faq_lang');
+        $question->setDecorators(array('ViewHelper'));
+        $this->addElement($question);
         
-        $paragraph = $this->createElement('hidden', 'edition');
-        $paragraph->setDecorators(array('ViewHelper'));
-        $this->addElement($paragraph);
-        
-        $paragraph = $this->createElement('text', 'paragraph_no');
-        $paragraph->setLabel('paragraph_no')
-        		->setAttribs(array('class' => 'width3'))
+        $question = $this->createElement('text', 'faq_question');
+        $question->setLabel('faq_question')
+        		->setAttribs(array('class' => 'width2'))
         		->setDecorators($this->_getZefirDecorators(TRUE))
+        		->setRequired(TRUE)
         		->addValidators(array(
-        			new Zend_Validate_Digits()
+        			new Zend_Validate_StringLength(array('min' => 0,'max' => 300)),
+        			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
         		));
         		
-        $this->addElement($paragraph);
+        $this->addElement($question);
         
-        $paragraph = $this->createElement('textarea', 'paragraph_text');
-        $paragraph->setLabel('paragraph_text')
+        $question = $this->createElement('textarea', 'faq_answer');
+        $question->setLabel('faq_answer')
         		->setAttribs(array('class' => 'width1'))
         		->setDecorators($this->_getZefirDecorators())
+        		->setRequired(TRUE)
         		->addValidators(array(
         			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
         		));
-        $this->addElement($paragraph);
+        $this->addElement($question);
         
-        $paragraph = $this->createElement('checkbox', 'paragraph_remove');
-        $paragraph->setLabel('paragraph_remove')
+        $question = $this->createElement('checkbox', 'question_remove');
+        $question->setLabel('question_remove')
         	->setAttribs(array('class' => 'checkbox'))
-        	->setValue('Remove paragraph')
+        	->setValue('Remove question')
         	->setDecorators(array(
 				array('ViewHelper'),
 				array('ErrorMsg'),
 				array('MyLabel', array('placement' => 'prepend', 'class' => 'label checkbox'))
 				)        			
         	);
-        $this->addElement($paragraph);
+        $this->addElement($question);
         
         $this->_createCsrfElement();
-        $this->_createStandardSubmit('regulation_submit');
+        $this->_createStandardSubmit('faq_submit');
         $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
         ->setDisplayGroupDecorators(array(
 						'FormElements', 
 						array('Fieldset', array('class' => 'submit'))
 			));;
     }
-
 
 }
 

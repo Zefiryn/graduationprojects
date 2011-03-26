@@ -1,0 +1,25 @@
+<?php echo $this->partial('partials/lang_menu.phtml', 
+			array('link' => 'faq/edit', 'lang' => $this->lang));
+?>
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'editions', 'delete_confirm' => $this->translate('faq_delete_confirm')));
+?>
+<div class="content">
+	<?php echo $this->partial('faq/_admin.phtml');?>
+	<h1><?php echo $this->translate('faq_header');?></h1>
+	<p class="spacer">&nbsp;</p>
+	
+	
+	<?php echo $this->form;?>
+	
+</div>
+
+<?php echo $this->partial('partials/submenu.phtml',	array('faq' => TRUE));
+?>
+
+<p class="spacer_small">&nbsp;</p> 
+<p class="previous">
+	<a href="<?php echo $this->baseUrl;?>">
+		&lt; <?php echo $this->translate('previous_page');?>
+	</a>
+</p>

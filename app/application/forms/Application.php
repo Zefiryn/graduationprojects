@@ -230,7 +230,7 @@ class Application_Form_Application extends Zefir_Form
 	
 		for ($i = 1; $i <= $appSettings->_max_files; $i++)
 		{
-			$subForm = new Application_Form_File($i, $this->_type);
+			$subForm = new Application_Form_Application_File($i, $this->_type);
 			$this->addSubForm($subForm, 'file_'.$i);
 		}
 		
