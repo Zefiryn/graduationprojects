@@ -28,6 +28,15 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 	 */
 	protected $_dependentTables = array();
 	
+	
+	/**
+	 * Get regulation for a given edition and language
+	 * 
+	 * @access public
+	 * @param string $lang
+	 * @param int $edition
+	 * @return Zend_Db_Table_Rowset
+	 */
 	public function getRegulations($lang, $edition)
 	{
 		$select = $this->select()
@@ -35,6 +44,23 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 				->where('edition_id = ? ', $edition)
 				->order('paragraph_no');
 		return $this->fetchAll($select);
+	}
+	
+	/**
+	 * Delete regulation for a given edition
+	 *
+	 * @access public
+	 * @param string $edition
+	 * @return TRUE
+	 */
+	public function deleteRegulation($edition)
+	{
+		$editions = new Application_Model_Editions();
+		$editions->getEdition($edition);
+		$where = $this->select()->where('edition_id = ?', $editions->_edition_id);
+		$this->fetchAll($where)->delete();
+		
+		return TRUE;
 	}
 	
 	

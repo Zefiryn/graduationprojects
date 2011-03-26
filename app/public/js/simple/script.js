@@ -17,6 +17,9 @@ $(document).ready(function(){
 	if ($('#add_new_paragraph').length )
 		addNewParagraph();
 	
+	if ($('#add_new_question').length )
+		addNewQuestion();
+	
 	hintImages();
 	
 	setDateFields();
@@ -304,6 +307,7 @@ function addNewParagraph()
 		var inputNo = $('#new_paragraph_1-paragraph_no').clone();
 		inputNo.attr('name', inputNo.attr('name').replace('new_paragraph_1', 'new_paragraph_'+no));
 		inputNo.attr('id', inputNo.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
+		inputNo.attr('value', '');
 		
 		var labelText = $('#new_paragraph_1-paragraph_text').prev().clone();
 		var inputText = $('#new_paragraph_1-paragraph_text').clone();
@@ -311,6 +315,42 @@ function addNewParagraph()
 		inputText.attr('id', inputText.attr('id').replace('new_paragraph_1', 'new_paragraph_'+no));
 		
 		$('#add_new_paragraph').before(inputLang).before(inputId).before(inputEdition).before(labelNo).before(inputNo).before(labelText).before(inputText);
+		
+	});
+}
+
+function addNewQuestion()
+{
+	$('#add_new_question').click(function(e) {
+		e.preventDefault(); 
+		
+		var no = $('textarea:last').attr('name').split('_');
+		no = parseInt(no[2].substring(0, no[2].indexOf('['))) + 1;
+		
+		
+		var inputId = $('#new_question_1-faq_id').clone();
+		inputId.attr('name', inputId.attr('name').replace('new_question_1', 'new_question_'+no));
+		inputId.attr('id', inputId.attr('id').replace('new_question_1', 'new_question_'+no));
+		
+		
+		var inputLang = $('#new_question_1-faq_lang').clone();
+		inputLang.attr('name', inputLang.attr('name').replace('new_question_1', 'new_question_'+no));
+		inputLang.attr('id', inputLang.attr('id').replace('new_question_1', 'new_question_'+no));
+		
+		
+		var labelNo = $('#new_question_1-faq_question').prev().clone();
+		var inputNo = $('#new_question_1-faq_question').clone();
+		inputNo.attr('name', inputNo.attr('name').replace('new_question_1', 'new_question_'+no));
+		inputNo.attr('id', inputNo.attr('id').replace('new_question_1', 'new_question_'+no));
+		inputNo.attr('value', '');
+		
+		var labelText = $('#new_question_1-faq_answer').prev().clone();
+		var inputText = $('#new_question_1-faq_answer').clone();
+		inputText.attr('name', inputText.attr('name').replace('new_question_1', 'new_question_'+no));
+		inputText.attr('id', inputText.attr('id').replace('new_question_1', 'new_question_'+no));
+		
+		
+		$('#add_new_question').before(inputLang).before(inputId).before(labelNo).before(inputNo).before(labelText).before(inputText);
 		
 	});
 }

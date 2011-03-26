@@ -88,6 +88,8 @@
         <formFile formName="School"/>
         <formFile formName="WorkType"/>
         <formFile formName="Edition"/>
+        <formFile formName="Faq"/>
+        <formFile formName="Question"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

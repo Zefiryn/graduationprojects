@@ -8,7 +8,7 @@
  * @since Feb 2011
  */
 
-class Application_Form_File extends Zefir_Form_SubForm
+class Application_Form_Application_File extends Zefir_Form_SubForm
 {
 	protected $_number;
 	protected $_type;

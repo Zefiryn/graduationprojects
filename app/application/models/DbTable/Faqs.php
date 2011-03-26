@@ -24,6 +24,12 @@ class Application_Model_DbTable_Faqs extends Zefir_Application_Model_DbTable
 		$select = $this->select()->where('faq_lang = ?', $lang);
 		return $this->fetchAll($select);
 	}
+	
+	public function deleteFaq($lang)
+	{
+		$where = $this->select()->where('faq_lang = ?', $lang);
+		$this->fetchAll($where)->delete();
+	}
 
 
 }

@@ -33,6 +33,23 @@ class Application_Model_Faqs extends GP_Application_Model
 		return($faq);
 		
 	}
+	
+	public function deleteFaq($lang)
+	{
+		$this->getDbTable()->deleteFaq($lang);
+	}
+	
+	public function prepareFormArray()
+	{
+		$data = array(
+			'faq_id' => $this->_faq_id,
+			'faq_lang' => $this->_faq_lang,
+			'faq_question' => $this->_faq_question,
+			'faq_answer' => $this->_faq_answer
+		);
+		
+		return $data;
+	}
 
 }
 

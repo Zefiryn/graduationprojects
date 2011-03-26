@@ -25,7 +25,7 @@ class Application_Form_Regulations extends Zefir_Form
         
         foreach($regulationsData as $regulation)
         {
-        	$paragraph = new Application_Form_Paragraph();
+        	$paragraph = new Application_Form_Regulations_Paragraph();
         	$paragraph->removeDecorator('form');		
         	$paragraph->removeElement('csrf');
         	$paragraph->removeDisplayGroup('submitFields');
@@ -43,7 +43,7 @@ class Application_Form_Regulations extends Zefir_Form
         
         for($i= 1; $i <= $this->_new; $i++)
         {
-        	$paragraph = new Application_Form_Paragraph();
+        	$paragraph = new Application_Form_Regulations_Paragraph();
         	$paragraph->removeDecorator('form');		
         	$paragraph->removeElement('csrf');
         	$paragraph->removeElement('paragraph_remove');

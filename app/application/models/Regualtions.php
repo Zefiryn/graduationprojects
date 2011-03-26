@@ -42,10 +42,7 @@ class Application_Model_Regualtions extends GP_Application_Model
 	
 	public function deleteRegulations($edition)
 	{
-		$paragraphs = $this->getRegulations($edition);
-		
-		foreach($paragraphs as $paragraph)
-			$paragraph->delete();
+		$this->getDbTable()->deleteRegulation($edition);
 	}
 
 	public function prepareFormArray()
