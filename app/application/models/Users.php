@@ -33,8 +33,10 @@ class Application_Model_Users extends GP_Application_Model
 	{
 		parent::populateFromForm($data);
 		
-		if ($this->_role == null)
+		if ($this->_role == null && $this->_user_id == null)
 			$this->_role = 'user';
+			
+		return $this;
 	}
 	
 	/**

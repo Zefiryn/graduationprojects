@@ -88,6 +88,25 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
       parent::__construct(array());
     }
     
+    public function getAllApplications($sort)
+    {
+    	$user = new Application_Model_Users();
+    	$user_table = $user->getDbTable()->getTablename();
+    	
+    	$work_type = new Application_Model_WorkTypes();
+    	$work_type_table = $work_type->getDbTable()->getTablename();
+    	
+    	$select = $this->select()
+    					->setIntegrityCheck(FALSE)
+    					->from(array('a' => $this->_name))
+    					->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
+    					->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
+    					->order($sort);
+		//echo $select;
+		return $this->fetchAll($select);
+    	
+    }
+    
 	/**
      * Save or update application data in the database 
      * 

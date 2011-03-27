@@ -10,7 +10,7 @@
 	<h1><?php echo $this->translate('applications_header'); ?></h1>
 	
 	<?php if (count($this->applications) > 0):?>
-	<?php echo $this->sortForm;?>
+	<p class="clear">&nbsp;</p>
 	
 	<table class="applications">
 		<!--TABLE HEADERS-->
@@ -29,19 +29,27 @@
 			</th>
 			<!--NAME-->
 			<th class="normal" style="width: 100px;">
+				<a href="<?php echo $this->url(array('sort' => 'surname'), 'applications_sort');?>">
 				<?php echo $this->translate('user_name_and_surname');?>
+				</a>
 			</th>
 			<!--COUNTRY-->
 			<th class="normal" style="width: 20px;">
+				<a href="<?php echo $this->url(array('sort' => 'country'), 'applications_sort');?>">
 				<?php echo $this->translate('country');?>
+				</a>
 			</th>
 			<!--SUBJECT-->
 			<th class="normal" style="width: 85px;">
+				<a href="<?php echo $this->url(array('sort' => 'work_subject'), 'applications_sort');?>">
 				<?php echo $this->translate('work_subject');?>
+				</a>
 			</th>
 			<!--2d/3d-->
 			<th class="normal" style="width: 35px;">
-			<?php echo $this->translate('work_type');?>
+				<a href="<?php echo $this->url(array('sort' => 'work_type_name'), 'applications_sort');?>">
+				<?php echo $this->translate('work_type');?>
+				</a>
 			</th>
 			<!--FILES LIST-->
 			<th class="normal" style="width: 50px;">
@@ -62,11 +70,13 @@
 		<?php foreach ($this->applications as $no => $application):?>
 		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
 			<td class="left" style="width: 15px;vertical-align: top;">
+				<?php if ($this->user->_role == 'admin'):?>
 				<input type="checkbox" id="app<?php echo $application->_application_id?>" name="app[<?php echo $application->_application_id?>]" class="admin_button" />
 				<img class="ui-icon ui-icon-check no-block" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
 				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
+				<?php endif;?>
 			</td>	
 			<td class="normal" style="width: 90px;">
 				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 
@@ -103,7 +113,26 @@
 		</tr>
 		<?php endforeach;?>
 	</table>
-	
+
+	<table class="stats"> 
+		<tr style="text-align: left;margin:0px; padding:0px;"> 
+			<td class="header"><?php echo $this->translate('statistics');?></th> 
+		</tr> 
+		<tr>
+			<th></th> 
+			<?php foreach ($this->statistics['pl'] as $type => $ammount):?>
+			<th><?php echo $this->translate($type);?></th>
+			<?php endforeach;?> 
+		</tr> 
+		<?php foreach($this->statistics as $part => $stats):?>
+		<tr>
+			<td class="left"><?php echo $this->translate('stat_'.$part);?></td>
+			<?php foreach ($stats as $type => $ammount):?>
+			<td><?php echo $ammount;?></td>
+			<?php endforeach;?>
+		</tr>
+		<?php endforeach;?>
+	</table>
 	<?php else:?>
 	<p class="empty">
 		<br />

@@ -8,9 +8,11 @@ echo $this->partial('partials/lang_menu.phtml',
 
 <div class="content">
 	<p class="admin">
+		<?php if ($this->user->_role == 'admin' || $this->user->_user_id == $this->application->_user->_user_id):?>
 		<?php echo $this->partial('applications/_admin.phtml', 
 			array('application' => $this->application,
 					'user' => $this->user));?>
+		<?php endif;?>
 	</p>
 	<h1><?php echo $this->application->_user->getUserFullName();?></h1>
 	<p class="spacer">&nbsp;</p>

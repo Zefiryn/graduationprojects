@@ -10,20 +10,13 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-
-    	$sortForm = new Application_Form_ApplicationsSort();
-    	
     	//get edition
     	$edition = new Application_Model_Editions();
     	$edition->getEditionByName(Zend_Registry::get('edition'));
     	
-    	$sortFormData['edition'] = $edition->_edition_id;
-    	$sortForm->populate($sortFormData);
-    	
-    	$this->view->sortForm = $sortForm;
-    	
     	$application = new Application_Model_Applications();
-    	$applications = $application->getApplications('edition', $edition->_edition_id);;
+    	$applications = $application->getApplications($edition->_edition_id, $this->_getSort());
+    	$this->view->statistics = $this->_createStatistics($applications);
     	$this->view->applications = $applications;
     }
 
@@ -213,7 +206,8 @@ class ApplicationsController extends Zefir_Controller_Action
 			throw new Zend_Exception('Wrong id parameter');
 		
 			
-		if ($this->user->_role == 'admin' 
+		if ($this->user->_role == 'admin'
+			|| $this->user->_role == 'juror'
 			|| $this->user->_applications[0]->_application_id == $id)
 		{
 			$application = new Application_Model_Applications($id);
@@ -304,5 +298,57 @@ class ApplicationsController extends Zefir_Controller_Action
     			unlink($dir.$data['file_'.$i]['file_'.$i.'Cache']);
     		}
     	}
+    }
+    
+    protected function _createStatistics($applications)
+    {
+    	$work_type = new Application_Model_WorkTypes();
+    	$types = $work_type->getWorkTypes();
+    	unset($types[0]);
+
+    	$languages = array('cz', 'pl', 'sk', 'all');
+    	
+    	$statistics = array();
+    	
+    	foreach($languages as $language)
+    	{
+    		foreach($types as $type)
+    		{
+    			$statistics[$language][$type] = 0;	
+    		}
+    		$statistics[$language]['all'] = 0;
+    	}
+    	
+    	foreach ($applications as $application)
+    	{
+    		$statistics['all'][$application->_work_type->_work_type_name]++;
+    		$statistics['all']['all']++;
+    		$statistics[$application->_country][$application->_work_type->_work_type_name]++;
+    		$statistics[$application->_country]['all']++;
+    	}
+    	
+    	return $statistics;
+    }
+    
+    protected function _getSort()
+    {
+    	$request = $this->getRequest();
+    	$sortApplication = new Zend_Session_Namespace('app_sort');
+    	
+    	$currentSort = $request->getParam('sort', NULL);
+    	$lastSort = $sortApplication->sort;
+    	
+    	if (strstr($lastSort, $currentSort))
+    	{
+    		$order = substr($lastSort, strpos($lastSort, ' ')+1);
+    		$currentSort .= $order == 'ASC' ? ' DESC' : ' ASC';
+    	}
+    	elseif ($currentSort != NULL)
+    		$currentSort .= ' ASC';
+    	
+    	//save current sort
+    	$sortApplication->sort = $currentSort;
+    	
+    	return $currentSort;
     }
 }

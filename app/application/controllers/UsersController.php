@@ -38,9 +38,6 @@ class UsersController extends Zefir_Controller_Action
     	
     	$form = new Application_Form_User('new');
     	$form->setAction('/users/new');
-    	$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_userForm.phtml'))
-		));
 		
     	if ($request->isPost())
     	{
@@ -69,12 +66,12 @@ class UsersController extends Zefir_Controller_Action
     public function editAction()
     {
     	$request = $this->getRequest();
+    	$role = Zend_Registry::get('role');
     	
-    	$form = new Application_Form_User('edit');
+    	$form = new Application_Form_User();
     	$form->setAction('/users/edit');
-    	$form->setDecorators(array(
-			array('ViewScript', array('viewScript' => 'forms/_userForm.phtml'))
-		));
+    	if ($role != 'admin')
+    		$form->removeElement('role'); 
 		
     	if ($request->isPost())
     	{
@@ -90,6 +87,7 @@ class UsersController extends Zefir_Controller_Action
     			$user = new Application_Model_Users();
     			$user->populateFromForm($form->getValues());
     			$user->save();
+    			
     			$this->flashMe('user_edited', 'SUCCESS');
     			$this->_redirectToRoute(array('id'=>$user->_user_id), 'user');
     		}	
