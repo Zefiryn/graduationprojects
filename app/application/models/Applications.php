@@ -82,21 +82,11 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 	
-	public function getApplications($select, $arg)
+	public function getApplications($edition, $sort = NULL)
 	{
-		switch($select)
-		{
-			case 'edition':
-				return $this->_getApplicationsByEdition($arg);
-			break;
-		}
+		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
 		
-	}
-	
-	protected function _getApplicationsByEdition($id)
-	{
-		$where = $this->getDbTable()->select()->where('edition_id = ?', $id)->order('application_date');
-		$rowset = $this->getDbTable()->fetchAll($where);
+		$rowset = $this->getDbTable()->getAllApplications($sort);
 		
 		$applications = array();
 		foreach($rowset as $row)
@@ -105,8 +95,9 @@ class Application_Model_Applications extends GP_Application_Model
 			$applications[] = $application->populateWithReference($row, $application);
 		}
 		
-		return $applications;
+		return $applications;	
 	}
+	
 	
 	public function getSupervisor()
 	{

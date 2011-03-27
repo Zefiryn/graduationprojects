@@ -72,11 +72,13 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 	protected function _checkUsersPrivileges()
 	{
 		$role =	Zend_Registry::get('role');
+		$auth = Zend_Auth::getInstance();
+		$acl = Zend_Registry::get('acl');
 		$redirect = new Zend_Controller_Action_Helper_Redirector();
-    	$acl = Zend_Registry::get('acl');
 		$request = $this->getActionController()->getRequest();
 		
-		if (!$acl->isAllowed($role, $request->getControllerName(), $request->getActionName()))
+		if (!$acl->isAllowed($role, $request->getControllerName(), $request->getActionName())
+			&& !$auth->hasIdentity())
 		{
 			if ($request->getActionName() != 'login')
 			{
@@ -100,6 +102,12 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 			{
 				$redirect->gotoUrlAndExit('/index');
 			}
+		}
+		elseif (!$acl->isAllowed($role, $request->getControllerName(), $request->getActionName())
+				&& $auth->hasIdentity())
+		{//insufficent rights
+			$this->getActionController()->flashMe('not_allowed', 'FAILURE');
+			$redirect->gotoUrlAndExit('/index');
 		}
 		
 	}

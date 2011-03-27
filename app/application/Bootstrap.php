@@ -184,20 +184,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
 		$acl->allow('user', array('auth'), array('logout'));
-		
-		$acl->allow(null, array('applications'), array('new'));
-		$acl->allow('user', array('applications'), array('show', 'edit', 'update'));
-		$acl->allow('juror', array('applications'), array('index', 'vote'));
-		
-		$acl->allow('juror', array('users'), array('index'));
-		
-		$acl->deny('juror', array('applications'), array('edit', 'update'));
-		$acl->allow('admin', array('applications', 'regulations', 'faq', 'about', 'users'), null);
+		$acl->allow('user', array('applications'), array('new', 'show', 'edit'));
 		$acl->deny('user', array('admin'), null);
+		
+		$acl->allow('juror', array('applications'), array('index', 'show', 'vote'));
+		$acl->deny('juror', array('applications'), array('new', 'edit'));
+		$acl->allow('juror', array('users'), array('show', 'edit', 'delete'));
+		$acl->deny('juror', array('users'), array('new', 'index'));
 		$acl->allow('juror', array('admin'), null);
+		$acl->allow('juror', array('localizations'), null);
 		
 		$acl->allow('admin', null, null);
-		
 		
 		Zend_Registry::set('acl', $acl);
 		

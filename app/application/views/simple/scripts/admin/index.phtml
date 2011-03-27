@@ -1,14 +1,25 @@
 <div class="content">
-	<h1><?php echo $this->translate('admin_panel');?></h1>	
+	<?php if ($this->user->_role == 'admin'):?>
+	<h1><?php echo $this->translate('admin_panel');?></h1>
+	<?php else:?>
+	<h1><?php echo $this->translate('juror_panel');?></h1>
+	<?php endif;?>	
 	
 	<br /><br />
 	
 	<a class="button_link" href="<?php echo $this->baseUrl('/applications')?>">
 		<?php echo $this->translate('applications');?>
 	</a><br />
+	<?php if ($this->user->_role == 'admin'):?>
 	<a class="button_link" href="<?php echo $this->baseUrl('/users')?>">
 		<?php echo $this->translate('users');?>
 	</a><br />
+	<?php else:?>
+	<a class="button_link" href="<?php echo $this->url(array('id' => $this->user->_user_id), 'user');?>">
+		<?php echo $this->translate('user_account');?>
+	</a><br />
+	<?php endif;?>
+	<?php if ($this->user->_role == 'admin'):?>
 	<a class="button_link" href="<?php echo $this->baseUrl('/editions')?>">
 		<?php echo $this->translate('editions');?>
 	</a><br />
@@ -18,12 +29,15 @@
 	<a class="button_link" href="<?php echo $this->baseUrl('/schools')?>">
 		<?php echo $this->translate('schools');?>
 	</a><br />
+	<?php endif;?>
 	<a class="button_link" href="<?php echo $this->baseUrl('/localizations')?>">
 		<?php echo $this->translate('localizations');?>
 	</a><br />
+	<?php if ($this->user->_role == 'admin'):?>
 	<a class="button_link" href="<?php echo $this->baseUrl('/settings/edit')?>">
 		<?php echo $this->translate('settings');?>
 	</a><br />
+	<?php endif;?>
 	
 </div>
 <p class="spacer_small">&nbsp;</p>

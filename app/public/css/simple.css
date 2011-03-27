@@ -813,3 +813,35 @@ form.search
 {
 	visibility: hidden;
 }
+
+/*statistics*/
+table.stats
+{
+	font-size: 12px;
+	padding: 0px;
+	margin: 30px 10px 0px 0px;
+}
+td.header
+{
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+	text-align: left;
+	text-indent: -30px;
+}
+table.stats tr
+{
+	margin: 3px 0px 3px 0px;
+	padding: 3px 0px 3px 0px;
+}
+table.stats td, table.stats th
+{
+	margin: 0px 5px 0px 5px;
+	padding: 0px 5px 0px 5px;
+	text-align: center;
+}
+table.stats td.left
+{
+	text-align: left;
+	border: 0px;
+}

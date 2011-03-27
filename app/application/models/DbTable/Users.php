@@ -62,7 +62,8 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	$row->phone			= $user->_phone;
     	$row->email			= $user->_email;
     	$row->show_email	= $user->_show_email;
-    	$row->role			= $user->_role;
+    	if ($user->_role != null)
+    		$row->role = $user->_role;
     	if ($user->_password != null)
     		$row->password = sha1($user->_password);
     	

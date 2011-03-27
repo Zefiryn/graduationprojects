@@ -16,17 +16,19 @@
 	
 	<?php if ($this->user->_role == 'user'):?>
 	<?php echo $this->translate('logged_as')?>: 
-		<a href="<?php echo $this->url(array('id'=>$this->user->_user_id), 'user');?>">
-			<?php echo $this->translate($this->user->_role);?>
-		</a>
+		<a href="<?php echo $this->url(array('id'=>$this->user->_user_id), 'user');?>"><?php echo $this->translate($this->user->_role);?></a>
 		&nbsp;|&nbsp;
 		<a href="<?php echo $this->url(array(), 'logout');?>"><?php echo $this->translate('logout')?></a>
 		
 	<?php elseif ($this->user->_role == 'admin'):?>
 	<?php echo $this->translate('logged_as')?>: 
-		<a href="<?php echo $this->baseUrl('admin');?>">
-			<?php echo $this->translate('admin');?>
-		</a>
+		<a href="<?php echo $this->baseUrl('admin');?>"><?php echo $this->translate('admin');?></a>
+		&nbsp;|&nbsp;
+		<a href="<?php echo $this->url(array(), 'logout');?>"><?php echo $this->translate('logout')?></a>
+	
+	<?php elseif ($this->user->_role == 'juror'):?>
+	<?php echo $this->translate('logged_as')?>: 
+		<a href="<?php echo $this->baseUrl('admin');?>"><?php echo $this->translate('juror');?></a>
 		&nbsp;|&nbsp;
 		<a href="<?php echo $this->url(array(), 'logout');?>"><?php echo $this->translate('logout')?></a>
 	
