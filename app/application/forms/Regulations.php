@@ -39,6 +39,7 @@ class Application_Form_Regulations extends Zefir_Form
         
         $editionName = Zend_Registry::get('edition');
         $edition = new Application_Model_Editions();
+        $edition->getEditionByName($editionName);
         $regulation_lang = new Zend_Session_Namespace('lang');
         
         for($i= 1; $i <= $this->_new; $i++)
