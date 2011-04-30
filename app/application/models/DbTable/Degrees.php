@@ -11,13 +11,18 @@ class Application_Model_DbTable_Degrees extends Zefir_Application_Model_DbTable
      * An array of child tables information
      * @var array
      */
-    protected $_referenceMap = array();
+    protected $_belongsTo = array();
 	
 	/**
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array();
+	protected $_hasMany = array(
+		'applications' => array(
+			'model' => 'Application_Model_Applications',
+			'refColumn' => 'degree_id'
+		)
+	);
 	
 
 }

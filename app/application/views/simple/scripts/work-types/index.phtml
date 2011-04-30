@@ -8,7 +8,7 @@
 	<h1>
 		<?php echo $this->translate('work-types');?>
 		<a href="<?php echo $this->baseUrl('/work-types/new');?>">
-			<img class="ui-icon ui-icon-plusthick no-block"
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block"
 				alt="<?php echo $this->translate('add_new_worktype');?>" 
 				title="<?php echo $this->translate('add_new_worktype');?>" />
 		</a>
@@ -20,13 +20,13 @@
 	
 		<span class="admin">
 		<a href="<?php echo $this->url(array('id' => $id), 'edit_type');?>">
-			<img class="ui-icon ui-icon-pencil no-block" 
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 				alt="<?php echo $this->translate('edit');?>" 
 				title="<?php echo $this->translate('edit');?>" />
 		</a>
 		<a href="<?php echo $this->url(array('id' => $id), 'delete_type');?>"
 			class="delete"> 
-			<img class="ui-icon ui-icon-trash no-block" 
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
 				del="<?php echo $this->translate('delete');?>" 
 				alt="<?php echo $this->translate('delete');?>" 
 				title="<?php echo $this->translate('delete');?>" />

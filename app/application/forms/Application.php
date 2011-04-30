@@ -177,7 +177,7 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-					new Zefir_Validate_DatePeriod($appSettings->_work_start_date, $appSettings->_work_end_date)
+					new Zefir_Validate_DatePeriod($appSettings->work_start_date, $appSettings->work_end_date)
 				));
 		$this->addElement($element);
 		
@@ -205,7 +205,7 @@ class Application_Form_Application extends Zefir_Form
 				->addValidators(array(
 					array('Extension', true, array(false, 'jpg,png,jpeg')),
 					array('MimeType', true, array(false, 'image')),
-					array('Size', false, array('min' => 100, 'max' => $appSettings->_max_file_size)),
+					array('Size', false, array('min' => 100, 'max' => $appSettings->max_file_size)),
 					array('ImageSize', false, array('minwidth' => 800,
                             						'maxwidth' => 800,
                             						'minheight' => 800,
@@ -228,7 +228,7 @@ class Application_Form_Application extends Zefir_Form
 		 * SUBMIT
 		 */
 	
-		for ($i = 1; $i <= $appSettings->_max_files; $i++)
+		for ($i = 1; $i <= $appSettings->max_files; $i++)
 		{
 			$subForm = new Application_Form_Application_File($i, $this->_type);
 			$this->addSubForm($subForm, 'file_'.$i);

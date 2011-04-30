@@ -14,9 +14,9 @@
 	
 	<?php foreach($this->regulations as $regulation):?>
 	<p class="rule">
-		<span style="font-weight: bold">&sect; <?php echo $regulation->_paragraph_no;?></span>
+		<span style="font-weight: bold">&sect; <?php echo $regulation->paragraph_no;?></span>
 		<br />
-		<?php echo  nl2br($regulation->_paragraph_text);?>
+		<?php echo  nl2br($regulation->paragraph_text);?>
 	</p> 
 	<?php endforeach; ?>
 	

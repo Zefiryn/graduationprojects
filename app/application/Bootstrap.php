@@ -197,6 +197,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 		$acl->allow('admin', array('users'), array('new', 'index'));
 		$acl->allow('admin', null, null);
+		$acl->allow('admin', 'applications', 'edit');
 		
 		Zend_Registry::set('acl', $acl);
 		

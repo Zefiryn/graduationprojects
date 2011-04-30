@@ -11,23 +11,13 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
      * An array of child tables information
      * @var array
      */
-    protected $_referenceMap = array(
-    	'Editions' => array(
-    		'objProperty' => '_edition',
-			'columns' => array('edition_id'),
-			'refTableClass' => 'Application_Model_DbTable_Editions',
-			'refColumns' => array('edition_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+    protected $_belongsTo = array(
+    	'edition' => array(
+    		'model' => 'Application_Model_Editions',
+			'column' => 'edition_id',
+			'refColumn' => 'edition_id'
 		)
 	);
-	
-	/**
-	 * An array of parent table information
-	 * @var array
-	 */
-	protected $_dependentTables = array();
-	
 	
 	/**
 	 * Get regulation for a given edition and language

@@ -1,6 +1,6 @@
 <?php $settings = Zend_Registry::get('appSettings');
 echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'application/'.$this->application->_application_id,	'lang' => $this->lang));
+			array('link' => 'application/'.$this->application->application_id,	'lang' => $this->lang));
 ?>
 <?php echo $this->partial('partials/delete_dialog.phtml', 
 			array('title' => 'application', 'delete_confirm' => $this->translate('application_delete_confirm')));
@@ -8,32 +8,32 @@ echo $this->partial('partials/lang_menu.phtml',
 
 <div class="content">
 	<p class="admin">
-		<?php if ($this->user->_role == 'admin' || $this->user->_user_id == $this->application->_user->_user_id):?>
+		<?php if ($this->user->_role == 'admin' || $this->user->user_id == $this->application->user->user_id):?>
 		<?php echo $this->partial('applications/_admin.phtml', 
 			array('application' => $this->application,
 					'user' => $this->user));?>
 		<?php endif;?>
 	</p>
-	<h1><?php echo $this->application->_user->getUserFullName();?></h1>
+	<h1><?php echo $this->application->user->getUserFullName();?></h1>
 	<p class="spacer">&nbsp;</p>
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('work_subject');?>:</span>
-	 	<?php echo $this->application->_work_subject;?>
+	 	<?php echo $this->application->work_subject;?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('work_type');?>:</span>
-	 	<?php echo $this->application->_work_type->_work_type_name;?>
+	 	<?php echo $this->application->work_type->work_type_name;?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('country');?>:</span>
-	 	<?php echo $this->translate($this->application->_country);?>
+	 	<?php echo $this->translate($this->application->country);?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('school');?>:</span>
-	 	<?php echo $this->application->_school->_school_name;?>, <?php echo $this->translate('department');?> <?php echo $this->application->_department;?>
+	 	<?php echo $this->application->school->school_name;?>, <?php echo $this->translate('department');?> <?php echo $this->application->department;?>
 	</p>
 	
 	<p class="application">
@@ -43,21 +43,21 @@ echo $this->partial('partials/lang_menu.phtml',
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('degree');?>:</span>
-	 	<?php echo $this->translate($this->application->_degree->_degree_name);?>
+	 	<?php echo $this->translate($this->application->degree->degree_name);?>
 	</p>
 	
 
 	<div id="files_slider">	
-		<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->_miniature)?>" 
+		<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->miniature)?>" 
 					class="files" rel="files" 
-					title="<?php echo $this->application->_work_subject;?>">
-					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->_miniature)?>" width="400px" height="400px" alt="thumbnail" />
+					title="<?php echo $this->application->work_subject;?>">
+					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$this->application->miniature)?>" width="400px" height="400px" alt="thumbnail" />
 				</a>
 		<br />
 		<span style="display: block; float: left;"><?php echo $this->translate('files')?>:</span>
-		<?php foreach ($this->application->_files as $id => $file):?>
-		<a href="/assets/applications/<?php echo $file->_path?>" 
-			title="<?php echo $file->_file_desc;?>" 
+		<?php foreach ($this->application->files as $id => $file):?>
+		<a href="/assets/applications/<?php echo $file->path?>" 
+			title="<?php echo $file->file_desc;?>" 
 			class="files images" rel="files">
 			<span class="file_box"><?php echo ++$id;?></span>
 		</a>
@@ -67,22 +67,22 @@ echo $this->partial('partials/lang_menu.phtml',
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('email');?>:</span>
-		<?php echo $this->application->_user->_email;?>
+		<?php echo $this->application->user->email;?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('work_desc');?>:</span><br />
-		<?php echo $this->application->_work_desc;?>
+		<?php echo $this->application->work_desc;?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('graduation_time');?>:</span>
-	 	<?php echo date($settings->_date_format, $this->application->_graduation_time);?>
+	 	<?php echo date($settings->date_format, $this->application->graduation_time);?>
 	</p>
 	
 	<p class="application">
 		<span class="application_field"><?php echo $this->translate('application_date');?>:</span>
-	 	<?php echo date($settings->_date_format, $this->application->_application_date);?>
+	 	<?php echo date($settings->date_format, $this->application->application_date);?>
 	</p>
 </div>
 

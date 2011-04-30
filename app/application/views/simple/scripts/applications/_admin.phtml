@@ -1,18 +1,18 @@
 <?php if ($this->user->_role == 'admin'):?>
-<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'edit_application');?>">
-	<img class="ui-icon ui-icon-mail-closed no-block" 
+<a href="<?php echo $this->url(array('id' => $this->application->application_id), 'edit_application');?>">
+	<img src="/img/simple/empty.png" class="ui-icon ui-icon-mail-closed no-block" 
 		alt="<?php echo $this->translate('send_mail');?>" 
 		title="<?php echo $this->translate('send_mail');?>" />
 </a>
 <?php endif;?>
-<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'edit_application');?>">
-	<img class="ui-icon ui-icon-pencil no-block" 
+<a href="<?php echo $this->url(array('id' => $this->application->application_id), 'edit_application');?>">
+	<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 		alt="<?php echo $this->translate('edit');?>" 
 		title="<?php echo $this->translate('edit');?>" />
 </a>
-<a href="<?php echo $this->url(array('id' => $this->application->_application_id), 'delete_application');?>"
+<a href="<?php echo $this->url(array('id' => $this->application->application_id), 'delete_application');?>"
 	class="delete"> 
-	<img class="ui-icon ui-icon-trash no-block" 
+	<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
 		del="Usuń" 
 		alt="<?php echo $this->translate('delete');?>" 
 		title="<?php echo $this->translate('delete');?>" />

@@ -2,15 +2,11 @@
 
 class Application_Model_Editions extends GP_Application_Model
 {
-	protected $_edition_id;
-	protected $_edition_name;
-	protected $_applications;
+	public $edition_id;
+	public $edition_name;
+	protected $applications;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Editions';
-	
-	protected $_set_vars = array('_edition_id', '_edition_name', '_applications');
-	protected $_get_vars = array('_edition_id', '_edition_name', '_applications');
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{
@@ -21,7 +17,7 @@ class Application_Model_Editions extends GP_Application_Model
 	{
 		$this->getEdition($edition, $onlyName);
 
-		if ($this->_edition_id != NULL)
+		if ($this->edition_id != NULL)
 			$check = TRUE;
 		else 
 			$check = FALSE;
@@ -67,7 +63,6 @@ class Application_Model_Editions extends GP_Application_Model
 		if ($row)
 		{
 			$this->populate($row);
-			$this->getDbTable()->getChildren($row, $this);
 		}
 		
 		return $this;
@@ -76,8 +71,8 @@ class Application_Model_Editions extends GP_Application_Model
 	public function prepareFormArray()
 	{
 		$data = array(
-			'edition_id' => $this->_edition_id,
-			'edition_name' => $this->_edition_name
+			'edition_id' => $this->edition_id,
+			'edition_name' => $this->edition_name
 		);
 		
 		return $data;

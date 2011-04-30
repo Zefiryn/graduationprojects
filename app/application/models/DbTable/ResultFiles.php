@@ -26,22 +26,13 @@ class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
      * An array of child tables information
      * @var array
      */
-    protected $_referenceMap = array(
-		'Results' => array(
-    		'objProperty' => '_result',
-			'columns' => array('result_id'),
-			'refTableClass' => 'Application_Model_DbTable_Results',
-			'refColumns' => array('result_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+    protected $_belongsTo = array(
+		'result' => array(
+    		'model' => 'Application_Model_Results',
+			'column' => 'result_id',
+			'refColumn' => 'result_id'
 		)
 	);
-	
-	/**
-	 * An array of parent table information
-	 * @var array
-	 */
-	protected $_dependentTables = array();
 	
 	/**
 	 * constructor

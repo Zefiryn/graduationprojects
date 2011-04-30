@@ -68,7 +68,7 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 				->addValidators(array(
 					array('Extension', true, array(false, 'jpg,png,jpeg')),
 					array('MimeType', true, array(false, 'image')),
-					array('Size', false, array('min' => 100, 'max' => $appSettings->_max_file_size)),
+					array('Size', false, array('min' => 100, 'max' => $appSettings->max_file_size)),
 					array('ImageSize', false, array('minwidth' => 300,
                             						'maxwidth' => 1600,
                             						'minheight' => 300,

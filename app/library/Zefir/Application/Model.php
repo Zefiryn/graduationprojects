@@ -52,7 +52,7 @@ class Zefir_Application_Model {
 	    if ($id != null)
 	    {
 	    	$row = $this->getDbTable()->find($id)->current();
-	    	$this->populateWithReference($row);	
+	    	$this->populate($row);	
 	    }
 	    
 	    return $this;
@@ -107,14 +107,7 @@ class Zefir_Application_Model {
 	 */
 	public function __set($name, $value) 
 	{
-	    if (!in_array($name, $this->_set_vars)) 
-	    {
-			throw new Exception('Variable '.$name.' cannot be set from the outside of the class');
-	    }
-	    else
-	    {
-	    	$this->$name = $value;
-	    }
+	    $this->$name = $value;
 	}
  
 	/**
@@ -127,15 +120,27 @@ class Zefir_Application_Model {
 	 */
 	public function __get($name) 
 	{
-
-	    if (!in_array($name, $this->_get_vars)) 
-	    {
-			throw new Exception('Variable '.$name.' cannot be read from the outside of the class');
-	    }
-	    else
-	    {
+    	if ($this->_isBelongsTo($name))
+    	{	
+    		return $this->_getParent($name);
+    	}
+    	elseif ($this->_isHasMany($name))
+    	{
+    		return $this->_getChild($name);
+    	}
+    	else
 	    	return $this->$name;
-	    }
+
+	}
+	
+	public function __call($name, $args)
+	{
+		if (preg_match('/^_has[a-zA-Z]+$/', $name))
+		{
+			$property = strtolower(substr($name, 4));
+			if ($this->_isHasMany($property))
+				return $this->_hasChild($property);
+		}
 	}
  
 	/**
@@ -181,6 +186,11 @@ class Zefir_Application_Model {
     	return $array;
 	}
 	
+	public function prepareFormArray()
+	{
+		return get_object_vars($this);
+	}
+	
 	/**
 	 * Populate object with data from the Zend_Db_Table_Row
 	 * 
@@ -188,46 +198,35 @@ class Zefir_Application_Model {
 	 * @param Zend_Db_Table_Row|array $row
 	 * @return Zefir_Application_Model $this
 	 */
-	public function populate($row)
+	public function populate(Zend_Db_Table_Row $row)
 	{
-		foreach ($this->_set_vars as $var)
+		foreach ($row as $var => $value)
 		{
-			$var_raw = substr($var, 1);
-			if (isset($row->$var_raw))
-				$this->$var = $row->$var_raw;
-				
-			if 	(isset($row[$var_raw]))
-				$this->$var = $row[$var_raw];
+			$this->$var = $value;
 		}
-		
+
 		return $this;
 	}
 	
 	/**
-	 * Populate object with data from row and perform
+	 * Get an array of all data from the database
 	 * 
 	 * @access public
-	 * @param Zend_Db_Table_Row $row
-	 * @return Zefir_Application_Model
+	 * @param mixed $args
+	 * @return array an array of Zefir_Application_Model
 	 */
-	public function populateWithReference($row)
+	public function fetchAll($args = null)
 	{
-		foreach ($this->_set_vars as $var)
-		{
-			$var_raw = substr($var, 1);
-			if (isset($row->$var_raw))
-				$this->$var = $row->$var_raw;
-				
-			if 	(isset($row[$var_raw]))
-				$this->$var = $row[$var_raw];
-		}
+		$rowset = $this->getDbTable()->getAll($args);
 		
-		if ($row)
+		$set = array();
+		foreach ($rowset as $row)
 		{
-			$this->getDbTable()->getChildren($row, $this);
-			$this->getDbTable()->getParents($row, $this);
+			$object = new $this;
+			$set[] = $object->populate($row);
 		}
-		return $this;
+
+		return ($set);
 	}
 	
 	/**
@@ -261,7 +260,7 @@ class Zefir_Application_Model {
 	 */
 	public function isEmpty()
 	{
-		$id_var = $this->_set_vars[0];
+		$id_var = $this->getDbTable()->getPrimaryKey();
 
 		return (($this->$id_var == NULL) ? TRUE : FALSE);
 	}
@@ -278,9 +277,7 @@ class Zefir_Application_Model {
 	{
 		foreach ($data as $key => $value)
 		{
-			$var = '_'.$key;
-			if (in_array($var, $this->_set_vars))
-				$this->$var = $value;
+			$this->$key = $value;
 		}
 		
 		return $this;
@@ -319,11 +316,76 @@ class Zefir_Application_Model {
 		
 		foreach($map as $reference)
 		{
-			$id = '_'.$reference['refColumns'][0];
+			$id = $reference['refColumns'][0];
 			$this->$reference['objProperty'] = $this->$reference['objProperty']->$id;
 		}
 		
 		return $this;
 	}
+	
+	private function _isBelongsTo($name)
+	{
+		$belongsToArray = $this->getDbTable()->getBelongsTo();
+
+		if (isset($belongsToArray[$name]))
+			return $belongsToArray[$name];
+		else
+			return FALSE;
+	}
+	
+	private function _isHasMany($name)
+	{
+		$hasManyArray = $this->getDbTable()->getHasMany();
+
+		if (isset($hasManyArray[$name]))
+			return $hasManyArray[$name];
+		else
+			return FALSE;
+	}
+	
+	protected function _hasChild($property)
+	{
+		$hasManyArray = $this->getDbTable()->getHasMany();
+		$primary = $this->getDbTable()->getPrimaryKey();
+
+		$model = new $hasManyArray[$property]['model'];
+		$modelTable = $model->getDbTable();
+		return $modelTable->countParents($hasManyArray[$property]['refColumn'], $this->$primary);	
+	}
+	
+	protected function _getParent($name)
+	{
+		if (isset($this->$name))
+		{
+			return $this->$name;
+		}
+		else 
+		{
+			$association = $this->_isBelongsTo($name);
+			$referenceColumn = $association['refColumn'];
+			$parentModel = new $association['model']($this->$referenceColumn);
+			$this->$name = $parentModel;
+			
+			return $parentModel;
+		}
+	}
+	
+	protected function _getChild($name)
+	{		
+		if (isset($this->$name))
+		{	
+			$set = $this->$name;
+		}
+		else
+		{
+			$id = $this->getDbTable()->getPrimaryKey();
+			$row = $this->getDbTable()->find($this->$id)->current();
+			$set = $this->getDbTable()->getChild($row, $name); 
+			$this->$name = $set;
+		}
+		return $set;
+	}
 }
+
+
 ?>

@@ -10,7 +10,10 @@
  */
 class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 {
-
+	protected $_belongsTo = array();
+	protected $_hasMany = array();
+	protected $_prefix;
+	
 	/**
 	 * Constructor
 	 * @access public
@@ -20,7 +23,8 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
   	public function __construct($config = array())
   	{
     	$options = Zend_Registry::get('options');
-    	$this->_name = $options['resources']['db']['params']['prefix'].$this->_raw_name;
+    	$this->_prefix = $options['resources']['db']['params']['prefix'];
+    	$this->_name = $this->_prefix.$this->_raw_name;
     	parent::__construct($config);
   	}
 
@@ -29,78 +33,95 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
   	 * @access public
   	 * @return array an array of related tables
   	 */
-	public function getReferenceMap()
+	public function getHasMany()
 	{
-		return $this->_referenceMap;
+		return $this->_hasMany;
 	}
-  	
-	/**
-	 * Get data from parent table
-	 * 
-	 * @param Zend_Db_Table_Row $result
-	 * @param Zefir_Application_Model $object
-	 * @return Zefir_Appication_Model $object
-	 */
-	public function getParents(Zend_Db_Table_Row $result, Zefir_Application_Model $object)
+	
+	public function getBelongsTo()
 	{
-		foreach($this->getReferenceMap() as $name => $tableData)
-		{
-			$model_name = 'Application_Model_'.$name;
-			$parentObject = new $model_name; 
-			$object->$tableData['objProperty'] = $parentObject->populate($result->findParentRow($tableData['refTableClass']));
-		}
-			
-		return $object;
+		return $this->_belongsTo;
 	}
 	
 	/**
-	 * Get data from dependent tables
+	 * Get the name of the assosiated table in the database
 	 * 
-	 * @param Zend_Db_Table_Row $result
-	 * @param Zefir_Application_Model $object
-	 * @return Zefir_Appication_Model $object
+	 * @access public
+	 * @return string
 	 */
-	public function getChildren(Zend_Db_Table_Row $result, Zefir_Application_Model $object)
+	public function getTableName()
 	{
-		foreach($this->getDependentTables() as $property => $class)
+		return $this->_name;
+	}
+	
+	public function getPrimaryKey()
+	{
+		if (is_array($this->_primary))
 		{
-			$rowset = $result->findDependentRowset($class);				
-			$set = array();			
-			
-			if (isset($this->_hasMany[$property]))
-			{
-				//$rowset has rows from the joining table 				
-				foreach ($rowset as $row)
-				{
-					//create Zend_Db_Table_Abstract class of the associated table
-					$assocData = new $this->_hasMany[$property]['dbModel'];
-					
-					//get name of the column that has the reference to the associated table 
-					$column = $this->_hasMany[$property]['column'];
-					
-					//create new model of a associated data
-					$propertyModel = new $this->_hasMany[$property]['assocModel'];
-					 
-					//populate model with data find by the column_id of the associated table
-					$set[] = $propertyModel->populate($assocData->find($row->$column)->current()); 
-				}		
-
-			}
-			
-			else
-			{
-				$model = str_replace('DbTable_', '', $class);
-				foreach ($rowset as $row)
-				{
-					$data = new $model;
-					$set[] = $data->populate($row);
-				}
-			}
-			
-			$object->$property = $set;
+			$primary = reset($this->_primary);
+			return $primary;
 		}
-
-		return $object;
+		else
+			return $this->_primary;
+	}
+	  	
+	public function getChild($result, $property)
+	{
+		$primary = $this->getPrimaryKey();
+		$prefix = $this->_prefix;
+		
+		$assocData = $this->_hasMany[$property];
+		$dependentObject = new $assocData['model'];
+		
+		//reference is in the associated model table
+		if (!isset($assocData['joinTable']) && !isset($assocData['joinModel']))
+		{
+			$dependentObjectTable =  $dependentObject->getDbTable(); 
+			$dependentSelect = $dependentObjectTable->select()->where($assocData['refColumn']. '= ?', $result->$primary);
+		}
+		
+		//join throught table without extra data in joining table
+		elseif (isset($assocData['joinTable']))
+		{
+			
+			$joinTable = $prefix.$assocData['joinTable'];
+			$dependentObjectTable =  $dependentObject->getDbTable(); 
+			$dependentSelect = $dependentObjectTable->select()->setIntegrityCheck(FALSE);
+			
+			$dependentSelect->from(array('t' => $dependentObjectTable->getTableName()))
+							->join(array('jt' => $joinTable),
+										't.'.$dependentObjectTable->getPrimaryKey().' = jt.'.$assocData['joinRefColumn'])
+							->where('jt.'.$assocData['refColumn']. '= ?', $result->$primary);
+		}
+		
+		//join through table with extra data in joining table
+		elseif (isset($assocData['joinModel']))
+		{
+			$joinModel = new $assocData['joinModel'];
+			$joinTable = $joinModel->getDbTable()->getTableName();
+			
+			$dependentObjectTable =  $dependentObject->getDbTable();
+			$dependentSelect = $dependentObjectTable->select()->setIntegrityCheck(FALSE);
+			$dependentSelect->from(array('t' => $dependentObjectTable->getTableName()))
+							->join(array('jt' => $joinTable),
+										't.'.$dependentObjectTable->getPrimaryKey().' = jt.'.$assocData['joinRefColumn'])
+							->where('jt.'.$assocData['refColumn']. '= ?', $result->$primary);
+		}
+		
+		//set order
+		if (isset($assocData['order']))
+				$dependentSelect->order($assocData['order']);
+		
+		//find rows and create table
+		$rowset = $this->fetchAll($dependentSelect);
+			
+		$set = array();
+		foreach($rowset as $row)
+		{
+			$model = new $assocData['model'];
+			$set[] = $model->populate($row);
+		}
+		return $set;
 	}
 	
 	
@@ -143,17 +164,6 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		}
 		return $array;
 		
-	}
-	
-	/**
-	 * Get the name of the assosiated table in the database
-	 * 
-	 * @access public
-	 * @return string
-	 */
-	public function getTableName()
-	{
-		return $this->_name;
 	}
 	
 	/**
@@ -251,8 +261,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
     	$primary = is_array($this->_primary) ? $this->_primary[1] : $this->_primary;
     	
     	//create name of the property that holds primary column data
-    	$var_primary = '_'.$primary;
-    	$id = $object->$var_primary;
+    	$id = $object->$primary;
     	
     	//get the row from the databases
     	$row = $this->find($id)->current();
@@ -266,21 +275,38 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
     	
     	foreach($columns as $name => $value)
     	{
-    		//all references in the db are made with _id but in the model without
-    		$variable = '_'.str_replace('_id', null, $name);
-    		$row->$name = $object->$variable;
+    		$row->$name = $object->$name;
     	}
-    	
+
     	if ($row->save())
     	{
     		if ($id == null)
-    			$object->$var_primary = $id = $this->getAdapter()->lastInsertId();
+    			$object->$primary = $id = $this->getAdapter()->lastInsertId();
     	}
     	else 
     	{
     		throw new Zend_Exception('Couldn\'t save data');
     	}
-    	
+
     	return $object;
     }
+    
+    public function countParents($refColumn, $refValue)
+    {
+    	$select = $this->select()->from(array($this->_name), array('number' => 'count(*)'))->where($refColumn.'=?', $refValue);
+    	$row = $this->fetchRow($select);
+    	
+    	return ($row->number);
+
+    }
+    
+	public function getRowsNum()
+	{
+		$select = $this->select()->from(array($this->_name),
+										array('rows' => 'COUNT(*)'));
+										
+		$row = $this->fetchRow($select);
+		
+		return $row->rows;
+	}
 }

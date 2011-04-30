@@ -62,8 +62,7 @@ class Application_Form_Faq extends Zefir_Form
             				));
      	$this->addElement($submit);
      	
-     	$this->_createCsrfElement();
-        $this->_createStandardSubmit('regulation_submit');
+     	$this->_createStandardSubmit('regulation_submit');
         $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
         ->setDisplayGroupDecorators(array(
 						'FormElements', 

@@ -2,15 +2,12 @@
 
 class Application_Model_Faqs extends GP_Application_Model
 {
-	protected $_faq_id;
-	protected $_faq_lang;
-	protected $_faq_question;
-	protected $_faq_answer;
+	public $faq_id;
+	public $faq_lang;
+	public $faq_question;
+	public $faq_answer;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Faqs';
-	
-	protected $_set_vars = array('_faq_id',	'_faq_lang', '_faq_question', '_faq_answer'); 
-	protected $_get_vars = array('_faq_id',	'_faq_lang', '_faq_question', '_faq_answer'); 
 	
 	
 	public function __construct($id = null, array $options = null) 

@@ -8,17 +8,15 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     protected $_primary = 'user_id';
 
     /**
-     * An array of child tables information
-     * @var array
-     */
-    protected $_referenceMap = array();
-	
-	/**
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array(
-		'_applications' => 'Application_Model_DbTable_Applications');
+	protected $_hasMany = array(
+		'applications' => array(
+			'model' => 'Application_Model_Applications',
+			'refColumn' => 'user_id'
+		)
+	);
 	
 	/**
 	 * Get user role  
@@ -55,13 +53,13 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     			$row = $this->createRow();
     	}
     	
-    	$row->nick 			= $user->_nick;
-    	$row->name 			= $user->_name;
-    	$row->surname		= $user->_surname;
-    	$row->address		= $user->_address;
-    	$row->phone			= $user->_phone;
-    	$row->email			= $user->_email;
-    	$row->show_email	= $user->_show_email;
+    	$row->nick 			= $user->nick;
+    	$row->name 			= $user->name;
+    	$row->surname		= $user->surname;
+    	$row->address		= $user->address;
+    	$row->phone			= $user->phone;
+    	$row->email			= $user->email;
+    	$row->show_email	= $user->show_email;
     	if ($user->_role != null)
     		$row->role = $user->_role;
     	if ($user->_password != null)
@@ -90,7 +88,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	else
     		$row = $this->fetchRow($this->select()->where('nick = ?', $id));
     		
-    	$user->populateWithReference($row);
+    	$user->populate($row);
     	
     	return $user;
     	

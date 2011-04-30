@@ -2,40 +2,32 @@
 
 class Application_Model_Applications extends GP_Application_Model
 {
-	protected $_application_id;
-	protected $_edition;
-	protected $_user;
-	protected $_country;
-	protected $_school;
-	protected $_department;
-	protected $_degree;
-	protected $_work_subject;
-	protected $_work_type;
-	protected $_work_desc;
-	protected $_supervisor;
-	protected $_supervisor_degree;
-	protected $_graduation_time;
-	protected $_application_date;
-	protected $_miniature;
-	protected $_files;
-	protected $_active;	
+	public $application_id;
+	public $edition_id;
+	public $user_id;
+	public $country;
+	public $school_id;
+	public $department;
+	public $degree_id;
+	public $work_subject;
+	public $work_type_id;
+	public $work_desc;
+	public $supervisor;
+	public $supervisor_degree;
+	public $graduation_time;	
+	public $application_date;
+	public $miniature;
+	public $active;
+	protected $edition;
+	protected $user;
+	protected $school;
+	protected $degree;
+	protected $work_type;
+	protected $files;
+	
 	protected $_update = FALSE;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Applications';
-	
-	protected $_set_vars = array('_application_id', '_edition', '_user', '_country', 
-								'_school', '_department', '_degree', '_work_subject', 
-								'_work_type', '_work_desc', '_supervisor', 
-								'_supervisor_degree', '_files', '_graduation_time', 
-								'_application_date', '_miniature', '_active', 
-								'_update');
-	protected $_get_vars = array('_application_id', '_edition', '_user', '_country', 
-								'_school', '_department', '_degree', '_work_subject', 
-								'_work_type', '_work_desc', '_supervisor', 
-								'_supervisor_degree', '_files', '_graduation_time', 
-								'_application_date', '_miniature', '_active', 
-								'_update');
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{
@@ -48,31 +40,34 @@ class Application_Model_Applications extends GP_Application_Model
 		parent::populateFromForm($data);
 		
 		if (isset($data['new_school']) && $data['new_school'] != null)
-			$this->_school = $data['new_school'];
-		else
-			$this->_school = (int) $this->_school;
-		
-		if ($this->_application_date == null)
-			$this->_application_date = time();
-		
-		if ($this->_graduation_time != null)
 		{
-			$this->_graduation_time = strtotime($this->_graduation_time);
+			$this->school = new Application_Model_Schools();
+			$this->school->populate(array('school_name' => $data['new_school']));
+		}
+		else
+			$this->school = new Application_Model_Schools($this->school);
+		
+		if ($this->application_date == null)
+			$this->application_date = time();
+		
+		if ($this->graduation_time != null)
+		{
+			$this->graduation_time = strtotime($this->graduation_time);
 		}
 		
-		if ($this->_active == null)
-			$this->_active = 1;
+		if ($this->active == null)
+			$this->active = 1;
 		
-		$this->_miniature = $data['miniatureCache'];
+		$this->miniature = $data['miniatureCache'];
 		
 		for($i = 1; $i <= $appSettings->_max_files; $i++)
 		{//add uploaded files
 			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
 			{
-				$this->_files[$i]['file_id'] = $data['file_'.$i]['file_id'];
-				$this->_files[$i]['application_id'] = $data['file_'.$i]['application_id'];
-				$this->_files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
-				$this->_files[$i]['description'] = $data['file_'.$i]['file_annotation'];
+				$this->files[$i]['file_id'] = $data['file_'.$i]['file_id'];
+				$this->files[$i]['application_id'] = $data['file_'.$i]['application_id'];
+				$this->files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
+				$this->files[$i]['description'] = $data['file_'.$i]['file_annotation'];
 			}  
 		}
 	}
@@ -92,7 +87,7 @@ class Application_Model_Applications extends GP_Application_Model
 		foreach($rowset as $row)
 		{
 			$application = new $this;
-			$applications[] = $application->populateWithReference($row, $application);
+			$applications[] = $application->populate($row, $application);
 		}
 		
 		return $applications;	
@@ -101,41 +96,44 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function getSupervisor()
 	{
-		return $this->_supervisor_degree.' '.$this->_supervisor;
+		return $this->supervisor_degree.' '.$this->supervisor;
 	}
 	
 	public function getApplicationSchool()
 	{
-		return $this->_school->_school_name.', '.$this->_department;
+		return $this->school->school_name.', '.$this->department;
 	}
 	
 	public function prepareFormArray()
 	{
 		$data = array(
-				'country' => $this->_country,
-				'application_id' => $this->_application_id,
-				'edition' => $this->_edition->_edition_id,
-				'user' => $this->_user->_user_id,
-				'school' => $this->_school->_school_id,
-				'department' => $this->_department,
-				'degree' => $this->_degree->_degree_id,
-				'work_subject' => $this->_work_subject,
-				'work_type' => $this->_work_type->_work_type_id,
-				'work_desc' => $this->_work_desc,
-				'supervisor_degree' => $this->_supervisor_degree,
-				'supervisor' => $this->_supervisor,
-				'graduation_time' => date('d-m-Y', $this->_graduation_time),
-				'miniatureCache' => 'miniatures/'.$this->_miniature,
+				'country' => $this->country,
+				'application_id' => $this->application_id,
+				'edition' => $this->edition_id,
+				'user' => $this->user_id,
+				'school' => $this->school_id,
+				'department' => $this->department,
+				'degree' => $this->degree_id,
+				'work_subject' => $this->work_subject,
+				'work_type' => $this->work_type_id,
+				'work_desc' => $this->work_desc,
+				'supervisor_degree' => $this->supervisor_degree,
+				'supervisor' => $this->supervisor,
+				'graduation_time' => date('d-m-Y', $this->graduation_time),
+				'miniatureCache' => 'miniatures/'.$this->miniature,
 				'personal_data_agreement' => TRUE
 		);
 		
-		foreach($this->_files as $no => $file)
+		if ($this->files == null)
+			$this->__get('files');
+			
+		foreach($this->files as $no => $file)
 		{
 			$i = ++$no;
-			$data['file_'.$i]['application_id'] = $this->_application_id;
-			$data['file_'.$i]['file_id'] = $file->_file_id; 
-			$data['file_'.$i]['file_'.$i.'Cache'] = 'applications/'.$file->_path;
-			$data['file_'.$i]['file_annotation'] = $file->_file_desc;
+			$data['file_'.$i]['application_id'] = $this->application_id;
+			$data['file_'.$i]['file_id'] = $file->file_id; 
+			$data['file_'.$i]['file_'.$i.'Cache'] = 'applications/'.$file->path;
+			$data['file_'.$i]['file_annotation'] = $file->file_desc;
 		}
 		
 		return $data;

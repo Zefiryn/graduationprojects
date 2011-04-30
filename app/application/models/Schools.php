@@ -2,15 +2,11 @@
 
 class Application_Model_Schools extends GP_Application_Model
 {
-	protected $_school_id;
-	protected $_school_name;
-	protected $_appliations;
+	public $school_id;
+	public $school_name;
+	protected $applications;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Schools';
-	
-	protected $_set_vars = array('_school_id', '_school_name', '_applications');
-	protected $_get_vars = array('_school_id', '_school_name', '_applications');
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{
