@@ -69,7 +69,7 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 			$lang = $options['i18n']['default_language'];
 	
 		//check if the language exist
-		if ($this->_langExists($lang))
+		if ($this->_langExists($lang, $options['i18n']['translation_source']))
 			$lang = $lang;
 		else
 			$lang = $options['i18n']['default_language'];
@@ -83,15 +83,22 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		$this->_setLocale($lang);
 		
 		//set translate object
-		$this->_setTranslation($lang);
+		$this->_setTranslation($lang, $options['i18n']['translation_source']);
 		
 		return $lang;	
 	}
 	
-	private function _langExists($lang)
+	private function _langExists($lang, $source)
 	{
-		$localization = new Application_Model_Localizations();
-		return ($localization->getDbTable()->isLocalization($lang));	
+		if ($source == 'db')
+		{
+			$localization = new Application_Model_Localizations();
+			return ($localization->getDbTable()->isLocalization($lang));
+		}
+		elseif ($source == 'csv')
+		{
+			return file_exists(APPLICATION_PATH . '/configs/lang/'. $lang . '.csv');
+		}	
 	}
 	
 	private function _setLocale($lang)
@@ -104,20 +111,33 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
     	Zend_Registry::set('Zend_Locale', $zl);
 	}
 
-	private function _setTranslation($language)
+	private function _setTranslation($language, $source)
 	{
 		$view = $this->_getView();
 		$langSession = new Zend_Session_Namespace('lang');
 		
-		$lang = new Application_Model_Localizations();
-		$translations = $lang->getTranslationFromDb();
+		if ($source == 'db')
+		{
+			$translations = $this->_getTranslationFromDb();
+			$translate = new Zend_Translate('array',  $translations[$language], $language);
+			$view->translations = $translations;
+			Zend_Registry::set('translations', $translations);
+		}
+		elseif ($source == 'csv')
+		{
+			$translate = new Zend_Translate('csv', APPLICATION_PATH . '/configs/lang/'. $language . '.csv' , $language);
+		}
 		
-		Zend_Registry::set('translations', $translations);
-		$view->translations = $translations;
 		$view->lang = $langSession->lang;
 		
 		//set translation object
-		$translate = new Zend_Translate('array',  $translations[$language], $language);
     	Zend_Registry::set('Zend_Translate', $translate);
+	}
+	
+	private function _getTranslationFromDb()
+	{
+		$lang = new Application_Model_Localizations();
+		$translations = $lang->getTranslationFromDb();
+		return $translations;
 	}
 }

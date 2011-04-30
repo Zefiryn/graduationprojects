@@ -2,26 +2,20 @@
 
 class Application_Model_Settings extends GP_Application_Model
 {
-	protected $_current_edition;
-	protected $_template_default;
-	protected $_max_file_size;
-	protected $_date_format;
-	protected $_max_files;
-	protected $_work_start_date;
-	protected $_work_end_date;
-	protected $_application_deadline;
-	protected $_result_date;
+	public $current_edition;
+	public $template_default;
+	public $max_file_size;
+	public $date_format;
+	public $max_files;
+	public $work_start_date;
+	public $work_end_date;
+	public $application_deadline;
+	public $result_date;
+	protected $edition;
+	protected $template;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Settings';
 
-	protected $_set_vars = array('_current_edition', '_template_default', '_max_file_size', 
-								'_date_format', '_max_files', '_work_start_date', '_work_end_date', 
-								'_application_deadline', '_result_date');
-	protected $_get_vars = array('_current_edition', '_template_default', '_max_file_size', 
-								'_date_format', '_max_files', '_work_start_date', '_work_end_date', 
-								'_application_deadline', '_result_date');
-	
-	
 	public function __construct($id = null, array $options = null) 
 	{
 	    return parent::__construct($id, $options);
@@ -30,15 +24,15 @@ class Application_Model_Settings extends GP_Application_Model
 	public function prepareFormArray()
 	{
 		$data = array(
-			'current_edition' => $this->_current_edition->_edition_id,
-			'template_default' => $this->_template_default->_template_id,
-			'max_file_size' => ($this->_max_file_size)/1024/1024,
-			'date_format' => $this->_date_format,
-			'max_files' => $this->_max_files,
-			'work_start_date' => date('d-m-Y', $this->_work_start_date),
-			'work_end_date' => date('d-m-Y', $this->_work_end_date),
-			'application_deadline' => date('d-m-Y', $this->_application_deadline),
-			'result_date' => date('d-m-Y', $this->_result_date),
+			'current_edition' => $this->current_edition,
+			'template_default' => $this->template_default,
+			'max_file_size' => ($this->max_file_size)/1024/1024,
+			'date_format' => $this->date_format,
+			'max_files' => $this->max_files,
+			'work_start_date' => date('d-m-Y', $this->work_start_date),
+			'work_end_date' => date('d-m-Y', $this->work_end_date),
+			'application_deadline' => date('d-m-Y', $this->application_deadline),
+			'result_date' => date('d-m-Y', $this->result_date),
 		);
 		
 		return $data;
@@ -48,12 +42,12 @@ class Application_Model_Settings extends GP_Application_Model
 	{
 		parent::populateFromForm($data);
 		
-		$this->_current_edition			= (int)$this->_current_edition;
-		$this->_max_file_size			= ($this->_max_file_size) * 1024 * 1024;
-		$this->_work_start_date 		= strtotime($this->_work_start_date);
-		$this->_work_end_date 			= strtotime($this->_work_end_date);
-		$this->_application_deadline 	= strtotime($this->_application_deadline);
-		$this->_result_date			 	= strtotime($this->_result_date);
+		$this->current_edition			= (int)$this->current_edition;
+		$this->max_file_size			= ($this->max_file_size) * 1024 * 1024;
+		$this->work_start_date 			= strtotime($this->work_start_date);
+		$this->work_end_date 			= strtotime($this->work_end_date);
+		$this->application_deadline 	= strtotime($this->application_deadline);
+		$this->result_date			 	= strtotime($this->result_date);
 		
 		return $this;
 	}

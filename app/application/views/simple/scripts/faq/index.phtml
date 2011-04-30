@@ -13,9 +13,9 @@
 	<?php foreach($this->faqs as $index => $faq):?>
 	<p class="rule">
 		<span style="font-weight: bold">
-				<?php echo ++$index.'. '.$faq->_faq_question;?>
+				<?php echo ++$index.'. '.$faq->faq_question;?>
 		</span><br />
-		<?php echo  $faq->_faq_answer;?>
+		<?php echo  $faq->faq_answer;?>
 	</p> 
 	<?php endforeach; ?>
 </div>

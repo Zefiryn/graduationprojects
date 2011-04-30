@@ -2,16 +2,12 @@
 
 class Application_Model_Localizations extends GP_Application_Model
 {
-	protected $_item_id;
-	protected $_name;
-	protected $_lang_code;
-	protected $_text;
+	public $item_id;
+	public $name;
+	public $lang_code;
+	public $text;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Localizations';
-	
-	protected $_set_vars = array('_item_id', '_name', '_lang_code', '_text'); 
-	protected $_get_vars = array('_item_id', '_name', '_lang_code', '_text'); 
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{

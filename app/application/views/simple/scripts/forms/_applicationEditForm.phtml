@@ -57,10 +57,10 @@
 	<p class="clear">&nbsp;</p>
 	<p style="margin: 30px 0px 0px 0px;">
 		<?php echo $this->translate('files_info')?><br />
-		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->_max_files;?><br />
-		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->_max_file_size/1024/1024);?>mb<br />
+		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->max_files;?><br />
+		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->max_file_size/1024/1024);?>mb<br />
 	</p>
-	<?php for ($i = 1; $i <= $appSettings->_max_files; $i++) 
+	<?php for ($i = 1; $i <= $appSettings->max_files; $i++) 
 			echo $form->getSubForm('file_'.$i);
 	?>
 	

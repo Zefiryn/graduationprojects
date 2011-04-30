@@ -55,10 +55,12 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 			{
 				$edition =  $session->edition;
 				if (!$editions->editionExists($edition, TRUE))
-					$edition =  $settings->_current_edition->_edition_name;
+					$edition =  $settings->edition->edition_name;
 			}
 			else 
-				$edition =  $settings->_current_edition->_edition_name;
+			{
+				$edition =  $settings->edition->edition_name;
+			}
 		}
 		 
 

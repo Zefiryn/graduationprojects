@@ -2,31 +2,38 @@
 
 class Application_Model_Users extends GP_Application_Model
 {
-	protected $_user_id;
-	protected $_nick;
-	protected $_password;
-	protected $_name;
-	protected $_surname;
-	protected $_address;
-	protected $_phone;
-	protected $_email;
-	protected $_show_email;
+	public $user_id;
+	public $nick;
+	protected  $_password;
+	public $name;
+	public $surname;
+	public $address;
+	public $phone;
+	public $email;
+	public $show_email;
 	protected $_role;
-	protected $_applications;
+	protected $applications;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Users';
-	
-	protected $_set_vars = array('_user_id', '_nick', '_password', '_name', '_surname', 
-								'_address', '_phone', '_email', '_show_email', '_role',
-								'_applications');
-	protected $_get_vars = array('_user_id', '_nick', '_password', '_name', '_surname', 
-								'_address', '_phone', '_email', '_show_email', '_role',
-								'_applications');
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{
 	    return parent::__construct($id, $options);
+	}
+	
+	public function __get($var)
+	{
+		if ($var == '_role')
+			return $this->_role;
+	}
+	
+	public function populate(Zend_Db_Table_Row $row)
+	{
+		parent::populate($row);
+		
+		$this->_role = $row->role;
+		
+		return $this;
 	}
 	
 	public function populateFromForm($data)
@@ -77,10 +84,10 @@ class Application_Model_Users extends GP_Application_Model
 	 */
 	public function getUserFullName()
 	{
-		if ($this->_name != null || $this->_surname != null)
-			$name = $this->_name.' '.$this->_surname;
+		if ($this->name != null || $this->surname != null)
+			$name = $this->name.' '.$this->surname;
 		else
-			$name = $this->_nick;
+			$name = $this->nick;
 			
 		return $name;
 	}
@@ -94,7 +101,7 @@ class Application_Model_Users extends GP_Application_Model
 		foreach($rowset as $row)
 		{
 			$user = new $this;
-			$users[] = $user->populateWithReference($row);
+			$users[] = $user->populate($row);
 		}
 		
 		return $users;
@@ -103,14 +110,14 @@ class Application_Model_Users extends GP_Application_Model
 	public function prepareFormArray()
 	{
 		$data = array(
-			'user_id' => $this->_user_id,
-			'name' => $this->_name,
-			'surname' => $this->_surname,
-			'nick' => $this->_nick,
-			'phone' => $this->_phone,
-			'address' => $this->_address,
-			'email' => $this->_email,
-			'show_email' => $this->_show_email,
+			'user_id' => $this->user_id,
+			'name' => $this->name,
+			'surname' => $this->surname,
+			'nick' => $this->nick,
+			'phone' => $this->phone,
+			'address' => $this->address,
+			'email' => $this->email,
+			'show_email' => $this->show_email,
 			'role' => $this->_role
 		);
 		

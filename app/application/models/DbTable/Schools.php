@@ -8,18 +8,17 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     protected $_primary = 'school_id';
 
     /**
-     * An array of child tables information
-     * @var array
-     */
-    protected $_referenceMap = array();
-	
-	/**
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array();
+	protected $_hasMany = array(
+		'applications' => array(
+			'model' => 'Application_Model_Applications',
+			'refColumn' => 'school_id'
+		)
+	);
 	
-	/**
+    /**
      * Save or update school data in the database 
      * 
      * @param Application_Model_School $school

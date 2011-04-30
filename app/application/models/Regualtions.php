@@ -2,19 +2,13 @@
 
 class Application_Model_Regualtions extends GP_Application_Model
 {
-	protected $_paragraph_id;
-	protected $_edition;
-	protected $_regulation_lang;
-	protected $_paragraph_no;
-	protected $_paragraph_text;
+	public $paragraph_id;
+	public $regulation_lang;
+	public $paragraph_no;
+	public $paragraph_text;
+	protected $edition;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Regulations';
-	
-	protected $_set_vars = array('_paragraph_id', '_edition', '_regulation_lang', 
-								'_paragraph_no', '_paragraph_text'); 
-	protected $_get_vars = array('_paragraph_id', '_edition', '_regulation_lang', 
-								'_paragraph_no', '_paragraph_text'); 
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{
@@ -28,13 +22,13 @@ class Application_Model_Regualtions extends GP_Application_Model
 		$editions = new Application_Model_Editions();
 		$editions->getEdition($edition);
 		
-		$rowset = $this->getDbTable()->getRegulations($lang->getLocale(), $editions->_edition_id);
+		$rowset = $this->getDbTable()->getRegulations($lang->getLocale(), $editions->edition_id);
 		
 		$regulations = array();
 		foreach($rowset as $row)
 		{
 			$paragraph = new $this;
-			$regulations[] = $paragraph->populateWithReference($row);
+			$regulations[] = $paragraph->populate($row);
 		}
 		
 		return($regulations);	

@@ -24,30 +24,18 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
      * An array of child tables information
      * @var array
      */
-    protected $_referenceMap = array(
-		'Editions' => array(
-    		'objProperty' => '_current_edition',
-			'columns' => array('current_edition'),
-			'refTableClass' => 'Application_Model_DbTable_Editions',
-			'refColumns' => array('edition_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+    protected $_belongsTo = array(
+		'edition' => array(
+    		'model' => 'Application_Model_Editions',
+			'column' => 'edition_id',
+			'refColumn' => 'current_edition'
 		),
-		'TemplateSettings' => array(
-    		'objProperty' => '_template_default',
-			'columns' => array('template_default'),
-			'refTableClass' => 'Application_Model_DbTable_TemplateSettings',
-			'refColumns' => array('template_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+		'template' => array(
+    		'model' => 'Application_Model_TemplateSettings',
+			'column' => 'template_id',
+			'refColumn' => 'template_default'
 		)
 	);
-	
-	/**
-	 * An array of parent table information
-	 * @var array
-	 */
-	protected $_dependentTables = array();
 	
 	/**
 	 * constructor
@@ -64,7 +52,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     {
     	$select = $this->select()->order('current_edition DESC')->limit('1');
     	$row = $this->fetchRow($select);
-    	$settings->populateWithReference($row);
+    	$settings->populate($row);
     	
     	return $settings;
     }
@@ -72,6 +60,8 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     
     public function save(Application_Model_Settings $settings)
     {
+    	parent::save($settings);
+    	/*
     	$row = $this->fetchAll()->current();
     	
     	$row->current_edition 		= $settings->_current_edition;
@@ -90,6 +80,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
     	}
 
     	return $settings;
+    	*/
     }
 
 }

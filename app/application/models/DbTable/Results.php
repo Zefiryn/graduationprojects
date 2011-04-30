@@ -26,39 +26,36 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
      * An array of child tables information
      * @var array
      */
-    protected $_referenceMap = array(
-		'Editions' => array(
-    		'objProperty' => '_edition',
-			'columns' => array('edition_id'),
-			'refTableClass' => 'Application_Model_DbTable_Editions',
-			'refColumns' => array('edition_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+     protected $_belongsTo = array(
+    
+    	'edition' => array(
+    		'model' => 'Application_Model_Editions',
+    		'column' => 'edition_id',
+			'refColumn' => 'edition_id'
+       	),
+
+       	'degree' => array(
+       		'model' => 'Application_Model_Degrees',
+			'column' => 'degree_id',
+			'refColumn' => 'degree_id'
 		),
-		'Degrees' => array(
-    		'objProperty' => '_degree',
-			'columns' => array('degree_id'),
-			'refTableClass' => 'Application_Model_DbTable_Degrees',
-			'refColumns' => array('degree_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
-		),
-		'WorkTypes' => array(
-    		'objProperty' => '_work_type',
-			'columns' => array('work_type_id'),
-			'refTableClass' => 'Application_Model_DbTable_WorkTypes',
-			'refColumns' => array('work_type_id'),
-			'onDelete' => self::CASCADE,
-			'onUpdate' => self::RESTRICT
+		
+		'work_type' => array(
+       		'model' => 'Application_Model_WorkTypes',
+			'column' => 'work_type_id',
+			'refColumn' => 'work_type_id'
 		)
-	);
+    );
 	
 	/**
 	 * An array of parent table information
 	 * @var array
 	 */
-	protected $_dependentTables = array(
-		'_files' => 'Application_Model_DbTable_ResultFiles',
+	protected $_hasMany = array(
+		'files' => array(
+			'model' => 'Application_Model_ResultFiles',
+			'refColumn' => 'result_id',
+		),
 	);
 	
 	/**

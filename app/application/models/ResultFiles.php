@@ -2,16 +2,12 @@
 
 class Application_Model_Files extends GP_Application_Model
 {
-	protected $_file_id;
-	protected $_result;
-	protected $_path;
-	protected $_file_desc;
+	public $file_id;
+	public $path;
+	public $file_desc;
+	protected $result;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_ResultFiles';
-	
-	protected $_set_vars = array('_file_id', '_result', '_path', '_file_desc');
-	protected $_get_vars = array('_file_id', '_result', '_path', '_file_desc');
-	
 	
 	public function __construct($id = null, array $options = null) 
 	{

@@ -71,36 +71,36 @@
 		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
 			<td class="left" style="width: 15px;vertical-align: top;">
 				<?php if ($this->user->_role == 'admin'):?>
-				<input type="checkbox" id="app<?php echo $application->_application_id?>" name="app[<?php echo $application->_application_id?>]" class="admin_button" />
-				<img class="ui-icon ui-icon-check no-block" 
+				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
 				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
 				<?php endif;?>
 			</td>	
 			<td class="normal" style="width: 90px;">
-				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" 
+				<a href="<?php echo $this->baseUrl('/assets/miniatures/'.$application->miniature)?>" 
 					class="miniature"
-					rel="application_<?php echo $application->_application_id;?>" 
-					title="<?php echo $application->_user->getUserFullName();?>">
-					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$application->_miniature)?>" width="100px" height="100px" alt="thumbnail" />
+					rel="application_<?php echo $application->application_id;?>" 
+					title="<?php echo $application->user->getUserFullName();?>">
+					<img src="<?php echo $this->baseUrl('/assets/miniatures/'.$application->miniature)?>" width="100px" height="100px" alt="thumbnail" />
 				</a>
 				</td>
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
 			<td class="normal" style="width: 100px;">
-				<a href="<?php echo $this->url(array('id' => $application->_application_id, 'lang' => $this->lang), 'lang_application');?>">
-					<?php echo $application->_user->getUserFullName();?>
+				<a href="<?php echo $this->url(array('id' => $application->application_id, 'lang' => $this->lang), 'lang_application');?>">
+					<?php echo $application->user->getUserFullName();?>
 				</a>
 			</td>
-			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->_country);?></td>
-			<td class="normal" style="width: 85px;"><?php echo $application->_work_subject;?></td>
-			<td class="normal" style="width: 35px;"><?php echo $application->_work_type->_work_type_name;?></td>
+			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->country);?></td>
+			<td class="normal" style="width: 85px;"><?php echo $application->work_subject;?></td>
+			<td class="normal" style="width: 35px;"><?php echo $application->work_type->work_type_name;?></td>
 			<td class="normal" style="width: 50px;">
-				<?php foreach($application->_files as $id => $file):?>
-				<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->_path);?>"
+				<?php foreach($application->files as $id => $file):?>
+				<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
 					class="application"
-					rel="application_<?php echo $application->_application_id;?>"
-					title="<?php echo $file->_file_desc;?>">
+					rel="application_<?php echo $application->application_id;?>"
+					title="<?php echo $file->file_desc;?>">
 					<?php echo $this->translate('file').' '.++$id;?>, 
 				</a>
 				<?php endforeach;?>

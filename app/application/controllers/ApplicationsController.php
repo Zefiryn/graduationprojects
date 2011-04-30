@@ -15,7 +15,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	$edition->getEditionByName(Zend_Registry::get('edition'));
     	
     	$application = new Application_Model_Applications();
-    	$applications = $application->getApplications($edition->_edition_id, $this->_getSort());
+    	$applications = $application->getApplications($edition->edition_id, $this->_getSort());
     	$this->view->statistics = $this->_createStatistics($applications);
     	$this->view->applications = $applications;
     }
@@ -40,7 +40,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			
 			if($form->leave->isChecked())
 			{
-				$this->_deleteCachedFiles($request->getPost());
+				$this->deleteCachedFiles($request->getPost());
 				$this->_redirect('/index');	
 			}
 			
@@ -61,11 +61,11 @@ class ApplicationsController extends Zefir_Controller_Action
 					$user->populateFromForm($data['user']);
 					$user->save();
 					
-					if ($user->_user_id != null)
+					if ($user->user_id != null)
 					{
 						$application = new Application_Model_Applications();
 						$application->populateFromForm($form->getValues());
-						$application->_user = $user->_user_id;
+						$application->user = $user->user_id;
 						$application->save();
 						
 						$this->flashMe('application_added', 'SUCCESS');
@@ -87,8 +87,8 @@ class ApplicationsController extends Zefir_Controller_Action
 		}
 		else
 		{//no form has been submited
-			
-			$form->getElement('edition')->setValue($appSettings->_current_edition->_edition_id);
+
+			$form->getElement('edition')->setValue($appSettings->edition->edition_id);
 			
 		}
 		
@@ -111,7 +111,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 			$id = $request->getParam('application_id', '');
 			if ($this->user->_role != 'admin' 
-				&& $this->user->_applications[0]->_application_id != $id)
+				&& $this->user->applications[0]->application_id != $id)
 			{
 				$this->flashMe('not_allowed', 'FAILURE');
 				$this->_redirect('/index');
@@ -131,7 +131,7 @@ class ApplicationsController extends Zefir_Controller_Action
     		if ($form->isValid($request->getPost()))
     		{
     			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
-				$this->_handleFiles($form, $cached, 'edit');
+				$this->handleFiles($form, $cached, 'edit');
     			if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
 				{
 					$application = new Application_Model_Applications();
@@ -139,23 +139,22 @@ class ApplicationsController extends Zefir_Controller_Action
 					$application->save();
 					
 					$this->flashMe('application_edited', 'SUCCESS');
-					$this->_redirectToRoute(array('id' => $application->_application_id), 'application');
+					$this->_redirectToRoute(array('id' => $application->application_id), 'application');
 				}
 				
     		}
     		else
     		{
     			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
-    			$this->_handleFiles($form, $cached, 'edit');
+    			$this->handleFiles($form, $cached, 'edit');
     		}
 		}
 		else
 		{
 			$id = $request->getParam('id', '');
 			
-			//check privileges
 			if ($this->user->_role != 'admin' 
-				&& $this->user->_applications[0]->_application_id != $id)
+				&& $this->user->applications[0]->application_id != $id)
 			{
 				$this->flashMe('not_allowed', 'FAILURE');
 				$this->_redirect('/index');
@@ -165,7 +164,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			if ($id != null)
 			{
 				$application = new Application_Model_Applications($id);
-				if ($application->_application_id != null)
+				if ($application->application_id != null)
 					$form->populate($application->prepareFormArray());
 				else 
 				{
@@ -185,7 +184,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$id = $request->getParam('id', '');
 
     	if ($this->user->_role != 'admin' 
-    		&& $this->user->_applications[0]->_application_id != $id)
+    		&& $this->user->applications[0]->application_id != $id)
 		{
 			$this->flashMe('not_allowed', 'FAILURE');
 			$this->_redirect('/index');
@@ -208,7 +207,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			
 		if ($this->user->_role == 'admin'
 			|| $this->user->_role == 'juror'
-			|| $this->user->_applications[0]->_application_id == $id)
+			|| $this->user->applications[0]->application_id == $id)
 		{
 			$application = new Application_Model_Applications($id);
 			$this->view->application = $application;
@@ -243,7 +242,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	$appSettings = Zend_Registry::get('appSettings');
     	$cached = FALSE;
     	
-    	for($i = 1; $i <= $appSettings->_max_files; $i++)
+    	for($i = 1; $i <= $appSettings->max_files; $i++)
     	{
     		$fileCache = $params['file_'.$i]['file_'.$i.'Cache'];
     		if ($type == 'new')
@@ -262,7 +261,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	$appSettings = Zend_Registry::get('appSettings');
     	$options  = Zend_Registry::get('options');
     	$newFile = FALSE; 
-    	for($i = 1; $i <= $appSettings->_max_files; $i++)
+    	for($i = 1; $i <= $appSettings->max_files; $i++)
 		{
 			$sf = $form->getSubForm('file_'.$i);
 			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i, 'edit');
@@ -321,10 +320,10 @@ class ApplicationsController extends Zefir_Controller_Action
     	
     	foreach ($applications as $application)
     	{
-    		$statistics['all'][$application->_work_type->_work_type_name]++;
+    		$statistics['all'][$application->work_type->work_type_name]++;
     		$statistics['all']['all']++;
-    		$statistics[$application->_country][$application->_work_type->_work_type_name]++;
-    		$statistics[$application->_country]['all']++;
+    		$statistics[$application->country][$application->work_type->work_type_name]++;
+    		$statistics[$application->country]['all']++;
     	}
     	
     	return $statistics;
