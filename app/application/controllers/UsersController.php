@@ -21,7 +21,7 @@ class UsersController extends Zefir_Controller_Action
 		$user = new Application_Model_Users($id);
 		
 		if ($this->view->user->_role == 'admin' 
-			|| $this->view->user->_user_id == $user->_user_id)
+			|| $this->view->user->user_id == $user->user_id)
 		{
 			$this->view->account = $user;
 		}

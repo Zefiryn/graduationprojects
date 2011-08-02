@@ -28,7 +28,7 @@
 							array('user' => $user));	
 			}?>
 			<h4>
-				<a href="<?php echo $this->url(array('id' => 1), 'user');?>">
+				<a href="<?php echo $this->url(array('id' => $user->user_id), 'user');?>">
 					<?php echo $user->getUserFullName();?>
 				</a>
 			</h4>
