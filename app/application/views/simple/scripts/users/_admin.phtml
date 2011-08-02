@@ -6,12 +6,12 @@
 			title="<?php echo $this->translate('promote');?>" />
 	</a>
 	<?php endif;?>
-	<a href="<?php echo $this->url(array('id' => 1), 'edit_user');?>">
+	<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'edit_user');?>">
 		<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 			alt="<?php echo $this->translate('edit');?>" 
 			title="<?php echo $this->translate('edit');?>" />
 	</a>
-	<a href="<?php echo $this->url(array('id' => 1), 'delete_user');?>"
+	<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'delete_user');?>"
 		class="delete"> 
 		<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
 			del="<?php echo $this->translate('delete');?>" 

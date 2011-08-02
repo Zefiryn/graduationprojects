@@ -1,5 +1,5 @@
 <?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'account/'.$this->account->_user_id, 'lang' => $this->lang));
+			array('link' => 'account/'.$this->account->user_id, 'lang' => $this->lang));
 ?>
 <?php echo $this->partial('partials/delete_dialog.phtml', 
 			array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
@@ -13,33 +13,33 @@
 							array('user' => $this->account));	?>
 		<p>
 			<span><?php echo $this->translate('nick');?></span>: 
-			<?php echo $this->account->_nick;?>
+			<?php echo $this->account->nick;?>
 		</p>
 		
 		<p>
 			<span><?php echo $this->translate('email');?></span>: 
-			<?php echo $this->account->_email;?>
+			<?php echo $this->account->email;?>
 		</p>
 		
-		<?php if ($this->account->_phone != null):?>
+		<?php if ($this->account->phone != null):?>
 		<p>
 			<span><?php echo $this->translate('phone');?></span>: 
-			<?php echo $this->account->_phone;?>
+			<?php echo $this->account->phone;?>
 		</p>
 		<?php endif;?>
 		
-		<?php if ($this->account->_address != null):?>
+		<?php if ($this->account->address != null):?>
 		<p>
 			<span><?php echo $this->translate('address');?></span>: 
-			<?php echo $this->account->_address;?>
+			<?php echo $this->account->address;?>
 		</p>
 		<?php endif; ?>
 		
-		<?php if ($this->account->_applications != null):?>
+		<?php if ($this->account->applications != null):?>
 		<p>
 			<span><?php echo $this->translate('application');?></span>:
-			<a href="<?php echo $this->url(array('id' => $this->account->_applications[0]->_application_id), 'application');?>"> 
-				<?php echo $this->account->_applications[0]->_work_subject;?>
+			<a href="<?php echo $this->url(array('id' => $this->account->applications[0]->application_id), 'application');?>"> 
+				<?php echo $this->account->applications[0]->work_subject;?>
 			</a>
 		</p>
 		<?php endif;?>

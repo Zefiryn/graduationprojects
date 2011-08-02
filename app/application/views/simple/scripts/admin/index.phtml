@@ -15,7 +15,7 @@
 		<?php echo $this->translate('users');?>
 	</a><br />
 	<?php else:?>
-	<a class="button_link" href="<?php echo $this->url(array('id' => $this->user->_user_id), 'user');?>">
+	<a class="button_link" href="<?php echo $this->url(array('id' => $this->user->user_id), 'user');?>">
 		<?php echo $this->translate('user_account');?>
 	</a><br />
 	<?php endif;?>

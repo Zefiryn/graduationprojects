@@ -14,8 +14,8 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
 	protected $_hasMany = array(
 		'applications' => array(
 			'model' => 'Application_Model_Applications',
-			'refColumn' => 'user_id'
-		)
+			'refColumn' => 'user_id',
+		),
 	);
 	
 	/**

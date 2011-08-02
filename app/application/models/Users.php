@@ -25,6 +25,8 @@ class Application_Model_Users extends GP_Application_Model
 	{
 		if ($var == '_role')
 			return $this->_role;
+		else
+			return parent::__get($var);		
 	}
 	
 	public function populate(Zend_Db_Table_Row $row)
