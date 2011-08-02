@@ -1,14 +1,14 @@
 <?php
 /**
- * @package Zefir_Action_Helper_Flash
+ * @package Zefir_Action_Helper_LoginForm
  */
 
 /**
- * Get flash message after redirection
+ * Create login form for not loogged user
  * @author Zefiryn
- * @since Jan 2011
+ * @since Apr 2011
  */
-class Zefir_Action_Helper_Flash extends Zend_Controller_Action_Helper_Abstract
+class Zefir_Action_Helper_LoginForm extends Zend_Controller_Action_Helper_Abstract
 {
 	/**
 	 * Zend_View object
@@ -24,18 +24,13 @@ class Zefir_Action_Helper_Flash extends Zend_Controller_Action_Helper_Abstract
 	public function preDispatch()
 	{
     	$view = $this->_getView();
-    	$flash = Zend_Session::namespaceGet('flash');
-    	if (isset($flash['message']) && $flash['message'] != NULL)
+    	$role = Zend_Registry::get('role');
+    	
+    	if ($role == 'guest')
     	{
-    		$view->flash = $flash['message'];
-    		$view->flash_bg = $flash['message_bg'];
-    	}	
-    	else 
-    		$view->flash = '';
-    		
-    	$newflash = new Zend_Session_Namespace('flash');
-		$newflash->message = NULL;
-		$newflash->message_bg = NULL;
+    		$form = new Application_Form_Login();
+    		$view->loginForm = $form;
+    	}
 		
 	}
 	

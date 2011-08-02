@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS files, result_files, applications, results, degrees, schools, work_types,
-jurors, faq, regulations, news, settings, template_settings, users,editions, localizations;
+jurors, faq, regulations, news, settings, template_settings, users,editions, localizations, languages, captions;
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -7,13 +7,27 @@ CREATE TABLE editions (
 	PRIMARY KEY (edition_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE localizations (
-	item_id int NOT NULL AUTO_INCREMENT,
+CREATE TABLE languages (
+	lang_id int NOT NULL AUTO_INCREMENT,
 	name varchar(60) not null,
 	lang_code char(4) not null,
-	text text not null,
-	PRIMARY KEY (item_id)
+	PRIMARY KEY (lang_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE localizations (
+	item_id int NOT NULL AUTO_INCREMENT,
+	caption_id int not null,
+	lang_id int not null,
+	text text not null,
+	PRIMARY KEY (item_id),
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(caption_id)
+		REFERENCES captions(caption_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE regulations (
 	paragraph_id int NOT NULL AUTO_INCREMENT,

@@ -203,6 +203,245 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	}
 	
 	/**
+	 * Copy file submited by the form
+	 * 
+	 * @access public
+	 * @param Zefir_Application_Model $object
+	 * @param string $property
+	 * @param string $upload_dir
+	 * @param Zefir_Application_Model $oldData
+	 * @throws Zend_Exception
+	 * @return Zefir_Application_Model
+	 */
+	protected function _copyFile($object, $property, $upload_dir, $uploadedFileName, $oldData)
+    {
+    	$copy = TRUE;
+    	
+    	$cachedFile = strstr($object->$property, '/') ? 
+    		substr($object->$property, strpos($object->$property, '/') + 1) :	$object->$property;
+
+    	if ($oldData != null)
+    	{
+    		//no new file has been sent
+    		if ($oldData->$property == $cachedFile)
+    			$copy = FALSE;
+    	}
+    	
+    	if ($copy)
+    	{
+    		//copy new file
+	    	$extension = Zefir_Filter::getExtension($object->$property);
+			$dirName = APPLICATION_PATH.'/../public'.$upload_dir.'/';
+	    	
+    		$fileName = $this->_getNewName($dirName , $uploadedFileName.'.'.$extension);
+	    	$dir = substr($upload_dir, -1) == '/' ? $upload_dir : $upload_dir.'/';
+	    	
+	    	if ($this->_copy($cachedFile, $dir.$fileName))
+	    	{
+	    		$object->$property = $fileName;
+	    		
+	    		//get thumbnails data and create it
+	    		foreach($object->getThumbnails() as $key)
+	    		{
+	    			$this->_resize($object, $property, APPLICATION_PATH.'/../public'.$dir, $key);
+	    		}
+	    		
+	    		if ($oldData != null)
+	    		{//delete old image
+	    			$this->_deleteOldImage($oldData);
+	    		}
+	    	}
+	    	else
+	    	{
+	    		if ($oldData != null)
+	    		{
+	    			throw new Zend_Exception('Couldn\'t save file');
+	    		}
+	    	}
+    	}
+    	else
+    	{
+    		$object->$property = substr($object->$property, strpos($object->$property, '/') + 1); 
+    	}
+    	
+    	return $object;
+    }
+    
+    /**
+     * Create image thumbnail
+     * 
+     * @param Zefir_Application_Model $object
+     * @param string $property
+     * @param sitr $dir
+     * @param string $key
+     * @throws Zend_Exception
+     */
+	protected function _resize(Zefir_Application_Model $object, $property, $dir, $key) 
+	{
+		//get image dimensions
+		$imagedata = @getimagesize($dir.$object->$property);
+		if(!$imagedata) {
+			throw new Zend_Exception('Nie udało się odczytać rozmiarów orginalnej fotografii.');
+		}
+
+		$oldWidth = (int)$imagedata[0];
+		$oldHeight = (int)$imagedata[1];
+
+		$sourceX = 0;
+		$sourceY = 0;
+		
+		//set dimensions for the thumbnail
+		$newHeight = $oldHeight;
+		$newWidth = $oldWidth;
+		
+		$sourceHeight = $oldHeight;
+		$sourceWidth = $oldWidth;
+		
+		//get thumbnail settings
+		$resizeData = $object->getImageData($key);
+		$height = $resizeData['height'];
+		$width = $resizeData['width'];
+		$crop = $resizeData['crop'];
+		
+		//set paths to the files
+		$inputFileName = $dir.$object->$property;
+		$ext = Zefir_Filter::getExtension($object->$property);
+		$outputFileName = $dir.str_replace('.'.$ext, '_'.$key.'.'.$ext, $object->$property);
+		
+		if($oldHeight <= $height && $oldWidth <= $width) 
+		{
+			//image is smaller than the thumbnail; do not resize, just copy
+			$newHeight = $oldHeight;
+			$newWidth = $oldWidth;
+		} 
+		elseif(isset($resizeData['ratio'])) 
+		{
+			//calculate new dimension according to ratio
+			if ($resizeData['ratio'] == 'width')
+			{
+				$newWidth = $width;
+				$newHeight = $this->_setRatio($oldWidth, $width, $oldHeight); 
+			}
+			else
+			{
+				$newHeight = $height;
+				$newWidth = $this->_setRatio($oldHeight, $height, $oldWidth);
+			}
+		} 
+		else 
+		{
+			if($crop) 
+			{
+				$sourceWidth = round($oldHeight / $height * $width);
+				$sourceX = round(($oldWidth - $sourceWidth) / 2);
+				$newWidth = $width;
+				$newHeight = $height;
+			} 
+			else 
+			{
+				$newWidth = $width;
+				$newHeight = round(($oldHeight * $newWidth) / $oldWidth);
+			}
+		}
+		
+		switch($imagedata['mime']) 
+		{
+			case 'image/jpeg': 
+				$createFunction = 'imagecreatefromjpeg';
+				$saveFunction = 'imagejpeg';
+				$quality = 100;
+				break;
+			case 'image/png': 
+				$createFunction = 'imagecreatefrompng';
+				$saveFunction = 'imagepng';
+				$quality = 0;
+				break;
+			case 'image/gif': 
+				$createFunction = 'imagecreatefromgif';
+				$saveFunction = 'imagegif';
+				$quality = null;
+				break;
+			default:
+				throw new Zend_Exception('Załadowano nieobsługiwany typ pliku.');
+		}
+
+		//przetwarzanie obrazu
+		$image2 = imagecreatetruecolor($newWidth, $newHeight);
+		$image1 = $createFunction($dir.$object->$property);
+		
+		//set full alpha transparency for png files
+		if ($imagedata['mime'] == 'image/png')
+		{
+			imagealphablending($image2, false);
+			imagealphablending($image1, false);
+			imagesavealpha($image2, true);
+			imagesavealpha($image1, true);			
+		}
+		
+		if(!$image1 || !$image2) 
+		{
+			throw new Zend_Exception('Tworzenie miniatury nie powiodło się');
+		}
+		
+		if($newHeight > $oldHeight && $newWidth > $oldWidth) 
+		{
+			// Jeśli nadesłany obrazek jest mniejszy niż nakazane wymiary, to przenoszony jest plik,
+			// żeby pominąć phpowe funkcje, które robią jakieś rozmycia podobdno
+			if(!copy($inputFileName, $outputFileName)) 
+			{
+				throw new Zend_Exception('Kopiowanie pliku nie powiodło się. '.$outputFileName);
+			}
+		} 
+		else 
+		{
+			if(!@imagecopyresampled($image2, $image1, 0, 0, $sourceX, $sourceY, $newWidth, $newHeight, $sourceWidth, $sourceHeight)) 
+			{
+				throw new Zend_Exception('Tworzenie miniatury nie powiodło się.2');
+			}
+		
+			//zapisywanie miniaturki
+			if(!$saveFunction($image2, $outputFileName, $quality)) 
+			{
+				throw new Zend_Exception('Zapisywanie miniatury nie powiodło się.3.'.$outputFileName);
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Set an image dimension to save ration according to the fixed second diemnsion
+	 *  
+	 * @param integer $imageSetDimension
+	 * @param integer $newSetDimension
+	 * @param integer $imageChangedDimension
+	 * @return integer $newChangedDimension
+	 */
+	protected function _setRatio($imageSetDimension, $newSetDimension, $imageChangedDimension)
+	{
+		$scale = $newSetDimension/$imageSetDimension;
+		$newChangedDimension= floor($imageChangedDimension * $scale);
+		return $newChangedDimension;
+	}
+	
+	/**
+	 * Delete all old images
+	 * 
+	 * @param Zefir_Application_Model $object
+	 */
+	protected function _deleteOldImage(Zefir_Application_Model $object)
+	{
+		$property = $object->_image['property'];
+		foreach ($object->getThumbnails() as $style)
+		{
+			unlink(APPLICATION_PATH.'/../public'.$object->_image['dir'].'/'.$object->getImage($style));
+		}
+		unlink(APPLICATION_PATH.'/../public'.$object->_image['dir'].'/'.$object->$property);
+		
+		return TRUE;
+	}
+	
+	/**
 	 * Select new name for an existing file
 	 * @access private
 	 * @param string $dir
@@ -213,6 +452,9 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 	{
 		$ext = substr($file, strrpos($file, '.'));
 		$rawname = substr($file, 0, strrpos($file, '.'));
+		//cut filename to 20 characters
+		if (strlen($rawname) > 20)
+			$rawname = substr($rawname, 0, 18);
 		$name = '';
 		
 		for($i = 1; $name == ''; $i++)
@@ -240,13 +482,23 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
     	
     	foreach($column as $col)
     	{
-    		$property = '_'.$col;
-       		$where = $this->getAdapter()->quoteInto($col.' = ?', $object->$property);
+       		$where = $this->getAdapter()->quoteInto($col.' = ?', $object->$col);
     	}
-
+		
     	parent::delete($where);
     }
     
+    /**
+     * Delete rows from the database using just zend_db delete method
+     *  
+     * @access public
+     * @param mixed $where
+     * @return void;
+     */
+    public function simpleDelete($where)
+    {
+    	parent::delete($where);
+    }
     
     /**
      * Save object data in the database
@@ -255,10 +507,10 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
      * @param Zefir_Application_Model $object
      * @return Zefir_Application_Model $object
      */
-    public function save(Zefir_Application_Model $object)
+	public function save(Zefir_Application_Model $object)
     {
     	//get the name of the primary column
-    	$primary = is_array($this->_primary) ? $this->_primary[1] : $this->_primary;
+    	$primary = is_array($this->_primary) ? array_shift($this->_primary) : $this->_primary;
     	
     	//create name of the property that holds primary column data
     	$id = $object->$primary;
@@ -308,5 +560,10 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		$row = $this->fetchRow($select);
 		
 		return $row->rows;
+	}
+	
+	public function rerunResize($object, $property, $dir, $key)
+	{
+		return $this->_resize($object, $property, $dir, $key);
 	}
 }
