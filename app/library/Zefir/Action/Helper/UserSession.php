@@ -60,7 +60,6 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 
     	Zend_Registry::set('role', $user->_role);
     	$view->user= $user;
-    	$this->getActionController()->user = $user;
     	$view->logged = $auth->hasIdentity();
 	}
 	
@@ -100,6 +99,7 @@ class Zefir_Action_Helper_UserSession extends Zend_Controller_Action_Helper_Abst
 			}
 			else 
 			{
+				$this->getActionController()->flashMe('not_allowed', 'FAILURE');
 				$redirect->gotoUrlAndExit('/index');
 			}
 		}

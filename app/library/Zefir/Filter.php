@@ -26,12 +26,23 @@ class Zefir_Filter
 	 * @param string $encoding
 	 * @return string
 	 */
-	public static function getFirstLetter($string, $upper = TRUE, $encoding = 'utf8')
+	public static function getFirstLetter($string, $upper = TRUE, $encoding = 'UTF-8')
 	{
+		$end = FALSE;	
+		$letters = 'abcdefghijklmnopqrstuwxyzáčďéěíňóřšťúůýžàáâãäåæçèéêëíìíîïñòóôõöùúûüýÿăąćĉċčĕęěĝğġģĥĵķĸĺĻļłńņňŏŕŗřśŝşšţťũŭŰűųŵŷýźżž';
+		
+		$sign = mb_substr($string, 0, 1, $encoding);
+		
+		if ($sign == '„')
+		{	
+			$sign = mb_substr($string, 1, 1, $encoding);
+			
+		}
+		
 		if ($upper == TRUE)
-			return mb_strtoupper(mb_substr($string, 0, 1, $encoding), $encoding);
+			return mb_strtoupper($sign, $encoding);
 		else
-			return mb_substr($string, 0, 1, $encoding);
+			return $sign;
 	}
 
 	/**
@@ -43,7 +54,7 @@ class Zefir_Filter
 	 * @param string $encoding
 	 * @return string
 	 */
-	public static function getLastChar($string, $upper = TRUE, $encoding = 'utf8')
+	public static function getLastChar($string, $upper = TRUE, $encoding = 'UTF-8')
 	{
 		if ($upper == TRUE)
 			return mb_strtoupper(mb_substr($string, -1, 1, $encoding), $encoding);
@@ -101,6 +112,16 @@ class Zefir_Filter
 			$ext = '';
 			
 		return $ext;
+	}
+	
+	/**
+	 * Strip bbcodes from the text
+	 * @param string $string
+	 */
+	public static function stripBbcode($string)
+	{
+		$string = preg_replace('/\[.+\]/', null, $string);
+		return $string;
 	}
 }
 

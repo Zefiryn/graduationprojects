@@ -52,7 +52,9 @@ class Zefir_Application_Model {
 	    if ($id != null)
 	    {
 	    	$row = $this->getDbTable()->find($id)->current();
-	    	$this->populate($row);	
+
+	    	if ($row)
+	    		$this->populate($row);	
 	    }
 	    
 	    return $this;
@@ -133,6 +135,14 @@ class Zefir_Application_Model {
 
 	}
 	
+	/**
+	 * Magic function for calling methods
+	 * 
+	 * @access public
+	 * @param string $name
+	 * @param mixed $args
+	 * @return mixed
+	 */
 	public function __call($name, $args)
 	{
 		if (preg_match('/^_has[a-zA-Z]+$/', $name))
@@ -170,20 +180,7 @@ class Zefir_Application_Model {
 	public function toArray() 
 	{
             
-    	$array = array();
-    	$properties = $this->getProperties();
-            
-	    foreach($properties as $property) 
-	    {
-    	    if($property->isProtected()) 
-    	    {
-            	$key = substr($property->getName(),1);
-	            $var = '_' . $key;
-    	        $array[$key] = $this->$var;
-        	}
-                
-    	}
-    	return $array;
+    	return get_object_vars($this);
 	}
 	
 	public function prepareFormArray()
@@ -277,7 +274,14 @@ class Zefir_Application_Model {
 	{
 		foreach ($data as $key => $value)
 		{
+			if (strstr($key, 'Cache'))
+			{
+				$key = substr($key, 0, strpos($key, 'Cache'));
+			}
+			
 			$this->$key = $value;
+			
+			
 		}
 		
 		return $this;
@@ -305,11 +309,37 @@ class Zefir_Application_Model {
 		$this->getDbTable()->delete($this);
 	}
 	
+	/**
+	 * Update new model data in the database
+	 * 
+	 * @access public
+	 * @return Zefir_Application_Model
+	 */
 	public function update()
 	{
-		$this->getDbTable()->save($this->_prepareUpdate());	
+		return $this->getDbTable()->save($this->_prepareUpdate());	
 	}
 	
+	public function search($phrase)
+	{
+		$rowset = $this->getDbTable()->search($phrase);
+		
+		$found = array();
+		foreach($rowset as $row)
+		{
+			$model = new $this;
+			$found[] = $model->populate($row);
+		}
+		
+		return $found;
+	}
+	
+	/**
+	 * Prepare data for the update
+	 * 
+	 * @access private
+	 * @return Zefir_Application_Model
+	 */
 	protected function _prepareUpdate()
 	{
 		$map = $this->getDbTable()->getReferenceMap();
@@ -323,6 +353,13 @@ class Zefir_Application_Model {
 		return $this;
 	}
 	
+	/**
+	 * Check whether given property has belongs_to relation to other model 
+	 * 
+	 * @access private
+	 * @param string $name
+	 * @return array|boolean
+	 */
 	private function _isBelongsTo($name)
 	{
 		$belongsToArray = $this->getDbTable()->getBelongsTo();
@@ -333,6 +370,13 @@ class Zefir_Application_Model {
 			return FALSE;
 	}
 	
+	/**
+	 * Check whether given property has has_many relation to other model 
+	 * 
+	 * @access private
+	 * @param string $name
+	 * @return array|boolean
+	 */
 	private function _isHasMany($name)
 	{
 		$hasManyArray = $this->getDbTable()->getHasMany();
@@ -343,6 +387,13 @@ class Zefir_Application_Model {
 			return FALSE;
 	}
 	
+	/**
+	 * Check whether given model has any child according to the given property 
+	 * 
+	 * @access private
+	 * @param string $property
+	 * @return integer
+	 */
 	protected function _hasChild($property)
 	{
 		$hasManyArray = $this->getDbTable()->getHasMany();
@@ -353,6 +404,13 @@ class Zefir_Application_Model {
 		return $modelTable->countParents($hasManyArray[$property]['refColumn'], $this->$primary);	
 	}
 	
+	/**
+	 * Get the model of the parent for the given property
+	 * 
+	 * @access private
+	 * @param string $name
+	 * @return Zefir_Model $parentModel
+	 */
 	protected function _getParent($name)
 	{
 		if (isset($this->$name))
@@ -370,6 +428,13 @@ class Zefir_Application_Model {
 		}
 	}
 	
+	/**
+	 * Get the array of children models for the given property
+	 * 
+	 * @access private
+	 * @param string $name
+	 * @return array $set
+	 */
 	protected function _getChild($name)
 	{		
 		if (isset($this->$name))
@@ -384,6 +449,54 @@ class Zefir_Application_Model {
 			$this->$name = $set;
 		}
 		return $set;
+	}
+	
+	public function getImageData($key)
+	{
+		if (isset($this->_imageData) && isset($this->_imageData[$key]))
+			return $this->_imageData[$key];
+		else 
+			return NULL;
+	}
+	
+	public function getThumbnails()
+	{
+		if (isset($this->_imageData))
+			return array_keys($this->_imageData);
+		else
+			return NULL;
+	}
+	
+	public function getImage($key)
+	{
+		
+		if (isset($this->_image) && array_key_exists($key, $this->_imageData))
+		{
+			$property = $this->_image['property'];
+			$file = $this->$property;
+			$ext = Zefir_Filter::getExtension($file);
+			return str_replace('.'.$ext, '_'.$key.'.'.$ext, $file);
+		}	
+		return FALSE;
+	}
+	
+	public function resizeImage()
+	{
+		if (isset($this->_image))
+		{
+			$dir = APPLICATION_PATH.'/../public'.$this->_image['dir'].'/';
+			$property = $this->_image['property'];
+			
+			$table = $this->getDbTable();
+			foreach($this->getThumbnails() as $key)
+			{
+				$table->rerunResize($this, $property, $dir, $key);
+			}
+			
+			return TRUE;
+		}
+		
+		return FALSE;
 	}
 }
 
