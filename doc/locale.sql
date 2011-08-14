@@ -492,8 +492,6 @@ Zaprszamy do udziału w przeglądzie!'),
 	(null,223, 1, 'Razem'),
 	(null,224, 1, 'Statystyka'),
 	(null,225, 1, 'Razem'),
-	
-INSERT INTO localizations VALUES	
 	(null,2,2,'Partneři'),
 	(null,3,2,'Central European Review – Graduation Projects'),
 	(null,4,2,'Mezinárodní <br>přehlídka <br>absolventských <br>prací'),
@@ -503,7 +501,6 @@ INSERT INTO localizations VALUES
 	(null,8,2,'Přihlásit práce'),
 	(null,9,2,'Výsledky'),
 	(null,10,2,'Kontakt'),
-INSERT INTO localizations VALUES
 	(null,2,3,'Partneri'),
 	(null,3,3,'Medzinárodná prehliadka absolventských prác'),
 	(null,4,3,'Medzinárodná <br>prehliadka <br>absolventských <br>prác'),

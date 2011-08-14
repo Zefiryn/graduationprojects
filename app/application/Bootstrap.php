@@ -175,6 +175,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('schools'));
 		$acl->addResource(new Zend_Acl_Resource('settings'));
 		$acl->addResource(new Zend_Acl_Resource('localizations'));
+		$acl->addResource(new Zend_Acl_Resource('captions'));
+		$acl->addResource(new Zend_Acl_Resource('languages'));
 		$acl->addResource(new Zend_Acl_Resource('editions'));
 		
 		//clearance

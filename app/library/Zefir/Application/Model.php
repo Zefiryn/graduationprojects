@@ -214,15 +214,24 @@ class Zefir_Application_Model {
 	 */
 	public function fetchAll($args = null)
 	{
-		$rowset = $this->getDbTable()->getAll($args);
-		
-		$set = array();
-		foreach ($rowset as $row)
+		if (Zend_Registry::isRegistered('set_'.get_class($this)))
 		{
-			$object = new $this;
-			$set[] = $object->populate($row);
+			$set = Zend_Registry::get('set_'.get_class($this));
 		}
-
+		else
+		{
+			$rowset = $this->getDbTable()->getAll($args);
+			
+			$set = array();
+			foreach ($rowset as $row)
+			{
+				$object = new $this;
+				$set[] = $object->populate($row);
+			}
+			
+			Zend_Registry::set('set_'.get_class($this), $set);
+		}
+		
 		return ($set);
 	}
 	
@@ -497,6 +506,16 @@ class Zefir_Application_Model {
 		}
 		
 		return FALSE;
+	}
+	
+	public function order($string) 
+	{
+		return $this->getDbTable()->select()->order($string);
+	}
+	
+	public function where($condition, $value) 
+	{
+		return $this->getDbTable()->select()->where($condition, $value);
 	}
 }
 
