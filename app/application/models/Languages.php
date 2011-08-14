@@ -17,5 +17,17 @@ class Application_Model_Languages extends GP_Application_Model
 	{
 		return $this->getDbTable()->isLocalization($lang);
 	}
+	
+	public function findLang($lang)
+	{
+		return $this->fetchAll($this->where('lang_code = ?', $lang));
+	}
+	
+	public function findLangId($lang)
+	{
+		$rowset = $this->findLang($lang);
+		return (array_shift($rowset)->lang_id);
+	}
+	
 }
 
