@@ -23,7 +23,7 @@ class Application_Model_Users extends GP_Application_Model
 	
 	public function __get($var)
 	{
-		if ($var == '_role')
+		if ($var == '_role' || $var == 'role')
 			return $this->_role;
 		else
 			return parent::__get($var);		

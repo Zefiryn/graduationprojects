@@ -7,7 +7,7 @@ class Application_Model_DbTable_Languages extends Zefir_Application_Model_DbTabl
 	protected $_name;
 	protected $_primary = 'lang_id';
 	
-		protected $_hasMany = array(
+	protected $_hasMany = array(
 		'localizations' => array(
 			'model' => 'Application_Model_Localizations',
 			'refColumn' => 'lang_id',

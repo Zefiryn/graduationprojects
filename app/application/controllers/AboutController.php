@@ -12,6 +12,7 @@ class AboutController extends Zefir_Controller_Action
     {
     	$about = $this->view->translations[$this->view->lang]['about_text'];
 		$this->view->about = explode("\n", $about);
+		
     }
     
     public function editAction()

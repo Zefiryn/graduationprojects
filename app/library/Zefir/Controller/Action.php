@@ -48,6 +48,8 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 	    	}
     	}
     	
+    	$this->view->link = $this->_getCurrentPage();
+    	
 	}
 	
 	/**
@@ -229,6 +231,11 @@ class Zefir_Controller_Action extends Zend_Controller_Action
     	return $this->_getRole() == 'admin';
     }
     
+    /**
+     * Clear cache according to given tag
+     * 
+     * @param string $tags
+     */
     protected function _clearZendCache($tags)
     {
     	$cache = Zend_Registry::get('cache');
@@ -237,4 +244,27 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 			$tags
 		);
     }
+    
+    /**
+     * Get current page link
+     * 
+     * @return string $link;
+     */
+	protected function _getCurrentPage()
+	{
+		$link = $this->getRequest()->getRequestUri();
+		
+		if ($link == '/')
+			$link = 'index';
+		
+		elseif (in_array(substr($link, 1, 2), array('pl', 'cs', 'sk', 'hu', 'en')))
+		{
+			$link = substr($link, 4);
+		}
+		
+		else 
+			$link = substr($link, 1);
+		
+		return $link;
+	}
 }

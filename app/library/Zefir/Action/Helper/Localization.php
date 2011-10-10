@@ -103,7 +103,7 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 	
 	private function _setLocale($lang)
 	{
-		$array = array('pl' => 'pl_PL', 'cs' => 'cs_CZ', 'sk' => 'sk_SK');
+		$array = array('pl' => 'pl_PL', 'cs' => 'cs_CZ', 'sk' => 'sk_SK', 'en' => 'en_UK', 'hu' => 'hu_HU');
 		
 		//locale object
 		$zl = new Zend_Locale();
@@ -119,7 +119,10 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		if ($source == 'db')
 		{
 			$translations = $this->_getTranslationFromDb();
-			$translate = new Zend_Translate('array',  $translations[$language], $language);
+			if (isset($translations[$language]))
+				$translate = new Zend_Translate('array',  $translations[$language], $language);
+			else
+				$translate = new Zend_Translate('array',  $translations['pl'], 'pl_PL');
 			$view->translations = $translations;
 			Zend_Registry::set('translations', $translations);
 		}

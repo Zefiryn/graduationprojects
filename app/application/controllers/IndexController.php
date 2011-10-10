@@ -10,9 +10,13 @@ class IndexController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-        $main = $this->view->translations;
-		ksort($main);
-		$this->view->main = $main;
+		$news = new Application_Model_News();
+		$this->view->news_list = $news->fetchAll(1);
+		$this->view->pages = $news->getPagination();
+		
+		$this->view->current_page = 1;
+		$this->view->start_pagination = 1;
+		$this->view->end_pagination = 1;
 		
     }
 

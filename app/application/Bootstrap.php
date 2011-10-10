@@ -101,11 +101,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$router->addRoute('def', $route);
     	
     	$route = new Zend_Controller_Router_Route(
-    			':edition',
-    			array(	'controller' => 'index',
+    			':lang/',
+    			array(	'controller' => 'news',
     					'action' => 'index'),
-    			array('edition' => '^[0-9]{4}-[0-9]{4}$'));
-    	$router->addRoute('edition', $route);
+    			array('lang' => '^[a-z]{2}$'));
+    	$router->addRoute('main', $route);
     	
     	$route = new Zend_Controller_Router_Route(
     			'login',
@@ -178,6 +178,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('captions'));
 		$acl->addResource(new Zend_Acl_Resource('languages'));
 		$acl->addResource(new Zend_Acl_Resource('editions'));
+		$acl->addResource(new Zend_Acl_Resource('news'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
@@ -186,6 +187,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
 		$acl->allow(null, array('applications'), array('new'));
+		$acl->allow(null, array('editions', 'news'), array('index', 'show'));
 		$acl->allow('user', array('auth'), array('logout'));
 		$acl->allow('user', array('applications'), array('new', 'show', 'edit'));
 		$acl->deny('user', array('admin'), null);
