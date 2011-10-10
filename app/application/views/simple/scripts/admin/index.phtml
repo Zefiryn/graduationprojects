@@ -1,4 +1,4 @@
-<div class="content">
+<div id="main">
 	<?php if ($this->user->_role == 'admin'):?>
 	<h1><?php echo $this->translate('admin_panel');?></h1>
 	<?php else:?>
@@ -46,5 +46,3 @@
 	<?php endif;?>
 	
 </div>
-<p class="spacer_small">&nbsp;</p>
-<p class="previous"><a href="/">&lt; <?php echo $this->translate('previous_page');?></a></p>

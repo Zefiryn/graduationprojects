@@ -1,12 +1,4 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'regulations', 'lang' => $this->lang));
-?>
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('regulation_delete_confirm')));
-?>
-
-
-<div class="content">
+<div id="main">
 	<?php if ($this->user->_role == 'admin') 
 			echo $this->partial('regulations/_admin.phtml');?>
 	<h1><?php echo $this->translate('regulation_header');?></h1>
@@ -27,15 +19,3 @@
 	</p>
 	<?php endif;?>
 </div>
-
-<?php echo $this->partial('partials/submenu.phtml', 
-			array(	'baseUrl' => $this->baseUrl,
-						'regulations' => TRUE));
-?>
-
-<p class="spacer_small">&nbsp;</p> 
-<p class="previous">
-	<a href="<?php echo $this->baseUrl;?>">
-	&lt; <?php echo $this->translate('previous_page');?>
-	</a>
-</p>

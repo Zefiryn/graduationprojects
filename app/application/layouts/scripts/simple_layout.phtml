@@ -1,11 +1,7 @@
-<?php echo $this->doctype('XHTML1_STRICT') ?>
+<?php echo $this->doctype('HTML5') ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
-	<meta name="Keywords" content="graduation projects, praace dyplomowe, design" />
-	<meta name="Description" content="Skrypt pozwalający w łatwy sposób zarządzać własnym księgozbiorem" />
-	<meta name="author" content="Artur Jewuła" />
-	<!-- link href="http://webfonts.fontslive.com/css/ebf21b27-0dc5-4085-9c64-175f9395fa6a.css" rel="stylesheet" type="text/css" / -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php echo $this->headTitle();?>
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.9.custom.css'); ?>
@@ -16,81 +12,44 @@
 									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
 									->appendFile($this->baseUrl.'js/simple/ajax.js')
 									->appendFile($this->baseUrl.'js/simple/script.js'); ?>
-	
 </head>
-<body>
-	<div id="flash">
-		<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->translation($this->flash);?></p>
-	</div>
-	
-	<div class="main">
-		<a href="<?php echo $this->baseUrl('index');?>">
-			<img src="<?php echo $this->baseUrl('img/simple/logo_'.strtoupper($this->lang).'.png')?>" id="header" name="<?php echo $this->lang;?>" alt="logo" />
-		</a>
-		<p class="spacer_small">&nbsp;</p>
 
-		<div id="content">
-			<?php echo $this->partial('partials/login_form.phtml', 
-										array(	'user' => $this->user, 
-												'edition' => $this->edition, 
-												'editions' => $this->edition_list)
-			);?>
-			
-			<?php echo $this->layout()->content; ?>
-			
-			<p class="spacer_small">&nbsp;</p>
+<body>
+	<header>
+		<div id="flash">
+			<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->translation($this->flash);?></p>
+      	</div>
+	  	<div class="header">
+		    <div class="logo">
+			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
+			    	<img src="/img/simple/graduation-projects-eu_logo.png"/>
+			    </a>
+			</div>
+	  	</div>
+	  
+		<div class="top-menu">
+		    <?php echo $this->partial('partials/current_edition.phtml', array('lang' => $this->lang));?>
+		    <?php echo $this->partial('partials/previous_edition.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang));?>
+		    
+		    <?php if ($this->user->role == 'admin'):?>
+		    <?php echo $this->partial('partials/admin_panel.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang));?>
+		    <?php endif;?>
+		    
+		    <?php echo $this->partial('partials/lang_menu.phtml', array('link' => $this->link, 'lang' => $this->lang));?>
 		</div>
-		
-		<p id="content_spacer">&nbsp;</p>
-				
-		<p class="partners">
-			<?php echo $this->translations['cs']['Partners'];?> 
-			| <?php echo $this->translations['pl']['Partners']?> | 
-			<?php echo $this->translations['sk']['Partners'];?>
-		</p>
-		
-		<div id="footer">
-			<p class="footer_paragraph" style="margin-left: 35px;">
-				<a href="http://www.typo.cz/" target="_blank">
-					<img src="<?php echo $this->baseUrl;?>img/simple/logo_typo.png" alt="Typo" />
-				</a>
-			</p>
-			<p class="footer_paragraph">
-				<a href="http://www.2plus3d.pl/" target="_blank">
-					<img src="<?php echo $this->baseUrl;?>img/simple/logo_2plus3d.png" alt="2+3D Magazine" />
-				</a>
-				<a href="http://www.zamekcieszyn.pl/" target="_blank">
-					<img src="<?php echo $this->baseUrl;?>img/simple/logo_zamek.png"  style="margin-right: 0px;" alt="{$lang.silesia_castle}" />
-				</a>
-			</p>
-			<p class="footer_paragraph">
-				<a href="http://www.sdc.sk/index.php?lang=en&amp;menu=designum" target="_blank">
-					<img src="<?php echo $this->baseUrl;?>img/simple/logo_designum.png" alt="designum" />
-				</a>
-			</p>
-			<p class="spacer">&nbsp;</p>
-			
-			<p class="footer_paragraph" style="margin-left: 35px;">
-				<?php echo $this->translations['cs']['footer_visegrad'];?>
-			</p>
-			<p class="footer_paragraph">
-				<?php echo $this->translations['pl']['footer_visegrad'];?>
-			</p>
-			<p class="footer_paragraph">
-				<?php echo $this->translations['sk']['footer_visegrad'];?>
-			</p>
-			<p class="spacer">&nbsp;</p>
-				<a href="http://www.visegradfund.eu/" target="_blank">
-					<img src="<?php echo $this->baseUrl;?>img/simple/logo_visegrad.png" class="visegradfund" alt="Visegrad Fund" />
-				</a>
-			<p class="spacer_small">&nbsp;</p>
-			
-		</div>
-		<p class="subfooter">&copy; 2010 Fundacja Rzecz Piękna WFP ASP Kraków. Wszelkie prawa zastrzeżone.
-			<br />
-			Wykonanie strony: Zefiryn	
-		</p>
+	</header>
+
+
+	<?php echo $this->layout()->content; ?>
+
+
+	<div id="footer">
+		<p> Copyright by 2+3D, 2011. Projekt wydany dzięki pomocy finansowej  
+	    Międzynarodowego Funduszu Wyszehradzkiego 
+	    www.visegradfund.org</p>
+	    <p><img src="/img/simple/visegrad_fund_logo_web_blue_400.jpg" alt="Visegrad Fund"></p>
 	</div>
+
 
 </body>
 </html>

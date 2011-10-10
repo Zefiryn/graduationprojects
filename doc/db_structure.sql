@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS files, result_files, applications, results, degrees, schools, work_types,
+DROP TABLE IF EXISTS files, result_files, fields, result_fields, applications, results, degrees, schools, work_types,
 jurors, faq, regulations, news, settings, template_settings, users,editions, localizations, languages, captions;
 
 CREATE TABLE editions (
@@ -134,14 +134,8 @@ CREATE TABLE results (
 	surname char(200) NOT NULL,
 	email varchar(35) NOT NULL,
 	country char(2) NOT NULL,
-	school varchar(60) NOT NULL,
-	department varchar(60) NOT NULL,
 	degree_id smallint(6),
-	work_subject varchar(300) NOT NULL,
 	work_type_id smallint(6),
-	work_desc text NOT NULL,
-	supervisor varchar(60) NOT NULL,
-	supervisor_degree varchar(15) NOT NULL,
 	graduation_time INT NOT NULL,	
 	miniature VARCHAR(35),
 	PRIMARY KEY (result_id),
@@ -153,6 +147,30 @@ CREATE TABLE results (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(work_type_id)
 		REFERENCES work_types(work_type_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE fields (
+	field_id smallint(6) NOT NULL AUTO_INCREMENT,
+	field_name varchar(100) NOT NULL,
+	PRIMARY KEY (field_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE result_fields (
+	result_field_id int not null auto_increment,
+	result_id smallint(6) NOT NULL,
+	lang_id int NOT NULL,
+	field_id smallint(6) not null,
+	entry text not null,
+	PRIMARY KEY (result_field_id),
+	FOREIGN KEY(result_id)
+		REFERENCES results(result_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(field_id)
+		REFERENCES fields(field_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -170,6 +188,7 @@ CREATE TABLE result_files(
 CREATE TABLE template_settings(
 	template_id smallint(6) NOT NULL AUTO_INCREMENT,
 	template_name varchar(20) NOT NULL,
+	news_limit int not null,
 	PRIMARY KEY (template_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -197,10 +216,10 @@ CREATE TABLE news(
 	news_title varchar(100) not null,
 	news_text text not null,
 	added int not null,
-	current_edition smallint(6),
+	lang_id int not null,
 	PRIMARY KEY(news_id),
-	FOREIGN KEY(current_edition)
-		REFERENCES editions(edition_id)
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

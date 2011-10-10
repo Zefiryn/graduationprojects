@@ -39,7 +39,7 @@ class ContactController extends Zefir_Controller_Action
 				$mail->addTo($options['mail']['to'], 'Graduation Projects');
 				$mail->setSubject($form->getValue('mail_title'));
 				try {
-					//$mail->send();
+					$mail->send();
 					if (FALSE)
 						throw new Zend_Exception('test');
 				} catch (Exception $e){

@@ -15,6 +15,10 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 		'applications' => array(
 			'model' => 'Application_Model_Applications',
 			'refColumn' => 'edition_id'
+		),
+		'results' => array(
+			'model' => 'Application_Model_Results',
+			'refColumn' => 'edition_id'
 		)
 	);
 	

@@ -1,10 +1,4 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'settings/edit',
-						'lang' => $this->lang));
-?>
-
-<div class="content">
+<div id="main">
 	<h1><?php echo $this->translate('settings');?></h1>
 	
 	<?php if ($this->form->csrf->hasErrors()):?>

@@ -20,12 +20,12 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
     	$settings = new Application_Model_Settings();
     	$settings = $settings->getDbTable()->getSettings($settings);
 
-    	/*
-    	$tplSettings = new Application_Model_TemplateSettings();
-		$tpl = new Zend_Session_Namespace('template');
-    	$tplSettings = $tplSettings->getDbTable()->findTemplateByName($tplSettings, $tpl->template_name);
-    	*/
     	
+    	$tplSettings = new Application_Model_TemplateSettings();
+    	$tpl = new Zend_Session_Namespace('template');
+		$tplSettings = $tplSettings->findTemplateByName($tpl->template_name);
+		
+    	Zend_Registry::set('tplSettings', $tplSettings);
 		Zend_Registry::set('appSettings', $settings);
 		
 		$this->_setEdition($settings);
@@ -34,6 +34,7 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 	
 	protected function _setEdition($settings)
 	{
+		/*
 		$request =	$this->getRequest();
 		$edition = $request->getParam('edition', '');
 
@@ -62,12 +63,12 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 				$edition =  $settings->edition->edition_name;
 			}
 		}
-		 
+		*/
 
-		Zend_Registry::set('edition', $edition);
+		Zend_Registry::set('edition', $settings->edition->edition_name);
 		$session = new Zend_Session_Namespace('edition');
-		$session->edition = $edition;
-		$this->getActionController()->view->edition = $edition;
+		$session->edition = $settings->edition->edition_name;
+		$this->getActionController()->view->edition = $settings->edition->edition_name;
 		
 		$editions = new Application_Model_Editions();
 		$this->getActionController()->view->edition_list = $editions->getEditions('DESC');

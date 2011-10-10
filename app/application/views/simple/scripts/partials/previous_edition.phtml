@@ -1,0 +1,12 @@
+<nav>
+	<menu> 
+		<p class="menu_label"><?php echo $this->translate('previous_editions')?> <span>&rsaquo;</span></p>
+		<menu>
+			<?php foreach ($this->edition_list as $edition):?> 
+			<?php if ($edition != $this->edition):?>
+			<a href="<?php echo $this->url(array('edition' => str_replace('/', '-', $edition), 'lang' => $this->lang), 'lang_edition');?>"><?php echo $edition;?></a>
+			<?php endif;?> 
+			<?php endforeach;?>
+		</menu>
+	</menu>
+</nav>

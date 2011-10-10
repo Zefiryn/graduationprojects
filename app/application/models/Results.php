@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Applications extends GP_Application_Model
+class Application_Model_Results extends GP_Application_Model
 {
 	public $result_id;
 	public $edition_id;
@@ -12,15 +12,15 @@ class Application_Model_Applications extends GP_Application_Model
 	public $department;
 	public $degree_id;
 	public $work_subject;
-	public $work_type;
+	public $work_type_id;
 	public $work_desc;
 	public $supervisor;
 	public $supervisor_degree;
 	public $miniature;
 	protected $edition;
 	protected $degree;
-	protected $work_type;
 	protected $files;
+	protected $work_type;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Results';
 	
