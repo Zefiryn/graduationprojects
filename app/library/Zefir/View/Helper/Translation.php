@@ -32,7 +32,7 @@ class Zefir_View_Helper_Translation extends Zend_View_Helper_Abstract
 			$lang : $this->_lang; 
 		
 		//check if $key exist
-		$text = array_key_exists($key, $this->_translations[$lang]) ?
+		$text = isset($this->_translations[$lang]) && array_key_exists($key, $this->_translations[$lang]) ?
 			$this->_translations[$lang][$key] : $key;
 		
 		return $text;

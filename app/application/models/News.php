@@ -3,11 +3,9 @@
 class Application_Model_News extends GP_Application_Model
 {
 	public $news_id;
-	public $news_title;
-	public $news_text;
 	public $added;
-	public $lang_id;
-	protected $lang;
+	protected $details;
+	protected $files;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_News';
 	
@@ -26,6 +24,23 @@ class Application_Model_News extends GP_Application_Model
 		return $pages;
 	}
 	
+	public function getDetail($property, $lang)
+	{
+		if ($this->details == null)
+			$this->__get('details');
+		
+		foreach($this->details as $text)
+		{
+			if ($text->lang->lang_code == $lang)
+				return $text->$property;
+		}
+		
+		//in case there is no text in given language
+		if (is_array($this->details))
+			return  $this->details[0]->$property;
+		else
+			return NULL;
 
+	}
 }
 
