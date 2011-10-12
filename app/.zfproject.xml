@@ -90,6 +90,9 @@
         <formFile formName="Edition"/>
         <formFile formName="Faq"/>
         <formFile formName="Question"/>
+        <formFile formName="News"/>
+        <formFile formName="NewsText"/>
+        <formFile formName="NewsFile"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -107,6 +110,8 @@
           <dbTableFile dbTableName="Localizations"/>
           <dbTableFile dbTableName="Regulations"/>
           <dbTableFile dbTableName="Faqs"/>
+          <dbTableFile dbTableName="NewsTexts"/>
+          <dbTableFile dbTableName="NewsFiles"/>
         </dbTableDirectory>
         <modelFile modelName="Editions"/>
         <modelFile modelName="Users"/>
@@ -119,6 +124,8 @@
         <modelFile modelName="Localizations"/>
         <modelFile modelName="Regualtions"/>
         <modelFile modelName="Faqs"/>
+        <modelFile modelName="NewsTexts"/>
+        <modelFile modelName="NewsFiles"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

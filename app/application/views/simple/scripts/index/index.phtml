@@ -7,12 +7,12 @@
 	  	</a>
 	    
 	    <h2>
-	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"><?php echo $news->news_title?></a>
+	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"><?php echo $news->getDetail('news_title', $this->lang);?></a>
 	    </h2>
 	    
 	    <p class="data"><?php echo date('d.m.Y H:i', $news->added);?></p> 
 	    
-	    <p><?php echo $news->news_text?></p>
+	    <p><?php echo $news->getDetail('news_text', $this->lang);?></p>
 	    
 	    <p>
 	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>" class="wiecej">

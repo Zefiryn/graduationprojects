@@ -2,6 +2,9 @@
 
 * { margin: 0; padding: 0; }
 
+::-moz-selection{ background: rgba(0,221,179,0.8); color:#222; text-shadow: none; }
+::selection { background:rgba(0,221,179,0.8); color:#222; text-shadow: none; }
+
 html {
 background-color: #fff;
 
@@ -476,7 +479,7 @@ a:hover { cursor: pointer; }
 	float: right;
 	text-align:right;
 	width: 220px;
-	height: 28px;
+	height: 30px;
 }
 
 a.lang {
@@ -486,7 +489,6 @@ a.lang {
 	-moz-border-radius: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
-	line-height: 28px;
 	-webkit-transition: background-color 500ms;
 	-moz-transition: background-color 500ms;
 	-o-transition: background-color 500ms;
@@ -496,7 +498,8 @@ a.lang {
 	padding-bottom: 0;
 	padding-left: 4px;
 	margin-left: 10px;
-	width: 21px;
+	width: 22px;
+	line-height: 28px;
 	text-align: center;
 }
 a.lang:hover {
@@ -590,6 +593,7 @@ a.strona {
 	width: 24px;
 	height: 24px;
 	margin-right: 10px;
+	line-height: 28px;
 	text-align: center;
 }
 

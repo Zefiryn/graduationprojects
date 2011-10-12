@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS files, result_files, fields, result_fields, applications, results, degrees, schools, work_types,
-jurors, faq, regulations, news, settings, template_settings, users,editions, localizations, languages, captions;
+jurors, faq, regulations, news_files, news_details, news, settings, template_settings, users,editions, localizations, languages, captions;
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -213,13 +213,32 @@ CREATE TABLE settings(
 
 CREATE TABLE news(
 	news_id int not null auto_increment,
-	news_title varchar(100) not null,
-	news_text text not null,
 	added int not null,
+	PRIMARY KEY(news_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE news_details(
+	news_text_id int not null auto_increment,
+	news_title varchar(100) not null,
+	news_id int not null,
+	news_text text not null,
 	lang_id int not null,
-	PRIMARY KEY(news_id),
+	PRIMARY KEY(news_text_id),
+	FOREIGN KEY(news_id)
+		REFERENCES news(news_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(lang_id)
 		REFERENCES languages(lang_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE news_files(
+	news_file_id int not null auto_increment,
+	news_id int not null,
+	path varchar(300) not null,
+	PRIMARY KEY(news_file_id),
+	FOREIGN KEY(news_id)
+		REFERENCES news(news_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

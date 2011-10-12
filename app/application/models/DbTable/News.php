@@ -7,12 +7,15 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 	protected $_name;
 	protected $_primary = 'news_id';
 
-	protected $_belongsTo = array(
-    	'language' => array(
-    		'model' => 'Application_Model_Languages',
-    		'column' => 'lang_id',
-			'refColumn' => 'lang_id'
-       	)
+	protected $_hasMany = array(
+		'details' => array(
+			'model' => 'Application_Model_NewsDetails',
+			'refColumn' => 'news_id',
+		),
+		'files' => array(
+			'model' => 'Application_Model_NewsFiles',
+			'refColumn' => 'news_id',
+		),
 	);
 	
 	public function getAll($page)
