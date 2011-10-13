@@ -15,15 +15,14 @@ class Application_Form_Regulations extends Zefir_Form
         parent::init();
         $this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
-        $edition = Zend_Registry::get('edition');
     	
         $this->_createCsrfElement();
+                
+        $langSession = new Zend_Session_Namespace('lang');
+        $lang = new Application_Model_Languages();
+        $lang->findLang($langSession->lang);
         
-        
-        $regulations = new Application_Model_Regualtions();
-        $regulationsData = $regulations->getRegulations($edition);
-        
-        foreach($regulationsData as $regulation)
+        foreach($lang->regulations as $regulation)
         {
         	$paragraph = new Application_Form_Regulations_Paragraph();
         	$paragraph->removeDecorator('form');		
@@ -33,14 +32,9 @@ class Application_Form_Regulations extends Zefir_Form
         	$paragraph->removeElement('leave');
         	$paragraph->setIsArray(TRUE);
         	$paragraph->populate($regulation->prepareFormArray());
-			$this->addSubForm($paragraph, 'paragraph_'.$regulation->_paragraph_id); 
+			$this->addSubForm($paragraph, 'paragraph_'.$regulation->paragraph_id); 
         }
         
-        
-        $editionName = Zend_Registry::get('edition');
-        $edition = new Application_Model_Editions();
-        $edition->getEditionByName($editionName);
-        $regulation_lang = new Zend_Session_Namespace('lang');
         
         for($i= 1; $i <= $this->_new; $i++)
         {
@@ -52,8 +46,7 @@ class Application_Form_Regulations extends Zefir_Form
         	$paragraph->removeElement('submit');
         	$paragraph->removeElement('leave');
         	$paragraph->setIsArray(TRUE);
-        	$paragraph->getElement('edition')->setValue($edition->_edition_id);
-        	$paragraph->getElement('regulation_lang')->setValue($regulation_lang->lang);
+        	$paragraph->getElement('lang_id')->setValue($lang->lang_id);
         	$this->addSubForm($paragraph, 'new_paragraph_'.$i);
         }
         

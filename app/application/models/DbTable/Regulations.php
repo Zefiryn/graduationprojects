@@ -12,10 +12,10 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
      * @var array
      */
     protected $_belongsTo = array(
-    	'edition' => array(
-    		'model' => 'Application_Model_Editions',
-			'column' => 'edition_id',
-			'refColumn' => 'edition_id'
+    	'lang' => array(
+    		'model' => 'Application_Model_Lang',
+			'column' => 'lang_id',
+			'refColumn' => 'lang_id'
 		)
 	);
 	
@@ -27,32 +27,12 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 	 * @param int $edition
 	 * @return Zend_Db_Table_Rowset
 	 */
-	public function getRegulations($lang, $edition)
+	public function getRegulations($lang)
 	{
 		$select = $this->select()
-				->where('regulation_lang = ?', $lang)
-				->where('edition_id = ? ', $edition)
+				->where('lang_id = ?', $lang)
 				->order('paragraph_no');
 		return $this->fetchAll($select);
-	}
-	
-	/**
-	 * Delete regulation for a given edition
-	 *
-	 * @access public
-	 * @param string $edition
-	 * @return TRUE
-	 */
-	public function deleteRegulation($edition)
-	{
-		$editions = new Application_Model_Editions();
-		$editions->getEdition($edition);
-		$where = $this->select()->where('edition_id = ?', $editions->_edition_id);
-		$this->fetchAll($where)->delete();
-		
-		return TRUE;
-	}
-	
-	
+	}	
 }
 

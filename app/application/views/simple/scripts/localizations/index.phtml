@@ -1,16 +1,4 @@
-<p class="language_bar"> 
-		<a href="<?php echo $this->baseUrl('localizations/cs');?>"
-		<?php if ($this->caption_lang == 'cs'):?> style="color: red;font-weight: bold;"<?php endif;?>>CZ</a> |
-		<a href="<?php echo $this->baseUrl('localizations/pl');?>" 
-		<?php if ($this->caption_lang == 'pl'):?> style="color: red;font-weight: bold;"<?php endif;?>>PL</a> |
-		<a href="<?php echo $this->baseUrl('localizations/sk');?>" 
-		<?php if ($this->caption_lang == 'sk'):?> style="color: red;font-weight: bold;"<?php endif;?>>SK</a> 
-</p>
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'localization', 'delete_confirm' => $this->translate('localization_delete_confirm')));
-?>
-
-<div class="content">
+<div id="main">
 	<h1><?php echo $this->translate('localizations_header'); ?>
 	<a href="<?php echo $this->url(array(), 'new_caption');?>">
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block" 
@@ -46,4 +34,3 @@
 	<?php endforeach;?>
 	</table>
 </div>
-

@@ -7,6 +7,7 @@ class Application_Model_Languages extends GP_Application_Model
 	protected $localizations;
 	protected $about;
 	protected $news;
+	protected $regualtions;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Languages';
 	

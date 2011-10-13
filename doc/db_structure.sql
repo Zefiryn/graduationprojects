@@ -31,13 +31,12 @@ CREATE TABLE localizations (
 
 CREATE TABLE regulations (
 	paragraph_id int NOT NULL AUTO_INCREMENT,
-	edition_id smallint(6) not null,
-	regulation_lang char(4) not null,
+	lang_id int not null,
 	paragraph_no smallint(6) not null,
 	paragraph_text text not null,
 	PRIMARY KEY (paragraph_id),
-	FOREIGN KEY(edition_id)
-		REFERENCES editions(edition_id)
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
