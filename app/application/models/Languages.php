@@ -5,6 +5,8 @@ class Application_Model_Languages extends GP_Application_Model
 	public $lang_id;
 	public $lang_code;
 	protected $localizations;
+	protected $about;
+	protected $news;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Languages';
 	
@@ -20,13 +22,27 @@ class Application_Model_Languages extends GP_Application_Model
 	
 	public function findLang($lang)
 	{
-		return $this->fetchAll($this->where('lang_code = ?', $lang));
+		$row = $this->getDbTable()->fetchRow($this->where('lang_code = ?', $lang));
+
+		return ($this->populate($row));
 	}
 	
 	public function findLangId($lang)
 	{
 		$rowset = $this->findLang($lang);
 		return (array_shift($rowset)->lang_id);
+	}
+	
+	public function getLanguages()
+	{
+		$rowset = $this->getDbTable()->fetchAll();
+		
+		foreach ($rowset as $row)
+		{
+			$select[$row->lang_id] = $row->lang_code; 
+		}
+		
+		return $select;
 	}
 	
 }

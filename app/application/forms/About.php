@@ -30,15 +30,22 @@ class Application_Form_About extends Zefir_Form
 		
 		$t = $this->getTranslator();
 		
-		$element = $this->createElement('hidden', 'lang_code');
+		$element = $this->createElement('hidden', 'about_id');
 		$element->setValue($t->getLocale());	
 		$this->addElement($element);
 		
-		$element = $this->createElement('hidden', 'name');
-		$element->setValue('about_text');	
+		$element = $this->createElement('text', 'about_title');
+		$element->setAttribs(array('class' => 'width2'))
+				->setLabel('about_title')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired()
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+					new Zend_Validate_StringLength(array('min' => 1, 'max' => 300))
+				));
 		$this->addElement($element);
 		
-		$element = $this->createElement('textarea', 'text');
+		$element = $this->createElement('textarea', 'about_text');
 		$element->setAttribs(array('class' => 'width3'))
 				->setLabel('about')
 				->setDecorators(array(
@@ -51,6 +58,18 @@ class Application_Form_About extends Zefir_Form
 				->addValidators(array(
 						new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.']+$/')
 					));	
+		$this->addElement($element);
+		
+		$lang = new Application_Model_Languages();
+		$element = $this->createElement('select', 'lang_id');
+		$element->setAttribs(array('class' => 'width2', 'size' => 1))
+				->setLabel('language')
+				->setDecorators($this->_getStandardDecorators())
+				->setMultiOptions($lang->getLanguages())
+				->setRequired(FALSE)
+				->addValidators(array(
+					new Zend_Validate_Digits()
+				));
 		$this->addElement($element);
 		
 		$this->_createCsrfElement();

@@ -329,15 +329,14 @@ class Zefir_Application_Model {
 		return $this->getDbTable()->save($this->_prepareUpdate());	
 	}
 	
-	public function search($phrase)
+	public function search($property, $value, $like = FALSE)
 	{
-		$rowset = $this->getDbTable()->search($phrase);
+		$rowset = $this->getDbTable()->search($property, $value);
 		
 		$found = array();
 		foreach($rowset as $row)
 		{
-			$model = new $this;
-			$found[] = $model->populate($row);
+			$found[] = $this->populate($row);
 		}
 		
 		return $found;

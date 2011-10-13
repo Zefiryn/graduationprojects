@@ -1,17 +1,5 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array(	'baseUrl' => $this->baseUrl,
-						'link' => 'about/edit',
-						'lang' => $this->lang));
-?>
-
-<div class="content">
-	<h1><?php echo $this->translate('about_header');?></h1>
+<div id="main">
+	
 	<?php echo $this->form;?>
 	
 </div>	
-<?php echo $this->partial('partials/submenu.phtml', 
-			array(	'baseUrl' => $this->baseUrl));
-?>
-
-<p class="spacer_small">&nbsp;</p> 
-<p class="previous"><a href="<?php echo $this->baseUrl;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>
