@@ -2,7 +2,14 @@
 
 class RegulationsController extends Zefir_Controller_Action
 {
-
+	protected function _getRegulations()
+	{
+		$lang = new Application_Model_Languages();
+		$lang->findLang($this->view->lang);
+		
+		return $lang->regulations;
+	}
+	
     public function init()
     {
         parent::init();
@@ -10,25 +17,20 @@ class RegulationsController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-		$this->showAction();
+		$this->view->regulations = $this->_getRegulations(); 
     }
 
 
 	public function showAction()
     {
-		$regulations = new Application_Model_Regualtions();
-		$edition = Zend_Registry::get('edition');
+		$this->view->regulations = $this->view->regulations = $this->_getRegulations();
 		
-		$this->view->regulations = $regulations->getRegulations($edition);
-		$this->_helper->viewRenderer('index');
     }
     
     public function editAction()
     {   	
     	$request = $this->getRequest();
     	
-    	$edition = Zend_Registry::get('edition');
-       
     	if ($request->isPost())
     	{
     		$data = $request->getPost();

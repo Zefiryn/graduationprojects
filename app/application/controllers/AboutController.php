@@ -34,8 +34,10 @@ class AboutController extends Zefir_Controller_Action
     
     public function newAction()
     {
-    	
+    	$this->editAction();
+    	$this->render('edit');
     }
+    
     public function editAction()
     {
     	$form = new Application_Form_About();

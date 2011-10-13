@@ -4,9 +4,9 @@
 	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->regulations as $i => $regulation):?>
-	<p class="rule" id="paragraph_<?php echo $regulation->paragraph_id;?>">
-		<span style="font-weight: bold">&sect; <?php echo ++$i;?></span>
+	<?php foreach($this->regulations as $regulation):?>
+	<p class="rule">
+		<span style="font-weight: bold">&sect; <?php echo $regulation->paragraph_no;?></span>
 		<br />
 		<?php echo  nl2br($regulation->paragraph_text);?>
 	</p> 

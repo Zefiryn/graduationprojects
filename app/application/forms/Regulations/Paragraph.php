@@ -18,11 +18,7 @@ class Application_Form_Regulations_Paragraph extends Zefir_Form
         $paragraph->setDecorators(array('ViewHelper'));
         $this->addElement($paragraph);
         
-        $paragraph = $this->createElement('hidden', 'regulation_lang');
-        $paragraph->setDecorators(array('ViewHelper'));
-        $this->addElement($paragraph);
-        
-        $paragraph = $this->createElement('hidden', 'edition');
+        $paragraph = $this->createElement('hidden', 'lang_id');
         $paragraph->setDecorators(array('ViewHelper'));
         $this->addElement($paragraph);
         
