@@ -112,6 +112,7 @@
           <dbTableFile dbTableName="Faqs"/>
           <dbTableFile dbTableName="NewsTexts"/>
           <dbTableFile dbTableName="NewsFiles"/>
+          <dbTableFile dbTableName="About"/>
         </dbTableDirectory>
         <modelFile modelName="Editions"/>
         <modelFile modelName="Users"/>
@@ -126,6 +127,7 @@
         <modelFile modelName="Faqs"/>
         <modelFile modelName="NewsTexts"/>
         <modelFile modelName="NewsFiles"/>
+        <modelFile modelName="About"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

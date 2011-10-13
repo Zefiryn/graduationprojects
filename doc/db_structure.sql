@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS files, result_files, fields, result_fields, applications, results, degrees, schools, work_types,
+DROP TABLE IF EXISTS about, files, result_files, fields, result_fields, applications, results, degrees, schools, work_types,
 jurors, faq, regulations, news_files, news_details, news, settings, template_settings, users,editions, localizations, languages, captions;
 
 CREATE TABLE editions (
@@ -250,5 +250,16 @@ CREATE TABLE jurors(
 	PRIMARY KEY(juror_id),
 	FOREIGN KEY(user_id)
 		REFERENCES users(user_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE about(
+	about_id int not null auto_increment,
+	about_title varchar(300) not null,
+	about_text text not null,
+	lang_id int not null,
+	PRIMARY KEY(about_id),
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
