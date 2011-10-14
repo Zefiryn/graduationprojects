@@ -736,7 +736,6 @@ span.admin {
 }
 
 .ui-state-highlight {
-	min-height: 30px !important; 
 	background: rgba(254,254,254, 0.5) !important; 
 	border: 1px solid rgba(0,221,179,0.8) !important;
 }
@@ -746,7 +745,14 @@ span.admin {
 }
 
 .rule {
+	padding: 3px;
 	margin: 15px 0px;
+	border-radius: 5px;
+	border: 1px solid white;
+}
+.rule:hover {
+	background: #f6faf9;
+	border: 1px solid #f6faf9;	
 }
 
 .new_rule a {

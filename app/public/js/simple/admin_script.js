@@ -12,6 +12,9 @@ function regulationDragAndDrop()
 {	
 	$( "#regulation" ).sortable({
 		placeholder: "ui-state-highlight",
+		 start: function(event, ui) {
+			 $('.ui-state-highlight').height(ui.item.height());
+		 },
 		update: function(event, ui) {
 			sortRegualtion(event, ui);
 		}

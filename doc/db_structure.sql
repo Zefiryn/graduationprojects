@@ -42,10 +42,14 @@ CREATE TABLE regulations (
 
 CREATE TABLE faq (
 	faq_id int NOT NULL AUTO_INCREMENT,
-	faq_lang char(4) not null,
+	lang_id int not null,
 	faq_question varchar(300) not null,
 	faq_answer text not null,
-	PRIMARY KEY (faq_id)
+	position smallint not null,
+	PRIMARY KEY (faq_id),
+	FOREIGN KEY(lang_id)
+		REFERENCES languages(lang_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE users(
