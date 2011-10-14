@@ -17,19 +17,18 @@ class RegulationsController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-		$this->view->regulations = $this->_getRegulations(); 
-    }
-
-
-	public function showAction()
-    {
-		$this->view->regulations = $this->view->regulations = $this->_getRegulations();
+		$this->view->regulations = $this->_getRegulations();
 		
+		if ($this->view->user->role == 'admin')
+			$this->render('index');
+		else
+			 $this->render('show');
     }
-    
-    public function editAction()
-    {   	
+
+    public function newAction()
+    {
     	$request = $this->getRequest();
+    	$form = new Application_Form_Regulations_Paragraph();
     	
     	if ($request->isPost())
     	{
@@ -37,54 +36,142 @@ class RegulationsController extends Zefir_Controller_Action
     		if (isset($data['leave']))
     		{
     			$this->flashMe('cancel_edit', 'SUCCESS');
-    			$this->_redirect('/regulations');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'regulation');
     		}
     		else 
     		{
-    			$new_paragraphs = $this->_countNewParagraphs();
-    			$form = new Application_Form_Regulations($new_paragraphs);
-				$form = $this->_addNewValidators($form, $new_paragraphs);
     			if ($form->isValid($request->getPost()))
-    			{
-		    		foreach ($form->getValues() as $id => $paragraphData)
-		    		{
-		    			if (!strstr($id, 'new_paragraph_'))
-		    			{//process existing paragraphs
-		    				$paragraph = new Application_Model_Regualtions();
-		    				$paragraph->populateFromForm($paragraphData);
-		    				
-		    				if (isset($paragraphData['paragraph_remove']) && 
-		    					$paragraphData['paragraph_remove'] == '1')
-		    					$paragraph->delete();
-		    				else
-		    					$paragraph->save();
-		    			}
-		    			else
-		    			{//add new paragraphs
-		    				$paragraph = new Application_Model_Regualtions();
-		    				$paragraph->populateFromForm($paragraphData);
-		    				
-		    				if ($paragraph->_paragraph_no != null)
-	    						$paragraph->save();
-		    			}
-		    		}
-		    		
-		    		$this->flashMe('regulations_saved');
-		    		$this->_redirect('/regulations');
-    			}
+				{
+					$paragraph = new Application_Model_Regualtions();
+					$paragraph->populateFromForm($form->getValues());
+					
+					$lang = new Application_Model_Languages();
+					$lang->findLang($this->view->lang);
+					$paragraph->lang_id = $lang->lang_id;
+					
+					$paragraph->positionLast();
+					
+					$paragraph->save();
+					$this->flashMe('paragraph_saved');
+					$this->_redirectToRoute(array(), 'regulation');
+				}
+    		}
+    	}
+    	
+    	$this->view->regulations = $form;
+    	
+    }
+    
+	public function editAction()
+    {   	
+    	$request = $this->getRequest();
+    	$form = new Application_Form_Regulations_Paragraph();
+    	
+    	if ($request->isPost())
+    	{
+    		$data = $request->getPost();
+    		if (isset($data['leave']))
+    		{
+    			$this->flashMe('cancel_edit', 'SUCCESS');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'regulation');
+    		}
+    		else 
+    		{
+    			if ($form->isValid($request->getPost()))
+				{
+					
+	    			//process existing paragraphs
+					$paragraph = new Application_Model_Regualtions();
+					$paragraph->populateFromForm($form->getValues());
+	
+					if (isset($paragraphData['paragraph_remove']) && $paragraphData['paragraph_remove'] == '1')
+					{
+						$paragraph->delete();
+						$this->flashMe('paragraph_deleted');
+					}
+					else
+					{
+						$paragraph->save();
+						$this->flashMe('paragraph_saved');
+					}
+					$this->_redirectToRoute(array(), 'regulation');
+				}				
     		}	
     	}
     	else
-    		$form = new Application_Form_Regulations();
-    		
+    	{
+    		$id = $request->getParam('id', null);
+    		$paragraph = new Application_Model_Regualtions($id);
+    		$form->populate($paragraph->toArray());
+    	}	
     	$this->view->regulations = $form;
     }
     
     public function deleteAction()
     {
-    	$edition = Zend_Registry::get('edition');
-    	$regulation = new Application_Model_Regualtions();
-    	$regulation->deleteRegulations($edition);
+    	$request = $this->getRequest();
+    	$id = $request->getParam('id', null);
+    	if ($id) 
+    	{
+    		$i = 1;
+    		foreach($this->_getRegulations() as $paragraph)
+    		{
+    			if ($paragraph->paragraph_id == $id)
+	    			$paragraph->delete();
+	    		else
+	    		{
+	    			$paragraph->paragraph_no = $i;
+	    			$paragraph->save();
+	    			$i++;
+	    		}
+    		}
+    		$this->flashMe('paragraphDeleted');
+    		$this->_redirectToRoute(array(), 'regulation');
+    	} 
+    }
+    
+    public function sortAction()
+    {
+    	$request = $this->getRequest();
+    	$moveId = $request->getParam('move_id', null);
+    	$behindId = $request->getParam('behind_id', null);
+		
+    	$sortedParagraphs = array();
+    	foreach ($this->_getRegulations() as $id => $paragraph)
+    	{ 
+    		$sortedParagraphs[$paragraph->paragraph_id] = $paragraph;
+    	}
+    	$move = $sortedParagraphs[$moveId];
+    	unset($sortedParagraphs[$moveId]);
+    	$i = 1;
+    	
+    	//move to the first position
+    	if ($behindId == 0)
+    	{
+    		$move->paragraph_no = $i;
+    		$move->save();
+    		$i++;
+    	}
+    	else
+	    {
+	    	foreach($sortedParagraphs as $pid => $par)
+	    	{
+	    		$par->paragraph_no = $i;
+	    		$par->save();
+	    		$i++;
+	    		
+	    		if ($par->paragraph_id == $behindId)
+	    		{
+	    			$move->paragraph_no = $i;
+	    			$move->save();
+	    			$i++;
+	    		}
+	    	}
+	    }
+
+    	//$this->flashMe('regulation_sorted');
+    	$this->_redirectToRoute(array(), 'regulation');
+    	
     }
     
     protected function _countNewParagraphs()

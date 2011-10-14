@@ -67,7 +67,7 @@ class Zefir_Decorator_ErrorMsg extends Zend_Form_Decorator_Abstract
     
 	protected function _createErrorMsg($tag, $class, $msg)
     {
-    	return '<'.$tag.' class="'.$class.'">'.$msg.'</'.$tag.'>';
+    	return '<'.$tag.' class="'.$class.'"><span>'.$msg.'</span></'.$tag.'>';
     }
     
     protected function _createImage($errorImgClass)

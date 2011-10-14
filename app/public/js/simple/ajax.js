@@ -12,6 +12,7 @@ function _ajax_request(url, data, callback, type, method) {
     return jQuery.ajax({
         type: method,
         url: url,
+        global: false,
         data: data,
         success: callback,
         dataType: type
@@ -35,6 +36,7 @@ jQuery.fn.deleteWithAjax = function() {
 	this.click(function() {
 
 	link = ($(this).attr("href"));
+
 	if ($(this).hasClass('no-confirm'))
 	{
 		$.delete_(link, {}, redirect_to_root(data), "script");
@@ -89,4 +91,10 @@ function refreshPage()
 {
 	link = window.location.href;
 	window.location.href =  link;
+}
+
+function getHost()
+{
+	link = window.location.href;
+	alert(link);
 }
