@@ -6,21 +6,21 @@
 					title="<?php echo $this->translate('new_caption');?>" />
 			</a>
 	</h1>
-	<table class="localizations">
+	<table class="localizations" style="border:1px solid black;">
 	<?php foreach ($this->captions as $caption):?>
-	<tr>
-		<td><?php echo $caption->name;?></td>
+	<tr style="border:1px solid black;">
+		<td style="border:1px solid black;"><?php echo $caption->name;?></td>
 		
-		<td><?php echo $caption->translate($caption->name, $this->caption_lang);?></td>
+		<td style="border:1px solid black;"><?php echo $caption->translate($caption->name, $this->lang);?></td>
 		
-		<td style="width: 50px;padding: 5px;border-right:0px;">
-			<span class="admin">
-			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->caption_lang), 'edit_localization');?>">
+		<td style="width: 50px;padding: 5px;border:1px solid;">
+			<span class="admin" style="float:none !important;">
+			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->lang), 'edit_localization');?>">
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 					alt="<?php echo $this->translate('edit');?>" 
 					title="<?php echo $this->translate('edit');?>" />
 			</a>
-			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->caption_lang), 'delete_localization');?>"
+			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->lang), 'delete_localization');?>"
 				class="delete"> 
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
 					del="<?php echo $this->translate('delete');?>" 

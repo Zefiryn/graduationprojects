@@ -4,13 +4,13 @@
 		<menu>
 			<a href="<?php echo $this->url(array('sort' => 'surname'), 'applications_sort')?>"><?php echo $this->translate('applications');?></a>
 			<a href="<?php echo $this->url(array(), 'users')?>"><?php echo $this->translate('users');?></a>
-			<a href=""><?php echo $this->translate('editions');?></a>
+			<a href="<?php echo $this->url(array(), 'editions')?>"><?php echo $this->translate('editions');?></a>
 			<a href=""><?php echo $this->translate('work_types');?></a>
 			<a href=""><?php echo $this->translate('schools');?></a>
 			<a href=""><?php echo $this->translate('languages');?></a>
 			<a href=""><?php echo $this->translate('captions');?></a>
 			<a href=""><?php echo $this->translate('translations');?></a>
-			<a href=""><?php echo $this->translate('settings');?></a>
+			<a href="<?php echo $this->url(array(), 'settings')?>"><?php echo $this->translate('settings');?></a>
 		</menu>
 	</menu>
 </nav>

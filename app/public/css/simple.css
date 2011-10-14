@@ -722,11 +722,13 @@ p.img_hint {
 }
 
 .admin {
-	
 	float: right;
 }
 .admin img{
 	float: left;
+}
+span.admin {
+	float: right;
 }
 
 #dialog_delete{
@@ -741,6 +743,10 @@ p.img_hint {
 #new_paragraph{
 	margin: 20px 0px 20px 0px;
 	text-align: right;
+}
+
+.rule {
+	margin: 15px 0px;
 }
 
 .new_rule a {
@@ -758,8 +764,9 @@ p.img_hint {
 .new_rule a:hover {
 	background-color: #e4eeec;
 	border: 1px solid #96a9a6;
-	color: #1e9780;
+	color: #27c1a4;
 	-o-transition: color background-color 300ms;
 	-webkit-transition: color background-color 300ms;
 	-moz-transition: color background-color 300ms;
+	text-decoration: none;
 }
