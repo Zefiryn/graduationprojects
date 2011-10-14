@@ -3,6 +3,13 @@
 class FaqController extends Zefir_Controller_Action
 {
 
+	protected function _getFaq()
+	{
+		$lang = new Application_Model_Languages();
+		$lang->findLang($this->view->lang);
+		
+		return $lang->faq;
+	}
     public function init()
     {
         parent::init();
@@ -10,105 +17,153 @@ class FaqController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-		$faqs = new Application_Model_Faqs();
-		$this->view->faqs = $faqs->getFaqs();
+		$this->view->faq = $this->_getFaq();
+		
+		if ($this->view->user->role == 'admin')
+			$this->render('index');
+		else
+			 $this->render('show');
     }
-    
-    public function editAction()
+	
+    public function newAction()
     {
     	$request = $this->getRequest();
-    
+    	$form = new Application_Form_Faq_Question();
+    	
     	if ($request->isPost())
     	{
     		$data = $request->getPost();
     		if (isset($data['leave']))
     		{
     			$this->flashMe('cancel_edit', 'SUCCESS');
-    			$this->_redirect('/faq');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'faq');
     		}
     		else 
     		{
-    			$new_questions = $this->_countNewQuestions();
-    			$form = new Application_Form_Faq($new_questions);
-				$form = $this->_addNewValidators($form, $new_questions);
-				if ($form->isValid($request->getPost()))
-    			{
-    				foreach ($form->getValues() as $id => $questionData)
-		    		{
-		    			if (!strstr($id, 'new_question_'))
-		    			{//process existing questions
-		    				$question = new Application_Model_Faqs();
-		    				$question->populateFromForm($questionData);
-		    				if (isset($questionData['question_remove']) && 
-		    					$questionData['question_remove'] == '1')
-		    					$question->delete();
-		    				else
-    							$question->save();
-		    			}
-		    			else
-		    			{//add new question
-		    				$question = new Application_Model_Faqs();
-		    				$question->populateFromForm($questionData);
-		    				
-		    				if ($question->_faq_question != null 
-		    					&& $question->_faq_answer != null)
-		    				{
-    							$question->save();
-		    				}
-		    			}
-		    		}
-    				$this->flashMe('faq_saved');
-		    		$this->_redirect('/faq');	
-    			}
+    			if ($form->isValid($request->getPost()))
+				{
+					$question = new Application_Model_Faqs();
+					$question->populateFromForm($form->getValues());
+					
+					$lang = new Application_Model_Languages();
+					$lang->findLang($this->view->lang);
+					$question->lang_id = $lang->lang_id;
+					
+					$question->positionLast();
+					
+					$question->save();
+					$this->flashMe('question_saved');
+					$this->_redirectToRoute(array(), 'faq');
+				}
     		}
-    	}
-    	else 
-    	{
-    		$form = new Application_Form_Faq();
     	}
     	
     	$this->view->form = $form;
+    	
+    }
     
+    public function editAction()
+    {
+    	$request = $this->getRequest();
+    	$form = new Application_Form_Faq_Question();
+    	
+    	if ($request->isPost())
+    	{
+    		$data = $request->getPost();
+    		if (isset($data['leave']))
+    		{
+    			$this->flashMe('cancel_edit', 'SUCCESS');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'faq');
+    		}
+    		else 
+    		{
+    			if ($form->isValid($request->getPost()))
+				{
+					
+	    			//process existing paragraphs
+					$question = new Application_Model_Faqs();
+					$question->populateFromForm($form->getValues());
+	
+					$question->save();
+					$this->flashMe('paragraph_saved');
+					$this->_redirectToRoute(array(), 'faq');
+				}				
+    		}	
+    	}
+    	else
+    	{
+    		$id = $request->getParam('id', null);
+    		$question = new Application_Model_Faqs($id);
+    		$form->populate($question->toArray());
+    	}	
+    	$this->view->form = $form;
     }
     
     
 	public function deleteAction()
     {
-    	$lang = new Zend_Session_Namespace('lang');
-    	$faq = new Application_Model_Faqs();
-    	$faq->deleteFaq($lang->_lang);
-    }
-    
- 	protected function _countNewQuestions()
-    {
-    	$data = $this->getRequest()->getPost();
-    	for($i = 1; isset($data['new_question_'.$i]); $i++);
-    	
-    	return --$i; 
-    }
-    
-	protected function _addNewValidators($form, $count)
-    {
-    	$data = $this->getRequest()->getPost();
-    	
-    	for($i = 1; $i <= $count; $i++)
+    	$request = $this->getRequest();
+    	$id = $request->getParam('id', null);
+    	if ($id) 
     	{
-    		$faq_question = $data['new_question_'.$i]['faq_question'];
-    		$faq_answer = $data['new_question_'.$i]['faq_answer'];
-    		
-    		if ($faq_question != null || $faq_answer != null)
+    		$i = 1;
+    		foreach($this->_getFaq() as $faq)
     		{
-    			$form->getSubform('new_question_'.$i)->getElement('faq_question')->setRequired(TRUE);
-    			$form->getSubform('new_question_'.$i)->getElement('faq_answer')->setRequired(TRUE);
+    			if ($faq->faq_id == $id)
+	    			$faq->delete();
+	    		else
+	    		{
+	    			$faq->position = $i;
+	    			$faq->save();
+	    			$i++;
+	    		}
     		}
-    		else
-    		{
-    			$form->getSubform('new_question_'.$i)->getElement('faq_question')->setRequired(FALSE);
-    			$form->getSubform('new_question_'.$i)->getElement('faq_answer')->setRequired(FALSE);
-    		}
+    		$this->flashMe('question_deleted');
+    		$this->_redirectToRoute(array(), 'faq');
+    	} 
+    }
+    
+	public function sortAction()
+    {
+    	$request = $this->getRequest();
+    	$moveId = $request->getParam('move_id', null);
+    	$behindId = $request->getParam('behind_id', null);
+		
+    	$sortedQuestion = array();
+    	foreach ($this->_getFaq() as $id => $question)
+    	{ 
+    		$sortedQuestion[$question->faq_id] = $question;
+    	}
+    	$move = $sortedQuestion[$moveId];
+    	unset($sortedQuestion[$moveId]);
+    	$i = 1;
+    	
+    	//move to the first position
+    	if ($behindId == 0)
+    	{
+    		$move->position = $i;
+    		$move->save();
+    		$i++;
     	}
     	
-    	return $form;
+    	foreach($sortedQuestion as $faq_id => $q)
+	    {
+    		$q->position = $i;
+    		$q->save();
+    		$i++;
+    		
+    		if ($faq_id == $behindId)
+    		{
+    			$move->position = $i;
+    			$move->save();
+    			$i++;
+    		}
+    	}
+	    
+
+    	//$this->flashMe('regulation_sorted');
+    	$this->_redirectToRoute(array(), 'faq');
+    	
     }
 
 

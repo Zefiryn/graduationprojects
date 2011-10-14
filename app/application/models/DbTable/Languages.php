@@ -25,6 +25,11 @@ class Application_Model_DbTable_Languages extends Zefir_Application_Model_DbTabl
 			'refColumn' => 'lang_id',
 			'order' => 'paragraph_no ASC'
 		),
+		'faq' => array(
+			'model' => 'Application_Model_Faqs',
+			'refColumn' => 'lang_id',
+			'order' => 'position ASC'
+		),
 	);
 
 	public function isLocalization($lang)

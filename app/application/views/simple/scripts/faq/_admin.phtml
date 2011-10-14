@@ -1,10 +1,10 @@
 <p class="admin">
-	<a href="<?php echo $this->baseUrl('/faq/edit');?>">
+	<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->faq->faq_id), 'lang_faq_edit');?>">
 		<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 			alt="<?php echo $this->translate('edit');?>" 
 			title="<?php echo $this->translate('edit');?>">
 	</a>
-	<a href="<?php echo $this->baseUrl('/faq/delete');?>"
+	<a href="<?php echo $this->url(array('id' => $this->faq->faq_id), 'faq_delete');?>"
 		class="delete">
 		<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
 			alt="<?php echo $this->translate('delete');?>" 

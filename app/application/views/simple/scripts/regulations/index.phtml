@@ -9,16 +9,16 @@
 	<div id="regulation">
 		
 		<?php foreach($this->regulations as $i => $regulation):?>
-		<div id="paragraph_<?php echo $regulation->paragraph_id;?>">
+		<div id="item_<?php echo $regulation->paragraph_id;?>">
 			<?php echo $this->partial('regulations/_admin.phtml', 
 					array('lang' => $this->lang, 'regulation' => $regulation));?>
 
 		
-		<p class="rule">
-			<span class="regulation_number" style="font-weight: bold">&sect; <?php echo ++$i;?></span>
-			<br />
-			<?php echo  nl2br($regulation->paragraph_text);?>
-		</p> 
+			<p class="rule">
+				<span class="regulation_number" style="font-weight: bold">&sect; <?php echo ++$i;?></span>
+				<br />
+				<?php echo  nl2br($regulation->paragraph_text);?>
+			</p> 
 		</div>
 		<?php endforeach; ?>
 		

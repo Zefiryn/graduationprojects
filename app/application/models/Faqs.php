@@ -3,9 +3,11 @@
 class Application_Model_Faqs extends GP_Application_Model
 {
 	public $faq_id;
-	public $faq_lang;
+	public $lang_id;
 	public $faq_question;
 	public $faq_answer;
+	public $position;
+	protected $lang;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Faqs';
 	
@@ -46,6 +48,17 @@ class Application_Model_Faqs extends GP_Application_Model
 		);
 		
 		return $data;
+	}
+	
+	public function positionLast()
+	{
+		if ($this->lang_id != null)
+		{
+			$last = $this->getDbTable()->findLastQuestion($this->lang_id);
+			$this->position = $last->position++; 
+		}
+		
+		return $this;
 	}
 
 }

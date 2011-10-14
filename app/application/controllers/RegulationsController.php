@@ -79,21 +79,11 @@ class RegulationsController extends Zefir_Controller_Action
     		{
     			if ($form->isValid($request->getPost()))
 				{
-					
-	    			//process existing paragraphs
 					$paragraph = new Application_Model_Regualtions();
 					$paragraph->populateFromForm($form->getValues());
 	
-					if (isset($paragraphData['paragraph_remove']) && $paragraphData['paragraph_remove'] == '1')
-					{
-						$paragraph->delete();
-						$this->flashMe('paragraph_deleted');
-					}
-					else
-					{
-						$paragraph->save();
-						$this->flashMe('paragraph_saved');
-					}
+					$paragraph->save();
+					$this->flashMe('paragraph_saved');
 					$this->_redirectToRoute(array(), 'regulation');
 				}				
     		}	
@@ -125,7 +115,7 @@ class RegulationsController extends Zefir_Controller_Action
 	    			$i++;
 	    		}
     		}
-    		$this->flashMe('paragraphDeleted');
+    		$this->flashMe('paragraph_deleted');
     		$this->_redirectToRoute(array(), 'regulation');
     	} 
     }
@@ -152,22 +142,19 @@ class RegulationsController extends Zefir_Controller_Action
     		$move->save();
     		$i++;
     	}
-    	else
-	    {
-	    	foreach($sortedParagraphs as $pid => $par)
-	    	{
-	    		$par->paragraph_no = $i;
-	    		$par->save();
-	    		$i++;
-	    		
-	    		if ($par->paragraph_id == $behindId)
-	    		{
-	    			$move->paragraph_no = $i;
-	    			$move->save();
-	    			$i++;
-	    		}
-	    	}
-	    }
+    	foreach($sortedParagraphs as $pid => $par)
+    	{
+    		$par->paragraph_no = $i;
+    		$par->save();
+    		$i++;
+    		
+    		if ($par->paragraph_id == $behindId)
+    		{
+    			$move->paragraph_no = $i;
+    			$move->save();
+    			$i++;
+    		}
+    	}
 
     	//$this->flashMe('regulation_sorted');
     	$this->_redirectToRoute(array(), 'regulation');

@@ -739,23 +739,23 @@ span.admin {
 	background: rgba(254,254,254, 0.5) !important; 
 	border: 1px solid rgba(0,221,179,0.8) !important;
 }
-#new_paragraph{
+#new_paragraph, #new_question {
 	margin: 20px 0px 20px 0px;
 	text-align: right;
 }
 
-.rule {
+.rule, .question {
 	padding: 3px;
 	margin: 15px 0px;
 	border-radius: 5px;
 	border: 1px solid white;
 }
-.rule:hover {
+.rule:hover, .question:hover {
 	background: #f6faf9;
 	border: 1px solid #f6faf9;	
 }
 
-.new_rule a {
+.new_rule a, .new_question a {
 	font-size: 24px;
 	text-align: right;
 	border-radius: 5px;
@@ -767,7 +767,7 @@ span.admin {
 	-moz-transition: color background-color 300ms;
 }
 
-.new_rule a:hover {
+.new_rule a:hover, .new_question a:hover {
 	background-color: #e4eeec;
 	border: 1px solid #96a9a6;
 	color: #27c1a4;
