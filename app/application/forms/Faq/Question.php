@@ -13,13 +13,12 @@ class Application_Form_Faq_Question extends Zefir_Form
         parent::init();
         $this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
-        $this->setDecorators(array('FormElements'));
     	
         $question = $this->createElement('hidden', 'faq_id');
         $question->setDecorators(array('ViewHelper'));
         $this->addElement($question);
         
-        $question = $this->createElement('hidden', 'faq_lang');
+        $question = $this->createElement('hidden', 'lang_id');
         $question->setDecorators(array('ViewHelper'));
         $this->addElement($question);
         
@@ -43,18 +42,6 @@ class Application_Form_Faq_Question extends Zefir_Form
         		->addValidators(array(
         			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
         		));
-        $this->addElement($question);
-        
-        $question = $this->createElement('checkbox', 'question_remove');
-        $question->setLabel('question_remove')
-        	->setAttribs(array('class' => 'checkbox'))
-        	->setValue('Remove question')
-        	->setDecorators(array(
-				array('ViewHelper'),
-				array('ErrorMsg'),
-				array('MyLabel', array('placement' => 'prepend', 'class' => 'label checkbox'))
-				)        			
-        	);
         $this->addElement($question);
         
         $this->_createCsrfElement();

@@ -4,47 +4,55 @@
 
 $(document).ready(function(){
 	
-	regulationDragAndDrop();
+	if ($("#regulation").length)
+		sortElements('#regulation', "/regulation/sort/", function(){sortNumbers("&sect; ", "");});
+	
+	if ($("#faq").length)
+		sortElements('#faq', "/faq/sort/", function(){sortNumbers("", ". ");});
 	
 });
 
-function regulationDragAndDrop()
+function test(){
+	alert('test');
+}
+
+function sortElements(id, link, sortCallback)
 {	
-	$( "#regulation" ).sortable({
+	$( id ).sortable({
 		placeholder: "ui-state-highlight",
 		 start: function(event, ui) {
 			 $('.ui-state-highlight').height(ui.item.height());
 		 },
 		update: function(event, ui) {
-			sortRegualtion(event, ui);
+			sort(event, ui, link, sortCallback);
 		}
 	});
 	
 	$( "#regulation" ).disableSelection();
 }
 
-function sortRegualtion(event, ui)
+function sort(event, ui, link, sortCallback)
 {
 	//moved paragraph
-	var paragraphId = ui.item.attr('id');
-	paragraphId = paragraphId.substring(paragraphId.indexOf('_')+1);
+	var moveId = ui.item.attr('id');
+	moveId = moveId.substring(moveId.indexOf('_')+1);
 	
 	//new position
-	if ($("#paragraph_"+paragraphId).prev().length != 0)
+	if ($("#item_"+moveId).prev().length != 0)
 	{
-		var newPrev = $("#paragraph_"+paragraphId).prev().attr('id');
+		var newPrev = $("#item_"+moveId).prev().attr('id');
 		newPrev = newPrev.substring(newPrev.indexOf('_')+1);
 	}
 	else
 		newPrev = 0;
 	
-	var link = "/regulation/sort/"+paragraphId+"/"+newPrev;
+	var url = link+moveId+"/"+newPrev;
 	
-	sortNumbers();
+	sortCallback();
 	
 	jQuery.ajax({
         type: "GET",
-        url: link,
+        url: url,
         global: false,
         success: function(){}, 
         error: function(){
@@ -53,10 +61,10 @@ function sortRegualtion(event, ui)
 	});
 }
 
-function sortNumbers()
+function sortNumbers(prev, post)
 {
-	$(".regulation_number").each(function(index){
+	$(".regulation_number, .position").each(function(index){
 		i = index + 1;
-		$(this).html("&sect; "+i);
+		$(this).html(prev+i+post);
 	});	
 }

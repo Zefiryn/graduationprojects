@@ -1,15 +1,37 @@
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'faq', 'delete_confirm' => $this->translate('faq_delete_confirm')));
+?>
+
 <div id="main">
-	<?php if ($this->user->_role == 'admin') 
-			echo $this->partial('faq/_admin.phtml');?>
 	<h1><?php echo $this->translate('faq_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->faqs as $index => $faq):?>
-	<p class="rule">
-		<span style="font-weight: bold">
-				<?php echo ++$index.'. '.$faq->faq_question;?>
-		</span><br />
-		<?php echo  $faq->faq_answer;?>
-	</p> 
-	<?php endforeach; ?>
+	<div id="faq">
+		<?php foreach($this->faq as $i => $faq):?>
+		<div id="item_<?php echo $faq->faq_id;?>">
+			<?php echo $this->partial('faq/_admin.phtml', 
+					array('lang' => $this->lang, 'faq' => $faq));?>
+			<p class="question">
+				<span class="position" style="font-weight: bold"><?php echo ++$i;?>. </span>
+				<span style="font-weight: bold"><?php echo $faq->faq_question;?></span>
+				<br />
+				<?php echo  nl2br($faq->faq_answer);?>
+			</p>
+		</div>
+		<?php endforeach; ?>
+		<?php if (count($this->faq) == 0):?>
+		<p class="empty">
+			<?php echo $this->translate('no_faq_defined');?>
+			<br /><br /><br /><br />
+		</p>
+		<?php endif;?>	
+	</div>
+	
+	<p id="new_question">
+		<span class="new_question">
+			<a href="<?php echo $this->url(array(), 'new_question');?>">
+				<?php echo  $this->translate('add_new_question');?>
+			</a>
+		</span> 
+	</p>
 </div>
