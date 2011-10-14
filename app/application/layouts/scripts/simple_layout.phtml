@@ -4,14 +4,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php echo $this->headTitle();?>
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
-	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.9.custom.css'); ?>
+	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
 	
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
-	<?php echo $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
+	<?php $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
 									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
 									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
 									->appendFile($this->baseUrl.'js/simple/ajax.js')
 									->appendFile($this->baseUrl.'js/simple/script.js'); ?>
+									
+	<?php if ($this->user->role == 'admin')
+		$this->headScript()->appendFile($this->baseUrl.'js/simple/admin_script.js');?>
+	
+	<?php echo $this->headScript();?>
 </head>
 
 <body>

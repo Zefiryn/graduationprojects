@@ -1,21 +1,49 @@
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'paragraph', 'delete_confirm' => $this->translate('paragraph_delete_confirm')));
+?>
+
 <div id="main">
-	<?php if ($this->user->_role == 'admin') 
-			echo $this->partial('regulations/_admin.phtml', array('lang' => $this->lang));?>
 	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->regulations as $i => $regulation):?>
-	<p class="rule" id="paragraph_<?php echo $regulation->paragraph_id;?>">
-		<span style="font-weight: bold">&sect; <?php echo ++$i;?></span>
-		<br />
-		<?php echo  nl2br($regulation->paragraph_text);?>
-	</p> 
-	<?php endforeach; ?>
-	
-	<?php if (count($this->regulations) == 0):?>
-	<p class="empty">
-		<?php echo $this->translate('no_regulation_defined');?>
-		<br /><br /><br /><br />
-	</p>
-	<?php endif;?>
+	<div id="regulation">
+		
+		<?php foreach($this->regulations as $i => $regulation):?>
+		<div id="paragraph_<?php echo $regulation->paragraph_id;?>">
+		<p class="admin">
+			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $regulation->paragraph_id), 'lang_regulation_edit');?>">
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
+					alt="<?php echo $this->translate('edit');?>" 
+					title="<?php echo $this->translate('edit');?>">
+			</a>
+			<a href="<?php echo $this->url(array('id' => $regulation->paragraph_id), 'regulation_delete');?>"
+				class="delete">
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
+					alt="<?php echo $this->translate('delete');?>" 
+					title="<?php echo $this->translate('delete');?>">
+			</a>
+		</p>
+		
+		<p class="rule">
+			<span class="regulation_number" style="font-weight: bold">&sect; <?php echo ++$i;?></span>
+			<br />
+			<?php echo  nl2br($regulation->paragraph_text);?>
+		</p> 
+		</div>
+		<?php endforeach; ?>
+		
+		<?php if (count($this->regulations) == 0):?>
+		<p class="empty">
+			<?php echo $this->translate('no_regulation_defined');?>
+			<br /><br /><br /><br />
+		</p>
+		<?php endif;?>	
+	</div>
+	<p id="new_paragraph">
+		<span class="new_rule">
+			<a href="<?php echo $this->url(array(), 'new_regulation');?>">
+				<?php echo  $this->translate('add_new_paragraph');?>
+			</a>
+		</span> 
+	</p>	
 </div>

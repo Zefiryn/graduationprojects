@@ -34,5 +34,14 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 				->order('paragraph_no');
 		return $this->fetchAll($select);
 	}	
+	
+	public function findLastParagraph($lang)
+	{
+		$select = $this->select()
+				->where('lang_id = ?', $lang)
+				->order('paragraph_no DESC')
+				->limit(1);
+		return $this->fetchAll($select)->current();
+	}
 }
 

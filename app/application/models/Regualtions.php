@@ -46,6 +46,16 @@ class Application_Model_Regualtions extends GP_Application_Model
 		return $data;
 	}
 	
+	public function positionLast()
+	{
+		if ($this->lang_id != null)
+		{
+			$last = $this->getDbTable()->findLastParagraph($this->lang_id);
+			$this->paragraph_no = $last->paragraph_no++; 
+		}
+		
+		return $this;
+	}
 	
 	
 }

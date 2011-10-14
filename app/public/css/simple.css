@@ -469,11 +469,13 @@ p, ul, ol {
 
 
 
-a {color: #000; text-decoration: none; }
+a {color: #27c1a4; text-decoration: none; 
+	-o-transition: color 300ms;-webkit-transition: color 300ms;-moz-transition: color 300ms;}
 a:active, a:focus { outline: none; }
 a:active { position: relative; top: 2px; }
-a:visited { color: #000;}
-a:hover { cursor: pointer; }
+a:visited { color: #1e9780;}
+a:hover { cursor: pointer; text-decoration: underline; color: #2ee4c3; 
+	-o-transition: color 300ms;-webkit-transition: color 300ms;-moz-transition: color 300ms;}
 .navi-lang {
 	display: block;
 	float: right;
@@ -633,6 +635,34 @@ textarea {
 	height: 300px;
 }
 
+textarea.error, input.error, select.error {
+	border: 3px solid #ca0000 !important;
+	margin-bottom: 0px;
+}
+
+p.error {
+	max-width: 406px;
+	border: 0px solid #aa0000;
+	color: #eee;
+	font-weight: bold;
+	margin-left: 0px;
+	margin-top: -2px;
+	font-size: 14px;
+	text-align:right;
+}
+
+p.error span {
+	background-color: #ca0000;
+	padding: 3px;
+	-webkit-border-bottom-left-radius: 5;
+	-moz-border-radius-bottomleft: 5;
+	border-bottom-left-radius: 5;
+	-webkit-border-bottom-right-radius: 5;
+	-moz-border-radius-bottomright: 5;
+	border-bottom-right-radius: 5;
+	
+}
+
 input.submit {
 	font-family: 'Myriad Pro', helvetica, arial, sans-serif;
 	padding: 5px;
@@ -689,4 +719,47 @@ p.img_hint {
    -webkit-box-shadow: 3px 3px 10px 0px rgb(238,238,238);
    -moz-box-shadow: 3px 3px 10px 0px rgb(238,238,238);
    text-align:left;
+}
+
+.admin {
+	
+	float: right;
+}
+.admin img{
+	float: left;
+}
+
+#dialog_delete{
+	visibility: hidden;
+}
+
+.ui-state-highlight {
+	min-height: 30px !important; 
+	background: rgba(254,254,254, 0.5) !important; 
+	border: 1px solid rgba(0,221,179,0.8) !important;
+}
+#new_paragraph{
+	margin: 20px 0px 20px 0px;
+	text-align: right;
+}
+
+.new_rule a {
+	font-size: 24px;
+	text-align: right;
+	border-radius: 5px;
+	padding: 5px;
+	border: 1px solid rgb(208, 208, 208); 	/*#1e9780*/
+	background-color: rgb(238, 238, 238);
+	-o-transition: color background-color 300ms;
+	-webkit-transition: color background-color 300ms;
+	-moz-transition: color background-color 300ms;
+}
+
+.new_rule a:hover {
+	background-color: #e4eeec;
+	border: 1px solid #96a9a6;
+	color: #1e9780;
+	-o-transition: color background-color 300ms;
+	-webkit-transition: color background-color 300ms;
+	-moz-transition: color background-color 300ms;
 }
