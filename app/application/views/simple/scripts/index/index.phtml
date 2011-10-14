@@ -3,7 +3,7 @@
   	<div class="news"> 
   		<!-- NEWS PHOTO -->
 	  	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
-	  		<img src="/assets/images/anna-ostrowska_01.jpg" alt="zdjecie" width="100%" />
+	  		<img src="/assets/images/<?php echo $news->getImage();?>" alt="zdjecie" width="100%" />
 	  	</a>
 	    
 	    <h2>

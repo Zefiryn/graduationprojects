@@ -15,6 +15,7 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 		'files' => array(
 			'model' => 'Application_Model_NewsFiles',
 			'refColumn' => 'news_id',
+			'order' => 'main_image',
 		),
 	);
 	

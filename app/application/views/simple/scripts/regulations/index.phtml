@@ -10,19 +10,9 @@
 		
 		<?php foreach($this->regulations as $i => $regulation):?>
 		<div id="paragraph_<?php echo $regulation->paragraph_id;?>">
-		<p class="admin">
-			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $regulation->paragraph_id), 'lang_regulation_edit');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
-					alt="<?php echo $this->translate('edit');?>" 
-					title="<?php echo $this->translate('edit');?>">
-			</a>
-			<a href="<?php echo $this->url(array('id' => $regulation->paragraph_id), 'regulation_delete');?>"
-				class="delete">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
-					alt="<?php echo $this->translate('delete');?>" 
-					title="<?php echo $this->translate('delete');?>">
-			</a>
-		</p>
+			<?php echo $this->partial('regulations/_admin.phtml', 
+					array('lang' => $this->lang, 'regulation' => $regulation));?>
+
 		
 		<p class="rule">
 			<span class="regulation_number" style="font-weight: bold">&sect; <?php echo ++$i;?></span>

@@ -42,5 +42,36 @@ class Application_Model_News extends GP_Application_Model
 			return NULL;
 
 	}
+	
+	public function getImage()
+	{
+		if ($this->files == null)
+			$this->__get('files');
+			
+		if (count($this->files) > 0)
+		{
+			return $this->files[0]->path;
+		}
+		
+		else
+			return NULL;
+	}
+	
+	public function hasPhoto()
+	{
+		if ($this->files == null)
+			$this->__get('files');
+			
+		if (count($this->files) > 0)
+		{
+			$options = Zend_Registry::get('options');
+			if (file_exists(APPLICATION_PATH.'/../public'.$options['upload']['images'].'/'.$this->files[0]->path))
+				return TRUE;
+			else
+				return FALSE;
+		}
+		else 
+			return FALSE;
+	}
 }
 
