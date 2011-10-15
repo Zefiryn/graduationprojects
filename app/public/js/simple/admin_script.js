@@ -7,8 +7,8 @@ $(document).ready(function(){
 	if ($("#regulation").length)
 		sortElements('#regulation', "/regulation/sort/", function(){sortNumbers("&sect; ", "");});
 	
-	if ($("#faq").length)
-		sortElements('#faq', "/faq/sort/", function(){sortNumbers("", ". ");});
+	if ($("#faq_l, #faq_r").length)
+		sortElements('#faq_l, #faq_r', "/faq/sort/", function(id){sortNumbers("", ". ");reposition(id);});
 	
 });
 
@@ -20,15 +20,16 @@ function sortElements(id, link, sortCallback)
 {	
 	$( id ).sortable({
 		placeholder: "ui-state-highlight",
-		 start: function(event, ui) {
-			 $('.ui-state-highlight').height(ui.item.height());
+		connectWith: ".connected",
+		start: function(event, ui) {
+			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
 		update: function(event, ui) {
 			sort(event, ui, link, sortCallback);
 		}
 	});
 	
-	$( "#regulation" ).disableSelection();
+	$( id ).disableSelection();
 }
 
 function sort(event, ui, link, sortCallback)
@@ -48,7 +49,7 @@ function sort(event, ui, link, sortCallback)
 	
 	var url = link+moveId+"/"+newPrev;
 	
-	sortCallback();
+	sortCallback(moveId);
 	
 	jQuery.ajax({
         type: "GET",
@@ -67,4 +68,8 @@ function sortNumbers(prev, post)
 		i = index + 1;
 		$(this).html(prev+i+post);
 	});	
+}
+
+function reposition(id){
+	
 }

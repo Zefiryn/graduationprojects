@@ -3,11 +3,12 @@
 			echo $this->partial('about/_admin.phtml', array('lang' => $this->lang));?>
 	<h1><?php echo $this->about->about_title;?></h1>
 	<p class="spacer">&nbsp;</p>
-	 
-	<?php foreach ($this->about_text as $text):?>
-	<p class="about">
-		<?php echo $text;?>
-	</p>
-	<?php endforeach;?>
 	
+	<div class="about">
+		<?php foreach ($this->about_text as $text):?>
+		<p class="about">
+			<?php echo $text;?>
+		</p>
+		<?php endforeach;?>
+	</div>
 </div>

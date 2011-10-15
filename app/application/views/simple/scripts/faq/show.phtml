@@ -1,0 +1,33 @@
+<div id="main">
+	<h1><?php echo $this->translate('faq_header');?></h1>
+	<p class="spacer">&nbsp;</p>
+	
+	<div class="column-left">
+	<?php foreach($this->faq_left as $i => $faq):?>
+	<p class="question">
+		<span class="position" style="font-weight: bold"><?php echo ++$i;?>. </span>
+		<span style="font-weight: bold"><?php echo $faq->faq_question;?></span>
+		<br />
+		<?php echo  nl2br($faq->faq_answer);?>
+	</p>
+	<?php endforeach; ?>
+	</div>
+	
+	<div class="column-right">
+	<?php foreach($this->faq_right as $i => $faq):?>
+	<p class="question">
+		<span class="position" style="font-weight: bold"><?php echo ++$i;?>. </span>
+		<span style="font-weight: bold"><?php echo $faq->faq_question;?></span>
+		<br />
+		<?php echo  nl2br($faq->faq_answer);?>
+	</p>
+	<?php endforeach; ?>
+	</div>
+	
+	<?php if (count($this->faq_left) == 0):?>
+	<p class="empty">
+		<?php echo $this->translate('no_faq_defined');?>
+		<br /><br /><br /><br />
+	</p>
+	<?php endif;?>
+</div>
