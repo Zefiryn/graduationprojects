@@ -22,7 +22,7 @@ class Application_Form_Login extends Zefir_Form
 		
 		$this->setMethod('post');
 		$this->setName('PageForm');
-		$this->setAction('/auth/login');
+		//$this->setAction('auth/login');
 
 		$login = $this->createElement('text', 'nick');
 		$login->setAttribs(array('size'=> 55,
