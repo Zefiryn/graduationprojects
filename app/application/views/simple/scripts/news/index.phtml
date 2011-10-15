@@ -4,7 +4,7 @@
   		<!-- NEWS PHOTO -->
   		<?php if ($news->hasPhoto()):?>
 	  	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
-	  		<img src="/assets/images/<?php echo $news->getImage();?>" alt="zdjecie" width="100%" />
+	  		<img src="<?php echo $this->baseUrl;?>assets/images/<?php echo $news->getImage();?>" alt="zdjecie" width="100%" />
 	  	</a>
 	    <?php endif;?>
 	    <h2>
@@ -17,7 +17,7 @@
 	    
 	    <p>
 	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>" class="wiecej">
-	    		<img src="/img/simple/bullet.png" />
+	    		<img src="<?php echo $this->baseUrl;?>img/simple/bullet.png" />
 	    	</a>
 	    </p>
 	</div>
@@ -36,7 +36,7 @@
 		</a>
 		<?php endfor;?>	
 		
-		<a class="strona"href="#"><img src="/img/simple/bullet.png" /></a> 
+		<a class="strona"href="#"><img src="<?php echo $this->baseUrl;?>img/simple/bullet.png" /></a> 
 	</div>
 </div>
 </div>
