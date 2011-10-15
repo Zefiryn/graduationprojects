@@ -1,12 +1,12 @@
 <p class="admin">
 	<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->regulation->paragraph_id), 'lang_regulation_edit');?>">
-		<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
 			alt="<?php echo $this->translate('edit');?>" 
 			title="<?php echo $this->translate('edit');?>">
 	</a>
 	<a href="<?php echo $this->url(array('id' => $this->regulation->paragraph_id), 'regulation_delete');?>"
 		class="delete">
-		<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
 			alt="<?php echo $this->translate('delete');?>" 
 			title="<?php echo $this->translate('delete');?>">
 	</a>
