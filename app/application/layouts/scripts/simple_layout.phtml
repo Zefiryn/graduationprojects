@@ -27,7 +27,8 @@
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
-			    	<img src="/img/simple/graduation-projects-eu_logo.png"/>
+			    	<object width="130px" height="130px" data="/img/simple/logo.swf"></object>
+			    	<img src="/img/simple/graduation-projects-eu_logo_<?php echo $this->lang?>.png"/>
 			    </a>
 			</div>
 	  	</div>
@@ -41,19 +42,25 @@
 		    <?php endif;?>
 		    
 		    <?php echo $this->partial('partials/lang_menu.phtml', array('link' => $this->link, 'lang' => $this->lang));?>
+		    
 		</div>
+		
+		<p class="hr"><span>&nbsp;</span></p>
+		
 	</header>
-
+	
+	
 
 	<?php echo $this->layout()->content; ?>
 
+	
 
-	<div id="footer">
+	<footer>
 		<p> Copyright by 2+3D, 2011. Projekt wydany dzięki pomocy finansowej  
 	    Międzynarodowego Funduszu Wyszehradzkiego 
 	    www.visegradfund.org</p>
 	    <p><img src="/img/simple/visegrad_fund_logo_web_blue_400.jpg" alt="Visegrad Fund"></p>
-	</div>
+	</footer>
 
 
 </body>

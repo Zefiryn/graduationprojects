@@ -6,12 +6,13 @@
 	<h1><?php echo $this->translate('faq_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<div id="faq">
-		<?php foreach($this->faq as $i => $faq):?>
+	<div style="clear:both;overflow:hidden;">
+	<div id="faq_l" class="connected column-left">
+		<?php foreach($this->faq_left as $i => $faq):?>
 		<div id="item_<?php echo $faq->faq_id;?>">
 			<?php echo $this->partial('faq/_admin.phtml', 
 					array('lang' => $this->lang, 'faq' => $faq));?>
-			<p class="question">
+			<p class="question color">
 				<span class="position" style="font-weight: bold"><?php echo ++$i;?>. </span>
 				<span style="font-weight: bold"><?php echo $faq->faq_question;?></span>
 				<br />
@@ -19,13 +20,30 @@
 			</p>
 		</div>
 		<?php endforeach; ?>
-		<?php if (count($this->faq) == 0):?>
+	</div>
+	
+	<div id="faq_r" class="connected column-right">
+		<?php foreach($this->faq_right as $i => $faq):?>
+		<div id="item_<?php echo $faq->faq_id;?>">
+			<?php echo $this->partial('faq/_admin.phtml', 
+					array('lang' => $this->lang, 'faq' => $faq));?>
+			<p class="question color">
+				<span class="position" style="font-weight: bold"><?php echo ++$i;?>. </span>
+				<span style="font-weight: bold"><?php echo $faq->faq_question;?></span>
+				<br />
+				<?php echo  nl2br($faq->faq_answer);?>
+			</p>
+		</div>
+		<?php endforeach; ?>
+	</div>
+	</div>
+		<?php if (count($this->faq_left) == 0):?>
 		<p class="empty">
 			<?php echo $this->translate('no_faq_defined');?>
 			<br /><br /><br /><br />
 		</p>
 		<?php endif;?>	
-	</div>
+
 	
 	<p id="new_question">
 		<span class="new_question">

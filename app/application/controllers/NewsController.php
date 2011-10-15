@@ -18,7 +18,6 @@ class NewsController extends Zefir_Controller_Action
 		$this->view->start_pagination = 1;
 		$this->view->end_pagination = 1;
 		
-		$this->renderScript('index/index.phtml');
     }
     
     public function showAction()

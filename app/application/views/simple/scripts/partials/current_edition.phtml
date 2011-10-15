@@ -1,6 +1,6 @@
 <nav>
 	<menu> 
-		<p class="menu_label"><?php echo $this->translate('edition').' '.$this->edition?><span>&rsaquo;</span></p>
+		<p class="menu_label"><?php echo $this->translate('edition').' '.str_replace('/', '-', $this->edition);?><span>&rsaquo;</span></p>
 		<menu> 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?></a> 
 			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?></a> 
