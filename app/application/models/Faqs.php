@@ -60,6 +60,11 @@ class Application_Model_Faqs extends GP_Application_Model
 		
 		return $this;
 	}
+	
+	public function getFaqLength($lang)
+	{
+		return $this->getDbTable()->getStringLength($lang);
+	}
 
 }
 

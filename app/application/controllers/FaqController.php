@@ -18,18 +18,23 @@ class FaqController extends Zefir_Controller_Action
     public function indexAction()
     {
     	$faqs = $this->_getFaq();
-		$count = count($faqs)/2;
+    	$faq = new Application_Model_Faqs();
+		$str_length = $faq->getFaqLength($this->view->lang);
 		
-		foreach($faqs as $i => $faq)
+		$sum = 0;
+		$faq_left = array();
+		$faq_right = array();
+		foreach($faqs as $faq_section)
 		{
-			if ($i < $count)
-				$faqs_left[$i] = $faq;
-			else
-				$faqs_right[$i] = $faq;
+			if ($sum < ($str_length/2))
+				$faq_left[] = $faq_section;
+			else 
+				$faq_right[] = $faq_section;
+				
+			$sum += mb_strlen($faq_section->faq_question, 'UTF8') + mb_strlen($faq_section->faq_answer, 'UTF8');	
 		}
 		
-		$this->view->faq_left = $faqs_left;
-		$this->view->faq_right = $faqs_right;
+		$this->view->columns = array('left' => $faq_left, 'right' => $faq_right);
 		
 		if ($this->view->user->role == 'admin')
 			$this->render('index');

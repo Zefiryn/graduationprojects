@@ -17,12 +17,31 @@ class RegulationsController extends Zefir_Controller_Action
 
     public function indexAction()
     {
-		$this->view->regulations = $this->_getRegulations();
+    	$regulations = $this->_getRegulations();
+		
+    	$reg = new Application_Model_Regualtions();
+		$str_length = $reg->getRegulationLength($this->view->lang);
+		
+		$sum = 0;
+		$regulation_left = array();
+		$regulation_right = array();
+		foreach($regulations as $regulation)
+		{
+			if ($sum < ($str_length/2))
+				$regulation_left[] = $regulation;
+			else 
+				$regulation_right[] = $regulation;
+				
+			$sum += mb_strlen($regulation->paragraph_text, 'UTF8');	
+		}
+		
+		$this->view->columns = array('left' => $regulation_left, 'right' => $regulation_right);
 		
 		if ($this->view->user->role == 'admin')
 			$this->render('index');
 		else
 			 $this->render('show');
+		
     }
 
     public function newAction()

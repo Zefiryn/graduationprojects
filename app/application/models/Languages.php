@@ -31,7 +31,7 @@ class Application_Model_Languages extends GP_Application_Model
 	public function findLangId($lang)
 	{
 		$rowset = $this->findLang($lang);
-		return (array_shift($rowset)->lang_id);
+		return ($rowset->lang_id);
 	}
 	
 	public function getLanguages()

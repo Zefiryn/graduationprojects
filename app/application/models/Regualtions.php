@@ -57,6 +57,11 @@ class Application_Model_Regualtions extends GP_Application_Model
 		return $this;
 	}
 	
+	public function getRegulationLength($lang)
+	{
+		return $this->getDbTable()->getStringLength($lang);
+	}
+	
 	
 }
 
