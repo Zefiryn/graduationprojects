@@ -58,7 +58,19 @@ $(document).ready(function(){
 	
 	
 	ajaxLinks();
+	
+	menuSlide();
 });
+
+function menuSlide(){
+	
+	if (navigator.platform == 'iPhone' || navigator.platform == 'iPad')
+	{
+		$('.menu_label').click(function(){
+			$(this).next().toggleClass('open_menu');
+		});
+	}
+}
 
 function flashMessage()
 {
