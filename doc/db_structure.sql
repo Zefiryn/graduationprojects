@@ -225,6 +225,7 @@ CREATE TABLE news_details(
 	news_title varchar(100) not null,
 	news_id int not null,
 	news_text text not null,
+	news_lead text not null,
 	lang_id int not null,
 	PRIMARY KEY(news_text_id),
 	FOREIGN KEY(news_id)
