@@ -103,7 +103,7 @@ menu {
 	font-family: helvetica, arial, sans-serif;
 }
 
-menu:hover menu, menu:focus menu {
+menu:hover menu, .open_menu {
 	height: 250px;
 	-webkit-transition: height 900ms;
 	-moz-transition: height 900ms;
