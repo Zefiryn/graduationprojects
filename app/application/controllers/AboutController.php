@@ -29,6 +29,10 @@ class AboutController extends Zefir_Controller_Action
     	
     	$this->view->about = $about;
 		$this->view->about_text = explode("\n", $about->about_text);
+		$this->view->path = array(
+    		0 => array('route' => 'root', 'data' => array(), 'name' => 'main_page'),
+    		1 => array('route' => 'about', 'data' => array(), 'name' => 'about_link'),
+    	);
 		
     }
     

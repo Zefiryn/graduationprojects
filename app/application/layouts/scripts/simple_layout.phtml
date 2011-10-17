@@ -49,6 +49,13 @@
 		
 	</header>
 	
+	<?php if (isset($this->path)):?>
+	<nav class="path">
+	<?php foreach($this->path as $i => $elem):?>
+		<a href="<?php echo $this->url($elem['data'], $elem['route']);?>" <?php if (++$i == count($this->path)):?>class="path_end"<?php endif;?>><?php echo $this->translate($elem['name'])?></a> <?php if ($i != count($this->path)):?>&raquo;<?php endif;?>
+	<?php endforeach;?>
+	</nav>
+	<?php endif;?>
 	
 
 	<?php echo $this->layout()->content; ?>

@@ -5,10 +5,10 @@
 $(document).ready(function(){
 	
 	if ($("#regulation").length)
-		sortElements('#regulation', "/regulation/sort/", function(){sortNumbers("&sect; ", "");});
+		sortElements('#regulation_left, #regulation_right', "/regulation/sort/", function(){sortNumbers("&sect; ", "");});
 	
-	if ($("#faq_l, #faq_r").length)
-		sortElements('#faq_l, #faq_r', "/faq/sort/", function(id){sortNumbers("", ". ");reposition(id);});
+	if ($("#faq").length)
+		sortElements('#faq_left, #faq_right', "/faq/sort/", function(id){sortNumbers("", ". ");reposition(id);});
 	
 });
 
