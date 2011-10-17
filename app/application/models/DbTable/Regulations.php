@@ -43,5 +43,18 @@ class Application_Model_DbTable_Regulations extends Zefir_Application_Model_DbTa
 				->limit(1);
 		return $this->fetchAll($select)->current();
 	}
+	
+	public function getStringLength($lang_id)
+	{
+		$lang = new Application_Model_Languages();
+		
+		$sql = 'SELECT SUM(CHAR_LENGTH(paragraph_text)) AS StrLength FROM '.$this->_name.' WHERE lang_id = ?';
+		
+		$s = $this->getAdapter()->query($sql, array($lang->findLangId($lang_id)));
+		
+		while ($row = $s->fetch()) {
+    		return ($row['StrLength']);
+		}
+	}
 }
 

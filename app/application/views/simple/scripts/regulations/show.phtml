@@ -2,15 +2,21 @@
 	<h1><?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
 	
-	<?php foreach($this->regulations as $regulation):?>
-	<p class="rule">
-		<span style="font-weight: bold">&sect; <?php echo $regulation->paragraph_no;?></span>
-		<br />
-		<?php echo  nl2br($regulation->paragraph_text);?>
-	</p> 
+	<?php foreach($this->columns as $side => $regulations):?>
+		
+		<div class="column-<?php echo $side;?>">
+		<?php foreach($regulations as $regulation):?>
+		<p class="rule">
+			<span style="font-weight: bold">&sect; <?php echo $regulation->paragraph_no;?></span>
+			<br />
+			<?php echo  nl2br($regulation->paragraph_text);?>
+		</p> 
+		<?php endforeach; ?>
+		</div>
+		
 	<?php endforeach; ?>
 	
-	<?php if (count($this->regulations) == 0):?>
+	<?php if (count($this->columns['left']) == 0):?>
 	<p class="empty">
 		<?php echo $this->translate('no_regulation_defined');?>
 		<br /><br /><br /><br />
