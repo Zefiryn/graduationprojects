@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
+class Application_Model_DbTable_ResultFiles extends Zefir_Application_Model_DbTable
 {
 
 	/**
@@ -52,7 +52,7 @@ class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
      * @throws Zend_Exception
      * @return Application_Model_Files $file
      */
-    public function save(Application_Model_Files $file)
+    public function save(Application_Model_ResultFiles $file)
     {
     	parent::save($file);
     }

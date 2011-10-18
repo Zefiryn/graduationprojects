@@ -179,6 +179,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('languages'));
 		$acl->addResource(new Zend_Acl_Resource('editions'));
 		$acl->addResource(new Zend_Acl_Resource('news'));
+		$acl->addResource(new Zend_Acl_Resource('migrations'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);

@@ -139,8 +139,9 @@ CREATE TABLE results (
 	country char(2) NOT NULL,
 	degree_id smallint(6),
 	work_type_id smallint(6),
-	graduation_time INT NOT NULL,	
-	miniature VARCHAR(35),
+	graduation_time INT,	
+	supervisor varchar(60) NOT NULL,
+	supervisor_degree varchar(15) NOT NULL,
 	PRIMARY KEY (result_id),
 	FOREIGN KEY(edition_id)
 		REFERENCES editions(edition_id)

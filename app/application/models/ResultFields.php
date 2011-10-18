@@ -19,6 +19,7 @@ class Application_Model_ResultFields extends GP_Application_Model
 	}
 	
 	
+	
 
 }
 

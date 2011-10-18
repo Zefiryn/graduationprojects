@@ -8,19 +8,16 @@ class Application_Model_Results extends GP_Application_Model
 	public $surname;
 	public $email;
 	public $country;
-	public $school;
-	public $department;
 	public $degree_id;
-	public $work_subject;
 	public $work_type_id;
-	public $work_desc;
+	public $graduation_time;
 	public $supervisor;
 	public $supervisor_degree;
-	public $miniature;
 	protected $edition;
 	protected $degree;
 	protected $files;
 	protected $work_type;
+	protected $fields;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Results';
 	
@@ -29,87 +26,37 @@ class Application_Model_Results extends GP_Application_Model
 	    return parent::__construct($id, $options);
 	}
 	
-	public function populateFromForm($data)
+	/**
+	 * Add new field for this application
+	 * 
+	 * @access public
+	 * @param Application_Model_ResultFields $field
+	 * @return Applcation_Model_Results $this
+	 */
+	public function addChild(Zefir_Application_Model $object, $var)
 	{
-		$appSettings = Zend_Registry::get('appSettings');
-		parent::populateFromForm($data);
-		
-		$this->_miniature = $data['miniatureCache'];
-		
-		for($i = 1; $i <= $appSettings->_max_files; $i++)
-		{//add uploaded files
-			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
-			{
-				$this->_files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
-				$this->_files[$i]['description'] = $data['file_'.$i]['file_annotation'];
-			}  
-		}
+		if (!is_array($var))
+			$this->$var = array();
+		array_push($this->$var, $object);
 	}
 	
-	public function delete()
+	public function save()
 	{
-		return $this->getDbTable()->delete($this);
-	}
-	
-	public function getApplications($select, $arg)
-	{
-		switch($select)
+		$self = $this->getDbTable()->save($this);
+		
+		foreach($this->fields as $field)
 		{
-			case 'edition':
-				return $this->_getApplicationsByEdition($arg);
-			break;
+			$field->result_id = $self->result_id;
+			$field->save();
 		}
 		
-	}
-	
-	protected function _getApplicationsByEdition($id)
-	{
-		$where = $this->getDbTable()->select()->where('edition_id = ?', $id)->order('application_date');
-		$rowset = $this->getDbTable()->fetchAll($where);
-		
-		$applications = array();
-		foreach($rowset as $row)
+		foreach($this->files as $file)
 		{
-			$application = new $this;
-			$applications[] = $application->populateWithReference($row, $application);
+			$file->result_id = $self->result_id;
+			$file->save();
 		}
 		
-		return $applications;
-	}
-	
-	public function getSupervisor()
-	{
-		return $this->_supervisor_degree.' '.$this->_supervisor;
-	}
-	
-	public function getApplicationSchool()
-	{
-		return $this->_school.', '.$this->_department;
-	}
-	
-	public function prepareFormArray()
-	{
-		$data = array(
-				'result_id' => $this->_application_id,
-				'school' => $this->_school,
-				'department' => $this->_department,
-				'degree' => $this->_degree->_degree_id,
-				'work_subject' => $this->_work_subject,
-				'work_type' => $this->_work_type->_work_type_id,
-				'work_desc' => $this->_work_desc,
-				'supervisor_degree' => $this->_supervisor_degree,
-				'supervisor' => $this->_supervisor,
-				'miniatureCache' => $this->_miniature,
-		);
-		
-		foreach($this->_files as $no => $file)
-		{
-			$i = ++$no;
-			$data['file_'.$i]['file_'.$i.'Cache'] = $file->_path;
-			$data['file_'.$i]['file_annotation'] = $file->_file_desc;
-		}
-		
-		return $data;
+		return $self;	
 	}
 
 }

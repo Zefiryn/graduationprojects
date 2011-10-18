@@ -83,36 +83,9 @@ class Application_Model_DbTable_ResultFields extends Zefir_Application_Model_DbT
      */
 	public function save(Application_Model_ResultFields $result)
     {
-    		parent::save($application);
+    		parent::save($result);
     }
     
-    public function delete(Application_Model_ResultFields $result)
-    {
-		$options = Zend_Registry::get('options');
-    	
-    	//remove files
-    	$this->_deleteApplicationFiles($result->_files);
-    	
-    	//remove miniature
-    	$path = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$result->_miniature;
-    	unlink($path);
-    	
-    	//remove application
-    	parent::delete($result);
-    }
     
-    protected function _deleteApplicationFiles($files)
-    {
-    	$options = Zend_Registry::get('options');
-    	foreach($files as $file)
-    	{
-    		$dir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.substr($file->_path, 0, strrpos($file->_path, '/'));
-    		$path = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$file->_path;
-    		//unlink($path);
-    		$file->delete();
-    	}
-    	
-    	//rmdir($dir);
-    }
 }
 

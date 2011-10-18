@@ -74,48 +74,5 @@ class Application_Model_DbTable_Results extends Zefir_Application_Model_DbTable
       parent::__construct(array());
     }
     
-	/**
-     * Save or update application data in the database 
-     * 
-     * @param Application_Model_Results $result
-     * @throws Zend_Exception
-     * @return Application_Model_Results $result
-     */
-	public function save(Application_Model_Results $result)
-    {
-    		parent::save($application);
-    }
-    
-    public function delete(Application_Model_Applications $application)
-    {
-		$options = Zend_Registry::get('options');
-    	
-    	//remove files
-    	$this->_deleteApplicationFiles($application->_files);
-    	
-    	//remove miniature
-    	$path = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->_miniature;
-    	unlink($path);
-    	
-    	//remove user
-    	$application->_user->delete();
-    	
-    	//remove application
-    	parent::delete($application);
-    }
-    
-    protected function _deleteApplicationFiles($files)
-    {
-    	$options = Zend_Registry::get('options');
-    	foreach($files as $file)
-    	{
-    		$dir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.substr($file->_path, 0, strrpos($file->_path, '/'));
-    		$path = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$file->_path;
-    		//unlink($path);
-    		$file->delete();
-    	}
-    	
-    	//rmdir($dir);
-    }
 }
 

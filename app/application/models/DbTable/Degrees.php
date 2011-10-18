@@ -24,6 +24,11 @@ class Application_Model_DbTable_Degrees extends Zefir_Application_Model_DbTable
 		)
 	);
 	
+	public function findDegree($degree)
+	{
+		$row = $this->fetchRow($this->select()->where('degree_name = ?', $degree));
+		return $row;
+	}
 
 }
 
