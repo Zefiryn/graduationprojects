@@ -13,7 +13,7 @@ class Application_Model_Degrees extends GP_Application_Model
 	    return parent::__construct($id, $options);
 	}
 	
-	public function getDegrees()
+	public function getDegreesList()
 	{
 		$rowset = $this->getDbTable()->fetchAll();
 		
@@ -24,6 +24,11 @@ class Application_Model_Degrees extends GP_Application_Model
 		}
 		
 		return $select;
+	}
+	
+	public function findDegree($degree)
+	{
+		return($this->populate($this->getDbTable()->findDegree($degree)));
 	}
 
 }
