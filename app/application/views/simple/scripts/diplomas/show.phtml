@@ -45,8 +45,8 @@
 		</div>
 		
 		<nav class="diploma_nav">
-			<a href="<?php echo $this->url(array(), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
-			<a href="" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+			<a href="<?php echo $this->url(array('id' => $this->adjacent[0]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+			<a href="<?php echo $this->url(array('id' => $this->adjacent[1]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
 		</nav>
     </div>
 	

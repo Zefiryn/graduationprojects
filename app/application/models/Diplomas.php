@@ -83,6 +83,11 @@ class Application_Model_Diplomas extends GP_Application_Model
 	{
 		return $this->supervisor_degree.' '.$this->supervisor;
 	}
+	
+	public function getAdjacentDiplomas()
+	{
+		return $this->getDbTable()->getAdjacentDiplomas($this);
+	}
 
 }
 

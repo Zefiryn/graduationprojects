@@ -25,6 +25,7 @@ class DiplomasController extends Zefir_Controller_Action
     	$id = $request->getParam('id', null);
     	$diploma = new Application_Model_Diplomas($id);
     	$this->view->diploma = $diploma;
+    	$this->view->adjacent = $diploma->getAdjacentDiplomas();
     }
     
     

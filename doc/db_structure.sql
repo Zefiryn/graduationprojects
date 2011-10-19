@@ -1,6 +1,7 @@
-DROP TABLE IF EXISTS about, diploma_files, diploma_fields, files, fields, applications, 
-diplomas, degrees, schools, work_types, jurors, faq, regulations, news_files, news_details, 
-news, settings, template_settings, users, editions, localizations, languages, captions;
+DROP TABLE IF EXISTS about, jurors, news_files, news_details, news, settings,
+template_settings, diploma_files, result_files, diploma_fields, result_fields, diplomas, results,
+fields, files, applications, schools, users, faq, regulations, localizations, captions, 
+work_types, degrees, languages, editions;  
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -15,6 +16,24 @@ CREATE TABLE languages (
 	PRIMARY KEY (lang_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE degrees(
+	degree_id smallint(6) NOT NULL AUTO_INCREMENT,
+	degree_name char(13) NOT NULL,
+	PRIMARY KEY (degree_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE work_types(
+	work_type_id smallint(6) NOT NULL AUTO_INCREMENT,
+	work_type_name varchar(10),
+	PRIMARY KEY (work_type_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE captions (
+	caption_id int not null, auto_increment,
+	name varchar(60) not null,
+	PRIMARY KEY (caption_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 CREATE TABLE localizations (
 	item_id int NOT NULL AUTO_INCREMENT,
 	caption_id int not null,
@@ -28,7 +47,6 @@ CREATE TABLE localizations (
 		REFERENCES captions(caption_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE regulations (
 	paragraph_id int NOT NULL AUTO_INCREMENT,
@@ -73,17 +91,6 @@ CREATE TABLE schools(
 	PRIMARY KEY (school_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE degrees(
-	degree_id smallint(6) NOT NULL AUTO_INCREMENT,
-	degree_name char(13) NOT NULL,
-	PRIMARY KEY (degree_id)
-)ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-CREATE TABLE work_types(
-	work_type_id smallint(6) NOT NULL AUTO_INCREMENT,
-	work_type_name varchar(10),
-	PRIMARY KEY (work_type_id)
-)ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE applications (
 	application_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -137,8 +144,6 @@ CREATE TABLE fields (
 	PRIMARY KEY (field_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-DROP TABLE diploma_fields, diploma_files, diplomas;
-
 CREATE TABLE diplomas (
 	diploma_id smallint(6) NOT NULL AUTO_INCREMENT,
 	edition_id smallint(6),
@@ -162,7 +167,6 @@ CREATE TABLE diplomas (
 		REFERENCES work_types(work_type_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE diploma_fields (
 	diploma_field_id int not null auto_increment,

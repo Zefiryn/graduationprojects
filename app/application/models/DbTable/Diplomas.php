@@ -74,5 +74,28 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
       parent::__construct(array());
     }
     
+    public function getAdjacentDiplomas($diploma)
+    {
+    	$select = $this->select()
+    					->union(
+    						array(
+    							'('.$this->select()->where('edition_id = ?', $diploma->edition_id)->where('surname < ?', $diploma->surname)->order(array('surname DESC', 'name DESC'))->limit(1).')',
+    							'('.$this->select()->where('edition_id = ?', $diploma->edition_id)->where('surname > ?', $diploma->surname)->order(array('surname ASC', 'name ASC'))->limit(1).')',
+    						)
+    					);
+    	$rowset = $this->fetchAll($select);
+    	
+    	$adjacentDiplomas = array();
+    	foreach($rowset as $row)
+    	{
+    		$diplomaClass = get_class($diploma);
+    		$adjacentDiploma = new $diplomaClass;
+    		$adjacentDiplomas[] =  $adjacentDiploma->populate($row);
+    	}
+    	
+    	return $adjacentDiplomas;
+    					
+    }
+    
 }
 
