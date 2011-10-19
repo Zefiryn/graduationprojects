@@ -45,8 +45,16 @@
 		</div>
 		
 		<nav class="diploma_nav">
+			<?php if (count($this->adjacent) == 2):?>
 			<a href="<?php echo $this->url(array('id' => $this->adjacent[0]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
 			<a href="<?php echo $this->url(array('id' => $this->adjacent[1]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+			<?php else:?>
+				<?php if ($this->adjacent[0]->surname < $this->diploma->surname):?>
+				<a href="<?php echo $this->url(array('id' => $this->adjacent[0]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+				<?php else: ?>
+				<a href="<?php echo $this->url(array('id' => $this->adjacent[0]->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+				<?php endif;?>
+			<?php endif;?>
 		</nav>
     </div>
 	
