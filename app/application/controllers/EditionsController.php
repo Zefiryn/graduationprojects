@@ -16,13 +16,7 @@ class EditionsController extends Zefir_Controller_Action
     
 	public function showAction()
     {
-    	$edition = new Application_Model_Editions();
-    	$editions = $edition->getEditions('DESC');
-		$selected_edition = str_replace('-', '/', $this->getRequest()->getParam('edition', array_shift($editions)));
-		
-		$edition->getEdition($selected_edition, TRUE);
-		
-		var_dump($edition->results);
+    	
     }
     
     

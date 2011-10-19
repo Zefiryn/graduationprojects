@@ -66,7 +66,7 @@ class Zefir_Filter
 	* CONVERTS DIACRITIC SYMBOLS TO NON-DIACRITIC ONE
 	* this function was found: http://mynthon.net/howto/-/strip-accents-romove-national-characters-replace-diacritic-chars.txt
 	* @param string $s a string in which charaters should be changed
-	* @param int $case states whether output string should change letter case or not (-1-leowercase, 0 - no change, 1-uppercase)
+	* @param int $case states whether output string should change letter case or not (-1-lowercase, 0 - no change, 1-uppercase)
 	**/
 	public static function strToUrl($s, $case=0)
 	{

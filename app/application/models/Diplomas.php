@@ -1,8 +1,8 @@
 <?php
 
-class Application_Model_Results extends GP_Application_Model
+class Application_Model_Diplomas extends GP_Application_Model
 {
-	public $result_id;
+	public $diploma_id;
 	public $edition_id;
 	public $name;
 	public $surname;
@@ -19,7 +19,7 @@ class Application_Model_Results extends GP_Application_Model
 	protected $work_type;
 	protected $fields;
 	
-	protected $_dbTableModelName = 'Application_Model_DbTable_Results';
+	protected $_dbTableModelName = 'Application_Model_DbTable_Diplomas';
 	
 	public function __construct($id = null, array $options = null) 
 	{
@@ -30,14 +30,17 @@ class Application_Model_Results extends GP_Application_Model
 	 * Add new field for this application
 	 * 
 	 * @access public
-	 * @param Application_Model_ResultFields $field
-	 * @return Applcation_Model_Results $this
+	 * @param Application_Model_DiplomaFields $field
+	 * @return Applcation_Model_Diplomas $this
 	 */
 	public function addChild(Zefir_Application_Model $object, $var)
 	{
-		if (!is_array($var))
+		if (!is_array($this->$var))
 			$this->$var = array();
+			
 		array_push($this->$var, $object);
+
+		return $this;
 	}
 	
 	public function save()
@@ -46,17 +49,39 @@ class Application_Model_Results extends GP_Application_Model
 		
 		foreach($this->fields as $field)
 		{
-			$field->result_id = $self->result_id;
+			$field->diploma_id = $self->diploma_id;
 			$field->save();
 		}
 		
 		foreach($this->files as $file)
 		{
-			$file->result_id = $self->result_id;
+			$file->diploma_id = $self->diploma_id;
 			$file->save();
 		}
 		
 		return $self;	
+	}
+	
+	public function getField($field, $lang)
+	{
+		if (!is_array($this->fields))
+			$this->__get('fields');
+				
+		foreach($this->fields as $diplomaField)
+		{
+			if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $lang)
+				return $diplomaField->entry;
+		}
+	}
+	
+	public function getAuthorName()
+	{
+		return $this->name.' '.$this->surname;
+	}
+	
+	public function getSupervisor()
+	{
+		return $this->supervisor_degree.' '.$this->supervisor;
 	}
 
 }

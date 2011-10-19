@@ -1,0 +1,53 @@
+<div id="main">
+
+	<div class="galeria">
+		<?php foreach($this->diploma->files as $file):?> 
+		<a href="#">
+			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->path);?>" alt="zdjecie" />
+		</a>
+		<?php endforeach;?>
+	</div>
+    
+	<div class="dyplom">
+		<p class="diploma_field"><?php echo strtolower($this->translate('edition'));?></p>
+		<p class="diploma_data diploma_edition"><?php echo $this->diploma->edition->edition_name2;?>
+			<?php if ($this->diploma->edition->edition_name2 < '2010-2011'):?>
+			<span class="kraj">(<?php echo $this->translate('only_polish_edition');?>)</span>
+			<?php endif;?>
+		</p>
+
+		<p class="diploma_field"><?php echo strtolower($this->translate('title'));?></p>
+		<p class="diploma_data"><?php echo $this->diploma->getField('work_subject', $this->lang);?></p>
+		
+		<p class="diploma_field"><?php echo strtolower($this->translate('author'));?></p>
+		<p class="diploma_data">
+			<span class="author"><?php echo $this->diploma->getAuthorName();?>
+				<span class="country">(<?php echo strtoupper($this->diploma->country);?>)</span>
+			</span>
+		</p>
+		
+		<?php if ($this->diploma->email != null):?>
+		<p class="diploma_field"><?php echo strtolower($this->translate('e-mail'));?></p>
+		<p class="diploma_data"><?php echo $this->diploma->email;?></p>
+		<?php endif;?>
+		
+		<p class="diploma_field"><?php echo strtolower($this->translate('degree'));?></p>
+		<p class="diploma_data"><?php echo $this->translate($this->diploma->degree->degree_name.'_adjective');?></p>
+		
+		<p class="diploma_field"><?php echo strtolower($this->translate('school'));?></p>
+		<p class="diploma_data"><?php echo $this->diploma->getField('school', $this->lang);?></p>
+		
+		<p class="diploma_field"><?php echo strtolower($this->translate('supervisor'));?></p>
+		<p class="diploma_data"><?php echo $this->diploma->getSupervisor();?></p>
+		
+		<div class="work_desc">
+			<p><?php echo $this->diploma->getField('work_desc', $this->lang);?></p>
+		</div>
+		
+		<nav class="diploma_nav">
+			<a href="<?php echo $this->url(array(), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+			<a href="" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+		</nav>
+    </div>
+	
+</div>

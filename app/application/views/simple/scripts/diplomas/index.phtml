@@ -1,0 +1,15 @@
+<div id="main">
+
+	<?php foreach($this->diplomas as $id => $diploma):?>
+	<div class="diploma news" style="border: 1px black;overflow:hidden;background: yellow;padding: 0px;">
+		<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">
+			<img src="<?php echo $this->baseUrl('assets/editions/'.$diploma->files[0]->path);?>" alt="" style="width: 100%;"/>
+		</a>
+	</div>
+		<?php if (++$id % 4 == 0 or ($id) == count($this->diplomas)): ?>
+	 	<!-- every 4 diplomas-->
+		<p class="clearfix"></p>
+		<?php endif;?>
+	<?php endforeach;?>	
+
+</div>

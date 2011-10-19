@@ -301,12 +301,13 @@ a img:hover {
 	margin-bottom: 30px;
 }
 
-.galeria img, a img {
+.galeria img, .galeria a img {
 	border: none;
 	outline: none;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
+	width: 100%;
 }
 .galeria a img:hover {
 	border: none;
@@ -315,96 +316,87 @@ a img:hover {
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 }
-.kategoria {
+
+.diploma_field {
 	width: 95px;
-	margin-right: 30px;
+	margin: 5px 30px 0px 0px;
 	float: left;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #CCC;
 	text-align: right;
-}
-.kategoria-edycja {
-	width: 95px;
-	margin-right: 30px;
-	float: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color: #CCC;
-	text-align: right;
-	padding-top: 4px;
-}
-.kategoria-autor {
-	width: 95px;
-	margin-right: 30px;
-	float: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color: #CCC;
-	text-align: right;
-	padding-top: 6px;
+	border: 0px solid;
 }
 
-.kategoria-opis {
-	width: 95px;
-	margin-right: 30px;
-	float: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	color: #CCC;
-	text-align: right;
-}
-
-.rzad {
-	display: block;
-	float: left;
-	width: 470px;
-	margin-right: 0px;
-	margin-top: 2px;
-	margin-bottom: 2px;
-}
-.rzad-navi {
-	display: block;
-	float: left;
-	width: 470px;
-	margin-right: 0px;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	padding-top: 15px;
-}
-.back {
-	float: left;
-}
-.forward {
-	float: left;
-	margin-left:30px;
-}
-
-
-.kraj {
-	font-weight: normal;
-	font-size: 14px;
-}
-
-.tresc-kategorii {
-	display: block;
-	float: left;
-	width: 345px;
-	margin-right: 0px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-.tresc-opis {
-	display: block;
-	float: left;
-	width: 345px;
-	margin-right: 0px;
+.diploma_data {
+	border: 0px solid;
 	color: #000;
-	padding-top: 6px;
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: rgba(0,221,179,0.9);
-	margin-top: 6px;
+	margin: 2px 0px 2px 125px; 
+	width: 345px;
+	padding: 5px 0px 0px 0px;
 }
+.diploma_data:after {
+	content: " ";
+	height: 0px;
+	display:block;
+	clear: both;
+}
+
+.diploma_edition {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	color: rgba(0,221,179,0.9);
+	margin-bottom: 6px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgba(0,221,179,0.9);
+	padding-top: 2px;
+	padding-bottom: 4px;	
+	font-weight: bold;
+}
+
+.work_desc {
+	border-top-color: rgba(0, 221, 179, 0.898);
+	border-top-style: solid;
+	border-top-width: 1px;
+	display: block;
+	margin: 6px 0px 0px 125px;
+	padding-top: 6px;
+	width: 345px;
+	font-family: "helvetica", "arial", sans-serif;
+	color: rgb(51, 51, 51);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 100;
+	line-height: 20px;
+	margin-top: 10px;
+}
+
+.author { 
+	color: rgba(0, 0, 0, 0.898);
+	font-family: "Myriad Pro", "helvetica", "arial", sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	margin-bottom: 0px;
+}
+
+.country { 
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.diploma_nav
+{
+	height: 45px;
+	margin-left: 125px;
+	margin-top: 27px;
+}
+
+.diploma_nav a:first-child {margin-right: 27px;}
+
+
 .tekst {
 	color: #000;
 	padding-top: 10px;
@@ -427,7 +419,7 @@ h1 {
 
 h2 {
 	color: rgb(0, 0, 0);
-	font-family: "Myriad Pro", "helvetica", "arial", sans-serif;
+	font-family: "Gesta-Bold", "Myriad Pro", "helvetica", "arial", sans-serif;
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 1.4;
@@ -473,13 +465,13 @@ h4 {
 p, ul, ol {
 	font-family: helvetica, arial, sans-serif;
 	margin-top: 5px;
-	color: #666666;
-	-webkit-transition: color 700ms;
-	-moz-transition: color 700ms;
-	-o-transition: color 700ms;
 	font-weight: 100;
 	font-size: 12px;
 	line-height: 20px;
+	color: rgb(51, 51, 51);
+	font-family: "helvetica", "arial", sans-serif;
+	font-style: normal;
+	margin-top: 10px;
 }
 .news p {
 	font-family: helvetica, arial, sans-serif;
@@ -919,3 +911,5 @@ a.path_end:link, a.path_end:visited{
 	font-weight: normal;
 	color: #3c9;
 }
+
+.clearfix {clear: both;}

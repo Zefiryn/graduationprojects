@@ -117,7 +117,6 @@ class Zefir_Application_Model {
 	 * 
 	 * @access public
 	 * @param string $name
-	 * @throws Exception
 	 * @return mixed
 	 */
 	public function __get($name) 
@@ -445,7 +444,7 @@ class Zefir_Application_Model {
 	 */
 	protected function _getChild($name)
 	{		
-		if (isset($this->$name))
+		if (isset($this->$name) && $this->$name != null)
 		{	
 			$set = $this->$name;
 		}
