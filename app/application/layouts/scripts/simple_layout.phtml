@@ -3,8 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php echo $this->headTitle();?>
-	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
-	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/webfonts.css'); ?>
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
 	
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
 	<?php $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
@@ -27,8 +28,9 @@
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
-			    	<object width="130px" height="130px" data="<?php echo $this->baseUrl;?>img/simple/logo.swf"></object>
-			    	<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"/>
+			    	<object width="130" height="130" data="<?php echo $this->baseUrl;?>img/simple/logo.swf"></object>
+			    	<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"
+			    		alt="Gradutation Project Logo"/>
 			    </a>
 			</div>
 	  	</div>

@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS about, files, result_files, fields, result_fields, applications, results, degrees, schools, work_types,
-jurors, faq, regulations, news_files, news_details, news, settings, template_settings, users,editions, localizations, languages, captions;
+DROP TABLE IF EXISTS about, diploma_files, diploma_fields, files, fields, applications, 
+diplomas, degrees, schools, work_types, jurors, faq, regulations, news_files, news_details, 
+news, settings, template_settings, users, editions, localizations, languages, captions;
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
@@ -130,8 +131,16 @@ CREATE TABLE files(
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE results (
-	result_id smallint(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE fields (
+	field_id smallint(6) NOT NULL AUTO_INCREMENT,
+	field_name varchar(100) NOT NULL,
+	PRIMARY KEY (field_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+DROP TABLE diploma_fields, diploma_files, diplomas;
+
+CREATE TABLE diplomas (
+	diploma_id smallint(6) NOT NULL AUTO_INCREMENT,
 	edition_id smallint(6),
 	name char(150) NOT NULL,
 	surname char(200) NOT NULL,
@@ -141,8 +150,8 @@ CREATE TABLE results (
 	work_type_id smallint(6),
 	graduation_time INT,	
 	supervisor varchar(60) NOT NULL,
-	supervisor_degree varchar(15) NOT NULL,
-	PRIMARY KEY (result_id),
+	supervisor_degree varchar(15),
+	PRIMARY KEY (diploma_id),
 	FOREIGN KEY(edition_id)
 		REFERENCES editions(edition_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
@@ -154,21 +163,16 @@ CREATE TABLE results (
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE fields (
-	field_id smallint(6) NOT NULL AUTO_INCREMENT,
-	field_name varchar(100) NOT NULL,
-	PRIMARY KEY (field_id)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE result_fields (
-	result_field_id int not null auto_increment,
-	result_id smallint(6) NOT NULL,
+CREATE TABLE diploma_fields (
+	diploma_field_id int not null auto_increment,
+	diploma_id smallint(6) NOT NULL,
 	lang_id int NOT NULL,
 	field_id smallint(6) not null,
 	entry text not null,
-	PRIMARY KEY (result_field_id),
-	FOREIGN KEY(result_id)
-		REFERENCES results(result_id)
+	PRIMARY KEY (diploma_field_id),
+	FOREIGN KEY(diploma_id)
+		REFERENCES diplomas(diploma_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(lang_id)
 		REFERENCES languages(lang_id)
@@ -178,14 +182,14 @@ CREATE TABLE result_fields (
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE result_files(
+CREATE TABLE diploma_files(
 	file_id smallint(6) NOT NULL AUTO_INCREMENT,
-	result_id smallint(6) NOT NULL,
+	diploma_id smallint(6) NOT NULL,
 	path varchar(150) NOT NULL,
 	file_desc varchar(150),
 	PRIMARY KEY (file_id),
-	FOREIGN KEY(result_id)
-		REFERENCES results(result_id)
+	FOREIGN KEY(diploma_id)
+		REFERENCES diplomas(diploma_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

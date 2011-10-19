@@ -4,8 +4,9 @@ class Application_Model_Editions extends GP_Application_Model
 {
 	public $edition_id;
 	public $edition_name;
+	public $edition_name2;
 	protected $applications;
-	protected $results;
+	protected $diplomas;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Editions';
 	

@@ -180,6 +180,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('editions'));
 		$acl->addResource(new Zend_Acl_Resource('news'));
 		$acl->addResource(new Zend_Acl_Resource('migrations'));
+		$acl->addResource(new Zend_Acl_Resource('diplomas'));
 		
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
@@ -188,7 +189,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
 		$acl->allow(null, array('applications'), array('new'));
-		$acl->allow(null, array('editions', 'news'), array('index', 'show'));
+		$acl->allow(null, array('diplomas', 'news'), array('index', 'show'));
 		$acl->allow('user', array('auth'), array('logout'));
 		$acl->allow('user', array('applications'), array('new', 'show', 'edit'));
 		$acl->deny('user', array('admin'), null);

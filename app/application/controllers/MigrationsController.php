@@ -60,19 +60,20 @@ class MigrationsController extends Zefir_Controller_Action
 		
 		$stmt = $db->query('SELECT DISTINCT post_id FROM wp_postmeta WHERE meta_key LIKE "_dyplomy%"');
 		
-		
+		//$row['post_id'] = 230;
 		while ($row = $stmt->fetch())
 		{
 			$stmt2 = $db->query('SELECT * FROM wp_posts WP JOIN wp_postmeta WM ON (WP.ID=WM.post_id ) WHERE WP.ID = '.$row['post_id']);
 			
-			$result = new Application_Model_Results();
-			$result->country = 'pl';
+			$Diploma = new Application_Model_Diplomas();
+			$Diploma->country = 'pl';
 			
+			//add diploma data
 			while ($row_d = $stmt2->fetch())
 			{
 				if (isset($dyplomy_fields[$row_d['meta_key']]) && !is_array($dyplomy_fields[$row_d['meta_key']]))
 				{
-					$result->$dyplomy_fields[$row_d['meta_key']] = $row_d['meta_value'];
+					$Diploma->$dyplomy_fields[$row_d['meta_key']] = trim($row_d['meta_value']);
 				}
 				elseif (isset($dyplomy_fields[$row_d['meta_key']]) && is_array($dyplomy_fields[$row_d['meta_key']]))
 				{
@@ -81,12 +82,12 @@ class MigrationsController extends Zefir_Controller_Action
 						$field = new Application_Model_Fields();
 						$field->getField($dyplomy_fields[$row_d['meta_key']]['fields']);
 						
-						$resultField = new Application_Model_ResultFields();
-						$resultField->lang_id = $lang->lang_id;
-						$resultField->field_id = $field->field_id;
-						$resultField->entry = $row_d['meta_value'];
+						$DiplomaField = new Application_Model_DiplomaFields();
+						$DiplomaField->lang_id = $lang->lang_id;
+						$DiplomaField->field_id = $field->field_id;
+						$DiplomaField->entry = trim($row_d['meta_value']);
 						
-						$result->addChild($resultField, 'fields');
+						$Diploma->addChild($DiplomaField, 'fields');
 					}
 					if (isset($dyplomy_fields[$row_d['meta_key']]['degree']))
 					{
@@ -99,11 +100,24 @@ class MigrationsController extends Zefir_Controller_Action
 						if ($dyp != null)
 						{
 							$d = $degree->findDegree($degrees[$dyp]);
-							$result->degree_id = $d->degree_id;
+							$Diploma->degree_id = $d->degree_id;
 						}
 					}
-				}	
+				}
+				$saved_row = $row_d;
 			}
+			
+
+			//add work description
+			$field = new Application_Model_Fields();
+			$field->getField($dyplomy_fields['post_content']['fields']);
+			
+			$DiplomaField = new Application_Model_DiplomaFields();
+			$DiplomaField->lang_id = $lang->lang_id;
+			$DiplomaField->field_id = $field->field_id;
+			$DiplomaField->entry = trim($saved_row ['post_content']);
+				
+			$Diploma->addChild($DiplomaField, 'fields');
 			
 			//get edition
 			$sql = $db->query('SELECT name FROM wp_terms WHERE term_id = 
@@ -111,44 +125,60 @@ class MigrationsController extends Zefir_Controller_Action
 					(SELECT term_taxonomy_id FROM wp_term_relationships WHERE object_id = '.$row['post_id'].' LIMIT 1)
 				)');
 			$r = $sql->fetch();
-			$result_edition = $editions->getEdition($r['name'], TRUE);
-			$result->edition_id = $result_edition->edition_id;
+			$Diploma_edition = $editions->getEdition($r['name'], TRUE);
+			$Diploma->edition_id = $Diploma_edition->edition_id;
+			
 			
 			//get files(aka images)
 			$folder = '/home/zefiryn/public_html/projekty/';
 			
 			$sim = $db->query('SELECT * FROM wp_posts WHERE post_type = "attachment" AND post_parent = '.$row['post_id']);
+			
+			if ($Diploma->surname != null)
+			{
+				var_dump($Diploma->surname);
+				var_dump($sim->rowCount());
+			}
 			while ($rim = $sim->fetch())
 			{
 				$path = substr($rim['guid'], strlen('http://www.dyplomyprojektowe.pl/'));
 				$source = $folder . $path;
 				
-				
 				$destination = dirname(__FILE__).'/../../public/assets/editions/';
-				$edition_folder = str_replace('/', '-', $result_edition->edition_name);
+				$edition_folder = str_replace('/', '-', $Diploma_edition->edition_name);
+				$user_folder = Zefir_Filter::strToUrl($Diploma->surname.'_'.$Diploma->name);
+				
+				//create edition folder
 				$dest = $destination.$edition_folder;
-
 				if (!is_dir($dest))
-				{
 					mkdir($dest);
-				}
+				
+				//create user folder
+				$dest = $dest.'/'.$user_folder;
+				if (!is_dir($dest))
+					mkdir($dest);
+					
 				$file = substr($source, strrpos($source, '/'));
 				$dest .= $file;
 				
-				if (copy($source, $dest))
+				if ($Diploma->surname != null && copy($source, $dest))
 				{
-					$resultFile = new Application_Model_ResultFiles();
-					$resultFile->path = $edition_folder.$file;
+					$DiplomaFile = new Application_Model_DiplomaFiles();
+					$DiplomaFile->path = $edition_folder.'/'.$user_folder.$file;
+					$Diploma->addChild($DiplomaFile , 'files');
 				}
-				$result->addChild($resultFile , 'files');
 				
 			}
 			
-			$results[] = array($row['post_id'] => $result);
-			 
-			if ($result->name != null)
-				$result->save();
+			if ($Diploma->surname != null)
+			{
+				$Diplomas[$row['post_id']] = array($row['post_id'] => $Diploma);
+				$Diploma->save();
+			}
 		}
+		
+		$d = $Diplomas[230][230];
+		//var_dump($d->files);
 		
 		
     }
