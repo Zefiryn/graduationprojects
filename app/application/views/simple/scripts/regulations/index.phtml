@@ -9,9 +9,9 @@
 	<div style="clear:both;overflow:hidden;" id="regulation">
 		
 		<?php foreach($this->columns as $side => $regulations):?>
-		<div id="regulation_<?php echo $side;?>" class="connected column-<?php echo $side;?>">
+		<div id="<?php echo $side;?>" class="connected column-<?php echo $side;?>">
 			<?php foreach($regulations as $i => $regulation):?>
-			<div id="item_<?php echo $regulation->paragraph_id;?>">
+			<div id="item_<?php echo $regulation->paragraph_id;?>" class="sort_item">
 				<?php echo $this->partial('regulations/_admin.phtml', 
 						array('lang' => $this->lang, 'regulation' => $regulation));?>
 	

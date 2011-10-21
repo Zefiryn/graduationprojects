@@ -76,25 +76,71 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
     
     public function getAdjacentDiplomas($diploma)
     {
-    	$select = $this->select()
-    					->union(
-    						array(
-    							'('.$this->select()->where('edition_id = ?', $diploma->edition_id)->where('surname < ?', $diploma->surname)->order(array('surname DESC', 'name DESC'))->limit(1).')',
-    							'('.$this->select()->where('edition_id = ?', $diploma->edition_id)->where('surname > ?', $diploma->surname)->order(array('surname ASC', 'name ASC'))->limit(1).')',
-    						)
-    					);
-    	$rowset = $this->fetchAll($select);
     	
-    	$adjacentDiplomas = array();
-    	foreach($rowset as $row)
-    	{
-    		$diplomaClass = get_class($diploma);
-    		$adjacentDiploma = new $diplomaClass;
-    		$adjacentDiplomas[] =  $adjacentDiploma->populate($row);
-    	}
+    	$adjacentDiplomas['previous'] = $this->_getPreviousDiploma($diploma);
+    	$adjacentDiplomas['next'] = $this->_getNextDiploma($diploma);
     	
     	return $adjacentDiplomas;
-    					
+    }
+    
+    protected function _getPreviousDiploma($diploma)
+    {
+    	$select = $this->getAdapter()->query(
+    		'SELECT * FROM (
+    			(
+    			SELECT `diplomas`.* FROM `diplomas` 
+    				WHERE (edition_id = ? ) AND (surname < ? ) 
+    				ORDER BY `surname` DESC, `name` DESC 
+    				LIMIT 1
+    			) 
+    			UNION 
+    			
+    			(
+    			SELECT `diplomas`.* FROM `diplomas` 
+    			WHERE (edition_id = ? ) AND (surname > ? ) 
+    			ORDER BY `surname` DESC, `name` DESC 
+    			LIMIT 1
+    			)
+    		) as previous',
+    		array($diploma->edition_id, $diploma->surname, $diploma->edition_id, $diploma->surname)
+    	);
+    	
+
+    	$row = $select->fetch();
+    	$diplomaClass = get_class($diploma);
+    	$previousDiploma = new $diplomaClass($row['diploma_id']);
+    	
+    	return $previousDiploma;
+    }
+    
+protected function _getNextDiploma($diploma)
+    {
+    	$select = $this->getAdapter()->query(
+    		'SELECT * FROM (
+    			(
+    			SELECT `diplomas`.* FROM `diplomas` 
+    				WHERE (edition_id = ? ) AND (surname > ? ) 
+    				ORDER BY `surname` ASC, `name` ASC
+    				LIMIT 1
+    			) 
+    			UNION 
+    			
+    			(
+    			SELECT `diplomas`.* FROM `diplomas` 
+    			WHERE (edition_id = ? ) AND (surname < ? ) 
+    			ORDER BY `surname` ASC, `name` ASC 
+    			LIMIT 1
+    			)
+    		) as next',
+    		array($diploma->edition_id, $diploma->surname, $diploma->edition_id, $diploma->surname)
+    	);
+    	
+
+    	$row = $select->fetch();
+    	$diplomaClass = get_class($diploma);
+    	$nextDiploma = new $diplomaClass($row['diploma_id']);
+    	
+    	return $nextDiploma;
     }
     
 }

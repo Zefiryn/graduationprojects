@@ -1,0 +1,18 @@
+<p class="admin">
+	<a href="<?php echo $this->url(array(), 'new_news');?>">
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-plusthick no-block" 
+			alt="<?php echo $this->translate('new');?>" 
+			title="<?php echo $this->translate('new');?>">
+	</a>
+	<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->news->news_id), 'lang_edit_news');?>">
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
+			alt="<?php echo $this->translate('edit');?>" 
+			title="<?php echo $this->translate('edit');?>">
+	</a>
+	<a href="<?php echo $this->url(array('id' => $this->news->news_id), 'delete_news');?>"
+		class="delete">
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
+			alt="<?php echo $this->translate('delete');?>" 
+			title="<?php echo $this->translate('delete');?>">
+	</a>
+</p>

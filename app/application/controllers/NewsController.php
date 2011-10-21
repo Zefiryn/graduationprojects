@@ -31,8 +31,32 @@ class NewsController extends Zefir_Controller_Action
     	$this->view->path = array(
     		0 => array('route' => 'root', 'data' => array(), 'name' => 'main_page'),
     		1 => array('route' => 'news', 'data' => array(), 'name' => 'news_link'),
-    		2 => array('route' => 'show_news', 'data' => array($news->news_id), 'name' => $news->getDetail('news_title', $this->view->lang)),
+    		2 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => $news->getDetail('news_title', $this->view->lang)),
     	);
+    }
+    
+    public function newAction()
+    {
+    	$form = new Application_Form_News();
+    	$request = $this->getRequest();
+    	
+    	if ($request->isPost())
+    	{
+    		$data = $request->getPost();
+    		if (isset($data['leave']))
+    		{
+    			$this->flashMe('cancel_edit', 'SUCCESS');
+    			$this->_redirect('/news');
+    		}
+    		else 
+    		{
+    			
+    		}
+    		
+    	}
+    	
+    	$this->view->form = $form;
+    	
     }
     
     public function editAction()
@@ -49,18 +73,22 @@ class NewsController extends Zefir_Controller_Action
     		}
     		else 
     		{
-    			$form = new Application_Form_Faq();
+    			$form = new Application_Form_News();
 				if ($form->isValid($request->getPost()))
     			{
-    				
+    				$news = new Application_Model_News($form->getElement('news_id')->getValue());
+    				$news->populateFromForm($form->getValues());
+    				$news->save();
     				$this->flashMe('news_saved');
-		    		$this->_redirect('/news');	
+		    		$this->_redirectToRoute(array('id' => $request->getParam('id')), 'show_news');	
     			}
     		}
     	}
     	else 
     	{
     		$form = new Application_Form_News();
+    		$news = new Application_Model_News($request->getParam('id', null));
+    		$form->populate($news->prepareFormArray($this->view->lang));
     	}
     	
     	$this->view->form = $form;

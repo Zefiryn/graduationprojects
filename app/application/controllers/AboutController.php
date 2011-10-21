@@ -52,13 +52,19 @@ class AboutController extends Zefir_Controller_Action
     	
     	if ($request->isPost())
     	{
+    		$data = $request->getPost();
+    		if (isset($data['leave']))
+    		{
+    			$this->flashMe('cancel_edit', 'SUCCESS');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'about');
+    		}
     		if ($form->isValid($request->getPost()))
     		{
     			$about->populateFromForm($form->getValues());
     			$about->save();
     			
     			$this->flashMe('item_saved', 'SUCCESS');
-    			$this->_redirect('/about');
+    			$this->_redirectToRoute(array('lang' => $this->view->lang), 'about');
     		}    		
     	}
     	else
