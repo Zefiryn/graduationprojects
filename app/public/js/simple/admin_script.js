@@ -5,16 +5,13 @@
 $(document).ready(function(){
 	
 	if ($("#regulation").length)
-		sortElements('#regulation_left, #regulation_right', "/regulation/sort/", function(){sortNumbers("&sect; ", "");});
+		sortElements('#left, #right', "/regulation/sort/", function(){sortNumbers($("#regulation"), "&sect; ", "");});
 	
 	if ($("#faq").length)
-		sortElements('#faq_left, #faq_right', "/faq/sort/", function(id){sortNumbers("", ". ");reposition(id);});
+		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");});
 	
 });
 
-function test(){
-	alert('test');
-}
 
 function sortElements(id, link, sortCallback)
 {	
@@ -25,7 +22,9 @@ function sortElements(id, link, sortCallback)
 			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
 		update: function(event, ui) {
+			
 			sort(event, ui, link, sortCallback);
+			sortElements(id,link,sortCallback);
 		}
 	});
 	
@@ -34,22 +33,15 @@ function sortElements(id, link, sortCallback)
 
 function sort(event, ui, link, sortCallback)
 {
+	sortCallback();
+	
 	//moved paragraph
-	var moveId = ui.item.attr('id');
-	moveId = moveId.substring(moveId.indexOf('_')+1);
+	var elemId = ui.item.attr('id').substring(ui.item.attr('id').indexOf('_')+1);
 	
-	//new position
-	if ($("#item_"+moveId).prev().length != 0)
-	{
-		var newPrev = $("#item_"+moveId).prev().attr('id');
-		newPrev = newPrev.substring(newPrev.indexOf('_')+1);
-	}
-	else
-		newPrev = 0;
+	var elem = $('#'+ui.item.attr('id'));
+	var newPos = $('.sort_item').index(elem) + 1;
 	
-	var url = link+moveId+"/"+newPrev;
-	
-	sortCallback(moveId);
+	var url = link+elemId+"/"+newPos;
 	
 	jQuery.ajax({
         type: "GET",
@@ -62,14 +54,31 @@ function sort(event, ui, link, sortCallback)
 	});
 }
 
-function sortNumbers(prev, post)
+function sortNumbers(elem, prev, post)
 {
-	$(".regulation_number, .position").each(function(index){
-		i = index + 1;
-		$(this).html(prev+i+post);
-	});	
-}
-
-function reposition(id){
+	var columnLength = Math.ceil($(".regulation_number, .position").length/2);
 	
+	var newList = elem.clone();
+	var leftColumn = $('#left').clone().html("");
+	var rightColumn = $('#right').clone().html("");
+	
+	newList.html("");
+	
+	$(".sort_item").each(function(index, elem){
+		
+		if (index < columnLength)
+			leftColumn.append(elem);
+		else
+			rightColumn.append(elem);
+
+	});
+	
+	
+	newList.append(leftColumn).append(rightColumn);
+	elem.replaceWith(newList);
+	
+	$(".regulation_number, .position").each(function(index){
+		var id = index + 1; 
+		$(this).html(prev+id+post);
+	});
 }

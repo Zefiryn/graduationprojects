@@ -184,7 +184,7 @@ function bindCheckbox(field)
 		if ($("label[for='"+field+"'] span:first-child").hasClass('ui-icon-check'))
 		{
 			$("label[for='"+field+"'] span:first-child").removeClass('ui-icon-check');
-			$("label[for='"+field+"']").removeClass('ui-state-default').addClass('ui-state-white');
+			$("label[for='"+field+"']").removeClass('ui-state-default').addClass('ui-state-default');
 			$("label[for='"+field+"'] span:first-child").addClass('ui-icon-closethick');
 		}
 		else if ($("label[for='"+field+"'] span:first-child").hasClass('ui-icon-closethick'))

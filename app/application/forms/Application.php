@@ -105,7 +105,7 @@ class Application_Form_Application extends Zefir_Form
 		$element = $this->createElement('select', 'degree');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('degree')
-				->setMultiOptions($degree->getDegrees())
+				->setMultiOptions($degree->getDegreesList())
 				->setDecorators($this->_getStandardDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(

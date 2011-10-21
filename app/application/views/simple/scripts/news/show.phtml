@@ -1,5 +1,7 @@
 <div id="main">
+	
 	<div class="column-left">
+		<?php if ($this->user->_role == 'admin') echo $this->partial('news/_admin.phtml', array('news' => $this->news, 'lang' => $this->lang));?>
 		<h1><?php echo $this->news->getDetail('news_title', $this->lang);?></h1>
 		<p class="data-artykulu"><?php echo date('d.m.Y H:i', $this->news->added);?></p>
 		<p class="lead"><?php echo $this->news->getDetail('news_lead', $this->lang);?></p>
@@ -13,6 +15,8 @@
 	</div>
 	
 	<div class="column-right">
-		<img src="<?php echo $this->baseUrl('assets/images/'.$this->news->getImage());?>" alt="zdjecie" width="100%"/>
+		<?php foreach($this->news->files as $image):?>
+		<img src="<?php echo $this->baseUrl('assets/images/'.$image->path);?>" alt="zdjecie" width="100%"/>
+		<?php endforeach;?>
 	</div>
 </div>

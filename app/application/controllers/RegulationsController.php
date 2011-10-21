@@ -2,12 +2,18 @@
 
 class RegulationsController extends Zefir_Controller_Action
 {
-	protected function _getRegulations()
+	protected $_regulation;
+	
+	protected function _getRegulations($refresh = FALSE)
 	{
-		$lang = new Application_Model_Languages();
-		$lang->findLang($this->view->lang);
+		if ($this->_regulation == null || $refresh)
+		{
+			$lang = new Application_Model_Languages();
+			$lang->findLang($this->view->lang);
+			$this->_regulation = $lang->regulations;
+		}
 		
-		return $lang->regulations;
+		return $this->_regulation;
 	}
 	
     public function init()
@@ -141,40 +147,38 @@ class RegulationsController extends Zefir_Controller_Action
     {
     	$request = $this->getRequest();
     	$moveId = $request->getParam('move_id', null);
-    	$behindId = $request->getParam('behind_id', null);
+    	$paragraphPosition = $request->getParam('position', 1);
 		
-    	$sortedParagraphs = array();
+    	$position = 1;
     	foreach ($this->_getRegulations() as $id => $paragraph)
     	{ 
-    		$sortedParagraphs[$paragraph->paragraph_id] = $paragraph;
-    	}
-    	$move = $sortedParagraphs[$moveId];
-    	unset($sortedParagraphs[$moveId]);
-    	$i = 1;
-    	
-    	//move to the first position
-    	if ($behindId == 0)
-    	{
-    		$move->paragraph_no = $i;
-    		$move->save();
-    		$i++;
-    	}
-    	foreach($sortedParagraphs as $pid => $par)
-    	{
-    		$par->paragraph_no = $i;
-    		$par->save();
-    		$i++;
-    		
-    		if ($par->paragraph_id == $behindId)
-    		{
-    			$move->paragraph_no = $i;
-    			$move->save();
-    			$i++;
+    		if ($paragraph->paragraph_id != $moveId && $position < $paragraphPosition)
+    		{ 
+    			$paragraph->paragraph_no = $position ;
+    			$paragraph->save();
     		}
+    		elseif ($paragraph->paragraph_id != $moveId && $position  > $paragraphPosition)
+    		{
+    				$paragraph->paragraph_no = $position + 1;
+    				$paragraph->save();
+    		}
+    		elseif ($paragraph->paragraph_id != $moveId && $position  == $paragraphPosition)
+    		{
+    				$paragraph->paragraph_no = $position + 1;
+    				$paragraph->save();
+    		}
+    		elseif ($paragraph->paragraph_id == $moveId)
+    		{
+    			$paragraph->paragraph_no = $paragraphPosition;
+    			$paragraph->save();
+    			$position--;	//reduce position so next paragraphs would fill the place
+    		} 
+    		$position++;
     	}
-
-    	//$this->flashMe('regulation_sorted');
+    	
+    	$this->flashMe('regulation_sorted');
     	$this->_redirectToRoute(array(), 'regulation');
+    	
     	
     }
     

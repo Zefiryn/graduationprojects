@@ -3,12 +3,18 @@
 class FaqController extends Zefir_Controller_Action
 {
 
-	protected function _getFaq()
+	protected $_faq;
+	
+	protected function _getFaq($refresh = FALSE)
 	{
-		$lang = new Application_Model_Languages();
-		$lang->findLang($this->view->lang);
+		if ($this->_faq == null || $refresh)
+		{
+			$lang = new Application_Model_Languages();
+			$lang->findLang($this->view->lang);
+			$this->_faq = $lang->faq;
+		}
 		
-		return $lang->faq;
+		return $this->_faq;
 	}
     public function init()
     {
@@ -135,8 +141,9 @@ class FaqController extends Zefir_Controller_Action
 	    			$i++;
 	    		}
     		}
-    		$this->flashMe('question_deleted');
-    		$this->_redirectToRoute(array(), 'faq');
+    		
+    		//$this->flashMe('question_deleted');
+    		//$this->_redirectToRoute(array(), 'faq');
     	} 
     }
     
@@ -144,43 +151,37 @@ class FaqController extends Zefir_Controller_Action
     {
     	$request = $this->getRequest();
     	$moveId = $request->getParam('move_id', null);
-    	$behindId = $request->getParam('behind_id', null);
+    	$questionPosition = $request->getParam('position', 1);
 		
-    	$sortedQuestion = array();
+    	$position = 1;
     	foreach ($this->_getFaq() as $id => $question)
     	{ 
-    		$sortedQuestion[$question->faq_id] = $question;
-    	}
-    	$move = $sortedQuestion[$moveId];
-    	unset($sortedQuestion[$moveId]);
-    	$i = 1;
-    	
-    	//move to the first position
-    	if ($behindId == 0)
-    	{
-    		$move->position = $i;
-    		$move->save();
-    		$i++;
-    	}
-    	
-    	foreach($sortedQuestion as $faq_id => $q)
-	    {
-    		$q->position = $i;
-    		$q->save();
-    		$i++;
-    		
-    		if ($faq_id == $behindId)
-    		{
-    			$move->position = $i;
-    			$move->save();
-    			$i++;
+    		if ($question->faq_id != $moveId && $position < $questionPosition)
+    		{ 
+    			$question->position = $position ;
+    			$question->save();
     		}
+    		elseif ($question->faq_id != $moveId && $position  > $questionPosition)
+    		{
+    				$question->position = $position + 1;
+    				$question->save();
+    		}
+    		elseif ($question->faq_id != $moveId && $position  == $questionPosition)
+    		{
+    				$question->position = $position + 1;
+    				$question->save();
+    		}
+    		elseif ($question->faq_id == $moveId)
+    		{
+    			$question->position = $questionPosition;
+    			$question->save();
+    			$position--;	//reduce position so next questions would fill the place
+    		} 
+    		$position++;
     	}
-	    
 
-    	//$this->flashMe('regulation_sorted');
+    	$this->flashMe('faq_sorted');
     	$this->_redirectToRoute(array(), 'faq');
-    	
     }
 
 

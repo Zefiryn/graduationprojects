@@ -70,8 +70,42 @@ class Application_Model_News extends GP_Application_Model
 			else
 				return FALSE;
 		}
-		else 
+		else
 			return FALSE;
+	}
+	
+	public function prepareFormarray($lang)
+	{
+		return array(
+			'news_id' => $this->news_id,
+			'news_title' => $this->getDetail('news_title', $lang),
+			'news_lead' => $this->getDetail('news_lead', $lang),
+			'news_text' => $this->getDetail('news_text', $lang),
+			'lang_id' => $this->getDetail('lang_id', $lang)
+		);
+	}
+	
+	public function populateFromForm($values)
+	{
+		$newsDetail = new Application_Model_NewsDetails();
+		$newsDetail->populateFromForm($values);
+		if (!is_array($this->details))
+			$this->details = array();
+		
+		$this->details[] = $newsDetail;
+		
+		return $this;
+	}
+	
+	public function save()
+	{
+		foreach ($this->details as $detail)
+			$detail->save();
+		
+		foreach ($this->files as $file)
+			$file->save();
+			
+		return $this;
 	}
 }
 

@@ -8,10 +8,10 @@
 	
 	<div style="clear:both;overflow:hidden;" id="faq">
 		<?php foreach($this->columns as $side => $faqs):?>
-		<div id="faq_<?php echo $side;?>" class="connected column-<?php echo $side;?>">
+		<div id="<?php echo $side;?>" class="connected column-<?php echo $side;?>">
 			<?php foreach($faqs as $i => $faq):?>
 	
-			<div id="item_<?php echo $faq->faq_id;?>">
+			<div id="item_<?php echo $faq->faq_id;?>" class="sort_item">
 				<?php echo $this->partial('faq/_admin.phtml', 
 						array('lang' => $this->lang, 'faq' => $faq));?>
 				<p class="question color">
