@@ -12,6 +12,7 @@ class Application_Form_Application extends Zefir_Form
 {
 
 	protected $_type;
+	public $fileOrder;
 	public function __construct($type)
 	{
 		$this->_type = $type;

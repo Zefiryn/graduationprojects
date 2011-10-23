@@ -637,11 +637,13 @@ form {
 	width: auto;
 }
 
+dt {height: 0px;}
+
 .label, #word_count {
 	font-family: 'Myriad Pro', helvetica, arial, sans-serif;
 	font-size: 16px;
     font-weight: bold;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     margin-top: 20px;
 }
 
@@ -678,7 +680,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 input[type="file"], select {
-	width: 300px;
+	width: 100%;
 	border: 0px;
 	
 }
@@ -754,21 +756,39 @@ input.submit {
 	font-size: 14px;
 }
 
+.file_number {
+	display: block;
+	background: #eee;
+	-moz-border-radius: 14px;
+	-webkit-border-radius: 14px;
+	border-radius: 14px;
+	float: left;
+	padding: 0 4px 0px 4px;
+	margin: 0px 5px 20px 0px;
+	width: 21px;
+	line-height: 28px;
+	text-align: center;
+}
+
 fieldset {
 	display: block;
-	width: 450px;
+	width: 430px;
+	min-height: 28px; 
 	border: 1px solid rgba(0,221,179,0.2);
 	font-size: 14px;
 	background-color: rgba(238,238,238,0.1);
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	padding: 0px 0px 5px 5px;
+	padding: 0px;
+	margin: 0px 0px 20px 0px;
+	text-align: right;
 }
 
 fieldset.submit {
 	border: 0px;
 	margin: 50px 28px 0px 0px;
+	text-align: left;
 }
 
 .width1 {

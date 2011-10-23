@@ -34,8 +34,10 @@ class Application_Model_Schools extends GP_Application_Model
 	public function getSchoolByName($name)
 	{
 		$row = $this->getDbTable()->findByName($name);
-		$this->populate($row);
-		
+		if ($row)
+		{
+			$this->populate($row);
+		}
 		return $this;
 	}
 	

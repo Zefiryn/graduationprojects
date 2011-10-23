@@ -57,16 +57,15 @@ class ApplicationsController extends Zefir_Controller_Action
 					$user->populateFromForm($data['user']);
 					$user->save();
 
-					//if ($user->user_id != null)
+					if ($user->user_id != null)
 					{
 						$application = new Application_Model_Applications();
 						$application->populateFromForm($form->getValues());
-						$application->user = $user;
-						//$application->save();
+						$application->user_id = $user->user_id;
+						$application->save();
 						
-						var_dump($application);
-						//$this->flashMe('application_added', 'SUCCESS');
-						//$this->_redirect('/');
+						$this->flashMe('application_added', 'SUCCESS');
+						$this->_redirect('/');
 					}
 				}
 				
@@ -83,7 +82,8 @@ class ApplicationsController extends Zefir_Controller_Action
 			
 		}
 		
-		$this->view->form = $form;
+		$form = $this->_createFileOrder($form);
+		$this->view->form = $form; 
 		$this->view->path = array(
 			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
     		1 => array('route' => 'lang_application_new', 'data' => array('lang' => $this->view->lang), 'name' => array('form_link')),
@@ -259,16 +259,15 @@ class ApplicationsController extends Zefir_Controller_Action
     {
     	$appSettings = Zend_Registry::get('appSettings');
     	$options  = Zend_Registry::get('options');
-    	$newFile = FALSE; 
+    	$newFile = FALSE;
     	for($i = 1; $i <= $appSettings->max_files; $i++)
 		{
 			$sf = $form->getSubForm('file_'.$i);
 			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i, 'edit');
 			if ($sf->getElement('file_'.$i.'Cache')->getValue() != null)
 			{
-				$sf->getElement('file_'.$i)->setLabel('new_file');
 				$newFile = TRUE;
-			}
+			} 
 		}
 		
 		if (!$cached && !$newFile)
@@ -276,6 +275,24 @@ class ApplicationsController extends Zefir_Controller_Action
 			$form->getSubForm('file_1')->getElement('file_1')->addError($this->view->translate('fileUploadErrorNoFile'));
 		}
 		
+		return $form;
+    }
+    
+    protected function _createFileOrder($form)
+    {
+    	$present = array();
+    	$empty = array();
+    	$appSettings = Zend_Registry::get('appSettings');
+    	for($i = 1; $i <= $appSettings->max_files; $i++)
+		{
+			if ($form->getSubForm('file_'.$i)->getElement('file_'.$i.'Cache')->getValue() != null)
+				$present[] = 'file_'.$i;
+			else
+				$empty[] = 'file_'.$i;
+		}
+		
+		$order = array_merge($present, $empty);
+		$form->fileOrder = $order;
 		return $form;
     }
     
