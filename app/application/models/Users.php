@@ -44,6 +44,8 @@ class Application_Model_Users extends GP_Application_Model
 		
 		if ($this->_role == null && $this->user_id == null)
 			$this->_role = 'user';
+		if ($this->_password == null && isset($data['password']))
+			$this->_password = $data['password'];
 			
 		return $this;
 	}

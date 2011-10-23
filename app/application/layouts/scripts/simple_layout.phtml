@@ -11,7 +11,7 @@
 									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
 									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
 									->appendFile($this->baseUrl.'js/simple/ajax.js')
-									->appendFile($this->baseUrl.'js/simple/script.js'); ?>
+									->appendFile($this->baseUrl.'js/simple/script.js?time=1'); ?>
 									
 	<?php if ($this->user->role == 'admin')
 		$this->headScript()->appendFile($this->baseUrl.'js/simple/admin_script.js');?>

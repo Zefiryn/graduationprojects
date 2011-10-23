@@ -12,6 +12,7 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 {
 	protected $_number;
 	protected $_type;
+	public $order;
 	
 	public function __construct($number, $type = 'new')
 	{

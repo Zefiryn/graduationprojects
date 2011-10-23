@@ -111,10 +111,11 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	//check if there is user added
     	if ($application->user_id == null && isset($application->user))
     		$application->user_id = $application->user->user_id;
-
+    	
     	//save application data
     	try {
-    		parent::save($application);
+    		$application = parent::save($application);
+    		$application->user = new Application_Model_Users($application->user_id);
     			
     	} catch (Zend_Exception $e) {
     		
@@ -155,6 +156,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     {
 		$school = new Application_Model_Schools();
 		$school->getSchoolByName($application->school->school_name);
+		
     	if ($school->school_id == NULL)
     	{
 	    	$school->school_name = $application->school->school_name;
@@ -247,7 +249,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	$type = new Application_Model_WorkTypes($application->work_type_id);
    		
-   		$userDir = strtoupper($application->country).'_'.$type->work_type_name.'_'.$user->getUserUrlName().'_'.$id;
+   		$userDir = strtoupper($application->country).'_'.$type->work_type_name.'_'.$application->user->getUserUrlName().'_'.$id;
    		if (!is_dir($uploadDir.'/'.$userDir) && $oldData == null)
    		{//create new user dir
    			mkdir($uploadDir.'/'.$userDir);
@@ -300,7 +302,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
    					else
    						$file = new Application_Model_Files();
    					$file->path = $userDir.'/'.$fileName;
-   					$file->application = $application->application_id;
+   					$file->application_id = $application->application_id;
    					$file->save();
    					$files[] = $file;
    				}
@@ -312,13 +314,9 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		   				$user->delete();
 		   				
 		   				//delete files and user directory
-		   				$this->deleteApplicationFiles($files);
+		   				$this->_deleteApplicationFiles($files);
 		   				$uploadDir = APPLICATION_PATH.'/..public/'.$options['upload']['applications'].'/';
 		   				unlink($uploadDir.$userDir);
-		   				
-		   				//delete miniature
-		   				$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->miniature;
-		   				unlink($miniature);
 		   				
 		   				//delete application entry
 		   				$application->delete();

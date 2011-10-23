@@ -61,9 +61,10 @@ function deleteAppImage()
 	        url: $(this).attr('href'),
 	        global: false,
 	        success: function(){
-	        	div.parent().parent().remove();
+	        	div.parent().remove();
 	        	$(cache).val("");
 	    		$(id).val("");
+	    		$(cache).parent().parent().show();
 	        }, 
 	        error: function(){
 	        	alert('An error occurred');
@@ -192,27 +193,33 @@ function getLang()
 
 function hideFileFields()
 {
-	var last = 0;
-	$('.fileFieldset').each(function(index){
-		 
-		if ($(this).find('input:file').length == 0)
+	var show = 0;
+	//hide fields, show only one for new file
+	$('.fileField').each(function(index){
+		var fieldset = $(this).find('fieldset');
+		
+		if (fieldset.find('input[name*="Cache"]').val() != '')
+			$(this).hide();	//fieldset with uploaded file
+		else if (show == 0)
+			show = 1;//first new file input
+		else if (show == 1)
+			$(this).hide(); //hide input
+	});
+	
+	//bind showing next input on change
+	$('input[type="file"]').change(function(){
+		var elementWrapper = $(this).parent().parent();
+		
+		if (elementWrapper.next().length != 0)
 		{
-			$(this).hide();
-			last = index;
-		}
-		else if(index > (last+1) )
-		{
-			$(this).hide();
+			$(this).parent().parent().next().show();
 		}
 	});
 	
-	$('input:file').change(function(){
-		var elem = $(this).parent().next();
-		if (elem.attr('class') == 'error-div')
-			elem = elem.next();
-		
-		elem.show();
-
+	//resort numbers
+	$('.file_number').each(function(index){
+		var number = index + 1;
+		$(this).text(number);
 	});
 }
 

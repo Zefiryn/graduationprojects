@@ -52,13 +52,7 @@
 	
 	
 	<div class="column-right">
-	
-	<p style="margin: 30px 0px 0px 0px;">
-		<?php echo $this->translate('files_info')?><br />
-		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->max_files;?><br />
-		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->max_file_size/1024/1024);?>mb<br />
-	</p>
-	
+	<p class="label"><?php echo $this->translate('application_files');?></p>
 	<div id="app_images">
 		<?php for ($i = 1; $i <= $appSettings->max_files; $i++): ?>
 			<?php 
@@ -96,9 +90,13 @@
 	</div>
 	<p class="clearfix"></p>
 	
-	<?php for ($i = 1; $i <= $appSettings->max_files; $i++) 
-			echo $form->getSubForm('file_'.$i);
-	?>
+	<?php foreach ($form->fileOrder as $name) echo $form->getSubForm($name);?>
+	
+	<p style="margin: 10px 0px 0px 0px;">
+		<?php echo $this->translate('files_info')?><br />
+		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->max_files;?><br />
+		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->max_file_size/1024/1024);?>mb<br />
+	</p>
 	</div>
 	
 	<p class="clearfix"></p>
