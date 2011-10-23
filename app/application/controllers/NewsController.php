@@ -29,9 +29,8 @@ class NewsController extends Zefir_Controller_Action
 
     	$this->view->news = $news;
     	$this->view->path = array(
-    		0 => array('route' => 'root', 'data' => array(), 'name' => 'main_page'),
-    		1 => array('route' => 'news', 'data' => array(), 'name' => 'news_link'),
-    		2 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => $news->getDetail('news_title', $this->view->lang)),
+    		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+    		1 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => array($news->getDetail('news_title', $this->view->lang))),
     	);
     }
     

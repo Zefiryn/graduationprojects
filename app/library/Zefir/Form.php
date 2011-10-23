@@ -20,7 +20,7 @@ class Zefir_Form extends Zend_Form
 	protected $_standardDecorators = array(
 				array('ViewHelper'),
 				array('MyLabel', array('placement' => 'prepend')),
-				array('ErrorMsg', array('image' => TRUE)),
+				array('ErrorMsg', array('image' => FALSE)),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
 				
 	);
@@ -32,7 +32,7 @@ class Zefir_Form extends Zend_Form
 	protected $_completeZefirDecorators = array(
 				array('TextField'),
 				array('MyLabel', array('placement' => 'prepend')),
-				array('ErrorMsg', array('image' => TRUE)),
+				array('ErrorMsg', array('image' => FALSE)),
 				array('UnderDescription', array('class' => 'description', 'placement' => 'append')));
 				
 	/**
@@ -41,7 +41,7 @@ class Zefir_Form extends Zend_Form
 	 */
 	protected $_basicZefirDecorators = array(
 				array('TextField'),
-				array('ErrorMsg', array('image' => TRUE)),
+				array('ErrorMsg', array('image' => FALSE)),
 				array('Description', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend'))
 				
 	);

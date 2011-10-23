@@ -1,4 +1,4 @@
-<?php
+	<?php
 /**
  * @package Application_Form_Application
  */
@@ -38,7 +38,7 @@ class Application_Form_Application extends Zefir_Form
 
 		
 		$appSettings = Zend_Registry::get('appSettings');
-		$element = $this->createElement('hidden', 'edition');
+		$element = $this->createElement('hidden', 'edition_id');
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
@@ -46,11 +46,14 @@ class Application_Form_Application extends Zefir_Form
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
-		$element = $this->createElement('hidden', 'user');
-		$element->setDecorators(array('ViewHelper'));	
-		$this->addElement($element);
+		if ($this->_type != 'new')
+		{
+			$element = $this->createElement('hidden', 'user_id');
+			$element->setDecorators(array('ViewHelper'));	
+			$this->addElement($element);
+		}
 		
-		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic');
+		$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic', 'hu' => 'Hungary');
 		$element = $this->createElement('select', 'country');
 		$element->setAttribs(array('class' => 'width1', 'size' => 1))
 				->setLabel('country')
@@ -63,26 +66,16 @@ class Application_Form_Application extends Zefir_Form
 		{
 			$userSubForm = new Application_Form_User('subform');
 			$userSubForm->removeDecorator('form');
+			$userSubForm->removeElement('csrf');
 			$userSubForm->removeElement('role');
 			$this->addSubForm($userSubForm, 'user');
 		}
 
-		$school = new Application_Model_Schools();
-		$element = $this->createElement('select', 'school');
-		$element->setAttribs(array('class' => 'width2', 'size' => 1))
+		$element = $this->createElement('text', 'school');
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('school')
 				->setDecorators($this->_getStandardDecorators())
-				->setMultiOptions($school->getSchools())
-				->setRequired(FALSE)
-				->addValidators(array(
-					new Zend_Validate_Digits()
-				));
-		$this->addElement($element);
-		
-		$element = $this->createElement('text', 'new_school');
-		$element->setAttribs(array('class' => 'width2'))
-				->setDecorators($this->_getZefirDecorators(FALSE))
-				->setAllowEmpty(FALSE)
+				->setRequired(TRUE)
 				->addValidators(array(
 					new Zefir_Validate_NotEmptyCombo('school'),
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
@@ -91,7 +84,7 @@ class Application_Form_Application extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'department');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('department')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
@@ -102,7 +95,7 @@ class Application_Form_Application extends Zefir_Form
 		$this->addElement($element);
 		
 		$degree = new Application_Model_Degrees();
-		$element = $this->createElement('select', 'degree');
+		$element = $this->createElement('select', 'degree_id');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('degree')
 				->setMultiOptions($degree->getDegreesList())
@@ -115,7 +108,7 @@ class Application_Form_Application extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'work_subject');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('work_subject')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
@@ -126,7 +119,7 @@ class Application_Form_Application extends Zefir_Form
 		$this->addElement($element);
 		
 		$work_type = new Application_Model_WorkTypes();
-		$element = $this->createElement('select', 'work_type');
+		$element = $this->createElement('select', 'work_type_id');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('work_type')
 				->setMultiOptions($work_type->getWorkTypes())
@@ -161,7 +154,7 @@ class Application_Form_Application extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'supervisor');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('supervisor')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
@@ -186,42 +179,13 @@ class Application_Form_Application extends Zefir_Form
 				->setLabel('personal_data_agreement', array('tag' => 'label'))
 				->setDecorators(array(
 						array('ViewHelper'),
-						array('MyLabel', array('placement' => 'prepend')),
+						array('MyLabel', array('placement' => 'append')),
 						array('ErrorMsg', array('image' => FALSE)),
 				))
 				->setRequired(TRUE)
 				->addValidators(array(
 						new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO)
 				));
-		$this->addElement($element);
-		
-		$options = Zend_Registry::get('options');
-		$element = new Zend_Form_Element_File('miniature');
-		$element->setLabel('miniature')
-				->setDescription('miniature_description')
-				->setDestination(APPLICATION_PATH.'/../public'.$options['upload']['cache'])
-				->setAttribs(array('class' => 'file'))
-				->setRequired(TRUE)
-				->addValidators(array(
-					array('Extension', true, array(false, 'jpg,png,jpeg')),
-					array('MimeType', true, array(false, 'image')),
-					array('Size', false, array('min' => 100, 'max' => $appSettings->max_file_size)),
-					array('ImageSize', false, array('minwidth' => 800,
-                            						'maxwidth' => 800,
-                            						'minheight' => 800,
-                            						'maxheight' => 800))
-				))
-				->setDecorators(array(
-					array('File'),
-					array('ErrorMsg'),
-					array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
-					array('MyLabel', array('placement' => 'prepend'))
-				));
-		$this->addElement($element);
-        
-		$element = $this->createElement('hidden', 'miniatureCache', array(
-						'decorators' => array('ViewHelper')
-		));
 		$this->addElement($element);
 		
 		/**

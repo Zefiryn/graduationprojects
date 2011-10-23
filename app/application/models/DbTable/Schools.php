@@ -60,17 +60,12 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
      * @param Application_Model_Schools $school
      * @return Application_Model_Schools $school
      */
-    public function findByName($name, $school)
+    public function findByName($name)
     {
-    	$row = $this->fetchRow($this->select()->where('school_name = ?', $name));
+    	$select = $this->select()->where('school_name = ?', $name);
+    	$row = $this->fetchRow($select);
     	
-    	if ($row)
-    	{
-	    	$school->populate($row);
-    		$this->getChildren($row, $school);
-    	}
-    	
-    	return $school;
+    	return $row;
     }    
 }
 

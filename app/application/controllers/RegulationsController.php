@@ -37,8 +37,8 @@ class RegulationsController extends Zefir_Controller_Action
 		
 		$this->view->columns = $columns;
 		$this->view->path = array(
-    		0 => array('route' => 'root', 'data' => array(), 'name' => 'main_page'),
-    		1 => array('route' => 'regulation', 'data' => array(), 'name' => 'regulation_link'),
+    		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+    		1 => array('route' => 'regulation', 'data' => array(), 'name' => array('regulation_link')),
     	);
 		
 		if ($this->view->user->role == 'admin')

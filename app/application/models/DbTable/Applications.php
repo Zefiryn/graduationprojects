@@ -108,36 +108,24 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	//add new school if any was given
     	$application = $this->_addNewSchool($application);
     	
-    	$user = new Application_Model_Users();
-    	$user->getUser($application->user);
-    	
-    	//copy miniature
-    	$this->_copyMiniature($user, $application, $oldData);
-    	
+    	//check if there is user added
+    	if ($application->user_id == null && isset($application->user))
+    		$application->user_id = $application->user->user_id;
+
     	//save application data
     	try {
     		parent::save($application);
     			
     	} catch (Zend_Exception $e) {
     		
-    		if ($oldData != null)
-    		{//delete data only after failing add new application
-    			 
-	    		//delete new user
-	    		$user->delete();
-	    		
-	    		//delete miniature
-				$miniature = APPLICATION_PATH.'/../public'.$options['upload']['miniatures'].'/'.$application->miniature;
-				unlink($miniature);
-    		}
     		throw $e;
     	}
     	
     	//create user directory
-    	$userDir = $this->_getUserDir($application, $user, $oldData);
+    	$userDir = $this->_getUserDir($application, $application->user, $oldData);
     	
    		//copy uploaded files
-   		$this->_saveUserFiles($application, $user, $userDir, $oldData);
+   		$this->_saveUserFiles($application, $application->user, $userDir, $oldData);
    		
    		//$application->files = $files;
 
@@ -165,23 +153,26 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     
     protected function _addNewSchool($application)
     {
-    	if (!is_int($application->school))
+		$school = new Application_Model_Schools();
+		$school->getSchoolByName($application->school->school_name);
+    	if ($school->school_id == NULL)
     	{
-    		$school = new Application_Model_Schools();
-    		$school->getSchoolByName($application->school);
-    		if ($school->school_id == NULL)
-    		{
-	    		$school->school_name = $application->school;
-    			$school->save();
-    			if ($school->school_id == null)
-    				throw new Zend_Exception('Couldn\'t add new school');
-    		}
-   			$application->school = $school->school_id;
+	    	$school->school_name = $application->school->school_name;
+    		$school->save();
+    		if ($school->school_id == null)
+    			throw new Zend_Exception('Couldn\'t add new school');
     	}
+   		$application->school = $school;
+    	$application->school_id = $school->school_id;
     	
     	return $application;
     }
     
+    /*
+     * Old function handling miniature of the appplication
+     * now deprecated as there is no miniature anymore
+     * 
+     * 
     protected function _copyMiniature($user, $application, $oldData)
     {
     	$copy = TRUE;
@@ -233,6 +224,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	return $application;
     }
+    */
     
     protected function _getUserDir($application, $user, $oldData)
     {
@@ -243,8 +235,8 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	$uploadDir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/';
     	
     	//create edition dir
-    	$edition = new Application_Model_Editions($application->edition);
-    	$editionName = str_replace('/', '-', $edition->edition_name);
+    	$edition = new Application_Model_Editions($application->edition_id);
+    	$editionName = $edition->edition_name2;
     	if (!is_dir($uploadDir.$editionName))
     	{
     		mkdir($uploadDir.$editionName );
@@ -253,8 +245,8 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	$uploadDir = $uploadDir.$editionName;
     	
-    	$type = new Application_Model_WorkTypes();
-   		$type->getWorkType($application->work_type);
+    	$type = new Application_Model_WorkTypes($application->work_type_id);
+   		
    		$userDir = strtoupper($application->country).'_'.$type->work_type_name.'_'.$user->getUserUrlName().'_'.$id;
    		if (!is_dir($uploadDir.'/'.$userDir) && $oldData == null)
    		{//create new user dir
@@ -263,11 +255,11 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
    		}
    		elseif ($oldData != NULL)
    		{//rename old dir if necessary
-   			$oldDir = $this->getOldUserDir($oldData);
+   			$oldDir = $this->_getOldUserDir($oldData);
 	   		
 	   		if ($userDir != $oldDir)
 	   		{
-	   			$this->renameOldUserDir($oldDir, $userDir, $editionName);
+	   			$this->_renameOldUserDir($oldDir, $userDir, $editionName);
 	   		}
    		}
    		
@@ -308,7 +300,6 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
    					else
    						$file = new Application_Model_Files();
    					$file->path = $userDir.'/'.$fileName;
-   					$file->file_desc = $uploaded_file['description'];
    					$file->application = $application->application_id;
    					$file->save();
    					$files[] = $file;
@@ -345,7 +336,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
    					$path = substr($file->path, 0, strrpos($file->path, '/'));
    					
    					$file->path = str_replace($path, $userDir, $file->path);
-   					$file->update();
+   					$file->save();
    					$files[] = $file;
    				}
    			}

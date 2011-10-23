@@ -14,56 +14,72 @@
 		</div>
 	<?php endif;?>
 	<?php echo $form->csrf->renderViewHelper(); ?> 
-	<?php echo $form->edition;?>
+	<?php echo $form->edition_id;?>
 	
-	<?php echo $form->getSubForm('user');?>
+	<div class="column-left">
+		<?php echo $form->getSubForm('user');?>
+			
+		<?php echo $form->country;?>
 		
-	<?php echo $form->country;?>
+		<?php echo $form->school;?>
+		
+		<?php echo $form->department;?>
+		
+		<?php echo $form->degree_id;?>
+		
+		<?php echo $form->work_subject;?>
+		
+		<?php echo $form->work_type_id;?>
+		
+		<p class="label"><?php echo $this->translate($form->work_desc->getLabel());?>:&nbsp;
+		<span style="color: #987878;"><?php echo $this->translate($form->work_desc->getDescription());?></span>
+		</p>
+		<?php echo $form->work_desc->renderTextField();?>
+		<?php echo $form->work_desc->renderErrorMsg();?>
+		<p id="word_count"><?php echo $this->translate('counter');?>: <span id="word_counter">0</span></p>
+		
+		<?php echo $form->supervisor_degree;?>
+		<?php echo $form->supervisor;?>
+		
+		<?php echo $form->graduation_time;?>
+		
+		<p class="clear">&nbsp;</p>
 	
-	<?php echo $form->school;?>
-	<?php echo $form->new_school;?>
+		<div class="checkbox <?php if ($form->personal_data_agreement->hasErrors()) echo "checkbox_error";?>">
+			<?php echo $form->personal_data_agreement;?>
+		</div>
+	</div>
 	
-	<?php echo $form->department;?>
 	
-	<?php echo $form->degree;?>
+	<div class="column-right">
 	
-	<?php echo $form->work_subject;?>
-	
-	<?php echo $form->work_type;?>
-	
-	<p class="label"><?php echo $this->translate($form->work_desc->getLabel());?>:&nbsp;
-	<span style="color: #987878;"><?php echo $this->translate($form->work_desc->getDescription());?></span>
-	</p>
-	<?php echo $form->work_desc->renderTextField();?>
-	<?php echo $form->work_desc->renderErrorMsg();?>
-	<p id="word_count"><?php echo $this->translate('counter');?>: <span id="word_counter">0</span></p>
-	
-	<?php echo $form->supervisor_degree;?>
-	<?php echo $form->supervisor;?>
-	
-	<?php echo $form->graduation_time;?>
-	
-	<?php if ($form->miniatureCache->getValue() != null): ?>
-	<p class="label"><?php echo $this->translate('miniature');?></p>
-	<img src="<?php echo $this->baseUrl('/assets/'.$form->miniatureCache->getValue());?>" 
-		width="300" height="300"/>
-	<?php endif;?>
-	<?php echo $form->miniatureCache;?>
-	<?php echo $form->miniature;?>
-	<p class="clear">&nbsp;</p>
 	<p style="margin: 30px 0px 0px 0px;">
 		<?php echo $this->translate('files_info')?><br />
 		<?php echo $this->translate('max_files')?>: <?php echo $appSettings->max_files;?><br />
 		<?php echo $this->translate('max_file_size')?>: <?php echo ($appSettings->max_file_size/1024/1024);?>mb<br />
 	</p>
+	
+	<div id="app_images">
+		<?php for ($i = 1; $i <= $appSettings->max_files; $i++): ?> 
+			<?php 
+				$file = $form->getSubForm('file_'.$i);
+				$cache = 'file_'.$i.'Cache';
+			 	if ($file->$cache->getValue() != null):?>
+			<a 	class="form_file"
+				href="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>"
+				rel="cache" >
+				<img src="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>" alt="picture" />
+			</a>
+			<?php endif;?>
+		<?php endfor;?>
+	</div>
+	
 	<?php for ($i = 1; $i <= $appSettings->max_files; $i++) 
 			echo $form->getSubForm('file_'.$i);
 	?>
+	</div>
 	
-	<p class="clear">&nbsp;</p>
-	
-	<?php echo $form->personal_data_agreement;?>
-
+	<p class="clearfix"></p>
 	<fieldset class="submit">
 		<p class="submit center">
 			<?php echo $form->submit; ?>

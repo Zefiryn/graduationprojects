@@ -1,10 +1,8 @@
 <div id="main">
 
-	<div class="galeria">
+	<div class="diploma_gallery">
 		<?php foreach($this->diploma->files as $file):?> 
-		<a href="#">
-			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->path);?>" alt="zdjecie" />
-		</a>
+			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->path);?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
 		<?php endforeach;?>
 	</div>
     

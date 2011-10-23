@@ -42,7 +42,7 @@ class Application_Model_Users extends GP_Application_Model
 	{
 		parent::populateFromForm($data);
 		
-		if ($this->_role == null && $this->_user_id == null)
+		if ($this->_role == null && $this->user_id == null)
 			$this->_role = 'user';
 			
 		return $this;
@@ -56,7 +56,7 @@ class Application_Model_Users extends GP_Application_Model
 	 */
 	public function getUserUrlName()
 	{
-		return Zefir_Filter::strToUrl($this->_name.'_'.$this->_surname);
+		return Zefir_Filter::strToUrl($this->name.'_'.$this->surname);
 	}
 	
 	/**
@@ -69,8 +69,9 @@ class Application_Model_Users extends GP_Application_Model
 	 */
 	public function getUser($id, $safe = FALSE)
 	{
-		$this->getDbTable()->findUser($id, $this);
+		$row = $this->getDbTable()->findUser($id);
 
+		$this->populate($row);
 		if ($safe)
 		{
 			$this->_password = null;

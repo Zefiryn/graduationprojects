@@ -7,7 +7,7 @@
 		<div class="column-<?php echo $side;?>">
 		<?php foreach($regulations as $i => $regulation):?>
 		<p class="rule">
-			<span style="font-weight: bold">&sect; <?php echo $i;?></span>
+			<span style="font-weight: bold">&sect; <?php echo ++$i;?></span>
 			<br />
 			<?php echo  nl2br($regulation->paragraph_text);?>
 		</p> 
