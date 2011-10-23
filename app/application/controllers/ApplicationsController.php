@@ -213,6 +213,26 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->_redirect('/index');
 		}
     }
+    
+    public function deleteImageAction()
+    {
+    	$request = $this->getRequest();
+    	$id = $request->getParam('id');
+    	
+    	if (ctype_digit($id))
+    	{//already sent image
+    		$file = new Application_Model_Files($id);
+    		$file->delete();
+    	}
+    	else 
+    	{//cached image
+    		$path = APPLICATION_PATH.'/../public/assets/cache/'.$id;
+    		unlink($path);
+    	}
+    	
+    	$this->flashMe('image_deleted', 'SUCCESS');
+		$this->_redirectToRoute(array(), 'root');
+    }
 
 	protected function _checkFileCache($type = 'new')
     {

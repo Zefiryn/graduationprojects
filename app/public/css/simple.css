@@ -325,6 +325,15 @@ menu menu a:last-child {
 	margin-top: 10px;
 }
 
+.index_author { 
+	color: rgba(0, 0, 0, 0.898);
+	font-family: "Myriad Pro", "helvetica", "arial", sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-weight: 700;
+	margin-bottom: 0px;
+}
+
 .author { 
 	color: rgba(0, 0, 0, 0.898);
 	font-family: "Myriad Pro", "helvetica", "arial", sans-serif;
@@ -379,14 +388,14 @@ h2 {
 	margin-top: 11px;
 }
 
-h2 a {
+h2 a, .index_author a {
 	border-bottom: solid 2px transparent;
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
 	-o-transition: background-color 300ms;
 }
 
-h2 a:hover {
+h2 a:hover, .index_author a:hover, .diploma a:hover + .index_author a {
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
 	-o-transition: background-color 300ms;
@@ -630,14 +639,29 @@ form {
 
 .label, #word_count {
 	font-family: 'Myriad Pro', helvetica, arial, sans-serif;
-	font-size: 14px;
+	font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+#word_count {
+	font-size: 11px;
+	font-weight: normal;
+	margin-top: 0px;
+}
+
+.description {
+	margin-top: 5px;
+	font-size: 11px;
+	margin-bottom: 20px;
 }
 
 input, textarea, select {
-	border: 1px solid rgba(0,221,179,0.2);
+	border: 1px solid rgba(100,100,100,0.2);
 	font-size: 14px;
 	height: 28px;
-	background-color: rgba(238,238,238,0.1);
+	background-color: rgba(238, 238, 238, 0.5);
 	border-radius: 5px;
 	margin: 0px;
 	-moz-box-shadow: none;
@@ -647,10 +671,10 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-	border: 1px solid rgba(0,221,179, 1);
-	-moz-box-shadow: inset 0 0 6px #555;
-	-webkit-box-shadow: inset 0 0 6px #55;
-	box-shadow: inset 0 0 6px #555;
+	border: 1px solid #00DDB3;
+	-moz-box-shadow: inset 0 0 6px #00DDB3;
+	-webkit-box-shadow: inset 0 0 6px #00DDB3;
+	box-shadow: inset 0 0 4px #00DDB3;
 }
 
 input[type="file"], select {
@@ -660,14 +684,14 @@ input[type="file"], select {
 }
 
 input[type="checkbox"] {
-	width: 30px;
-	height: 30px;
+	width: 15px;
+	height: 15px;
 	padding: 0px;
 	margin: 0px 5px 5px 0px;
 }
 
 textarea {
-	width: 460px;
+	width: 450px;
 	height: 300px;
 	margin: 0px;
 }
@@ -676,7 +700,7 @@ textarea.error, input.error, select.error, fieldset.error {
 	
 	border: 1px solid #ca0000 !important;
 	margin-bottom: 0px;
-	padding:0px;
+	padding: 0px 3px 0px 5px;
 	-webkit-border-radius: 5px;
 	-webkit-border-bottom-right-radius: 0;
 	-moz-border-radius: 5px;
@@ -689,14 +713,13 @@ div.error-div {
 	border: 0px solid green;
 	margin: 0px;
 	padding: 0px;
-	width: 462px;
+	width: 460px;
 	text-align: left; 
 }
 #error-csrf p.error {
 	text-align: left !important;
 }
 p.error {
-	max-width: 462px;
 	border: 0px solid #ca0000;
 	color: #ca0000;
 	font-weight: bold;
@@ -707,7 +730,6 @@ p.error {
 }
 
 p.error span {
-	min-width: 460px;
 	background-color: #ca0000;
 	padding: 3px;
 	color: #eee;
@@ -734,7 +756,7 @@ input.submit {
 
 fieldset {
 	display: block;
-	width: 460px;
+	width: 450px;
 	border: 1px solid rgba(0,221,179,0.2);
 	font-size: 14px;
 	background-color: rgba(238,238,238,0.1);
@@ -750,6 +772,9 @@ fieldset.submit {
 }
 
 .width1 {
+	width: 450px;
+}
+select.width1 {
 	width: 460px;
 }
 
@@ -765,7 +790,7 @@ select.error + div.error-div {
 }
 
 div.checkbox {
-	width: 454px;
+	width: 452px;
 	border: 0px solid;
 	margin: 0px;
 	padding: 0px 0px 0px 5px;
@@ -782,7 +807,7 @@ div.checkbox_error {
 }
 
 div.checkbox_error div.error-div {
-	width: 454px;
+	width: 452px;
 	position: absolute;
 	margin-top: 1px;
 	margin-left: 1px;
@@ -794,7 +819,22 @@ div.checkbox_error div.error-div {
 	margin: 20px 0px 10px 0px;
 }
 
-#app_images a.form_file img {width: 23%;}
+#app_images div {
+	width: 100px;
+	display: block;
+	float: left;
+	margin: 2px;
+}
+#app_images a.form_file img {
+	width: 100%;
+}
+
+.image_move{
+	display: block; 
+	border: 1px solid rgba(0,221,179,0.8);
+	background: rgba(50,50,50,0.1);
+	overflow: hidden;
+}
 
 #flash {
    width: 100%;
@@ -908,6 +948,7 @@ span.admin {
 	padding-left: 0px;
 	padding-top: 0px;
 	width: 470px;
+	border: 0px solid green;
 }
 
 .column-right:after {
@@ -991,6 +1032,34 @@ table.stats {
 }
 
 table.stats td {padding: 0px 3px 0px 3px;}
+
+.ui-widget-content, .ui-widget-header{
+	background-color: rgba(249,249,249,1) !important;
+	border: 1px solid rgba(0,221,179,0.5) !important;
+	background-image: none !important;
+	color: #555 !important;
+}
+
+.ui-state-default {
+	border: 1px solid rgba(0,221,179,0.5) !important;
+	background-color: rgb(245,245,245) !important;
+	background-image: none !important;
+	color: #555 !important;
+}
+
+.ui-datepicker-calendar th {
+	background-color: rgba(251,251,251, 0.1) !important;
+}
+
+.ui-datepicker-current-day a {
+	color: #000 !important;
+	background: rgba(205,205,205, 0.8) !important;
+	font-weight: bold !important;
+}
+
+.ui-datepicker-next, .ui-datepicker-prev {
+	border: 1px solid rgba(0,221,179,0.5) !important;
+}
 
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }

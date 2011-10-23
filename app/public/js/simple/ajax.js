@@ -35,11 +35,11 @@ jQuery.fn.deleteWithAjax = function() {
 	this.unbind('click', false);
 	this.click(function() {
 
-	link = ($(this).attr("href"));
+	var link = ($(this).attr("href"));
 
 	if ($(this).hasClass('no-confirm'))
 	{
-		$.delete_(link, {}, redirect_to_root(data), "script");
+		$.delete_(link, {}, function(){}, "script");
 		return true;
 	}
 	else

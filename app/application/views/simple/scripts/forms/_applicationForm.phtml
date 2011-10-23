@@ -60,19 +60,41 @@
 	</p>
 	
 	<div id="app_images">
-		<?php for ($i = 1; $i <= $appSettings->max_files; $i++): ?> 
+		<?php for ($i = 1; $i <= $appSettings->max_files; $i++): ?>
 			<?php 
 				$file = $form->getSubForm('file_'.$i);
 				$cache = 'file_'.$i.'Cache';
-			 	if ($file->$cache->getValue() != null):?>
+				$id = 'file'.$i.'_id';
+
+				//get the data for delete link
+				if ($file->$id != null)
+					$file_id = $file->$id;
+				else
+					$file_id = substr($file->$cache->getValue(), strrpos($file->$cache->getValue(), '/')+1);
+				
+				if ($file->$cache->getValue() != null):?>
+			<div>
+			 <p class="admin">
+				<a href="<?php echo $this->url(array('id'=> $file_id), 'applications_image_delete');?>"
+					class="remove-image" alt="file_<?php echo $i;?>">
+					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
+						alt="<?php echo $this->translate('delete');?>" 
+						title="<?php echo $this->translate('delete');?>">
+				</a>
+			</p>
 			<a 	class="form_file"
 				href="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>"
 				rel="cache" >
 				<img src="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>" alt="picture" />
 			</a>
+			<?php if ($i % 4 == 0):?><p class="clearfix"></p><?php endif;?>
+			</div>
 			<?php endif;?>
+			
 		<?php endfor;?>
+		<p class="clearfix"></p>
 	</div>
+	<p class="clearfix"></p>
 	
 	<?php for ($i = 1; $i <= $appSettings->max_files; $i++) 
 			echo $form->getSubForm('file_'.$i);

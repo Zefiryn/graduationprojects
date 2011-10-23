@@ -22,9 +22,8 @@ function sortElements(id, link, sortCallback)
 			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
 		update: function(event, ui) {
-			
 			sort(event, ui, link, sortCallback);
-			sortElements(id,link,sortCallback);
+			sortElements(id, link, sortCallback);
 		}
 	});
 	
