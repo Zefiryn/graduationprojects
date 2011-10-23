@@ -112,6 +112,7 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 	
 	/**
      * Set configuration for receiving uploaded file
+     * 
      * @access private
      * @param string $cache_folder
      * @param Application_Book_Form $form
@@ -145,6 +146,7 @@ class Zefir_Controller_Action extends Zend_Controller_Action
     
     /**
      * Remove file
+     * 
      * @access private
      * @param string $dir
      * @param string $file

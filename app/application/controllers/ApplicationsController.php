@@ -35,23 +35,19 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($request->isPost())
 		{//form has been submited
 			
-			$form->populate($request->getPost());
-			$form->getSubForm('user')->populate($request->getPost());
+			//$form->getSubForm('user')->populate($request->getPost());
 			
-			if($form->leave->isChecked())
+			if($request->getParam('leave', null))
 			{
-				$this->deleteCachedFiles($request->getPost());
-				$this->_redirect('/index');	
+				$this->_deleteCachedFiles($request->getPost());
+				$this->_redirectToRoute(array(), 'root');	
 			}
 			
-			//handle miniature file
-			$form = $this->_checkMiniatureCache($form);
 			$cached = $this->_checkFileCache('new');
 			
-			if ($form->isValid($request->getPost()))
+			if ($form->isValid($request->getPost()) || count($form->getMessages()) == 0)
 			{//form is valid
 				
-				$this->_cacheFile($options['upload']['cache'], $form, 'miniature');
 				$this->_handleFiles($form, $cached);
 				
 				if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
@@ -60,39 +56,38 @@ class ApplicationsController extends Zefir_Controller_Action
 					$data = $form->getValues();
 					$user->populateFromForm($data['user']);
 					$user->save();
-					
-					if ($user->user_id != null)
+
+					//if ($user->user_id != null)
 					{
 						$application = new Application_Model_Applications();
 						$application->populateFromForm($form->getValues());
-						$application->user = $user->user_id;
-						$application->save();
+						$application->user = $user;
+						//$application->save();
 						
-						$this->flashMe('application_added', 'SUCCESS');
-						$this->_redirect('');
+						var_dump($application);
+						//$this->flashMe('application_added', 'SUCCESS');
+						//$this->_redirect('/');
 					}
 				}
 				
 			}				
 			else
 			{//form has errors
-				$form = $this->_cacheFile($options['upload']['cache'], $form, 'miniature');
 				$form = $this->_handleFiles($form, $cached);
-				
-				if ($form->getElement('miniatureCache')->getValue() != null)
-				{
-					$form->getElement('miniature')->setLabel('new_miniature');
-				}
 			}	
 		}
 		else
 		{//no form has been submited
 
-			$form->getElement('edition')->setValue($appSettings->edition->edition_id);
+			$form->getElement('edition_id')->setValue($appSettings->edition->edition_id);
 			
 		}
 		
 		$this->view->form = $form;
+		$this->view->path = array(
+			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+    		1 => array('route' => 'lang_application_new', 'data' => array('lang' => $this->view->lang), 'name' => array('form_link')),
+		);
     }
 
     public function editAction()
@@ -100,6 +95,7 @@ class ApplicationsController extends Zefir_Controller_Action
         $appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
         $form = new Application_Form_Application('edit');
+        $form->removeElement('personal_data_agreement');
         $form->setAction('/applications/edit');
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationEditForm.phtml'))
@@ -110,28 +106,25 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($request->isPost())
 		{
 			$id = $request->getParam('application_id', '');
-			if ($this->user->_role != 'admin' 
-				&& $this->user->applications[0]->application_id != $id)
+			if ($this->view->user->_role != 'admin'
+				&& !isset($this->view->user->applications[0]) 
+				&& $this->view->user->applications[0]->application_id != $id)
 			{
 				$this->flashMe('not_allowed', 'FAILURE');
 				$this->_redirect('/index');
 			}
 			
 			
-			$form->populate($request->getPost());
-			if($form->leave->isChecked())
+			if($request->getParam('leave', null))
 			{
-				$this->_redirect('/applications');	
+				$this->_redirectToRoute(array(), 'applications');	
 			}
 			
-			//handle miniature file
-			$form = $this->_checkMiniatureCache($form, 'edit');
 			$cached = $this->_checkFileCache('edit');
 			
-    		if ($form->isValid($request->getPost()))
+    		if ($form->isValid($request->getPost()) || count($form->getMessages()) == 0)
     		{
-    			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
-				$this->handleFiles($form, $cached, 'edit');
+    			$this->_handleFiles($form, $cached, 'edit');
     			if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
 				{
 					$application = new Application_Model_Applications();
@@ -145,19 +138,21 @@ class ApplicationsController extends Zefir_Controller_Action
     		}
     		else
     		{
-    			$this->_cacheFile($options['upload']['cache'], $form, 'miniature', 'edit');
-    			$this->handleFiles($form, $cached, 'edit');
+    			var_dump($form->getMessages());
+    			var_dump($form->getValues());
+    			$this->_handleFiles($form, $cached, 'edit');
     		}
 		}
 		else
 		{
 			$id = $request->getParam('id', '');
 			
-			if ($this->user->_role != 'admin' 
-				&& $this->user->applications[0]->application_id != $id)
+			if ($this->view->user->_role != 'admin' 
+				&& !isset($this->view->user->applications[0])
+				&& $this->view->user->applications[0]->application_id != $id)
 			{
-				$this->flashMe('not_allowed', 'FAILURE');
-				$this->_redirect('/index');
+				//$this->flashMe('not_allowed', 'FAILURE');
+				//$this->_redirect('/index');	
 			}
 			
 			//populate form
@@ -219,23 +214,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		}
     }
 
-	protected function _checkMiniatureCache($form)
-    {
-    	$request = $this->getRequest();
-    	$options = Zend_Registry::get('options');
-    	
-    	$miniatureCache = $request->getParam('miniatureCache', '');
-		$miniatureFile = APPLICATION_PATH.'/../public/assets/'.$miniatureCache;
-
-		if ($miniatureCache != null	&& file_exists($miniatureFile))
-			$form->getElement('miniature')->setRequired(FALSE);
-		else
-			$form->getElement('miniatureCache')->setValue(null);
-		
-		return $form;
-    }
-
-    protected function _checkFileCache($type = 'new')
+	protected function _checkFileCache($type = 'new')
     {
     	$params = $this->getRequest()->getParams();
     	$options = Zend_Registry::get('options');
@@ -283,11 +262,6 @@ class ApplicationsController extends Zefir_Controller_Action
     protected function _deleteCachedFiles($data)
     {
     	$dir = APPLICATION_PATH.'/../public/assets/';
-    	
-    	if ($data['miniatureCache'] != null && file_exists($dir.$data['miniatureCache']))
-    	{
-    		unlink($dir.$data['miniatureCache']);
-    	}
     	
     	for($i = 1; $i <= 10; $i++)
     	{

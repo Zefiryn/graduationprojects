@@ -3,8 +3,8 @@
 class Application_Model_Files extends GP_Application_Model
 {
 	public $file_id;
+	public $application_id;
 	public $path;
-	public $file_desc;
 	protected $application;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Files';

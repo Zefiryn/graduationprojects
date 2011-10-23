@@ -36,7 +36,7 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 		$this->setTranslator(Zend_Registry::get('Zend_Translate'));
 		
 		$this->setDecorators(array(
-					'PrepareElements', 
+					 
                 	array('viewScript', array('viewScript' => 'forms/_fileForm.phtml',
                 								'number' => $number)) 
 				));
@@ -61,14 +61,14 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 		$this->addElement($element);
 		
 		$element = new Zend_Form_Element_File('file_'.$number);
-		$element->setLabel('file')
-				->setDestination(APPLICATION_PATH.'/../public'.$options['upload']['cache'])
+		$element->setDestination(APPLICATION_PATH.'/../public'.$options['upload']['cache'])
 				->setAttribs(array('class' => 'file'))
 				->setRequired(FALSE)
+				->setAllowEmpty(TRUE)
 				->addValidators(array(
 					array('Extension', true, array(false, 'jpg,png,jpeg')),
 					array('MimeType', true, array(false, 'image')),
-					array('Size', false, array('min' => 100, 'max' => $appSettings->max_file_size)),
+					array('Size', false, array('max' => $appSettings->max_file_size)),
 					array('ImageSize', false, array('minwidth' => 300,
                             						'maxwidth' => 1600,
                             						'minheight' => 300,
@@ -81,19 +81,7 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 					array('MyLabel', array('placement' => 'prepend'))
 				));
 		$this->addElement($element);
-		
-		$element = $this->createElement('text', 'file_annotation');
-		$element->setLabel('file_annotation')
-				->setAttribs(array('class' => 'width2'))
-				->setRequired(FALSE)
-				->addValidators(array(
-					
-				))
-				->setDecorators($this->_getZefirDecorators());
-		$this->addElement($element);
-	
-	
-    }
+	}
 
 
 }

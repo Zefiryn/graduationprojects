@@ -38,8 +38,8 @@ class FaqController extends Zefir_Controller_Action
 		
 		$this->view->columns = $columns;
 		$this->view->path = array(
-    		0 => array('route' => 'root', 'data' => array(), 'name' => 'main_page'),
-    		1 => array('route' => 'faq', 'data' => array(), 'name' => 'faq_link'),
+    		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+    		1 => array('route' => 'faq', 'data' => array(), 'name' => array('faq_link')),
     	);
     	
 		if ($this->view->user->role == 'admin')

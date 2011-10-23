@@ -40,7 +40,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
      */
     public function save(Application_Model_Users $user)
     {
-    	$id = $user->_user_id;
+    	$id = $user->user_id;
     	
     	if ($id != null)
     		$row = $this->find($id)->current();
@@ -68,7 +68,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
     	if ($row->save())
     	{
     		if (!$id)
-    			$user->_user_id = $id = $this->getAdapter()->lastInsertId();
+    			$user->user_id = $id = $this->getAdapter()->lastInsertId();
     	}
     	else 
     		throw new Zend_Exception('Couldn\'t save data');
@@ -81,16 +81,14 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
      * @param int $id
      * @param Application_Model_Users $user
      */
-    public function findUser($id, Application_Model_Users $user)
+    public function findUser($id)
     {
     	if (ctype_digit($id))
     		$row = $this->find($id)->current();
     	else
     		$row = $this->fetchRow($this->select()->where('nick = ?', $id));
     		
-    	$user->populate($row);
-    	
-    	return $user;
+    	return $row;
     	
     }
 

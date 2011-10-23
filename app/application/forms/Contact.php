@@ -28,7 +28,7 @@ class Application_Form_Contact extends Zefir_Form
 		$name = $this->createElement('text', 'name');
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'width2'))
+								'class' => 'width1'))
 				->setLabel('contact_name')
 				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
@@ -39,7 +39,7 @@ class Application_Form_Contact extends Zefir_Form
 		$name = $this->createElement('text', 'email');
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'width2'))
+								'class' => 'width1'))
 				->setLabel('contact_email')
 				->setRequired(true)
 				->setDecorators($this->_getZefirDecorators())
@@ -51,7 +51,7 @@ class Application_Form_Contact extends Zefir_Form
 		$name = $this->createElement('text', 'mail_title');
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'width2'))
+								'class' => 'width1'))
 				->setLabel('mail_title')
 				->setRequired(true)
 				->setDecorators($this->_getZefirDecorators())				

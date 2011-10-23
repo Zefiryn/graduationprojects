@@ -3,23 +3,15 @@
 		$cache = $file.'Cache'; 
 		$appSettings = Zend_Registry::get('appSettings');
 ?>
-<fieldset class="fileFieldset">
-	<legend><?php echo $this->translate('file');?></legend	>
+<fieldset class="fileFieldset <?php if ($form->$file->hasErrors()) echo 'error';?>">
+	<legend><?php echo $this->translate('file').' '.$this->number;?></legend	>
 	
 	<?php echo $form->$cache;?>
 	<?php echo $form->application_id;?>
 	<?php echo $form->file_id;?>
-	<p class="uploaded_file">
-		<?php if ($form->$cache->getValue() != null): ?>
-			<a 	class="form_file"
-				href="<?php echo $this->baseUrl('/assets/'.$form->$cache->getValue());?>"
-				rel="cache" >
-				<?php echo $this->translate('file_uploaded');?>
-			</a>
-		<?php endif;?>		
-	</p>
-
-	<?php echo $form->$file?>
+	<?php if ($form->$cache->getValue() == null) {
+		echo $form->$file->renderFile();
+	}?>
 	
-	<?php echo $form->file_annotation;?>
 </fieldset>
+<?php if ($form->$file->hasErrors()){ echo $form->$file->renderErrorMsg(); }?>

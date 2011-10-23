@@ -16,7 +16,6 @@ class Application_Model_Applications extends GP_Application_Model
 	public $supervisor_degree;
 	public $graduation_time;	
 	public $application_date;
-	public $miniature;
 	public $active;
 	protected $edition;
 	protected $user;
@@ -39,13 +38,8 @@ class Application_Model_Applications extends GP_Application_Model
 		$appSettings = Zend_Registry::get('appSettings');
 		parent::populateFromForm($data);
 		
-		if (isset($data['new_school']) && $data['new_school'] != null)
-		{
-			$this->school = new Application_Model_Schools();
-			$this->school->populate(array('school_name' => $data['new_school']));
-		}
-		else
-			$this->school = new Application_Model_Schools($this->school);
+		$this->school = new Application_Model_Schools();
+		$this->school->populateFromForm(array('school_name' => $data['school']));
 		
 		if ($this->application_date == null)
 			$this->application_date = time();
@@ -58,17 +52,19 @@ class Application_Model_Applications extends GP_Application_Model
 		if ($this->active == null)
 			$this->active = 1;
 		
-		$this->miniature = $data['miniatureCache'];
-		
-		for($i = 1; $i <= $appSettings->_max_files; $i++)
+		for($i = 1; $i <= $appSettings->max_files; $i++)
 		{//add uploaded files
 			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
 			{
 				$this->files[$i]['file_id'] = $data['file_'.$i]['file_id'];
 				$this->files[$i]['application_id'] = $data['file_'.$i]['application_id'];
 				$this->files[$i]['file'] = $data['file_'.$i]['file_'.$i.'Cache'];
-				$this->files[$i]['description'] = $data['file_'.$i]['file_annotation'];
 			}  
+		}
+		
+		if (isset($data['user_id']))
+		{
+			$this->user = new Application_Model_Users($data['user_id']);
 		}
 	}
 	
@@ -106,21 +102,21 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function prepareFormArray()
 	{
+		$this->__get('school');
 		$data = array(
 				'country' => $this->country,
 				'application_id' => $this->application_id,
-				'edition' => $this->edition_id,
-				'user' => $this->user_id,
-				'school' => $this->school_id,
+				'edition_id' => $this->edition_id,
+				'user_id' => $this->user_id,
+				'school' => $this->school->school_name,
 				'department' => $this->department,
-				'degree' => $this->degree_id,
+				'degree_id' => $this->degree_id,
 				'work_subject' => $this->work_subject,
-				'work_type' => $this->work_type_id,
+				'work_type_id' => $this->work_type_id,
 				'work_desc' => $this->work_desc,
 				'supervisor_degree' => $this->supervisor_degree,
 				'supervisor' => $this->supervisor,
 				'graduation_time' => date('d-m-Y', $this->graduation_time),
-				'miniatureCache' => 'miniatures/'.$this->miniature,
 				'personal_data_agreement' => TRUE
 		);
 		
@@ -133,7 +129,6 @@ class Application_Model_Applications extends GP_Application_Model
 			$data['file_'.$i]['application_id'] = $this->application_id;
 			$data['file_'.$i]['file_id'] = $file->file_id; 
 			$data['file_'.$i]['file_'.$i.'Cache'] = 'applications/'.$file->path;
-			$data['file_'.$i]['file_annotation'] = $file->file_desc;
 		}
 		
 		return $data;

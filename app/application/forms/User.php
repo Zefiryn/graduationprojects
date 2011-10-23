@@ -74,7 +74,7 @@ class Application_Form_User extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'name');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('user_name')
 				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
@@ -84,7 +84,7 @@ class Application_Form_User extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'surname');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('user_surname')
 				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
@@ -94,7 +94,7 @@ class Application_Form_User extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'address');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('address')
 				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(

@@ -3,7 +3,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php echo $this->headTitle();?>
-	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/webfonts.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
 	
@@ -21,10 +20,12 @@
 </head>
 
 <body>
-	<header>
+	<header id="header" name="<?php echo $this->lang;?>">
+		<?php if ($this->flash):?>
 		<div id="flash">
 			<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->translation($this->flash);?></p>
       	</div>
+      	<?php endif;?>
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
@@ -54,7 +55,9 @@
 	<?php if (isset($this->path)):?>
 	<nav class="path">
 	<?php foreach($this->path as $i => $elem):?>
-		<a href="<?php echo $this->url($elem['data'], $elem['route']);?>" <?php if (++$i == count($this->path)):?>class="path_end"<?php endif;?>><?php echo $this->translate($elem['name'])?></a> <?php if ($i != count($this->path)):?>&raquo;<?php endif;?>
+		<a href="<?php echo $this->url($elem['data'], $elem['route']);?>" <?php if (++$i == count($this->path)):?>class="path_end"<?php endif;?>>
+			<?php foreach($elem['name'] as $string) {echo $this->translate($string).' ';}?>
+		</a> <?php if ($i != count($this->path)):?>&raquo;<?php endif;?>
 	<?php endforeach;?>
 	</nav>
 	<?php endif;?>
