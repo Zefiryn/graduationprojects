@@ -42,7 +42,69 @@ $(document).ready(function(){
 	ajaxLinks();
 	
 	menuSlide();
+	
+	//dragAppFiles();
+	deleteAppImage();
 });
+
+function deleteAppImage()
+{
+	$('.remove-image').click(function(e){
+		e.preventDefault();
+		var div = $(this).parent();
+		var file = $(this).attr('alt');
+		var cache = '#'+file+'-'+file+'Cache';
+		var id = '#'+file+'-file_id';
+		
+		jQuery.ajax({
+	        type: "GET",
+	        url: $(this).attr('href'),
+	        global: false,
+	        success: function(){
+	        	div.parent().parent().remove();
+	        	$(cache).val("");
+	    		$(id).val("");
+	        }, 
+	        error: function(){
+	        	alert('An error occurred');
+	        }
+		});
+	}
+	);
+}
+
+function dragAppFiles()
+{
+	$( '#app_images').sortable({
+		placeholder: "image_move",
+		
+		start: function(event, ui) {
+			 $('.image_move').width(ui.helper.width());
+			 $('.image_move').height(ui.helper.height());
+		 },
+		update: function(event, ui) {
+			var clear = $('.clearfix:first').clone();
+			$('.clearfix').remove();
+			var images = $('#app_images').clone().html("");
+			
+			$('.form_file').each(function(index, element){
+				index = index + 1;
+				if (index % 4 == 0)
+				{
+					images.append(element);
+					images.append(clear);
+				}
+				else
+					images.append(element);
+			});
+			
+			$('#app_images').replaceWith(images);
+			dragAppFiles();
+		}
+	});
+	
+	$( id ).disableSelection();
+}
 
 function menuSlide(){
 	

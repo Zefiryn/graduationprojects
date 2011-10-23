@@ -188,7 +188,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('auth'), array('index', 'login'));
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
-		$acl->allow(null, array('applications'), array('new'));
+		$acl->allow(null, array('applications'), array('new', 'delete-image'));
 		$acl->allow(null, array('diplomas', 'news'), array('index', 'show'));
 		$acl->allow('user', array('auth'), array('logout'));
 		$acl->allow('user', array('applications'), array('new', 'show', 'edit'));
