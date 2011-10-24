@@ -183,6 +183,117 @@ class MigrationsController extends Zefir_Controller_Action
 		
     }
     
+    public function lastAction()
+    {
+    	$config = new Zend_Config(
+			array(
+		        'database' => array(
+		            'adapter' => 'Pdo_Mysql',
+		            'params'  => array(
+		                'host'     => 'localhost',
+		                'username' => 'artur',
+		    			'password' => 'artur1',
+		    			'dbname'   => '2_3d',
+		    			'charset'  => 'utf8'
+		            )
+		        )
+		    )
+		);
+    	$db = Zend_Db::factory($config->database);
+    	
+    	$dyplomy_fields = array(
+			'competitor_email' => 'email',
+			'competitor_name' => 'name',
+    		'competitor_surname' => 'surname',
+			'competitor_supervisor' => 'supervisor',
+			'competitor_supervisor_degree' => 'supervisor_degree',
+			'competitor_school' => array('fields' => 'school'),
+    		'competitor_department' => array('fields' => 'department'),
+			'competitor_work_subject' => array ('fields' => 'work_subject'),
+			'competitor_school_level' => array('degrees' => 'degree_name'),
+    		'graduation_time' => 'graduation_time',
+			'country' => 'country'
+			);
+		$degrees = array('graduate' => 'M.A.', 'undergraduate' => 'B.A.');
+		$degree = new Application_Model_Degrees();
+		$type = new Application_Model_WorkTypes();
+		$lang = new Application_Model_Languages();
+    	
+		$stmt = $db->query('SELECT * FROM applications WHERE publication_qualified = 1 or review_qualified = 1 order by competitor_work_type asc, competitor_surname asc, competitor_name asc');
+		
+		while ($row = $stmt->fetch())
+		{
+			$lang->findLangId(str_replace('cz', 'cs', $row['country']));
+			$diploma = new Application_Model_Diplomas();
+			$diploma->edition_id = 10;
+			foreach($dyplomy_fields as $old => $new)
+			{
+				if (!is_array($new))
+					$diploma->$new = $row[$old];
+				else
+				{
+					if (isset($new['fields']))
+					{
+						$field = new Application_Model_Fields();
+						$field->getField($new['fields']);
+						
+						$DiplomaField = new Application_Model_DiplomaFields();
+						$DiplomaField->lang_id = $lang->lang_id;
+						$DiplomaField->field_id = $field->field_id;
+						$DiplomaField->entry = trim($row[$old]);
+						
+						$diploma->addChild($DiplomaField, 'fields');
+					}
+					else 
+					{
+						$d = $degree->findDegree($degrees[$row[$old]]);
+						$diploma->degree_id = $d->degree_id;
+					}
+				}
+			} 
+			$type = $type->findWorkType($row['competitor_work_type']);
+			$diploma->work_type_id = $type->work_type_id;
+			
+			//get files(aka images)
+			$folder = '/home/zefiryn/public_html/2_3d/upload/';
+			
+			$stmt2 = $db->query('SELECT path from files where applications_application_id = '.$row['application_id']);
+			while($rowf = $stmt2->fetch())
+			{
+				if (!strstr($rowf['path'], '.pdf'))
+				{
+					$source = $folder . $rowf['path'];
+					$destination = dirname(__FILE__).'/../../public/assets/editions/';
+					$edition_folder = '2009-2010';
+					$user_folder = Zefir_Filter::strToUrl($diploma->surname.'_'.$diploma->name);
+					
+					//create edition folder
+					$dest = $destination.$edition_folder;
+					if (!is_dir($dest))
+						mkdir($dest);
+					
+					//create user folder
+					$dest = $dest.'/'.$user_folder;
+					if (!is_dir($dest))
+						mkdir($dest);
+						
+					$file = substr($source, strrpos($source, '/'));
+					$dest .= $file;
+					
+					if ($diploma->surname != null && copy($source, $dest))
+					{
+						$diplomaFile = new Application_Model_DiplomaFiles();
+						$diplomaFile->path = $edition_folder.'/'.$user_folder.$file;
+						$diploma->addChild($diplomaFile , 'files');
+					}
+				}
+			}
+			
+			$diploma->save();
+		}
+		
+    	$this->render('index');
+    }
     
 
 

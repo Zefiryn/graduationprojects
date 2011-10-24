@@ -37,6 +37,15 @@ class Application_Model_WorkTypes extends GP_Application_Model
 		return $this;
 	}
 	
+	public function findWorkType($name)
+	{
+		$row = $this->getDbTable()->findWorkType($name);
+		if ($row)
+			$this->populate($row);
+		
+		return $this;
+	}
+	
 	public function prepareFormArray()
 	{
 		$data = array(

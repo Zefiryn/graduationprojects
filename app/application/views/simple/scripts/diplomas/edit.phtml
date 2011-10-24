@@ -1,4 +1,11 @@
 <div id="main">
 	<h1><?php echo $this->translate('edit_edition');?></h1>
+	<?php if ($this->form->csrf->hasErrors()):?>
+		<p class="spacer">&nbsp;</p>
+		<div id="error-csrf" class="error-div">
+			<p class="error"><?php echo $this->translate('csrf_error')?></p>
+		</div>
+	<?php endif;?>
+	<?php echo $this->form->csrf->renderViewHelper(); ?> 
 	<?php echo $this->form;?>
 </div>

@@ -113,7 +113,7 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
     	return $previousDiploma;
     }
     
-protected function _getNextDiploma($diploma)
+	protected function _getNextDiploma($diploma)
     {
     	$select = $this->getAdapter()->query(
     		'SELECT * FROM (
