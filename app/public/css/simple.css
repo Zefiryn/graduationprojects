@@ -718,6 +718,15 @@ div.error-div {
 	width: 460px;
 	text-align: left; 
 }
+
+fieldset.fileFieldset{
+	width: 435px;
+	margin-left: 32px;
+}
+fieldset.error + div.error-div {
+	width: 445px;
+	margin-left:32px;
+}
 #error-csrf p.error {
 	text-align: left !important;
 }
@@ -762,7 +771,7 @@ input.submit {
 	-moz-border-radius: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
-	float: left;
+	position: absolute;
 	padding: 0 4px 0px 4px;
 	margin: 0px 5px 20px 0px;
 	width: 21px;
@@ -782,7 +791,7 @@ fieldset {
 	-moz-border-radius: 5px;
 	padding: 0px;
 	margin: 0px 0px 20px 0px;
-	text-align: right;
+	text-align: right
 }
 
 fieldset.submit {

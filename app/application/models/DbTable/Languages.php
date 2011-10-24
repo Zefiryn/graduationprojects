@@ -38,5 +38,14 @@ class Application_Model_DbTable_Languages extends Zefir_Application_Model_DbTabl
 		return $this->fetchAll($select)->count();
 	}
 	
+	public function findLang($lang)
+	{
+		$select = $this->select()->where('lang_code = ?', $lang);
+		
+		$row = $this->fetchRow($select);
+		
+		return $row;
+	}
+	
 }
 

@@ -47,7 +47,28 @@ class DiplomasController extends Zefir_Controller_Action
     
 	public function editAction()
     {
+    	$request = $this->getRequest();
+    	$form = new Application_Form_Diploma();
+    	$id = $request->getParam('id', null);
+    	$diploma = new Application_Model_Diplomas($id);
     	
+    	if ($request->isPost())
+    	{
+    		if ($form->isValid($request->getPost()))
+    		{
+    			$diploma->populateFieldsFromForm($form->getValues());
+    			$diploma->save();
+    			$this->flashMe('diploma_saved');
+    			$this->_redirectToRoute(array('id' => $diploma->diploma_id), 'show_diploma');
+    		}
+
+    	}
+    	else
+    	{
+    		$form->populate($diploma->prepareFormArray($this->view->lang));
+    	}
+    	
+    	$this->view->form = $form;
     }
     
     public function deleteAction()

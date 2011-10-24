@@ -78,7 +78,6 @@ class Application_Form_Application extends Zefir_Form
 				->setDecorators($this->_getStandardDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-					new Zefir_Validate_NotEmptyCombo('school'),
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
 					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
 				));

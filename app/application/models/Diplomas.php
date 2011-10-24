@@ -47,18 +47,21 @@ class Application_Model_Diplomas extends GP_Application_Model
 	{
 		$self = $this->getDbTable()->save($this);
 		
-		foreach($this->fields as $field)
+		if (is_array($this->fields))
 		{
-			$field->diploma_id = $self->diploma_id;
-			$field->save();
+			foreach($this->fields as $field)
+			{
+				$field->diploma_id = $self->diploma_id;
+				$field->save();
+			}
 		}
-		
-		foreach($this->files as $file)
-		{
-			$file->diploma_id = $self->diploma_id;
-			$file->save();
+		if (is_array($this->files)){	
+			foreach($this->files as $file)
+			{
+				$file->diploma_id = $self->diploma_id;
+				$file->save();
+			}
 		}
-		
 		return $self;	
 	}
 	
@@ -87,6 +90,42 @@ class Application_Model_Diplomas extends GP_Application_Model
 	public function getAdjacentDiplomas()
 	{
 		return $this->getDbTable()->getAdjacentDiplomas($this);
+	}
+	
+	public function prepareFormArray($lang)
+	{
+		$language = new Application_Model_Languages();
+		
+		return array(
+			'diploma_id' => $this->diploma_id,
+			'lang_id' => $language->findLangId($lang),
+			'work_subject' => $this->getField('work_subject', $lang),
+			'work_desc' => $this->getField('work_desc', $lang),
+			'school' => $this->getField('school', $lang),
+			
+		);
+	}
+	
+	public function populateFieldsFromForm($data)
+	{
+		$field = new Application_Model_Fields();
+		$id = $data['diploma_id'];
+		$lang = $data['lang_id'];
+		
+		unset($data['diploma_id']);
+		unset($data['lang_id']);
+		
+		foreach($data as $field_name => $entry)
+		{
+			$diplomaField = new Application_Model_DiplomaFields();
+			$diplomaField->diploma_id = $id;
+			$diplomaField->lang_id = $lang;
+			$diplomaField->field_id = $field->getField($field_name)->field_id;
+			$diplomaField->entry = $entry;
+			$this->addChild($diplomaField, 'fields');
+		}	
+		
+		return $this;
 	}
 
 }

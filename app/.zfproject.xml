@@ -93,6 +93,7 @@
         <formFile formName="News"/>
         <formFile formName="NewsText"/>
         <formFile formName="NewsFile"/>
+        <formFile formName="Diploma"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

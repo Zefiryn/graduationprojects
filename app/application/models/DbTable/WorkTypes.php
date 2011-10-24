@@ -43,5 +43,13 @@ class Application_Model_DbTable_WorkTypes extends Zefir_Application_Model_DbTabl
 		
 		return $type;
 	}
+	
+	public function findWorkType($name)
+	{
+		$select = $this->select()->where('work_type_name = ?', $name);
+		$row = $this->fetchRow($select);
+		
+		return $row;
+	}
 }
 

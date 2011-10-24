@@ -5,11 +5,21 @@
 			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->path);?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
 		<?php endforeach;?>
 	</div>
-    
+
 	<div class="dyplom">
+		<?php if ($this->user->role == 'admin'):?>
+		<p class="admin">
+			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
+					alt="<?php echo $this->translate('edit');?>" 
+					title="<?php echo $this->translate('edit');?>">
+			</a>
+			
+		</p>
+		<?php endif?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('edition'));?></p>
 		<p class="diploma_data diploma_edition"><?php echo $this->diploma->edition->edition_name2;?>
-			<?php if ($this->diploma->edition->edition_name2 < '2010-2011'):?>
+			<?php if ($this->diploma->edition->edition_name2 < '2009-2010'):?>
 			<span class="kraj">(<?php echo $this->translate('only_polish_edition');?>)</span>
 			<?php endif;?>
 		</p>

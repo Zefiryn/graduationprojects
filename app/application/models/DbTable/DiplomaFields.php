@@ -59,15 +59,24 @@ class Application_Model_DbTable_DiplomaFields extends Zefir_Application_Model_Db
     }
     
 	/**
-     * Save or update application data in the database 
+     * Save or update diploma field data in the database 
      * 
-     * @param Application_Model_ResultFields $result
+     * @param Application_Model_DiplomaFields $field
      * @throws Zend_Exception
-     * @return Application_Model_ResultFields $result
+     * @return Application_Model_DiplomaFields $field
      */
-	public function save(Application_Model_DiplomaFields $result)
+	public function save(Application_Model_DiplomaFields $field)
     {
-    		parent::save($result);
+    	$select = $this->select()
+    					->where('diploma_id = ?', $field->diploma_id)
+    					->where('lang_id = ?', $field->lang_id)
+    					->where('field_id = ?', $field->field_id);
+		$row = $this->fetchRow($select);
+		
+		if ($row)
+			$field->diploma_field_id = $row['diploma_field_id'];
+				
+    	parent::save($field);
     }
     
     
