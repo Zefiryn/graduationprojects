@@ -102,8 +102,11 @@ class Application_Model_Diplomas extends GP_Application_Model
 			'work_subject' => $this->getField('work_subject', $lang),
 			'work_desc' => $this->getField('work_desc', $lang),
 			'school' => $this->getField('school', $lang),
-			'department' => $this->getField('department', $lang)
-			
+			'department' => $this->getField('department', $lang),
+			'supervisor' => $this->supervisor,
+			'supervisor_degree' => $this->supervisor_degree,
+			'name' => $this->name,
+			'surname' => $this->surname
 		);
 	}
 	
@@ -113,10 +116,12 @@ class Application_Model_Diplomas extends GP_Application_Model
 		$id = $data['diploma_id'];
 		$lang = $data['lang_id'];
 		
-		unset($data['diploma_id']);
-		unset($data['lang_id']);
+		$this->name = $data['name'];
+		$this->surname = $data['surname'];
+		$this->supervisor = $data['supervisor'];
+		$this->supervisor_degree = $data['supervisor_degree'];
 		
-		foreach($data as $field_name => $entry)
+		foreach($data['fields'] as $field_name => $entry)
 		{
 			$diplomaField = new Application_Model_DiplomaFields();
 			$diplomaField->diploma_id = $id;
@@ -124,8 +129,8 @@ class Application_Model_Diplomas extends GP_Application_Model
 			$diplomaField->field_id = $field->getField($field_name)->field_id;
 			$diplomaField->entry = $entry;
 			$this->addChild($diplomaField, 'fields');
-		}	
-		
+		}
+	
 		return $this;
 	}
 

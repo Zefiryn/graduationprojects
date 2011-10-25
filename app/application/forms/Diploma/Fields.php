@@ -1,9 +1,7 @@
 <?php
-
-class Application_Form_Diploma extends Zefir_Form
+class Application_Form_Diploma_Fields extends Zefir_Form_SubForm
 {
-
-    public function init()
+	public function init()
     {
     	$L = $this->_regex['L'];
     	$N = $this->_regex['N'];
@@ -20,7 +18,6 @@ class Application_Form_Diploma extends Zefir_Form
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 
 		
-		$appSettings = Zend_Registry::get('appSettings');
 		$element = $this->createElement('hidden', 'lang_id');
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
@@ -29,31 +26,31 @@ class Application_Form_Diploma extends Zefir_Form
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'name');
+		$element = $this->createElement('text', 'school');
 		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('name')
-				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE)
+				->setLabel('school')
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(FALSE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 200))
 				));
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'surname');
+		$element = $this->createElement('text', 'department');
 		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('surname')
-				->setDecorators($this->_getZefirDecorators())
-				->setRequired(TRUE)
+				->setLabel('department')
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(FALSE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 200))
 				));
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'supervisor');
+		$element = $this->createElement('text', 'work_subject');
 		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('supervisor')
+				->setLabel('work_subject')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(FALSE)
 				->addValidators(array(
@@ -62,27 +59,16 @@ class Application_Form_Diploma extends Zefir_Form
 				));
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'supervisor_degree');
-		$element->setAttribs(array('class' => 'width1'))
-				->setLabel('supervisor_degree')
+		$element = $this->createElement('textarea', 'work_desc');
+		$element->setAttribs(array('class' => 'desc'))
+				->setLabel('work_desc')
+				->setDescription('work_desc_count')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(FALSE)
 				->addValidators(array(
-					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
+					//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/')
 				));
 		$this->addElement($element);
-		
-		$fields = new Application_Form_Diploma_Fields();
-		$this->addSubForm($fields, 'fields');
-		
-		$this->_createCsrfElement();	 
-		$this->_createStandardSubmit('submit');
-		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
-        ->setDisplayGroupDecorators(array(
-						'FormElements', 
-						array('Fieldset', array('class' => 'submit'))
-			));
     }
 
 

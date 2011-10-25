@@ -719,10 +719,6 @@ div.error-div {
 	text-align: left; 
 }
 
-fieldset.fileFieldset{
-	width: 435px;
-	margin-left: 32px;
-}
 fieldset.error + div.error-div {
 	width: 445px;
 	margin-left:32px;
@@ -781,17 +777,25 @@ input.submit {
 
 fieldset {
 	display: block;
-	width: 430px;
+	width: 465px;
 	min-height: 28px; 
-	border: 1px solid rgba(0,221,179,0.2);
 	font-size: 14px;
+	border: 0px solid;
 	background-color: rgba(238,238,238,0.1);
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	padding: 0px;
 	margin: 0px 0px 20px 0px;
-	text-align: right
+	text-align: left;
+}
+
+fieldset.fileFieldset{
+	width: 435px;
+	margin-left: 32px;
+	text-align: right;
+	border: 1px solid rgba(0,221,179,0.2);
+	
 }
 
 fieldset.submit {
