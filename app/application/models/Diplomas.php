@@ -102,6 +102,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 			'work_subject' => $this->getField('work_subject', $lang),
 			'work_desc' => $this->getField('work_desc', $lang),
 			'school' => $this->getField('school', $lang),
+			'department' => $this->getField('department', $lang)
 			
 		);
 	}

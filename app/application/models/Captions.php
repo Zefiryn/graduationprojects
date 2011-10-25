@@ -36,7 +36,7 @@ class Application_Model_Captions extends GP_Application_Model
     {
     	$lang = new Application_Model_Languages();
     	$languages = $lang->findLang($language);
-    	return (array_shift($languages)->lang_id);
+    	return ($languages->lang_id);
     }
 }
 

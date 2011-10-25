@@ -36,7 +36,18 @@ class Application_Form_Diploma extends Zefir_Form
 				->setRequired(FALSE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 200))
+				));
+		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'department');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('department')
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(FALSE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 200))
 				));
 		$this->addElement($element);
 		
@@ -58,7 +69,7 @@ class Application_Form_Diploma extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(FALSE)
 				->addValidators(array(
-					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/')
+					//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/')
 				));
 		$this->addElement($element);
 		
