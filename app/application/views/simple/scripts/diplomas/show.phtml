@@ -49,7 +49,7 @@
 		<p class="diploma_data"><?php echo $this->diploma->getSupervisor();?></p>
 		
 		<div class="work_desc">
-			<p><?php echo $this->diploma->getField('work_desc', $this->lang);?></p>
+			<p><?php echo nl2br($this->diploma->getField('work_desc', $this->lang));?></p>
 		</div>
 		
 		<nav class="diploma_nav">
