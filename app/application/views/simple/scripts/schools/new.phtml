@@ -1,8 +1,4 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'schools/new', 'lang' => $this->lang));
-?>
-
-<div class="content">
+<div id="main">
 	<h1><?php echo $this->translate('new_school');?></h1>
 	
 	<?php if ($this->form->csrf->hasErrors()):?>
@@ -12,7 +8,3 @@
 	<?php endif;?>
 	<?php echo $this->form;?>
 </div>
-
-
-<p class="spacer_small">&nbsp;</p> 
-<p class="previous"><a href="<?php ;?>">&lt; <?php echo $this->translate('previous_page');?></a></p>

@@ -1,11 +1,8 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'schools', 'lang' => $this->lang));
-?>
 <?php echo $this->partial('partials/delete_dialog.phtml', 
 			array('title' => 'editions', 'delete_confirm' => $this->translate('school_delete_confirm')));
 ?>
 
-<div class="content">
+<div id="main">
 	<h1>
 		<?php echo $this->translate('schools');?>
 		<a href="<?php echo $this->baseUrl('/schools/new');?>">
@@ -39,10 +36,3 @@
 	<?php endforeach;?>
 
 </div>
-
-<p class="spacer_small">&nbsp;</p> 
-<p class="previous">
-	<a href="<?php echo $this->baseUrl('/admin');?>">
-	&lt; <?php echo $this->translate('previous_page');?>
-	</a>
-</p>

@@ -35,6 +35,11 @@ class LocalizationsController extends Zefir_Controller_Action
 			
 			if ($request->isPost())
 			{
+				if ($request->getPost('leave', null))
+				{
+					$this->flashMe('cancel_edit');
+					$this->_redirectToRoute(array('loc_lang' => $lang), 'translation');
+				}
 				if ($form->isValid($request->getPost()))
 				{
 					$language = new Application_Model_Languages();

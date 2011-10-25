@@ -21,7 +21,29 @@ class CAptionsController extends Zefir_Controller_Action
 
     public function newAction() 
     {
+    	$request = $this->getRequest();
+    	$form = new Application_Form_Caption();
     	
+    	if ($request->isPost())
+    	{
+    		if ($request->getParam('leave'))
+    		{
+    			$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'captions');
+    		}
+    		
+    		if ($form->isValid($request->getPost()))
+    		{
+    			$caption = new Application_Model_Captions();
+    			$caption->populateFromForm($form->getValues());
+    			$caption->save();
+    			
+    			$this->flashMe('caption_added');
+				$this->_redirectToRoute(array(), 'captions');
+    		}
+    	}
+    	
+    	$this->view->form = $form;
     }
 }
 

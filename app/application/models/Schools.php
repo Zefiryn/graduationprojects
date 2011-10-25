@@ -57,8 +57,8 @@ class Application_Model_Schools extends GP_Application_Model
 	
 	public function prepareFormArray()
 	{
-		$data = array(	'school_id' => $this->_school_id,
-						'school_name' => $this->_school_name);
+		$data = array(	'school_id' => $this->school_id,
+						'school_name' => $this->school_name);
 		
 		return $data;
 	}
