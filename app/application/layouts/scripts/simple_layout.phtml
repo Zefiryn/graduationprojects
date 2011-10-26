@@ -29,7 +29,18 @@
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
-			    	<object width="130" height="130" data="<?php echo $this->baseUrl;?>img/simple/logo.swf"></object>
+			    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="128" height="128" id="G logo">
+						<param name="movie" value="<?php echo $this->baseUrl;?>img/simple/logo.swf" />
+						<!--[if !IE]>-->
+						<object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl;?>img/simple/logo.swf" width="128" height="128">
+						<!--<![endif]-->
+							<a href="http://graduationprojects.eu">
+								<img src="G-alt.png" alt="G logo" />
+							</a>
+						<!--[if !IE]>-->
+						</object>
+						<!--<![endif]-->
+					</object>
 			    	<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"
 			    		alt="Gradutation Project Logo"/>
 			    </a>
@@ -68,10 +79,20 @@
 	
 
 	<footer>
-		<p> Copyright by 2+3D, 2011. Projekt wydany dzięki pomocy finansowej  
-	    Międzynarodowego Funduszu Wyszehradzkiego 
-	    www.visegradfund.org</p>
-	    <p><img src="<?php echo $this->baseUrl('img/simple/visegrad_fund_logo_web_blue_400.jpg');?>" alt="Visegrad Fund"></p>
+		<p>
+		<a href="http://www.2plus3d.pl"><img src="<?php echo $this->baseUrl('img/simple/2plus3d_logo.png');?>" alt="2plus3d magazine" title="2plus3d magazine" /></a>
+		
+		<a href="http://www.typo.cz"><img src="<?php echo $this->baseUrl('img/simple/typo_logo.png');?>" alt="typo magazine" title="typo magazine" /></a>
+		
+		<a href=""><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977 magazine" title="1977 magazine" /></a>
+		
+		<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
+		
+		<a href="http://www.2plus3d.pl" style="margin-left: 250px"><img src="<?php echo $this->baseUrl('img/simple/visegrad_fund_logo_web_blue_400.jpg');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>
+		
+		<p class="organizers_info"><?php echo $this->translate('project_organized_by');?></p>
+		
+		<p class="creator"><a href="http://zefiryn.jewula.net" alt="Web page development" title="Web page development">created by: Zefiryn</a></p>
 	</footer>
 
 

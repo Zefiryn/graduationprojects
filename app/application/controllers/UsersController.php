@@ -37,15 +37,13 @@ class UsersController extends Zefir_Controller_Action
         $request = $this->getRequest();
     	
     	$form = new Application_Form_User('new');
-    	$form->setAction('/users/new');
-		
+    	
     	if ($request->isPost())
     	{
-    		$form->populate($request->getPost());
-			
-			if($form->leave->isChecked())
+    		if($request->getParam('leave'))
 			{
-				$this->_redirect('/admin');	
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'users');	
 			}
 			
     		elseif ($form->isValid($request->getPost()))
@@ -55,7 +53,7 @@ class UsersController extends Zefir_Controller_Action
     			$user->save();
     			
     			$this->flashMe('user_added', 'SUCCESS');
-    			$this->_redirect('/users');
+    			$this->_redirectToRoute(array(), 'users');
     		}	
     		
     	}

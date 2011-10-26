@@ -12,15 +12,15 @@ class DiplomasController extends Zefir_Controller_Action
     {
 		$edition = new Application_Model_Editions();
     	$editions = $edition->getEditions('DESC');
-    	$cur_edition = $this->getRequest()->getParam('edition', array_shift($editions));
-		$selected_edition = str_replace('-', '/', $cur_edition);
+    	$selected_edition = $this->getRequest()->getParam('edition', array_shift($editions));
+    	$selected_edition = str_replace('-', '–', $selected_edition);
 		
 		$edition->getEdition($selected_edition, TRUE);
 		
 		$this->view->diplomas = $edition->diplomas;
 		$this->view->path = array(
 			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
-    		1 => array('route' => 'diplomas', 'data' => array('edition' => $cur_edition), 'name' => array('edition', $cur_edition)),
+    		1 => array('route' => 'diplomas', 'data' => array('edition' => $selected_edition), 'name' => array('edition', $selected_edition)),
 		);
     }
     
@@ -34,7 +34,7 @@ class DiplomasController extends Zefir_Controller_Action
     	
     	$this->view->path = array(
 			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
-    		1 => array('route' => 'diplomas', 'data' => array('edition' => $diploma->edition->edition_name2), 'name' => array('edition', $diploma->edition->edition_name2)),
+    		1 => array('route' => 'diplomas', 'data' => array('edition' => $diploma->edition->edition_name), 'name' => array('edition', $diploma->edition->edition_name)),
     		2 => array('route' => 'show_diploma', 'data' => array('id' => $diploma->diploma_id), 'name' => array($diploma->getAuthorName())),
 		);
     }

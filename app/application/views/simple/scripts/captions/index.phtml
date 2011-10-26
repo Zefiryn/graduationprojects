@@ -1,0 +1,36 @@
+<div id="main">
+	<h1>
+		<?php echo $this->translate('captions');?>
+		<a href="<?php echo $this->url(array(), 'new_caption');?>">
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block" 
+				alt="<?php echo $this->translate('new_caption');?>" 
+				title="<?php echo $this->translate('new_caption');?>" />
+		</a>
+	</h1>
+	</h1>
+	<div class="captions">
+		<?php foreach($this->captions as $caption):?>
+		<p>
+			<span><?php echo $caption->name;?></span> 
+		
+			<a href="<?php echo $this->url(array('id' => $caption->caption_id), 'edit_caption');?>">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
+					alt="<?php echo $this->translate('edit');?>" 
+					title="<?php echo $this->translate('edit');?>">
+			</a>
+			
+			<a href="<?php echo $this->url(array('id' => $caption->caption_id), 'delete_caption');?>"
+				class="delete">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
+					alt="<?php echo $this->translate('delete');?>" 
+					title="<?php echo $this->translate('delete');?>">
+			</a>
+		
+		</p>
+		<?php endforeach;?>
+	</div>
+</div>
+
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'captions', 'delete_confirm' => $this->translate('caption_delete_confirm')));
+?>
