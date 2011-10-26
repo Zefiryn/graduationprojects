@@ -3,7 +3,7 @@
 	<?php foreach($this->diplomas as $id => $diploma):?>
 	<div class="diploma">
 		<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">
-			<img src="<?php echo $this->baseUrl('assets/editions/'.$diploma->files[0]->path);?>" alt="" style="width: 100%;"/>
+			<img src="<?php echo $this->baseUrl('assets/editions/'.$diploma->files[0]->getImage('thumb'));?>" alt="" style="width: 100%;"/>
 		</a>
 		<p class="index_author">
 			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">

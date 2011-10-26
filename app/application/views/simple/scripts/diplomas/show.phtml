@@ -2,7 +2,7 @@
 
 	<div class="diploma_gallery">
 		<?php foreach($this->diploma->files as $file):?> 
-			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->path);?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
+			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
 		<?php endforeach;?>
 	</div>
 
