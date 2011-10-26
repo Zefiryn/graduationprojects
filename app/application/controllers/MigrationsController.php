@@ -588,5 +588,21 @@ class MigrationsController extends Zefir_Controller_Action
 			$this->render('index');
 	}
 
+	public function resizeAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('edition');
+		
+		$edition = new Application_Model_Editions($id);
+		
+		foreach($edition->diplomas as $diploma)
+		{
+			foreach ($diploma->files as $file)
+			{
+				$file->recreateThumbnails();
+			}
+		}
+		$this->render('index');
+	}
 }
 

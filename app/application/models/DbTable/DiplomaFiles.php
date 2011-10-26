@@ -52,9 +52,17 @@ class Application_Model_DbTable_DiplomaFiles extends Zefir_Application_Model_DbT
      * @throws Zend_Exception
      * @return Application_Model_Files $file
      */
-    public function save(Application_Model_DiplomaFiles $file)
-    {
+	public function save(Application_Model_DiplomaFiles $file)
+	{
+		if ($file->file_id != null)
+    		$oldData = new Application_Model_DiplomaFiles($file->file_id);
+    	else 
+    		$oldData = null;
+
     	parent::save($file);
-    }
+    	
+    	$options = Zend_Registry::get('options');
+    	$this->_copyFile($file, 'path', $options['upload']['diplomas'].$file->getFileFolder(), $file->getFileName(), $oldData);
+	}
 }
 

@@ -385,8 +385,8 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		
 		if($newHeight > $oldHeight && $newWidth > $oldWidth) 
 		{
-			// Jeśli nadesłany obrazek jest mniejszy niż nakazane wymiary, to przenoszony jest plik,
-			// żeby pominąć phpowe funkcje, które robią jakieś rozmycia podobdno
+			// Jeśli nadesłany obrazek jest mniejszy niż nakazane wymiary, to przenoszony 
+			//jest plik, żeby pominąć phpowe funkcje, które robią jakieś rozmycia podobdno
 			if(!copy($inputFileName, $outputFileName)) 
 			{
 				throw new Zend_Exception('Kopiowanie pliku nie powiodło się. '.$outputFileName);
