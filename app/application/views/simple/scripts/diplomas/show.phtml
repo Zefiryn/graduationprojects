@@ -18,8 +18,8 @@
 		</p>
 		<?php endif?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('edition'));?></p>
-		<p class="diploma_data diploma_edition"><?php echo $this->diploma->edition->edition_name2;?>
-			<?php if ($this->diploma->edition->edition_name2 < '2009-2010'):?>
+		<p class="diploma_data diploma_edition"><?php echo $this->diploma->edition->edition_name;?>
+			<?php if ($this->diploma->edition->edition_name < '2009–2010'):?>
 			<span class="kraj">(<?php echo $this->translate('only_polish_edition');?>)</span>
 			<?php endif;?>
 		</p>
@@ -45,6 +45,10 @@
 		<p class="diploma_field"><?php echo strtolower($this->translate('school'));?></p>
 		<p class="diploma_data"><?php echo $this->diploma->getField('school', $this->lang);?></p>
 		
+		<?php if ($this->diploma->getField('department', $this->lang) != ''):?>
+		<p class="diploma_field"><?php echo strtolower($this->translate('department'));?></p>
+		<p class="diploma_data"><?php echo $this->diploma->getField('department', $this->lang);?></p>
+		<?php endif; ?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('supervisor'));?></p>
 		<p class="diploma_data"><?php echo $this->diploma->getSupervisor();?></p>
 		

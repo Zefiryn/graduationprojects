@@ -24,12 +24,11 @@ class SchoolsController extends Zefir_Controller_Action
 		
     	if ($request->isPost())
 		{
-			$form->populate($request->getPost());
-			
-			if($form->leave->isChecked())
-			{
-				$this->_redirect('/schools');	
-			}
+			if ($request->getParam('leave'))
+    		{
+    			$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'schools');
+    		}
 			
     		elseif ($form->isValid($request->getPost()))
     		{
@@ -52,12 +51,11 @@ class SchoolsController extends Zefir_Controller_Action
 				
 		if ($request->isPost())
 		{
-			$form->populate($request->getPost());
-			
-			if($form->leave->isChecked())
-			{
-				$this->_redirect('/schools');	
-			}
+			if ($request->getParam('leave'))
+    		{
+    			$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'schools');
+    		}
 			
     		elseif ($form->isValid($request->getPost()))
     		{

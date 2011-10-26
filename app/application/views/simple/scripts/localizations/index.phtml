@@ -34,3 +34,7 @@
 	<?php endforeach;?>
 	</table>
 </div>
+
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'translation', 'delete_confirm' => $this->translate('translation_delete_confirm')));
+?>

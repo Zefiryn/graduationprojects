@@ -69,7 +69,7 @@ class Application_Form_Diploma extends Zefir_Form
 				->setRequired(FALSE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-					new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
+					new Zend_Validate_StringLength(array('max' => 300))
 				));
 		$this->addElement($element);
 		

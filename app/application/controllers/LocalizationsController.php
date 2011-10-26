@@ -63,5 +63,16 @@ class LocalizationsController extends Zefir_Controller_Action
 			$this->view->form = $form;
 		}
     }
+    
+    public function deleteAction()
+    {
+    	$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+
+		$localization = new Application_Model_Localizations($id);
+		$localization->delete();
+		$this->flashMe('translation_deleted', 'SUCCESS');
+		$this->_redirectToRoute(array('loc_lang' => $request->getParam('loc_lang', '')), 'localization');
+    }
 }
 
