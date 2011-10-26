@@ -295,7 +295,298 @@ class MigrationsController extends Zefir_Controller_Action
     	$this->render('index');
     }
     
+	public function locAction()
+	{
 
+		$lang_sk = array(
+			'lang' => 'sk',					//this should not be changed
+			'meta_title' => 'Medzinárodná prehliadka absolventských prác',
+			'yes' => 'tak',
+			'no' => 'nie',
+			'db_error' => 'Chyba spojenia s databázou',
+			'regulation_link' => 'Pravidlá',
+			'form_link' => 'Prihlásiť práce',
+			'result_link' => 'Výsledky',
+			
+			
+			
+			
+			//more text
+			'about_header' => 'Medzinárodná prehliadka <br>absolventských prác',
+
+			////faq
+			'faq_header' => 'Často kladené otázky',
+
+			//regulation
+			'regulation_header' => 'Pravidlá',
+	
+			//result page
+			'result_header' => 'Výsledky prehliadky',
+			'early_result' => 'Výsledky ešte neboli vyhlásené',
+			'result_info' => 'Práca zdôraznené v preskúmaní',
+			//footer 
+			'creator' => 'Created by Zefiryn',
+			'faq_link' => 'FAQ <!--Často kladené otázky-->',
+			'contact_link' => 'Kontakt',
+			'previous_link' => 'Predchádzajúca stránka',
+
+			//entry form
+			'entry_form' => 'Prihláška',
+			'country' => 'Štát',
+			'pl' => 'Poľsko',
+			'sk' => 'Slovensko',
+			'cz' => 'Česká republika',
+			'competitor_name' => 'Meno',
+			'competitor_surname' => 'Priezvisko',
+			'competitor_address' => 'Adresa',
+			'competitor_phone' => 'Telefón',
+			'phone_format' => 'Telefónne číslo zadajte vo formáte +421 12345678',
+			'competitor_email' => 'E-mail',
+			'competitor_email_check' => 'Potvrdiť e-mail',
+			'competitor_show_email' => 'Prosím o uvedenie e-mailovej adresy u prezentovanej práce',
+			'competitor_show_email_display' => 'Zobrazovať u práce e-mail',
+			'competitor_school' => 'Škola',
+			'competitor_department' => 'Katedra',
+			'competitor_workshop' => 'Ateliér',
+			'competitor_school_level' => 'Druh štúdia',
+			'competitor_school_level_expl' => '(vyberte)', 
+			'undergraduate' => 'bakalárske',
+			'graduate' => 'magisterské',
+			'competitor_work_subject' => 'Téma práce',
+			'competitor_work_short_subject' => 'Skrócony temat',
+			'competitor_work_short_subject_explain' => 'Typ práce (napríklad plagát, kreslo, kniha)',
+			'competitor_work_type' => '2D/3D',
+			'competitor_work_desc' => 'Popis práce (max. 2000 znakov)',
+			'counter' => 'Počet znakov',
+			'competitor_supervisor' => 'Vedúci práce',
+			'competitor_supervisor_degree' => 'Akademický titul vedúceho práce',
+			'competitor_graduation' => 'Dátum obhajoby',
+			'graduation_day' => 'Deň',
+			'graduation_month' => 'Mesiac',
+			'graduation_year' => 'Rok',
+			'miniature' => 'Náhľad',
+			'new_miniature' => 'Zmeniť náhľad',
+			'miniature_explain' => 'Jeden obrázok, ktorý reprezentuje prácu, s rozmerom 800 × 800 px',
+			'submit' => 'Odoslať prihlášku',
+			'confirmation_header' => 'Przesłane dane',
+			'confirm_submit' => 'Zadané údaje',
+			'return_submit' => 'Potvrdiť prihlášku',
+			'personal_data_agreement' => 'Súhlasím so spracovaním osobných údajov uvedených vo formulári za účelom zorganizovania prehliadky, v zmysle zákona Poľskej republiky na ochranu osobných údajov zo dňa 29.8.1997. (Dz. U. z 2002 r. nr 101, poz. 926 ze zm.)',
+		
+			//confirmation mail
+			'mail_confirm_subject' => 'Přihlášení práce do Mezinárodní přehlídky absolventských prací',
+			'mail_confirm_text' => 'Toto je automatická zpráva vygenerovaná po úspešném přijetí přihlášky do projektu Mezinárodní přehlídky absolventských prací.',
+			'mail_send_data' => 'Prenesených dát',
+			'file_counter' => 'Počet súborov',
+			
+			'mail_confirm_success' => 'Na zadaný e-mail byla odeslána zpráva s potvrzením přihlášky',
+			'mail_confirm_fail' => 'Během odesílání zprávy potvrzující přihlášku se objevila chyba',
+		
+			//other application columns
+			'application_id' => 'ID',
+			'edition' => 'Edícia',
+			'graduation_time' => 'Dátum obhajoby',
+			'application_date' => 'Dátum podania prihlášky',
+			'jury_qualified' => 'Kkceptovaný na ......',
+			'publication_qualified' => 'Vybrané na uverejnenie',
+			'review_qualified' => 'Vybrané na uverejnenie',
+			'annotations' => 'Poznámky',
+		
+			//files
+			'files' => 'Súbory',
+			'cached_files' => 'Nahrané súbory',
+			'add_file' => 'Pridať súbor (JPG, PDF)',
+			'file' => 'Súbor',
+			'file_desc' => 'Popis ilustrácií',
+			'file_max_ammount' => 'Maximálny počet prác',
+			'file_max_size' => 'Maximálna veľkosť súboru',
+			'remove' => 'Odstrániť',
+			'upload_error' => 'Chyba nahrávania',
+	
+	
+			//adding result
+			'adding_result' => 'Prihlásenie projektu',
+			'adding_error' => 'Počas prihlasovania projektu sa objavili chyby',
+			'adding_success' => 'Prihláška bola úspešne uložená',
+			'error' => 'Chyba',
+			
+			//contact
+			'contact_header' => 'Kontakt',
+			'mailer_name' => 'Meno a priezvisko',
+			'mailer_mail' => 'E-mailová adresa',
+			'mail_subject' => 'Názov správy',
+			'mail_text' => 'Obsah správy',
+			'mail_text_count' => '(max 5000 znakov)',
+			'mail_submit' => 'Odoslať správu',
+			'mail_success' => 'Správa bola úspešne odoslaná',
+			'mail_fail' => 'Pri odosielaní správy došlo k chybe',
+			'nomail' => 'Nie udało się załadować obsługi wysyłania wiadomości',
+			'nomailconfig' => 'Chýba konfiguračný súbor',
+			'mail_confirm' => 'Odoslať správu',
+			'mail_return' => 'Upraviť správu',
+			'from' => 'Od');
+		
+		$lang_cs = array(
+			'meta_title' => 'Central European Review – Graduation Projects',
+			'yes' => 'ano',
+			'no' => 'ne',
+			'db_error' => 'Chyba spojení s databází',
+			
+			'about_header' => 'Mezinárodní přehlídka <br>absolventských prací',
+			
+			
+			//faq
+			'faq_header' => 'Často kladené otázky',
+			//regulation
+			'regulation_header' => 'Pravidla',
+			//result page
+			'result_header' => 'Výsledky přehlídky',
+			'early_result' => 'Výsledky ještě nebyly vyhlášeny',
+			'result_info' => 'Práce zdůrazněno v přezkumu',
+			//footer 
+			'creator' => 'Created by Zefiryn',
+			'regulation_link' => 'Pravidla',
+			'form_link' => 'Přihlásit práce',
+			'faq_link' => 'Často kladené otázky',
+			'contact_link' => 'Kontakt',
+			'result_link' => 'Výsledky',
+			'previous_link' => 'Přechozí stránka',
+			
+			'error_info' => 'Chyba',
+			'query' => 'Dotaz',
+			'error_occured' => 'Došlo k chybě',
+				
+			
+			//entry form
+			'entry_form' => 'Přihláška',
+			'before_filling_form' => 'Před vyplněním formuláře si prosím přečtěte pravidla a často kladené otázky.',
+			'country' => 'Stát',
+			'competitor_name' => 'Jméno',
+			'competitor_surname' => 'Příjmení',
+			'competitor_address' => 'Adresa',
+			'competitor_phone' => 'Telefon',
+			'phone_format' => 'Telefonní číslo zadejte ve formátu +420 12345678',
+			'competitor_email' => 'E-mail',
+			'competitor_email_check' => 'Potvrdit e-mail',
+			'competitor_show_email' => 'Přeji si uvést e-mailovou adresu společně s  prací',
+			'competitor_show_email_display' => 'Zobrazovat u práce e-mail',
+			'competitor_school' => 'Škola',
+			'competitor_department' => 'Katedra',
+			'competitor_workshop' => 'Ateliér',
+			'competitor_school_level' => 'Druh studia',
+			'competitor_school_level_expl' => '(vyberte)', 
+			'undergraduate' => 'bakalářské',
+			'graduate' => 'magisterské',
+			'competitor_work_subject' => 'Úplný název práce',
+			'competitor_work_short_subject' => 'Stručný název práce',
+			'competitor_work_short_subject_explain' => 'Typ práce (např. plakát, křeslo, knížka)',
+			'competitor_work_type' => '2D/3D',
+			'competitor_work_desc' => 'Popis práce (max. 2000 znaků)',
+			'counter' => 'Počet znaků',
+			'competitor_supervisor' => 'Vedoucí práce',
+			'competitor_supervisor_degree' => 'Akademický titul vedoucího',
+			'competitor_graduation' => 'Datum obhajoby',
+			'graduation_day' => 'Den',
+			'graduation_month' => 'Měsíc',
+			'graduation_year' => 'Rok',
+			'miniature' => 'Náhled',
+			'new_miniature' => 'Změnit náhled',
+			'miniature_explain' => 'Jeden obrázek, který reprezentuje práci, o rozměru 800 × 800 px',
+			'submit' => 'Odeslat přihlášku',
+			'confirmation_header' => 'Zadané údaje',
+			'confirm_submit' => 'Potvrdit přihlášku',
+			'return_submit' => 'Upravit údaje',
+			'personal_data_agreement' => 'Souhlasím se zpracováním osobních údajů uvedených ve formuláři za účelem zorganizování přehlídky, ve smyslu zákona Polské republiky na ochranu osobních údajů ze dne 29.8.1997. (Dz. U. z 2002 r. nr 101, poz. 926 ze zm.)',
+			
+			
+			//confirmation mail
+			'mail_confirm_subject' => 'Přihlášení práce do Mezinárodní přehlídky absolventských prací',
+			'mail_confirm_text' => 'Toto je automatická zpráva vygenerovaná po úspešném přijetí přihlášky do projektu Mezinárodní přehlídky absolventských prací.',
+			'file_counter' => 'Počet souborů',
+			'mail_send_data' => 'Přenesených dat',
+			
+			'mail_confirm_success' => 'Na zadaný e-mail byla odeslána zpráva s potvrzením přihlášky',
+			'mail_confirm_fail' => 'Během odesílání zprávy potvrzující přihlášku se objevila chyba',
+			
+			//other application columns
+			'application_id' => 'ID',
+			'edition' => 'Edycja',
+			'graduation_time' => 'Datum obhajoby',
+			'application_date' => 'Datum podání přihlášky',
+			'jury_qualified' => 'Zakwalifikowane do konkursu',
+			'publication_qualified' => 'Vybráno k uveřejnění',
+			'review_qualified' => 'Vybráno do přehlídky',
+			'annotations' => 'Poznámky',
+			
+			
+			//files
+			'files' => 'Soubory',
+			'cached_files' => 'Nahrané soubory',
+			'add_file' => 'Přidat soubor (JPG, PDF)',
+			'file' => 'Soubor',
+			'file_desc' => 'Popis ilustrací',
+			'file_max_ammount' => 'Maximální počet prací',
+			'file_max_size' => 'Maximální velikost souboru',
+			'remove' => 'Odstranit',
+			'upload_error' => 'Chyba nahrávání',
+			//adding result
+			'adding_result' => 'Přihlášení projektu',
+			'adding_error' => 'Během přihlašování projektu se objevily chyby',
+			'adding_success' => 'Přihláška byla úspěšně přijata',
+			'error' => 'Chyba',
+			
+			
+			//contact
+			'contact_header' => 'Kontakt',
+			'mailer_name' => 'Jméno a příjmení',
+			'mailer_mail' => 'E-mailová adresa',
+			'mail_subject' => 'Název zprávy',
+			'mail_text' => 'Obsah zprávy',
+			'mail_text_count' => '(max. 5000 znaků)',
+			'mail_submit' => 'Odeslat zprávu',
+			'mail_success' => 'Zpráva byla úspěšně odeslána',
+			'mail_fail' => 'Při odesílání zprávy došlo k chybě',
+			'nomail' => 'Nepodařilo se nahrát modul pro odesílání zpráv',
+			'nomailconfig' => 'Chybí konfigurační soubor',
+			'mail_confirm' => 'Odeslat zprávu',
+			'mail_return' => 'Upravit zprávu',
+			'from' => 'Od',
+			
+			
+			);
+		
+			$captions = new Application_Model_Captions();
+			
+			foreach($lang_sk as $caption => $translation)
+			{
+				$lang_id = 3;
+				$cap_id = $captions->getCaptionId($caption);
+				if ($cap_id)
+				{
+					$loc = new Application_Model_Localizations();
+					$loc->caption_id = $cap_id;
+					$loc->lang_id = $lang_id;
+					$loc->text = $translation;
+					$loc->save(); 
+				}
+			}
+			
+			foreach($lang_cs as $caption => $translation)
+			{
+				$lang_id = 2;
+				$cap_id = $captions->getCaptionId($caption);
+				if ($cap_id)
+				{
+					$loc = new Application_Model_Localizations();
+					$loc->caption_id = $cap_id;
+					$loc->lang_id = $lang_id;
+					$loc->text = $translation;
+					$loc->save(); 
+				}
+			}
+			
+			$this->render('index');
+	}
 
 }
 
