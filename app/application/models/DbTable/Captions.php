@@ -13,5 +13,13 @@ class Application_Model_DbTable_Captions extends Zefir_Application_Model_DbTable
 			'refColumn' => 'caption_id',
 		)
 	);
+	
+	public function findCaption($name)
+	{
+		$select = $this->select()->where('name = ?', $name);
+		$row = $this->fetchRow($select);
+		
+		return $row;
+	}
 }
 

@@ -6,7 +6,6 @@ work_types, degrees, languages, editions;
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
 	edition_name char(10) NOT NULL,
-	edition_name2 char(10),
 	PRIMARY KEY (edition_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

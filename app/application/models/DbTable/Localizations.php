@@ -25,5 +25,22 @@ class Application_Model_DbTable_Localizations extends Zefir_Application_Model_Db
 		$languages = new Application_Model_Languages();
 		return $languages->isLocalization($lang);
 	}
+	
+	public function save(Application_Model_Localizations $localization)
+	{
+		$row = $this->_findRow($localization);
+		if ($row)
+		{
+			$localization->item_id = $row['item_id'];
+		}
+		
+		parent::save($localization);
+	}
+	
+	protected function _findRow($object)
+	{
+		$select = $this->select()->where('caption_id = ?', $object->caption_id)->where('lang_id = ?', $object->lang_id);
+		return $this->fetchRow($select);
+	}
 }
 

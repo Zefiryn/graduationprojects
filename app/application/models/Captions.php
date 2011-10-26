@@ -32,11 +32,23 @@ class Application_Model_Captions extends GP_Application_Model
     	return new Application_Model_Localizations();
     } 
     
+	public function getCaptionId($name)
+    {
+    	$row = $this->getDbTable()->findCaption($name);
+    	
+    	if ($row)
+    		return $row['caption_id'];
+    	else
+    		return NULL;
+    }
+    
     protected function _getLangId($language)
     {
     	$lang = new Application_Model_Languages();
     	$languages = $lang->findLang($language);
     	return ($languages->lang_id);
     }
+    
+    
 }
 
