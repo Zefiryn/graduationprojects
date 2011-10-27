@@ -35,7 +35,7 @@ class Application_Form_About extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'about_title');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('about_title')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired()
@@ -46,7 +46,7 @@ class Application_Form_About extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('textarea', 'about_text');
-		$element->setAttribs(array('class' => 'width3'))
+		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('about')
 				->setDecorators(array(
 						array('TextField'),
@@ -60,16 +60,8 @@ class Application_Form_About extends Zefir_Form
 					));	
 		$this->addElement($element);
 		
-		$lang = new Application_Model_Languages();
-		$element = $this->createElement('select', 'lang_id');
-		$element->setAttribs(array('class' => 'width2', 'size' => 1))
-				->setLabel('language')
-				->setDecorators($this->_getStandardDecorators())
-				->setMultiOptions($lang->getLanguages())
-				->setRequired(FALSE)
-				->addValidators(array(
-					new Zend_Validate_Digits()
-				));
+		$element = $this->createElement('hidden', 'lang_id');
+		$element->setValue($t->getLocale());	
 		$this->addElement($element);
 		
 		$this->_createCsrfElement();

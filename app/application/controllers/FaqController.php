@@ -42,7 +42,7 @@ class FaqController extends Zefir_Controller_Action
     		1 => array('route' => 'faq', 'data' => array(), 'name' => array('faq_link')),
     	);
     	
-		if ($this->view->user->role == 'admin')
+		if ($this->view->user->role == 'admin' || $this->view->user->role == 'juror')
 			$this->render('index');
 		else
 			 $this->render('show');
@@ -142,8 +142,8 @@ class FaqController extends Zefir_Controller_Action
 	    		}
     		}
     		
-    		//$this->flashMe('question_deleted');
-    		//$this->_redirectToRoute(array(), 'faq');
+    		$this->flashMe('question_deleted');
+    		$this->_redirectToRoute(array(), 'faq');
     	} 
     }
     

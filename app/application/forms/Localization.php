@@ -14,11 +14,11 @@ class Application_Form_Localization extends Zefir_Form
         $name = $this->createElement('text', 'text');
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'width2'))
+								'class' => 'width1'))
 				->setLabel('translation')
 				->setDecorators($this->_getZefirDecorators())
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
+						//new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
 					));	
 		$this->addElement($name);
 

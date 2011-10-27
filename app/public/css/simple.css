@@ -618,12 +618,15 @@ footer p:first-child {
 	padding-top: 19px;
 	margin-bottom: 0px;
 }
+footer p a {
+	margin: 0px 5px 0px 5px;
+}
 
 p.organizers_info {
 	width: 200px;
 	border: 1px solid;
 	position: absolute;
-	margin-left: 510px;
+	margin-left: 545px;
 	margin-top: -60px;
 }
 

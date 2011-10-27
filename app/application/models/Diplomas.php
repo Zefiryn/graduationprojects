@@ -98,6 +98,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 		
 		return array(
 			'diploma_id' => $this->diploma_id,
+			'degree_id' => $this->degree_id,
 			'lang_id' => $language->findLangId($lang),
 			'work_subject' => $this->getField('work_subject', $lang),
 			'work_desc' => $this->getField('work_desc', $lang),
@@ -120,6 +121,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 		$this->surname = $data['surname'];
 		$this->supervisor = $data['supervisor'];
 		$this->supervisor_degree = $data['supervisor_degree'];
+		$this->degree_id = $data['degree_id'] != 0 ? $data['degree_id'] : NULL;
 		
 		foreach($data['fields'] as $field_name => $entry)
 		{

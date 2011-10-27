@@ -55,6 +55,10 @@
 		    <?php echo $this->partial('partials/admin_panel.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang));?>
 		    <?php endif;?>
 		    
+		    <?php if ($this->user->role == 'juror'):?>
+		    <?php echo $this->partial('partials/juror_panel.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang, 'user' => $this->user));?>
+		    <?php endif;?>
+		    
 		    <?php echo $this->partial('partials/lang_menu.phtml', array('link' => $this->link, 'lang' => $this->lang));?>
 		    
 		</div>
@@ -86,7 +90,7 @@
 		
 		<a href=""><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977 magazine" title="1977 magazine" /></a>
 		
-		<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
+		<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/zamek_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
 		
 		<a href="http://www.2plus3d.pl" style="margin-left: 250px"><img src="<?php echo $this->baseUrl('img/simple/visegrad_fund_logo_web_blue_400.jpg');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>
 		

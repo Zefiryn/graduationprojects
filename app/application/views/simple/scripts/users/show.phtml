@@ -1,16 +1,15 @@
-<?php echo $this->partial('partials/lang_menu.phtml', 
-			array('link' => 'account/'.$this->account->user_id, 'lang' => $this->lang));
+<?php if ($this->user->role == 'admin')
+		echo $this->partial('partials/delete_dialog.phtml',	array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
 ?>
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
-?>
-<div class="content">
-	<h1><?php echo $this->account->getUserFullName();?></h1>
-	<p class="clear">&nbsp;</p>
-	<div class="account">
-		<?php echo $this->partial(
+<div id="main">
+	<?php echo $this->partial(
 							'users/_admin.phtml', 
 							array('user' => $this->account));	?>
+							
+	<h1><?php echo $this->account->getUserFullName();?></h1>
+	<p class="clear">&nbsp;</p>
+	
+	<div class="account">
 		<p>
 			<span><?php echo $this->translate('nick');?></span>: 
 			<?php echo $this->account->nick;?>
@@ -45,6 +44,3 @@
 		<?php endif;?>
 	</div>
 </div>
-
-<p class="spacer_small">&nbsp;</p> 
-<p class="previous"><a href="<?php echo $this->baseUrl('/users');?>">&lt; <?php echo $this->translate('previous_page');?></a></p>
