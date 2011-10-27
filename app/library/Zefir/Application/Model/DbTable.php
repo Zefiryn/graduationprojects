@@ -349,7 +349,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			case 'image/jpeg': 
 				$createFunction = 'imagecreatefromjpeg';
 				$saveFunction = 'imagejpeg';
-				$quality = 100;
+				$quality = 90;
 				break;
 			case 'image/png': 
 				$createFunction = 'imagecreatefrompng';
