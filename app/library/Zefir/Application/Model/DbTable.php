@@ -283,7 +283,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		if(!$imagedata) {
 			throw new Zend_Exception('Nie udało się odczytać rozmiarów orginalnej fotografii.');
 		}
-
+var_dump($imagedata);
 		$oldWidth = (int)$imagedata[0];
 		$oldHeight = (int)$imagedata[1];
 

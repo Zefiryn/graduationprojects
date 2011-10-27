@@ -2,7 +2,7 @@
 
 	<h1><?php echo $this->translate('faq_header');?></h1>
 	<p class="spacer">&nbsp;</p>
-	<?php if ($form->csrf->hasErrors()):?>
+	<?php if ($this->->csrf->hasErrors()):?>
 	<div id="error-csrf" class="error-div">
 		<p class="error"><?php echo $this->translate('csrf_error')?></p>
 	</div>
