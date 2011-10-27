@@ -37,7 +37,7 @@ class SchoolsController extends Zefir_Controller_Action
     			$school->save();
     			
     			$this->flashMe('school_edited', 'SUCCESS');
-    			$this->_redirect('/schools');
+    			$this->_redirectToRoute(array(), 'schools');
     		}
 		}
 		
@@ -64,7 +64,7 @@ class SchoolsController extends Zefir_Controller_Action
     			$school->save();
     			
     			$this->flashMe('school_edited', 'SUCCESS');
-    			$this->_redirect('/schools');
+    			$this->_redirectToRoute(array(), 'schools');
     		}
 		}
 		else
@@ -86,7 +86,17 @@ class SchoolsController extends Zefir_Controller_Action
 		$school = new Application_Model_Schools($id);
 		$school->delete();
 		$this->flashMe('school_deleted', 'SUCCESS');
-		$this->_redirect('schools');
+		$this->_redirectToRoute(array(), 'schools');
+    }
+    
+    public function findAction()
+    {
+    	$request = $this->getRequest();
+    	$term = $request->getParam('term');
+    	$schools = new Application_Model_Schools();
+    	$result = $schools->findSchool($term);
+    	array_unshift($result, $term);
+    	$this->_helper->json($result);
     }
 
 }

@@ -81,7 +81,7 @@ class RegulationsController extends Zefir_Controller_Action
     		}
     	}
     	
-    	$this->view->regulations = $form;
+    	$this->view->form = $form;
     	
     }
     
@@ -117,7 +117,7 @@ class RegulationsController extends Zefir_Controller_Action
     		$paragraph = new Application_Model_Regualtions($id);
     		$form->populate($paragraph->toArray());
     	}	
-    	$this->view->regulations = $form;
+    	$this->view->form = $form;
     }
     
     public function deleteAction()

@@ -62,6 +62,18 @@ class Application_Model_Schools extends GP_Application_Model
 		
 		return $data;
 	}
+	
+	public function findSchool($name)
+	{
+		$rowset = $this->getDbTable()->findSchool($name);
+		$data = array();
+		foreach($rowset as $row)
+		{
+			$data[] = $row['school_name'];
+		}
+		
+		return $data;
+	}
 
 }
 

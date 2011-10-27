@@ -190,6 +190,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('contact'), null);
 		$acl->allow(null, array('applications'), array('new', 'delete-image'));
 		$acl->allow(null, array('diplomas', 'news'), array('index', 'show'));
+		$acl->allow(null, array('schools'), array('find'));
 		$acl->allow('user', array('auth'), array('logout'));
 		$acl->allow('user', array('applications'), array('new', 'show', 'edit'));
 		$acl->deny('user', array('admin'), null);
@@ -201,7 +202,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('juror', array('admin'), null);
 		$acl->allow('juror', array('localizations'), null);
 		$acl->allow('juror', array('captions'), array('index','new','edit'));
-		$acl->allow('juror', array('schools'), null);
 		$acl->allow('juror', array('diplomas'), array('index','show','edit'));
 		$acl->allow('juror', array('about'), null);
 		$acl->allow('juror', array('faq'), null);
