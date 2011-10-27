@@ -55,7 +55,10 @@ class Application_Model_Faqs extends GP_Application_Model
 		if ($this->lang_id != null)
 		{
 			$last = $this->getDbTable()->findLastQuestion($this->lang_id);
-			$this->position = $last->position++; 
+			if ($last)
+				$this->position = $last->position++;
+			else 
+				$this->position = 1; 
 		}
 		
 		return $this;

@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="dyplom">
-		<?php if ($this->user->role == 'admin'):?>
+		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
 		<p class="admin">
 			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
 				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
@@ -39,8 +39,10 @@
 		<p class="diploma_data"><?php echo $this->diploma->email;?></p>
 		<?php endif;?>
 		
+		<?php if ($this->diploma->degree->degree_name != null):?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('degree'));?></p>
 		<p class="diploma_data"><?php echo $this->translate($this->diploma->degree->degree_name.'_adjective');?></p>
+		<?php endif;?>
 		
 		<p class="diploma_field"><?php echo strtolower($this->translate('school'));?></p>
 		<p class="diploma_data"><?php echo $this->diploma->getField('school', $this->lang);?></p>

@@ -41,7 +41,7 @@ class RegulationsController extends Zefir_Controller_Action
     		1 => array('route' => 'regulation', 'data' => array(), 'name' => array('regulation_link')),
     	);
 		
-		if ($this->view->user->role == 'admin')
+		if ($this->view->user->role == 'admin' || $this->view->user->role == 'juror')
 			$this->render('index');
 		else
 			 $this->render('show');

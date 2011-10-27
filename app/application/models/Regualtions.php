@@ -51,7 +51,10 @@ class Application_Model_Regualtions extends GP_Application_Model
 		if ($this->lang_id != null)
 		{
 			$last = $this->getDbTable()->findLastParagraph($this->lang_id);
-			$this->paragraph_no = $last->paragraph_no++; 
+			if ($last)
+				$this->paragraph_no = $last->paragraph_no++; 
+			else
+				$this->paragraph_no = 1;
 		}
 		
 		return $this;

@@ -73,6 +73,19 @@ class Application_Form_Diploma extends Zefir_Form
 				));
 		$this->addElement($element);
 		
+		$degree = new Application_Model_Degrees();
+		$element = $this->createElement('select', 'degree_id');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('degree')
+				->setMultiOptions($degree->getDegreesList())
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(FALSE)
+				->addValidators(array(
+					
+					new Zend_Validate_Digits()
+				));
+		$this->addElement($element);
+		
 		$fields = new Application_Form_Diploma_Fields();
 		$this->addSubForm($fields, 'fields');
 		

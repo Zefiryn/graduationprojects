@@ -1,5 +1,5 @@
 <div id="main">
-	<?php if ($this->user->_role == 'admin')
+	<?php if ($this->user->_role == 'admin' || $this->user->_role == 'juror')
 			echo $this->partial('about/_admin.phtml', array('lang' => $this->lang));?>
 	<h1><?php echo $this->about->about_title;?></h1>
 	<p class="spacer">&nbsp;</p>
