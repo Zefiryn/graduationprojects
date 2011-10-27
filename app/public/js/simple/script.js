@@ -45,6 +45,7 @@ $(document).ready(function(){
 	
 	//dragAppFiles();
 	deleteAppImage();
+	
 });
 
 function deleteAppImage()

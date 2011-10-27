@@ -31,5 +31,12 @@ class Application_Model_DbTable_Schools extends Zefir_Application_Model_DbTable
     	
     	return $row;
     }    
+    
+    public function findSchool($name)
+    {
+    	$select = $this->select()->where('school_name LIKE "%' . $name . '%"');
+    	$rowset = $this->fetchAll($select);
+    	return $rowset;
+    }
 }
 

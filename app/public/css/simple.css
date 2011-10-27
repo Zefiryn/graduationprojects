@@ -619,15 +619,24 @@ footer p:first-child {
 	margin-bottom: 0px;
 }
 footer p a {
-	margin: 0px 5px 0px 5px;
+	margin: 0px 20px 0px 20px;
+	border: 0px solid #000;
+}
+footer p a:first-child {
+	margin-left: 0px;
+}
+#fund {
+	margin-left: 178px;
+	margin-right: 0px;
 }
 
 p.organizers_info {
 	width: 200px;
-	border: 1px solid;
+	border: 0px solid;
 	position: absolute;
-	margin-left: 545px;
-	margin-top: -60px;
+	margin-left: 575px;
+	margin-top: -91px;
+	height: 85px;
 }
 
 .creator {
@@ -1170,6 +1179,18 @@ div.user p{
 	display: inline !important;
 }
 
+.ui-autocomplete, .ui-corner-all {
+	font-family: 'Myriad Pro', helvetica, arial, sans-serif;
+	font-size: 14px;
+	text-align: left;
+	background: rgba(238,238,238,0.5);
+}
+
+.ui-state-hover {
+	border: 1px solid rgba(0,221,179,0.3) !important;
+	background: #000 !important;
+	color: #fff !important;
+}
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }
