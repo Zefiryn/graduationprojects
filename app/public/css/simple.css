@@ -958,9 +958,13 @@ div.checkbox_error div.error-div {
 }
 
 .lang_choice li {
-	display: inline;
+	display: inline-block;
 	background: rgba(0,221,178,0.8);
 	padding: 8px;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
 	color: #fff;
 	font-weight: bold;
 	-webkit-border-radius: 5px;

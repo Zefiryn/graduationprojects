@@ -26,7 +26,8 @@ class Application_Form_News_File extends Zefir_Form
 				->setAllowEmpty(TRUE)
 				->addValidators(array(
 					array('Extension', true, array(false, 'jpg,png,jpeg')),
-					array('MimeType', true, array(false, 'image')),
+					//not working on production server
+					//array('MimeType', true, array(false, 'image')),
 					
 				))
 				->setDecorators(array(

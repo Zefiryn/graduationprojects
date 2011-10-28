@@ -24,8 +24,11 @@
 		
 	</ul> 
 	
+	<?php echo $form->news_id ?>
 	
-	<?php echo $form->published ?>
+	<?php echo $form->published; ?>
+	
+	<?php echo $form->link; ?>
 	
 	<?php foreach($form->getLanguages() as $lang):?>
 	<div id="<?php echo $lang->lang_code?>" class="lang_div">

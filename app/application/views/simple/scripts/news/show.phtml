@@ -16,7 +16,12 @@
 	
 	<div class="column-right">
 		<?php foreach($this->news->files as $image):?>
-		<img src="<?php echo $this->baseUrl('assets/images/'.$image->path);?>" alt="zdjecie" width="100%"/>
+		<img src="<?php echo $this->baseUrl('assets/images/'.$image->getImage('small'))?>" alt="zdjecie" width="100%"/>
 		<?php endforeach;?>
 	</div>
 </div>
+
+
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'news', 'delete_confirm' => $this->translate('news_delete_confirm')));
+?>

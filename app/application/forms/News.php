@@ -26,10 +26,7 @@ class Application_Form_News extends Zefir_Form
 		
 		$element = $this->createElement('hidden', 'news_id');	
 		$this->addElement($element);
-		
-		$element = $this->createElement('hidden', 'lang_id');	
-		$this->addElement($element);
-		
+				
 		$element = $this->createElement('hidden', 'files');
 		$element->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
@@ -43,6 +40,15 @@ class Application_Form_News extends Zefir_Form
 						new Zend_Validate_Regex('/^0|1$/')
 					));	
 		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'link');
+        $element->setLabel('link')
+        		->setAttribs(array('class' => 'width1'))
+        		->setDecorators($this->_getZefirDecorators())
+        		->addValidators(array(
+        			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
+        		));
+        $this->addElement($element);
 		
 		foreach($this->_languages as $lang)
 		{

@@ -1,32 +1,46 @@
 <div id="main">
 	<?php foreach($this->news_list as $id => $news):?>
   	<div class="news"> 
+  		
   		<!-- NEWS PHOTO -->
-  		<?php if ($news->hasPhoto()):?>
-	  	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
-	  		<img src="<?php echo $this->baseUrl('assets/images/'.$news->getImage());?>" alt="zdjecie" width="220" />
-	  	</a>
+	  	<?php if ($news->hasPhoto()):?>
+		  	<?php if ($news->link == ''):?>
+	  		<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
+		  		<img src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
+		  	</a>
+		  	<?php else:?>
+		  	<a href="<?php echo $news->link?>">
+		  		<img src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
+		  	</a>
+		    <?php endif;?>
 	    <?php endif;?>
+	    
 	    <h2>
+	    	<?php if ($news->link == ''):?>
 	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"><?php echo $news->getDetail('news_title', $this->lang);?></a>
+	    	<?php else:?>
+	    	<a href="<?php echo $news->link ?>"><?php echo $news->getDetail('news_title', $this->lang);?></a>
+	    	<?php endif;?>
 	    </h2>
 	    
 	    <p class="data"><?php echo date('d.m.Y H:i', $news->added);?></p> 
 	    
 	    <p><?php echo $news->getDetail('news_text', $this->lang);?></p>
 	    
+	    <?php if ($news->link == '' || $this->user->role == 'admin'):?>
 	    <p>
 	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>" class="wiecej">
 	    		<img src="<?php echo $this->baseUrl('img/simple/bullet.png');?>" />
 	    	</a>
 	    </p>
+	    <?php endif;?>
 	</div>
-	 	<?php if ($id % 4 == 0 or ($id+1) == count($this->news_list)): ?>
-	 	<!-- every 4 news -->
-		<p class="clearfix"></p>
-		<?php endif;?>
+ 	<?php if (($id+1) % 4 == 0 or ($id+1) == count($this->news_list)): ?>
+ 	<!-- every 4 news -->
+	<p class="clearfix"></p>
+	<?php endif;?>
   	<?php endforeach;?>
-
+	<p class="clearfix"></p>
 	<!-- PAGINATION -->
 	<div class="paginator">
 		<?php for($i = ($this->start_pagination); $i <= ($this->end_pagination); $i++):?>

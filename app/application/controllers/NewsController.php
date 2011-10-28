@@ -11,7 +11,11 @@ class NewsController extends Zefir_Controller_Action
     public function indexAction()
     {
 		$news = new Application_Model_News();
-		$this->view->news_list = $news->fetchAll(1);
+		if ($this->view->user->role == 'admin')
+			$this->view->news_list = $news->fetchAll(array(1, false));
+		else 
+			$this->view->news_list = $news->fetchAll(array(1, true));
+		
 		$this->view->pages = $news->getPagination();
 		
 		$this->view->current_page = 1;
@@ -28,9 +32,12 @@ class NewsController extends Zefir_Controller_Action
     	$news = new Application_Model_News($id);
 
     	$this->view->news = $news;
+    	
+    	$link = $news->getDetail('news_title', $this->view->lang) ? $news->getDetail('news_title', $this->view->lang) : $news->link;
+    	
     	$this->view->path = array(
     		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
-    		1 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => array($news->getDetail('news_title', $this->view->lang))),
+    		1 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => array($link)),
     	);
     }
     
@@ -45,11 +52,19 @@ class NewsController extends Zefir_Controller_Action
     		if (isset($data['leave']))
     		{
     			$this->flashMe('cancel_edit', 'SUCCESS');
-    			$this->_redirect('/news');
+    			$this->_redirectToRoute(array(), 'news');
     		}
     		else 
     		{
-    			
+    			if ($form->isValid($request->getPost()))
+    			{
+    				$news = new Application_Model_News();
+    				$news->populateFromForm($form->getValues());
+    				$news->added = time();
+    				$news->save();
+					//$this->flashMe('news_saved');
+					//$this->_redirectToRoute(array('id' => $news->news_id), 'show_news');
+    			}	
     		}
     		
     	}
@@ -67,7 +82,8 @@ class NewsController extends Zefir_Controller_Action
     public function editAction()
     {
     	$request = $this->getRequest();
-    
+    	$form = new Application_Form_News();
+    	
     	if ($request->isPost())
     	{
     		$data = $request->getPost();
@@ -78,7 +94,7 @@ class NewsController extends Zefir_Controller_Action
     		}
     		else 
     		{
-    			$form = new Application_Form_News_Detail();
+    			
 				if ($form->isValid($request->getPost()))
     			{
     				$news = new Application_Model_News($form->getElement('news_id')->getValue());
@@ -91,9 +107,8 @@ class NewsController extends Zefir_Controller_Action
     	}
     	else 
     	{
-    		$form = new Application_Form_News_Detail();
     		$news = new Application_Model_News($request->getParam('id', null));
-    		$form->populate($news->prepareFormArray($this->view->lang));
+    		$form->populate($news->prepareFormArray());
     	}
     	
     	$this->view->form = $form;
@@ -102,6 +117,11 @@ class NewsController extends Zefir_Controller_Action
     
 	public function deleteAction()
     {
+    	$request = $this->getRequest();
+		$news = new Application_Model_News($request->getParam('id'));
+		$news->delete();
+		$this->flashMe('news_deleted');
+		$this->_redirectToRoute(array(), 'news');
     	
     }
     
@@ -123,7 +143,10 @@ class NewsController extends Zefir_Controller_Action
 	    		$files .= $uploadedFile.', ';
 				$file->getElement('news_files')->setValue($files);
 	    	}
-	    	
+	    	else
+	    	{
+	    		$file->getElement('news_files')->setValue($request->getParam('news_files'));
+	    	}
     	}
     	else 
     	{
