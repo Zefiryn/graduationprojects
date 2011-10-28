@@ -62,8 +62,8 @@ class NewsController extends Zefir_Controller_Action
     				$news->populateFromForm($form->getValues());
     				$news->added = time();
     				$news->save();
-					//$this->flashMe('news_saved');
-					//$this->_redirectToRoute(array('id' => $news->news_id), 'show_news');
+					$this->flashMe('news_saved');
+					$this->_redirectToRoute(array('id' => $news->news_id), 'show_news');
     			}	
     		}
     		
