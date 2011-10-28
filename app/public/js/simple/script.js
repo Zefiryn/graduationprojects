@@ -99,6 +99,17 @@ function prepareNewsForm()
 		var files = $('#newsfiles').contents().find('#news_files').val();
 		$('#files').val(files);
 	});
+	
+	$('#newsfiles').load(function(){
+		if ($('#files').val() != '')
+		{
+			var files = $('#files').val();
+			var frame = $('#newsfiles').contents().find('#news_files');
+			frame.val(files);
+			$('#files').val('');		//reset to not overwrite
+		}
+	});
+	
 }
 
 function deleteAppImage()

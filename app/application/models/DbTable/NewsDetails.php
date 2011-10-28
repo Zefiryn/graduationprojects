@@ -27,7 +27,7 @@ class Application_Model_DbTable_NewsDetails extends Zefir_Application_Model_DbTa
 		
 		if (!$row)
 		{
-			$this->createRow();
+			$row = $this->createRow();
 		}
 		
 		$row->news_id = $detail->news_id;

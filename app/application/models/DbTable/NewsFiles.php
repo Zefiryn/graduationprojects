@@ -15,31 +15,47 @@ class Application_Model_DbTable_NewsFiles extends Zefir_Application_Model_DbTabl
        	)
 	);
 
-	public function save(Zefir_Application_Model $file)
+	public function save(Application_Model_NewsFiles $file)
 	{
-		$find = $this->select()->where('news_id = ?', $file->news_id);
-		$row = $this->fetchRow($find);
+		if ($file->news_file_id != null)
+    		$oldData = new Application_Model_DiplomaFiles($file->news_file_id);
+    	else 
+    		$oldData = null;
+		
+		$row = $this->find($file->news_file_id)->current();
 		
 		if (!$row)
 		{
-			$this->createRow();
+			$row = $this->createRow();
 		}
 		
+		//trim /assets/cache or assets/images
+		if (strstr($file->path, 'assets'))
+		{
+			if (strstr($file->path, 'cache'))
+				$file->path = substr($file->path, strpos($file->path, '/cache') + strlen('/cache/'));
+		}
+		$options = Zend_Registry::get('options');
+		$file = $this->_copyFile($file, 'path', $options['upload']['images'], 'news_image', $oldData);
+
+			
 		$row->news_id = $file->news_id;
 		$row->path = $file->path;
-		$row->main_image = $detail->main_image;
+		$row->main_image = $file->main_image;
 		
 		if ($row->save())
     	{
-    		if ($id == null)
-    			$detail->$primary = $id = $this->getAdapter()->lastInsertId();
+    		if ($file->news_file_id == null)
+    			$file->news_file_id = $this->getAdapter()->lastInsertId();
     	}
     	else 
     	{
     		throw new Zend_Exception('Couldn\'t save data');
     	}
     	
-    	return $detail;
+    	
+    	return $file;
 	}
+	
 
 }

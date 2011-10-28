@@ -4,6 +4,8 @@ class Application_Model_News extends GP_Application_Model
 {
 	public $news_id;
 	public $added;
+	public $published;
+	public $link;
 	protected $details;
 	protected $files;
 	
@@ -36,21 +38,21 @@ class Application_Model_News extends GP_Application_Model
 		}
 		
 		//in case there is no text in given language
-		if (is_array($this->details))
+		if (isset($this->details[0]))
 			return  $this->details[0]->$property;
 		else
 			return NULL;
 
 	}
 	
-	public function getImage()
+	public function getImage($key)
 	{
 		if ($this->files == null)
 			$this->__get('files');
 			
 		if (count($this->files) > 0)
 		{
-			return $this->files[0]->path;
+			return $this->files[0]->getImage($key);
 		}
 		
 		else
@@ -74,37 +76,70 @@ class Application_Model_News extends GP_Application_Model
 			return FALSE;
 	}
 	
-	public function prepareFormarray($lang)
+	public function prepareFormarray()
 	{
-		return array(
+		$data = array(
 			'news_id' => $this->news_id,
-			'news_title' => $this->getDetail('news_title', $lang),
-			'news_lead' => $this->getDetail('news_lead', $lang),
-			'news_text' => $this->getDetail('news_text', $lang),
-			'lang_id' => $this->getDetail('lang_id', $lang)
+			'link' => $this->link
 		);
+		$languages = new Application_Model_Languages();
+		foreach($languages->fetchAll() as $lang)
+		{
+			$data[$lang->lang_code] = array(
+				'news_title' => $this->getDetail('news_title', $lang->lang_code),
+				'news_lead' => $this->getDetail('news_lead', $lang->lang_code),
+				'news_text' => $this->getDetail('news_text', $lang->lang_code),
+			);
+		}
+		return $data;
 	}
 	
 	public function populateFromForm($values)
 	{
-		$newsDetail = new Application_Model_NewsDetails();
-		$newsDetail->populateFromForm($values);
-		if (!is_array($this->details))
-			$this->details = array();
+		parent::populateFromForm($values);
 		
-		$this->details[] = $newsDetail;
+		$languages = new Application_Model_Languages();
+		
+		$this->details = array();
+		foreach($languages->fetchAll() as $lang)
+		{
+			$detail = new Application_Model_NewsDetails();
+			$detail->populateFromForm($values[$lang->lang_code]);
+			if (!$detail->isEmpty())
+				$this->details[] = $detail;
+		}
+		
+		$this->files = array();
+		foreach(explode(',', $values['files']) as $i => $file)
+		{
+			if (trim($file))
+			{
+				$newsFile = new Application_Model_NewsFiles();
+				$newsFile->news_id = $this->news_id;
+				$newsFile->path = trim($file);
+				if ($i == 0) $newsFile->main_image = 1;
+				$this->files[] = $newsFile;
+			}
+		}
 		
 		return $this;
 	}
 	
 	public function save()
 	{
-		foreach ($this->details as $detail)
-			$detail->save();
+		parent::save();
 		
+		foreach ($this->details as $detail)
+		{
+			$detail->news_id = $this->news_id;
+			$detail->save();
+		}
 		foreach ($this->files as $file)
+		{
+			$file->news_id = $this->news_id;
 			$file->save();
-			
+		}
+	
 		return $this;
 	}
 }
