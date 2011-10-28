@@ -44,9 +44,62 @@ $(document).ready(function(){
 	menuSlide();
 	
 	//dragAppFiles();
-	deleteAppImage();
+	//deleteAppImage();
+
+	if ($('#news_files').length)
+	{
+		deleteNewsFiles();
+	}
+	if ($('iframe').length)
+	{
+		prepareNewsForm();
+	}
+	
+	if ($('.lang_choice').length)
+	{
+		newsLangChoice();
+	}
 	
 });
+
+function deleteNewsFiles()
+{
+	$('.remove-image').click(function(e){
+		e.preventDefault();
+		var file = $(this).attr('href') + ', ';
+		var files = $('#news_files').val();
+		files = files.replace(file, '');
+		$('#news_files').val(files);
+		
+		$(this).parent().parent().remove();
+		
+		rearangeRows('app_images');
+	});
+}
+
+function rearangeRows(id)
+{
+	var clear = $('.clearfix:first').clone();
+	$('.clearfix').remove();
+	
+	var images = $('#'+id).clone().html();
+	
+	$('#'+id).children().each(function(index, element){
+		var i = index + 1;
+		images.append(element)
+		if (i % 4 == 0)
+			images.append(clear);
+	});
+	$('#'+id).html(images);
+}
+
+function prepareNewsForm()
+{
+	$('form').submit(function(e){
+		var files = $('#newsfiles').contents().find('#news_files').val();
+		$('#files').val(files);
+	});
+}
 
 function deleteAppImage()
 {
@@ -73,6 +126,31 @@ function deleteAppImage()
 		});
 	}
 	);
+}
+
+function newsLangChoice() 
+{
+	//show first div according to lang settings
+	if ($('.current').length == 0)
+	{
+		var lang = $('.lang-selected').text().toLowerCase(); 
+	}
+	else
+	{
+		var lang = $('.current').text();
+		$('.current').removeClass('current');
+	}
+	$('form div').hide();
+	$('#' + lang).show();
+	$('.choice_' + lang).addClass('current');
+	
+	$('.lang_choice li').click(function(){
+		var lang = $(this).text();
+		$('form div').hide();
+		$('#' + lang).show();
+		$('.current').removeClass('current');
+		$('.choice_' + lang).addClass('current');
+	});
 }
 
 function dragAppFiles()

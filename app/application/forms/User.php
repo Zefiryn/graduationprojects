@@ -81,6 +81,8 @@ class Application_Form_User extends Zefir_Form
 						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
 						new Zend_Validate_StringLength(array('min' => 3, 'max' => 150))
 					));	
+		if ($this->_type == 'subform')
+			$element->setRequired(TRUE);
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'surname');
@@ -91,6 +93,8 @@ class Application_Form_User extends Zefir_Form
 						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
 						new Zend_Validate_StringLength(array('min' => 3, 'max' => 200))
 					));	
+		if ($this->_type == 'subform')
+			$element->setRequired(TRUE);
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'address');
@@ -127,6 +131,17 @@ class Application_Form_User extends Zefir_Form
         							'field' => 'email',
 									'id' => 'user_id'))
 					));	
+		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'email_check');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('email_repeat')
+				->setDecorators($this->_getStandardDecorators())
+				->addValidators(array(
+						new Zefir_Validate_IdenticalField('email')
+					));	
+		if ($this->_type == 'new' || $this->_type == 'subform')
+			$element->setRequired(TRUE);
 		$this->addElement($element);
 		
 		$element = $this->createElement('checkbox', 'show_email');

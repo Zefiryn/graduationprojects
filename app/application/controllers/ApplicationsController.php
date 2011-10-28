@@ -263,7 +263,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	for($i = 1; $i <= $appSettings->max_files; $i++)
 		{
 			$sf = $form->getSubForm('file_'.$i);
-			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i, 'edit');
+			$sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i);
 			if ($sf->getElement('file_'.$i.'Cache')->getValue() != null)
 			{
 				$newFile = TRUE;

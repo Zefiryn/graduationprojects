@@ -29,13 +29,13 @@
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
-			    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="128" height="128" id="G logo">
-						<param name="movie" value="<?php echo $this->baseUrl;?>img/simple/logo.swf" />
+			    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="128" height="128" id="G_logo">
+						<param name="movie" value="<?php echo $this->baseUrl('img/simple/logo.swf');?>" />
 						<!--[if !IE]>-->
-						<object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl;?>img/simple/logo.swf" width="128" height="128">
+						<object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl('img/simple/logo.swf');?>" width="128" height="128">
 						<!--<![endif]-->
 							<a href="http://graduationprojects.eu">
-								<img src="G-alt.png" alt="G logo" />
+								<img src="<?php echo $this->baseUrl('img/simple/logo-alt.png');?>" alt="Graduation Projects logo" />
 							</a>
 						<!--[if !IE]>-->
 						</object>
@@ -94,9 +94,9 @@
 		
 		<a href="http://visegradfund.org" id="fund"><img src="<?php echo $this->baseUrl('img/simple/visegrad-fund_logo.png');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>
 		
-		<p class="organizers_info"><?php echo $this->translate('project_organized_by');?></p>
+		<div class="organizers_info"><?php echo $this->translate('project_organized_by');?></div>
 		
-		<p class="creator"><a href="http://zefiryn.jewula.net" alt="Web page development" title="Web page development">created by: Zefiryn</a></p>
+		<p class="creator"><a href="http://zefiryn.jewula.net" title="Web page development">created by: Zefiryn</a></p>
 	</footer>
 
 

@@ -21,7 +21,7 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 	
 	public function getAll($page)
 	{
-		$select = $this->select()->order('added DESC');
+		$select = $this->select()->where('published = 1')->order('added DESC');
 
 		if ($page)
 		{
