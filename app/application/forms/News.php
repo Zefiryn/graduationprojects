@@ -2,9 +2,12 @@
 
 class Application_Form_News extends Zefir_Form
 {
-
+	protected $_languages;
+	
     public function init()
     {
+    	$lang = new Application_Model_Languages();
+    	$this->_languages = $lang->fetchAll(); 
         $L = $this->_regex['L'];
     	$N = $this->_regex['N'];
     	$S = $this->_regex['S'];
@@ -17,6 +20,9 @@ class Application_Form_News extends Zefir_Form
         $this->setMethod('post');
 		$this->setName('NewsForm');
 		$this->setTranslator(Zend_Registry::get('Zend_Translate'));
+		$this->setDecorators(array(
+			array('ViewScript', array('viewScript' => 'forms/_newsForm.phtml'))
+		));
 		
 		$element = $this->createElement('hidden', 'news_id');	
 		$this->addElement($element);
@@ -24,34 +30,33 @@ class Application_Form_News extends Zefir_Form
 		$element = $this->createElement('hidden', 'lang_id');	
 		$this->addElement($element);
 		
-		$element = $this->createElement('text', 'news_title');
-        $element->setLabel('news_title')
-        		->setAttribs(array('class' => 'width1'))
-        		->setDecorators($this->_getZefirDecorators(TRUE))
-        		->addValidators(array(
-        			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/'),
-        			new Zend_Validate_StringLength(array('min' => 0,'max' => 300))
-        		));
-        $this->addElement($element);
-        
-        $element = $this->createElement('textarea', 'news_lead');
-        $element->setLabel('news_lead')
-        		->setAttribs(array('class' => 'width1'))
-        		->setDecorators($this->_getZefirDecorators())
-        		->addValidators(array(
-        			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
-        		));
-        $this->addElement($element);
-        
-        $element = $this->createElement('textarea', 'news_text');
-        $element->setLabel('news_text')
-        		->setAttribs(array('class' => 'width1'))
-        		->setDecorators($this->_getZefirDecorators())
-        		->addValidators(array(
-        			new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
-        		));
-        $this->addElement($element);
+		$element = $this->createElement('hidden', 'files');
+		$element->setDecorators(array('ViewHelper'));	
+		$this->addElement($element);
 		
+		$element = $this->createElement('checkbox', 'published');
+		$element->setAttribs(array('class' => 'checkbox'))
+				->setLabel('publish', array('tag' => 'label'))
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(FALSE)
+				->addValidators(array(
+						new Zend_Validate_Regex('/^0|1$/')
+					));	
+		$this->addElement($element);
+		
+		foreach($this->_languages as $lang)
+		{
+			$subform = new Application_Form_News_Detail();
+			$subform->getElement('lang_id')->setValue($lang->lang_id);
+			$subform->removeDecorator('form');
+			$subform->removeElement('csrf');
+			$subform->removeElement('leave');
+			$subform->removeElement('submit');
+			$subform->removeDisplayGroup('submitFields');
+			$subform->setIsArray(true);
+			$this->addSubForm($subform, $lang->lang_code);
+		}
+        $this->_createCsrfElement();	 
 		$this->_createStandardSubmit('news_submit');
         $this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
         ->setDisplayGroupDecorators(array(
@@ -60,6 +65,10 @@ class Application_Form_News extends Zefir_Form
 			));
     }
 
+    public function getLanguages()
+    {
+    	return $this->_languages;
+    }
 
 }
 

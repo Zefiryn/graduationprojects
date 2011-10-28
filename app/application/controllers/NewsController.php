@@ -55,6 +55,12 @@ class NewsController extends Zefir_Controller_Action
     	}
     	
     	$this->view->form = $form;
+    	$this->view->fileForm = new Application_Form_News_File();
+    	    	
+    	$this->view->path = array(
+    		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+    		1 => array('route' => 'new_news', 'data' => array(), 'name' => array('new_news')),
+    	);
     	
     }
     
@@ -68,11 +74,11 @@ class NewsController extends Zefir_Controller_Action
     		if (isset($data['leave']))
     		{
     			$this->flashMe('cancel_edit', 'SUCCESS');
-    			$this->_redirect('/news');
+    			$this->_redirectToRoute(array('id' => $request->getParam('id', null)), 'show_news');
     		}
     		else 
     		{
-    			$form = new Application_Form_News();
+    			$form = new Application_Form_News_Detail();
 				if ($form->isValid($request->getPost()))
     			{
     				$news = new Application_Model_News($form->getElement('news_id')->getValue());
@@ -85,18 +91,46 @@ class NewsController extends Zefir_Controller_Action
     	}
     	else 
     	{
-    		$form = new Application_Form_News();
+    		$form = new Application_Form_News_Detail();
     		$news = new Application_Model_News($request->getParam('id', null));
     		$form->populate($news->prepareFormArray($this->view->lang));
     	}
     	
     	$this->view->form = $form;
-    
     }
     
     
 	public function deleteAction()
     {
+    	
+    }
+    
+    public function uploadAction()
+    {
+    	$request = $this->getRequest();
+    	
+    	if ($request->isPost())
+    	{
+	    	$file = new Application_Form_News_File();
+	    	$options  = Zend_Registry::get('options');
+	    	$file = $this->_cacheFile($options['upload']['cache'], $file, 'file');
+	    	
+	    	$uploadedFile = $file->file->getFileName();
+	    	if (!is_array($uploadedFile))
+	    	{
+	    		$uploadedFile = substr($uploadedFile, strpos($uploadedFile, '../')+10);
+	    		$files = $request->getParam('news_files');
+	    		$files .= $uploadedFile.', ';
+				$file->getElement('news_files')->setValue($files);
+	    	}
+	    	
+    	}
+    	else 
+    	{
+    		$file = new Application_Form_News_File();
+    	}
+    	$this->view->fileForm = $file;
+    	$this->_helper->layout->disableLayout();
     	
     }
     

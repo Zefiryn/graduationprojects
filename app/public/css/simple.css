@@ -20,6 +20,13 @@ body {
 	margin: 0 auto;
 	text-align: center;
 }
+body.iframe {
+	min-width: 460px !important;
+}
+
+.iframe form {
+	width: 460px; 
+}
 
 header, menu, nav { display: block; }
 
@@ -630,13 +637,18 @@ footer p a:first-child {
 	margin-right: 0px;
 }
 
-p.organizers_info {
+div.organizers_info {
 	width: 200px;
 	border: 0px solid;
 	position: absolute;
 	margin-left: 575px;
 	margin-top: -91px;
 	height: 85px;
+	text-align: left;
+	font-size: 11px;
+	line-height: 14px;
+	color: #666666;
+	padding-top: 20px;
 }
 
 .creator {
@@ -863,6 +875,12 @@ fieldset.submit {
 	text-align: left;
 }
 
+fieldset.upload {
+	border: 0px;
+	margin: 20px 28px 0px 0px;
+	text-align: left;
+}
+
 .width1 {
 	width: 450px;
 }
@@ -916,6 +934,7 @@ div.checkbox_error div.error-div {
 	display: block;
 	float: left;
 	margin: 2px;
+	text-align: left;
 }
 #app_images a.form_file img {
 	width: 100%;
@@ -926,6 +945,44 @@ div.checkbox_error div.error-div {
 	border: 1px solid rgba(0,221,179,0.8);
 	background: rgba(50,50,50,0.1);
 	overflow: hidden;
+}
+
+.lang_choice {
+	list-style-type: none;
+	text-align: right;
+}
+
+.lang_choice span {
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.lang_choice li {
+	display: inline;
+	background: rgba(0,221,178,0.8);
+	padding: 8px;
+	color: #fff;
+	font-weight: bold;
+	-webkit-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border-radius: 5px;
+}
+
+.lang_choice li:hover {
+	background: #000;
+	cursor: pointer; 
+}
+
+.lang_choice li.current {
+	background: #000;
+	cursor: default;
+}
+
+.lang_div {
+	margin: 0px;
 }
 
 #flash {

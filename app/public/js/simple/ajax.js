@@ -143,3 +143,25 @@ function schoolAutocomplete(){
 			});
 	});
 }
+
+function uploadFile()
+{
+	$('#file').change(function(){
+		
+		var url = $('#FileForm').attr('action');
+		
+		$.ajax({
+			type: "POST",
+			url: url,
+			//data: 'file$=' + ('#FileForm'),
+			global: false,
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(errorThrown);
+			},
+			success: function(data, msg, jqXHR){
+				console.log(data);
+			},
+			dataType: '	json'
+		});
+	});
+}

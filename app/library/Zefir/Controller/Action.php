@@ -133,12 +133,17 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 			$name = $this->_getNewName($dir, $file);
 			$upload->addFilter('Rename', $dir.$name);
 			$upload->receive();
-			$oldCache = $form->getElement($element.'Cache')->getValue();
-			$form->getElement($element.'Cache')->setValue('cache/'.$name);
 			
-			//remove old cached file
-			if (strstr($oldCache, 'cache/'))
-				$this->_removeOldCache(APPLICATION_PATH.'/../public/assets/', $oldCache);
+			if ($form->getElement($element.'Cache'))
+			{
+				$oldCache = $form->getElement($element.'Cache')->getValue();
+				$form->getElement($element.'Cache')->setValue('cache/'.$name);
+				
+				//remove old cached file
+				if (strstr($oldCache, 'cache/'))
+					$this->_removeOldCache(APPLICATION_PATH.'/../public/assets/', $oldCache);
+			}
+			$form->$element = $upload;
 		}
 
 		return $form;
