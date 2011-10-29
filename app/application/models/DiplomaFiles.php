@@ -6,6 +6,7 @@ class Application_Model_DiplomaFiles extends GP_Application_Model
 	public $path;
 	public $file_desc;
 	public $diploma_id;
+	public $position;
 	protected $diploma;
 	protected $_image = array(
 		'property' => 'path',

@@ -61,8 +61,11 @@ class Application_Model_DbTable_DiplomaFiles extends Zefir_Application_Model_DbT
 
     	parent::save($file);
     	
-    	$options = Zend_Registry::get('options');
-    	$this->_copyFile($file, 'path', $options['upload']['diplomas'].$file->getFileFolder(), $file->getFileName(), $oldData);
+    	if (strstr($file->path, 'cache'))
+    	{//save file, otherwise save data only
+    		$options = Zend_Registry::get('options');
+    		$this->_copyFile($file, 'path', $options['upload']['diplomas'].$file->getFileFolder(), $file->getFileName(), $oldData);
+    	}
 	}
 }
 

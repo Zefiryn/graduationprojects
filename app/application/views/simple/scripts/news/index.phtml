@@ -1,7 +1,15 @@
 <div id="main">
+	<?php if ($this->user->role == 'admin'):?>
+	<div class="news">
+		<a href="<?php echo $this->url(array(),'new_news')?>">
+			<img src="<?php echo $this->baseUrl('img/simple/new_news.png');?>" alt="zdjecie" width="220" />
+		</a>
+	</div>
+	<?php endif;?>
+
 	<?php foreach($this->news_list as $id => $news):?>
   	<div class="news"> 
-  		
+  		<?php if ($this->user->role == 'admin') {$id = $id + 2;} else {$id = $id + 1;}?>
   		<!-- NEWS PHOTO -->
 	  	<?php if ($news->hasPhoto()):?>
 		  	<?php if ($news->link == ''):?>
@@ -23,9 +31,11 @@
 	    	<?php endif;?>
 	    </h2>
 	    
+	    <?php if ($news->link == ''):?>
 	    <p class="data"><?php echo date('d.m.Y H:i', $news->added);?></p> 
+	    <?php endif; ?>
 	    
-	    <p><?php echo $news->getDetail('news_text', $this->lang);?></p>
+	    <p><?php echo $news->getDetail('news_lead', $this->lang);?></p>
 	    
 	    <?php if ($news->link == '' || $this->user->role == 'admin'):?>
 	    <p>
@@ -35,7 +45,7 @@
 	    </p>
 	    <?php endif;?>
 	</div>
- 	<?php if (($id+1) % 4 == 0 or ($id+1) == count($this->news_list)): ?>
+ 	<?php if (($id) % 4 == 0): ?>
  	<!-- every 4 news -->
 	<p class="clearfix"></p>
 	<?php endif;?>

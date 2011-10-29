@@ -614,10 +614,11 @@ footer {
 
 footer p {
 	width: 970px;
-	text-align: center;
+	text-align: left;
 	line-height: 20px;
 	font-size: 12px;
 	min-height: 20px;
+	padding: 0px;
 	border: 0px solid;
 }
 footer p:first-child {
@@ -626,29 +627,30 @@ footer p:first-child {
 	margin-bottom: 0px;
 }
 footer p a {
-	margin: 0px 20px 0px 20px;
+	margin: 0px 5px 0px 0px;
 	border: 0px solid #000;
+	
 }
 footer p a:first-child {
 	margin-left: 0px;
 }
 #fund {
-	margin-left: 178px;
+	margin-left: 167px;
 	margin-right: 0px;
 }
 
 div.organizers_info {
-	width: 200px;
+	width: 120px;
 	border: 0px solid;
 	position: absolute;
-	margin-left: 575px;
-	margin-top: -91px;
+	margin-left: 670px;
+	margin-top: -85px;
 	height: 85px;
 	text-align: left;
 	font-size: 11px;
 	line-height: 14px;
 	color: #666666;
-	padding-top: 20px;
+	padding-top: 10px;
 }
 
 .creator {

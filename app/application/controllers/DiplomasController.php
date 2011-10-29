@@ -76,6 +76,44 @@ class DiplomasController extends Zefir_Controller_Action
     	
     }
 
-
+    public function sortAction()
+    {
+    	$request = $this->getRequest();
+    	$id = $request->getParam('id', null);
+    	$file_id = $request->getParam('file_id', null);
+    	$new_position = $request->getParam('position', 1);
+		$diploma = new Application_Model_Diplomas($id);
+    	
+    	$position = 1;
+    	foreach ($diploma->files as $file)
+    	{ 
+    		if ($file->file_id != $file_id && $position < $new_position)
+    		{ 
+    			$file->position = $position ;
+    			$file->save();
+    		}
+    		elseif ($file->file_id != $file_id && $position  > $new_position)
+    		{
+    				$file->position = $position + 1;
+    				$file->save();
+    		}
+    		elseif ($file->file_id != $file_id && $position  == $new_position)
+    		{
+    				$file->position = $position + 1;
+    				$file->save();
+    		}
+    		elseif ($file->file_id == $file_id)
+    		{
+    			$file->position = $new_position;
+    			$file->save();
+    			$position--;	//reduce position so next paragraphs would fill the place
+    		} 
+    		$position++;
+    	}
+    	
+    	//$this->_helper->viewRenderer->setNoRender(true);
+    }
+	
+    
 }
 
