@@ -10,6 +10,11 @@ $(document).ready(function(){
 	if ($("#faq").length)
 		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");});
 	
+	if ($("#diploma_gallery").length)
+	{
+		var id = $('.dyplom').attr('id');
+		sortColumnElements('#diploma_gallery', "/diploma/" + id + "/sort/");
+	}
 });
 
 
@@ -30,6 +35,42 @@ function sortElements(id, link, sortCallback)
 	$( id ).disableSelection();
 }
 
+function sortColumnElements(id, link)
+{	
+	$( id ).sortable({
+		placeholder: "ui-state-highlight",
+		start: function(event, ui) {
+			 $('.ui-state-highlight').height(ui.helper.height());
+		 },
+		update: function(event, ui) {
+			sortDiplomaImages(event, ui, link);
+			//sortColumnElements(id, link);
+		}
+	});
+	
+	$( id ).disableSelection();
+}
+
+function sortDiplomaImages(event, ui, link)
+{
+	var id = ui.item.attr('id');
+	console.log(id);
+	var position = $('.sort_item').index($('#'+id)) + 1;
+	console.log(position);
+	var  url = link + id + "/" + position;
+	console.log(url);
+	
+	jQuery.ajax({
+        type: "GET",
+        url: url,
+        global: false,
+        success: function(){}, 
+        error: function(){
+        	alert('An error occurred');
+        }
+	});
+}
+
 function sort(event, ui, link, sortCallback)
 {
 	sortCallback();
@@ -42,6 +83,7 @@ function sort(event, ui, link, sortCallback)
 	
 	var url = link+elemId+"/"+newPos;
 	
+	console.log(url);
 	jQuery.ajax({
         type: "GET",
         url: url,

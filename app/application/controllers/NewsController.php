@@ -121,8 +121,8 @@ class NewsController extends Zefir_Controller_Action
 		$news = new Application_Model_News($request->getParam('id'));
 		$news->delete();
 		$this->flashMe('news_deleted');
-		$this->_redirectToRoute(array(), 'news');
-    	
+		$data = array(0 => $this->view->url(array(), 'news'));		
+    	$this->_helper->json($data);
     }
     
     public function uploadAction()

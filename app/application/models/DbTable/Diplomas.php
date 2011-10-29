@@ -55,6 +55,7 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
 		'files' => array(
 			'model' => 'Application_Model_DiplomaFiles',
 			'refColumn' => 'diploma_id',
+			'order' => 'position ASC'
 		),
 		
 		'fields' => array(

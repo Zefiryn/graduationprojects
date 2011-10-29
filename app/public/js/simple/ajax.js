@@ -14,9 +14,13 @@ function _ajax_request(url, data, callback, type, method) {
         url: url,
         global: false,
         data: data,
-        success: callback,
+        success: function(data) {
+        	console.log(data);
+        	callback(data);
+        },
         dataType: type
         });
+     
 }
 
 jQuery.extend({
@@ -33,52 +37,52 @@ jQuery.fn.deleteWithAjax = function() {
 	this.preventDefault;
 	this.removeAttr('onclick');
 	this.unbind('click', false);
-	this.click(function() {
-
-	var link = ($(this).attr("href"));
-
-	if ($(this).hasClass('no-confirm'))
-	{
-		$.delete_(link, {}, function(){}, "script");
-		return true;
-	}
-	else
-	{
-		var confirmText = '<span class="ui-icon ui-icon-alert" style="float:left; margin:20px 7px 20px 0px;"></span>' + $('#dialog-confirm p').text();
-		$('#dialog-confirm p').html(confirmText);
-		
-		var titleText = $('#ui-dialog-title-dialog-confirm').text();
-		var deleteButton = $('#button_conf').text();
-		var cancelButton = $('#button_close').text();
-
-		$( "#dialog-confirm" ).dialog({
-				draggable: true,
-				resizable: false,
-				title: titleText,
-				modal: true,
-				buttons:
-				[{
-					text: deleteButton, 
-	                click: function() {
-	                    $( this ).dialog( "close" );
-	                    $.delete_(link, $(this).serialize(), refreshPage(), "script");
-	                    return true;
-	                }
-				 },
-				 {
-					 text: cancelButton,
-					 click: function() {
-	                    $( this ).dialog( "close" );
-	                    return false;
-	                }
-	            }]
-		});
-		
-	    $( "#dialog-confirm" ).dialog("open");
-	    return false;
-	}
-  })
-  return this;
+	this.click(function(e) {
+		e.preventDefault();
+		var link = ($(this).attr("href"));
+	
+		if ($(this).hasClass('no-confirm'))
+		{
+			$.delete_(link, {}, function(){}, "script");
+			return true;
+		}
+		else
+		{
+			var confirmText = '<span class="ui-icon ui-icon-alert" style="float:left; margin:20px 7px 20px 0px;"></span>' + $('#dialog-confirm p').text();
+			$('#dialog-confirm p').html(confirmText);
+			
+			var titleText = $('#ui-dialog-title-dialog-confirm').text();
+			var deleteButton = $('#button_conf').text();
+			var cancelButton = $('#button_close').text();
+	
+			$( "#dialog-confirm" ).dialog({
+					draggable: true,
+					resizable: false,
+					title: titleText,
+					modal: true,
+					buttons:
+					[{
+						text: deleteButton, 
+		                click: function() {
+		                    $( this ).dialog( "close" );
+		                    $.delete_(link, $(this).serialize(), redirect, "script");
+		                    return true;
+		                }
+					 },
+					 {
+						 text: cancelButton,
+						 click: function() {
+		                    $( this ).dialog( "close" );
+		                    return false;
+		                }
+		            }]
+			});
+			
+		    $( "#dialog-confirm" ).dialog("open");
+		    return false;
+		}
+	});
+	return this;
 };
 
 //This will "ajaxify" the links
@@ -88,10 +92,12 @@ function ajaxLinks(){
     schoolAutocomplete();
 }
 
-function refreshPage()
+function redirect(link)
 {
-	link = window.location.href;
-	window.location.href =  link;
+	var url = link.substring(3, link.lastIndexOf('"'))
+	url = url.replace('\\/', '/');
+	window.location.href =  url;
+	
 }
 
 function getHost()

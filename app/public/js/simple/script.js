@@ -64,6 +64,10 @@ $(document).ready(function(){
 
 function deleteNewsFiles()
 {
+	$('input[type=file]').change(function(){
+		$('#submit').click();
+	});
+	
 	$('.remove-image').click(function(e){
 		e.preventDefault();
 		var file = $(this).attr('href') + ', ';
@@ -72,7 +76,7 @@ function deleteNewsFiles()
 		$('#news_files').val(files);
 		
 		$(this).parent().parent().remove();
-		
+		$('.img_hint').remove();
 		rearangeRows('app_images');
 	});
 }
@@ -82,15 +86,14 @@ function rearangeRows(id)
 	var clear = $('.clearfix:first').clone();
 	$('.clearfix').remove();
 	
-	var images = $('#'+id).clone().html();
-	
+	$('#'+id).html();
 	$('#'+id).children().each(function(index, element){
 		var i = index + 1;
-		images.append(element)
+		
+		$('#'+id).append(element);
 		if (i % 4 == 0)
-			images.append(clear);
+			$('#'+id).append(clear);
 	});
-	$('#'+id).html(images);
 }
 
 function prepareNewsForm()

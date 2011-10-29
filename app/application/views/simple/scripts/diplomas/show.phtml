@@ -1,12 +1,12 @@
 <div id="main">
 
-	<div class="diploma_gallery">
+	<div class="diploma_gallery" id="diploma_gallery">
 		<?php foreach($this->diploma->files as $file):?> 
-			<img src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
+			<img id="<?php echo $file->file_id?>" class="sort_item" src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
 		<?php endforeach;?>
 	</div>
 
-	<div class="dyplom">
+	<div class="dyplom" id="<?php echo $this->diploma->diploma_id?>">
 		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
 		<p class="admin">
 			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
