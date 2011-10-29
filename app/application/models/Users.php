@@ -128,6 +128,13 @@ class Application_Model_Users extends GP_Application_Model
 		
 		return $data;
 	}	
+	
+	public function setUserRole($role)
+	{
+		$this->_role = $role;
+		
+		return $this;
+	}
 }
 
 

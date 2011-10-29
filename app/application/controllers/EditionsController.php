@@ -16,7 +16,9 @@ class EditionsController extends Zefir_Controller_Action
     
 	public function showAction()
     {
-    	
+    	$edition = new Application_Model_Editions();
+		$this->view->editions = $edition->getEditions();
+		$this->render('index');
     }
     
     

@@ -16,7 +16,13 @@ class Application_Form_Localization extends Zefir_Form
 								'maxlength' => 16,
 								'class' => 'width1'))
 				->setLabel('translation')
-				->setDecorators($this->_getZefirDecorators())
+				->setDecorators(
+					array(
+						array('TextField'),
+						array('ErrorMsg', array('image' => FALSE)),
+						array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
+						array('MyLabel', array('placement' => 'prepend'))
+					))
 				->addValidators(array(
 						//new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
 					));	
