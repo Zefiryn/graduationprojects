@@ -32,13 +32,17 @@ class LocalizationsController extends Zefir_Controller_Action
 			$form = new Application_Form_Localization();
 			$caption = new Application_Model_Captions($id);
 			$localization = $caption->getTranslationObject($lang);
+			$form->getElement('text')->setDescription($caption->name);
+			$form->setDecorators(array(
+				array('ViewScript', array('viewScript' => 'forms/_translationForm.phtml'))
+			));
 			
 			if ($request->isPost())
 			{
 				if ($request->getPost('leave', null))
 				{
 					$this->flashMe('cancel_edit');
-					$this->_redirectToRoute(array('loc_lang' => $lang), 'translation');
+					$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
 				}
 				if ($form->isValid($request->getPost()))
 				{
@@ -59,6 +63,7 @@ class LocalizationsController extends Zefir_Controller_Action
 			}
 			
 			$this->view->caption_lang = $lang;
+			$this->view->caption = $caption;
 			$this->view->localization = $localization;
 			$this->view->form = $form;
 		}

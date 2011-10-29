@@ -181,32 +181,5 @@ class RegulationsController extends Zefir_Controller_Action
     	
     	
     }
-    
-    protected function _countNewParagraphs()
-    {
-    	$data = $this->getRequest()->getPost();
-    	for($i = 1; isset($data['new_paragraph_'.$i]); $i++);
-    	
-    	return --$i; 
-    }
-    
-    protected function _addNewValidators($form, $count)
-    {
-    	$data = $this->getRequest()->getPost();
-    	
-    	for($i = 1; $i <= $count; $i++)
-    	{
-    		$par_no = $data['new_paragraph_'.$i]['paragraph_no'];
-    		$par_text = $data['new_paragraph_'.$i]['paragraph_text'];
-    		
-    		if ($par_no != null || $par_text != null)
-    		{
-    			$form->getSubform('new_paragraph_'.$i)->getElement('paragraph_no')->setRequired(TRUE);
-    			$form->getSubform('new_paragraph_'.$i)->getElement('paragraph_text')->setRequired(TRUE);
-    		}
-    	}
-    	
-    	return $form;
-    }
 }
 

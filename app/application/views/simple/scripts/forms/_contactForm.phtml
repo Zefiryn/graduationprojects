@@ -17,8 +17,8 @@
 
 	<?php echo $form->mail_title;?>
 	
-	<p class="label"><?php echo $this->translate($form->mail_text->getLabel());?>:&nbsp;
-	<span style="color: #987878;"><?php echo $this->translate('mail_text_count');?></span>
+	<p class="label"><?php echo $this->translate($form->mail_text->getLabel());?>&nbsp;
+	<span style="color: #000;font-weight: normal;"><?php echo $this->translate('mail_text_count');?></span>
 	</p>
 	<?php echo $form->mail_text->renderTextField();?>
 	<?php echo $form->mail_text->renderErrorMsg();?>
