@@ -2,7 +2,12 @@
 
 class Application_Form_Localization extends Zefir_Form
 {
-
+	public $data;
+   	
+	public function setData(array $data){
+        $this->data = $data;
+    }
+	
 	public function init()
     {
     	parent::init();

@@ -36,6 +36,7 @@ class LocalizationsController extends Zefir_Controller_Action
 			$form->setDecorators(array(
 				array('ViewScript', array('viewScript' => 'forms/_translationForm.phtml'))
 			));
+			$form->setData(array('lang'=>$lang));
 			
 			if ($request->isPost())
 			{
@@ -72,12 +73,18 @@ class LocalizationsController extends Zefir_Controller_Action
     public function deleteAction()
     {
     	$request = $this->getRequest();
-		$id = $request->getParam('id', '');
-
-		$localization = new Application_Model_Localizations($id);
-		$localization->delete();
-		$this->flashMe('translation_deleted', 'SUCCESS');
-		$this->_redirectToRoute(array('loc_lang' => $request->getParam('loc_lang', '')), 'localization');
+		$id = $request->getParam('id', null);
+		$lang = $request->getParam('loc_lang', null);
+		
+		if ($lang && $id)
+		{
+			$caption = new Application_Model_Captions($id);
+			$localization = $caption->getTranslationObject($lang);
+			$localization->delete();
+			$this->flashMe('translation_deleted', 'SUCCESS');
+			$data = array(0 => $this->view->url(array('loc_lang' => $lang), 'localization'));		
+    		$this->_helper->json($data);
+		}
     }
 }
 

@@ -15,7 +15,7 @@
 			<p>
 				<strong><?php echo $lang;?></strong>:
 				<?php 
-					if (isset($strings[$caption->name])) 
+					if (isset($strings[$caption->name]) && $strings[$caption->name] != null) 
 						echo $strings[$caption->name];
 					else
 						echo '<span style="color:red">empty</span>';
