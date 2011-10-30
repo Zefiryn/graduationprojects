@@ -75,7 +75,8 @@ class Application_Form_Application extends Zefir_Form
 		$element = $this->createElement('text', 'school');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('school')
-				->setDecorators($this->_getStandardDecorators())
+				->setDecorators($this->_getZefirDecorators())
+				->setDescription('school_suggestion')
 				->setRequired(TRUE)
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
