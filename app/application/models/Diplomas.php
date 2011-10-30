@@ -69,12 +69,24 @@ class Application_Model_Diplomas extends GP_Application_Model
 	{
 		if (!is_array($this->fields))
 			$this->__get('fields');
-				
+		
+		$options = Zend_Registry::get('options');
+		$default_language = $options['i18n']['default_language'];
+		
 		foreach($this->fields as $diplomaField)
 		{
 			if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $lang)
-				return $diplomaField->entry;
+				$entry = $diplomaField->entry;
+			if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $default_language)
+				$entry_def_lang = $diplomaField->entry;	
 		}
+		
+		if (isset($entry) && $entry != '')
+			return  $entry;
+		elseif (isset($entry_def_lang) && $entry_def_lang != '')
+			return $entry_def_lang;
+		else
+			return null;
 	}
 	
 	public function getAuthorName()

@@ -6,6 +6,24 @@ class Application_Model_Files extends GP_Application_Model
 	public $application_id;
 	public $path;
 	protected $application;
+	protected $_image = array(
+		'property' => 'path',
+		'dir' => '/assets/editions'
+	);
+	protected $_imageData = array(
+		'thumb' => array(
+			'width' => 220,
+			'height' => 210,
+			'crop' => false,
+			'ratio' => 'width' //save ratio according to new width
+		),
+		'small' => array(
+			'width' => 470,
+			'height' => 260,
+			'crop' => false,
+			'ratio' => 'width'	//save ratio according to new width
+		)
+	);
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Files';
 	

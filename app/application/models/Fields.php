@@ -6,6 +6,7 @@ class Application_Model_Fields extends GP_Application_Model
 	public $field_name;
 	protected $result_fields;
 	
+	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Fields';
 	
 	

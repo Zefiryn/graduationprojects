@@ -31,18 +31,25 @@ class Application_Model_News extends GP_Application_Model
 		if ($this->details == null)
 			$this->__get('details');
 		
+		$options = Zend_Registry::get('options');
+		$default_language = $options['i18n']['default_language'];
+
 		foreach($this->details as $text)
 		{
 			if ($text->lang->lang_code == $lang)
-				return $text->$property;
+				$detail = $text->$property;
+				
+			if ($text->lang->lang_code == $default_language)
+				$detail_def_lang = $text->$property;
 		}
 		
-		//in case there is no text in given language
-		if (isset($this->details[0]))
-			return  $this->details[0]->$property;
+		if (isset($detail) && $detail != '')
+			return  $detail;
+		elseif (isset($detail_def_lang) && $detail_def_lang != '')
+			return $detail_def_lang;
 		else
-			return NULL;
-
+			return null;
+		
 	}
 	
 	public function getImage($key)

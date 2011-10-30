@@ -24,18 +24,24 @@ class ApplicationsController extends Zefir_Controller_Action
     {
     	$appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
-        $form = new Application_Form_Application('new');
-        $form->setAction('/applications/new');
+        
+		$form = new Application_Form_Application('new');
+		$form->setAction($this->view->url(array(), 'application_new'));
 		$form->setDecorators(array(
 			array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
 		));
 		
+    	$session = new Zend_Session_Namespace('applicationForm');
+    	if (isset($session->form))
+    	{
+    		$values =  $session->form;
+    		$form->populate($values);
+    	}
+    	
 		$request = $this->getRequest();
 		
 		if ($request->isPost())
 		{//form has been submited
-			
-			//$form->getSubForm('user')->populate($request->getPost());
 			
 			if($request->getParam('leave', null))
 			{
@@ -52,21 +58,14 @@ class ApplicationsController extends Zefir_Controller_Action
 				
 				if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
 				{
-					$user = new Application_Model_Users();
-					$data = $form->getValues();
-					$user->populateFromForm($data['user']);
-					$user->save();
-
-					if ($user->user_id != null)
-					{
-						$application = new Application_Model_Applications();
-						$application->populateFromForm($form->getValues());
-						$application->user_id = $user->user_id;
-						$application->save();
-						
-						$this->flashMe('application_added', 'SUCCESS');
-						$this->_redirect('/');
-					}
+					$form = $this->_createFileOrder($form);
+					$session->form = $form->getValues();
+					$this->view->form = $form; 
+					$this->view->path = array(
+						0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+			    		1 => array('route' => 'lang_application_new', 'data' => array('lang' => $this->view->lang), 'name' => array('form_link')),
+					);
+					$this->renderScript('applications/confirm.phtml');
 				}
 				
 			}				
@@ -88,6 +87,36 @@ class ApplicationsController extends Zefir_Controller_Action
 			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
     		1 => array('route' => 'lang_application_new', 'data' => array('lang' => $this->view->lang), 'name' => array('form_link')),
 		);
+    }
+    
+    public function saveAction()
+    {
+    	$request = $this->getRequest();
+    	
+    	if ($request->getParam('confirm'))
+		{//add application
+			$session = new Zend_Session_Namespace('applicationForm');
+			$user = new Application_Model_Users();
+			$data = $session->form;
+			$user->populateFromForm($data['user']);
+			$user->save();
+
+			if ($user->user_id != null)
+			{
+				$application = new Application_Model_Applications();
+				$application->populateFromForm($session->form);
+				$application->user_id = $user->user_id;
+				$application->save();
+				unset($session->form);
+				$this->_sendConfirmationMail($user);
+				$this->flashMe('application_added', 'SUCCESS');
+				$this->_redirectToRoute(array(), 'root');
+			}
+		}
+		else 
+		{
+			$this->_redirectToRoute(array(), 'application_new');
+		}
     }
 
     public function editAction()
@@ -199,12 +228,13 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($id == null)
 			throw new Zend_Exception('Wrong id parameter');
 		
+		$application = new Application_Model_Applications($id);
 			
-		if ($this->user->_role == 'admin'
-			|| $this->user->_role == 'juror'
-			|| $this->user->applications[0]->application_id == $id)
+		if ($this->view->user->role == 'admin'
+			|| $this->view->user->role == 'juror'
+			|| $this->view->user->user_id == $application->user->user_id)
 		{
-			$application = new Application_Model_Applications($id);
+			
 			$this->view->application = $application;
 		}
 		else
@@ -360,5 +390,16 @@ class ApplicationsController extends Zefir_Controller_Action
     	$sortApplication->sort = $currentSort;
     	
     	return $currentSort;
+    }
+    
+    
+    protected function _sendConfirmationMail($user)
+    {
+    	$mail = new Zend_Mail();
+		$mail->setBodyText('This is the text of the mail.');
+		$mail->setFrom('no-reply@2plus3d.pl', 'Graduation Projects Review');
+		$mail->addTo($user->email, $user->getUserFullName());
+		$mail->setSubject('TestSubject');
+		$mail->send();
     }
 }

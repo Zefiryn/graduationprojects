@@ -15,7 +15,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 */
 	protected function _init()
 	{
-		Zend_Session::start();
+		//Zend_Session::start();
 	}
 	
 	/**
@@ -31,54 +31,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$config = Zend_Registry::get('options');
 		$db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
 		Zend_Db_Table::setDefaultAdapter($db);
-	}
-	
-	/**
-	 * Init View class
-	 * @access private
-	 * @return Zend_View an instance of Zend_View class or similar
-	 */
-	protected function _initView() {
-
-		$view = new Zefir_View_Template();
-		$view->addHelperPath('Zefir/View/Helper', 'Zefir_View_Helper');
-		
-		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
-		$viewRenderer->setView($view)
-					->setViewScriptPathSpec(':controller/:action.:suffix')
-					->setViewScriptPathNoControllerSpec(':action.:suffix')
-					->setViewSuffix('phtml');
-
-		//initialize layout
-    	$layout = Zend_Layout::getMvcInstance();
-    	$layout->setViewSuffix('phtml');
-    	
-    	return $view;
-    	
-	}
-	
-	/**
-	 * Init placeholders for the view
-	 * @access private
-	 * @return void
-	 */
-	protected function _initPlaceholders() {
-		
-		$this->bootstrap('view');
-		$view = $this->getResource('view');
-		$view->assign('doctype', 'XHTML1_STRICT');
-		
-		// Set the initial title
-      	$view->headTitle('Graduation Projects')->setSeparator(' :: ');
-        
-      	//set the js files
-      	$options = Zend_Registry::get('options');
-     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.easing.1.3.js');
-     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-ui-1.8.9.custom.min.js');
-     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.min.js');
-     	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.fancybox-1.3.1.pack.js');
-     	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.mousewheel-3.0.2.pack.js');
-        
 	}
 	
 	/**
@@ -188,7 +140,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow(null, array('auth'), array('index', 'login'));
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
-		$acl->allow(null, array('applications'), array('new', 'delete-image'));
+		$acl->allow(null, array('applications'), array('new', 'delete-image', 'save'));
 		$acl->allow(null, array('diplomas', 'news'), array('index', 'show'));
 		$acl->allow(null, array('schools'), array('find'));
 		$acl->allow('user', array('auth'), array('logout'));
@@ -245,6 +197,54 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 		$transport = new Zend_Mail_Transport_Smtp($options['mail']['host'], $options['mail']['smtp']);
 		Zend_Mail::setDefaultTransport($transport);
+	}
+	
+	/**
+	 * Init View class
+	 * @access private
+	 * @return Zend_View an instance of Zend_View class or similar
+	 */
+	protected function _initView() {
+
+		$view = new Zefir_View_Template();
+		$view->addHelperPath('Zefir/View/Helper', 'Zefir_View_Helper');
+		
+		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+		$viewRenderer->setView($view)
+					->setViewScriptPathSpec(':controller/:action.:suffix')
+					->setViewScriptPathNoControllerSpec(':action.:suffix')
+					->setViewSuffix('phtml');
+
+		//initialize layout
+    	$layout = Zend_Layout::getMvcInstance();
+    	$layout->setViewSuffix('phtml');
+    	
+    	return $view;
+    	
+	}
+	
+	/**
+	 * Init placeholders for the view
+	 * @access private
+	 * @return void
+	 */
+	protected function _initPlaceholders() {
+		
+		$this->bootstrap('view');
+		$view = $this->getResource('view');
+		$view->assign('doctype', 'XHTML1_STRICT');
+		
+		// Set the initial title
+      	$view->headTitle('Graduation Projects')->setSeparator(' :: ');
+        
+      	//set the js files
+      	$options = Zend_Registry::get('options');
+     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.easing.1.3.js');
+     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-ui-1.8.9.custom.min.js');
+     	$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.min.js');
+     	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.fancybox-1.3.1.pack.js');
+     	$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.mousewheel-3.0.2.pack.js');
+        
 	}
 	
 }

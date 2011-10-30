@@ -65,7 +65,13 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			return $this->_primary;
 	}
 	  	
-	public function getChild($result, $property)
+	/**
+	 * Return children rowset
+	 * 
+	 * @param Zefir_Application_Model $object
+	 * @param string $property
+	 */
+	public function getChild($object, $property)
 	{
 		$primary = $this->getPrimaryKey();
 		$prefix = $this->_prefix;
@@ -77,7 +83,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 		if (!isset($assocData['joinTable']) && !isset($assocData['joinModel']))
 		{
 			$dependentObjectTable =  $dependentObject->getDbTable(); 
-			$dependentSelect = $dependentObjectTable->select()->where($assocData['refColumn']. '= ?', $result->$primary);
+			$dependentSelect = $dependentObjectTable->select()->where($assocData['refColumn']. '= ?', $object->$primary);
 		}
 		
 		//join throught table without extra data in joining table
@@ -91,7 +97,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			$dependentSelect->from(array('t' => $dependentObjectTable->getTableName()))
 							->join(array('jt' => $joinTable),
 										't.'.$dependentObjectTable->getPrimaryKey().' = jt.'.$assocData['joinRefColumn'])
-							->where('jt.'.$assocData['refColumn']. '= ?', $result->$primary);
+							->where('jt.'.$assocData['refColumn']. '= ?', $object->$primary);
 		}
 		
 		//join through table with extra data in joining table
@@ -105,7 +111,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			$dependentSelect->from(array('t' => $dependentObjectTable->getTableName()))
 							->join(array('jt' => $joinTable),
 										't.'.$dependentObjectTable->getPrimaryKey().' = jt.'.$assocData['joinRefColumn'])
-							->where('jt.'.$assocData['refColumn']. '= ?', $result->$primary);
+							->where('jt.'.$assocData['refColumn']. '= ?', $object->$primary);
 		}
 		
 		//set order

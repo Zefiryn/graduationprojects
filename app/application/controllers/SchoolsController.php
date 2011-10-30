@@ -86,7 +86,8 @@ class SchoolsController extends Zefir_Controller_Action
 		$school = new Application_Model_Schools($id);
 		$school->delete();
 		$this->flashMe('school_deleted', 'SUCCESS');
-		$this->_redirectToRoute(array(), 'schools');
+		$data = array(0 => $this->view->url(array(), 'schools'));		
+    	$this->_helper->json($data);
     }
     
     public function findAction()
