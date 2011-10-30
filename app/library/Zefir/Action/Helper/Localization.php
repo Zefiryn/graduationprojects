@@ -122,7 +122,7 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 			if (isset($translations[$language]))
 				$translate = new Zend_Translate('array',  $translations[$language], $language);
 			else
-				$translate = new Zend_Translate('array',  $translations['pl'], 'pl_PL');
+				$translate = new Zend_Translate('array',  $translations['en'], 'en_UK');
 			$view->translations = $translations;
 			Zend_Registry::set('translations', $translations);
 		}
