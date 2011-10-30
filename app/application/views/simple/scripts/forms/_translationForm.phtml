@@ -13,7 +13,7 @@
 	<?php echo $form->csrf->renderViewHelper(); ?> 
 	
 	<p class="label">
-		<?php echo $form->getElement('text')->getLabel();?>: 
+		<?php echo $form->getElement('text')->getLabel();?> (<?php echo $form->data['lang']?>): 
 		<span style="font-weight: normal; font-size: 14px"><?php echo $form->getElement('text')->getDescription();?></span>
 	</p>
 	<?php echo $form->text->renderTextField();?>
