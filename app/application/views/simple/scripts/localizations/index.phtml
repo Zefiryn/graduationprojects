@@ -6,33 +6,42 @@
 					title="<?php echo $this->translate('new_caption');?>" />
 			</a>
 	</h1>
-	<table class="localizations" style="border:1px solid black;">
-	<?php foreach ($this->captions as $caption):?>
-	<tr style="border:1px solid black;">
-		<td style="border:1px solid black;"><?php echo $caption->name;?></td>
+	<div class="column-left">
+	<?php $divide = count($this->captions)/2;?>
+	<?php foreach ($this->captions as $index => $caption):?>
+		<div class="caption">
+			<h3><?php echo $caption->name;?></h3>
+			<?php foreach($this->translations as $lang => $strings):?>
+			<p>
+				<strong><?php echo $lang;?></strong>:
+				<?php 
+					if (isset($strings[$caption->name])) 
+						echo $strings[$caption->name];
+					else
+						echo '<span style="color:red">empty</span>';
+				?>
+				<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $lang), 'edit_localization');?>">
+					<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
+						alt="<?php echo $this->translate('edit');?>" 
+						title="<?php echo $this->translate('edit');?>" />
+				</a>
+				<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $lang), 'delete_localization');?>"
+					class="delete"> 
+					<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
+						del="<?php echo $this->translate('delete');?>" 
+						alt="<?php echo $this->translate('delete');?>" 
+						title="<?php echo $this->translate('delete');?>" />
+				</a>
+			</p>
+			<?php endforeach;?>
+		</div>
 		
-		<td style="border:1px solid black;"><?php echo $caption->translate($caption->name, $this->lang);?></td>
-		
-		<td style="width: 50px;padding: 5px;border:1px solid;">
-			<span class="admin" style="float:none !important;">
-			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->lang), 'edit_localization');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
-					alt="<?php echo $this->translate('edit');?>" 
-					title="<?php echo $this->translate('edit');?>" />
-			</a>
-			<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $this->lang), 'delete_localization');?>"
-				class="delete"> 
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
-					del="<?php echo $this->translate('delete');?>" 
-					alt="<?php echo $this->translate('delete');?>" 
-					title="<?php echo $this->translate('delete');?>" />
-			</a>
-			
-			</span>
-		</td>
-	</tr>
+	<?php if (($index + 1) == $divide):?>
+	</div>
+	<div class="column-right">
+	<?php endif;?>
 	<?php endforeach;?>
-	</table>
+	</div>
 </div>
 
 <?php echo $this->partial('partials/delete_dialog.phtml', 

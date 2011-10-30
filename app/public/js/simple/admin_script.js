@@ -15,7 +15,20 @@ $(document).ready(function(){
 		var id = $('.dyplom').attr('id');
 		sortColumnElements('#diploma_gallery', "/diploma/" + id + "/sort/");
 	}
+	
+	if ($('.caption').length)
+	{
+		showCaptions();
+	}
 });
+
+function showCaptions()
+{
+	
+	$('.caption').click(function(){
+		$(this).children('p').toggle();//slideToggle('slow');
+	});
+}
 
 
 function sortElements(id, link, sortCallback)

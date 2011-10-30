@@ -11,11 +11,11 @@ class LocalizationsController extends Zefir_Controller_Action
     public function indexAction()
     {
 		$request = $this->getRequest();
-		$lang = $request->getParam('loc_lang', 'pl');
-		
+		$localization = new Application_Model_Localizations();
+				
 		$caption = new Application_Model_Captions();
 		$this->view->captions = $caption->fetchAll($caption->order('name ASC'));
-		$this->view->caption_lang = $lang;
+		$this->view->translations = $localization->getTranslationFromDb(); 
     }
 
 
