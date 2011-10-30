@@ -238,7 +238,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     	
     	//create edition dir
     	$edition = new Application_Model_Editions($application->edition_id);
-    	$editionName = $edition->edition_name2;
+    	$editionName = $edition->edition_name;
     	if (!is_dir($uploadDir.$editionName))
     	{
     		mkdir($uploadDir.$editionName );

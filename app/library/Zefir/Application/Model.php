@@ -451,8 +451,7 @@ class Zefir_Application_Model {
 		else
 		{
 			$id = $this->getDbTable()->getPrimaryKey();
-			$row = $this->getDbTable()->find($this->$id)->current();
-			$set = $this->getDbTable()->getChild($row, $name); 
+			$set = $this->getDbTable()->getChild($this, $name); 
 			$this->$name = $set;
 		}
 		return $set;

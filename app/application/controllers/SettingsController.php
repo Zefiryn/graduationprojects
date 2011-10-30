@@ -20,7 +20,8 @@ class SettingsController extends Zefir_Controller_Action
 			
 			if($form->leave->isChecked())
 			{
-				$this->_redirect('/admin');	
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'root');	
 			}
 			
     		elseif ($form->isValid($request->getPost()))
@@ -29,7 +30,7 @@ class SettingsController extends Zefir_Controller_Action
     			$settings->populateFromForm($form->getValues());
     			$settings->save();
     			$this->flashMe('settings_saved', 'SUCCESS');
-    			$this->_redirect('/admin');
+    			$this->_redirectToRoute(array(), 'root');
     		}
 			
 		}
