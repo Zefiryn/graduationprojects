@@ -16,7 +16,7 @@ class Application_Form_Localization extends Zefir_Form
     	
         $this->_createCsrfElement();
         
-        $name = $this->createElement('text', 'text');
+        $name = $this->createElement('textarea', 'text');
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
 								'class' => 'width1'))

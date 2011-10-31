@@ -25,8 +25,8 @@ $(document).ready(function(){
 function showCaptions()
 {
 	
-	$('.caption').click(function(){
-		$(this).children('p').toggle();//slideToggle('slow');
+	$('.caption h3').click(function(){
+		$(this).siblings('p').toggle();//slideToggle('slow');
 	});
 }
 

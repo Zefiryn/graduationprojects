@@ -50,7 +50,7 @@
 	  	</div>
 
 		<div class="top-menu">
-		    <?php echo $this->partial('partials/current_edition.phtml', array('lang' => $this->lang, 'edition' => $this->edition));?>
+		    <?php echo $this->partial('partials/current_edition.phtml', array('lang' => $this->lang, 'edition' => $this->edition, 'user' => $this->user));?>
 		    <?php echo $this->partial('partials/previous_edition.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang));?>
 		    
 		    <?php if ($this->user->role == 'admin'):?>
@@ -88,11 +88,11 @@
 		<p>
 			<a href="http://www.typo.cz"><img src="<?php echo $this->baseUrl('img/simple/typo_logo.png');?>" alt="typo magazine" title="typo magazine" /></a>
 			
-			<a href="plusminus.hu"><img src="<?php echo $this->baseUrl('img/simple/plus-minus_logo.png');?>" alt="typo magazine" title="typo magazine" /></a>
+			<a href="http://plusminus.hu"><img src="<?php echo $this->baseUrl('img/simple/plus-minus_logo.png');?>" alt="plusminus" title="plusminus" /></a>
 			
 			<a href="http://www.2plus3d.pl"><img src="<?php echo $this->baseUrl('img/simple/2plus3d_logo.png');?>" alt="2plus3d magazine" title="2plus3d magazine" /></a>
 			
-			<a href=""><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977 magazine" title="1977 magazine" /></a>
+			<img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977" title="1977" />
 			
 			<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/zamek_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
 			

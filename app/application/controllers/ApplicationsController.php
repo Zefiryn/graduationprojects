@@ -118,8 +118,8 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->_redirectToRoute(array(), 'application_new');
 		}
     }
-
-    public function editAction()
+    
+	public function editAction()
     {
         $appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
@@ -395,11 +395,16 @@ class ApplicationsController extends Zefir_Controller_Action
     
     protected function _sendConfirmationMail($user)
     {
-    	$mail = new Zend_Mail();
-		$mail->setBodyText('This is the text of the mail.');
-		$mail->setFrom('no-reply@2plus3d.pl', 'Graduation Projects Review');
+    	$appSettings = Zend_Registry::get('appSettings');
+    	$mail = new Zend_Mail('UTF8');
+    	
+		$mail->setFrom('no-reply@2plus3d.pl', $this->view->translate('confirmation_email_from'));
 		$mail->addTo($user->email, $user->getUserFullName());
-		$mail->setSubject('TestSubject');
+		$mail->setSubject($this->view->translate('confirmation_email_subject'));
+		
+		$body = $this->view->translate('confirmation_email_body');
+		$body = sprintf($body, date($appSettings->date_format, $appSettings->application_deadline), $user->nick);
+		$mail->setBodyText($body);
 		$mail->send();
     }
 }

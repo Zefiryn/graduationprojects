@@ -27,11 +27,11 @@ class Application_Form_Login extends Zefir_Form
 		$login = $this->createElement('text', 'nick');
 		$login->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'normal'))
+								'class' => 'width1 normal'))
 				->setDescription('Użytkownik')
 				->setLabel('user')
 				->setRequired(true)
-				->addValidator(new Zefir_Validate_Login())
+				->addValidator(new Zefir_Validate_Login(3, 50))
 				->setDecorators(array(
 					array('TextField'),
 					array('ErrorMsg')
@@ -41,11 +41,11 @@ class Application_Form_Login extends Zefir_Form
 		$password = $this->createElement('password', 'password');
 		$password->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
-								'class' => 'normal'))
+								'class' => 'width1 normal'))
 				->setDescription('Hasło')
 				->setLabel('password')
 				->setRequired(true)
-				->addValidator(new Zefir_Validate_Password())
+				->addValidator(new Zefir_Validate_Password(1, 100))
 				->setDecorators(array(
 					array('PasswordField'),
 					array('ErrorMsg')

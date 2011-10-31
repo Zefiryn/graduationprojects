@@ -34,10 +34,11 @@ class ContactController extends Zefir_Controller_Action
     			$options = Zend_Registry::get('options');
     			
     			$mail = new Zend_Mail('UTF-8');
-    			$mail->setBodyText($form->getValue('mail_text'));
+    			$mail->setBodyText($form->getValue('mail_text'). "\n\n\n".$form->getValue('email'));
 				$mail->setFrom($form->getValue('email'), $form->getValue('name'));
 				$mail->addTo($options['mail']['to'], 'Graduation Projects');
 				$mail->setSubject($form->getValue('mail_title'));
+				
 				try {
 					$mail->send();
 					if (FALSE)
