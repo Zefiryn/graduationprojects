@@ -1,11 +1,9 @@
 <div id="main">
 <h1><?php echo $this->translate('login_header'); ?></h1>
-<p class="spacer">&nbsp;</p>
 
 <?php if ($this->wrongLogin == TRUE):?>
-<br /><br />
 <div class="error-div">
-	<p class="error"><?php echo $this->translate('login_error'); ?>.</p>
+	<p class="error" style="text-align: left;" ><?php echo $this->translate('login_error'); ?>.</p>
 </div>
 <?php endif;?>
 
