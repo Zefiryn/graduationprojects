@@ -600,7 +600,7 @@ a.lang-selected:hover {
 }
 
 
-footer {
+#footer {
 	margin-top: 15px;
 	margin-bottom: 40px;
 	float: none;
@@ -611,7 +611,7 @@ footer {
 	padding-top: 10px;
 }
 
-footer p {
+#footer p {
 	width: 970px;
 	text-align: left;
 	line-height: 20px;
@@ -620,17 +620,17 @@ footer p {
 	padding: 0px;
 	border: 0px solid;
 }
-footer p:first-child {
+#footer p:first-child {
 	border-top: 1px dashed #999999;
 	padding-top: 19px;
 	margin-bottom: 0px;
 }
-footer p a {
+#footer p a {
 	margin: 0px 0px 0px 0px;
 	border: 0px solid #000;
 	
 }
-footer p a:first-child {
+#footer p a:first-child {
 	margin-left: 0px;
 }
 #fund {
@@ -653,8 +653,8 @@ footer p a:first-child {
 }
 
 .creator {
-	border-top: 1px dashed #999999;
-	text-align: right;
+	border-top: 1px dashed #999999 !important;
+	text-align: right !important;
 }
 
 .creator a {
@@ -1220,7 +1220,7 @@ div.caption
 	width: 400px;
 }
 div.caption p {
-	display: none;
+	
 	margin: 5px;
 }
 div.caption h3 {
