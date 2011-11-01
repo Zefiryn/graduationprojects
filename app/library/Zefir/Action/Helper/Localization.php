@@ -49,6 +49,7 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		$langSession = new Zend_Session_Namespace('lang');
 		
 		$lang = $request->getParam('lang', '');
+		$browser_lang = $this->_getBrowserLang($options);
 		
 		//get locale
 		if ($lang != NULL)	
@@ -65,9 +66,9 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 			$user = new Application_Model_Users();
 			$lang = $user->getDbTable()->getUserLanguage($auth->getIdentity());
 		}
-		else
-			$lang = $options['i18n']['default_language'];
-	
+		else 
+			$lang = $browser_lang;
+			
 		//check if the language exist
 		if ($this->_langExists($lang, $options['i18n']['translation_source']))
 			$lang = $lang;
@@ -142,5 +143,35 @@ class Zefir_Action_Helper_Localization extends Zend_Controller_Action_Helper_Abs
 		$lang = new Application_Model_Localizations();
 		$translations = $lang->getTranslationFromDb();
 		return $translations;
+	}
+	
+	protected function _getBrowserLang($options)
+	{
+		$accepted_lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+		
+		if (strstr($accepted_lang, 'pl'))
+		{
+			return 'pl';
+		}
+		elseif (strstr($accepted_lang, 'sk'))
+		{
+			return 'sk';
+		}
+		elseif (strstr($accepted_lang, 'hu'))
+		{
+			return 'hu';
+		}
+		elseif (strstr($accepted_lang, 'cz'))
+		{
+			return 'cz';
+		}
+		elseif (strstr($accepted_lang, 'cz'))
+		{
+			return 'en';
+		}
+		else 
+		{
+			return $options['i18n']['default_language'];
+		}
 	}
 }
