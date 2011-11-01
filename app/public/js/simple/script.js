@@ -273,7 +273,7 @@ function setPosition(obj, e)
 function setDateFields()
 {
 	
-	$('.date').datepicker({ dateFormat: 'dd.mm.yy',
+	$('.date').datepicker({ dateFormat: 'dd-mm-yy',
 		 					showAnim: 'slideDown'});
 	 $('.date').datepicker( "option", $.datepicker.regional[ getLang() ] );
 }

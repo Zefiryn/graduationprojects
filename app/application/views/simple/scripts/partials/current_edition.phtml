@@ -4,8 +4,16 @@
 		<menu> 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?></a> 
 			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?></a> 
-			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?></a> 
+			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?></a>
+			
+			<!-- NEW APPLICATION FOR NOT LOGGED USER-->
+			
+			<?php if ($this->user->role != 'user'):?>			 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_application_new')?>"><?php echo $this->translate('form_link');?></a> 
+			<?php else: ?>
+			<a href="<?php echo $this->url(array('id' => $this->user->applications[0]->application_id), 'edit_application')?>"><?php echo $this->translate('edit_application');?></a>
+			<?php endif; ?>
+
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_faq')?>"><?php echo $this->translate('faq_link');?></a> 
 			<a class="nieaktywna" href="#"><s><?php echo $this->translate('best_works_link');?></s></a> 
 			<a href="#"><?php echo $this->translate('press_link');?></a> 
