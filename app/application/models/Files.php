@@ -59,5 +59,15 @@ class Application_Model_Files extends GP_Application_Model
 		
 		return 'width="'.$width.'" height="'.$height.'"';
 	}
+	
+	public function getFileFolder()
+	{
+		return '/'.substr($this->path, 0, strrpos($this->path, '/'));
+	} 
+	
+	public function getFileName()
+	{
+		return substr($this->path, strrpos($this->path, '/')+1);
+	}
 }
 
