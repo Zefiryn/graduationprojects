@@ -96,9 +96,9 @@
 			
 			<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/zamek_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
 			
-			<!--<a href="http://visegradfund.org" id="fund"><img src="<?php echo $this->baseUrl('img/simple/visegrad-fund_logo.png');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>-->
+			<a href="http://visegradfund.org" id="fund"><img src="<?php echo $this->baseUrl('img/simple/visegrad-fund_logo.png');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>
 			
-			<!--<span class="organizers_info"><?php echo $this->translate('project_organized_by');?></span>-->
+			<span class="organizers_info"><?php echo $this->translate('project_organized_by');?></span>
 		</p>
 		
 		<p class="creator"><a href="http://zefiryn.jewula.net" title="Web page development">created by: Zefiryn</a></p>
