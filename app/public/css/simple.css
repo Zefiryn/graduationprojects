@@ -326,7 +326,7 @@ menu menu a:last-child {
 	margin: 6px 0px 0px 125px;
 	padding-top: 6px;
 	width: 345px;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	color: rgb(51, 51, 51);
 	font-size: 12px;
 	font-style: normal;
@@ -337,7 +337,7 @@ menu menu a:last-child {
 
 .index_author { 
 	color: rgba(0, 0, 0, 0.898);
-	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-style: normal;
 	font-weight: 700;
@@ -360,7 +360,7 @@ menu menu a:last-child {
 
 .author { 
 	color: rgba(0, 0, 0, 0.898);
-	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 700;
@@ -405,7 +405,7 @@ a:hover img {
 
 h1 {
 	color: rgb(0, 0, 0);
-	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 1.4;
@@ -416,7 +416,7 @@ h1 {
 
 h2 {
 	color: rgb(0, 0, 0);
-	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 1.4;
@@ -497,7 +497,7 @@ p, ul, ol {
 	border-bottom-style: dashed;
 	border-bottom-width: 1px;
 	color: rgb(114, 114, 114);
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	margin-bottom: 15px;
 	margin-right: 30px;
@@ -1091,7 +1091,7 @@ span.admin {
 
 .question {
 	color: rgb(51, 51, 51);
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 100;
