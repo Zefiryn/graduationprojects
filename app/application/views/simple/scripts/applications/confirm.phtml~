@@ -13,7 +13,7 @@
 		</p>
 		
 		<p>
-			<span class="label"><?php echo $this->translate('name')?></span>: <?php echo $data['user']['name'];?>
+			<span class="label"><?php echo $this->translate('name')?></span>: <?php echo $data['user']['nick'];?>
 		</p>
 		
 		<p>
