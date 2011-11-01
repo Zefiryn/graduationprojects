@@ -15,8 +15,12 @@
 			<?php endif; ?>
 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_faq')?>"><?php echo $this->translate('faq_link');?></a> 
+
+			<?php if ($this->user->role == 'admin'):?>
 			<a class="nieaktywna" href="#"><s><?php echo $this->translate('best_works_link');?></s></a> 
-			<a href="#"><?php echo $this->translate('press_link');?></a> 
+			<a href="#"><?php echo $this->translate('press_link');?></a>
+			<?php endif;?>
+			 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'contact')?>"><?php echo $this->translate('contact_link');?></a>
 			<?php if ($this->user->role == 'guest'):?>
 				<a href="<?php echo $this->url(array(), 'login')?>"><?php echo $this->translate('login_link');?></a>
