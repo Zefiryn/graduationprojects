@@ -116,6 +116,7 @@ class ApplicationsController extends Zefir_Controller_Action
 				$this->_sendConfirmationMail($user);
 				$this->flashMe('application_added', 'SUCCESS');
 				$this->_redirectToRoute(array(), 'root');
+				$this->render('delete');
 			}
 		}
 		else 

@@ -55,6 +55,10 @@ class Application_Model_DbTable_Files extends Zefir_Application_Model_DbTable
     public function save(Application_Model_Files $file)
     {
     	parent::save($file);
+		foreach($file->getThumbnails() as $key)
+		{
+			$this->_resize($file, 'path', APPLICATION_PATH.'/../public/assets/applications/', $key);
+		}
     }
 }
 
