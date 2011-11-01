@@ -22,6 +22,11 @@ class ApplicationsController extends Zefir_Controller_Action
 
     public function newAction()
     {
+    	if (!$this->_checkDeadline())
+    	{
+    		$this->flashMe('application_deadline_has_passed');
+    		$this->_redirectToRoute(array(), 'root');
+    	}
     	$appSettings = Zend_Registry::get('appSettings');
     	$options = Zend_Registry::get('options');
         
@@ -167,8 +172,6 @@ class ApplicationsController extends Zefir_Controller_Action
     		}
     		else
     		{
-    			var_dump($form->getMessages());
-    			var_dump($form->getValues());
     			$this->_handleFiles($form, $cached, 'edit');
     		}
 		}
@@ -406,5 +409,15 @@ class ApplicationsController extends Zefir_Controller_Action
 		$body = sprintf($body, date($appSettings->date_format, $appSettings->application_deadline), $user->nick);
 		$mail->setBodyText($body);
 		$mail->send();
+    }
+    
+    protected function _checkDeadline()
+    {
+    	$appSettings = Zend_Registry::get('appSettings');
+    	
+    	if ($appSettings->application_deadline >= time())
+    		return TRUE;
+    	else
+    		return FALSE;
     }
 }
