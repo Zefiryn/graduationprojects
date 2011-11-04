@@ -25,9 +25,9 @@ $(document).ready(function(){
 		runFancyBox('a.form_file', true);
 	}
 	
-	if ($('a.application').length )
+	if ($('a.application_files').length )
 	{
-		runFancyBox('a.application', true);
+		runFancyBox('a.application_files', true);
 	}
 	
 	if ($('a.files').length )
