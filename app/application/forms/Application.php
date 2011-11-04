@@ -140,7 +140,8 @@ class Application_Form_Application extends Zefir_Form
 				->setRequired(TRUE)
 				->addFilter('HtmlEntities')
 				->addValidators(array(
-					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/')
+					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
+					new Zend_Validate_StringLength(array('max'=>2000))
 				));
 		$this->addElement($element);
 		
