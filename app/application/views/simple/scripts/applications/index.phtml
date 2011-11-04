@@ -78,6 +78,7 @@
 			<td class="normal" style="width: 50px;">
 				<?php foreach($application->files as $id => $file):?>
 				<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
+					class="application_files"
 					rel="application_<?php echo $application->application_id;?>">
 					<?php echo $this->translate('file').' '.++$id;?>, 
 				</a>
