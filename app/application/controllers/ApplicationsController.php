@@ -350,7 +350,7 @@ class ApplicationsController extends Zefir_Controller_Action
     	$types = $work_type->getWorkTypes();
     	unset($types[0]);
 
-    	$languages = array('cz', 'pl', 'sk', 'all');
+    	$languages = array('cs', 'pl', 'sk', 'hu', 'all');
     	
     	$statistics = array();
     	
