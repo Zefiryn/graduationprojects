@@ -54,6 +54,7 @@ class Application_Model_Applications extends GP_Application_Model
 		
 		for($i = 1; $i <= $appSettings->max_files; $i++)
 		{//add uploaded files
+			
 			if ($data['file_'.$i]['file_'.$i.'Cache'] != null)
 			{
 				$this->files[$i]['file_id'] = $data['file_'.$i]['file_id'];

@@ -491,7 +491,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
        		$where = $this->getAdapter()->quoteInto($col.' = ?', $object->$col);
     	}
 		
-    	parent::delete($where);
+    	return parent::delete($where);
     }
     
     /**
@@ -503,7 +503,7 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
      */
     public function simpleDelete($where)
     {
-    	parent::delete($where);
+    	return parent::delete($where);
     }
     
     /**

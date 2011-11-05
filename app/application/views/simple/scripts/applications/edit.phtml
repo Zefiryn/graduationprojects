@@ -4,3 +4,7 @@
 
 	<?php echo $this->form;?>
 </div>
+
+<?php echo $this->partial('partials/delete_dialog.phtml', 
+			array('title' => 'file', 'delete_confirm' => $this->translate('application_image_delete_confirm')));
+?>

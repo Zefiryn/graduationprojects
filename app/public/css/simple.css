@@ -1041,6 +1041,12 @@ p.img_hint {
 span.admin {
 	float: right;
 }
+.editApplication {
+	position:absolute;
+	margin: 0px 0px 0px 442px;
+	background:#fff;
+	border: 1px solid rgb(0,221,179);	
+}
 
 #dialog_delete{
 	visibility: hidden;
@@ -1233,7 +1239,12 @@ div.caption h3 {
 	background-image: none !important;
 	color: #555 !important;
 }
-
+.ui-dialog-titlebar {
+	margin-bottom: 5px;
+}
+.ui-icon {
+	background-image: url("images/ui-icons_2cd9b9_256x240.png") !important;
+}
 .ui-state-default {
 	border: 1px solid rgba(0,221,179,0.5) !important;
 	background-color: rgb(245,245,245) !important;

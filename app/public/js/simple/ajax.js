@@ -1,8 +1,4 @@
-/**
- * @author zefiryn
- */
-
-jQuery.ajaxSetup({ 'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")} })
+jQuery.ajaxSetup({ 'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript");} });
 
 function _ajax_request(url, data, callback, type, method) {
     if (jQuery.isFunction(data)) {
@@ -15,7 +11,6 @@ function _ajax_request(url, data, callback, type, method) {
         global: false,
         data: data,
         success: function(data) {
-        	console.log(data);
         	callback(data);
         },
         dataType: type
@@ -32,7 +27,7 @@ jQuery.extend({
     }
 });
 
-jQuery.fn.deleteWithAjax = function() {
+jQuery.fn.deleteWithAjax = function(callback) {
 	
 	this.preventDefault;
 	this.removeAttr('onclick');
@@ -65,7 +60,7 @@ jQuery.fn.deleteWithAjax = function() {
 						text: deleteButton, 
 		                click: function() {
 		                    $( this ).dialog( "close" );
-		                    $.delete_(link, $(this).serialize(), redirect, "script");
+		                    $.delete_(link, $(this).serialize(), callback, "json");
 		                    return true;
 		                }
 					 },
@@ -88,16 +83,32 @@ jQuery.fn.deleteWithAjax = function() {
 //This will "ajaxify" the links
 function ajaxLinks(){
 	
-    $('a.delete').deleteWithAjax();
+    $('a.delete').deleteWithAjax(redirect);
+    $('a.remove-image').deleteWithAjax(removeImage);
     schoolAutocomplete();
 }
 
 function redirect(link)
 {
-	var url = link.substring(3, link.lastIndexOf('"'))
+	var url = link.substring(3, link.lastIndexOf('"'));
 	url = url.replace('\\/', '/');
 	window.location.href =  url;
 	
+}
+
+function removeImage(data)
+{
+	if (data.access == 0)
+	{
+		console.log(data);
+		alert("You don't have access to this resource");
+	}
+	else
+	{
+		console.log(data);
+		$('#file_' + data.file_id).remove();
+		//$('.fileField');
+	}
 }
 
 function getHost()
