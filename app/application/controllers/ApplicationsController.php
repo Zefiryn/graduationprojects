@@ -251,21 +251,35 @@ class ApplicationsController extends Zefir_Controller_Action
     public function deleteImageAction()
     {
     	$request = $this->getRequest();
-    	$id = $request->getParam('id');
-    	
-    	if (ctype_digit($id))
-    	{//already sent image
-    		$file = new Application_Model_Files($id);
-    		$file->delete();
+    	if ($request->isXmlHttpRequest())
+    	{
+	    	$id = $request->getParam('id');
+	    	
+	    	if (ctype_digit($id))
+	    	{//already sent image
+	    		$file = new Application_Model_Files($id);
+	    		if ($this->view->user->user_id == $file->application->user->user_id || $this->view->user->role == 'admin')
+	    		{
+	    			$file->delete();
+	    			$this->_helper->json(array("file_id" => $id));
+	    		}
+	    		else 
+	    		{
+	    			$this->_helper->json(array("access" => 0), FALSE);
+	    		}
+	    	}
+	    	else 
+	    	{//cached image
+	    		$path = APPLICATION_PATH.'/../public/assets/cache/'.$id;
+	    		unlink($path);
+	    		$this->_helper->json(array("file_d" => $id), FALSE);
+	    	}
     	}
-    	else 
-    	{//cached image
-    		$path = APPLICATION_PATH.'/../public/assets/cache/'.$id;
-    		unlink($path);
+    	else
+    	{
+    		$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'root');
     	}
-    	
-    	$this->flashMe('image_deleted', 'SUCCESS');
-		$this->_redirectToRoute(array(), 'root');
     }
 
 	protected function _checkFileCache($type = 'new')

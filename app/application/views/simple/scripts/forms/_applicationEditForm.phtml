@@ -6,7 +6,6 @@
       method="<?php echo $this->escape($form->getMethod()); ?>"
       enctype="<?php echo $form->getEnctype(); ?>"
       class="contact">
-
 	<?php if ($form->csrf->hasErrors()):?>
 		<div id="error-csrf" class="error-div">
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>
@@ -57,12 +56,23 @@
 				$file = $form->getSubForm('file_'.$i);
 				$cache = 'file_'.$i.'Cache';
 			 	if ($file->$cache->getValue() != null):?>
+			<div id="file_<?php echo $file->file_id->getValue()?>" style="width: 460px;">
+		 	<p class="admin editApplication">
+		 		<a href="<?php echo $this->url(array('id'=> $file->file_id->getValue()), 'applications_image_delete');?>"
+					class="remove-image" alt="file_<?php echo $i;?>">
+					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
+						alt="<?php echo $this->translate('delete');?>" 
+						title="<?php echo $this->translate('delete');?>">
+				</a>
+			</p>
 			<a 	class="form_file"
 				href="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>"
 				rel="cache" >
-				<img src="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>" alt="picture" />
+				<img src="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>" alt="" />
 			</a>
+			</div>
 			<?php endif;?>
+			<p class="clearfix"></p>
 		<?php endfor;?>
 	</div>
 	<?php for ($i = 1; $i <= $appSettings->max_files; $i++) 

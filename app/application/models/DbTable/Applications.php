@@ -288,13 +288,14 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     {
     	$options = Zend_Registry::get('options');
     	$files = array();
-   		
+
     	foreach($application->files as $key => $uploaded_file)
    		{
    			if (strstr($uploaded_file['file'], 'cache'))
    			{
    				$uploaded_file['file'] = substr($uploaded_file['file'], strpos($uploaded_file['file'], '/') + 1);
-   				$fileName = 'file_'.$key.'.'.strtolower(Zefir_Filter::getExtension($uploaded_file['file']));
+   				$fileName = 'file.'.strtolower(Zefir_Filter::getExtension($uploaded_file['file']));
+   				$fileName = $this->_getNewName($options['upload']['applications'].'/'.$userDir, $fileName);
    				
    				if ($this->_copy($uploaded_file['file'], $options['upload']['applications'].'/'.$userDir.'/'.$fileName))
    				{
