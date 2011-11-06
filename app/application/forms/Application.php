@@ -141,7 +141,7 @@ class Application_Form_Application extends Zefir_Form
 				->addFilter('HtmlEntities')
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
-					new Zend_Validate_StringLength(array('max'=>2100, 'encoding' => 'utf8'))
+					new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
 				));
 		$this->addElement($element);
 		
