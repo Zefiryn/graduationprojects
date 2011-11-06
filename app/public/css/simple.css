@@ -805,7 +805,7 @@ p.error {
 	margin: 0px;
 	padding: 0px;
 	text-align: right;
-	line-height: auto;
+	line-height: 12px;
 }
 
 p.error span {
