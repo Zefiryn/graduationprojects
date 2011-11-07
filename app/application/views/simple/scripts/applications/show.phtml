@@ -36,6 +36,11 @@
 		<p class="application_data"><?php echo $this->application->user->email;?></p>
 		<?php endif;?>
 		
+		<?php if ($this->application->user->phone != null && ($this->user->role == 'admin' || $this->user->user_id == $this->application->user->user_id)):?>
+		<p class="application_field"><?php echo strtolower($this->translate('phone'));?></p>
+		<p class="application_data"><?php echo $this->application->user->phone;?></p>
+		<?php endif;?>
+		
 		<?php if ($this->application->degree->degree_name != null):?>
 		<p class="application_field"><?php echo strtolower($this->translate('degree'));?></p>
 		<p class="application_data"><?php echo $this->translate($this->application->degree->degree_name.'_adjective');?></p>
