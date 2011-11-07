@@ -295,14 +295,15 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
    			{
    				$uploaded_file['file'] = substr($uploaded_file['file'], strpos($uploaded_file['file'], '/') + 1);
    				$fileName = 'file.'.strtolower(Zefir_Filter::getExtension($uploaded_file['file']));
-   				$fileName = $this->_getNewName($options['upload']['applications'].'/'.$userDir, $fileName);
-   				
+   				$fileName = $this->_getNewName(APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$userDir.'/', $fileName);
+
    				if ($this->_copy($uploaded_file['file'], $options['upload']['applications'].'/'.$userDir.'/'.$fileName))
    				{
    					if ($uploaded_file['file_id'] != null)
    						$file = new Application_Model_Files($uploaded_file['file_id']);
    					else
    						$file = new Application_Model_Files();
+   						
    					$file->path = $userDir.'/'.$fileName;
    					$file->application_id = $application->application_id;
    					$file->save();
