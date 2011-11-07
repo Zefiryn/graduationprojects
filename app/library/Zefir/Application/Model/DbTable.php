@@ -463,11 +463,15 @@ class Zefir_Application_Model_DbTable extends Zend_Db_Table_Abstract
 			$rawname = substr($rawname, 0, 18);
 		$name = '';
 		
-		for($i = 1; $name == ''; $i++)
+		$end = FALSE;
+		for($i = 1; $end == FALSE; $i++)
 		{
 			$tryname = $rawname.'_'.$i.$ext;
 			if (!file_exists($dir.$tryname))
+			{
 				$name = $tryname;
+				$end = TRUE;
+			}
 		}
 		
 		return $name;
