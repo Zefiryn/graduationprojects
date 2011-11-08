@@ -36,6 +36,7 @@ class Application_Form_Application extends Zefir_Form
 		
 		$this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
+		$this->addElementPrefixPath('Zefir_Filter', 'Zefir/Filter/', 'filter');
 
 		
 		$appSettings = Zend_Registry::get('appSettings');
@@ -138,7 +139,7 @@ class Application_Form_Application extends Zefir_Form
 				->setDescription('work_desc_count')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
-				->addFilter('HtmlEntities')
+				->addFilter('HtmlSpecialChars')
 				->addValidators(array(
 					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
 					new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
