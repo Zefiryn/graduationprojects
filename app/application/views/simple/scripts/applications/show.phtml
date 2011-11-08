@@ -2,7 +2,7 @@
 
 	<div class="application_gallery" id="application_gallery">
 		<?php foreach($this->application->files as $file):?> 
-			<img id="<?php echo $file->file_id?>" class="sort_item" src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small'));?>" alt="<?php echo $this->application->work_subject;?>" class="application_image" />
+			<img id="<?php echo $file->file_id?>" class="sort_item" src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small'));?>" alt="<?php echo $this->application->work_subject.'?'.time();?>" class="application_image" />
 		<?php endforeach;?>
 	</div>
 
