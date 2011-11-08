@@ -107,7 +107,47 @@ function removeImage(data)
 	{
 		console.log(data);
 		$('#file_' + data.file_id).remove();
-		//$('.fileField');
+		$('input[name*="file_id"]').each(function(){
+			console.log($(this));
+			if ($(this).val() == data.file_id)
+			{
+				var fieldset = $(this).parent();
+				console.log(fieldset);
+				fieldset.children('input[name*="Cache"]').val('');
+				fieldset.children('input[name*="file_id"]').val('');
+				fieldset.parent().show();
+			}
+		});
+		var cached = new Array();
+		var empty = new Array();
+		$('.fileField').each(function(){
+			if ($(this).children('fieldset').children('input[name*="Cache"]').val() != '')
+			{
+				cached.push($(this));
+			}
+			else
+			{
+				empty.push($(this));
+			}
+		});
+		
+		$('.fileField').remove();
+		var last = 0;
+		for (x in cached)
+		{
+			var elem = cached[x];
+			last = parseInt(last) + 1;
+			elem.children('.file_number').text(last);
+			$('.column-right div:last-child').after(elem);
+		}
+		for (x in empty)
+		{
+			var elem = empty[x];
+			last = parseInt(last) + 1;
+			elem.children('.file_number').text(last);
+			$('.column-right div:last-child').after(elem);
+		}
+		hideFileFields();
 	}
 }
 
