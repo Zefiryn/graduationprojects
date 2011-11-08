@@ -139,9 +139,9 @@ class Application_Form_Application extends Zefir_Form
 				->setDescription('work_desc_count')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
-				->addFilter('HtmlSpecialChars')
+				->addFilter('StripTags')
 				->addValidators(array(
-					new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
+					//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
 					new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
 				));
 		$this->addElement($element);
