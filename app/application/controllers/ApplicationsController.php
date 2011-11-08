@@ -260,7 +260,7 @@ class ApplicationsController extends Zefir_Controller_Action
 	    		$file = new Application_Model_Files($id);
 	    		if ($this->view->user->user_id == $file->application->user->user_id || $this->view->user->role == 'admin')
 	    		{
-	    			$file->delete();
+	    			//$file->delete();
 	    			$this->_helper->json(array("file_id" => $id));
 	    		}
 	    		else 
