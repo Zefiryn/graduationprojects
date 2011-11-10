@@ -500,9 +500,10 @@ class Zefir_Application_Model {
 			if (!isset($association['joinTable']) && !isset($association['joinModel']))
 			{
 				$set = array();
+				$primaryKey = $this->getDbTable()->getPrimaryKey();
 				foreach ($tableData as $row)
 				{
-					if ($row->$column == $this->$column)
+					if ($row->$column == $this->$primaryKey)
 					{
 						$parentModel = new $association['model'];
 						$parentModel->populate($row);
