@@ -23,12 +23,12 @@ class Application_Model_DbTable_Languages extends Zefir_Application_Model_DbTabl
 		'regulations' => array(
 			'model' => 'Application_Model_Regualtions',
 			'refColumn' => 'lang_id',
-			'order' => 'paragraph_no ASC'
+			'order' => 'paragraph_no'
 		),
 		'faq' => array(
 			'model' => 'Application_Model_Faqs',
 			'refColumn' => 'lang_id',
-			'order' => 'position ASC'
+			'order' => 'position'
 		),
 	);
 

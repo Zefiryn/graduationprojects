@@ -19,7 +19,7 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 		'diplomas' => array(
 			'model' => 'Application_Model_Diplomas',
 			'refColumn' => 'edition_id',
-			'order' => array('surname ASC', 'name ASC')
+			'order' => array('surname', 'name')
 		)
 	);
 	
