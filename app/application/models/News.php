@@ -33,12 +33,14 @@ class Application_Model_News extends GP_Application_Model
 		
 		$options = Zend_Registry::get('options');
 		$default_language = $options['i18n']['default_language'];
-
+		
 		foreach($this->details as $text)
 		{
 			if ($text->lang->lang_code == $lang)
-				$detail = $text->$property;
+			{
 				
+				$detail = $text->$property;
+			}	
 			if ($text->lang->lang_code == $default_language)
 				$detail_def_lang = $text->$property;
 		}
