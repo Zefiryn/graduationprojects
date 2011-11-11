@@ -455,14 +455,10 @@ class Zefir_Application_Model {
 				$tableData = $this->_getParentTableFromRegistry($name, $association['model']);
 			}
 			
-			foreach($tableData as $row)
+			if ($tableData[$this->$column])
 			{
-				if ($row[$refColumn] == $this->$column)
-				{
 					$parentModel = new $association['model'];
-					$parentModel->populate($row);
-					break;
-				}
+					$parentModel->populate($tableData[$this->$column]);
 			}
 			
 			$this->$name = $parentModel;
@@ -505,9 +501,9 @@ class Zefir_Application_Model {
 				{
 					if ($row->$column == $this->$primaryKey)
 					{
-						$parentModel = new $association['model'];
-						$parentModel->populate($row);
-						$set[] = $parentModel;
+						$childModel = new $association['model'];
+						$childModel->populate($row);
+						$set[] = $childModel;
 					}
 				}
 				
