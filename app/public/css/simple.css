@@ -242,7 +242,7 @@ menu menu a:last-child {
 	margin-bottom: 0px;
 	padding-top: 0px;
 	clear: both;
-	background-color: 00ddb3;
+	background-color: #fff;
 	padding-bottom: 20px;
 }
 
@@ -465,7 +465,7 @@ p, ul, ol {
 	font-size: 12px;
 	line-height: 20px;
 	color: rgb(51, 51, 51);
-	font-family: Arial, Helvetica, sans-serif
+	font-family: Arial, Helvetica, sans-serif;
 	font-style: normal;
 	margin-top: 10px;
 }
@@ -740,7 +740,7 @@ input, textarea, select {
 	margin: 0px;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
-	box-shadow:inset none;
+	box-shadow: none;
 	padding: 0px 3px 0px 5px;
 }
 
@@ -1073,25 +1073,25 @@ span.admin {
 }
 
 .new_rule a, .new_question a {
-	font-size: 24px;
 	text-align: right;
 	border-radius: 5px;
-	padding: 5px;
 	border: 1px solid rgb(208, 208, 208); 	/*#1e9780*/
 	background-color: rgb(238, 238, 238);
-	-o-transition: color background-color 300ms;
-	-webkit-transition: color background-color 300ms;
-	-moz-transition: color background-color 300ms;
+	-o-transition: color 300ms linear, background-color 300ms linear;
+	-webkit-transition: color 300ms linear, background-color 300ms linear;
+	-moz-transition: color 300ms linear, background-color 300ms linear;
 	margin-right: 38px;
+	font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
+	padding: 5px;
+	margin-right: 28px;
+	background-color: #eee;
+	font-size: 14px;
 }
 
 .new_rule a:hover, .new_question a:hover {
 	background-color: #e4eeec;
 	border: 1px solid #96a9a6;
 	color: #27c1a4;
-	-o-transition: color background-color 300ms;
-	-webkit-transition: color background-color 300ms;
-	-moz-transition: color background-color 300ms;
 	text-decoration: none;
 }
 
