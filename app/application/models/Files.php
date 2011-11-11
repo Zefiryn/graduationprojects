@@ -73,17 +73,10 @@ class Application_Model_Files extends GP_Application_Model
 	public function delete()
 	{
 		parent::delete();
-		if (file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$this->path))
-		{
-			unlink(APPLICATION_PATH.'/../public/assets/applications/'.$this->path);
-		}
-			
+		unlink(APPLICATION_PATH.'/../public/assets/applications/'.$this->path);
 		foreach($this->_imageData as $key => $data)
 		{
-			if (file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$this->getImage($key)))
-			{
-				unlink(APPLICATION_PATH.'/../public/assets/applications/'.$this->getImage($key));
-			}
+			unlink(APPLICATION_PATH.'/../public/assets/applications/'.$this->getImage($key));
 		}
 		
 		return $this;
