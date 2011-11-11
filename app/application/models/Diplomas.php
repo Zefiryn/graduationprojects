@@ -125,8 +125,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 			'supervisor' => $this->supervisor,
 			'supervisor_degree' => $this->supervisor_degree,
 			'name' => $this->name,
-			'surname' => $this->surname,
-			'email' => $this->email
+			'surname' => $this->surname
 		);
 	}
 	
@@ -138,7 +137,6 @@ class Application_Model_Diplomas extends GP_Application_Model
 		
 		$this->name = $data['name'];
 		$this->surname = $data['surname'];
-		$this->email = $data['email'];
 		$this->supervisor = $data['supervisor'];
 		$this->supervisor_degree = $data['supervisor_degree'];
 		$this->degree_id = $data['degree_id'] != 0 ? $data['degree_id'] : NULL;
