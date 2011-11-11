@@ -7,4 +7,4 @@ app/public/assets/applications/
 app/public/assets/images/
 app/public/assets/editions/
 app/public/.htaccess
-app/cache/zend*
+app/cache/*
