@@ -51,6 +51,17 @@ class Application_Form_Diploma extends Zefir_Form
 				));
 		$this->addElement($element);
 		
+		$element = $this->createElement('text', 'email');
+		$element->setAttribs(array('class' => 'width1'))
+				->setLabel('email')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+						new Zend_Validate_EmailAddress(),
+						new Zend_Validate_StringLength(array('min' => 3, 'max' => 35))
+					));	
+		$this->addElement($element);
+		
 		$element = $this->createElement('text', 'supervisor');
 		$element->setAttribs(array('class' => 'width1'))
 				->setLabel('supervisor')
