@@ -43,7 +43,7 @@ class Application_Form_User extends Zefir_Form
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(
-						new Zend_Validate_Regex('/^['.$L.'\- ]+$/'),
+						new Zend_Validate_Regex('/^['.$L.$N.'\-_ ]+$/'),
 						new Zend_Validate_StringLength(array('min' => 3, 'max' => 50)),
 						new Zefir_Validate_Unique(array(
         							'table' => 'users',
