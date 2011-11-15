@@ -652,14 +652,29 @@ a.lang-selected:hover {
 	padding-top: 10px;
 }
 
-.creator {
+.media-partners {
 	border-top: 1px dashed #999999 !important;
-	text-align: right !important;
+	padding-top: 8px !important;
+	text-align: left !important;
+}
+.media-partners img {
+	margin: 0px 40px 0px 0px;
+}
+.media-partners a:hover img {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
 }
 
-.creator a {
-	font-size: 10px;
+.creator {margin-top: 35px;}
+.creator, .creator a {
+	text-align: left;
+	font-size: 10px !important;
 	color: #999;
+}
+
+.bold {
+	font-weight: bold;
 }
 
 .paginator {
