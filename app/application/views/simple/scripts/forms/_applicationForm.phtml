@@ -7,13 +7,13 @@
       enctype="<?php echo $form->getEnctype(); ?>"
       class="contact">
 
-	<?php if ($form->csrf->hasErrors()):?>
+	<?php /*if ($form->csrf->hasErrors()):?>
 		<p class="spacer">&nbsp;</p>
 		<div id="error-csrf" class="error-div">
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>
 		</div>
 	<?php endif;?>
-	<?php echo $form->csrf->renderViewHelper(); ?> 
+	<?php echo $form->csrf->renderViewHelper(); */?> 
 	<?php echo $form->edition_id;?>
 	
 	<div class="column-left">

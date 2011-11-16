@@ -8,3 +8,4 @@ app/public/assets/images/
 app/public/assets/editions/
 app/public/.htaccess
 app/cache/*
+app/log/*.log            
