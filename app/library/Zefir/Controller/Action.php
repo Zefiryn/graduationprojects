@@ -10,7 +10,7 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 {
 	protected $_role;
 	protected $_cache;
-	protected $_log;
+	protected $_log = NULL;
 	/**
 	 * init function
 	 * @access public
@@ -72,9 +72,8 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 			$formatter = new Zend_Log_Formatter_Simple($format);
 			$writer->setFormatter($formatter);
 			$logger->addWriter($writer);
+			$this->_log = $logger;
 		}
-		
-		$this->_log = $logger;
 	}
 	
 	/**
@@ -92,7 +91,10 @@ class Zefir_Controller_Action extends Zend_Controller_Action
 			$message = print_r($message, true);
 		}
 		
-		$logger = $this->_log->log($message, Zend_Log::DEBUG);
+		if ($this->_log)
+		{
+			$this->_log->log($message, Zend_Log::DEBUG);
+		}
 	}
 	
 	/**
