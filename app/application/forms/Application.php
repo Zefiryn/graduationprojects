@@ -67,7 +67,7 @@ class Application_Form_Application extends Zefir_Form
 		if ($this->_type == 'new')
 		{
 			$userSubForm = new Application_Form_User('subform');
-			$userSubForm->removeDecorator('form');
+			$userSubForm->setDecorators(array('FormElements'));
 			$userSubForm->removeElement('csrf');
 			$userSubForm->removeElement('role');
 			$this->addSubForm($userSubForm, 'user');
