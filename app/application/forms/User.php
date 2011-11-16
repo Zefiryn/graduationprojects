@@ -34,7 +34,7 @@ class Application_Form_User extends Zefir_Form
 		$this->addElementPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
 		$this->addPrefixPath('GP_Decorator', 'GP/Form/Decorator', 'decorator');
         
-        $element = $this->createElement('hidden', 'user_id');	
+        $element = $this->createElement('hidden', 'user_id')->setDecorators(array('ViewHelper'));	
 		$this->addElement($element);
 		
         $element = $this->createElement('text', 'nick');
