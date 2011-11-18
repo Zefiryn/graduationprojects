@@ -76,11 +76,11 @@ class ApplicationsController extends Zefir_Controller_Action
 			}				
 			else
 			{//form has errors
+				$form = $this->_handleFiles($form, $cached);
 				$this->_log('Request:');
 				$this->_log($this->getRequest()->getParams());
 				$this->_log('Form values:');
 				$this->_log($form->getValues());
-				$form = $this->_handleFiles($form, $cached);
 			}	
 		}
 		else
