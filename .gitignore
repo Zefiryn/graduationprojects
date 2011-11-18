@@ -9,3 +9,4 @@ app/public/assets/editions/
 app/public/.htaccess
 app/cache/*
 app/log/*.log            
+app/library/Zefir
