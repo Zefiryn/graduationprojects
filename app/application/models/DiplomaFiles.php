@@ -4,7 +4,6 @@ class Application_Model_DiplomaFiles extends GP_Application_Model
 {
 	public $file_id;
 	public $path;
-	public $file_desc;
 	public $diploma_id;
 	public $position;
 	protected $diploma;
