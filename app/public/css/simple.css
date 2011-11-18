@@ -639,26 +639,37 @@ a.lang-selected:hover {
 	float: right;
 }
 
+.footer-desc {
+	font-weight: normal;
+	font-size: 11px;
+	font-style: normal;
+	color: #666666;
+	padding-left: 2px;
+	display: block;
+	clear: both;
+}
+
 .organizers_info {
-	width: 120px;
-	border: 0px solid;
+	width: 150px;
 	float: right;
 	height: 85px;
-	margin-top: -10px;
+	margin-top: -5px;
 	text-align: left;
 	font-size: 11px;
 	line-height: 14px;
 	color: #666666;
 	padding-top: 10px;
+	border: 0px solid #000;
+	padding-left: 10px;
 }
 
 .media-partners {
 	border-top: 1px dashed #999999 !important;
-	padding-top: 8px !important;
+	padding-top: 4px !important;
 	text-align: left !important;
 }
 .media-partners img {
-	margin: 0px 40px 0px 0px;
+	margin: 0px;
 }
 .media-partners a:hover img {
 	border-radius: 0px;
