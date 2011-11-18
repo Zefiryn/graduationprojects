@@ -295,11 +295,14 @@ class ApplicationsController extends Zefir_Controller_Action
     	
     	for($i = 1; $i <= $appSettings->max_files; $i++)
     	{
-    		$fileCache = $params['file_'.$i]['file_'.$i.'Cache'];
+    		$fileCache = isset($params['file_'.$i]['file_'.$i.'Cache']) ?
+    			$params['file_'.$i]['file_'.$i.'Cache'] : null;
+    			    		
     		if ($type == 'new')
     			$file = APPLICATION_PATH.'/../public'.$options['upload']['cache'].'/'.$fileCache;
     		else
     			$file = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$fileCache;
+    		
     		if ($fileCache != null && file_exists($file))
     			$cached = TRUE;
     	}
