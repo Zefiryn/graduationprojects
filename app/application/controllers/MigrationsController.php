@@ -607,8 +607,9 @@ class MigrationsController extends Zefir_Controller_Action
 	
 	public function infoAction()
 	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 		phpinfo();
-		$this->render('index');
 	}
 }
 
