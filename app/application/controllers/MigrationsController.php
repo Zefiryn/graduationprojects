@@ -604,5 +604,11 @@ class MigrationsController extends Zefir_Controller_Action
 		}
 		$this->render('index');
 	}
+	
+	public function infoAction()
+	{
+		phpinfo();
+		$this->render('index');
+	}
 }
 
