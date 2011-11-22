@@ -5,7 +5,7 @@
 <form action="<?php echo $this->escape($form->getAction()); ?>"
       method="<?php echo $this->escape($form->getMethod()); ?>"
       enctype="<?php echo $form->getEnctype(); ?>"
-      class="contact">
+      class="contact" id="applicationForm">
 	<?php if ($form->csrf->hasErrors()):?>
 		<div id="error-csrf" class="error-div">
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>

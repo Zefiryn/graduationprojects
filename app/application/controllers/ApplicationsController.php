@@ -50,7 +50,9 @@ class ApplicationsController extends Zefir_Controller_Action
 			
 			if($request->getParam('leave', null))
 			{
+				$this->_log('leaving');
 				$this->_deleteCachedFiles($request->getPost());
+				$this->flashMe('cancel_edit');
 				$this->_redirectToRoute(array(), 'root');	
 			}
 			
