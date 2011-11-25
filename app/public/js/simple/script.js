@@ -60,7 +60,33 @@ $(document).ready(function(){
 		newsLangChoice();
 	}
 	
+	if ($('#applicationForm').length)
+	{
+		disableSubmitOnEnter();
+	}
 });
+
+function disableSubmitOnEnter()
+{
+	//var formFields = $('input[type!="hidden"], textarea, select')
+	$('input, select').keypress(function(e){
+		if (e.which == 13)
+		{
+			e.preventDefault();
+			/*
+			 * go to next field 
+			var curElem = $(this);
+			formFields.each(function(index){
+				var elem = $(this);
+				if (elem.attr('name') == curElem.attr('name'))
+				{
+					formFields[index + 1].focus();
+				}
+			});
+			*/
+		}
+	});
+}
 
 function deleteNewsFiles()
 {

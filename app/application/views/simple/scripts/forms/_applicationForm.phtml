@@ -5,7 +5,7 @@
 <form action="<?php echo $this->escape($form->getAction()); ?>"
       method="<?php echo $this->escape($form->getMethod()); ?>"
       enctype="<?php echo $form->getEnctype(); ?>"
-      class="contact">
+      class="contact" id="applicationForm">
 
 	<?php if ($form->csrf->hasErrors()):?>
 		<p class="spacer">&nbsp;</p>
@@ -104,8 +104,8 @@
 	<p class="clearfix"></p>
 	<fieldset class="submit">
 		<p class="submit center">
-			<?php echo $form->leave; ?>
 			<?php echo $form->submit; ?>
+			<?php echo $form->leave; ?>
 		</p>
 	</fieldset>
 		
