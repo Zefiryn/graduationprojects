@@ -26,23 +26,6 @@ class Application_Model_Diplomas extends GP_Application_Model
 	    return parent::__construct($id, $options);
 	}
 	
-	/**
-	 * Add new field for this application
-	 * 
-	 * @access public
-	 * @param Application_Model_DiplomaFields $field
-	 * @return Applcation_Model_Diplomas $this
-	 */
-	public function addChild(Zefir_Application_Model $object, $var)
-	{
-		if (!is_array($this->$var))
-			$this->$var = array();
-			
-		array_push($this->$var, $object);
-
-		return $this;
-	}
-	
 	public function save()
 	{
 		$self = $this->getDbTable()->save($this);
