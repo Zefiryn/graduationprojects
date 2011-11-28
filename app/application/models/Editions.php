@@ -79,5 +79,60 @@ class Application_Model_Editions extends GP_Application_Model
 		
 		return $data;
 	}
+	
+	public function getDiplomas()
+	{
+		$diplomaTable = new Application_Model_DbTable_Diplomas();
+		$diplomaFieldsTable = new Application_Model_DbTable_DiplomaFields();
+		$diplomaFilesTable = new Application_Model_DbTable_DiplomaFiles();
+		$fields = new Application_Model_DbTable_Fields();
+		$langs = new Application_Model_DbTable_Languages();
+		
+		$select = $this->getDbTable()->select()->setIntegrityCheck(false);
+		$select->from(array('e' => $this->getDbTable()->getTableName()))
+				->joinLeft(array('d' => $diplomaTable->getTableName()), 'd.edition_id = e.edition_id')
+				->joinLeft(array('fd' => $diplomaFieldsTable->getTableName()), 'fd.diploma_id = d.diploma_id')
+				->joinLeft(array('fi' => $diplomaFilesTable->getTableName()), 'fi.diploma_id = d.diploma_id')
+				->joinLeft(array('f' => $fields->getTableName()), 'f.field_id = fd.field_id')
+				->joinLeft(array('l' => $langs->getTableName()), 'fd.lang_id = l.lang_id')
+				->where('e.edition_id = ?', $this->edition_id)
+				->order(array('surname ASC', 'name ASC', 'fi.position ASC'));
+				
+		
+		$diplomas = array();
+		$fields = array();
+		foreach ($diplomaTable->fetchAll($select) as $row)
+		{
+			if (!isset($diplomas[$row['diploma_id']]))
+			{
+				$diploma = new Application_Model_Diplomas();
+				$diploma->populate($row);
+			}
+			if (!isset($fields[$row['diploma_field_id']]))
+			{
+				$diplomaField = new Application_Model_DiplomaFields();
+				$diplomaField->populate($row);
+				
+				$field = new Application_Model_Fields();
+				$field->populate($row);
+				$diplomaField->addParent($field, 'field');
+				
+				$lang = new Application_Model_Languages();
+				$lang->populate($row);
+				$diplomaField->addParent($lang, 'lang');
+				
+				$diploma->addChild($diplomaField, 'fields');
+				$fields[$row['diploma_field_id']] = TRUE;
+			}
+			
+			$diplomaFile = new Application_Model_DiplomaFiles();
+			$diplomaFile->populate($row);
+			$diploma->addChild($diplomaFile, 'files');
+			
+			$diplomas[$row['diploma_id']] = $diploma;
+		}
+		
+		return $diplomas;
+	}
 }
 

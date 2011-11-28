@@ -15,9 +15,9 @@ class DiplomasController extends Zefir_Controller_Action
     	$selected_edition = $this->getRequest()->getParam('edition', array_shift($editions));
     	$selected_edition = str_replace('-', '–', $selected_edition);
 		
-		$edition->getEdition($selected_edition, TRUE);
+    	$edition->getEdition($selected_edition, TRUE);
 		
-		$this->view->diplomas = $edition->diplomas;
+		$this->view->diplomas = $edition->diplomas; 
 		$this->view->path = array(
 			0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
     		1 => array('route' => 'diplomas', 'data' => array('edition' => $selected_edition), 'name' => array('edition', $selected_edition)),
