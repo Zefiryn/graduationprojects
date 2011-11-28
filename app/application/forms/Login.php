@@ -45,7 +45,7 @@ class Application_Form_Login extends Zefir_Form
 				->setDescription('Hasło')
 				->setLabel('password')
 				->setRequired(true)
-				->addValidator(new Zefir_Validate_Password(1, 100))
+				->addValidator()
 				->setDecorators(array(
 					array('PasswordField'),
 					array('ErrorMsg')
