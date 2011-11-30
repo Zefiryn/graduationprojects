@@ -39,29 +39,29 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_TestPHPUnitBootstrapFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'bootstrap.php';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'bootstrap.php';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestPHPUnitBootstrapFile';
-    }
-    
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
-        $codeGenerator = new Zend_CodeGenerator_Php_File(array(
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestPHPUnitBootstrapFile';
+	}
+
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+		$codeGenerator = new Zend_CodeGenerator_Php_File(array(
             'body' => <<<EOS
 // Define path to application directory
 defined('APPLICATION_PATH')
@@ -81,8 +81,8 @@ require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
 EOS
-            ));
-        return $codeGenerator->generate();
-    }
+		));
+		return $codeGenerator->generate();
+	}
 
 }

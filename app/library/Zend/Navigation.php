@@ -34,21 +34,21 @@ require_once 'Zend/Navigation/Container.php';
  */
 class Zend_Navigation extends Zend_Navigation_Container
 {
-    /**
-     * Creates a new navigation container
-     *
-     * @param array|Zend_Config $pages    [optional] pages to add
-     * @throws Zend_Navigation_Exception  if $pages is invalid
-     */
-    public function __construct($pages = null)
-    {
-        if (is_array($pages) || $pages instanceof Zend_Config) {
-            $this->addPages($pages);
-        } elseif (null !== $pages) {
-            require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(
+	/**
+	 * Creates a new navigation container
+	 *
+	 * @param array|Zend_Config $pages    [optional] pages to add
+	 * @throws Zend_Navigation_Exception  if $pages is invalid
+	 */
+	public function __construct($pages = null)
+	{
+		if (is_array($pages) || $pages instanceof Zend_Config) {
+			$this->addPages($pages);
+		} elseif (null !== $pages) {
+			require_once 'Zend/Navigation/Exception.php';
+			throw new Zend_Navigation_Exception(
                     'Invalid argument: $pages must be an array, an ' .
                     'instance of Zend_Config, or null');
-        }
-    }
+		}
+	}
 }

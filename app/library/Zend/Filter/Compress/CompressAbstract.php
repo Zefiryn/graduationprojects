@@ -34,56 +34,56 @@ require_once 'Zend/Filter/Compress/CompressInterface.php';
  */
 abstract class Zend_Filter_Compress_CompressAbstract implements Zend_Filter_Compress_CompressInterface
 {
-    /**
-     * Class constructor
-     *
-     * @param array|Zend_Config $options (Optional) Options to set
-     */
-    public function __construct($options = null)
-    {
-        if ($options instanceof Zend_Config) {
-            $options = $options->toArray();
-        }
+	/**
+	 * Class constructor
+	 *
+	 * @param array|Zend_Config $options (Optional) Options to set
+	 */
+	public function __construct($options = null)
+	{
+		if ($options instanceof Zend_Config) {
+			$options = $options->toArray();
+		}
 
-        if (is_array($options)) {
-            $this->setOptions($options);
-        }
-    }
+		if (is_array($options)) {
+			$this->setOptions($options);
+		}
+	}
 
-    /**
-     * Returns one or all set options
-     *
-     * @param string $option (Optional) Option to return
-     * @return mixed
-     */
-    public function getOptions($option = null)
-    {
-        if ($option === null) {
-            return $this->_options;
-        }
+	/**
+	 * Returns one or all set options
+	 *
+	 * @param string $option (Optional) Option to return
+	 * @return mixed
+	 */
+	public function getOptions($option = null)
+	{
+		if ($option === null) {
+			return $this->_options;
+		}
 
-        if (!array_key_exists($option, $this->_options)) {
-            return null;
-        }
+		if (!array_key_exists($option, $this->_options)) {
+			return null;
+		}
 
-        return $this->_options[$option];
-    }
+		return $this->_options[$option];
+	}
 
-    /**
-     * Sets all or one option
-     *
-     * @param  array $options
-     * @return Zend_Filter_Compress_Bz2
-     */
-    public function setOptions(array $options)
-    {
-        foreach ($options as $key => $option) {
-            $method = 'set' . $key;
-            if (method_exists($this, $method)) {
-                $this->$method($option);
-            }
-        }
+	/**
+	 * Sets all or one option
+	 *
+	 * @param  array $options
+	 * @return Zend_Filter_Compress_Bz2
+	 */
+	public function setOptions(array $options)
+	{
+		foreach ($options as $key => $option) {
+			$method = 'set' . $key;
+			if (method_exists($this, $method)) {
+				$this->$method($option);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 }

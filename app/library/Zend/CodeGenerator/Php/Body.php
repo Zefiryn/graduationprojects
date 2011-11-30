@@ -34,40 +34,40 @@ require_once 'Zend/CodeGenerator/Abstract.php';
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Abstract
 {
 
-    /**
-     * @var string
-     */
-    protected $_content = null;
+	/**
+	 * @var string
+	 */
+	protected $_content = null;
 
-    /**
-     * setContent()
-     *
-     * @param string $content
-     * @return Zend_CodeGenerator_Php_Body
-     */
-    public function setContent($content)
-    {
-        $this->_content = $content;
-        return $this;
-    }
+	/**
+	 * setContent()
+	 *
+	 * @param string $content
+	 * @return Zend_CodeGenerator_Php_Body
+	 */
+	public function setContent($content)
+	{
+		$this->_content = $content;
+		return $this;
+	}
 
-    /**
-     * getContent()
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return (string) $this->_content;
-    }
+	/**
+	 * getContent()
+	 *
+	 * @return string
+	 */
+	public function getContent()
+	{
+		return (string) $this->_content;
+	}
 
-    /**
-     * generate()
-     *
-     * @return string
-     */
-    public function generate()
-    {
-        return $this->getContent();
-    }
+	/**
+	 * generate()
+	 *
+	 * @return string
+	 */
+	public function generate()
+	{
+		return $this->getContent();
+	}
 }

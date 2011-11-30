@@ -34,9 +34,9 @@ require_once 'Zend/Dojo/Form/Element/Button.php';
  */
 class Zend_Dojo_Form_Element_SubmitButton extends Zend_Dojo_Form_Element_Button
 {
-    /**
-     * Use SubmitButton dijit view helper
-     * @var string
-     */
-    public $helper = 'SubmitButton';
+	/**
+	 * Use SubmitButton dijit view helper
+	 * @var string
+	 */
+	public $helper = 'SubmitButton';
 }

@@ -36,13 +36,13 @@ require_once 'Zend/Ldap/Filter/Logical.php';
  */
 class Zend_Ldap_Filter_Or extends Zend_Ldap_Filter_Logical
 {
-    /**
-     * Creates an 'or' grouping filter.
-     *
-     * @param array $subfilters
-     */
-    public function __construct(array $subfilters)
-    {
-        parent::__construct($subfilters, self::TYPE_OR);
-    }
+	/**
+	 * Creates an 'or' grouping filter.
+	 *
+	 * @param array $subfilters
+	 */
+	public function __construct(array $subfilters)
+	{
+		parent::__construct($subfilters, self::TYPE_OR);
+	}
 }

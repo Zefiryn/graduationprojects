@@ -35,6 +35,6 @@
 interface Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry);
+	public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry);
 
 }

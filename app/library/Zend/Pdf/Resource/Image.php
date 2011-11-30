@@ -39,35 +39,35 @@ require_once 'Zend/Pdf/Resource.php';
  */
 abstract class Zend_Pdf_Resource_Image extends Zend_Pdf_Resource
 {
-    /**
-     * Object constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct('');
+	/**
+	 * Object constructor.
+	 */
+	public function __construct()
+	{
+		parent::__construct('');
 
-        $this->_resource->dictionary->Type    = new Zend_Pdf_Element_Name('XObject');
-        $this->_resource->dictionary->Subtype = new Zend_Pdf_Element_Name('Image');
-    }
-    /**
-     * get the height in pixels of the image
-     *
-     * @return integer
-     */
-    abstract public function getPixelHeight();
+		$this->_resource->dictionary->Type    = new Zend_Pdf_Element_Name('XObject');
+		$this->_resource->dictionary->Subtype = new Zend_Pdf_Element_Name('Image');
+	}
+	/**
+	 * get the height in pixels of the image
+	 *
+	 * @return integer
+	 */
+	abstract public function getPixelHeight();
 
-    /**
-     * get the width in pixels of the image
-     *
-     * @return integer
-     */
-    abstract public function getPixelWidth();
+	/**
+	 * get the width in pixels of the image
+	 *
+	 * @return integer
+	 */
+	abstract public function getPixelWidth();
 
-    /**
-     * gets an associative array of information about an image
-     *
-     * @return array
-     */
-    abstract public function getProperties();
+	/**
+	 * gets an associative array of information about an image
+	 *
+	 * @return array
+	 */
+	abstract public function getProperties();
 }
 

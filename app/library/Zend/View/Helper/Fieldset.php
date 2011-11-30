@@ -33,47 +33,47 @@ require_once 'Zend/View/Helper/FormElement.php';
  */
 class Zend_View_Helper_Fieldset extends Zend_View_Helper_FormElement
 {
-    /**
-     * Render HTML form
-     *
-     * @param  string $name Form name
-     * @param  string $content Form content
-     * @param  array $attribs HTML form attributes
-     * @return string
-     */
-    public function fieldset($name, $content, $attribs = null)
-    {
-        $info = $this->_getInfo($name, $content, $attribs);
-        extract($info);
+	/**
+	 * Render HTML form
+	 *
+	 * @param  string $name Form name
+	 * @param  string $content Form content
+	 * @param  array $attribs HTML form attributes
+	 * @return string
+	 */
+	public function fieldset($name, $content, $attribs = null)
+	{
+		$info = $this->_getInfo($name, $content, $attribs);
+		extract($info);
 
-        // get legend
-        $legend = '';
-        if (isset($attribs['legend'])) {
-            $legendString = trim($attribs['legend']);
-            if (!empty($legendString)) {
-                $legend = '<legend>'
-                        . (($escape) ? $this->view->escape($legendString) : $legendString)
-                        . '</legend>' . PHP_EOL;
-            }
-            unset($attribs['legend']);
-        }
+		// get legend
+		$legend = '';
+		if (isset($attribs['legend'])) {
+			$legendString = trim($attribs['legend']);
+			if (!empty($legendString)) {
+				$legend = '<legend>'
+				. (($escape) ? $this->view->escape($legendString) : $legendString)
+				. '</legend>' . PHP_EOL;
+			}
+			unset($attribs['legend']);
+		}
 
-        // get id
-        if (!empty($id)) {
-            $id = ' id="' . $this->view->escape($id) . '"';
-        } else {
-            $id = '';
-        }
+		// get id
+		if (!empty($id)) {
+			$id = ' id="' . $this->view->escape($id) . '"';
+		} else {
+			$id = '';
+		}
 
-        // render fieldset
-        $xhtml = '<fieldset'
-               . $id
-               . $this->_htmlAttribs($attribs)
-               . '>'
-               . $legend
-               . $content
-               . '</fieldset>';
+		// render fieldset
+		$xhtml = '<fieldset'
+		. $id
+		. $this->_htmlAttribs($attribs)
+		. '>'
+		. $legend
+		. $content
+		. '</fieldset>';
 
-        return $xhtml;
-    }
+		return $xhtml;
+	}
 }

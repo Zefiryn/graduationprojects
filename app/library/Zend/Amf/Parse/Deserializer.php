@@ -35,31 +35,31 @@
  */
 abstract class Zend_Amf_Parse_Deserializer
 {
-    /**
-     * The raw string that represents the AMF request.
-     *
-     * @var Zend_Amf_Parse_InputStream
-     */
-    protected $_stream;
+	/**
+	 * The raw string that represents the AMF request.
+	 *
+	 * @var Zend_Amf_Parse_InputStream
+	 */
+	protected $_stream;
 
-    /**
-     * Constructor
-     *
-     * @param  Zend_Amf_Parse_InputStream $stream
-     * @return void
-     */
-    public function __construct(Zend_Amf_Parse_InputStream $stream)
-    {
-        $this->_stream = $stream;
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  Zend_Amf_Parse_InputStream $stream
+	 * @return void
+	 */
+	public function __construct(Zend_Amf_Parse_InputStream $stream)
+	{
+		$this->_stream = $stream;
+	}
 
-    /**
-     * Checks for AMF marker types and calls the appropriate methods
-     * for deserializing those marker types. Markers are the data type of
-     * the following value.
-     *
-     * @param  int $typeMarker
-     * @return mixed Whatever the data type is of the marker in php
-     */
-    public abstract function readTypeMarker($markerType = null);
+	/**
+	 * Checks for AMF marker types and calls the appropriate methods
+	 * for deserializing those marker types. Markers are the data type of
+	 * the following value.
+	 *
+	 * @param  int $typeMarker
+	 * @return mixed Whatever the data type is of the marker in php
+	 */
+	public abstract function readTypeMarker($markerType = null);
 }

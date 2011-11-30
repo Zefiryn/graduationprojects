@@ -1,10 +1,14 @@
 <div id="main">
-	<h1><?php echo $this->translate('application_edit_header'); ?></h1>
+	<h1>
+	<?php echo $this->translate('application_edit_header'); ?></h1>
 	<p class="spacer">&nbsp;</p>
+	
+	
 
 	<?php echo $this->form;?>
 </div>
 
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'file', 'delete_confirm' => $this->translate('application_image_delete_confirm')));
+
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'file', 'delete_confirm' => $this->translate('application_image_delete_confirm')));
 ?>

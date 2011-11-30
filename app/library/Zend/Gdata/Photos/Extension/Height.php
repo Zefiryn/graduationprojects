@@ -44,19 +44,19 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Height extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'height';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'height';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_Height object.
-     *
-     * @param string $text (optional) The value to represent.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_Height object.
+	 *
+	 * @param string $text (optional) The value to represent.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

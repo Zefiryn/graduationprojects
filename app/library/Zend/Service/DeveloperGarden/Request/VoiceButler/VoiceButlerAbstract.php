@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Service_DeveloperGarden_Request_VoiceButler_VoiceButlerAbstract
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
 }

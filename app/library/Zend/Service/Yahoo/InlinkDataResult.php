@@ -36,23 +36,23 @@ require_once 'Zend/Service/Yahoo/Result.php';
  */
 class Zend_Service_Yahoo_InlinkDataResult extends Zend_Service_Yahoo_Result
 {
-    /**
-     * Web result namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srch';
+	/**
+	 * Web result namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srch';
 
 
-    /**
-     * Initializes the web result
-     *
-     * @param  DOMElement $result
-     * @return void
-     */
-    public function __construct(DOMElement $result)
-    {
-        $this->_fields = array();
-        parent::__construct($result);
-    }
+	/**
+	 * Initializes the web result
+	 *
+	 * @param  DOMElement $result
+	 * @return void
+	 */
+	public function __construct(DOMElement $result)
+	{
+		$this->_fields = array();
+		parent::__construct($result);
+	}
 }

@@ -36,26 +36,26 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_Content_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+extends Zend_Feed_Reader_Extension_EntryAbstract
 {
 
-    public function getContent()
-    {
-        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
-            && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090
-        ) {
-            $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
-        } else {
-            $content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
-        }
-        return $content;
-    }
+	public function getContent()
+	{
+		if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
+		&& $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090
+		) {
+			$content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+		} else {
+			$content = $this->_xpath->evaluate('string('.$this->getXpathPrefix().'/content:encoded)');
+		}
+		return $content;
+	}
 
-    /**
-     * Register RSS Content Module namespace
-     */
-    protected function _registerNamespaces()
-    {
-        $this->_xpath->registerNamespace('content', 'http://purl.org/rss/1.0/modules/content/');
-    }
+	/**
+	 * Register RSS Content Module namespace
+	 */
+	protected function _registerNamespaces()
+	{
+		$this->_xpath->registerNamespace('content', 'http://purl.org/rss/1.0/modules/content/');
+	}
 }

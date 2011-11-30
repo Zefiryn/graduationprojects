@@ -31,51 +31,51 @@
  */
 class Zend_Service_Simpy_WatchlistFilter
 {
-    /**
-     * Name of the filter
-     *
-     * @var string
-     */
-    protected $_name;
+	/**
+	 * Name of the filter
+	 *
+	 * @var string
+	 */
+	protected $_name;
 
-    /**
-     * Query for the filter
-     *
-     * @var string
-     */
-    protected $_query;
+	/**
+	 * Query for the filter
+	 *
+	 * @var string
+	 */
+	protected $_query;
 
-    /**
-     * Constructor to initialize the object with data
-     *
-     * @param  DOMNode $node Individual <filter> node from a parsed response from
-     *                       a GetWatchlists or GetWatchlist operation
-     * @return void
-     */
-    public function __construct($node)
-    {
-        $map =& $node->attributes;
-        $this->_name = $map->getNamedItem('name')->nodeValue;
-        $this->_query = $map->getNamedItem('query')->nodeValue;
-    }
+	/**
+	 * Constructor to initialize the object with data
+	 *
+	 * @param  DOMNode $node Individual <filter> node from a parsed response from
+	 *                       a GetWatchlists or GetWatchlist operation
+	 * @return void
+	 */
+	public function __construct($node)
+	{
+		$map =& $node->attributes;
+		$this->_name = $map->getNamedItem('name')->nodeValue;
+		$this->_query = $map->getNamedItem('query')->nodeValue;
+	}
 
-    /**
-     * Returns the name of the filter
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
+	/**
+	 * Returns the name of the filter
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
 
-    /**
-     * Returns the query for the filter
-     *
-     * @return string
-     */
-    public function getQuery()
-    {
-        return $this->_query;
-    }
+	/**
+	 * Returns the query for the filter
+	 *
+	 * @return string
+	 */
+	public function getQuery()
+	{
+		return $this->_query;
+	}
 }

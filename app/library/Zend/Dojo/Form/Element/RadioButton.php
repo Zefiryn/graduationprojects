@@ -34,9 +34,9 @@ require_once 'Zend/Dojo/Form/Element/DijitMulti.php';
  */
 class Zend_Dojo_Form_Element_RadioButton extends Zend_Dojo_Form_Element_DijitMulti
 {
-    /**
-     * Use RadioButton dijit view helper
-     * @var string
-     */
-    public $helper = 'RadioButton';
+	/**
+	 * Use RadioButton dijit view helper
+	 * @var string
+	 */
+	public $helper = 'RadioButton';
 }

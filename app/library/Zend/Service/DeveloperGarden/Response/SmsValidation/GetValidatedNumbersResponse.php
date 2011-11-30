@@ -34,22 +34,22 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_SmsValidation_GetValidatedNumbersResponse
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * array of validated numbers
-     *
-     * @var array of Zend_Service_DeveloperGarden_Response_SmsValidation_ValidatedNumber
-     */
-    public $validatedNumbers = null;
+	/**
+	 * array of validated numbers
+	 *
+	 * @var array of Zend_Service_DeveloperGarden_Response_SmsValidation_ValidatedNumber
+	 */
+	public $validatedNumbers = null;
 
-    /**
-     * returns the internal array of validated numbers
-     *
-     * @return array of Zend_Service_DeveloperGarden_Response_SmsValidation_ValidatedNumber
-     */
-    public function getNumbers()
-    {
-        return (array) $this->validatedNumbers;
-    }
+	/**
+	 * returns the internal array of validated numbers
+	 *
+	 * @return array of Zend_Service_DeveloperGarden_Response_SmsValidation_ValidatedNumber
+	 */
+	public function getNumbers()
+	{
+		return (array) $this->validatedNumbers;
+	}
 }

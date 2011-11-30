@@ -45,24 +45,24 @@ require_once 'Zend/Gdata/YouTube/ContactEntry.php';
 class Zend_Gdata_YouTube_ContactFeed extends Zend_Gdata_Media_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_YouTube_ContactEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_YouTube_ContactEntry';
 
-    /**
-     * Constructs a new YouTube Contact Feed object, to represent
-     * a feed of contacts for a user
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new YouTube Contact Feed object, to represent
+	 * a feed of contacts for a user
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct($element);
+	}
 
 }

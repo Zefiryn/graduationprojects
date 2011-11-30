@@ -29,38 +29,38 @@
  */
 interface Zend_Memory_Container_Interface
 {
-    /**
-     * Get string value reference
-     *
-     * _Must_ be used for value access before PHP v 5.2
-     * or _may_ be used for performance considerations
-     *
-     * @return &string
-     */
-    public function &getRef();
+	/**
+	 * Get string value reference
+	 *
+	 * _Must_ be used for value access before PHP v 5.2
+	 * or _may_ be used for performance considerations
+	 *
+	 * @return &string
+	 */
+	public function &getRef();
 
-    /**
-     * Signal, that value is updated by external code.
-     *
-     * Should be used together with getRef()
-     */
-    public function touch();
+	/**
+	 * Signal, that value is updated by external code.
+	 *
+	 * Should be used together with getRef()
+	 */
+	public function touch();
 
-    /**
-     * Lock object in memory.
-     */
-    public function lock();
+	/**
+	 * Lock object in memory.
+	 */
+	public function lock();
 
-    /**
-     * Unlock object
-     */
-    public function unlock();
+	/**
+	 * Unlock object
+	 */
+	public function unlock();
 
-    /**
-     * Return true if object is locked
-     *
-     * @return boolean
-     */
-    public function isLocked();
+	/**
+	 * Return true if object is locked
+	 *
+	 * @return boolean
+	 */
+	public function isLocked();
 }
 

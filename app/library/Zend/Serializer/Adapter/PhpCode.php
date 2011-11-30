@@ -32,36 +32,36 @@ require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
  */
 class Zend_Serializer_Adapter_PhpCode extends Zend_Serializer_Adapter_AdapterAbstract
 {
-    /**
-     * Serialize PHP using var_export
-     *
-     * @param  mixed $value
-     * @param  array $opts
-     * @return string
-     */
-    public function serialize($value, array $opts = array())
-    {
-        return var_export($value, true);
-    }
+	/**
+	 * Serialize PHP using var_export
+	 *
+	 * @param  mixed $value
+	 * @param  array $opts
+	 * @return string
+	 */
+	public function serialize($value, array $opts = array())
+	{
+		return var_export($value, true);
+	}
 
-    /**
-     * Deserialize PHP string
-     *
-     * Warning: this uses eval(), and should likely be avoided.
-     *
-     * @param  string $code
-     * @param  array $opts
-     * @return mixed
-     * @throws Zend_Serializer_Exception on eval error
-     */
-    public function unserialize($code, array $opts = array())
-    {
-        $eval = @eval('$ret=' . $code . ';');
-        if ($eval === false) {
-                $lastErr = error_get_last();
-                require_once 'Zend/Serializer/Exception.php';
-                throw new Zend_Serializer_Exception('eval failed: ' . $lastErr['message']);
-        }
-        return $ret;
-    }
+	/**
+	 * Deserialize PHP string
+	 *
+	 * Warning: this uses eval(), and should likely be avoided.
+	 *
+	 * @param  string $code
+	 * @param  array $opts
+	 * @return mixed
+	 * @throws Zend_Serializer_Exception on eval error
+	 */
+	public function unserialize($code, array $opts = array())
+	{
+		$eval = @eval('$ret=' . $code . ';');
+		if ($eval === false) {
+			$lastErr = error_get_last();
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception('eval failed: ' . $lastErr['message']);
+		}
+		return $ret;
+	}
 }

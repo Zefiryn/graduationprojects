@@ -37,376 +37,376 @@ require_once 'Zend/Reflection/Function.php';
  */
 class Zend_Reflection_File implements Reflector
 {
-    /**
-     * @var string
-     */
-    protected $_filepath        = null;
+	/**
+	 * @var string
+	 */
+	protected $_filepath        = null;
 
-    /**
-     * @var string
-     */
-    protected $_docComment      = null;
+	/**
+	 * @var string
+	 */
+	protected $_docComment      = null;
 
-    /**
-     * @var int
-     */
-    protected $_startLine       = 1;
+	/**
+	 * @var int
+	 */
+	protected $_startLine       = 1;
 
-    /**
-     * @var int
-     */
-    protected $_endLine         = null;
+	/**
+	 * @var int
+	 */
+	protected $_endLine         = null;
 
-    /**
-     * @var string[]
-     */
-    protected $_requiredFiles   = array();
+	/**
+	 * @var string[]
+	 */
+	protected $_requiredFiles   = array();
 
-    /**
-     * @var Zend_Reflection_Class[]
-     */
-    protected $_classes         = array();
+	/**
+	 * @var Zend_Reflection_Class[]
+	 */
+	protected $_classes         = array();
 
-    /**
-     * @var Zend_Reflection_Function[]
-     */
-    protected $_functions       = array();
+	/**
+	 * @var Zend_Reflection_Function[]
+	 */
+	protected $_functions       = array();
 
-    /**
-     * @var string
-     */
-    protected $_contents        = null;
+	/**
+	 * @var string
+	 */
+	protected $_contents        = null;
 
-    /**
-     * Constructor
-     *
-     * @param  string $file
-     * @return void
-     */
-    public function __construct($file)
-    {
-        $fileName = $file;
+	/**
+	 * Constructor
+	 *
+	 * @param  string $file
+	 * @return void
+	 */
+	public function __construct($file)
+	{
+		$fileName = $file;
 
-        if (($fileRealpath = realpath($fileName)) === false) {
-            $fileRealpath = self::findRealpathInIncludePath($file);
-        }
+		if (($fileRealpath = realpath($fileName)) === false) {
+			$fileRealpath = self::findRealpathInIncludePath($file);
+		}
 
-        if (!$fileRealpath || !in_array($fileRealpath, get_included_files())) {
-            require_once 'Zend/Reflection/Exception.php';
-            throw new Zend_Reflection_Exception('File ' . $file . ' must be required before it can be reflected');
-        }
+		if (!$fileRealpath || !in_array($fileRealpath, get_included_files())) {
+			require_once 'Zend/Reflection/Exception.php';
+			throw new Zend_Reflection_Exception('File ' . $file . ' must be required before it can be reflected');
+		}
 
-        $this->_fileName = $fileRealpath;
-        $this->_contents = file_get_contents($this->_fileName);
-        $this->_reflect();
-    }
+		$this->_fileName = $fileRealpath;
+		$this->_contents = file_get_contents($this->_fileName);
+		$this->_reflect();
+	}
 
-    /**
-     * Find realpath of file based on include_path
-     *
-     * @param  string $fileName
-     * @return string
-     */
-    public static function findRealpathInIncludePath($fileName)
-    {
-        require_once 'Zend/Loader.php';
-        $includePaths = Zend_Loader::explodeIncludePath();
-        while (count($includePaths) > 0) {
-            $filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
+	/**
+	 * Find realpath of file based on include_path
+	 *
+	 * @param  string $fileName
+	 * @return string
+	 */
+	public static function findRealpathInIncludePath($fileName)
+	{
+		require_once 'Zend/Loader.php';
+		$includePaths = Zend_Loader::explodeIncludePath();
+		while (count($includePaths) > 0) {
+			$filePath = array_shift($includePaths) . DIRECTORY_SEPARATOR . $fileName;
 
-            if ( ($foundRealpath = realpath($filePath)) !== false) {
-                break;
-            }
-        }
+			if ( ($foundRealpath = realpath($filePath)) !== false) {
+				break;
+			}
+		}
 
-        return $foundRealpath;
-    }
+		return $foundRealpath;
+	}
 
-    /**
-     * Export
-     *
-     * Required by the Reflector interface.
-     *
-     * @todo   What should this do?
-     * @return null
-     */
-    public static function export()
-    {
-        return null;
-    }
+	/**
+	 * Export
+	 *
+	 * Required by the Reflector interface.
+	 *
+	 * @todo   What should this do?
+	 * @return null
+	 */
+	public static function export()
+	{
+		return null;
+	}
 
-    /**
-     * Return the file name of the reflected file
-     *
-     * @return string
-     */
-    public function getFileName()
-    {
-        return $this->_fileName;
-    }
+	/**
+	 * Return the file name of the reflected file
+	 *
+	 * @return string
+	 */
+	public function getFileName()
+	{
+		return $this->_fileName;
+	}
 
-    /**
-     * Get the start line - Always 1, staying consistent with the Reflection API
-     *
-     * @return int
-     */
-    public function getStartLine()
-    {
-        return $this->_startLine;
-    }
+	/**
+	 * Get the start line - Always 1, staying consistent with the Reflection API
+	 *
+	 * @return int
+	 */
+	public function getStartLine()
+	{
+		return $this->_startLine;
+	}
 
-    /**
-     * Get the end line / number of lines
-     *
-     * @return int
-     */
-    public function getEndLine()
-    {
-        return $this->_endLine;
-    }
+	/**
+	 * Get the end line / number of lines
+	 *
+	 * @return int
+	 */
+	public function getEndLine()
+	{
+		return $this->_endLine;
+	}
 
-    /**
-     * Return the doc comment
-     *
-     * @return string
-     */
-    public function getDocComment()
-    {
-        return $this->_docComment;
-    }
+	/**
+	 * Return the doc comment
+	 *
+	 * @return string
+	 */
+	public function getDocComment()
+	{
+		return $this->_docComment;
+	}
 
-    /**
-     * Return the docblock
-     *
-     * @param  string $reflectionClass Reflection class to use
-     * @return Zend_Reflection_Docblock
-     */
-    public function getDocblock($reflectionClass = 'Zend_Reflection_Docblock')
-    {
-        $instance = new $reflectionClass($this);
-        if (!$instance instanceof Zend_Reflection_Docblock) {
-            require_once 'Zend/Reflection/Exception.php';
-            throw new Zend_Reflection_Exception('Invalid reflection class specified; must extend Zend_Reflection_Docblock');
-        }
-        return $instance;
-    }
+	/**
+	 * Return the docblock
+	 *
+	 * @param  string $reflectionClass Reflection class to use
+	 * @return Zend_Reflection_Docblock
+	 */
+	public function getDocblock($reflectionClass = 'Zend_Reflection_Docblock')
+	{
+		$instance = new $reflectionClass($this);
+		if (!$instance instanceof Zend_Reflection_Docblock) {
+			require_once 'Zend/Reflection/Exception.php';
+			throw new Zend_Reflection_Exception('Invalid reflection class specified; must extend Zend_Reflection_Docblock');
+		}
+		return $instance;
+	}
 
-    /**
-     * Return the reflection classes of the classes found inside this file
-     *
-     * @param  string $reflectionClass Name of reflection class to use for instances
-     * @return array Array of Zend_Reflection_Class instances
-     */
-    public function getClasses($reflectionClass = 'Zend_Reflection_Class')
-    {
-        $classes = array();
-        foreach ($this->_classes as $class) {
-            $instance = new $reflectionClass($class);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                require_once 'Zend/Reflection/Exception.php';
-                throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
-            }
-            $classes[] = $instance;
-        }
-        return $classes;
-    }
+	/**
+	 * Return the reflection classes of the classes found inside this file
+	 *
+	 * @param  string $reflectionClass Name of reflection class to use for instances
+	 * @return array Array of Zend_Reflection_Class instances
+	 */
+	public function getClasses($reflectionClass = 'Zend_Reflection_Class')
+	{
+		$classes = array();
+		foreach ($this->_classes as $class) {
+			$instance = new $reflectionClass($class);
+			if (!$instance instanceof Zend_Reflection_Class) {
+				require_once 'Zend/Reflection/Exception.php';
+				throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Class');
+			}
+			$classes[] = $instance;
+		}
+		return $classes;
+	}
 
-    /**
-     * Return the reflection functions of the functions found inside this file
-     *
-     * @param  string $reflectionClass Name of reflection class to use for instances
-     * @return array Array of Zend_Reflection_Functions
-     */
-    public function getFunctions($reflectionClass = 'Zend_Reflection_Function')
-    {
-        $functions = array();
-        foreach ($this->_functions as $function) {
-            $instance = new $reflectionClass($function);
-            if (!$instance instanceof Zend_Reflection_Function) {
-                require_once 'Zend/Reflection/Exception.php';
-                throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Function');
-            }
-            $functions[] = $instance;
-        }
-        return $functions;
-    }
+	/**
+	 * Return the reflection functions of the functions found inside this file
+	 *
+	 * @param  string $reflectionClass Name of reflection class to use for instances
+	 * @return array Array of Zend_Reflection_Functions
+	 */
+	public function getFunctions($reflectionClass = 'Zend_Reflection_Function')
+	{
+		$functions = array();
+		foreach ($this->_functions as $function) {
+			$instance = new $reflectionClass($function);
+			if (!$instance instanceof Zend_Reflection_Function) {
+				require_once 'Zend/Reflection/Exception.php';
+				throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Function');
+			}
+			$functions[] = $instance;
+		}
+		return $functions;
+	}
 
-    /**
-     * Retrieve the reflection class of a given class found in this file
-     *
-     * @param  null|string $name
-     * @param  string $reflectionClass Reflection class to use when creating reflection instance
-     * @return Zend_Reflection_Class
-     * @throws Zend_Reflection_Exception for invalid class name or invalid reflection class
-     */
-    public function getClass($name = null, $reflectionClass = 'Zend_Reflection_Class')
-    {
-        if ($name === null) {
-            reset($this->_classes);
-            $selected = current($this->_classes);
-            $instance = new $reflectionClass($selected);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                require_once 'Zend/Reflection/Exception.php';
-                throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
-            }
-            return $instance;
-        }
+	/**
+	 * Retrieve the reflection class of a given class found in this file
+	 *
+	 * @param  null|string $name
+	 * @param  string $reflectionClass Reflection class to use when creating reflection instance
+	 * @return Zend_Reflection_Class
+	 * @throws Zend_Reflection_Exception for invalid class name or invalid reflection class
+	 */
+	public function getClass($name = null, $reflectionClass = 'Zend_Reflection_Class')
+	{
+		if ($name === null) {
+			reset($this->_classes);
+			$selected = current($this->_classes);
+			$instance = new $reflectionClass($selected);
+			if (!$instance instanceof Zend_Reflection_Class) {
+				require_once 'Zend/Reflection/Exception.php';
+				throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
+			}
+			return $instance;
+		}
 
-        if (in_array($name, $this->_classes)) {
-            $instance = new $reflectionClass($name);
-            if (!$instance instanceof Zend_Reflection_Class) {
-                require_once 'Zend/Reflection/Exception.php';
-                throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
-            }
-            return $instance;
-        }
+		if (in_array($name, $this->_classes)) {
+			$instance = new $reflectionClass($name);
+			if (!$instance instanceof Zend_Reflection_Class) {
+				require_once 'Zend/Reflection/Exception.php';
+				throw new Zend_Reflection_Exception('Invalid reflection class given; must extend Zend_Reflection_Class');
+			}
+			return $instance;
+		}
 
-        require_once 'Zend/Reflection/Exception.php';
-        throw new Zend_Reflection_Exception('Class by name ' . $name . ' not found.');
-    }
+		require_once 'Zend/Reflection/Exception.php';
+		throw new Zend_Reflection_Exception('Class by name ' . $name . ' not found.');
+	}
 
-    /**
-     * Return the full contents of file
-     *
-     * @return string
-     */
-    public function getContents()
-    {
-        return $this->_contents;
-    }
+	/**
+	 * Return the full contents of file
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+		return $this->_contents;
+	}
 
-    /**
-     * Serialize to string
-     *
-     * Required by the Reflector interface
-     *
-     * @todo   What should this serialization look like?
-     * @return string
-     */
-    public function __toString()
-    {
-        return '';
-    }
+	/**
+	 * Serialize to string
+	 *
+	 * Required by the Reflector interface
+	 *
+	 * @todo   What should this serialization look like?
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return '';
+	}
 
-    /**
-     * This method does the work of "reflecting" the file
-     *
-     * Uses PHP's tokenizer to perform file reflection.
-     *
-     * @return void
-     */
-    protected function _reflect()
-    {
-        $contents = $this->_contents;
-        $tokens   = token_get_all($contents);
+	/**
+	 * This method does the work of "reflecting" the file
+	 *
+	 * Uses PHP's tokenizer to perform file reflection.
+	 *
+	 * @return void
+	 */
+	protected function _reflect()
+	{
+		$contents = $this->_contents;
+		$tokens   = token_get_all($contents);
 
-        $functionTrapped = false;
-        $classTrapped    = false;
-        $requireTrapped  = false;
-        $openBraces      = 0;
+		$functionTrapped = false;
+		$classTrapped    = false;
+		$requireTrapped  = false;
+		$openBraces      = 0;
 
-        $this->_checkFileDocBlock($tokens);
+		$this->_checkFileDocBlock($tokens);
 
-        foreach ($tokens as $token) {
-            /*
-             * Tokens are characters representing symbols or arrays
-             * representing strings. The keys/values in the arrays are
-             *
-             * - 0 => token id,
-             * - 1 => string,
-             * - 2 => line number
-             *
-             * Token ID's are explained here:
-             * http://www.php.net/manual/en/tokens.php.
-             */
+		foreach ($tokens as $token) {
+			/*
+			 * Tokens are characters representing symbols or arrays
+			* representing strings. The keys/values in the arrays are
+			*
+			* - 0 => token id,
+			* - 1 => string,
+			* - 2 => line number
+			*
+			* Token ID's are explained here:
+			* http://www.php.net/manual/en/tokens.php.
+			*/
 
-            if (is_array($token)) {
-                $type    = $token[0];
-                $value   = $token[1];
-                $lineNum = $token[2];
-            } else {
-                // It's a symbol
-                // Maintain the count of open braces
-                if ($token == '{') {
-                    $openBraces++;
-                } else if ($token == '}') {
-                    $openBraces--;
-                }
+			if (is_array($token)) {
+				$type    = $token[0];
+				$value   = $token[1];
+				$lineNum = $token[2];
+			} else {
+				// It's a symbol
+				// Maintain the count of open braces
+				if ($token == '{') {
+					$openBraces++;
+				} else if ($token == '}') {
+					$openBraces--;
+				}
 
-                continue;
-            }
+				continue;
+			}
 
-            switch ($type) {
-                // Name of something
-                case T_STRING:
-                    if ($functionTrapped) {
-                        $this->_functions[] = $value;
-                        $functionTrapped = false;
-                    } elseif ($classTrapped) {
-                        $this->_classes[] = $value;
-                        $classTrapped = false;
-                    }
-                    continue;
+			switch ($type) {
+				// Name of something
+				case T_STRING:
+					if ($functionTrapped) {
+						$this->_functions[] = $value;
+						$functionTrapped = false;
+					} elseif ($classTrapped) {
+						$this->_classes[] = $value;
+						$classTrapped = false;
+					}
+					continue;
 
-                // Required file names are T_CONSTANT_ENCAPSED_STRING
-                case T_CONSTANT_ENCAPSED_STRING:
-                    if ($requireTrapped) {
-                        $this->_requiredFiles[] = $value ."\n";
-                        $requireTrapped = false;
-                    }
-                    continue;
+					// Required file names are T_CONSTANT_ENCAPSED_STRING
+				case T_CONSTANT_ENCAPSED_STRING:
+					if ($requireTrapped) {
+						$this->_requiredFiles[] = $value ."\n";
+						$requireTrapped = false;
+					}
+					continue;
 
-                // Functions
-                case T_FUNCTION:
-                    if ($openBraces == 0) {
-                        $functionTrapped = true;
-                    }
-                    break;
+					// Functions
+				case T_FUNCTION:
+					if ($openBraces == 0) {
+						$functionTrapped = true;
+					}
+					break;
 
-                // Classes
-                case T_CLASS:
-                case T_INTERFACE:
-                    $classTrapped = true;
-                    break;
+					// Classes
+				case T_CLASS:
+				case T_INTERFACE:
+					$classTrapped = true;
+					break;
 
-                // All types of requires
-                case T_REQUIRE:
-                case T_REQUIRE_ONCE:
-                case T_INCLUDE:
-                case T_INCLUDE_ONCE:
-                    $requireTrapped = true;
-                    break;
+					// All types of requires
+				case T_REQUIRE:
+				case T_REQUIRE_ONCE:
+				case T_INCLUDE:
+				case T_INCLUDE_ONCE:
+					$requireTrapped = true;
+					break;
 
-                // Default case: do nothing
-                default:
-                    break;
-            }
-        }
+					// Default case: do nothing
+				default:
+					break;
+			}
+		}
 
-        $this->_endLine = count(explode("\n", $this->_contents));
-    }
+		$this->_endLine = count(explode("\n", $this->_contents));
+	}
 
-    /**
-     * Validate / check a file level docblock
-     *
-     * @param  array $tokens Array of tokenizer tokens
-     * @return void
-     */
-    protected function _checkFileDocBlock($tokens) {
-        foreach ($tokens as $token) {
-            $type    = $token[0];
-            $value   = $token[1];
-            $lineNum = $token[2];
-            if(($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
-                continue;
-            } elseif ($type == T_DOC_COMMENT) {
-                $this->_docComment = $value;
-                $this->_startLine  = $lineNum + substr_count($value, "\n") + 1;
-                return;
-            } else {
-                // Only whitespace is allowed before file docblocks
-                return;
-            }
-        }
-    }
+	/**
+	 * Validate / check a file level docblock
+	 *
+	 * @param  array $tokens Array of tokenizer tokens
+	 * @return void
+	 */
+	protected function _checkFileDocBlock($tokens) {
+		foreach ($tokens as $token) {
+			$type    = $token[0];
+			$value   = $token[1];
+			$lineNum = $token[2];
+			if(($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
+				continue;
+			} elseif ($type == T_DOC_COMMENT) {
+				$this->_docComment = $value;
+				$this->_startLine  = $lineNum + substr_count($value, "\n") + 1;
+				return;
+			} else {
+				// Only whitespace is allowed before file docblocks
+				return;
+			}
+		}
+	}
 }

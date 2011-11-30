@@ -34,38 +34,38 @@ require_once 'Zend/Validate/File/MimeType.php';
  */
 class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
 {
-    /**
-     * @const string Error constants
-     */
-    const FALSE_TYPE   = 'fileIsImageFalseType';
-    const NOT_DETECTED = 'fileIsImageNotDetected';
-    const NOT_READABLE = 'fileIsImageNotReadable';
+	/**
+	 * @const string Error constants
+	 */
+	const FALSE_TYPE   = 'fileIsImageFalseType';
+	const NOT_DETECTED = 'fileIsImageNotDetected';
+	const NOT_READABLE = 'fileIsImageNotReadable';
 
-    /**
-     * @var array Error message templates
-     */
-    protected $_messageTemplates = array(
-        self::FALSE_TYPE   => "File '%value%' is no image, '%type%' detected",
-        self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
-        self::NOT_READABLE => "File '%value%' is not readable or does not exist",
-    );
+	/**
+	 * @var array Error message templates
+	 */
+	protected $_messageTemplates = array(
+	self::FALSE_TYPE   => "File '%value%' is no image, '%type%' detected",
+	self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
+	self::NOT_READABLE => "File '%value%' is not readable or does not exist",
+	);
 
-    /**
-     * Sets validator options
-     *
-     * @param  string|array|Zend_Config $mimetype
-     * @return void
-     */
-    public function __construct($mimetype = array())
-    {
-        if ($mimetype instanceof Zend_Config) {
-            $mimetype = $mimetype->toArray();
-        }
+	/**
+	 * Sets validator options
+	 *
+	 * @param  string|array|Zend_Config $mimetype
+	 * @return void
+	 */
+	public function __construct($mimetype = array())
+	{
+		if ($mimetype instanceof Zend_Config) {
+			$mimetype = $mimetype->toArray();
+		}
 
-        $temp    = array();
-        // http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
-        // http://www.iana.org/assignments/media-types/image/
-        $default = array(
+		$temp    = array();
+		// http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
+		// http://www.iana.org/assignments/media-types/image/
+		$default = array(
             'application/cdf',
             'application/dicom',
             'application/fractals',
@@ -120,54 +120,54 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
             'image/x-unknown',
             'image/x-windows-bmp',
             'image/x-xpmi',
-        );
+		);
 
-        if (is_array($mimetype)) {
-            $temp = $mimetype;
-            if (array_key_exists('magicfile', $temp)) {
-                unset($temp['magicfile']);
-            }
+		if (is_array($mimetype)) {
+			$temp = $mimetype;
+			if (array_key_exists('magicfile', $temp)) {
+				unset($temp['magicfile']);
+			}
 
-            if (array_key_exists('headerCheck', $temp)) {
-                unset($temp['headerCheck']);
-            }
+			if (array_key_exists('headerCheck', $temp)) {
+				unset($temp['headerCheck']);
+			}
 
-            if (empty($temp)) {
-                $mimetype += $default;
-            }
-        }
+			if (empty($temp)) {
+				$mimetype += $default;
+			}
+		}
 
-        if (empty($mimetype)) {
-            $mimetype = $default;
-        }
+		if (empty($mimetype)) {
+			$mimetype = $default;
+		}
 
-        parent::__construct($mimetype);
-    }
+		parent::__construct($mimetype);
+	}
 
-    /**
-     * Throws an error of the given type
-     * Duplicates parent method due to OOP Problem with late static binding in PHP 5.2
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function _throw($file, $errorType)
-    {
-        $this->_value = $file['name'];
-        switch($errorType) {
-            case Zend_Validate_File_MimeType::FALSE_TYPE :
-                $errorType = self::FALSE_TYPE;
-                break;
-            case Zend_Validate_File_MimeType::NOT_DETECTED :
-                $errorType = self::NOT_DETECTED;
-                break;
-            case Zend_Validate_File_MimeType::NOT_READABLE :
-                $errorType = self::NOT_READABLE;
-                break;
-        }
+	/**
+	 * Throws an error of the given type
+	 * Duplicates parent method due to OOP Problem with late static binding in PHP 5.2
+	 *
+	 * @param  string $file
+	 * @param  string $errorType
+	 * @return false
+	 */
+	protected function _throw($file, $errorType)
+	{
+		$this->_value = $file['name'];
+		switch($errorType) {
+			case Zend_Validate_File_MimeType::FALSE_TYPE :
+				$errorType = self::FALSE_TYPE;
+				break;
+			case Zend_Validate_File_MimeType::NOT_DETECTED :
+				$errorType = self::NOT_DETECTED;
+				break;
+			case Zend_Validate_File_MimeType::NOT_READABLE :
+				$errorType = self::NOT_READABLE;
+				break;
+		}
 
-        $this->_error($errorType);
-        return false;
-    }
+		$this->_error($errorType);
+		return false;
+	}
 }

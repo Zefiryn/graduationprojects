@@ -35,39 +35,39 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Category extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * The unique ID of a category on the specified eBay site.
-     *
-     * @var string
-     */
-    public $categoryId;
+	/**
+	 * The unique ID of a category on the specified eBay site.
+	 *
+	 * @var string
+	 */
+	public $categoryId;
 
-    /**
-     * Display name of a category as it appears on the eBay Web site.
-     *
-     * @var string
-     */
-    public $categoryName;
+	/**
+	 * Display name of a category as it appears on the eBay Web site.
+	 *
+	 * @var string
+	 */
+	public $categoryName;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
-        $this->categoryId   = $this->_query(".//$ns:categoryId[1]", 'string');
-        $this->categoryName = $this->_query(".//$ns:categoryName[1]", 'string');
-    }
+		$this->categoryId   = $this->_query(".//$ns:categoryId[1]", 'string');
+		$this->categoryName = $this->_query(".//$ns:categoryName[1]", 'string');
+	}
 
-    /**
-     * @param  Zend_Service_Ebay_Finding $proxy
-     * @param  Zend_Config|array         $options
-     * @return Zend_Service_Ebay_Finding_Response_Items
-     */
-    public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
-    {
-        return $proxy->findItemsByCategory($this->categoryId, $options);
-    }
+	/**
+	 * @param  Zend_Service_Ebay_Finding $proxy
+	 * @param  Zend_Config|array         $options
+	 * @return Zend_Service_Ebay_Finding_Response_Items
+	 */
+	public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
+	{
+		return $proxy->findItemsByCategory($this->categoryId, $options);
+	}
 }

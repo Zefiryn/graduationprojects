@@ -39,19 +39,19 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_LocalesDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'locales';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'locales';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'LocalesDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'LocalesDirectory';
+	}
 
 }

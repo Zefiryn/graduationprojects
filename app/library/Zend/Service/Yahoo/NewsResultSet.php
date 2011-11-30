@@ -43,21 +43,21 @@ require_once 'Zend/Service/Yahoo/NewsResult.php';
  */
 class Zend_Service_Yahoo_NewsResultSet extends Zend_Service_Yahoo_ResultSet
 {
-    /**
-     * News result set namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:yn';
+	/**
+	 * News result set namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:yn';
 
 
-    /**
-     * Overrides Zend_Service_Yahoo_ResultSet::current()
-     *
-     * @return Zend_Service_Yahoo_NewsResult
-     */
-    public function current()
-    {
-        return new Zend_Service_Yahoo_NewsResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Overrides Zend_Service_Yahoo_ResultSet::current()
+	 *
+	 * @return Zend_Service_Yahoo_NewsResult
+	 */
+	public function current()
+	{
+		return new Zend_Service_Yahoo_NewsResult($this->_results->item($this->_currentIndex));
+	}
 }

@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_Exception
-    extends Zend_Service_DeveloperGarden_Exception
+extends Zend_Service_DeveloperGarden_Exception
 {
 }

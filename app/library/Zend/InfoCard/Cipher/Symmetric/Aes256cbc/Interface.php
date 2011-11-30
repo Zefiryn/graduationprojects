@@ -29,5 +29,5 @@
  */
 interface Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface
 {
-    public function decrypt($encryptedData, $decryptionKey, $iv_length = null);
+	public function decrypt($encryptedData, $decryptionKey, $iv_length = null);
 }

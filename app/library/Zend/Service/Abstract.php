@@ -34,38 +34,38 @@ require_once 'Zend/Http/Client.php';
  */
 abstract class Zend_Service_Abstract
 {
-    /**
-     * HTTP Client used to query all web services
-     *
-     * @var Zend_Http_Client
-     */
-    protected static $_httpClient = null;
+	/**
+	 * HTTP Client used to query all web services
+	 *
+	 * @var Zend_Http_Client
+	 */
+	protected static $_httpClient = null;
 
 
-    /**
-     * Sets the HTTP client object to use for retrieving the feeds.  If none
-     * is set, the default Zend_Http_Client will be used.
-     *
-     * @param Zend_Http_Client $httpClient
-     */
-    final public static function setHttpClient(Zend_Http_Client $httpClient)
-    {
-        self::$_httpClient = $httpClient;
-    }
+	/**
+	 * Sets the HTTP client object to use for retrieving the feeds.  If none
+	 * is set, the default Zend_Http_Client will be used.
+	 *
+	 * @param Zend_Http_Client $httpClient
+	 */
+	final public static function setHttpClient(Zend_Http_Client $httpClient)
+	{
+		self::$_httpClient = $httpClient;
+	}
 
 
-    /**
-     * Gets the HTTP client object.
-     *
-     * @return Zend_Http_Client
-     */
-    final public static function getHttpClient()
-    {
-        if (!self::$_httpClient instanceof Zend_Http_Client) {
-            self::$_httpClient = new Zend_Http_Client();
-        }
+	/**
+	 * Gets the HTTP client object.
+	 *
+	 * @return Zend_Http_Client
+	 */
+	final public static function getHttpClient()
+	{
+		if (!self::$_httpClient instanceof Zend_Http_Client) {
+			self::$_httpClient = new Zend_Http_Client();
+		}
 
-        return self::$_httpClient;
-    }
+		return self::$_httpClient;
+	}
 }
 

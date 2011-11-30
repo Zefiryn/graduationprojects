@@ -33,42 +33,42 @@ require_once 'Zend/Translate/Adapter.php';
  */
 class Zend_Translate_Adapter_Ini extends Zend_Translate_Adapter
 {
-    private $_data = array();
+	private $_data = array();
 
-    /**
-     * Load translation data
-     *
-     * @param  string|array  $data
-     * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
-     *                                see Zend_Locale for more information
-     * @param  array         $options OPTIONAL Options to use
-     * @throws Zend_Translate_Exception Ini file not found
-     * @return array
-     */
-    protected function _loadTranslationData($data, $locale, array $options = array())
-    {
-        $this->_data = array();
-        if (!file_exists($data)) {
-            require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception("Ini file '".$data."' not found");
-        }
+	/**
+	 * Load translation data
+	 *
+	 * @param  string|array  $data
+	 * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
+	 *                                see Zend_Locale for more information
+	 * @param  array         $options OPTIONAL Options to use
+	 * @throws Zend_Translate_Exception Ini file not found
+	 * @return array
+	 */
+	protected function _loadTranslationData($data, $locale, array $options = array())
+	{
+		$this->_data = array();
+		if (!file_exists($data)) {
+			require_once 'Zend/Translate/Exception.php';
+			throw new Zend_Translate_Exception("Ini file '".$data."' not found");
+		}
 
-        $inidata = parse_ini_file($data, false);
-        if (!isset($this->_data[$locale])) {
-            $this->_data[$locale] = array();
-        }
+		$inidata = parse_ini_file($data, false);
+		if (!isset($this->_data[$locale])) {
+			$this->_data[$locale] = array();
+		}
 
-        $this->_data[$locale] = array_merge($this->_data[$locale], $inidata);
-        return $this->_data;
-    }
+		$this->_data[$locale] = array_merge($this->_data[$locale], $inidata);
+		return $this->_data;
+	}
 
-    /**
-     * returns the adapters name
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return "Ini";
-    }
+	/**
+	 * returns the adapters name
+	 *
+	 * @return string
+	 */
+	public function toString()
+	{
+		return "Ini";
+	}
 }

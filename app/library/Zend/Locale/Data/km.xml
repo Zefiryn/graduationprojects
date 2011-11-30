@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ldml>
 	<identity>
-		<version number="$Revision: 1.77 $"/>
-		<generation date="$Date: 2009/06/15 03:46:23 $"/>
-		<language type="km"/>
+		<version number="$Revision: 1.77 $" />
+		<generation date="$Date: 2009/06/15 03:46:23 $" />
+		<language type="km" />
 	</identity>
 	<localeDisplayNames>
 		<languages>
@@ -312,7 +312,9 @@
 		</territories>
 	</localeDisplayNames>
 	<characters>
-		<exemplarCharacters>[\u17CE \u17CF \u17D1 \u17D0 ៈ \u17CB \u17C9 \u17CA \u17CD \u17CC ក-រ ឫ ឬ ល ឭ ឮ វ ស-អ {អា} ឥ-ឧ {ឧក} ឪ ឩ ឯ-ឳ ា-ះ \u17D2]</exemplarCharacters>
+		<exemplarCharacters>[\u17CE \u17CF \u17D1 \u17D0 ៈ \u17CB \u17C9
+			\u17CA \u17CD \u17CC ក-រ ឫ ឬ ល ឭ ឮ វ ស-អ {អា} ឥ-ឧ {ឧក} ឪ ឩ ឯ-ឳ ា-ះ
+			\u17D2]</exemplarCharacters>
 		<exemplarCharacters type="auxiliary">[\u17B4 \u17B5\u200B ឝ ឞ]</exemplarCharacters>
 	</characters>
 	<delimiters>
@@ -330,7 +332,7 @@
 					</eraAbbr>
 				</eras>
 				<dateFormats>
-					<default choice="long"/>
+					<default choice="long" />
 					<dateFormatLength type="full">
 						<dateFormat>
 							<pattern>EEEE ថ្ងៃ d ខែ MMMM ឆ្នាំ y</pattern>
@@ -353,7 +355,7 @@
 					</dateFormatLength>
 				</dateFormats>
 				<dateTimeFormats>
-					<default choice="medium"/>
+					<default choice="medium" />
 					<dateTimeFormatLength type="full">
 						<dateTimeFormat>
 							<pattern>{1}, {0}</pattern>
@@ -438,7 +440,7 @@
 						</dayWidth>
 						<dayWidth type="wide">
 							<day type="sun">ថ្ងៃអាទិត្យ</day>
-							<day type="mon">​ថ្ងៃច័ន្ទ</day>
+							<day type="mon"> ថ្ងៃច័ន្ទ</day>
 							<day type="tue">ថ្ងៃអង្គារ</day>
 							<day type="wed">ថ្ងៃពុធ</day>
 							<day type="thu">ថ្ងៃព្រហស្បតិ៍</day>
@@ -478,11 +480,11 @@
 				<pm>ល្ងាច</pm>
 				<eras>
 					<eraNames>
-						<era type="0">មុន​គ្រិស្តសករាជ</era>
+						<era type="0">មុន គ្រិស្តសករាជ</era>
 						<era type="1">គ្រិស្តសករាជ</era>
 					</eraNames>
 					<eraAbbr>
-						<era type="0">មុន​គ.ស.</era>
+						<era type="0">មុន គ.ស.</era>
 						<era type="1">គ.ស.</era>
 					</eraAbbr>
 				</eras>
@@ -511,12 +513,12 @@
 				<timeFormats>
 					<timeFormatLength type="full">
 						<timeFormat>
-							<pattern>H ម៉ោង m នាទី ss វិនាទី​ zzzz</pattern>
+							<pattern>H ម៉ោង m នាទី ss វិនាទី zzzz</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="long">
 						<timeFormat>
-							<pattern>H ម៉ោង m នាទី ss វិនាទី​z</pattern>
+							<pattern>H ម៉ោង m នាទី ss វិនាទី z</pattern>
 						</timeFormat>
 					</timeFormatLength>
 					<timeFormatLength type="medium">
@@ -616,9 +618,12 @@
 							<greatestDifference id="y">d/M/yyyy - d/M/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMEd">
-							<greatestDifference id="d">E, d/M/yyyy - E, d/M/yyyy</greatestDifference>
-							<greatestDifference id="M">E, d/M/yyyy - E, d/M/yyyy</greatestDifference>
-							<greatestDifference id="y">E, d/M/yyyy - E, d/M/yyyy</greatestDifference>
+							<greatestDifference id="d">E, d/M/yyyy - E,
+								d/M/yyyy</greatestDifference>
+							<greatestDifference id="M">E, d/M/yyyy - E,
+								d/M/yyyy</greatestDifference>
+							<greatestDifference id="y">E, d/M/yyyy - E,
+								d/M/yyyy</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMM">
 							<greatestDifference id="M">y MMM-MMM</greatestDifference>
@@ -630,9 +635,12 @@
 							<greatestDifference id="y">y MMM d - y MMM d</greatestDifference>
 						</intervalFormatItem>
 						<intervalFormatItem id="yMMMEd">
-							<greatestDifference id="d">E, y MMM dd - E, y MMM dd</greatestDifference>
-							<greatestDifference id="M">E, y MMM dd - E, y MMM dd</greatestDifference>
-							<greatestDifference id="y">E, y MMM dd - E, y MMM dd</greatestDifference>
+							<greatestDifference id="d">E, y MMM dd - E, y MMM
+								dd</greatestDifference>
+							<greatestDifference id="M">E, y MMM dd - E, y MMM
+								dd</greatestDifference>
+							<greatestDifference id="y">E, y MMM dd - E, y MMM
+								dd</greatestDifference>
 						</intervalFormatItem>
 					</intervalFormats>
 				</dateTimeFormats>

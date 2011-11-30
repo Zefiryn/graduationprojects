@@ -34,19 +34,19 @@
  */
 interface Zend_Feed_Builder_Interface
 {
-    /**
-     * Returns an instance of Zend_Feed_Builder_Header
-     * describing the header of the feed
-     *
-     * @return Zend_Feed_Builder_Header
-     */
-    public function getHeader();
+	/**
+	 * Returns an instance of Zend_Feed_Builder_Header
+	 * describing the header of the feed
+	 *
+	 * @return Zend_Feed_Builder_Header
+	 */
+	public function getHeader();
 
-    /**
-     * Returns an array of Zend_Feed_Builder_Entry instances
-     * describing the entries of the feed
-     *
-     * @return array of Zend_Feed_Builder_Entry
-     */
-    public function getEntries();
+	/**
+	 * Returns an array of Zend_Feed_Builder_Entry instances
+	 * describing the entries of the feed
+	 *
+	 * @return array of Zend_Feed_Builder_Entry
+	 */
+	public function getEntries();
 }

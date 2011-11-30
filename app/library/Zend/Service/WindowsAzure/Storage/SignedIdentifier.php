@@ -43,23 +43,23 @@ require_once 'Zend/Service/WindowsAzure/Storage/StorageEntityAbstract.php';
  * @property string $Permissions  Signed permissions - read (r), write (w), delete (d) and list (l)
  */
 class Zend_Service_WindowsAzure_Storage_SignedIdentifier
-    extends Zend_Service_WindowsAzure_Storage_StorageEntityAbstract
+extends Zend_Service_WindowsAzure_Storage_StorageEntityAbstract
 {
-    /**
-     * Constructor
-     *
-     * @param string $id           Id for the signed identifier
-     * @param string $start        The time at which the Shared Access Signature becomes valid.
-     * @param string $expiry       The time at which the Shared Access Signature becomes invalid.
-     * @param string $permissions  Signed permissions - read (r), write (w), delete (d) and list (l)
-     */
-    public function __construct($id = '', $start = '', $expiry = '', $permissions = '')
-    {
-        $this->_data = array(
+	/**
+	 * Constructor
+	 *
+	 * @param string $id           Id for the signed identifier
+	 * @param string $start        The time at which the Shared Access Signature becomes valid.
+	 * @param string $expiry       The time at which the Shared Access Signature becomes invalid.
+	 * @param string $permissions  Signed permissions - read (r), write (w), delete (d) and list (l)
+	 */
+	public function __construct($id = '', $start = '', $expiry = '', $permissions = '')
+	{
+		$this->_data = array(
             'id'           => $id,
             'start'        => $start,
             'expiry'       => $expiry,
             'permissions'  => $permissions
-        );
-    }
+		);
+	}
 }

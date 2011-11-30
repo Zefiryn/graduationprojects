@@ -34,14 +34,14 @@ require_once 'Zend/Tool/Framework/Manifest/Interface.php';
 interface Zend_Tool_Framework_Manifest_ActionManifestable extends Zend_Tool_Framework_Manifest_Interface
 {
 
-    /**
-     * getActions()
-     *
-     * Should either return a single action, or an array
-     * of actions
-     *
-     * @return array|Zend_Tool_Framework_Action_Interface
-     */
-    public function getActions();
+	/**
+	 * getActions()
+	 *
+	 * Should either return a single action, or an array
+	 * of actions
+	 *
+	 * @return array|Zend_Tool_Framework_Action_Interface
+	 */
+	public function getActions();
 
 }

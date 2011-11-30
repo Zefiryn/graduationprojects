@@ -43,42 +43,42 @@ require_once 'Zend/Service/Yahoo/LocalResult.php';
  */
 class Zend_Service_Yahoo_LocalResultSet extends Zend_Service_Yahoo_ResultSet
 {
-    /**
-     * The URL of a webpage containing a map graphic with all returned results plotted on it.
-     *
-     * @var string
-     */
-    public $resultSetMapURL;
+	/**
+	 * The URL of a webpage containing a map graphic with all returned results plotted on it.
+	 *
+	 * @var string
+	 */
+	public $resultSetMapURL;
 
-    /**
-     * Local result set namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:lcl';
-
-
-    /**
-     * Initializes the local result set
-     *
-     * @param  DOMDocument $dom
-     * @return void
-     */
-    public function __construct(DOMDocument $dom)
-    {
-        parent::__construct($dom);
-
-        $this->resultSetMapURL = $this->_xpath->query('//yh:ResultSetMapUrl/text()')->item(0)->data;
-    }
+	/**
+	 * Local result set namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:lcl';
 
 
-    /**
-     * Overrides Zend_Service_Yahoo_ResultSet::current()
-     *
-     * @return Zend_Service_Yahoo_LocalResult
-     */
-    public function current()
-    {
-        return new Zend_Service_Yahoo_LocalResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Initializes the local result set
+	 *
+	 * @param  DOMDocument $dom
+	 * @return void
+	 */
+	public function __construct(DOMDocument $dom)
+	{
+		parent::__construct($dom);
+
+		$this->resultSetMapURL = $this->_xpath->query('//yh:ResultSetMapUrl/text()')->item(0)->data;
+	}
+
+
+	/**
+	 * Overrides Zend_Service_Yahoo_ResultSet::current()
+	 *
+	 * @return Zend_Service_Yahoo_LocalResult
+	 */
+	public function current()
+	{
+		return new Zend_Service_Yahoo_LocalResult($this->_results->item($this->_currentIndex));
+	}
 }

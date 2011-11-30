@@ -37,61 +37,61 @@ require_once 'Zend/Feed/Reader/Extension/CreativeCommons/Feed.php';
  */
 class Zend_Feed_Reader_Extension_CreativeCommons_Entry extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-    /**
-     * Get the entry license
-     *
-     * @return string|null
-     */
-    public function getLicense($index = 0)
-    {
-        $licenses = $this->getLicenses();
+	/**
+	 * Get the entry license
+	 *
+	 * @return string|null
+	 */
+	public function getLicense($index = 0)
+	{
+		$licenses = $this->getLicenses();
 
-        if (isset($licenses[$index])) {
-            return $licenses[$index];
-        }
+		if (isset($licenses[$index])) {
+			return $licenses[$index];
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Get the entry licenses
-     *
-     * @return array
-     */
-    public function getLicenses()
-    {
-        $name = 'licenses';
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
-        }
+	/**
+	 * Get the entry licenses
+	 *
+	 * @return array
+	 */
+	public function getLicenses()
+	{
+		$name = 'licenses';
+		if (array_key_exists($name, $this->_data)) {
+			return $this->_data[$name];
+		}
 
-        $licenses = array();
-        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//cc:license');
+		$licenses = array();
+		$list = $this->_xpath->evaluate($this->getXpathPrefix() . '//cc:license');
 
-        if ($list->length) {
-            foreach ($list as $license) {
-                    $licenses[] = $license->nodeValue;
-            }
+		if ($list->length) {
+			foreach ($list as $license) {
+				$licenses[] = $license->nodeValue;
+			}
 
-            $licenses = array_unique($licenses);
-        } else {
-            $cc = new Zend_Feed_Reader_Extension_CreativeCommons_Feed(
-                $this->_domDocument, $this->_data['type'], $this->_xpath
-            );
-            $licenses = $cc->getLicenses();
-        }
+			$licenses = array_unique($licenses);
+		} else {
+			$cc = new Zend_Feed_Reader_Extension_CreativeCommons_Feed(
+			$this->_domDocument, $this->_data['type'], $this->_xpath
+			);
+			$licenses = $cc->getLicenses();
+		}
 
-        $this->_data[$name] = $licenses;
+		$this->_data[$name] = $licenses;
 
-        return $this->_data[$name];
-    }
+		return $this->_data[$name];
+	}
 
-    /**
-     * Register Creative Commons namespaces
-     *
-     */
-    protected function _registerNamespaces()
-    {
-        $this->_xpath->registerNamespace('cc', 'http://backend.userland.com/creativeCommonsRssModule');
-    }
+	/**
+	 * Register Creative Commons namespaces
+	 *
+	 */
+	protected function _registerNamespaces()
+	{
+		$this->_xpath->registerNamespace('cc', 'http://backend.userland.com/creativeCommonsRssModule');
+	}
 }

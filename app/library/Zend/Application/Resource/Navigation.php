@@ -38,91 +38,91 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application_Resource_Navigation
-    extends Zend_Application_Resource_ResourceAbstract
+extends Zend_Application_Resource_ResourceAbstract
 {
-    const DEFAULT_REGISTRY_KEY = 'Zend_Navigation';
+	const DEFAULT_REGISTRY_KEY = 'Zend_Navigation';
 
-    /**
-     * @var Zend_Navigation
-     */
-    protected $_container;
+	/**
+	 * @var Zend_Navigation
+	 */
+	protected $_container;
 
-    /**
-     * Defined by Zend_Application_Resource_Resource
-     *
-     * @return Zend_Navigation
-     */
-    public function init()
-    {
-        if (!$this->_container) {
-            $options = $this->getOptions();
+	/**
+	 * Defined by Zend_Application_Resource_Resource
+	 *
+	 * @return Zend_Navigation
+	 */
+	public function init()
+	{
+		if (!$this->_container) {
+			$options = $this->getOptions();
 
-            if(isset($options['defaultPageType'])) {
-                Zend_Navigation_Page::setDefaultPageType($options['defaultPageType']);
-            }
-            
-            $pages = isset($options['pages']) ? $options['pages'] : array();
-            $this->_container = new Zend_Navigation($pages);
-        }
+			if(isset($options['defaultPageType'])) {
+				Zend_Navigation_Page::setDefaultPageType($options['defaultPageType']);
+			}
 
-        $this->store();
-        return $this->_container;
-    }
+			$pages = isset($options['pages']) ? $options['pages'] : array();
+			$this->_container = new Zend_Navigation($pages);
+		}
 
-    /**
-     * Stores navigation container in registry or Navigation view helper
-     *
-     * @return void
-     */
-    public function store()
-    {
-        $options = $this->getOptions();
-        if (isset($options['storage']['registry']) &&
-            $options['storage']['registry'] == true) {
-            $this->_storeRegistry();
-        } else {
-            $this->_storeHelper();
-        }
-    }
+		$this->store();
+		return $this->_container;
+	}
 
-    /**
-     * Stores navigation container in the registry
-     *
-     * @return void
-     */
-    protected function _storeRegistry()
-    {
-        $options = $this->getOptions();
-        if(isset($options['storage']['registry']['key']) &&
-           !is_numeric($options['storage']['registry']['key'])) // see ZF-7461
-        {
-           $key = $options['storage']['registry']['key'];
-        } else {
-            $key = self::DEFAULT_REGISTRY_KEY;
-        }
+	/**
+	 * Stores navigation container in registry or Navigation view helper
+	 *
+	 * @return void
+	 */
+	public function store()
+	{
+		$options = $this->getOptions();
+		if (isset($options['storage']['registry']) &&
+		$options['storage']['registry'] == true) {
+			$this->_storeRegistry();
+		} else {
+			$this->_storeHelper();
+		}
+	}
 
-        Zend_Registry::set($key,$this->getContainer());
-    }
+	/**
+	 * Stores navigation container in the registry
+	 *
+	 * @return void
+	 */
+	protected function _storeRegistry()
+	{
+		$options = $this->getOptions();
+		if(isset($options['storage']['registry']['key']) &&
+		!is_numeric($options['storage']['registry']['key'])) // see ZF-7461
+		{
+			$key = $options['storage']['registry']['key'];
+		} else {
+			$key = self::DEFAULT_REGISTRY_KEY;
+		}
 
-    /**
-     * Stores navigation container in the Navigation helper
-     *
-     * @return void
-     */
-    protected function _storeHelper()
-    {
-        $this->getBootstrap()->bootstrap('view');
-        $view = $this->getBootstrap()->view;
-        $view->getHelper('navigation')->navigation($this->getContainer());
-    }
+		Zend_Registry::set($key,$this->getContainer());
+	}
 
-    /**
-     * Returns navigation container
-     *
-     * @return Zend_Navigation
-     */
-    public function getContainer()
-    {
-        return $this->_container;
-    }
+	/**
+	 * Stores navigation container in the Navigation helper
+	 *
+	 * @return void
+	 */
+	protected function _storeHelper()
+	{
+		$this->getBootstrap()->bootstrap('view');
+		$view = $this->getBootstrap()->view;
+		$view->getHelper('navigation')->navigation($this->getContainer());
+	}
+
+	/**
+	 * Returns navigation container
+	 *
+	 * @return Zend_Navigation
+	 */
+	public function getContainer()
+	{
+		return $this->_container;
+	}
 }

@@ -35,39 +35,39 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Storefront extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * The name of the seller's eBay Store.
-     *
-     * @var string
-     */
-    public $storeName;
+	/**
+	 * The name of the seller's eBay Store.
+	 *
+	 * @var string
+	 */
+	public $storeName;
 
-    /**
-     * The URL of the seller's eBay Store page.
-     *
-     * @var string
-     */
-    public $storeURL;
+	/**
+	 * The URL of the seller's eBay Store page.
+	 *
+	 * @var string
+	 */
+	public $storeURL;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
-        $this->storeName = $this->_query(".//$ns:storeName[1]", 'string');
-        $this->storeURL  = $this->_query(".//$ns:storeURL[1]", 'string');
-    }
+		$this->storeName = $this->_query(".//$ns:storeName[1]", 'string');
+		$this->storeURL  = $this->_query(".//$ns:storeURL[1]", 'string');
+	}
 
-    /**
-     * @param  Zend_Service_Ebay_Finding $proxy
-     * @param  Zend_Config|array         $options
-     * @return Zend_Service_Ebay_Finding_Response_Items
-     */
-    public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
-    {
-        return $proxy->findItemsInEbayStores($this->storeName, $options);
-    }
+	/**
+	 * @param  Zend_Service_Ebay_Finding $proxy
+	 * @param  Zend_Config|array         $options
+	 * @return Zend_Service_Ebay_Finding_Response_Items
+	 */
+	public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
+	{
+		return $proxy->findItemsInEbayStores($this->storeName, $options);
+	}
 }

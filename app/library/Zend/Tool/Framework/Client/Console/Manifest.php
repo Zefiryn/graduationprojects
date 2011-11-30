@@ -58,90 +58,90 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Console_Manifest
-    implements Zend_Tool_Framework_Registry_EnabledInterface,
-               Zend_Tool_Framework_Manifest_MetadataManifestable
+implements Zend_Tool_Framework_Registry_EnabledInterface,
+Zend_Tool_Framework_Manifest_MetadataManifestable
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+	/**
+	 * @var Zend_Tool_Framework_Registry_Interface
+	 */
+	protected $_registry = null;
 
-    /**
-     * setRegistry() - Required for the Zend_Tool_Framework_Registry_EnabledInterface interface
-     *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
-     * @return Zend_Tool_Framework_Client_Console_Manifest
-     */
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
-    {
-        $this->_registry = $registry;
-        return $this;
-    }
+	/**
+	 * setRegistry() - Required for the Zend_Tool_Framework_Registry_EnabledInterface interface
+	 *
+	 * @param Zend_Tool_Framework_Registry_Interface $registry
+	 * @return Zend_Tool_Framework_Client_Console_Manifest
+	 */
+	public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+	{
+		$this->_registry = $registry;
+		return $this;
+	}
 
-    /**
-     * getMetadata() is required by the Manifest Interface.
-     *
-     * These are the following metadatas that will be setup:
-     *
-     * actionName
-     *   - metadata for actions
-     *   - value will be a dashed name for the action named in 'actionName'
-     * providerName
-     *   - metadata for providers
-     *   - value will be a dashed-name for the provider named in 'providerName'
-     * providerSpecialtyNames
-     *   - metadata for providers
-     * actionableMethodLongParameters
-     *   - metadata for providers
-     * actionableMethodShortParameters
-     *   - metadata for providers
-     *
-     * @return array Array of Metadatas
-     */
-    public function getMetadata()
-    {
-        $metadatas = array();
+	/**
+	 * getMetadata() is required by the Manifest Interface.
+	 *
+	 * These are the following metadatas that will be setup:
+	 *
+	 * actionName
+	 *   - metadata for actions
+	 *   - value will be a dashed name for the action named in 'actionName'
+	 * providerName
+	 *   - metadata for providers
+	 *   - value will be a dashed-name for the provider named in 'providerName'
+	 * providerSpecialtyNames
+	 *   - metadata for providers
+	 * actionableMethodLongParameters
+	 *   - metadata for providers
+	 * actionableMethodShortParameters
+	 *   - metadata for providers
+	 *
+	 * @return array Array of Metadatas
+	 */
+	public function getMetadata()
+	{
+		$metadatas = array();
 
-        // setup the camelCase to dashed filter to use since cli expects dashed named
-        $ccToDashedFilter = new Zend_Filter();
-        $ccToDashedFilter
-            ->addFilter(new Zend_Filter_Word_CamelCaseToDash())
-            ->addFilter(new Zend_Filter_StringToLower());
+		// setup the camelCase to dashed filter to use since cli expects dashed named
+		$ccToDashedFilter = new Zend_Filter();
+		$ccToDashedFilter
+		->addFilter(new Zend_Filter_Word_CamelCaseToDash())
+		->addFilter(new Zend_Filter_StringToLower());
 
-        // get the registry to get the action and provider repository
-        $actionRepository   = $this->_registry->getActionRepository();
-        $providerRepository = $this->_registry->getProviderRepository();
+		// get the registry to get the action and provider repository
+		$actionRepository   = $this->_registry->getActionRepository();
+		$providerRepository = $this->_registry->getProviderRepository();
 
-        // loop through all actions and create a metadata for each
-        foreach ($actionRepository->getActions() as $action) {
-            // each action metadata will be called
-            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+		// loop through all actions and create a metadata for each
+		foreach ($actionRepository->getActions() as $action) {
+			// each action metadata will be called
+			$metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
                 'name'            => 'actionName',
                 'value'           => $ccToDashedFilter->filter($action->getName()),
                 'reference'       => $action,
                 'actionName'      => $action->getName(),
                 'clientName'      => 'console',
                 'clientReference' => $this->_registry->getClient()
-                ));
-        }
+			));
+		}
 
-        foreach ($providerRepository->getProviderSignatures() as $providerSignature) {
+		foreach ($providerRepository->getProviderSignatures() as $providerSignature) {
 
-            // create the metadata for the provider's cliProviderName
-            $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+			// create the metadata for the provider's cliProviderName
+			$metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
                 'name'            => 'providerName',
                 'value'           => $ccToDashedFilter->filter($providerSignature->getName()),
                 'reference'       => $providerSignature,
                 'clientName'      => 'console',
                 'providerName'    => $providerSignature->getName(),
                 'clientReference' => $this->_registry->getClient()
-                ));
+			));
 
-            // create the metadatas for the per provider specialites in providerSpecaltyNames
-            foreach ($providerSignature->getSpecialties() as $specialty) {
+			// create the metadatas for the per provider specialites in providerSpecaltyNames
+			foreach ($providerSignature->getSpecialties() as $specialty) {
 
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+				$metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
                     'name'            => 'specialtyName',
                     'value'           =>  $ccToDashedFilter->filter($specialty),
                     'reference'       => $providerSignature,
@@ -149,29 +149,29 @@ class Zend_Tool_Framework_Client_Console_Manifest
                     'providerName'    => $providerSignature->getName(),
                     'specialtyName'   => $specialty,
                     'clientReference' => $this->_registry->getClient()
-                    ));
+				));
 
-            }
+			}
 
-            // $actionableMethod is keyed by the methodName (but not used)
-            foreach ($providerSignature->getActionableMethods() as $actionableMethodData) {
+			// $actionableMethod is keyed by the methodName (but not used)
+			foreach ($providerSignature->getActionableMethods() as $actionableMethodData) {
 
-                $methodLongParams  = array();
-                $methodShortParams = array();
+				$methodLongParams  = array();
+				$methodShortParams = array();
 
-                // $actionableMethodData get both the long and short names
-                foreach ($actionableMethodData['parameterInfo'] as $parameterInfoData) {
+				// $actionableMethodData get both the long and short names
+				foreach ($actionableMethodData['parameterInfo'] as $parameterInfoData) {
 
-                    // filter to dashed
-                    $methodLongParams[$parameterInfoData['name']] = $ccToDashedFilter->filter($parameterInfoData['name']);
+					// filter to dashed
+					$methodLongParams[$parameterInfoData['name']] = $ccToDashedFilter->filter($parameterInfoData['name']);
 
-                    // simply lower the character, (its only 1 char after all)
-                    $methodShortParams[$parameterInfoData['name']] = strtolower($parameterInfoData['name'][0]);
+					// simply lower the character, (its only 1 char after all)
+					$methodShortParams[$parameterInfoData['name']] = strtolower($parameterInfoData['name'][0]);
 
-                }
+				}
 
-                // create metadata for the long name cliActionableMethodLongParameters
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+				// create metadata for the long name cliActionableMethodLongParameters
+				$metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
                     'name'            => 'actionableMethodLongParams',
                     'value'           => $methodLongParams,
                     'clientName'      => 'console',
@@ -180,10 +180,10 @@ class Zend_Tool_Framework_Client_Console_Manifest
                     'actionName'      => $actionableMethodData['actionName'],
                     'reference'       => &$actionableMethodData,
                     'clientReference' => $this->_registry->getClient()
-                    ));
+				));
 
-                // create metadata for the short name cliActionableMethodShortParameters
-                $metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
+				// create metadata for the short name cliActionableMethodShortParameters
+				$metadatas[] = new Zend_Tool_Framework_Metadata_Tool(array(
                     'name'            => 'actionableMethodShortParams',
                     'value'           => $methodShortParams,
                     'clientName'      => 'console',
@@ -192,18 +192,18 @@ class Zend_Tool_Framework_Client_Console_Manifest
                     'actionName'      => $actionableMethodData['actionName'],
                     'reference'       => &$actionableMethodData,
                     'clientReference' => $this->_registry->getClient()
-                    ));
+				));
 
-            }
+			}
 
-        }
+		}
 
-        return $metadatas;
-    }
+		return $metadatas;
+	}
 
-    public function getIndex()
-    {
-        return 10000;
-    }
+	public function getIndex()
+	{
+		return 10000;
+	}
 
 }

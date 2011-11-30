@@ -34,24 +34,24 @@ class Zend_Feed_Reader_Collection_Category
 extends Zend_Feed_Reader_Collection_CollectionAbstract
 {
 
-    /**
-     * Return a simple array of the most relevant slice of
-     * the collection values. For example, feed categories contain
-     * the category name, domain/URI, and other data. This method would
-     * merely return the most useful data - i.e. the category names.
-     *
-     * @return array
-     */
-    public function getValues() {
-        $categories = array();
-        foreach ($this->getIterator() as $element) {
-            if (isset($element['label']) && !empty($element['label'])) {
-                $categories[] = $element['label'];
-            } else {
-                $categories[] = $element['term'];
-            }
-        }
-        return array_unique($categories);
-    }
+	/**
+	 * Return a simple array of the most relevant slice of
+	 * the collection values. For example, feed categories contain
+	 * the category name, domain/URI, and other data. This method would
+	 * merely return the most useful data - i.e. the category names.
+	 *
+	 * @return array
+	 */
+	public function getValues() {
+		$categories = array();
+		foreach ($this->getIterator() as $element) {
+			if (isset($element['label']) && !empty($element['label'])) {
+				$categories[] = $element['label'];
+			} else {
+				$categories[] = $element['term'];
+			}
+		}
+		return array_unique($categories);
+	}
 
 }

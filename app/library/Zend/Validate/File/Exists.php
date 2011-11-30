@@ -34,170 +34,170 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_File_Exists extends Zend_Validate_Abstract
 {
-    /**
-     * @const string Error constants
-     */
-    const DOES_NOT_EXIST = 'fileExistsDoesNotExist';
+	/**
+	 * @const string Error constants
+	 */
+	const DOES_NOT_EXIST = 'fileExistsDoesNotExist';
 
-    /**
-     * @var array Error message templates
-     */
-    protected $_messageTemplates = array(
-        self::DOES_NOT_EXIST => "File '%value%' does not exist",
-    );
+	/**
+	 * @var array Error message templates
+	 */
+	protected $_messageTemplates = array(
+	self::DOES_NOT_EXIST => "File '%value%' does not exist",
+	);
 
-    /**
-     * Internal list of directories
-     * @var string
-     */
-    protected $_directory = '';
+	/**
+	 * Internal list of directories
+	 * @var string
+	 */
+	protected $_directory = '';
 
-    /**
-     * @var array Error message template variables
-     */
-    protected $_messageVariables = array(
+	/**
+	 * @var array Error message template variables
+	 */
+	protected $_messageVariables = array(
         'directory' => '_directory'
-    );
+	);
 
-    /**
-     * Sets validator options
-     *
-     * @param  string|array|Zend_Config $directory
-     * @return void
-     */
-    public function __construct($directory = array())
-    {
-        if ($directory instanceof Zend_Config) {
-            $directory = $directory->toArray();
-        } else if (is_string($directory)) {
-            $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
-            require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception ('Invalid options to validator provided');
-        }
+	/**
+	 * Sets validator options
+	 *
+	 * @param  string|array|Zend_Config $directory
+	 * @return void
+	 */
+	public function __construct($directory = array())
+	{
+		if ($directory instanceof Zend_Config) {
+			$directory = $directory->toArray();
+		} else if (is_string($directory)) {
+			$directory = explode(',', $directory);
+		} else if (!is_array($directory)) {
+			require_once 'Zend/Validate/Exception.php';
+			throw new Zend_Validate_Exception ('Invalid options to validator provided');
+		}
 
-        $this->setDirectory($directory);
-    }
+		$this->setDirectory($directory);
+	}
 
-    /**
-     * Returns the set file directories which are checked
-     *
-     * @param  boolean $asArray Returns the values as array, when false an concated string is returned
-     * @return string
-     */
-    public function getDirectory($asArray = false)
-    {
-        $asArray   = (bool) $asArray;
-        $directory = (string) $this->_directory;
-        if ($asArray) {
-            $directory = explode(',', $directory);
-        }
+	/**
+	 * Returns the set file directories which are checked
+	 *
+	 * @param  boolean $asArray Returns the values as array, when false an concated string is returned
+	 * @return string
+	 */
+	public function getDirectory($asArray = false)
+	{
+		$asArray   = (bool) $asArray;
+		$directory = (string) $this->_directory;
+		if ($asArray) {
+			$directory = explode(',', $directory);
+		}
 
-        return $directory;
-    }
+		return $directory;
+	}
 
-    /**
-     * Sets the file directory which will be checked
-     *
-     * @param  string|array $directory The directories to validate
-     * @return Zend_Validate_File_Extension Provides a fluent interface
-     */
-    public function setDirectory($directory)
-    {
-        $this->_directory = null;
-        $this->addDirectory($directory);
-        return $this;
-    }
+	/**
+	 * Sets the file directory which will be checked
+	 *
+	 * @param  string|array $directory The directories to validate
+	 * @return Zend_Validate_File_Extension Provides a fluent interface
+	 */
+	public function setDirectory($directory)
+	{
+		$this->_directory = null;
+		$this->addDirectory($directory);
+		return $this;
+	}
 
-    /**
-     * Adds the file directory which will be checked
-     *
-     * @param  string|array $directory The directory to add for validation
-     * @return Zend_Validate_File_Extension Provides a fluent interface
-     */
-    public function addDirectory($directory)
-    {
-        $directories = $this->getDirectory(true);
+	/**
+	 * Adds the file directory which will be checked
+	 *
+	 * @param  string|array $directory The directory to add for validation
+	 * @return Zend_Validate_File_Extension Provides a fluent interface
+	 */
+	public function addDirectory($directory)
+	{
+		$directories = $this->getDirectory(true);
 
-        if (is_string($directory)) {
-            $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
-            require_once 'Zend/Validate/Exception.php';
-            throw new Zend_Validate_Exception ('Invalid options to validator provided');
-        }
+		if (is_string($directory)) {
+			$directory = explode(',', $directory);
+		} else if (!is_array($directory)) {
+			require_once 'Zend/Validate/Exception.php';
+			throw new Zend_Validate_Exception ('Invalid options to validator provided');
+		}
 
-        foreach ($directory as $content) {
-            if (empty($content) || !is_string($content)) {
-                continue;
-            }
+		foreach ($directory as $content) {
+			if (empty($content) || !is_string($content)) {
+				continue;
+			}
 
-            $directories[] = trim($content);
-        }
-        $directories = array_unique($directories);
+			$directories[] = trim($content);
+		}
+		$directories = array_unique($directories);
 
-        // Sanity check to ensure no empty values
-        foreach ($directories as $key => $dir) {
-            if (empty($dir)) {
-                unset($directories[$key]);
-            }
-        }
+		// Sanity check to ensure no empty values
+		foreach ($directories as $key => $dir) {
+			if (empty($dir)) {
+				unset($directories[$key]);
+			}
+		}
 
-        $this->_directory = implode(',', $directories);
+		$this->_directory = implode(',', $directories);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Defined by Zend_Validate_Interface
-     *
-     * Returns true if and only if the file already exists in the set directories
-     *
-     * @param  string  $value Real file to check for existance
-     * @param  array   $file  File data from Zend_File_Transfer
-     * @return boolean
-     */
-    public function isValid($value, $file = null)
-    {
-        $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
-            $file['name'] = $value;
-        }
+	/**
+	 * Defined by Zend_Validate_Interface
+	 *
+	 * Returns true if and only if the file already exists in the set directories
+	 *
+	 * @param  string  $value Real file to check for existance
+	 * @param  array   $file  File data from Zend_File_Transfer
+	 * @return boolean
+	 */
+	public function isValid($value, $file = null)
+	{
+		$directories = $this->getDirectory(true);
+		if (($file !== null) and (!empty($file['destination']))) {
+			$directories[] = $file['destination'];
+		} else if (!isset($file['name'])) {
+			$file['name'] = $value;
+		}
 
-        $check = false;
-        foreach ($directories as $directory) {
-            if (empty($directory)) {
-                continue;
-            }
+		$check = false;
+		foreach ($directories as $directory) {
+			if (empty($directory)) {
+				continue;
+			}
 
-            $check = true;
-            if (!file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->_throw($file, self::DOES_NOT_EXIST);
-            }
-        }
+			$check = true;
+			if (!file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
+				return $this->_throw($file, self::DOES_NOT_EXIST);
+			}
+		}
 
-        if (!$check) {
-            return $this->_throw($file, self::DOES_NOT_EXIST);
-        }
+		if (!$check) {
+			return $this->_throw($file, self::DOES_NOT_EXIST);
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function _throw($file, $errorType)
-    {
-        if ($file !== null) {
-            $this->_value = $file['name'];
-        }
+	/**
+	 * Throws an error of the given type
+	 *
+	 * @param  string $file
+	 * @param  string $errorType
+	 * @return false
+	 */
+	protected function _throw($file, $errorType)
+	{
+		if ($file !== null) {
+			$this->_value = $file['name'];
+		}
 
-        $this->_error($errorType);
-        return false;
-    }
+		$this->_error($errorType);
+		return false;
+	}
 }

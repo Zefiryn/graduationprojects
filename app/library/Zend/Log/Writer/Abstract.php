@@ -33,106 +33,107 @@ require_once 'Zend/Log/Filter/Priority.php';
  */
 abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
 {
-    /**
-     * @var array of Zend_Log_Filter_Interface
-     */
-    protected $_filters = array();
+	/**
+	 * @var array of Zend_Log_Filter_Interface
+	 */
+	protected $_filters = array();
 
-    /**
-     * Formats the log message before writing.
-     *
-     * @var Zend_Log_Formatter_Interface
-     */
-    protected $_formatter;
+	/**
+	 * Formats the log message before writing.
+	 *
+	 * @var Zend_Log_Formatter_Interface
+	 */
+	protected $_formatter;
 
-    /**
-     * Add a filter specific to this writer.
-     *
-     * @param  Zend_Log_Filter_Interface  $filter
-     * @return Zend_Log_Writer_Abstract
-     */
-    public function addFilter($filter)
-    {
-        if (is_int($filter)) {
-            $filter = new Zend_Log_Filter_Priority($filter);
-        }
+	/**
+	 * Add a filter specific to this writer.
+	 *
+	 * @param  Zend_Log_Filter_Interface  $filter
+	 * @return Zend_Log_Writer_Abstract
+	 */
+	public function addFilter($filter)
+	{
+		if (is_int($filter)) {
+			$filter = new Zend_Log_Filter_Priority($filter);
+		}
 
-        if (!$filter instanceof Zend_Log_Filter_Interface) {
-            /** @see Zend_Log_Exception */
-            require_once 'Zend/Log/Exception.php';
-            throw new Zend_Log_Exception('Invalid filter provided');
-        }
+		if (!$filter instanceof Zend_Log_Filter_Interface) {
+			/** @see Zend_Log_Exception */
+			require_once 'Zend/Log/Exception.php';
+			throw new Zend_Log_Exception('Invalid filter provided');
+		}
 
-        $this->_filters[] = $filter;
-        return $this;
-    }
+		$this->_filters[] = $filter;
+		return $this;
+	}
 
-    /**
-     * Log a message to this writer.
-     *
-     * @param  array $event log data event
-     * @return void
-     */
-    public function write($event)
-    {
-        foreach ($this->_filters as $filter) {
-            if (! $filter->accept($event)) {
-                return;
-            }
-        }
+	/**
+	 * Log a message to this writer.
+	 *
+	 * @param  array $event log data event
+	 * @return void
+	 */
+	public function write($event)
+	{
+		foreach ($this->_filters as $filter) {
+			if (! $filter->accept($event)) {
+				return;
+			}
+		}
 
-        // exception occurs on error
-        $this->_write($event);
-    }
+		// exception occurs on error
+		$this->_write($event);
+	}
 
-    /**
-     * Set a new formatter for this writer
-     *
-     * @param  Zend_Log_Formatter_Interface $formatter
-     * @return Zend_Log_Writer_Abstract
-     */
-    public function setFormatter(Zend_Log_Formatter_Interface $formatter)
-    {
-        $this->_formatter = $formatter;
-        return $this;
-    }
+	/**
+	 * Set a new formatter for this writer
+	 *
+	 * @param  Zend_Log_Formatter_Interface $formatter
+	 * @return Zend_Log_Writer_Abstract
+	 */
+	public function setFormatter(Zend_Log_Formatter_Interface $formatter)
+	{
+		$this->_formatter = $formatter;
+		return $this;
+	}
 
-    /**
-     * Perform shutdown activites such as closing open resources
-     *
-     * @return void
-     */
-    public function shutdown()
-    {}
+	/**
+	 * Perform shutdown activites such as closing open resources
+	 *
+	 * @return void
+	 */
+	public function shutdown()
+	{
+	}
 
-    /**
-     * Write a message to the log.
-     *
-     * @param  array  $event  log data event
-     * @return void
-     */
-    abstract protected function _write($event);
+	/**
+	 * Write a message to the log.
+	 *
+	 * @param  array  $event  log data event
+	 * @return void
+	 */
+	abstract protected function _write($event);
 
-    /**
-     * Validate and optionally convert the config to array
-     *
-     * @param  array|Zend_Config $config Zend_Config or Array
-     * @return array
-     * @throws Zend_Log_Exception
-     */
-    static protected function _parseConfig($config)
-    {
-        if ($config instanceof Zend_Config) {
-            $config = $config->toArray();
-        }
+	/**
+	 * Validate and optionally convert the config to array
+	 *
+	 * @param  array|Zend_Config $config Zend_Config or Array
+	 * @return array
+	 * @throws Zend_Log_Exception
+	 */
+	static protected function _parseConfig($config)
+	{
+		if ($config instanceof Zend_Config) {
+			$config = $config->toArray();
+		}
 
-        if (!is_array($config)) {
-            require_once 'Zend/Log/Exception.php';
-            throw new Zend_Log_Exception(
+		if (!is_array($config)) {
+			require_once 'Zend/Log/Exception.php';
+			throw new Zend_Log_Exception(
                 'Configuration must be an array or instance of Zend_Config'
-            );
-        }
+			);
+		}
 
-        return $config;
-    }
+		return $config;
+	}
 }

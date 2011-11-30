@@ -36,39 +36,39 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Capacitance extends Zend_Measure_Abstract
 {
-    const STANDARD = 'FARAD';
+	const STANDARD = 'FARAD';
 
-    const ABFARAD                = 'ABFARAD';
-    const AMPERE_PER_SECOND_VOLT = 'AMPERE_PER_SECOND_VOLT';
-    const CENTIFARAD             = 'CENTIFARAD';
-    const COULOMB_PER_VOLT       = 'COULOMB_PER_VOLT';
-    const DECIFARAD              = 'DECIFARAD';
-    const DEKAFARAD              = 'DEKAFARAD';
-    const ELECTROMAGNETIC_UNIT   = 'ELECTROMAGNETIC_UNIT';
-    const ELECTROSTATIC_UNIT     = 'ELECTROSTATIC_UNIT';
-    const FARAD                  = 'FARAD';
-    const FARAD_INTERNATIONAL    = 'FARAD_INTERNATIONAL';
-    const GAUSSIAN               = 'GAUSSIAN';
-    const GIGAFARAD              = 'GIGAFARAD';
-    const HECTOFARAD             = 'HECTOFARAD';
-    const JAR                    = 'JAR';
-    const KILOFARAD              = 'KILOFARAD';
-    const MEGAFARAD              = 'MEGAFARAD';
-    const MICROFARAD             = 'MICROFARAD';
-    const MILLIFARAD             = 'MILLIFARAD';
-    const NANOFARAD              = 'NANOFARAD';
-    const PICOFARAD              = 'PICOFARAD';
-    const PUFF                   = 'PUFF';
-    const SECOND_PER_OHM         = 'SECOND_PER_OHM';
-    const STATFARAD              = 'STATFARAD';
-    const TERAFARAD              = 'TERAFARAD';
+	const ABFARAD                = 'ABFARAD';
+	const AMPERE_PER_SECOND_VOLT = 'AMPERE_PER_SECOND_VOLT';
+	const CENTIFARAD             = 'CENTIFARAD';
+	const COULOMB_PER_VOLT       = 'COULOMB_PER_VOLT';
+	const DECIFARAD              = 'DECIFARAD';
+	const DEKAFARAD              = 'DEKAFARAD';
+	const ELECTROMAGNETIC_UNIT   = 'ELECTROMAGNETIC_UNIT';
+	const ELECTROSTATIC_UNIT     = 'ELECTROSTATIC_UNIT';
+	const FARAD                  = 'FARAD';
+	const FARAD_INTERNATIONAL    = 'FARAD_INTERNATIONAL';
+	const GAUSSIAN               = 'GAUSSIAN';
+	const GIGAFARAD              = 'GIGAFARAD';
+	const HECTOFARAD             = 'HECTOFARAD';
+	const JAR                    = 'JAR';
+	const KILOFARAD              = 'KILOFARAD';
+	const MEGAFARAD              = 'MEGAFARAD';
+	const MICROFARAD             = 'MICROFARAD';
+	const MILLIFARAD             = 'MILLIFARAD';
+	const NANOFARAD              = 'NANOFARAD';
+	const PICOFARAD              = 'PICOFARAD';
+	const PUFF                   = 'PUFF';
+	const SECOND_PER_OHM         = 'SECOND_PER_OHM';
+	const STATFARAD              = 'STATFARAD';
+	const TERAFARAD              = 'TERAFARAD';
 
-    /**
-     * Calculations for all capacitance units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all capacitance units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'ABFARAD'              => array('1.0e+9',      'abfarad'),
         'AMPERE_PER_SECOND_VOLT' => array('1',         'A/sV'),
         'CENTIFARAD'           => array('0.01',        'cF'),
@@ -94,5 +94,5 @@ class Zend_Measure_Capacitance extends Zend_Measure_Abstract
         'STATFARAD'            => array('1.11265e-12', 'statfarad'),
         'TERAFARAD'            => array('1.0e+12',     'TF'),
         'STANDARD'             => 'FARAD'
-    );
+        );
 }

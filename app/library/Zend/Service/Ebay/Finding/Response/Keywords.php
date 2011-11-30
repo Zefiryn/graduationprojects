@@ -40,39 +40,39 @@ require_once 'Zend/Service/Ebay/Finding.php';
  */
 class Zend_Service_Ebay_Finding_Response_Keywords extends Zend_Service_Ebay_Finding_Response_Abstract
 {
-    /**
-     * Contains a spell-checked version of the submitted keywords. If no
-     * recommended spelling can be identified for the submitted keywords, the
-     * response contains a warning to that effect and an empty keywords field
-     * is returned.
-     *
-     * @var string
-     */
-    public $keywords;
+	/**
+	 * Contains a spell-checked version of the submitted keywords. If no
+	 * recommended spelling can be identified for the submitted keywords, the
+	 * response contains a warning to that effect and an empty keywords field
+	 * is returned.
+	 *
+	 * @var string
+	 */
+	public $keywords;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
-        $this->keywords = $this->_query(".//$ns:keywords[1]", 'string');
-    }
+		$this->keywords = $this->_query(".//$ns:keywords[1]", 'string');
+	}
 
-    /**
-     * @param  Zend_Service_Ebay_Finding $proxy
-     * @param  Zend_Config|array         $options
-     * @return Zend_Service_Ebay_Finding_Response_Items
-     */
-    public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
-    {
-        // prepare options
-        $options = Zend_Service_Ebay_Abstract::optionsToArray($options);
-        $options = $options + $this->_options;
+	/**
+	 * @param  Zend_Service_Ebay_Finding $proxy
+	 * @param  Zend_Config|array         $options
+	 * @return Zend_Service_Ebay_Finding_Response_Items
+	 */
+	public function findItems(Zend_Service_Ebay_Finding $proxy, $options = null)
+	{
+		// prepare options
+		$options = Zend_Service_Ebay_Abstract::optionsToArray($options);
+		$options = $options + $this->_options;
 
-        // find items
-        return $proxy->findItemsByKeywords($this->keywords, $options);
-    }
+		// find items
+		return $proxy->findItemsByKeywords($this->keywords, $options);
+	}
 }

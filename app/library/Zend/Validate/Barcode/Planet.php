@@ -32,21 +32,21 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  */
 class Zend_Validate_Barcode_Planet extends Zend_Validate_Barcode_AdapterAbstract
 {
-    /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = array(12, 14);
+	/**
+	 * Allowed barcode lengths
+	 * @var integer
+	 */
+	protected $_length = array(12, 14);
 
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
+	/**
+	 * Allowed barcode characters
+	 * @var string
+	 */
+	protected $_characters = '0123456789';
 
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_postnet';
+	/**
+	 * Checksum function
+	 * @var string
+	 */
+	protected $_checksum = '_postnet';
 }

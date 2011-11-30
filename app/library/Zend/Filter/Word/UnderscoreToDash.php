@@ -32,14 +32,14 @@ require_once 'Zend/Filter/Word/SeparatorToSeparator.php';
  */
 class Zend_Filter_Word_UnderscoreToDash extends Zend_Filter_Word_SeparatorToSeparator
 {
-    /**
-     * Constructor
-     *
-     * @param  string $separator Space by default
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct('_', '-');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  string $separator Space by default
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct('_', '-');
+	}
 }

@@ -40,75 +40,75 @@ require_once 'Zend/Pdf/Resource.php';
  */
 class Zend_Pdf_Resource_ContentStream extends Zend_Pdf_Resource
 {
-    /**
-     * Buffered content
-     *
-     * @var string
-     */
-    protected $_bufferedContent = '';
+	/**
+	 * Buffered content
+	 *
+	 * @var string
+	 */
+	protected $_bufferedContent = '';
 
-    /**
-     * Object constructor.
-     *
-     * @param Zend_Pdf_Element_Object_Stream|string $contentStreamObject
-     * @throws Zend_Pdf_Exception
-     */
-    public function __construct($contentStreamObject = '')
-    {
-        if ($contentStreamObject !== null &&
-            !$contentStreamObject instanceof Zend_Pdf_Element_Object_Stream &&
-            !is_string($contentStreamObject)
-        ) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Content stream parameter must be a string or stream object');
-        }
+	/**
+	 * Object constructor.
+	 *
+	 * @param Zend_Pdf_Element_Object_Stream|string $contentStreamObject
+	 * @throws Zend_Pdf_Exception
+	 */
+	public function __construct($contentStreamObject = '')
+	{
+		if ($contentStreamObject !== null &&
+		!$contentStreamObject instanceof Zend_Pdf_Element_Object_Stream &&
+		!is_string($contentStreamObject)
+		) {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Content stream parameter must be a string or stream object');
+		}
 
-        parent::__construct($contentStreamObject);
-    }
+		parent::__construct($contentStreamObject);
+	}
 
-    /**
-     * Appends instructions to the end of the content stream
-     *
-     * @param string $instructions
-     * @return Zend_Pdf_Resource_ContentStream
-     */
-    public function addInstructions($instructions)
-    {
-        $this->_bufferedContent .= $instructions;
-        return $this;
-    }
+	/**
+	 * Appends instructions to the end of the content stream
+	 *
+	 * @param string $instructions
+	 * @return Zend_Pdf_Resource_ContentStream
+	 */
+	public function addInstructions($instructions)
+	{
+		$this->_bufferedContent .= $instructions;
+		return $this;
+	}
 
-    /**
-     * Get current stream content
-     *
-     * @return string
-     */
-    public function getInstructions()
-    {
-        $this->flush();
-        return $this->_resource->value;
-    }
+	/**
+	 * Get current stream content
+	 *
+	 * @return string
+	 */
+	public function getInstructions()
+	{
+		$this->flush();
+		return $this->_resource->value;
+	}
 
-    /**
-     * Clear stream content.
-     *
-     * @return Zend_Pdf_Resource_ContentStream
-     */
-    public function clear()
-    {
-        $this->_resource->value = '';
-        $this->_bufferedContent = '';
-        return $this;
-    }
+	/**
+	 * Clear stream content.
+	 *
+	 * @return Zend_Pdf_Resource_ContentStream
+	 */
+	public function clear()
+	{
+		$this->_resource->value = '';
+		$this->_bufferedContent = '';
+		return $this;
+	}
 
-    /**
-     * Flush buffered content
-     */
-    public function flush()
-    {
-        $this->_resource->value .= $this->_bufferedContent;
-        $this->_bufferedContent = '';
+	/**
+	 * Flush buffered content
+	 */
+	public function flush()
+	{
+		$this->_resource->value .= $this->_bufferedContent;
+		$this->_bufferedContent = '';
 
-        return $this;
-    }
+		return $this;
+	}
 }

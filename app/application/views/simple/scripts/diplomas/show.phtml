@@ -1,21 +1,32 @@
 <div id="main">
 
 	<div class="diploma_gallery" id="diploma_gallery">
-		<?php foreach($this->diploma->files as $file):?> 
-			<img id="<?php echo $file->file_id?>" class="sort_item" src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>" alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>" class="diploma_image" />
+
+	<?php foreach($this->diploma->files as $file):?>
+		<img id="<?php echo $file->file_id?>" class="sort_item"
+			src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>"
+			alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>"
+			class="diploma_image" />
+		
+		
 		<?php endforeach;?>
 	</div>
 
 	<div class="dyplom" id="<?php echo $this->diploma->diploma_id?>">
-		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
+
+	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
 		<p class="admin">
-			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
-				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
-					alt="<?php echo $this->translate('edit');?>" 
-					title="<?php echo $this->translate('edit');?>">
+			<a
+				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+				class="ui-icon ui-icon-pencil no-block"
+				alt="<?php echo $this->translate('edit');?>"
+				title="<?php echo $this->translate('edit');?>">
 			</a>
-			
+
 		</p>
+		
+		
 		<?php endif?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('edition'));?></p>
 		<p class="diploma_data diploma_edition"><?php echo $this->diploma->edition->edition_name;?>
@@ -65,5 +76,5 @@
 			
 		</nav>
     </div>
-	
+
 </div>

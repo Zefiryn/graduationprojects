@@ -32,25 +32,25 @@ require_once 'Zend/Http/UserAgent/AbstractDevice.php';
 class Zend_Http_UserAgent_Desktop extends Zend_Http_UserAgent_AbstractDevice
 {
 
-    /**
-     * Used by default : must be always true
-     *
-     * @param string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
-     * @return bool
-     */
-    public static function match($userAgent, $server)
-    {
-        return true;
-    }
+	/**
+	 * Used by default : must be always true
+	 *
+	 * @param string $userAgent User Agent chain
+	 * @param  array $server $_SERVER like param
+	 * @return bool
+	 */
+	public static function match($userAgent, $server)
+	{
+		return true;
+	}
 
-    /**
-     * Gives the current browser type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return 'desktop';
-    }
+	/**
+	 * Gives the current browser type
+	 *
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'desktop';
+	}
 }

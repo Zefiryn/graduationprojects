@@ -45,24 +45,24 @@ require_once 'Zend/Gdata/YouTube/PlaylistVideoEntry.php';
 class Zend_Gdata_YouTube_PlaylistVideoFeed extends Zend_Gdata_Media_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_YouTube_PlaylistVideoEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_YouTube_PlaylistVideoEntry';
 
-    /**
-     * Creates a Play Video feed, representing a list of videos contained
-     * within a single playlist.
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Creates a Play Video feed, representing a list of videos contained
+	 * within a single playlist.
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct($element);
+	}
 
 }

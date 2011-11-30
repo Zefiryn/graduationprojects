@@ -1,16 +1,23 @@
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('work-type_delete_confirm')));
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'editions', 'delete_confirm' => $this->translate('work-type_delete_confirm')));
 ?>
 <div id="main">
 	<h1>
-		<?php echo $this->translate('work-types');?>
-		<a href="<?php echo $this->baseUrl('/work-types/new');?>">
-			<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block"
-				alt="<?php echo $this->translate('add_new_worktype');?>" 
-				title="<?php echo $this->translate('add_new_worktype');?>" />
+
+
+	<?php echo $this->translate('work-types');?>
+		<a href="<?php echo $this->baseUrl('/work-types/new');?>"> <img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('add_new_worktype');?>"
+			title="<?php echo $this->translate('add_new_worktype');?>" />
 		</a>
 	</h1>
 	<br />
+	
+	
+	
+	
 	<?php foreach ($this->work_types as $id => $type):?>
 	<p>
 		<?php echo $type;?>

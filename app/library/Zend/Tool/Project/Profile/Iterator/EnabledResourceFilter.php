@@ -31,13 +31,13 @@
 class Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter extends RecursiveFilterIterator
 {
 
-    /**
-     * accept() is required by teh RecursiveFilterIterator
-     *
-     * @return bool
-     */
-    public function accept()
-    {
-        return $this->current()->isEnabled();
-    }
+	/**
+	 * accept() is required by teh RecursiveFilterIterator
+	 *
+	 * @return bool
+	 */
+	public function accept()
+	{
+		return $this->current()->isEnabled();
+	}
 }

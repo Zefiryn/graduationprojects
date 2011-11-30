@@ -38,22 +38,22 @@ require_once 'Zend/Gdata/Media/Feed.php';
 class Zend_Gdata_YouTube_CommentEntry extends Zend_Gdata_Entry
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_YouTube_CommentEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_YouTube_CommentEntry';
 
-    /**
-     * Constructs a new Zend_Gdata_YouTube_CommentEntry object.
-     * @param DOMElement $element (optional) The DOMElement on which to
-     * base this object.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_YouTube_CommentEntry object.
+	 * @param DOMElement $element (optional) The DOMElement on which to
+	 * base this object.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct($element);
+	}
 
 }

@@ -34,42 +34,42 @@ require_once 'Zend/Pdf/Element.php';
  */
 class Zend_Pdf_Element_Null extends Zend_Pdf_Element
 {
-    /**
-     * Object value. Always null.
-     *
-     * @var mixed
-     */
-    public $value;
+	/**
+	 * Object value. Always null.
+	 *
+	 * @var mixed
+	 */
+	public $value;
 
 
-    /**
-     * Object constructor
-     */
-    public function __construct()
-    {
-        $this->value = null;
-    }
+	/**
+	 * Object constructor
+	 */
+	public function __construct()
+	{
+		$this->value = null;
+	}
 
 
-    /**
-     * Return type of the element.
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return Zend_Pdf_Element::TYPE_NULL;
-    }
+	/**
+	 * Return type of the element.
+	 *
+	 * @return integer
+	 */
+	public function getType()
+	{
+		return Zend_Pdf_Element::TYPE_NULL;
+	}
 
 
-    /**
-     * Return object as string
-     *
-     * @param Zend_Pdf_Factory $factory
-     * @return string
-     */
-    public function toString($factory = null)
-    {
-        return 'null';
-    }
+	/**
+	 * Return object as string
+	 *
+	 * @param Zend_Pdf_Factory $factory
+	 * @return string
+	 */
+	public function toString($factory = null)
+	{
+		return 'null';
+	}
 }

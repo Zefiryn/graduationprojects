@@ -41,114 +41,114 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  */
 class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
 {
-    /**
-     * Attributes that should not be passed to helper
-     * @var array
-     */
-    protected $_attribBlacklist = array('helper', 'placement', 'separator', 'tag');
+	/**
+	 * Attributes that should not be passed to helper
+	 * @var array
+	 */
+	protected $_attribBlacklist = array('helper', 'placement', 'separator', 'tag');
 
-    /**
-     * Default placement: append
-     * @var string
-     */
-    protected $_placement = 'APPEND';
+	/**
+	 * Default placement: append
+	 * @var string
+	 */
+	protected $_placement = 'APPEND';
 
-    /**
-     * HTML tag with which to surround image
-     * @var string
-     */
-    protected $_tag;
+	/**
+	 * HTML tag with which to surround image
+	 * @var string
+	 */
+	protected $_tag;
 
-    /**
-     * Set HTML tag with which to surround label
-     *
-     * @param  string $tag
-     * @return Zend_Form_Decorator_Image
-     */
-    public function setTag($tag)
-    {
-        $this->_tag = (string) $tag;
-        return $this;
-    }
+	/**
+	 * Set HTML tag with which to surround label
+	 *
+	 * @param  string $tag
+	 * @return Zend_Form_Decorator_Image
+	 */
+	public function setTag($tag)
+	{
+		$this->_tag = (string) $tag;
+		return $this;
+	}
 
-    /**
-     * Get HTML tag, if any, with which to surround label
-     *
-     * @return void
-     */
-    public function getTag()
-    {
-        if (null === $this->_tag) {
-            $tag = $this->getOption('tag');
-            if (null !== $tag) {
-                $this->removeOption('tag');
-                $this->setTag($tag);
-            }
-            return $tag;
-        }
+	/**
+	 * Get HTML tag, if any, with which to surround label
+	 *
+	 * @return void
+	 */
+	public function getTag()
+	{
+		if (null === $this->_tag) {
+			$tag = $this->getOption('tag');
+			if (null !== $tag) {
+				$this->removeOption('tag');
+				$this->setTag($tag);
+			}
+			return $tag;
+		}
 
-        return $this->_tag;
-    }
+		return $this->_tag;
+	}
 
-    /**
-     * Get attributes to pass to image helper
-     *
-     * @return array
-     */
-    public function getAttribs()
-    {
-        $attribs = $this->getOptions();
+	/**
+	 * Get attributes to pass to image helper
+	 *
+	 * @return array
+	 */
+	public function getAttribs()
+	{
+		$attribs = $this->getOptions();
 
-        if (null !== ($element = $this->getElement())) {
-            $attribs['alt'] = $element->getLabel();
-            $attribs = array_merge($attribs, $element->getAttribs());
-        }
+		if (null !== ($element = $this->getElement())) {
+			$attribs['alt'] = $element->getLabel();
+			$attribs = array_merge($attribs, $element->getAttribs());
+		}
 
-        foreach ($this->_attribBlacklist as $key) {
-            if (array_key_exists($key, $attribs)) {
-                unset($attribs[$key]);
-            }
-        }
+		foreach ($this->_attribBlacklist as $key) {
+			if (array_key_exists($key, $attribs)) {
+				unset($attribs[$key]);
+			}
+		}
 
-        return $attribs;
-    }
+		return $attribs;
+	}
 
-    /**
-     * Render a form image
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $element = $this->getElement();
-        $view    = $element->getView();
-        if (null === $view) {
-            return $content;
-        }
+	/**
+	 * Render a form image
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$element = $this->getElement();
+		$view    = $element->getView();
+		if (null === $view) {
+			return $content;
+		}
 
-        $tag           = $this->getTag();
-        $placement     = $this->getPlacement();
-        $separator     = $this->getSeparator();
-        $name          = $element->getFullyQualifiedName();
-        $attribs       = $this->getAttribs();
-        $attribs['id'] = $element->getId();
+		$tag           = $this->getTag();
+		$placement     = $this->getPlacement();
+		$separator     = $this->getSeparator();
+		$name          = $element->getFullyQualifiedName();
+		$attribs       = $this->getAttribs();
+		$attribs['id'] = $element->getId();
 
-        $image = $view->formImage($name, $element->getImageValue(), $attribs);
+		$image = $view->formImage($name, $element->getImageValue(), $attribs);
 
-        if (null !== $tag) {
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
-            $decorator = new Zend_Form_Decorator_HtmlTag();
-            $decorator->setOptions(array('tag' => $tag));
-            $image = $decorator->render($image);
-        }
+		if (null !== $tag) {
+			require_once 'Zend/Form/Decorator/HtmlTag.php';
+			$decorator = new Zend_Form_Decorator_HtmlTag();
+			$decorator->setOptions(array('tag' => $tag));
+			$image = $decorator->render($image);
+		}
 
-        switch ($placement) {
-            case self::PREPEND:
-                return $image . $separator . $content;
-            case self::APPEND:
-            default:
-                return $content . $separator . $image;
-        }
-    }
+		switch ($placement) {
+			case self::PREPEND:
+				return $image . $separator . $content;
+			case self::APPEND:
+			default:
+				return $content . $separator . $image;
+		}
+	}
 }

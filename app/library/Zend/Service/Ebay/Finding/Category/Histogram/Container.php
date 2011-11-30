@@ -35,32 +35,32 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Category_Histogram_Container extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * Response container for category histograms.
-     *
-     * This container is returned only when the specified category has children
-     * categories.
-     *
-     * @var Zend_Service_Ebay_Finding_Category_Histogram_Set
-     */
-    public $categoryHistogram;
+	/**
+	 * Response container for category histograms.
+	 *
+	 * This container is returned only when the specified category has children
+	 * categories.
+	 *
+	 * @var Zend_Service_Ebay_Finding_Category_Histogram_Set
+	 */
+	public $categoryHistogram;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
 
-        $nodes = $this->_xPath->query(".//$ns:categoryHistogram", $this->_dom);
-        if ($nodes->length > 0) {
-            /**
-             * @see Zend_Service_Ebay_Finding_Category_Histogram_Set
-             */
-            require_once 'Zend/Service/Ebay/Finding/Category/Histogram/Set.php';
-            $this->categoryHistogram = new Zend_Service_Ebay_Finding_Category_Histogram_Set($nodes);
-        }
-    }
+		$nodes = $this->_xPath->query(".//$ns:categoryHistogram", $this->_dom);
+		if ($nodes->length > 0) {
+			/**
+			 * @see Zend_Service_Ebay_Finding_Category_Histogram_Set
+			 */
+			require_once 'Zend/Service/Ebay/Finding/Category/Histogram/Set.php';
+			$this->categoryHistogram = new Zend_Service_Ebay_Finding_Category_Histogram_Set($nodes);
+		}
+	}
 }

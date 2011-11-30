@@ -39,22 +39,22 @@ require_once 'Zend/Gdata/Feed.php';
  */
 class Zend_Gdata_Gbase_Feed extends Zend_Gdata_Feed
 {
-    /**
-     * The classname for the feed.
-     *
-     * @var string
-     */
-    protected $_feedClassName = 'Zend_Gdata_Gbase_Feed';
+	/**
+	 * The classname for the feed.
+	 *
+	 * @var string
+	 */
+	protected $_feedClassName = 'Zend_Gdata_Gbase_Feed';
 
-    /**
-     * Create a new instance.
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Gbase::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Create a new instance.
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Gbase::$namespaces);
+		parent::__construct($element);
+	}
 }

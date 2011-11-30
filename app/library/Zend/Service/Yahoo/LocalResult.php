@@ -37,88 +37,88 @@ require_once 'Zend/Service/Yahoo/Result.php';
  */
 class Zend_Service_Yahoo_LocalResult extends Zend_Service_Yahoo_Result
 {
-    /**
-     * Street address of the result
-     *
-     * @var string
-     */
-    public $Address;
+	/**
+	 * Street address of the result
+	 *
+	 * @var string
+	 */
+	public $Address;
 
-    /**
-     * City in which the result resides
-     *
-     * @var string
-     */
-    public $City;
+	/**
+	 * City in which the result resides
+	 *
+	 * @var string
+	 */
+	public $City;
 
-    /**
-     * State in which the result resides
-     *
-     * @var string
-     */
-    public $State;
+	/**
+	 * State in which the result resides
+	 *
+	 * @var string
+	 */
+	public $State;
 
-    /**
-     * Phone number for the result
-     *
-     * @var string
-     */
-    public $Phone;
+	/**
+	 * Phone number for the result
+	 *
+	 * @var string
+	 */
+	public $Phone;
 
-    /**
-     * User-submitted rating for the result
-     *
-     * @var string
-     */
-    public $Rating;
+	/**
+	 * User-submitted rating for the result
+	 *
+	 * @var string
+	 */
+	public $Rating;
 
-    /**
-     * The distance to the result from your specified location
-     *
-     * @var string
-     */
-    public $Distance;
+	/**
+	 * The distance to the result from your specified location
+	 *
+	 * @var string
+	 */
+	public $Distance;
 
-    /**
-     * A URL of a map for the result
-     *
-     * @var string
-     */
-    public $MapUrl;
+	/**
+	 * A URL of a map for the result
+	 *
+	 * @var string
+	 */
+	public $MapUrl;
 
-    /**
-     * The URL for the business website, if known
-     *
-     * @var string
-     */
-    public $BusinessUrl;
+	/**
+	 * The URL for the business website, if known
+	 *
+	 * @var string
+	 */
+	public $BusinessUrl;
 
-    /**
-     * The URL for linking to the business website, if known
-     *
-     * @var string
-     */
-    public $BusinessClickUrl;
+	/**
+	 * The URL for linking to the business website, if known
+	 *
+	 * @var string
+	 */
+	public $BusinessClickUrl;
 
-    /**
-     * Local result namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:lcl';
+	/**
+	 * Local result namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:lcl';
 
 
-    /**
-     * Initializes the local result
-     *
-     * @param  DOMElement $result
-     * @return void
-     */
-    public function __construct(DOMElement $result)
-    {
-        $this->_fields = array('Address','City', 'City', 'State', 'Phone', 'Rating', 'Distance', 'MapUrl',
+	/**
+	 * Initializes the local result
+	 *
+	 * @param  DOMElement $result
+	 * @return void
+	 */
+	public function __construct(DOMElement $result)
+	{
+		$this->_fields = array('Address','City', 'City', 'State', 'Phone', 'Rating', 'Distance', 'MapUrl',
                                'BusinessUrl', 'BusinessClickUrl');
 
-        parent::__construct($result);
-    }
+		parent::__construct($result);
+	}
 }

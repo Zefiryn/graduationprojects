@@ -38,27 +38,27 @@ require_once 'Zend/Gdata/Entry.php';
 class Zend_Gdata_Spreadsheets_SpreadsheetEntry extends Zend_Gdata_Entry
 {
 
-    protected $_entryClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetEntry';
+	protected $_entryClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetEntry';
 
-    /**
-     * Constructs a new Zend_Gdata_Spreadsheets_SpreadsheetEntry object.
-     * @param DOMElement $element (optional) The DOMElement on which to base this object.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Spreadsheets_SpreadsheetEntry object.
+	 * @param DOMElement $element (optional) The DOMElement on which to base this object.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
+		parent::__construct($element);
+	}
 
-    /**
-     * Returns the worksheets in this spreadsheet
-     *
-     * @return Zend_Gdata_Spreadsheets_WorksheetFeed The worksheets
-     */
-    public function getWorksheets()
-    {
-        $service = new Zend_Gdata_Spreadsheets($this->getHttpClient());
-        return $service->getWorksheetFeed($this);
-    }
+	/**
+	 * Returns the worksheets in this spreadsheet
+	 *
+	 * @return Zend_Gdata_Spreadsheets_WorksheetFeed The worksheets
+	 */
+	public function getWorksheets()
+	{
+		$service = new Zend_Gdata_Spreadsheets($this->getHttpClient());
+		return $service->getWorksheetFeed($this);
+	}
 
 }

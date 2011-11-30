@@ -29,10 +29,10 @@
  */
 interface Zend_InfoCard_Xml_KeyInfo_Interface
 {
-    /**
-     * Return an object representing a KeyInfo data type
-     *
-     * @return Zend_InfoCard_Xml_KeyInfo
-     */
-    public function getKeyInfo();
+	/**
+	 * Return an object representing a KeyInfo data type
+	 *
+	 * @return Zend_InfoCard_Xml_KeyInfo
+	 */
+	public function getKeyInfo();
 }

@@ -32,15 +32,15 @@ require_once 'Zend/Filter/Word/SeparatorToSeparator.php';
  */
 class Zend_Filter_Word_SeparatorToDash extends Zend_Filter_Word_SeparatorToSeparator
 {
-    /**
-     * Constructor
-     *
-     * @param  string  $searchSeparator  Seperator to search for change
-     * @return void
-     */
-    public function __construct($searchSeparator = ' ')
-    {
-        parent::__construct($searchSeparator, '-');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  string  $searchSeparator  Seperator to search for change
+	 * @return void
+	 */
+	public function __construct($searchSeparator = ' ')
+	{
+		parent::__construct($searchSeparator, '-');
+	}
 
 }

@@ -34,84 +34,84 @@ require_once 'Zend/Tool/Framework/Client/Storage/AdapterInterface.php';
 class Zend_Tool_Framework_Client_Storage
 {
 
-    /**
-     * @var Zend_Tool_Framework_Client_Storage_AdapterInterface
-     */
-    protected $_adapter = null;
+	/**
+	 * @var Zend_Tool_Framework_Client_Storage_AdapterInterface
+	 */
+	protected $_adapter = null;
 
-    public function __construct($options = array())
-    {
-        if (isset($options['adapter'])) {
-            $this->setAdapter($options['adapter']);
-        }
-    }
+	public function __construct($options = array())
+	{
+		if (isset($options['adapter'])) {
+			$this->setAdapter($options['adapter']);
+		}
+	}
 
-    public function setAdapter($adapter)
-    {
-        if (is_string($adapter)) {
-            $storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_' . ucfirst($adapter);
-            Zend_Loader::loadClass($storageAdapterClass);
-            $adapter = new $storageAdapterClass();
-        }
-        $this->_adapter = $adapter;
-    }
+	public function setAdapter($adapter)
+	{
+		if (is_string($adapter)) {
+			$storageAdapterClass = 'Zend_Tool_Framework_Client_Storage_' . ucfirst($adapter);
+			Zend_Loader::loadClass($storageAdapterClass);
+			$adapter = new $storageAdapterClass();
+		}
+		$this->_adapter = $adapter;
+	}
 
-    public function isEnabled()
-    {
-        return ($this->_adapter instanceof Zend_Tool_Framework_Client_Storage_AdapterInterface);
-    }
+	public function isEnabled()
+	{
+		return ($this->_adapter instanceof Zend_Tool_Framework_Client_Storage_AdapterInterface);
+	}
 
-    public function put($name, $value)
-    {
-        if (!$this->_adapter) {
-            return false;
-        }
+	public function put($name, $value)
+	{
+		if (!$this->_adapter) {
+			return false;
+		}
 
-        $this->_adapter->put($name, $value);
+		$this->_adapter->put($name, $value);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function get($name, $defaultValue = false)
-    {
-        if (!$this->_adapter) {
-            return false;
-        }
+	public function get($name, $defaultValue = false)
+	{
+		if (!$this->_adapter) {
+			return false;
+		}
 
-        if ($this->_adapter->has($name)) {
-            return $this->_adapter->get($name);
-        } else {
-            return $defaultValue;
-        }
+		if ($this->_adapter->has($name)) {
+			return $this->_adapter->get($name);
+		} else {
+			return $defaultValue;
+		}
 
-    }
+	}
 
-    public function has($name)
-    {
-        if (!$this->_adapter) {
-            return false;
-        }
+	public function has($name)
+	{
+		if (!$this->_adapter) {
+			return false;
+		}
 
-        return $this->_adapter->has($name);
-    }
+		return $this->_adapter->has($name);
+	}
 
-    public function remove($name)
-    {
-        if (!$this->_adapter) {
-            return false;
-        }
+	public function remove($name)
+	{
+		if (!$this->_adapter) {
+			return false;
+		}
 
-        $this->_adapter->remove($name);
+		$this->_adapter->remove($name);
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getStreamUri($name)
-    {
-        if (!$this->_adapter) {
-            return false;
-        }
+	public function getStreamUri($name)
+	{
+		if (!$this->_adapter) {
+			return false;
+		}
 
-        return $this->_adapter->getStreamUri($name);
-    }
+		return $this->_adapter->getStreamUri($name);
+	}
 }

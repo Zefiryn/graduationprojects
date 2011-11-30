@@ -34,22 +34,22 @@ require_once 'Zend/Exception.php';
  */
 class Zend_File_Transfer_Exception extends Zend_Exception
 {
-    protected $_fileerror = null;
+	protected $_fileerror = null;
 
-    public function __construct($message, $fileerror = 0)
-    {
-        $this->_fileerror = $fileerror;
-        parent::__construct($message);
-    }
+	public function __construct($message, $fileerror = 0)
+	{
+		$this->_fileerror = $fileerror;
+		parent::__construct($message);
+	}
 
-    /**
-     * Returns the transfer error code for the exception
-     * This is not the exception code !!!
-     *
-     * @return integer
-     */
-    public function getFileError()
-    {
-        return $this->_fileerror;
-    }
+	/**
+	 * Returns the transfer error code for the exception
+	 * This is not the exception code !!!
+	 *
+	 * @return integer
+	 */
+	public function getFileError()
+	{
+		return $this->_fileerror;
+	}
 }

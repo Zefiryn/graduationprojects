@@ -39,19 +39,19 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_TestApplicationControllerDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'controllers';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'controllers';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestApplicationControllerDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestApplicationControllerDirectory';
+	}
 
 }

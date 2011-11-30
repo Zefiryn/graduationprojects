@@ -35,34 +35,34 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Aspect extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * Container that returns the name of the respective aspect value and the
-     * histogram (the number of available items) that share that item
-     * characteristic.
-     *
-     * @var Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set
-     */
-    public $valueHistogram;
+	/**
+	 * Container that returns the name of the respective aspect value and the
+	 * histogram (the number of available items) that share that item
+	 * characteristic.
+	 *
+	 * @var Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set
+	 */
+	public $valueHistogram;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
-        $this->_attributes['valueHistogram'] = array(
+		$this->_attributes['valueHistogram'] = array(
             'valueName' => $this->_query(".//$ns:valueHistogram/@valueName", 'string', true)
-        );
+		);
 
-        $nodes = $this->_xPath->query(".//$ns:valueHistogram", $this->_dom);
-        if ($nodes->length > 0) {
-            /**
-             * @see Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set
-             */
-            require_once 'Zend/Service/Ebay/Finding/Aspect/Histogram/Value/Set.php';
-            $this->valueHistogram = new Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set($nodes);
-        }
-    }
+		$nodes = $this->_xPath->query(".//$ns:valueHistogram", $this->_dom);
+		if ($nodes->length > 0) {
+			/**
+			 * @see Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set
+			 */
+			require_once 'Zend/Service/Ebay/Finding/Aspect/Histogram/Value/Set.php';
+			$this->valueHistogram = new Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set($nodes);
+		}
+	}
 }

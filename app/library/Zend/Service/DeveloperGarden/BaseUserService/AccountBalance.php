@@ -30,33 +30,33 @@
  */
 class Zend_Service_DeveloperGarden_BaseUserService_AccountBalance
 {
-    /**
-     * @var integer
-     */
-    public $Account = null;
+	/**
+	 * @var integer
+	 */
+	public $Account = null;
 
-    /**
-     * @var integer $Credits
-     */
-    public $Credits = null;
+	/**
+	 * @var integer $Credits
+	 */
+	public $Credits = null;
 
-    /**
-     * returns the account id
-     *
-     * @return integer
-     */
-    public function getAccount()
-    {
-        return $this->Account;
-    }
+	/**
+	 * returns the account id
+	 *
+	 * @return integer
+	 */
+	public function getAccount()
+	{
+		return $this->Account;
+	}
 
-    /**
-     * returns the credits
-     *
-     * @return integer
-     */
-    public function getCredits()
-    {
-        return $this->Credits;
-    }
+	/**
+	 * returns the credits
+	 *
+	 * @return integer
+	 */
+	public function getCredits()
+	{
+		return $this->Credits;
+	}
 }

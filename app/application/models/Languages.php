@@ -8,22 +8,22 @@ class Application_Model_Languages extends GP_Application_Model
 	protected $about;
 	protected $news;
 	protected $regualtions;
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_Languages';
-	
-	public function __construct($id = null, array $options = null) 
+
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
+
 	public function isLocalization($lang)
 	{
 		return $this->getDbTable()->isLocalization($lang);
 	}
-	
+
 	/**
 	 * Get language data according to given lang_code
-	 * 
+	 *
 	 * @access public
 	 * @param string $lang
 	 * @return Application_Model_Languages $this
@@ -31,16 +31,16 @@ class Application_Model_Languages extends GP_Application_Model
 	public function findLang($lang)
 	{
 		$row = $this->getDbTable()->findLang($lang);
-		
+
 		if ($row)
-			$this->populate($row);
+		$this->populate($row);
 			
 		return ($this);
 	}
-	
+
 	/**
 	 * Get language id according to given lang_code
-	 * 
+	 *
 	 * @access public
 	 * @param string $lang
 	 * @return int $lang_id
@@ -48,27 +48,27 @@ class Application_Model_Languages extends GP_Application_Model
 	public function findLangId($lang)
 	{
 		$this->findLang($lang);
-		
+
 		return ($this->lang_id);
 	}
-	
+
 	/**
 	 * Get language array for select fields
-	 * 
+	 *
 	 * @access public
 	 * @return array $select
 	 */
 	public function getLanguages()
 	{
 		$rowset = $this->getDbTable()->fetchAll();
-		
+
 		foreach ($rowset as $row)
 		{
-			$select[$row->lang_id] = $row->lang_code; 
+			$select[$row->lang_id] = $row->lang_code;
 		}
-		
+
 		return $select;
 	}
-	
+
 }
 

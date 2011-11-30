@@ -1,7 +1,10 @@
 <div id="main">
 
-	<h1><?php echo $this->translate('regulation_header');?></h1>
+	<h1>
+	<?php echo $this->translate('regulation_header');?></h1>
 	<p class="spacer">&nbsp;</p>
+	
+	
 	<?php if ($this->form->csrf->hasErrors()):?>
 	<div id="error-csrf" class="error-div">
 		<p class="error"><?php echo $this->translate('csrf_error')?></p>

@@ -38,87 +38,87 @@ require_once 'Zend/XmlRpc/Request.php';
  */
 class Zend_XmlRpc_Request_Http extends Zend_XmlRpc_Request
 {
-    /**
-     * Array of headers
-     * @var array
-     */
-    protected $_headers;
+	/**
+	 * Array of headers
+	 * @var array
+	 */
+	protected $_headers;
 
-    /**
-     * Raw XML as received via request
-     * @var string
-     */
-    protected $_xml;
+	/**
+	 * Raw XML as received via request
+	 * @var string
+	 */
+	protected $_xml;
 
-    /**
-     * Constructor
-     *
-     * Attempts to read from php://input to get raw POST request; if an error
-     * occurs in doing so, or if the XML is invalid, the request is declared a
-     * fault.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $xml = @file_get_contents('php://input');
-        if (!$xml) {
-            require_once 'Zend/XmlRpc/Fault.php';
-            $this->_fault = new Zend_XmlRpc_Fault(630);
-            return;
-        }
+	/**
+	 * Constructor
+	 *
+	 * Attempts to read from php://input to get raw POST request; if an error
+	 * occurs in doing so, or if the XML is invalid, the request is declared a
+	 * fault.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$xml = @file_get_contents('php://input');
+		if (!$xml) {
+			require_once 'Zend/XmlRpc/Fault.php';
+			$this->_fault = new Zend_XmlRpc_Fault(630);
+			return;
+		}
 
-        $this->_xml = $xml;
+		$this->_xml = $xml;
 
-        $this->loadXml($xml);
-    }
+		$this->loadXml($xml);
+	}
 
-    /**
-     * Retrieve the raw XML request
-     *
-     * @return string
-     */
-    public function getRawRequest()
-    {
-        return $this->_xml;
-    }
+	/**
+	 * Retrieve the raw XML request
+	 *
+	 * @return string
+	 */
+	public function getRawRequest()
+	{
+		return $this->_xml;
+	}
 
-    /**
-     * Get headers
-     *
-     * Gets all headers as key => value pairs and returns them.
-     *
-     * @return array
-     */
-    public function getHeaders()
-    {
-        if (null === $this->_headers) {
-            $this->_headers = array();
-            foreach ($_SERVER as $key => $value) {
-                if ('HTTP_' == substr($key, 0, 5)) {
-                    $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))));
-                    $this->_headers[$header] = $value;
-                }
-            }
-        }
+	/**
+	 * Get headers
+	 *
+	 * Gets all headers as key => value pairs and returns them.
+	 *
+	 * @return array
+	 */
+	public function getHeaders()
+	{
+		if (null === $this->_headers) {
+			$this->_headers = array();
+			foreach ($_SERVER as $key => $value) {
+				if ('HTTP_' == substr($key, 0, 5)) {
+					$header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))));
+					$this->_headers[$header] = $value;
+				}
+			}
+		}
 
-        return $this->_headers;
-    }
+		return $this->_headers;
+	}
 
-    /**
-     * Retrieve the full HTTP request, including headers and XML
-     *
-     * @return string
-     */
-    public function getFullRequest()
-    {
-        $request = '';
-        foreach ($this->getHeaders() as $key => $value) {
-            $request .= $key . ': ' . $value . "\n";
-        }
+	/**
+	 * Retrieve the full HTTP request, including headers and XML
+	 *
+	 * @return string
+	 */
+	public function getFullRequest()
+	{
+		$request = '';
+		foreach ($this->getHeaders() as $key => $value) {
+			$request .= $key . ': ' . $value . "\n";
+		}
 
-        $request .= $this->_xml;
+		$request .= $this->_xml;
 
-        return $request;
-    }
+		return $request;
+	}
 }

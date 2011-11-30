@@ -33,92 +33,92 @@ require_once 'Zend/Markup/Token.php';
 class Zend_Markup_TokenList implements RecursiveIterator
 {
 
-    /**
-     * Array of tokens
-     *
-     * @var array
-     */
-    protected $_tokens = array();
+	/**
+	 * Array of tokens
+	 *
+	 * @var array
+	 */
+	protected $_tokens = array();
 
-    /**
-     * Get the current token
-     *
-     * @return Zend_Markup_Token
-     */
-    public function current()
-    {
-        return current($this->_tokens);
-    }
+	/**
+	 * Get the current token
+	 *
+	 * @return Zend_Markup_Token
+	 */
+	public function current()
+	{
+		return current($this->_tokens);
+	}
 
-    /**
-     * Get the children of the current token
-     *
-     * @return Zend_Markup_TokenList
-     */
-    public function getChildren()
-    {
-        return current($this->_tokens)->getChildren();
-    }
+	/**
+	 * Get the children of the current token
+	 *
+	 * @return Zend_Markup_TokenList
+	 */
+	public function getChildren()
+	{
+		return current($this->_tokens)->getChildren();
+	}
 
-    /**
-     * Add a new child token
-     *
-     * @param Zend_Markup_Token $child
-     *
-     * @return void
-     */
-    public function addChild(Zend_Markup_Token $child)
-    {
-        $this->_tokens[] = $child;
-    }
+	/**
+	 * Add a new child token
+	 *
+	 * @param Zend_Markup_Token $child
+	 *
+	 * @return void
+	 */
+	public function addChild(Zend_Markup_Token $child)
+	{
+		$this->_tokens[] = $child;
+	}
 
-    /**
-     * Check if the current token has children
-     *
-     * @return bool
-     */
-    public function hasChildren()
-    {
-        return current($this->_tokens)->hasChildren();
-    }
+	/**
+	 * Check if the current token has children
+	 *
+	 * @return bool
+	 */
+	public function hasChildren()
+	{
+		return current($this->_tokens)->hasChildren();
+	}
 
-    /**
-     * Get the key of the current token
-     *
-     * @return int
-     */
-    public function key()
-    {
-        return key($this->_tokens);
-    }
+	/**
+	 * Get the key of the current token
+	 *
+	 * @return int
+	 */
+	public function key()
+	{
+		return key($this->_tokens);
+	}
 
-    /**
-     * Go to the next token
-     *
-     * @return Zend_Markup_Token
-     */
-    public function next()
-    {
-        return next($this->_tokens);
-    }
+	/**
+	 * Go to the next token
+	 *
+	 * @return Zend_Markup_Token
+	 */
+	public function next()
+	{
+		return next($this->_tokens);
+	}
 
-    /**
-     * Rewind the iterator
-     *
-     * @return void
-     */
-    public function rewind()
-    {
-        reset($this->_tokens);
-    }
+	/**
+	 * Rewind the iterator
+	 *
+	 * @return void
+	 */
+	public function rewind()
+	{
+		reset($this->_tokens);
+	}
 
-    /**
-     * Check if the element is valid
-     *
-     * @return void
-     */
-    public function valid()
-    {
-        return $this->current() !== false;
-    }
+	/**
+	 * Check if the element is valid
+	 *
+	 * @return void
+	 */
+	public function valid()
+	{
+		return $this->current() !== false;
+	}
 }

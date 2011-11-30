@@ -43,64 +43,64 @@ require_once 'Zend/Tool/Project/Context/Content/Engine/Phtml.php';
  */
 class Zend_Tool_Project_Context_Content_Engine
 {
-    /**
-     * @var Zend_Tool_Framework_Client_Storage
-     */
-    protected $_storage = null;
+	/**
+	 * @var Zend_Tool_Framework_Client_Storage
+	 */
+	protected $_storage = null;
 
-    /**
-     * @var string
-     */
-    protected $_keyInStorage = 'project/content';
+	/**
+	 * @var string
+	 */
+	protected $_keyInStorage = 'project/content';
 
-    /**
-     * @var array
-     */
-    protected $_engines = array();
+	/**
+	 * @var array
+	 */
+	protected $_engines = array();
 
-    /**
-     * __construct()
-     *
-     * @param Zend_Tool_Framework_Client_Storage $storage
-     */
-    public function __construct(Zend_Tool_Framework_Client_Storage $storage)
-    {
-        $this->_storage = $storage;
-        $this->_engines = array(
-            new Zend_Tool_Project_Context_Content_Engine_CodeGenerator($storage, $this->_keyInStorage),
-            new Zend_Tool_Project_Context_Content_Engine_Phtml($storage, $this->_keyInStorage),
-            );
-    }
+	/**
+	 * __construct()
+	 *
+	 * @param Zend_Tool_Framework_Client_Storage $storage
+	 */
+	public function __construct(Zend_Tool_Framework_Client_Storage $storage)
+	{
+		$this->_storage = $storage;
+		$this->_engines = array(
+		new Zend_Tool_Project_Context_Content_Engine_CodeGenerator($storage, $this->_keyInStorage),
+		new Zend_Tool_Project_Context_Content_Engine_Phtml($storage, $this->_keyInStorage),
+		);
+	}
 
-    /**
-     * getContent()
-     *
-     * @param Zend_Tool_Project_Context_Interface $context
-     * @param string $methodName
-     * @param mixed $parameters
-     * @return string
-     */
-    public function getContent(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
-    {
-        $content = null;
+	/**
+	 * getContent()
+	 *
+	 * @param Zend_Tool_Project_Context_Interface $context
+	 * @param string $methodName
+	 * @param mixed $parameters
+	 * @return string
+	 */
+	public function getContent(Zend_Tool_Project_Context_Interface $context, $methodName, $parameters)
+	{
+		$content = null;
 
-        foreach ($this->_engines as $engine) {
-            if ($engine->hasContent($context, $methodName, $parameters)) {
-                $content = $engine->getContent($context, $methodName, $parameters);
+		foreach ($this->_engines as $engine) {
+			if ($engine->hasContent($context, $methodName, $parameters)) {
+				$content = $engine->getContent($context, $methodName, $parameters);
 
-                if ($content != null) {
-                    break;
-                }
+				if ($content != null) {
+					break;
+				}
 
-            }
+			}
 
-        }
+		}
 
-        if ($content == null) {
-            return false;
-        }
+		if ($content == null) {
+			return false;
+		}
 
-        return $content;
-    }
+		return $content;
+	}
 
 }

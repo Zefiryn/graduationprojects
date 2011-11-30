@@ -38,25 +38,25 @@ require_once 'Zend/Gdata/Feed.php';
 class Zend_Gdata_Books_VolumeFeed extends Zend_Gdata_Feed
 {
 
-    /**
-     * Constructor for Zend_Gdata_Books_VolumeFeed which
-     * Describes a Book Search volume feed
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructor for Zend_Gdata_Books_VolumeFeed which
+	 * Describes a Book Search volume feed
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
+		parent::__construct($element);
+	}
 
-     /**
-      * The classname for individual feed elements.
-      *
-      * @var string
-      */
-     protected $_entryClassName = 'Zend_Gdata_Books_VolumeEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Books_VolumeEntry';
 
 }
 

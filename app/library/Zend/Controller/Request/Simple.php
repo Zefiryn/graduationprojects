@@ -33,23 +33,23 @@ require_once 'Zend/Controller/Request/Abstract.php';
 class Zend_Controller_Request_Simple extends Zend_Controller_Request_Abstract
 {
 
-    public function __construct($action = null, $controller = null, $module = null, array $params = array())
-    {
-        if ($action) {
-            $this->setActionName($action);
-        }
+	public function __construct($action = null, $controller = null, $module = null, array $params = array())
+	{
+		if ($action) {
+			$this->setActionName($action);
+		}
 
-        if ($controller) {
-            $this->setControllerName($controller);
-        }
+		if ($controller) {
+			$this->setControllerName($controller);
+		}
 
-        if ($module) {
-            $this->setModuleName($module);
-        }
+		if ($module) {
+			$this->setModuleName($module);
+		}
 
-        if ($params) {
-            $this->setParams($params);
-        }
-    }
+		if ($params) {
+			$this->setParams($params);
+		}
+	}
 
 }

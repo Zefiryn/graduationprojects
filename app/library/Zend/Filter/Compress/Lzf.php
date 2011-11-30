@@ -34,58 +34,58 @@ require_once 'Zend/Filter/Compress/CompressInterface.php';
  */
 class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
 {
-    /**
-     * Class constructor
-     */
-    public function __construct()
-    {
-        if (!extension_loaded('lzf')) {
-            require_once 'Zend/Filter/Exception.php';
-            throw new Zend_Filter_Exception('This filter needs the lzf extension');
-        }
-    }
+	/**
+	 * Class constructor
+	 */
+	public function __construct()
+	{
+		if (!extension_loaded('lzf')) {
+			require_once 'Zend/Filter/Exception.php';
+			throw new Zend_Filter_Exception('This filter needs the lzf extension');
+		}
+	}
 
-    /**
-     * Compresses the given content
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function compress($content)
-    {
-        $compressed = lzf_compress($content);
-        if (!$compressed) {
-            require_once 'Zend/Filter/Exception.php';
-            throw new Zend_Filter_Exception('Error during compression');
-        }
+	/**
+	 * Compresses the given content
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function compress($content)
+	{
+		$compressed = lzf_compress($content);
+		if (!$compressed) {
+			require_once 'Zend/Filter/Exception.php';
+			throw new Zend_Filter_Exception('Error during compression');
+		}
 
-        return $compressed;
-    }
+		return $compressed;
+	}
 
-    /**
-     * Decompresses the given content
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function decompress($content)
-    {
-        $compressed = lzf_decompress($content);
-        if (!$compressed) {
-            require_once 'Zend/Filter/Exception.php';
-            throw new Zend_Filter_Exception('Error during compression');
-        }
+	/**
+	 * Decompresses the given content
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function decompress($content)
+	{
+		$compressed = lzf_decompress($content);
+		if (!$compressed) {
+			require_once 'Zend/Filter/Exception.php';
+			throw new Zend_Filter_Exception('Error during compression');
+		}
 
-        return $compressed;
-    }
+		return $compressed;
+	}
 
-    /**
-     * Returns the adapter name
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return 'Lzf';
-    }
+	/**
+	 * Returns the adapter name
+	 *
+	 * @return string
+	 */
+	public function toString()
+	{
+		return 'Lzf';
+	}
 }

@@ -41,19 +41,19 @@ require_once 'Zend/Service/WindowsAzure/Diagnostics/ConfigurationObjectBaseAbstr
  * @property    int        SampleRateInSeconds                    Sample rate in seconds
  */
 class Zend_Service_WindowsAzure_Diagnostics_PerformanceCounterSubscription
-    extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
+extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
-    /**
-     * Constructor
-     *
- 	 * @param	string	$counterSpecifier					Counter specifier
- 	 * @param	int		$sampleRateInSeconds				Sample rate in seconds
+	/**
+	 * Constructor
+	 *
+	 * @param	string	$counterSpecifier					Counter specifier
+	 * @param	int		$sampleRateInSeconds				Sample rate in seconds
 	 */
-    public function __construct($counterSpecifier, $sampleRateInSeconds = 1)
-    {	
-        $this->_data = array(
+	public function __construct($counterSpecifier, $sampleRateInSeconds = 1)
+	{
+		$this->_data = array(
             'counterspecifier'      => $counterSpecifier,
             'samplerateinseconds'     => $sampleRateInSeconds
-        );
-    }
+		);
+	}
 }

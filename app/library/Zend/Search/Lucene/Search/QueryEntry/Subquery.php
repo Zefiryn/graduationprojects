@@ -32,46 +32,46 @@ require_once 'Zend/Search/Lucene/Search/QueryEntry.php';
  */
 class Zend_Search_Lucene_Search_QueryEntry_Subquery extends Zend_Search_Lucene_Search_QueryEntry
 {
-    /**
-     * Query
-     *
-     * @var Zend_Search_Lucene_Search_Query
-     */
-    private $_query;
+	/**
+	 * Query
+	 *
+	 * @var Zend_Search_Lucene_Search_Query
+	 */
+	private $_query;
 
-    /**
-     * Object constractor
-     *
-     * @param Zend_Search_Lucene_Search_Query $query
-     */
-    public function __construct(Zend_Search_Lucene_Search_Query $query)
-    {
-        $this->_query = $query;
-    }
+	/**
+	 * Object constractor
+	 *
+	 * @param Zend_Search_Lucene_Search_Query $query
+	 */
+	public function __construct(Zend_Search_Lucene_Search_Query $query)
+	{
+		$this->_query = $query;
+	}
 
-    /**
-     * Process modifier ('~')
-     *
-     * @param mixed $parameter
-     * @throws Zend_Search_Lucene_Search_QueryParserException
-     */
-    public function processFuzzyProximityModifier($parameter = null)
-    {
-        require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
-        throw new Zend_Search_Lucene_Search_QueryParserException('\'~\' sign must follow term or phrase');
-    }
+	/**
+	 * Process modifier ('~')
+	 *
+	 * @param mixed $parameter
+	 * @throws Zend_Search_Lucene_Search_QueryParserException
+	 */
+	public function processFuzzyProximityModifier($parameter = null)
+	{
+		require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
+		throw new Zend_Search_Lucene_Search_QueryParserException('\'~\' sign must follow term or phrase');
+	}
 
 
-    /**
-     * Transform entry to a subquery
-     *
-     * @param string $encoding
-     * @return Zend_Search_Lucene_Search_Query
-     */
-    public function getQuery($encoding)
-    {
-        $this->_query->setBoost($this->_boost);
+	/**
+	 * Transform entry to a subquery
+	 *
+	 * @param string $encoding
+	 * @return Zend_Search_Lucene_Search_Query
+	 */
+	public function getQuery($encoding)
+	{
+		$this->_query->setBoost($this->_boost);
 
-        return $this->_query;
-    }
+		return $this->_query;
+	}
 }

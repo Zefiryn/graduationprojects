@@ -37,16 +37,16 @@ require_once 'Zend/Gdata/App/Extension.php';
  */
 class Zend_Gdata_Media_Extension_MediaKeywords extends Zend_Gdata_Extension
 {
-    protected $_rootElement = 'keywords';
-    protected $_rootNamespace = 'media';
+	protected $_rootElement = 'keywords';
+	protected $_rootNamespace = 'media';
 
-    /**
-     * Constructs a new MediaKeywords element
-     */
-    public function __construct()
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
-        parent::__construct();
-    }
+	/**
+	 * Constructs a new MediaKeywords element
+	 */
+	public function __construct()
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Media::$namespaces);
+		parent::__construct();
+	}
 
 }

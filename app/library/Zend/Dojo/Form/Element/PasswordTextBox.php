@@ -34,9 +34,9 @@ require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
  */
 class Zend_Dojo_Form_Element_PasswordTextBox extends Zend_Dojo_Form_Element_ValidationTextBox
 {
-    /**
-     * Use PasswordTextBox dijit view helper
-     * @var string
-     */
-    public $helper = 'PasswordTextBox';
+	/**
+	 * Use PasswordTextBox dijit view helper
+	 * @var string
+	 */
+	public $helper = 'PasswordTextBox';
 }

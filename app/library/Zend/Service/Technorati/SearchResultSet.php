@@ -38,42 +38,42 @@ require_once 'Zend/Service/Technorati/ResultSet.php';
  */
 class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_ResultSet
 {
-    /**
-     * Number of query results.
-     *
-     * @var     int
-     * @access  protected
-     */
-    protected $_queryCount;
+	/**
+	 * Number of query results.
+	 *
+	 * @var     int
+	 * @access  protected
+	 */
+	protected $_queryCount;
 
-    /**
-     * Parses the search response and retrieve the results for iteration.
-     *
-     * @param   DomDocument $dom    the ReST fragment for this object
-     * @param   array $options      query options as associative array
-     */
-    public function __construct(DomDocument $dom, $options = array())
-    {
-        parent::__construct($dom, $options);
+	/**
+	 * Parses the search response and retrieve the results for iteration.
+	 *
+	 * @param   DomDocument $dom    the ReST fragment for this object
+	 * @param   array $options      query options as associative array
+	 */
+	public function __construct(DomDocument $dom, $options = array())
+	{
+		parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/querycount/text()');
-        if ($result->length == 1) $this->_queryCount = (int) $result->item(0)->data;
+		$result = $this->_xpath->query('/tapi/document/result/querycount/text()');
+		if ($result->length == 1) $this->_queryCount = (int) $result->item(0)->data;
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
-        $this->_totalResultsAvailable = (int) $this->_queryCount;
-    }
+		$this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+		$this->_totalResultsAvailable = (int) $this->_queryCount;
+	}
 
-    /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
-     *
-     * @return Zend_Service_Technorati_SearchResult current result
-     */
-    public function current()
-    {
-        /**
-         * @see Zend_Service_Technorati_SearchResult
-         */
-        require_once 'Zend/Service/Technorati/SearchResult.php';
-        return new Zend_Service_Technorati_SearchResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Implements Zend_Service_Technorati_ResultSet::current().
+	 *
+	 * @return Zend_Service_Technorati_SearchResult current result
+	 */
+	public function current()
+	{
+		/**
+		 * @see Zend_Service_Technorati_SearchResult
+		 */
+		require_once 'Zend/Service/Technorati/SearchResult.php';
+		return new Zend_Service_Technorati_SearchResult($this->_results->item($this->_currentIndex));
+	}
 }

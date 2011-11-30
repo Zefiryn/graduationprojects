@@ -41,50 +41,50 @@ require_once 'Zend/Form/Decorator/FormElements.php';
  */
 class Zend_Form_Decorator_PrepareElements extends Zend_Form_Decorator_FormElements
 {
-    /**
-     * Render form elements
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $form = $this->getElement();
-        if ((!$form instanceof Zend_Form) && (!$form instanceof Zend_Form_DisplayGroup)) {
-            return $content;
-        }
+	/**
+	 * Render form elements
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$form = $this->getElement();
+		if ((!$form instanceof Zend_Form) && (!$form instanceof Zend_Form_DisplayGroup)) {
+			return $content;
+		}
 
-        $this->_recursivelyPrepareForm($form);
+		$this->_recursivelyPrepareForm($form);
 
-        return $content;
-    }
+		return $content;
+	}
 
-    protected function _recursivelyPrepareForm(Zend_Form $form)
-    {
-        $belongsTo      = ($form instanceof Zend_Form) ? $form->getElementsBelongTo() : null;
-        $elementContent = '';
-        $separator      = $this->getSeparator();
-        $translator     = $form->getTranslator();
-        $view           = $form->getView();
+	protected function _recursivelyPrepareForm(Zend_Form $form)
+	{
+		$belongsTo      = ($form instanceof Zend_Form) ? $form->getElementsBelongTo() : null;
+		$elementContent = '';
+		$separator      = $this->getSeparator();
+		$translator     = $form->getTranslator();
+		$view           = $form->getView();
 
-        foreach ($form as $item) {
-            $item->setView($view)
-                 ->setTranslator($translator);
-            if ($item instanceof Zend_Form_Element) {
-                $item->setBelongsTo($belongsTo);
-            } elseif (!empty($belongsTo) && ($item instanceof Zend_Form)) {
-                if ($item->isArray()) {
-                    $name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
-                    $item->setElementsBelongTo($name, true);
-                } else {
-                    $item->setElementsBelongTo($belongsTo, true);
-                }
-                $this->_recursivelyPrepareForm($item);
-            } elseif (!empty($belongsTo) && ($item instanceof Zend_Form_DisplayGroup)) {
-                foreach ($item as $element) {
-                    $element->setBelongsTo($belongsTo);
-                }
-            }
-        }
-    }
+		foreach ($form as $item) {
+			$item->setView($view)
+			->setTranslator($translator);
+			if ($item instanceof Zend_Form_Element) {
+				$item->setBelongsTo($belongsTo);
+			} elseif (!empty($belongsTo) && ($item instanceof Zend_Form)) {
+				if ($item->isArray()) {
+					$name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
+					$item->setElementsBelongTo($name, true);
+				} else {
+					$item->setElementsBelongTo($belongsTo, true);
+				}
+				$this->_recursivelyPrepareForm($item);
+			} elseif (!empty($belongsTo) && ($item instanceof Zend_Form_DisplayGroup)) {
+				foreach ($item as $element) {
+					$element->setBelongsTo($belongsTo);
+				}
+			}
+		}
+	}
 }

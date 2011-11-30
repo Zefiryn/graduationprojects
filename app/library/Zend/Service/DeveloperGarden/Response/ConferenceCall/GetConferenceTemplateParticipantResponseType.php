@@ -34,22 +34,22 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateParticipantResponseType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * the participant
-     *
-     * @var Zend_Service_DeveloperGarden_ConferenceCall_Participant
-     */
-    public $participant = null;
+	/**
+	 * the participant
+	 *
+	 * @var Zend_Service_DeveloperGarden_ConferenceCall_Participant
+	 */
+	public $participant = null;
 
-    /**
-     * returns the participant details
-     *
-     * @return Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
-     */
-    public function getParticipant()
-    {
-        return $this->participant;
-    }
+	/**
+	 * returns the participant details
+	 *
+	 * @return Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
+	 */
+	public function getParticipant()
+	{
+		return $this->participant;
+	}
 }

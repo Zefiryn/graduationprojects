@@ -34,36 +34,36 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the template id
-     *
-     * @var string
-     */
-    public $templateId = null;
+	/**
+	 * the template id
+	 *
+	 * @var string
+	 */
+	public $templateId = null;
 
-    /**
-     * constructor
-     *
-     * @param integer $environment
-     * @param string $templateId
-     */
-    public function __construct($environment, $templateId)
-    {
-        parent::__construct($environment);
-        $this->setTemplateId($templateId);
-    }
+	/**
+	 * constructor
+	 *
+	 * @param integer $environment
+	 * @param string $templateId
+	 */
+	public function __construct($environment, $templateId)
+	{
+		parent::__construct($environment);
+		$this->setTemplateId($templateId);
+	}
 
-    /**
-     * set the template id
-     *
-     * @param string $templateId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-        return $this;
-    }
+	/**
+	 * set the template id
+	 *
+	 * @param string $templateId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
+	 */
+	public function setTemplateId($templateId)
+	{
+		$this->templateId = $templateId;
+		return $this;
+	}
 }

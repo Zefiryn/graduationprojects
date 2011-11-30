@@ -37,51 +37,51 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application_Resource_Router
-    extends Zend_Application_Resource_ResourceAbstract
+extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Controller_Router_Rewrite
-     */
-    protected $_router;
+	/**
+	 * @var Zend_Controller_Router_Rewrite
+	 */
+	protected $_router;
 
-    /**
-     * Defined by Zend_Application_Resource_Resource
-     *
-     * @return Zend_Controller_Router_Rewrite
-     */
-    public function init()
-    {
-        return $this->getRouter();
-    }
+	/**
+	 * Defined by Zend_Application_Resource_Resource
+	 *
+	 * @return Zend_Controller_Router_Rewrite
+	 */
+	public function init()
+	{
+		return $this->getRouter();
+	}
 
-    /**
-     * Retrieve router object
-     *
-     * @return Zend_Controller_Router_Rewrite
-     */
-    public function getRouter()
-    {
-        if (null === $this->_router) {
-            $bootstrap = $this->getBootstrap();
-            $bootstrap->bootstrap('FrontController');
-            $this->_router = $bootstrap->getContainer()->frontcontroller->getRouter();
+	/**
+	 * Retrieve router object
+	 *
+	 * @return Zend_Controller_Router_Rewrite
+	 */
+	public function getRouter()
+	{
+		if (null === $this->_router) {
+			$bootstrap = $this->getBootstrap();
+			$bootstrap->bootstrap('FrontController');
+			$this->_router = $bootstrap->getContainer()->frontcontroller->getRouter();
 
-            $options = $this->getOptions();
-            if (!isset($options['routes'])) {
-                $options['routes'] = array();
-            }
+			$options = $this->getOptions();
+			if (!isset($options['routes'])) {
+				$options['routes'] = array();
+			}
 
-            if (isset($options['chainNameSeparator'])) {
-                $this->_router->setChainNameSeparator($options['chainNameSeparator']);
-            }
+			if (isset($options['chainNameSeparator'])) {
+				$this->_router->setChainNameSeparator($options['chainNameSeparator']);
+			}
 
-            if (isset($options['useRequestParametersAsGlobal'])) {
-                $this->_router->useRequestParametersAsGlobal($options['useRequestParametersAsGlobal']);
-            }
+			if (isset($options['useRequestParametersAsGlobal'])) {
+				$this->_router->useRequestParametersAsGlobal($options['useRequestParametersAsGlobal']);
+			}
 
-            $this->_router->addConfig(new Zend_Config($options['routes']));
-        }
+			$this->_router->addConfig(new Zend_Config($options['routes']));
+		}
 
-        return $this->_router;
-    }
+		return $this->_router;
+	}
 }

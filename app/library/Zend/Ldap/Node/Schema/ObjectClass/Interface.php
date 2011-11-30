@@ -31,53 +31,53 @@
  */
 interface Zend_Ldap_Node_Schema_ObjectClass_Interface
 {
-    /**
-     * Gets the objectClass name
-     *
-     * @return string
-     */
-    public function getName();
+	/**
+	 * Gets the objectClass name
+	 *
+	 * @return string
+	 */
+	public function getName();
 
-    /**
-     * Gets the objectClass OID
-     *
-     * @return string
-     */
-    public function getOid();
+	/**
+	 * Gets the objectClass OID
+	 *
+	 * @return string
+	 */
+	public function getOid();
 
-    /**
-     * Gets the attributes that this objectClass must contain
-     *
-     * @return array
-     */
-    public function getMustContain();
+	/**
+	 * Gets the attributes that this objectClass must contain
+	 *
+	 * @return array
+	 */
+	public function getMustContain();
 
-    /**
-     * Gets the attributes that this objectClass may contain
-     *
-     * @return array
-     */
-    public function getMayContain();
+	/**
+	 * Gets the attributes that this objectClass may contain
+	 *
+	 * @return array
+	 */
+	public function getMayContain();
 
-    /**
-     * Gets the objectClass description
-     *
-     * @return string
-     */
-    public function getDescription();
+	/**
+	 * Gets the objectClass description
+	 *
+	 * @return string
+	 */
+	public function getDescription();
 
-    /**
-     * Gets the objectClass type
-     *
-     * @return integer
-     */
-    public function getType();
+	/**
+	 * Gets the objectClass type
+	 *
+	 * @return integer
+	 */
+	public function getType();
 
-    /**
-     * Returns the parent objectClasses of this class.
-     * This includes structural, abstract and auxiliary objectClasses
-     *
-     * @return array
-     */
-    public function getParentClasses();
+	/**
+	 * Returns the parent objectClasses of this class.
+	 * This includes structural, abstract and auxiliary objectClasses
+	 *
+	 * @return array
+	 */
+	public function getParentClasses();
 }

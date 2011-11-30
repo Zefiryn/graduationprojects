@@ -49,38 +49,38 @@ require_once 'Zend/Pdf/Element/String.php';
  */
 class Zend_Pdf_Resource_Extractor
 {
-    /**
-     * PDF objects factory.
-     *
-     * @var Zend_Pdf_ElementFactory_Interface
-     */
-    protected $_factory;
+	/**
+	 * PDF objects factory.
+	 *
+	 * @var Zend_Pdf_ElementFactory_Interface
+	 */
+	protected $_factory;
 
-    /**
-     * Reusable list of already processed objects
-     *
-     * @var array
-     */
-    protected $_processed;
+	/**
+	 * Reusable list of already processed objects
+	 *
+	 * @var array
+	 */
+	protected $_processed;
 
-    /**
-     * Object constructor.
-     */
-    public function __construct()
-    {
-        $this->_factory   = Zend_Pdf_ElementFactory::createFactory(1);
-        $this->_processed = array();
-    }
+	/**
+	 * Object constructor.
+	 */
+	public function __construct()
+	{
+		$this->_factory   = Zend_Pdf_ElementFactory::createFactory(1);
+		$this->_processed = array();
+	}
 
-    /**
-     * Clone page, extract it and dependent objects from the current document,
-     * so it can be used within other docs
-     *
-     * return Zend_Pdf_Page
-     */
-    public function clonePage(Zend_Pdf_Page $page)
-    {
-        return $page->clonePage($this->_factory, $this->_processed);
-    }
+	/**
+	 * Clone page, extract it and dependent objects from the current document,
+	 * so it can be used within other docs
+	 *
+	 * return Zend_Pdf_Page
+	 */
+	public function clonePage(Zend_Pdf_Page $page)
+	{
+		return $page->clonePage($this->_factory, $this->_processed);
+	}
 }
 

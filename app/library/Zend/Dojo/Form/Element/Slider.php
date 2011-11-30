@@ -34,166 +34,166 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 abstract class Zend_Dojo_Form_Element_Slider extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Set clickSelect flag
-     *
-     * @param  bool $clickSelect
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setClickSelect($flag)
-    {
-        $this->setDijitParam('clickSelect', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set clickSelect flag
+	 *
+	 * @param  bool $clickSelect
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setClickSelect($flag)
+	{
+		$this->setDijitParam('clickSelect', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve clickSelect flag
-     *
-     * @return bool
-     */
-    public function getClickSelect()
-    {
-        if (!$this->hasDijitParam('clickSelect')) {
-            return false;
-        }
-        return $this->getDijitParam('clickSelect');
-    }
+	/**
+	 * Retrieve clickSelect flag
+	 *
+	 * @return bool
+	 */
+	public function getClickSelect()
+	{
+		if (!$this->hasDijitParam('clickSelect')) {
+			return false;
+		}
+		return $this->getDijitParam('clickSelect');
+	}
 
-    /**
-     * Set intermediateChanges flag
-     *
-     * @param  bool $intermediateChanges
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setIntermediateChanges($flag)
-    {
-        $this->setDijitParam('intermediateChanges', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set intermediateChanges flag
+	 *
+	 * @param  bool $intermediateChanges
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setIntermediateChanges($flag)
+	{
+		$this->setDijitParam('intermediateChanges', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve intermediateChanges flag
-     *
-     * @return bool
-     */
-    public function getIntermediateChanges()
-    {
-        if (!$this->hasDijitParam('intermediateChanges')) {
-            return false;
-        }
-        return $this->getDijitParam('intermediateChanges');
-    }
+	/**
+	 * Retrieve intermediateChanges flag
+	 *
+	 * @return bool
+	 */
+	public function getIntermediateChanges()
+	{
+		if (!$this->hasDijitParam('intermediateChanges')) {
+			return false;
+		}
+		return $this->getDijitParam('intermediateChanges');
+	}
 
-    /**
-     * Set showButtons flag
-     *
-     * @param  bool $showButtons
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setShowButtons($flag)
-    {
-        $this->setDijitParam('showButtons', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set showButtons flag
+	 *
+	 * @param  bool $showButtons
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setShowButtons($flag)
+	{
+		$this->setDijitParam('showButtons', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve showButtons flag
-     *
-     * @return bool
-     */
-    public function getShowButtons()
-    {
-        if (!$this->hasDijitParam('showButtons')) {
-            return false;
-        }
-        return $this->getDijitParam('showButtons');
-    }
+	/**
+	 * Retrieve showButtons flag
+	 *
+	 * @return bool
+	 */
+	public function getShowButtons()
+	{
+		if (!$this->hasDijitParam('showButtons')) {
+			return false;
+		}
+		return $this->getDijitParam('showButtons');
+	}
 
-    /**
-     * Set discreteValues
-     *
-     * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setDiscreteValues($value)
-    {
-        $this->setDijitParam('discreteValues', (int) $value);
-        return $this;
-    }
+	/**
+	 * Set discreteValues
+	 *
+	 * @param  int $value
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setDiscreteValues($value)
+	{
+		$this->setDijitParam('discreteValues', (int) $value);
+		return $this;
+	}
 
-    /**
-     * Retrieve discreteValues
-     *
-     * @return int|null
-     */
-    public function getDiscreteValues()
-    {
-        return $this->getDijitParam('discreteValues');
-    }
+	/**
+	 * Retrieve discreteValues
+	 *
+	 * @return int|null
+	 */
+	public function getDiscreteValues()
+	{
+		return $this->getDijitParam('discreteValues');
+	}
 
-    /**
-     * Set maximum
-     *
-     * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setMaximum($value)
-    {
-        $this->setDijitParam('maximum', (int) $value);
-        return $this;
-    }
+	/**
+	 * Set maximum
+	 *
+	 * @param  int $value
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setMaximum($value)
+	{
+		$this->setDijitParam('maximum', (int) $value);
+		return $this;
+	}
 
-    /**
-     * Retrieve maximum
-     *
-     * @return int|null
-     */
-    public function getMaximum()
-    {
-        return $this->getDijitParam('maximum');
-    }
+	/**
+	 * Retrieve maximum
+	 *
+	 * @return int|null
+	 */
+	public function getMaximum()
+	{
+		return $this->getDijitParam('maximum');
+	}
 
-    /**
-     * Set minimum
-     *
-     * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setMinimum($value)
-    {
-        $this->setDijitParam('minimum', (int) $value);
-        return $this;
-    }
+	/**
+	 * Set minimum
+	 *
+	 * @param  int $value
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setMinimum($value)
+	{
+		$this->setDijitParam('minimum', (int) $value);
+		return $this;
+	}
 
-    /**
-     * Retrieve minimum
-     *
-     * @return int|null
-     */
-    public function getMinimum()
-    {
-        return $this->getDijitParam('minimum');
-    }
+	/**
+	 * Retrieve minimum
+	 *
+	 * @return int|null
+	 */
+	public function getMinimum()
+	{
+		return $this->getDijitParam('minimum');
+	}
 
-    /**
-     * Set pageIncrement
-     *
-     * @param  int $value
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setPageIncrement($value)
-    {
-        $this->setDijitParam('pageIncrement', (int) $value);
-        return $this;
-    }
+	/**
+	 * Set pageIncrement
+	 *
+	 * @param  int $value
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setPageIncrement($value)
+	{
+		$this->setDijitParam('pageIncrement', (int) $value);
+		return $this;
+	}
 
-    /**
-     * Retrieve pageIncrement
-     *
-     * @return int|null
-     */
-    public function getPageIncrement()
-    {
-        return $this->getDijitParam('pageIncrement');
-    }
+	/**
+	 * Retrieve pageIncrement
+	 *
+	 * @return int|null
+	 */
+	public function getPageIncrement()
+	{
+		return $this->getDijitParam('pageIncrement');
+	}
 }

@@ -33,76 +33,76 @@ require_once 'Zend/Log/Formatter/Abstract.php';
  */
 class Zend_Log_Formatter_Simple extends Zend_Log_Formatter_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_format;
+	/**
+	 * @var string
+	 */
+	protected $_format;
 
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
+	const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
 
-    /**
-     * Class constructor
-     *
-     * @param  null|string  $format  Format specifier for log messages
-     * @return void
-     * @throws Zend_Log_Exception
-     */
-    public function __construct($format = null)
-    {
-        if ($format === null) {
-            $format = self::DEFAULT_FORMAT . PHP_EOL;
-        }
+	/**
+	 * Class constructor
+	 *
+	 * @param  null|string  $format  Format specifier for log messages
+	 * @return void
+	 * @throws Zend_Log_Exception
+	 */
+	public function __construct($format = null)
+	{
+		if ($format === null) {
+			$format = self::DEFAULT_FORMAT . PHP_EOL;
+		}
 
-        if (!is_string($format)) {
-            require_once 'Zend/Log/Exception.php';
-            throw new Zend_Log_Exception('Format must be a string');
-        }
+		if (!is_string($format)) {
+			require_once 'Zend/Log/Exception.php';
+			throw new Zend_Log_Exception('Format must be a string');
+		}
 
-        $this->_format = $format;
-    }
+		$this->_format = $format;
+	}
 
-    /**
+	/**
 	 * Factory for Zend_Log_Formatter_Simple classe
 	 *
 	 * @param array|Zend_Config $options
 	 * @return Zend_Log_Formatter_Simple
-     */
-    public static function factory($options)
-    {
-        $format = null;
-        if (null !== $options) {
-            if ($options instanceof Zend_Config) {
-                $options = $options->toArray();
-            }
+	 */
+	public static function factory($options)
+	{
+		$format = null;
+		if (null !== $options) {
+			if ($options instanceof Zend_Config) {
+				$options = $options->toArray();
+			}
 
-            if (array_key_exists('format', $options)) {
-                $format = $options['format'];
-            }
-        }
+			if (array_key_exists('format', $options)) {
+				$format = $options['format'];
+			}
+		}
 
-        return new self($format);
-    }
+		return new self($format);
+	}
 
-    /**
-     * Formats data into a single line to be written by the writer.
-     *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
-     */
-    public function format($event)
-    {
-        $output = $this->_format;
+	/**
+	 * Formats data into a single line to be written by the writer.
+	 *
+	 * @param  array    $event    event data
+	 * @return string             formatted line to write to the log
+	 */
+	public function format($event)
+	{
+		$output = $this->_format;
 
-        foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
-            ) {
-                $value = gettype($value);
-            }
+		foreach ($event as $name => $value) {
+			if ((is_object($value) && !method_exists($value,'__toString'))
+			|| is_array($value)
+			) {
+				$value = gettype($value);
+			}
 
-            $output = str_replace("%$name%", $value, $output);
-        }
+			$output = str_replace("%$name%", $value, $output);
+		}
 
-        return $output;
-    }
+		return $output;
+	}
 }

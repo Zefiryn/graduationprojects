@@ -35,33 +35,33 @@ require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
  */
 class Zend_Amf_Value_Messaging_ErrorMessage extends Zend_Amf_Value_Messaging_AcknowledgeMessage
 {
-    /**
-     * Additional data with error
-     * @var object
-     */
-    public $extendedData = null;
+	/**
+	 * Additional data with error
+	 * @var object
+	 */
+	public $extendedData = null;
 
-    /**
-     * Error code number
-     * @var string
-     */
-    public $faultCode;
+	/**
+	 * Error code number
+	 * @var string
+	 */
+	public $faultCode;
 
-    /**
-     * Description as to the cause of the error
-     * @var string
-     */
-    public $faultDetail;
+	/**
+	 * Description as to the cause of the error
+	 * @var string
+	 */
+	public $faultDetail;
 
-    /**
-     * Short description of error
-     * @var string
-     */
-    public $faultString = '';
+	/**
+	 * Short description of error
+	 * @var string
+	 */
+	public $faultString = '';
 
-    /**
-     * root cause of error
-     * @var object
-     */
-    public $rootCause = null;
+	/**
+	 * root cause of error
+	 * @var object
+	 */
+	public $rootCause = null;
 }

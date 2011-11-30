@@ -34,59 +34,59 @@
  */
 class Zend_Service_StrikeIron
 {
-    /**
-     * Options to pass to Zend_Service_StrikeIron_Base constructor
-     * @param array
-     */
-    protected $_options;
+	/**
+	 * Options to pass to Zend_Service_StrikeIron_Base constructor
+	 * @param array
+	 */
+	protected $_options;
 
-    /**
-     * Class constructor
-     *
-     * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
-     */
-    public function __construct($options = array())
-    {
-        $this->_options = $options;
-    }
+	/**
+	 * Class constructor
+	 *
+	 * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
+	 */
+	public function __construct($options = array())
+	{
+		$this->_options = $options;
+	}
 
-    /**
-     * Factory method to return a preconfigured Zend_Service_StrikeIron_*
-     * instance.
-     *
-     * @param  null|string  $options  Service options
-     * @return object       Zend_Service_StrikeIron_* instance
-     * @throws Zend_Service_StrikeIron_Exception
-     */
-    public function getService($options = array())
-    {
-        $class = isset($options['class']) ? $options['class'] : 'Base';
-        unset($options['class']);
+	/**
+	 * Factory method to return a preconfigured Zend_Service_StrikeIron_*
+	 * instance.
+	 *
+	 * @param  null|string  $options  Service options
+	 * @return object       Zend_Service_StrikeIron_* instance
+	 * @throws Zend_Service_StrikeIron_Exception
+	 */
+	public function getService($options = array())
+	{
+		$class = isset($options['class']) ? $options['class'] : 'Base';
+		unset($options['class']);
 
-        if (strpos($class, '_') === false) {
-            $class = "Zend_Service_StrikeIron_{$class}";
-        }
+		if (strpos($class, '_') === false) {
+			$class = "Zend_Service_StrikeIron_{$class}";
+		}
 
-        try {
-            if (!class_exists($class)) {
-                require_once 'Zend/Loader.php';
-                @Zend_Loader::loadClass($class);
-            }
-            if (!class_exists($class, false)) {
-                throw new Exception('Class file not found');
-            }
-        } catch (Exception $e) {
-            $msg = "Service '$class' could not be loaded: " . $e->getMessage();
-            /**
-             * @see Zend_Service_StrikeIron_Exception
-             */
-            require_once 'Zend/Service/StrikeIron/Exception.php';
-            throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode(), $e);
-        }
+		try {
+			if (!class_exists($class)) {
+				require_once 'Zend/Loader.php';
+				@Zend_Loader::loadClass($class);
+			}
+			if (!class_exists($class, false)) {
+				throw new Exception('Class file not found');
+			}
+		} catch (Exception $e) {
+			$msg = "Service '$class' could not be loaded: " . $e->getMessage();
+			/**
+			 * @see Zend_Service_StrikeIron_Exception
+			 */
+			require_once 'Zend/Service/StrikeIron/Exception.php';
+			throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode(), $e);
+		}
 
-        // instantiate and return the service
-        $service = new $class(array_merge($this->_options, $options));
-        return $service;
-    }
+		// instantiate and return the service
+		$service = new $class(array_merge($this->_options, $options));
+		return $service;
+	}
 
 }

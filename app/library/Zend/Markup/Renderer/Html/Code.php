@@ -37,17 +37,17 @@ require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
 class Zend_Markup_Renderer_Html_Code extends Zend_Markup_Renderer_Html_HtmlAbstract
 {
 
-    /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function convert(Zend_Markup_Token $token, $text)
-    {
-        return highlight_string($text, true);
-    }
+	/**
+	 * Convert the token
+	 *
+	 * @param Zend_Markup_Token $token
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function convert(Zend_Markup_Token $token, $text)
+	{
+		return highlight_string($text, true);
+	}
 
 }

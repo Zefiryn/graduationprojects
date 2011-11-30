@@ -38,183 +38,183 @@ require_once 'Zend/Mail/Transport/Abstract.php';
  */
 class Zend_Mail_Transport_Sendmail extends Zend_Mail_Transport_Abstract
 {
-    /**
-     * Subject
-     * @var string
-     * @access public
-     */
-    public $subject = null;
+	/**
+	 * Subject
+	 * @var string
+	 * @access public
+	 */
+	public $subject = null;
 
 
-    /**
-     * Config options for sendmail parameters
-     *
-     * @var string
-     */
-    public $parameters;
+	/**
+	 * Config options for sendmail parameters
+	 *
+	 * @var string
+	 */
+	public $parameters;
 
-    /**
-     * EOL character string
-     * @var string
-     * @access public
-     */
-    public $EOL = PHP_EOL;
+	/**
+	 * EOL character string
+	 * @var string
+	 * @access public
+	 */
+	public $EOL = PHP_EOL;
 
-    /**
-     * error information
-     * @var string
-     */
-    protected $_errstr;
+	/**
+	 * error information
+	 * @var string
+	 */
+	protected $_errstr;
 
-    /**
-     * Constructor.
-     *
-     * @param  string|array|Zend_Config $parameters OPTIONAL (Default: null)
-     * @return void
-     */
-    public function __construct($parameters = null)
-    {
-        if ($parameters instanceof Zend_Config) {
-            $parameters = $parameters->toArray();
-        }
+	/**
+	 * Constructor.
+	 *
+	 * @param  string|array|Zend_Config $parameters OPTIONAL (Default: null)
+	 * @return void
+	 */
+	public function __construct($parameters = null)
+	{
+		if ($parameters instanceof Zend_Config) {
+			$parameters = $parameters->toArray();
+		}
 
-        if (is_array($parameters)) {
-            $parameters = implode(' ', $parameters);
-        }
+		if (is_array($parameters)) {
+			$parameters = implode(' ', $parameters);
+		}
 
-        $this->parameters = $parameters;
-    }
+		$this->parameters = $parameters;
+	}
 
 
-    /**
-     * Send mail using PHP native mail()
-     *
-     * @access public
-     * @return void
-     * @throws Zend_Mail_Transport_Exception if parameters is set
-     *         but not a string
-     * @throws Zend_Mail_Transport_Exception on mail() failure
-     */
-    public function _sendMail()
-    {
-        if ($this->parameters === null) {
-            set_error_handler(array($this, '_handleMailErrors'));
-            $result = mail(
-                $this->recipients,
-                $this->_mail->getSubject(),
-                $this->body,
-                $this->header);
-            restore_error_handler();
-        } else {
-            if(!is_string($this->parameters)) {
-                /**
-                 * @see Zend_Mail_Transport_Exception
-                 *
-                 * Exception is thrown here because
-                 * $parameters is a public property
-                 */
-                require_once 'Zend/Mail/Transport/Exception.php';
-                throw new Zend_Mail_Transport_Exception(
+	/**
+	 * Send mail using PHP native mail()
+	 *
+	 * @access public
+	 * @return void
+	 * @throws Zend_Mail_Transport_Exception if parameters is set
+	 *         but not a string
+	 * @throws Zend_Mail_Transport_Exception on mail() failure
+	 */
+	public function _sendMail()
+	{
+		if ($this->parameters === null) {
+			set_error_handler(array($this, '_handleMailErrors'));
+			$result = mail(
+			$this->recipients,
+			$this->_mail->getSubject(),
+			$this->body,
+			$this->header);
+			restore_error_handler();
+		} else {
+			if(!is_string($this->parameters)) {
+				/**
+				 * @see Zend_Mail_Transport_Exception
+				 *
+				 * Exception is thrown here because
+				 * $parameters is a public property
+				 */
+				require_once 'Zend/Mail/Transport/Exception.php';
+				throw new Zend_Mail_Transport_Exception(
                     'Parameters were set but are not a string'
-                );
-            }
+				);
+			}
 
-            set_error_handler(array($this, '_handleMailErrors'));
-            $result = mail(
-                $this->recipients,
-                $this->_mail->getSubject(),
-                $this->body,
-                $this->header,
-                $this->parameters);
-            restore_error_handler();
-        }
+			set_error_handler(array($this, '_handleMailErrors'));
+			$result = mail(
+			$this->recipients,
+			$this->_mail->getSubject(),
+			$this->body,
+			$this->header,
+			$this->parameters);
+			restore_error_handler();
+		}
 
-        if ($this->_errstr !== null || !$result) {
-            /**
-             * @see Zend_Mail_Transport_Exception
-             */
-            require_once 'Zend/Mail/Transport/Exception.php';
-            throw new Zend_Mail_Transport_Exception('Unable to send mail. ' . $this->_errstr);
-        }
-    }
+		if ($this->_errstr !== null || !$result) {
+			/**
+			 * @see Zend_Mail_Transport_Exception
+			 */
+			require_once 'Zend/Mail/Transport/Exception.php';
+			throw new Zend_Mail_Transport_Exception('Unable to send mail. ' . $this->_errstr);
+		}
+	}
 
 
-    /**
-     * Format and fix headers
-     *
-     * mail() uses its $to and $subject arguments to set the To: and Subject:
-     * headers, respectively. This method strips those out as a sanity check to
-     * prevent duplicate header entries.
-     *
-     * @access  protected
-     * @param   array $headers
-     * @return  void
-     * @throws  Zend_Mail_Transport_Exception
-     */
-    protected function _prepareHeaders($headers)
-    {
-        if (!$this->_mail) {
-            /**
-             * @see Zend_Mail_Transport_Exception
-             */
-            require_once 'Zend/Mail/Transport/Exception.php';
-            throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
-        }
+	/**
+	 * Format and fix headers
+	 *
+	 * mail() uses its $to and $subject arguments to set the To: and Subject:
+	 * headers, respectively. This method strips those out as a sanity check to
+	 * prevent duplicate header entries.
+	 *
+	 * @access  protected
+	 * @param   array $headers
+	 * @return  void
+	 * @throws  Zend_Mail_Transport_Exception
+	 */
+	protected function _prepareHeaders($headers)
+	{
+		if (!$this->_mail) {
+			/**
+			 * @see Zend_Mail_Transport_Exception
+			 */
+			require_once 'Zend/Mail/Transport/Exception.php';
+			throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
+		}
 
-        // mail() uses its $to parameter to set the To: header, and the $subject
-        // parameter to set the Subject: header. We need to strip them out.
-        if (0 === strpos(PHP_OS, 'WIN')) {
-            // If the current recipients list is empty, throw an error
-            if (empty($this->recipients)) {
-                /**
-                 * @see Zend_Mail_Transport_Exception
-                 */
-                require_once 'Zend/Mail/Transport/Exception.php';
-                throw new Zend_Mail_Transport_Exception('Missing To addresses');
-            }
-        } else {
-            // All others, simply grab the recipients and unset the To: header
-            if (!isset($headers['To'])) {
-                /**
-                 * @see Zend_Mail_Transport_Exception
-                 */
-                require_once 'Zend/Mail/Transport/Exception.php';
-                throw new Zend_Mail_Transport_Exception('Missing To header');
-            }
+		// mail() uses its $to parameter to set the To: header, and the $subject
+		// parameter to set the Subject: header. We need to strip them out.
+		if (0 === strpos(PHP_OS, 'WIN')) {
+			// If the current recipients list is empty, throw an error
+			if (empty($this->recipients)) {
+				/**
+				 * @see Zend_Mail_Transport_Exception
+				 */
+				require_once 'Zend/Mail/Transport/Exception.php';
+				throw new Zend_Mail_Transport_Exception('Missing To addresses');
+			}
+		} else {
+			// All others, simply grab the recipients and unset the To: header
+			if (!isset($headers['To'])) {
+				/**
+				 * @see Zend_Mail_Transport_Exception
+				 */
+				require_once 'Zend/Mail/Transport/Exception.php';
+				throw new Zend_Mail_Transport_Exception('Missing To header');
+			}
 
-            unset($headers['To']['append']);
-            $this->recipients = implode(',', $headers['To']);
-        }
+			unset($headers['To']['append']);
+			$this->recipients = implode(',', $headers['To']);
+		}
 
-        // Remove recipient header
-        unset($headers['To']);
+		// Remove recipient header
+		unset($headers['To']);
 
-        // Remove subject header, if present
-        if (isset($headers['Subject'])) {
-            unset($headers['Subject']);
-        }
+		// Remove subject header, if present
+		if (isset($headers['Subject'])) {
+			unset($headers['Subject']);
+		}
 
-        // Prepare headers
-        parent::_prepareHeaders($headers);
+		// Prepare headers
+		parent::_prepareHeaders($headers);
 
-        // Fix issue with empty blank line ontop when using Sendmail Trnasport
-        $this->header = rtrim($this->header);
-    }
+		// Fix issue with empty blank line ontop when using Sendmail Trnasport
+		$this->header = rtrim($this->header);
+	}
 
-    /**
-     * Temporary error handler for PHP native mail().
-     *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param string $errline
-     * @param array  $errcontext
-     * @return true
-     */
-    public function _handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
-    {
-        $this->_errstr = $errstr;
-        return true;
-    }
+	/**
+	 * Temporary error handler for PHP native mail().
+	 *
+	 * @param int    $errno
+	 * @param string $errstr
+	 * @param string $errfile
+	 * @param string $errline
+	 * @param array  $errcontext
+	 * @return true
+	 */
+	public function _handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
+	{
+		$this->_errstr = $errstr;
+		return true;
+	}
 
 }

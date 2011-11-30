@@ -34,14 +34,14 @@ require_once 'Zend/Tool/Framework/Manifest/Interface.php';
 interface Zend_Tool_Framework_Manifest_ProviderManifestable extends Zend_Tool_Framework_Manifest_Interface
 {
 
-    /**
-     * getProviders()
-     *
-     * Should either return a single provider or an array
-     * of providers
-     *
-     * @return array|string|Zend_Tool_Framework_Provider_Interface
-     */
-    public function getProviders();
+	/**
+	 * getProviders()
+	 *
+	 * Should either return a single provider or an array
+	 * of providers
+	 *
+	 * @return array|string|Zend_Tool_Framework_Provider_Interface
+	 */
+	public function getProviders();
 
 }

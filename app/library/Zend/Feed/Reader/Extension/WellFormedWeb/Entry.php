@@ -36,38 +36,38 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_WellFormedWeb_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-    /**
-     * Get the entry comment Uri
-     *
-     * @return string|null
-     */
-    public function getCommentFeedLink()
-    {
-        $name = 'commentRss';
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
-        }
+	/**
+	 * Get the entry comment Uri
+	 *
+	 * @return string|null
+	 */
+	public function getCommentFeedLink()
+	{
+		$name = 'commentRss';
+		if (array_key_exists($name, $this->_data)) {
+			return $this->_data[$name];
+		}
 
-        $data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
+		$data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
 
-        if (!$data) {
-            $data = null;
-        }
+		if (!$data) {
+			$data = null;
+		}
 
-        $this->_data[$name] = $data;
+		$this->_data[$name] = $data;
 
-        return $data;
-    }
+		return $data;
+	}
 
-    /**
-     * Register Slash namespaces
-     *
-     * @return void
-     */
-    protected function _registerNamespaces()
-    {
-        $this->_xpath->registerNamespace('wfw', 'http://wellformedweb.org/CommentAPI/');
-    }
+	/**
+	 * Register Slash namespaces
+	 *
+	 * @return void
+	 */
+	protected function _registerNamespaces()
+	{
+		$this->_xpath->registerNamespace('wfw', 'http://wellformedweb.org/CommentAPI/');
+	}
 }

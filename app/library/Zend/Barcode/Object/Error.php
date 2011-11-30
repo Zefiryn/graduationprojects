@@ -33,68 +33,68 @@ require_once 'Zend/Barcode/Object/ObjectAbstract.php';
  */
 class Zend_Barcode_Object_Error extends Zend_Barcode_Object_ObjectAbstract
 {
-    /**
-     * All texts are accepted
-     * @param string $value
-     * @return boolean
-     */
-    public function validateText($value)
-    {
-        return true;
-    }
+	/**
+	 * All texts are accepted
+	 * @param string $value
+	 * @return boolean
+	 */
+	public function validateText($value)
+	{
+		return true;
+	}
 
-    /**
-     * Height is forced
-     * @return integer
-     */
-    public function getHeight($recalculate = false)
-    {
-        return 40;
-    }
+	/**
+	 * Height is forced
+	 * @return integer
+	 */
+	public function getHeight($recalculate = false)
+	{
+		return 40;
+	}
 
-    /**
-     * Width is forced
-     * @return integer
-     */
-    public function getWidth($recalculate = false)
-    {
-        return 400;
-    }
+	/**
+	 * Width is forced
+	 * @return integer
+	 */
+	public function getWidth($recalculate = false)
+	{
+		return 400;
+	}
 
-    /**
-     * Reset precedent instructions
-     * and draw the error message
-     * @return array
-     */
-    public function draw()
-    {
-        $this->_instructions = array();
-        $this->_addText('ERROR:', 10, array(5 , 18), $this->_font, 0, 'left');
-        $this->_addText($this->_text, 10, array(5 , 32), $this->_font, 0, 'left');
-        return $this->_instructions;
-    }
+	/**
+	 * Reset precedent instructions
+	 * and draw the error message
+	 * @return array
+	 */
+	public function draw()
+	{
+		$this->_instructions = array();
+		$this->_addText('ERROR:', 10, array(5 , 18), $this->_font, 0, 'left');
+		$this->_addText($this->_text, 10, array(5 , 32), $this->_font, 0, 'left');
+		return $this->_instructions;
+	}
 
-    /**
-     * For compatibility reason
-     * @return void
-     */
-    protected function _prepareBarcode()
-    {
-    }
+	/**
+	 * For compatibility reason
+	 * @return void
+	 */
+	protected function _prepareBarcode()
+	{
+	}
 
-    /**
-     * For compatibility reason
-     * @return void
-     */
-    protected function _checkParams()
-    {
-    }
+	/**
+	 * For compatibility reason
+	 * @return void
+	 */
+	protected function _checkParams()
+	{
+	}
 
-    /**
-     * For compatibility reason
-     * @return void
-     */
-    protected function _calculateBarcodeWidth()
-    {
-    }
+	/**
+	 * For compatibility reason
+	 * @return void
+	 */
+	protected function _calculateBarcodeWidth()
+	{
+	}
 }

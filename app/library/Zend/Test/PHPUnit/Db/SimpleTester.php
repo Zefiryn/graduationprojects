@@ -62,34 +62,34 @@ require_once "PHPUnit/Extensions/Database/DataSet/IDataSet.php";
  */
 class Zend_Test_PHPUnit_Db_SimpleTester extends PHPUnit_Extensions_Database_DefaultTester
 {
-    /**
-     * Creates a new default database tester using the given connection.
-     *
-     * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection
-     */
-    public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection)
-    {
-        if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            require_once "Zend/Test/PHPUnit/Db/Exception.php";
-            throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
-        }
+	/**
+	 * Creates a new default database tester using the given connection.
+	 *
+	 * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection
+	 */
+	public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection)
+	{
+		if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
+			require_once "Zend/Test/PHPUnit/Db/Exception.php";
+			throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+		}
 
-        $this->connection = $connection;
-        $this->setUpOperation = new PHPUnit_Extensions_Database_Operation_Composite(array(
-            new Zend_Test_PHPUnit_Db_Operation_Truncate(),
-            new Zend_Test_PHPUnit_Db_Operation_Insert(),
-        ));
-        $this->tearDownOperation = PHPUnit_Extensions_Database_Operation_Factory::NONE();
-    }
+		$this->connection = $connection;
+		$this->setUpOperation = new PHPUnit_Extensions_Database_Operation_Composite(array(
+		new Zend_Test_PHPUnit_Db_Operation_Truncate(),
+		new Zend_Test_PHPUnit_Db_Operation_Insert(),
+		));
+		$this->tearDownOperation = PHPUnit_Extensions_Database_Operation_Factory::NONE();
+	}
 
-    /**
-     * Set Up the database using the given Dataset and the SetUp strategy "Truncate, then Insert"
-     *
-     * @param PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet
-     */
-    public function setUpDatabase(PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
-    {
-        $this->setDataSet($dataSet);
-        $this->onSetUp();
-    }
+	/**
+	 * Set Up the database using the given Dataset and the SetUp strategy "Truncate, then Insert"
+	 *
+	 * @param PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet
+	 */
+	public function setUpDatabase(PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
+	{
+		$this->setDataSet($dataSet);
+		$this->onSetUp();
+	}
 }

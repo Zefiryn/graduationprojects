@@ -1,6 +1,10 @@
 <div id="main">
-	<?php if ($this->user->_role == 'admin'):?>
-	<h1><?php echo $this->translate('admin_panel');?></h1>
+
+<?php if ($this->user->_role == 'admin'):?>
+	<h1>
+	<?php echo $this->translate('admin_panel');?></h1>
+	
+	
 	<?php else:?>
 	<h1><?php echo $this->translate('juror_panel');?></h1>
 	<?php endif;?>	

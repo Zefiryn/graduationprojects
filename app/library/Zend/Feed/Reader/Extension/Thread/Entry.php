@@ -31,61 +31,61 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_Thread_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-    /**
-     * Get the "in-reply-to" value
-     *
-     * @return string
-     */
-    public function getInReplyTo()
-    {
-        // TODO: to be implemented
-    }
+	/**
+	 * Get the "in-reply-to" value
+	 *
+	 * @return string
+	 */
+	public function getInReplyTo()
+	{
+		// TODO: to be implemented
+	}
 
-    // TODO: Implement "replies" and "updated" constructs from standard
+	// TODO: Implement "replies" and "updated" constructs from standard
 
-    /**
-     * Get the total number of threaded responses (i.e comments)
-     *
-     * @return int|null
-     */
-    public function getCommentCount()
-    {
-        return $this->_getData('total');
-    }
+	/**
+	 * Get the total number of threaded responses (i.e comments)
+	 *
+	 * @return int|null
+	 */
+	public function getCommentCount()
+	{
+		return $this->_getData('total');
+	}
 
-    /**
-     * Get the entry data specified by name
-     *
-     * @param  string $name
-     * @param  string $type
-     * @return mixed|null
-     */
-    protected function _getData($name)
-    {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
-        }
+	/**
+	 * Get the entry data specified by name
+	 *
+	 * @param  string $name
+	 * @param  string $type
+	 * @return mixed|null
+	 */
+	protected function _getData($name)
+	{
+		if (array_key_exists($name, $this->_data)) {
+			return $this->_data[$name];
+		}
 
-        $data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
+		$data = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
 
-        if (!$data) {
-            $data = null;
-        }
+		if (!$data) {
+			$data = null;
+		}
 
-        $this->_data[$name] = $data;
+		$this->_data[$name] = $data;
 
-        return $data;
-    }
+		return $data;
+	}
 
-    /**
-     * Register Atom Thread Extension 1.0 namespace
-     *
-     * @return void
-     */
-    protected function _registerNamespaces()
-    {
-        $this->_xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
-    }
+	/**
+	 * Register Atom Thread Extension 1.0 namespace
+	 *
+	 * @return void
+	 */
+	protected function _registerNamespaces()
+	{
+		$this->_xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
+	}
 }

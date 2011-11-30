@@ -39,75 +39,75 @@ require_once 'Zend/Tool/Project/Context/Zf/AbstractClassFile.php';
 class Zend_Tool_Project_Context_Zf_FormFile extends Zend_Tool_Project_Context_Zf_AbstractClassFile
 {
 
-    /**
-     * @var string
-     */
-    protected $_formName = 'Base';
+	/**
+	 * @var string
+	 */
+	protected $_formName = 'Base';
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'formName';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'formName';
 
-    /**
-     * init()
-     *
-     */
-    public function init()
-    {
-        $this->_formName = $this->_resource->getAttribute('formName');
-        $this->_filesystemName = ucfirst($this->_formName) . '.php';
-        parent::init();
-    }
+	/**
+	 * init()
+	 *
+	 */
+	public function init()
+	{
+		$this->_formName = $this->_resource->getAttribute('formName');
+		$this->_filesystemName = ucfirst($this->_formName) . '.php';
+		parent::init();
+	}
 
-    /**
-     * getPersistentAttributes
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'formName' => $this->getFormName()
-            );
-    }
+		);
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'FormFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'FormFile';
+	}
 
-    public function getFormName()
-    {
-        return $this->_formName;
-    }
+	public function getFormName()
+	{
+		return $this->_formName;
+	}
 
-    public function getContents()
-    {
+	public function getContents()
+	{
 
-        $className = $this->getFullClassName($this->_formName, 'Form');
+		$className = $this->getFullClassName($this->_formName, 'Form');
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+		$codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+		new Zend_CodeGenerator_Php_Class(array(
                     'name' => $className,
                     'extendedClass' => 'Zend_Form',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+		new Zend_CodeGenerator_Php_Method(array(
                             'name' => 'init',
                             'body' => '/* Form Elements & Other Definitions Here ... */',
-                            ))
-                        )
+		))
+		)
 
-                    ))
-                )
-            ));
-        return $codeGenFile->generate();
-    }
+		))
+		)
+		));
+		return $codeGenFile->generate();
+	}
 }

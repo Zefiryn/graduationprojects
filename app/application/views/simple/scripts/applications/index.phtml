@@ -1,9 +1,15 @@
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
 ?>
 
 <div id="main">
-	<h1><?php echo $this->translate('applications_header'); ?></h1>
+	<h1>
+
+	<?php echo $this->translate('applications_header'); ?></h1>
+	
+	
+	
+	
 	
 	<?php if (count($this->applications) > 0):?>
 	<p class="clear">&nbsp;</p>

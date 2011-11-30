@@ -30,10 +30,10 @@
  */
 interface Zend_Http_UserAgent_Features_Adapter
 {
-    /**
-     * Retrieve the browser's features from a given request object ($_SERVER)
-     *
-     * @return array
-     */
-    public static function getFromRequest($request, array $config);
+	/**
+	 * Retrieve the browser's features from a given request object ($_SERVER)
+	 *
+	 * @return array
+	 */
+	public static function getFromRequest($request, array $config);
 }

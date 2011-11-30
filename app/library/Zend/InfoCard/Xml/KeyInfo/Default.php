@@ -43,22 +43,22 @@ require_once 'Zend/InfoCard/Xml/SecurityTokenReference.php';
  */
 class Zend_InfoCard_Xml_KeyInfo_Default extends Zend_InfoCard_Xml_KeyInfo_Abstract
 {
-    /**
-     * Returns the object representation of the SecurityTokenReference block
-     *
-     * @throws Zend_InfoCard_Xml_Exception
-     * @return Zend_InfoCard_Xml_SecurityTokenReference
-     */
-    public function getSecurityTokenReference()
-    {
-        $this->registerXPathNamespace('o', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
+	/**
+	 * Returns the object representation of the SecurityTokenReference block
+	 *
+	 * @throws Zend_InfoCard_Xml_Exception
+	 * @return Zend_InfoCard_Xml_SecurityTokenReference
+	 */
+	public function getSecurityTokenReference()
+	{
+		$this->registerXPathNamespace('o', 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
 
-        list($sectokenref) = $this->xpath('//o:SecurityTokenReference');
+		list($sectokenref) = $this->xpath('//o:SecurityTokenReference');
 
-        if(!($sectokenref instanceof Zend_InfoCard_Xml_Element)) {
-            throw new Zend_InfoCard_Xml_Exception('Could not locate the Security Token Reference');
-        }
+		if(!($sectokenref instanceof Zend_InfoCard_Xml_Element)) {
+			throw new Zend_InfoCard_Xml_Exception('Could not locate the Security Token Reference');
+		}
 
-        return Zend_InfoCard_Xml_SecurityTokenReference::getInstance($sectokenref);
-    }
+		return Zend_InfoCard_Xml_SecurityTokenReference::getInstance($sectokenref);
+	}
 }

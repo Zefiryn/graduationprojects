@@ -1,10 +1,16 @@
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delete_confirm')));
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delete_confirm')));
 ?>
 
 <div id="main">
-	<h1><?php echo $this->translate('editions');?></h1>
+	<h1>
+
+	<?php echo $this->translate('editions');?></h1>
 	<br />
+	
+	
+	
+	
 	<?php foreach ($this->editions as $id => $edition):?>
 	<p>
 		<span class="admin">

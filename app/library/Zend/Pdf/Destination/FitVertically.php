@@ -46,53 +46,53 @@ require_once 'Zend/Pdf/Destination/Explicit.php';
  */
 class Zend_Pdf_Destination_FitVertically extends Zend_Pdf_Destination_Explicit
 {
-    /**
-     * Create destination object
-     *
-     * @param Zend_Pdf_Page|integer $page  Page object or page number
-     * @param float $left  Left edge of displayed page
-     * @return Zend_Pdf_Destination_FitVertically
-     * @throws Zend_Pdf_Exception
-     */
-    public static function create($page, $left)
-    {
-        $destinationArray = new Zend_Pdf_Element_Array();
+	/**
+	 * Create destination object
+	 *
+	 * @param Zend_Pdf_Page|integer $page  Page object or page number
+	 * @param float $left  Left edge of displayed page
+	 * @return Zend_Pdf_Destination_FitVertically
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function create($page, $left)
+	{
+		$destinationArray = new Zend_Pdf_Element_Array();
 
-        if ($page instanceof Zend_Pdf_Page) {
-            $destinationArray->items[] = $page->getPageDictionary();
-        } else if (is_integer($page)) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
-        } else {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or page number.');
-        }
+		if ($page instanceof Zend_Pdf_Page) {
+			$destinationArray->items[] = $page->getPageDictionary();
+		} else if (is_integer($page)) {
+			$destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
+		} else {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or page number.');
+		}
 
-        $destinationArray->items[] = new Zend_Pdf_Element_Name('FitV');
-        $destinationArray->items[] = new Zend_Pdf_Element_Numeric($left);
+		$destinationArray->items[] = new Zend_Pdf_Element_Name('FitV');
+		$destinationArray->items[] = new Zend_Pdf_Element_Numeric($left);
 
-        return new Zend_Pdf_Destination_FitVertically($destinationArray);
-    }
+		return new Zend_Pdf_Destination_FitVertically($destinationArray);
+	}
 
-    /**
-     * Get left edge of the displayed page
-     *
-     * @return float
-     */
-    public function getLeftEdge()
-    {
-        return $this->_destinationArray->items[2]->value;
-    }
+	/**
+	 * Get left edge of the displayed page
+	 *
+	 * @return float
+	 */
+	public function getLeftEdge()
+	{
+		return $this->_destinationArray->items[2]->value;
+	}
 
-    /**
-     * Set left edge of the displayed page
-     *
-     * @param float $left
-     * @return Zend_Pdf_Action_FitVertically
-     */
-    public function setLeftEdge($left)
-    {
-        $this->_destinationArray->items[2] = new Zend_Pdf_Element_Numeric($left);
+	/**
+	 * Set left edge of the displayed page
+	 *
+	 * @param float $left
+	 * @return Zend_Pdf_Action_FitVertically
+	 */
+	public function setLeftEdge($left)
+	{
+		$this->_destinationArray->items[2] = new Zend_Pdf_Element_Numeric($left);
 
-        return $this;
-    }
+		return $this;
+	}
 }

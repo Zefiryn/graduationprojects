@@ -41,79 +41,79 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
 class Zend_Gdata_App_LoggingHttpClientAdapterSocket extends Zend_Http_Client_Adapter_Socket
 {
 
-    /**
-     * The file handle for writing logs
-     *
-     * @var resource|null
-     */
-    protected $log_handle = null;
+	/**
+	 * The file handle for writing logs
+	 *
+	 * @var resource|null
+	 */
+	protected $log_handle = null;
 
-    /**
-     * Log the given message to the log file.  The log file is configured
-     * as the config param 'logfile'.  This method opens the file for
-     * writing if necessary.
-     *
-     * @param string $message The message to log
-     */
-    protected function log($message)
-    {
-        if ($this->log_handle == null) {
-            $this->log_handle = fopen($this->config['logfile'], 'a');
-        }
-        fwrite($this->log_handle, $message);
-    }
+	/**
+	 * Log the given message to the log file.  The log file is configured
+	 * as the config param 'logfile'.  This method opens the file for
+	 * writing if necessary.
+	 *
+	 * @param string $message The message to log
+	 */
+	protected function log($message)
+	{
+		if ($this->log_handle == null) {
+			$this->log_handle = fopen($this->config['logfile'], 'a');
+		}
+		fwrite($this->log_handle, $message);
+	}
 
-    /**
-     * Connect to the remote server
-     *
-     * @param string  $host
-     * @param int     $port
-     * @param boolean $secure
-     * @param int     $timeout
-     */
-    public function connect($host, $port = 80, $secure = false)
-    {
-        $this->log("Connecting to: ${host}:${port}");
-        return parent::connect($host, $port, $secure);
-    }
+	/**
+	 * Connect to the remote server
+	 *
+	 * @param string  $host
+	 * @param int     $port
+	 * @param boolean $secure
+	 * @param int     $timeout
+	 */
+	public function connect($host, $port = 80, $secure = false)
+	{
+		$this->log("Connecting to: ${host}:${port}");
+		return parent::connect($host, $port, $secure);
+}
 
-    /**
-     * Send request to the remote server
-     *
-     * @param string        $method
-     * @param Zend_Uri_Http $uri
-     * @param string        $http_ver
-     * @param array         $headers
-     * @param string        $body
-     * @return string Request as string
-     */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
-    {
-        $request = parent::write($method, $uri, $http_ver, $headers, $body);
-        $this->log("\n\n" . $request);
-        return $request;
-    }
+/**
+ * Send request to the remote server
+ *
+ * @param string        $method
+ * @param Zend_Uri_Http $uri
+ * @param string        $http_ver
+ * @param array         $headers
+ * @param string        $body
+ * @return string Request as string
+ */
+public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+{
+	$request = parent::write($method, $uri, $http_ver, $headers, $body);
+	$this->log("\n\n" . $request);
+	return $request;
+}
 
-    /**
-     * Read response from server
-     *
-     * @return string
-     */
-    public function read()
-    {
-        $response = parent::read();
-        $this->log("${response}\n\n");
-        return $response;
-    }
+/**
+ * Read response from server
+ *
+ * @return string
+ */
+public function read()
+{
+	$response = parent::read();
+	$this->log("${response}\n\n");
+	return $response;
+}
 
-    /**
-     * Close the connection to the server
-     *
-     */
-    public function close()
-    {
-        $this->log("Closing socket\n\n");
-        parent::close();
-    }
+/**
+ * Close the connection to the server
+ *
+ */
+public function close()
+{
+	$this->log("Closing socket\n\n");
+	parent::close();
+}
 
 }

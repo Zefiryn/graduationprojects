@@ -32,33 +32,33 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  */
 class Zend_Validate_Barcode_Code25interleaved extends Zend_Validate_Barcode_AdapterAbstract
 {
-    /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = 'even';
+	/**
+	 * Allowed barcode lengths
+	 * @var integer
+	 */
+	protected $_length = 'even';
 
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
+	/**
+	 * Allowed barcode characters
+	 * @var string
+	 */
+	protected $_characters = '0123456789';
 
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_code25';
+	/**
+	 * Checksum function
+	 * @var string
+	 */
+	protected $_checksum = '_code25';
 
-    /**
-     * Constructor
-     *
-     * Sets check flag to false.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setCheck(false);
-    }
+	/**
+	 * Constructor
+	 *
+	 * Sets check flag to false.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->setCheck(false);
+	}
 }

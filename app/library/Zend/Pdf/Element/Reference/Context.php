@@ -31,53 +31,53 @@
  */
 class Zend_Pdf_Element_Reference_Context
 {
-    /**
-     * PDF parser object.
-     *
-     * @var Zend_Pdf_StringParser
-     */
-    private $_stringParser;
+	/**
+	 * PDF parser object.
+	 *
+	 * @var Zend_Pdf_StringParser
+	 */
+	private $_stringParser;
 
-    /**
-     * Reference table
-     *
-     * @var Zend_Pdf_Element_Reference_Table
-     */
-    private $_refTable;
+	/**
+	 * Reference table
+	 *
+	 * @var Zend_Pdf_Element_Reference_Table
+	 */
+	private $_refTable;
 
-    /**
-     * Object constructor
-     *
-     * @param Zend_Pdf_StringParser $parser
-     * @param Zend_Pdf_Element_Reference_Table $refTable
-     */
-    public function __construct(Zend_Pdf_StringParser $parser,
-                                Zend_Pdf_Element_Reference_Table $refTable)
-    {
-        $this->_stringParser = $parser;
-        $this->_refTable     = $refTable;
-    }
-
-
-    /**
-     * Context parser
-     *
-     * @return Zend_Pdf_StringParser
-     */
-    public function getParser()
-    {
-        return $this->_stringParser;
-    }
+	/**
+	 * Object constructor
+	 *
+	 * @param Zend_Pdf_StringParser $parser
+	 * @param Zend_Pdf_Element_Reference_Table $refTable
+	 */
+	public function __construct(Zend_Pdf_StringParser $parser,
+	Zend_Pdf_Element_Reference_Table $refTable)
+	{
+		$this->_stringParser = $parser;
+		$this->_refTable     = $refTable;
+	}
 
 
-    /**
-     * Context reference table
-     *
-     * @return Zend_Pdf_Element_Reference_Table
-     */
-    public function getRefTable()
-    {
-        return $this->_refTable;
-    }
+	/**
+	 * Context parser
+	 *
+	 * @return Zend_Pdf_StringParser
+	 */
+	public function getParser()
+	{
+		return $this->_stringParser;
+	}
+
+
+	/**
+	 * Context reference table
+	 *
+	 * @return Zend_Pdf_Element_Reference_Table
+	 */
+	public function getRefTable()
+	{
+		return $this->_refTable;
+	}
 }
 

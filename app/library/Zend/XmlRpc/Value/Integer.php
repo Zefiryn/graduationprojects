@@ -37,29 +37,29 @@ require_once 'Zend/XmlRpc/Value/Scalar.php';
 class Zend_XmlRpc_Value_Integer extends Zend_XmlRpc_Value_Scalar
 {
 
-    /**
-     * Set the value of an integer native type
-     *
-     * @param int $value
-     */
-    public function __construct($value)
-    {
-        if ($value > PHP_INT_MAX) {
-            require_once 'Zend/XmlRpc/Value/Exception.php';
-            throw new Zend_XmlRpc_Value_Exception('Overlong integer given');
-        }
+	/**
+	 * Set the value of an integer native type
+	 *
+	 * @param int $value
+	 */
+	public function __construct($value)
+	{
+		if ($value > PHP_INT_MAX) {
+			require_once 'Zend/XmlRpc/Value/Exception.php';
+			throw new Zend_XmlRpc_Value_Exception('Overlong integer given');
+		}
 
-        $this->_type = self::XMLRPC_TYPE_INTEGER;
-        $this->_value = (int)$value;    // Make sure this value is integer
-    }
+		$this->_type = self::XMLRPC_TYPE_INTEGER;
+		$this->_value = (int)$value;    // Make sure this value is integer
+	}
 
-    /**
-     * Return the value of this object, convert the XML-RPC native integer value into a PHP integer
-     *
-     * @return int
-     */
-    public function getValue()
-    {
-        return $this->_value;
-    }
+	/**
+	 * Return the value of this object, convert the XML-RPC native integer value into a PHP integer
+	 *
+	 * @return int
+	 */
+	public function getValue()
+	{
+		return $this->_value;
+	}
 }

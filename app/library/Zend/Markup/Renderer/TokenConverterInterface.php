@@ -32,13 +32,13 @@
 interface Zend_Markup_Renderer_TokenConverterInterface
 {
 
-    /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function convert(Zend_Markup_Token $token, $text);
+	/**
+	 * Convert the token
+	 *
+	 * @param Zend_Markup_Token $token
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function convert(Zend_Markup_Token $token, $text);
 }

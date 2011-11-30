@@ -1,12 +1,21 @@
 <nav>
-	<menu> 
-		<p class="menu_label"><?php echo $this->translate('edition').' '.str_replace('/', '-', $this->edition);?><span>&rsaquo;</span></p>
-		<menu> 
-			<a href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?></a> 
-			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?></a> 
-			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?></a>
-			
+	<menu>
+		<p class="menu_label">
+		<?php echo $this->translate('edition').' '.str_replace('/', '-', $this->edition);?>
+			<span>&rsaquo;</span>
+		</p>
+		<menu>
+			<a
+				href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?>
+			</a>
+			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?>
+			</a>
+			<a
+				href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?>
+			</a>
+
 			<!-- NEW APPLICATION FOR NOT LOGGED USER-->
+			
 			
 			<?php if ($this->user->role != 'user'):?>			 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_application_new')?>"><?php echo $this->translate('form_link');?></a> 

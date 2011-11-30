@@ -55,57 +55,57 @@ require_once 'Zend/Filter/StringToLower.php';
 class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'controllerName';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'controllerName';
 
-    /**
-     * @var name
-     */
-    protected $_forControllerName = null;
+	/**
+	 * @var name
+	 */
+	protected $_forControllerName = null;
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory
-     */
-    public function init()
-    {
-        $this->_forControllerName = $this->_resource->getAttribute('forControllerName');
-        $this->_filesystemName = $this->_convertControllerNameToFilesystemName($this->_forControllerName);
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory
+	 */
+	public function init()
+	{
+		$this->_forControllerName = $this->_resource->getAttribute('forControllerName');
+		$this->_filesystemName = $this->_convertControllerNameToFilesystemName($this->_forControllerName);
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getPersistentAttributes()
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes()
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'forControllerName' => $this->_forControllerName
-            );
-    }
+		);
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ViewControllerScriptsDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'ViewControllerScriptsDirectory';
+	}
 
-    protected function _convertControllerNameToFilesystemName($controllerName)
-    {
-        $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
-            ->addFilter(new Zend_Filter_StringToLower());
-        return $filter->filter($controllerName);
-    }
+	protected function _convertControllerNameToFilesystemName($controllerName)
+	{
+		$filter = new Zend_Filter();
+		$filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
+		->addFilter(new Zend_Filter_StringToLower());
+		return $filter->filter($controllerName);
+	}
 
 }

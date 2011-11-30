@@ -45,19 +45,19 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Weight extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'weight';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'weight';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_Weight object.
-     *
-     * @param string $text (optional) The value to represent.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_Weight object.
+	 *
+	 * @param string $text (optional) The value to represent.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

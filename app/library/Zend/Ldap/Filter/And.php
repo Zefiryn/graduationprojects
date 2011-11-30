@@ -36,13 +36,13 @@ require_once 'Zend/Ldap/Filter/Logical.php';
  */
 class Zend_Ldap_Filter_And extends Zend_Ldap_Filter_Logical
 {
-    /**
-     * Creates an 'and' grouping filter.
-     *
-     * @param array $subfilters
-     */
-    public function __construct(array $subfilters)
-    {
-        parent::__construct($subfilters, self::TYPE_AND);
-    }
+	/**
+	 * Creates an 'and' grouping filter.
+	 *
+	 * @param array $subfilters
+	 */
+	public function __construct(array $subfilters)
+	{
+		parent::__construct($subfilters, self::TYPE_AND);
+	}
 }

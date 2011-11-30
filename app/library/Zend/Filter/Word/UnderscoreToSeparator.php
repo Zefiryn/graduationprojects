@@ -32,14 +32,14 @@ require_once 'Zend/Filter/Word/SeparatorToSeparator.php';
  */
 class Zend_Filter_Word_UnderscoreToSeparator extends Zend_Filter_Word_SeparatorToSeparator
 {
-    /**
-     * Constructor
-     *
-     * @param  string $separator Space by default
-     * @return void
-     */
-    public function __construct($replacementSeparator = ' ')
-    {
-        parent::__construct('_', $replacementSeparator);
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  string $separator Space by default
+	 * @return void
+	 */
+	public function __construct($replacementSeparator = ' ')
+	{
+		parent::__construct('_', $replacementSeparator);
+	}
 }

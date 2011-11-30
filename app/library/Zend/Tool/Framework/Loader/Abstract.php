@@ -37,120 +37,120 @@ require_once 'Zend/Tool/Framework/Provider/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tool_Framework_Loader_Abstract
-    implements Zend_Tool_Framework_Loader_Interface, Zend_Tool_Framework_Registry_EnabledInterface
+implements Zend_Tool_Framework_Loader_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
-    /**
-     * @var Zend_Tool_Framework_Repository_Interface
-     */
-    protected $_registry = null;
+	/**
+	 * @var Zend_Tool_Framework_Repository_Interface
+	 */
+	protected $_registry = null;
 
-    /**
-     * @var array
-     */
-    private $_retrievedFiles = array();
+	/**
+	 * @var array
+	 */
+	private $_retrievedFiles = array();
 
-    /**
-     * @var array
-     */
-    private $_loadedClasses  = array();
+	/**
+	 * @var array
+	 */
+	private $_loadedClasses  = array();
 
-    /**
-     * _getFiles
-     *
-     * @return array Array Of Files
-     */
-    abstract protected function _getFiles();
+	/**
+	 * _getFiles
+	 *
+	 * @return array Array Of Files
+	 */
+	abstract protected function _getFiles();
 
-    /**
-     * setRegistry() - required by the enabled interface to get an instance of
-     * the registry
-     *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
-     * @return Zend_Tool_Framework_Loader_Abstract
-     */
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
-    {
-        $this->_registry = $registry;
-        return $this;
-    }
+	/**
+	 * setRegistry() - required by the enabled interface to get an instance of
+	 * the registry
+	 *
+	 * @param Zend_Tool_Framework_Registry_Interface $registry
+	 * @return Zend_Tool_Framework_Loader_Abstract
+	 */
+	public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+	{
+		$this->_registry = $registry;
+		return $this;
+	}
 
-    /**
-     * load() - called by the client initialize routine to load files
-     *
-     */
-    public function load()
-    {
-        $this->_retrievedFiles = $this->getRetrievedFiles();
-        $this->_loadedClasses  = array();
+	/**
+	 * load() - called by the client initialize routine to load files
+	 *
+	 */
+	public function load()
+	{
+		$this->_retrievedFiles = $this->getRetrievedFiles();
+		$this->_loadedClasses  = array();
 
-        $manifestRepository = $this->_registry->getManifestRepository();
-        $providerRepository = $this->_registry->getProviderRepository();
+		$manifestRepository = $this->_registry->getManifestRepository();
+		$providerRepository = $this->_registry->getProviderRepository();
 
-        $loadedClasses = array();
+		$loadedClasses = array();
 
-        // loop through files and find the classes declared by loading the file
-        foreach ($this->_retrievedFiles as $file) {
-            if(is_dir($file)) {
-                continue;
-            }
+		// loop through files and find the classes declared by loading the file
+		foreach ($this->_retrievedFiles as $file) {
+			if(is_dir($file)) {
+				continue;
+			}
 
-            $classesLoadedBefore = get_declared_classes();
-            $oldLevel = error_reporting(E_ALL | ~E_STRICT); // remove strict so that other packages wont throw warnings
-            // should we lint the files here? i think so
-            include_once $file;
-            error_reporting($oldLevel); // restore old error level
-            $classesLoadedAfter = get_declared_classes();
-            $loadedClasses = array_merge($loadedClasses, array_diff($classesLoadedAfter, $classesLoadedBefore));
-        }
+			$classesLoadedBefore = get_declared_classes();
+			$oldLevel = error_reporting(E_ALL | ~E_STRICT); // remove strict so that other packages wont throw warnings
+			// should we lint the files here? i think so
+			include_once $file;
+			error_reporting($oldLevel); // restore old error level
+			$classesLoadedAfter = get_declared_classes();
+			$loadedClasses = array_merge($loadedClasses, array_diff($classesLoadedAfter, $classesLoadedBefore));
+		}
 
-        // loop through the loaded classes and ensure that
-        foreach ($loadedClasses as $loadedClass) {
+		// loop through the loaded classes and ensure that
+		foreach ($loadedClasses as $loadedClass) {
 
-            // reflect class to see if its something we want to load
-            $reflectionClass = new ReflectionClass($loadedClass);
-            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface')
-                && !$reflectionClass->isAbstract())
-            {
-                $manifestRepository->addManifest($reflectionClass->newInstance());
-                $this->_loadedClasses[] = $loadedClass;
-            }
+			// reflect class to see if its something we want to load
+			$reflectionClass = new ReflectionClass($loadedClass);
+			if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface')
+			&& !$reflectionClass->isAbstract())
+			{
+				$manifestRepository->addManifest($reflectionClass->newInstance());
+				$this->_loadedClasses[] = $loadedClass;
+			}
 
-            if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface')
-                && !$reflectionClass->isAbstract()
-                && !$providerRepository->hasProvider($reflectionClass->getName(), false))
-            {
-                $providerRepository->addProvider($reflectionClass->newInstance());
-                $this->_loadedClasses[] = $loadedClass;
-            }
+			if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface')
+			&& !$reflectionClass->isAbstract()
+			&& !$providerRepository->hasProvider($reflectionClass->getName(), false))
+			{
+				$providerRepository->addProvider($reflectionClass->newInstance());
+				$this->_loadedClasses[] = $loadedClass;
+			}
 
-        }
+		}
 
-        return $this->_loadedClasses;
-    }
+		return $this->_loadedClasses;
+	}
 
-    /**
-     * getRetrievedFiles()
-     *
-     * @return array Array of Files Retrieved
-     */
-    public function getRetrievedFiles()
-    {
-        if ($this->_retrievedFiles == null) {
-            $this->_retrievedFiles = $this->_getFiles();
-        }
+	/**
+	 * getRetrievedFiles()
+	 *
+	 * @return array Array of Files Retrieved
+	 */
+	public function getRetrievedFiles()
+	{
+		if ($this->_retrievedFiles == null) {
+			$this->_retrievedFiles = $this->_getFiles();
+		}
 
-        return $this->_retrievedFiles;
-    }
+		return $this->_retrievedFiles;
+	}
 
-    /**
-     * getLoadedClasses()
-     *
-     * @return array Array of Loaded Classes
-     */
-    public function getLoadedClasses()
-    {
-        return $this->_loadedClasses;
-    }
+	/**
+	 * getLoadedClasses()
+	 *
+	 * @return array Array of Loaded Classes
+	 */
+	public function getLoadedClasses()
+	{
+		return $this->_loadedClasses;
+	}
 
 
 }

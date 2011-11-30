@@ -32,13 +32,13 @@ require_once 'Zend/Filter/Word/SeparatorToCamelCase.php';
  */
 class Zend_Filter_Word_UnderscoreToCamelCase extends Zend_Filter_Word_SeparatorToCamelCase
 {
-    /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct('_');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct('_');
+	}
 }

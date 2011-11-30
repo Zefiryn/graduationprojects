@@ -34,21 +34,21 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
 class Zend_Tool_Project_Provider_Profile extends Zend_Tool_Project_Provider_Abstract
 {
 
-    /**
-     * show()
-     *
-     */
-    public function show()
-    {
-        $this->_loadProfile();
+	/**
+	 * show()
+	 *
+	 */
+	public function show()
+	{
+		$this->_loadProfile();
 
-        $profileIterator = $this->_loadedProfile->getIterator();
+		$profileIterator = $this->_loadedProfile->getIterator();
 
-        foreach ($profileIterator as $profileItem) {
-            $this->_registry->getResponse()->appendContent(
-                str_repeat('    ', $profileIterator->getDepth()) . $profileItem
-            );
-        }
+		foreach ($profileIterator as $profileItem) {
+			$this->_registry->getResponse()->appendContent(
+			str_repeat('    ', $profileIterator->getDepth()) . $profileItem
+			);
+		}
 
-    }
+	}
 }

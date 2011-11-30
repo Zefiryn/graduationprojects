@@ -34,36 +34,36 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_GetRunningConferenceRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the conference id
-     *
-     * @var string
-     */
-    public $conferenceId = null;
+	/**
+	 * the conference id
+	 *
+	 * @var string
+	 */
+	public $conferenceId = null;
 
-    /**
-     * constructor
-     *
-     * @param integer $environment
-     * @param string $conferenceId
-     */
-    public function __construct($environment, $conferenceId)
-    {
-        parent::__construct($environment);
-        $this->setConferenceId($conferenceId);
-    }
+	/**
+	 * constructor
+	 *
+	 * @param integer $environment
+	 * @param string $conferenceId
+	 */
+	public function __construct($environment, $conferenceId)
+	{
+		parent::__construct($environment);
+		$this->setConferenceId($conferenceId);
+	}
 
-    /**
-     * set the conference id
-     *
-     * @param string $conferenceId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetRunningConferenceRequest
-     */
-    public function setConferenceId($conferenceId)
-    {
-        $this->conferenceId = $conferenceId;
-        return $this;
-    }
+	/**
+	 * set the conference id
+	 *
+	 * @param string $conferenceId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetRunningConferenceRequest
+	 */
+	public function setConferenceId($conferenceId)
+	{
+		$this->conferenceId = $conferenceId;
+		return $this;
+	}
 }

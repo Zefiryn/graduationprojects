@@ -35,16 +35,16 @@ require_once 'Zend/Filter/Interface.php';
  */
 class Zend_Filter_Dir implements Zend_Filter_Interface
 {
-    /**
-     * Defined by Zend_Filter_Interface
-     *
-     * Returns dirname($value)
-     *
-     * @param  string $value
-     * @return string
-     */
-    public function filter($value)
-    {
-        return dirname((string) $value);
-    }
+	/**
+	 * Defined by Zend_Filter_Interface
+	 *
+	 * Returns dirname($value)
+	 *
+	 * @param  string $value
+	 * @return string
+	 */
+	public function filter($value)
+	{
+		return dirname((string) $value);
+	}
 }

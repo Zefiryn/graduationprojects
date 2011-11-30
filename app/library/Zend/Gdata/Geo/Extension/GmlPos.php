@@ -43,19 +43,19 @@ require_once 'Zend/Gdata/Geo.php';
 class Zend_Gdata_Geo_Extension_GmlPos extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gml';
-    protected $_rootElement = 'pos';
+	protected $_rootNamespace = 'gml';
+	protected $_rootElement = 'pos';
 
-    /**
-     * Constructs a new Zend_Gdata_Geo_Extension_GmlPos object.
-     *
-     * @param string $text (optional) The value to use for this element.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Geo_Extension_GmlPos object.
+	 *
+	 * @param string $text (optional) The value to use for this element.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

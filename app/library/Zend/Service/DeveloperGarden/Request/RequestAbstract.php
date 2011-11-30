@@ -30,43 +30,43 @@
  */
 abstract class Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * environment value
-     *
-     * @var integer
-     */
-    public $environment = null;
+	/**
+	 * environment value
+	 *
+	 * @var integer
+	 */
+	public $environment = null;
 
-    /**
-     * constructor give them the environment
-     *
-     * @param integer $environment
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
-     */
-    public function __construct($environment)
-    {
-        $this->setEnvironment($environment);
-    }
+	/**
+	 * constructor give them the environment
+	 *
+	 * @param integer $environment
+	 * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+	 */
+	public function __construct($environment)
+	{
+		$this->setEnvironment($environment);
+	}
 
-    /**
-     * sets a new moduleId
-     *
-     * @param integer $environment
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
-     */
-    public function setEnvironment($environment)
-    {
-        $this->environment = $environment;
-        return $this;
-    }
+	/**
+	 * sets a new moduleId
+	 *
+	 * @param integer $environment
+	 * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+	 */
+	public function setEnvironment($environment)
+	{
+		$this->environment = $environment;
+		return $this;
+	}
 
-    /**
-     * the current configured environment value
-     *
-     * @return integer
-     */
-    public function getEnvironment()
-    {
-        return $this->environment;
-    }
+	/**
+	 * the current configured environment value
+	 *
+	 * @return integer
+	 */
+	public function getEnvironment()
+	{
+		return $this->environment;
+	}
 }

@@ -44,19 +44,19 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Location extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'location';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'location';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_Location object.
-     *
-     * @param string $text (optional) The value to represent.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_Location object.
+	 *
+	 * @param string $text (optional) The value to represent.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

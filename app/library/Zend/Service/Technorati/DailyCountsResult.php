@@ -40,54 +40,54 @@ require_once 'Zend/Service/Technorati/Result.php';
  */
 class Zend_Service_Technorati_DailyCountsResult extends Zend_Service_Technorati_Result
 {
-    /**
-     * Date of count.
-     *
-     * @var     Zend_Date
-     * @access  protected
-     */
-    protected $_date;
+	/**
+	 * Date of count.
+	 *
+	 * @var     Zend_Date
+	 * @access  protected
+	 */
+	protected $_date;
 
-    /**
-     * Number of posts containing query on given date.
-     *
-     * @var     int
-     * @access  protected
-     */
-    protected $_count;
+	/**
+	 * Number of posts containing query on given date.
+	 *
+	 * @var     int
+	 * @access  protected
+	 */
+	protected $_count;
 
 
-    /**
-     * Constructs a new object object from DOM Document.
-     *
-     * @param   DomElement $dom the ReST fragment for this object
-     */
-    public function __construct(DomElement $dom)
-    {
-        $this->_fields = array( '_date'   => 'date',
+	/**
+	 * Constructs a new object object from DOM Document.
+	 *
+	 * @param   DomElement $dom the ReST fragment for this object
+	 */
+	public function __construct(DomElement $dom)
+	{
+		$this->_fields = array( '_date'   => 'date',
                                 '_count'  => 'count');
-        parent::__construct($dom);
+		parent::__construct($dom);
 
-        // filter fields
-        $this->_date  = new Zend_Date(strtotime($this->_date));
-        $this->_count = (int) $this->_count;
-    }
+		// filter fields
+		$this->_date  = new Zend_Date(strtotime($this->_date));
+		$this->_count = (int) $this->_count;
+	}
 
-    /**
-     * Returns the date of count.
-     *
-     * @return  Zend_Date
-     */
-    public function getDate() {
-        return $this->_date;
-    }
+	/**
+	 * Returns the date of count.
+	 *
+	 * @return  Zend_Date
+	 */
+	public function getDate() {
+		return $this->_date;
+	}
 
-    /**
-     * Returns the number of posts containing query on given date.
-     *
-     * @return  int
-     */
-    public function getCount() {
-        return $this->_count;
-    }
+	/**
+	 * Returns the number of posts containing query on given date.
+	 *
+	 * @return  int
+	 */
+	public function getCount() {
+		return $this->_count;
+	}
 }

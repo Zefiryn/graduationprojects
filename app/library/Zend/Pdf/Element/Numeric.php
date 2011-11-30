@@ -34,62 +34,62 @@ require_once 'Zend/Pdf/Element.php';
  */
 class Zend_Pdf_Element_Numeric extends Zend_Pdf_Element
 {
-    /**
-     * Object value
-     *
-     * @var numeric
-     */
-    public $value;
+	/**
+	 * Object value
+	 *
+	 * @var numeric
+	 */
+	public $value;
 
 
-    /**
-     * Object constructor
-     *
-     * @param numeric $val
-     * @throws Zend_Pdf_Exception
-     */
-    public function __construct($val)
-    {
-        if ( !is_numeric($val) ) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Argument must be numeric');
-        }
+	/**
+	 * Object constructor
+	 *
+	 * @param numeric $val
+	 * @throws Zend_Pdf_Exception
+	 */
+	public function __construct($val)
+	{
+		if ( !is_numeric($val) ) {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Argument must be numeric');
+		}
 
-        $this->value = $val;
-    }
-
-
-    /**
-     * Return type of the element.
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return Zend_Pdf_Element::TYPE_NUMERIC;
-    }
+		$this->value = $val;
+	}
 
 
-    /**
-     * Return object as string
-     *
-     * @param Zend_Pdf_Factory $factory
-     * @return string
-     */
-    public function toString($factory = null)
-    {
-        if (is_integer($this->value)) {
-            return (string)$this->value;
-        }
+	/**
+	 * Return type of the element.
+	 *
+	 * @return integer
+	 */
+	public function getType()
+	{
+		return Zend_Pdf_Element::TYPE_NUMERIC;
+	}
 
-        /**
-         * PDF doesn't support exponental format.
-         * Fixed point format must be used instead
-         */
-        $prec = 0; $v = $this->value;
-        while (abs( floor($v) - $v ) > 1e-10) {
-            $prec++; $v *= 10;
-        }
-        return sprintf("%.{$prec}F", $this->value);
-    }
+
+	/**
+	 * Return object as string
+	 *
+	 * @param Zend_Pdf_Factory $factory
+	 * @return string
+	 */
+	public function toString($factory = null)
+	{
+		if (is_integer($this->value)) {
+			return (string)$this->value;
+		}
+
+		/**
+		 * PDF doesn't support exponental format.
+		 * Fixed point format must be used instead
+		 */
+		$prec = 0; $v = $this->value;
+		while (abs( floor($v) - $v ) > 1e-10) {
+			$prec++; $v *= 10;
+		}
+		return sprintf("%.{$prec}F", $this->value);
+	}
 }

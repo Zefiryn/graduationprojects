@@ -41,25 +41,25 @@ require_once 'Zend/Validate/Barcode.php';
 class Zend_Barcode_Object_Ean2 extends Zend_Barcode_Object_Ean5
 {
 
-    protected $_parities = array(
-        0 => array('A','A'),
-        1 => array('A','B'),
-        2 => array('B','A'),
-        3 => array('B','B')
-    );
+	protected $_parities = array(
+	0 => array('A','A'),
+	1 => array('A','B'),
+	2 => array('B','A'),
+	3 => array('B','B')
+	);
 
-    /**
-     * Default options for Ean2 barcode
-     * @return void
-     */
-    protected function _getDefaultOptions()
-    {
-        $this->_barcodeLength = 2;
-    }
+	/**
+	 * Default options for Ean2 barcode
+	 * @return void
+	 */
+	protected function _getDefaultOptions()
+	{
+		$this->_barcodeLength = 2;
+	}
 
-    protected function _getParity($i)
-    {
-        $modulo = $this->getText() % 4;
-        return $this->_parities[$modulo][$i];
-    }
+	protected function _getParity($i)
+	{
+		$modulo = $this->getText() % 4;
+		return $this->_parities[$modulo][$i];
+	}
 }

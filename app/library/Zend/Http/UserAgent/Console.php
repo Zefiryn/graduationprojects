@@ -32,36 +32,36 @@ require_once 'Zend/Http/UserAgent/Desktop.php';
  */
 class Zend_Http_UserAgent_Console extends Zend_Http_UserAgent_Desktop
 {
-    /**
-     * User Agent Signatures
-     *
-     * @var array
-     */
-    protected static $_uaSignatures = array(
+	/**
+	 * User Agent Signatures
+	 *
+	 * @var array
+	 */
+	protected static $_uaSignatures = array(
         'playstation',
         'wii',
         'libnup',
-    );
+	);
 
-    /**
-     * Comparison of the UserAgent chain and User Agent signatures
-     *
-     * @param string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
-     * @return bool
-     */
-    public static function match($userAgent, $server)
-    {
-        return self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures);
-    }
+	/**
+	 * Comparison of the UserAgent chain and User Agent signatures
+	 *
+	 * @param string $userAgent User Agent chain
+	 * @param  array $server $_SERVER like param
+	 * @return bool
+	 */
+	public static function match($userAgent, $server)
+	{
+		return self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures);
+	}
 
-    /**
-     * Gives the current browser type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return 'console';
-    }
+	/**
+	 * Gives the current browser type
+	 *
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'console';
+	}
 }

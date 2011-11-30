@@ -36,109 +36,109 @@ require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Reader_Extension_Slash_Entry
-    extends Zend_Feed_Reader_Extension_EntryAbstract
+extends Zend_Feed_Reader_Extension_EntryAbstract
 {
-    /**
-     * Get the entry section
-     *
-     * @return string|null
-     */
-    public function getSection()
-    {
-        return $this->_getData('section');
-    }
+	/**
+	 * Get the entry section
+	 *
+	 * @return string|null
+	 */
+	public function getSection()
+	{
+		return $this->_getData('section');
+	}
 
-    /**
-     * Get the entry department
-     *
-     * @return string|null
-     */
-    public function getDepartment()
-    {
-        return $this->_getData('department');
-    }
+	/**
+	 * Get the entry department
+	 *
+	 * @return string|null
+	 */
+	public function getDepartment()
+	{
+		return $this->_getData('department');
+	}
 
-    /**
-     * Get the entry hit_parade
-     *
-     * @return array
-     */
-    public function getHitParade()
-    {
-        $name = 'hit_parade';
+	/**
+	 * Get the entry hit_parade
+	 *
+	 * @return array
+	 */
+	public function getHitParade()
+	{
+		$name = 'hit_parade';
 
-        if (isset($this->_data[$name])) {
-            return $this->_data[$name];
-        }
+		if (isset($this->_data[$name])) {
+			return $this->_data[$name];
+		}
 
-        $stringParade = $this->_getData($name);
-        $hitParade    = array();
+		$stringParade = $this->_getData($name);
+		$hitParade    = array();
 
-        if (!empty($stringParade)) {
-            $stringParade = explode(',', $stringParade);
+		if (!empty($stringParade)) {
+			$stringParade = explode(',', $stringParade);
 
-            foreach ($stringParade as $hit)
-                $hitParade[] = $hit + 0; //cast to integer
-        }
+			foreach ($stringParade as $hit)
+			$hitParade[] = $hit + 0; //cast to integer
+		}
 
-        $this->_data[$name] = $hitParade;
-        return $hitParade;
-    }
+		$this->_data[$name] = $hitParade;
+		return $hitParade;
+	}
 
-    /**
-     * Get the entry comments
-     *
-     * @return int
-     */
-    public function getCommentCount()
-    {
-        $name = 'comments';
+	/**
+	 * Get the entry comments
+	 *
+	 * @return int
+	 */
+	public function getCommentCount()
+	{
+		$name = 'comments';
 
-        if (isset($this->_data[$name])) {
-            return $this->_data[$name];
-        }
+		if (isset($this->_data[$name])) {
+			return $this->_data[$name];
+		}
 
-        $comments = $this->_getData($name, 'string');
+		$comments = $this->_getData($name, 'string');
 
-        if (!$comments) {
-            $this->_data[$name] = null;
-            return $this->_data[$name];
-        }
+		if (!$comments) {
+			$this->_data[$name] = null;
+			return $this->_data[$name];
+		}
 
-        return $comments;
-    }
+		return $comments;
+	}
 
-    /**
-     * Get the entry data specified by name
-     * @param string $name
-     * @param string $type
-     *
-     * @return mixed|null
-     */
-    protected function _getData($name, $type = 'string')
-    {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
-        }
+	/**
+	 * Get the entry data specified by name
+	 * @param string $name
+	 * @param string $type
+	 *
+	 * @return mixed|null
+	 */
+	protected function _getData($name, $type = 'string')
+	{
+		if (array_key_exists($name, $this->_data)) {
+			return $this->_data[$name];
+		}
 
-        $data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
+		$data = $this->_xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
 
-        if (!$data) {
-            $data = null;
-        }
+		if (!$data) {
+			$data = null;
+		}
 
-        $this->_data[$name] = $data;
+		$this->_data[$name] = $data;
 
-        return $data;
-    }
+		return $data;
+	}
 
-    /**
-     * Register Slash namespaces
-     *
-     * @return void
-     */
-    protected function _registerNamespaces()
-    {
-        $this->_xpath->registerNamespace('slash10', 'http://purl.org/rss/1.0/modules/slash/');
-    }
+	/**
+	 * Register Slash namespaces
+	 *
+	 * @return void
+	 */
+	protected function _registerNamespaces()
+	{
+		$this->_xpath->registerNamespace('slash10', 'http://purl.org/rss/1.0/modules/slash/');
+	}
 }

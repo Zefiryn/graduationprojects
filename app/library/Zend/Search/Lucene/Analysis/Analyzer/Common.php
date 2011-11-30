@@ -51,42 +51,42 @@ require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
  */
 abstract class Zend_Search_Lucene_Analysis_Analyzer_Common extends Zend_Search_Lucene_Analysis_Analyzer
 {
-    /**
-     * The set of Token filters applied to the Token stream.
-     * Array of Zend_Search_Lucene_Analysis_TokenFilter objects.
-     *
-     * @var array
-     */
-    private $_filters = array();
+	/**
+	 * The set of Token filters applied to the Token stream.
+	 * Array of Zend_Search_Lucene_Analysis_TokenFilter objects.
+	 *
+	 * @var array
+	 */
+	private $_filters = array();
 
-    /**
-     * Add Token filter to the Analyzer
-     *
-     * @param Zend_Search_Lucene_Analysis_TokenFilter $filter
-     */
-    public function addFilter(Zend_Search_Lucene_Analysis_TokenFilter $filter)
-    {
-        $this->_filters[] = $filter;
-    }
+	/**
+	 * Add Token filter to the Analyzer
+	 *
+	 * @param Zend_Search_Lucene_Analysis_TokenFilter $filter
+	 */
+	public function addFilter(Zend_Search_Lucene_Analysis_TokenFilter $filter)
+	{
+		$this->_filters[] = $filter;
+	}
 
-    /**
-     * Apply filters to the token. Can return null when the token was removed.
-     *
-     * @param Zend_Search_Lucene_Analysis_Token $token
-     * @return Zend_Search_Lucene_Analysis_Token
-     */
-    public function normalize(Zend_Search_Lucene_Analysis_Token $token)
-    {
-        foreach ($this->_filters as $filter) {
-            $token = $filter->normalize($token);
+	/**
+	 * Apply filters to the token. Can return null when the token was removed.
+	 *
+	 * @param Zend_Search_Lucene_Analysis_Token $token
+	 * @return Zend_Search_Lucene_Analysis_Token
+	 */
+	public function normalize(Zend_Search_Lucene_Analysis_Token $token)
+	{
+		foreach ($this->_filters as $filter) {
+			$token = $filter->normalize($token);
 
-            // resulting token can be null if the filter removes it
-            if ($token === null) {
-                return null;
-            }
-        }
+			// resulting token can be null if the filter removes it
+			if ($token === null) {
+				return null;
+			}
+		}
 
-        return $token;
-    }
+		return $token;
+	}
 }
 

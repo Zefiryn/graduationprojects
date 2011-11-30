@@ -40,54 +40,54 @@ require_once 'Zend/Service/Technorati/Result.php';
  */
 class Zend_Service_Technorati_TagsResult extends Zend_Service_Technorati_Result
 {
-    /**
-     * Name of the tag.
-     *
-     * @var     string
-     * @access  protected
-     */
-    protected $_tag;
+	/**
+	 * Name of the tag.
+	 *
+	 * @var     string
+	 * @access  protected
+	 */
+	protected $_tag;
 
-    /**
-     * Number of posts containing this tag.
-     *
-     * @var     int
-     * @access  protected
-     */
-    protected $_posts;
+	/**
+	 * Number of posts containing this tag.
+	 *
+	 * @var     int
+	 * @access  protected
+	 */
+	protected $_posts;
 
 
-    /**
-     * Constructs a new object object from DOM Document.
-     *
-     * @param   DomElement $dom the ReST fragment for this object
-     */
-    public function __construct(DomElement $dom)
-    {
-        $this->_fields = array( '_tag'   => 'tag',
+	/**
+	 * Constructs a new object object from DOM Document.
+	 *
+	 * @param   DomElement $dom the ReST fragment for this object
+	 */
+	public function __construct(DomElement $dom)
+	{
+		$this->_fields = array( '_tag'   => 'tag',
                                 '_posts' => 'posts');
-        parent::__construct($dom);
+		parent::__construct($dom);
 
-        // filter fields
-        $this->_tag   = (string) $this->_tag;
-        $this->_posts = (int) $this->_posts;
-    }
+		// filter fields
+		$this->_tag   = (string) $this->_tag;
+		$this->_posts = (int) $this->_posts;
+	}
 
-    /**
-     * Returns the tag name.
-     *
-     * @return  string
-     */
-    public function getTag() {
-        return $this->_tag;
-    }
+	/**
+	 * Returns the tag name.
+	 *
+	 * @return  string
+	 */
+	public function getTag() {
+		return $this->_tag;
+	}
 
-    /**
-     * Returns the number of posts.
-     *
-     * @return  int
-     */
-    public function getPosts() {
-        return $this->_posts;
-    }
+	/**
+	 * Returns the number of posts.
+	 *
+	 * @return  int
+	 */
+	public function getPosts() {
+		return $this->_posts;
+	}
 }
