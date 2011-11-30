@@ -34,47 +34,47 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_SmsValidation_Invalidate
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the number
-     *
-     * @var string
-     */
-    public $number = null;
+	/**
+	 * the number
+	 *
+	 * @var string
+	 */
+	public $number = null;
 
-    /**
-     * create the class for validation a sms keyword
-     *
-     * @param integer $environment
-     * @param string $keyword
-     * @param string $number
-     */
-    public function __construct($environment, $number = null)
-    {
-        parent::__construct($environment);
-        $this->setNumber($number);
-    }
+	/**
+	 * create the class for validation a sms keyword
+	 *
+	 * @param integer $environment
+	 * @param string $keyword
+	 * @param string $number
+	 */
+	public function __construct($environment, $number = null)
+	{
+		parent::__construct($environment);
+		$this->setNumber($number);
+	}
 
-    /**
-     * returns the number
-     *
-     * @return string $number
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
+	/**
+	 * returns the number
+	 *
+	 * @return string $number
+	 */
+	public function getNumber()
+	{
+		return $this->number;
+	}
 
-    /**
-     * set a new number
-     *
-     * @param string $number
-     * @return Zend_Service_DeveloperGarden_Request_SmsValidation_Validate
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-        return $this;
-    }
+	/**
+	 * set a new number
+	 *
+	 * @param string $number
+	 * @return Zend_Service_DeveloperGarden_Request_SmsValidation_Validate
+	 */
+	public function setNumber($number)
+	{
+		$this->number = $number;
+		return $this;
+	}
 }

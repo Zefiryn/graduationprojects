@@ -36,67 +36,67 @@ require_once 'Zend/Http/UserAgent/Features/Adapter.php';
  */
 class Zend_Http_UserAgent_Features_Adapter_TeraWurfl implements Zend_Http_UserAgent_Features_Adapter
 {
-    /**
-     * Get features from request
-     *
-     * @param  array $request $_SERVER variable
-     * @return array
-     */
-    public static function getFromRequest($request, array $config)
-    {
-        if (!class_exists('TeraWurfl')) {
-            // If TeraWurfl class not found, see if we can load it from
-            // configuration
-            //
-            if (!isset($config['terawurfl'])) {
-                // No configuration
-                require_once 'Zend/Http/UserAgent/Features/Exception.php';
-                throw new Zend_Http_UserAgent_Features_Exception('"TeraWurfl" configuration is not defined');
-            }
+	/**
+	 * Get features from request
+	 *
+	 * @param  array $request $_SERVER variable
+	 * @return array
+	 */
+	public static function getFromRequest($request, array $config)
+	{
+		if (!class_exists('TeraWurfl')) {
+			// If TeraWurfl class not found, see if we can load it from
+			// configuration
+			//
+			if (!isset($config['terawurfl'])) {
+				// No configuration
+				require_once 'Zend/Http/UserAgent/Features/Exception.php';
+				throw new Zend_Http_UserAgent_Features_Exception('"TeraWurfl" configuration is not defined');
+			}
 
-            $config = $config['terawurfl'];
+			$config = $config['terawurfl'];
 
-             if (empty($config['terawurfl_lib_dir'])) {
-                // No lib_dir given
-                require_once 'Zend/Http/UserAgent/Features/Exception.php';
-                throw new Zend_Http_UserAgent_Features_Exception('The "terawurfl_lib_dir" parameter is not defined');
-            }
+			if (empty($config['terawurfl_lib_dir'])) {
+				// No lib_dir given
+				require_once 'Zend/Http/UserAgent/Features/Exception.php';
+				throw new Zend_Http_UserAgent_Features_Exception('The "terawurfl_lib_dir" parameter is not defined');
+			}
 
-            // Include the Tera-WURFL file
-            require_once ($config['terawurfl_lib_dir'] . '/TeraWurfl.php');
-        }
+			// Include the Tera-WURFL file
+			require_once ($config['terawurfl_lib_dir'] . '/TeraWurfl.php');
+		}
 
 
-        // instantiate the Tera-WURFL object
-        $wurflObj = new TeraWurfl();
+		// instantiate the Tera-WURFL object
+		$wurflObj = new TeraWurfl();
 
-        // Get the capabilities of the current client.
-        $matched = $wurflObj->getDeviceCapabilitiesFromRequest(array_change_key_case($request, CASE_UPPER));
+		// Get the capabilities of the current client.
+		$matched = $wurflObj->getDeviceCapabilitiesFromRequest(array_change_key_case($request, CASE_UPPER));
 
-        return self::getAllCapabilities($wurflObj);
-    }
+		return self::getAllCapabilities($wurflObj);
+	}
 
-    /***
-     * Builds an array with all capabilities
-     *
-     * @param TeraWurfl $wurflObj TeraWurfl object
-     */
-    public static function getAllCapabilities(TeraWurfl $wurflObj)
-    {
+	/***
+	 * Builds an array with all capabilities
+	*
+	* @param TeraWurfl $wurflObj TeraWurfl object
+	*/
+	public static function getAllCapabilities(TeraWurfl $wurflObj)
+	{
 
-        foreach ($wurflObj->capabilities as $group) {
-            if (!is_array($group)) {
-                continue;
-            }
-            while (list ($key, $value) = each($group)) {
-                if (is_bool($value)) {
-                    // to have the same type than the official WURFL API
-                    $features[$key] = ($value ? 'true' : 'false');
-                } else {
-                    $features[$key] = $value;
-                }
-            }
-        }
-        return $features;
-    }
+		foreach ($wurflObj->capabilities as $group) {
+			if (!is_array($group)) {
+				continue;
+			}
+			while (list ($key, $value) = each($group)) {
+				if (is_bool($value)) {
+					// to have the same type than the official WURFL API
+					$features[$key] = ($value ? 'true' : 'false');
+				} else {
+					$features[$key] = $value;
+				}
+			}
+		}
+		return $features;
+	}
 }

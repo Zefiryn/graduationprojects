@@ -36,40 +36,40 @@ require_once 'Zend/XmlRpc/Value/Collection.php';
  */
 class Zend_XmlRpc_Value_Struct extends Zend_XmlRpc_Value_Collection
 {
-    /**
-     * Set the value of an struct native type
-     *
-     * @param array $value
-     */
-    public function __construct($value)
-    {
-        $this->_type = self::XMLRPC_TYPE_STRUCT;
-        parent::__construct($value);
-    }
+	/**
+	 * Set the value of an struct native type
+	 *
+	 * @param array $value
+	 */
+	public function __construct($value)
+	{
+		$this->_type = self::XMLRPC_TYPE_STRUCT;
+		parent::__construct($value);
+	}
 
 
-    /**
-     * Generate the XML code that represent struct native MXL-RPC value
-     *
-     * @return void
-     */
-    protected function _generateXML()
-    {
-        $generator = $this->getGenerator();
-        $generator->openElement('value')
-                  ->openElement('struct');
+	/**
+	 * Generate the XML code that represent struct native MXL-RPC value
+	 *
+	 * @return void
+	 */
+	protected function _generateXML()
+	{
+		$generator = $this->getGenerator();
+		$generator->openElement('value')
+		->openElement('struct');
 
-        if (is_array($this->_value)) {
-            foreach ($this->_value as $name => $val) {
-                /* @var $val Zend_XmlRpc_Value */
-                $generator->openElement('member')
-                          ->openElement('name', $name)
-                          ->closeElement('name');
-                $val->generateXml();
-                $generator->closeElement('member');
-            }
-        }
-        $generator->closeElement('struct')
-                  ->closeElement('value');
-    }
+		if (is_array($this->_value)) {
+			foreach ($this->_value as $name => $val) {
+				/* @var $val Zend_XmlRpc_Value */
+				$generator->openElement('member')
+				->openElement('name', $name)
+				->closeElement('name');
+				$val->generateXml();
+				$generator->closeElement('member');
+			}
+		}
+		$generator->closeElement('struct')
+		->closeElement('value');
+	}
 }

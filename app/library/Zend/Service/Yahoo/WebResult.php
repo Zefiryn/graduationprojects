@@ -37,73 +37,73 @@ require_once 'Zend/Service/Yahoo/Result.php';
  */
 class Zend_Service_Yahoo_WebResult extends Zend_Service_Yahoo_Result
 {
-    /**
-     * A summary of the result
-     *
-     * @var string
-     */
-    public $Summary;
+	/**
+	 * A summary of the result
+	 *
+	 * @var string
+	 */
+	public $Summary;
 
-    /**
-     * The file type of the result (text, html, pdf, etc.)
-     *
-     * @var string
-     */
-    public $MimeType;
+	/**
+	 * The file type of the result (text, html, pdf, etc.)
+	 *
+	 * @var string
+	 */
+	public $MimeType;
 
-    /**
-     * The modification time of the result (as a unix timestamp)
-     *
-     * @var string
-     */
-    public $ModificationDate;
+	/**
+	 * The modification time of the result (as a unix timestamp)
+	 *
+	 * @var string
+	 */
+	public $ModificationDate;
 
-    /**
-     * The URL for the Yahoo cache of this page, if it exists
-     *
-     * @var string
-     */
-    public $CacheUrl;
+	/**
+	 * The URL for the Yahoo cache of this page, if it exists
+	 *
+	 * @var string
+	 */
+	public $CacheUrl;
 
-    /**
-     * The size of the cache entry
-     *
-     * @var int
-     */
-    public $CacheSize;
+	/**
+	 * The size of the cache entry
+	 *
+	 * @var int
+	 */
+	public $CacheSize;
 
-    /**
-     * Web result namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srch';
+	/**
+	 * Web result namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srch';
 
 
-    /**
-     * Initializes the web result
-     *
-     * @param  DOMElement $result
-     * @return void
-     */
-    public function __construct(DOMElement $result)
-    {
-        $this->_fields = array('Summary', 'MimeType', 'ModificationDate');
-        parent::__construct($result);
+	/**
+	 * Initializes the web result
+	 *
+	 * @param  DOMElement $result
+	 * @return void
+	 */
+	public function __construct(DOMElement $result)
+	{
+		$this->_fields = array('Summary', 'MimeType', 'ModificationDate');
+		parent::__construct($result);
 
-        $this->_xpath = new DOMXPath($result->ownerDocument);
-        $this->_xpath->registerNamespace('yh', $this->_namespace);
+		$this->_xpath = new DOMXPath($result->ownerDocument);
+		$this->_xpath->registerNamespace('yh', $this->_namespace);
 
-        // check if the cache section exists
-        $cacheUrl = $this->_xpath->query('./yh:Cache/yh:Url/text()', $result)->item(0);
-        if ($cacheUrl instanceof DOMNode)
-        {
-            $this->CacheUrl = $cacheUrl->data;
-        }
-        $cacheSize = $this->_xpath->query('./yh:Cache/yh:Size/text()', $result)->item(0);
-        if ($cacheSize instanceof DOMNode)
-        {
-            $this->CacheSize = (int) $cacheSize->data;
-        }
-    }
+		// check if the cache section exists
+		$cacheUrl = $this->_xpath->query('./yh:Cache/yh:Url/text()', $result)->item(0);
+		if ($cacheUrl instanceof DOMNode)
+		{
+			$this->CacheUrl = $cacheUrl->data;
+		}
+		$cacheSize = $this->_xpath->query('./yh:Cache/yh:Size/text()', $result)->item(0);
+		if ($cacheSize instanceof DOMNode)
+		{
+			$this->CacheSize = (int) $cacheSize->data;
+		}
+	}
 }

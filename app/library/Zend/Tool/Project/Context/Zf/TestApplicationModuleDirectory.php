@@ -40,59 +40,59 @@ class Zend_Tool_Project_Context_Zf_TestApplicationModuleDirectory extends Zend_T
 {
 
 
-    /**
-     * @var string
-     */
-    protected $_forModuleName = null;
+	/**
+	 * @var string
+	 */
+	protected $_forModuleName = null;
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'moduleDirectory';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'moduleDirectory';
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_ControllerFile
-     */
-    public function init()
-    {
-        $this->_filesystemName = $this->_forModuleName = $this->_resource->getAttribute('forModuleName');
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_ControllerFile
+	 */
+	public function init()
+	{
+		$this->_filesystemName = $this->_forModuleName = $this->_resource->getAttribute('forModuleName');
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestApplicationModuleDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestApplicationModuleDirectory';
+	}
 
-    /**
-     * getPersistentAttributes
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'forModuleName' => $this->getForModuleName()
-            );
-    }
+		);
+	}
 
-    /**
-     * getModuleName()
-     *
-     * @return string
-     */
-    public function getForModuleName()
-    {
-        return $this->_forModuleName;
-    }
-    
+	/**
+	 * getModuleName()
+	 *
+	 * @return string
+	 */
+	public function getForModuleName()
+	{
+		return $this->_forModuleName;
+	}
+
 
 }

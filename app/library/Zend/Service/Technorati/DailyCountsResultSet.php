@@ -48,78 +48,78 @@ require_once 'Zend/Service/Technorati/Utils.php';
  */
 class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technorati_ResultSet
 {
-    /**
-     * Technorati search URL for given query.
-     *
-     * @var     Zend_Uri_Http
-     * @access  protected
-     */
-    protected $_searchUrl;
+	/**
+	 * Technorati search URL for given query.
+	 *
+	 * @var     Zend_Uri_Http
+	 * @access  protected
+	 */
+	protected $_searchUrl;
 
-    /**
-     * Number of days for which counts provided.
-     *
-     * @var     Zend_Service_Technorati_Weblog
-     * @access  protected
-     */
-    protected $_days;
+	/**
+	 * Number of days for which counts provided.
+	 *
+	 * @var     Zend_Service_Technorati_Weblog
+	 * @access  protected
+	 */
+	protected $_days;
 
-    /**
-     * Parses the search response and retrieve the results for iteration.
-     *
-     * @param   DomDocument $dom    the ReST fragment for this object
-     * @param   array $options      query options as associative array
-     */
-    public function __construct(DomDocument $dom, $options = array())
-    {
-        parent::__construct($dom, $options);
+	/**
+	 * Parses the search response and retrieve the results for iteration.
+	 *
+	 * @param   DomDocument $dom    the ReST fragment for this object
+	 * @param   array $options      query options as associative array
+	 */
+	public function __construct(DomDocument $dom, $options = array())
+	{
+		parent::__construct($dom, $options);
 
-        // default locale prevent Zend_Date to fail
-        // when script is executed via shell
-        // Zend_Locale::setDefault('en');
+		// default locale prevent Zend_Date to fail
+		// when script is executed via shell
+		// Zend_Locale::setDefault('en');
 
-        $result = $this->_xpath->query('/tapi/document/result/days/text()');
-        if ($result->length == 1) $this->_days = (int) $result->item(0)->data;
+		$result = $this->_xpath->query('/tapi/document/result/days/text()');
+		if ($result->length == 1) $this->_days = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/searchurl/text()');
-        if ($result->length == 1) {
-            $this->_searchUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
-        }
+		$result = $this->_xpath->query('/tapi/document/result/searchurl/text()');
+		if ($result->length == 1) {
+			$this->_searchUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
+		}
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/items/item)");
-        $this->_totalResultsAvailable = (int) $this->getDays();
-    }
+		$this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/items/item)");
+		$this->_totalResultsAvailable = (int) $this->getDays();
+	}
 
 
-    /**
-     * Returns the search URL for given query.
-     *
-     * @return  Zend_Uri_Http
-     */
-    public function getSearchUrl() {
-        return $this->_searchUrl;
-    }
+	/**
+	 * Returns the search URL for given query.
+	 *
+	 * @return  Zend_Uri_Http
+	 */
+	public function getSearchUrl() {
+		return $this->_searchUrl;
+	}
 
-    /**
-     * Returns the number of days for which counts provided.
-     *
-     * @return  int
-     */
-    public function getDays() {
-        return $this->_days;
-    }
+	/**
+	 * Returns the number of days for which counts provided.
+	 *
+	 * @return  int
+	 */
+	public function getDays() {
+		return $this->_days;
+	}
 
-    /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
-     *
-     * @return Zend_Service_Technorati_DailyCountsResult current result
-     */
-    public function current()
-    {
-        /**
-         * @see Zend_Service_Technorati_DailyCountsResult
-         */
-        require_once 'Zend/Service/Technorati/DailyCountsResult.php';
-        return new Zend_Service_Technorati_DailyCountsResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Implements Zend_Service_Technorati_ResultSet::current().
+	 *
+	 * @return Zend_Service_Technorati_DailyCountsResult current result
+	 */
+	public function current()
+	{
+		/**
+		 * @see Zend_Service_Technorati_DailyCountsResult
+		 */
+		require_once 'Zend/Service/Technorati/DailyCountsResult.php';
+		return new Zend_Service_Technorati_DailyCountsResult($this->_results->item($this->_currentIndex));
+	}
 }

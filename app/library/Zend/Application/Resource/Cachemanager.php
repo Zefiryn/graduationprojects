@@ -33,41 +33,41 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  */
 class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_ResourceAbstract
 {
-    /**
-     * @var Zend_Cache_Manager
-     */
-    protected $_manager = null;
+	/**
+	 * @var Zend_Cache_Manager
+	 */
+	protected $_manager = null;
 
-    /**
-     * Initialize Cache_Manager
-     *
-     * @return Zend_Cache_Manager
-     */
-    public function init()
-    {
-        return $this->getCacheManager();
-    }
+	/**
+	 * Initialize Cache_Manager
+	 *
+	 * @return Zend_Cache_Manager
+	 */
+	public function init()
+	{
+		return $this->getCacheManager();
+	}
 
-    /**
-     * Retrieve Zend_Cache_Manager instance
-     *
-     * @return Zend_Cache_Manager
-     */
-    public function getCacheManager()
-    {
-        if (null === $this->_manager) {
-            $this->_manager = new Zend_Cache_Manager;
+	/**
+	 * Retrieve Zend_Cache_Manager instance
+	 *
+	 * @return Zend_Cache_Manager
+	 */
+	public function getCacheManager()
+	{
+		if (null === $this->_manager) {
+			$this->_manager = new Zend_Cache_Manager;
 
-            $options = $this->getOptions();
-            foreach ($options as $key => $value) {
-                if ($this->_manager->hasCacheTemplate($key)) {
-                    $this->_manager->setTemplateOptions($key, $value);
-                } else {
-                    $this->_manager->setCacheTemplate($key, $value);
-                }
-            }
-        }
+			$options = $this->getOptions();
+			foreach ($options as $key => $value) {
+				if ($this->_manager->hasCacheTemplate($key)) {
+					$this->_manager->setTemplateOptions($key, $value);
+				} else {
+					$this->_manager->setCacheTemplate($key, $value);
+				}
+			}
+		}
 
-        return $this->_manager;
-    }
+		return $this->_manager;
+	}
 }

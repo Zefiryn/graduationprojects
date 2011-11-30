@@ -38,15 +38,15 @@ require_once 'Zend/Form/Element/Multi.php';
  */
 class Zend_Form_Element_MultiCheckbox extends Zend_Form_Element_Multi
 {
-    /**
-     * Use formMultiCheckbox view helper by default
-     * @var string
-     */
-    public $helper = 'formMultiCheckbox';
+	/**
+	 * Use formMultiCheckbox view helper by default
+	 * @var string
+	 */
+	public $helper = 'formMultiCheckbox';
 
-    /**
-     * MultiCheckbox is an array of values by default
-     * @var bool
-     */
-    protected $_isArray = true;
+	/**
+	 * MultiCheckbox is an array of values by default
+	 * @var bool
+	 */
+	protected $_isArray = true;
 }

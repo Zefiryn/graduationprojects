@@ -34,9 +34,9 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 class Zend_Dojo_Form_Element_Textarea extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Use Textarea dijit view helper
-     * @var string
-     */
-    public $helper = 'Textarea';
+	/**
+	 * Use Textarea dijit view helper
+	 * @var string
+	 */
+	public $helper = 'Textarea';
 }

@@ -34,31 +34,31 @@ require_once 'Zend/View/Helper/Interface.php';
  */
 abstract class Zend_View_Helper_Abstract implements Zend_View_Helper_Interface
 {
-    /**
-     * View object
-     *
-     * @var Zend_View_Interface
-     */
-    public $view = null;
+	/**
+	 * View object
+	 *
+	 * @var Zend_View_Interface
+	 */
+	public $view = null;
 
-    /**
-     * Set the View object
-     *
-     * @param  Zend_View_Interface $view
-     * @return Zend_View_Helper_Abstract
-     */
-    public function setView(Zend_View_Interface $view)
-    {
-        $this->view = $view;
-        return $this;
-    }
+	/**
+	 * Set the View object
+	 *
+	 * @param  Zend_View_Interface $view
+	 * @return Zend_View_Helper_Abstract
+	 */
+	public function setView(Zend_View_Interface $view)
+	{
+		$this->view = $view;
+		return $this;
+	}
 
-    /**
-     * Strategy pattern: currently unutilized
-     *
-     * @return void
-     */
-    public function direct()
-    {
-    }
+	/**
+	 * Strategy pattern: currently unutilized
+	 *
+	 * @return void
+	 */
+	public function direct()
+	{
+	}
 }

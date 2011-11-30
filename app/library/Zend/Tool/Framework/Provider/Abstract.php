@@ -44,25 +44,25 @@ require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Tool_Framework_Provider_Abstract
-    implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
+implements Zend_Tool_Framework_Provider_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
 
-    /**
-     * @var Zend_Tool_Framework_Registry_Interface
-     */
-    protected $_registry = null;
+	/**
+	 * @var Zend_Tool_Framework_Registry_Interface
+	 */
+	protected $_registry = null;
 
-    /**
-     * setRegistry() - required by Zend_Tool_Framework_Registry_EnabledInterface
-     *
-     * @param Zend_Tool_Framework_Registry_Interface $registry
-     * @return Zend_Tool_Framework_Provider_Abstract
-     */
-    public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
-    {
-        $this->_registry = $registry;
-        return $this;
-    }
+	/**
+	 * setRegistry() - required by Zend_Tool_Framework_Registry_EnabledInterface
+	 *
+	 * @param Zend_Tool_Framework_Registry_Interface $registry
+	 * @return Zend_Tool_Framework_Provider_Abstract
+	 */
+	public function setRegistry(Zend_Tool_Framework_Registry_Interface $registry)
+	{
+		$this->_registry = $registry;
+		return $this;
+	}
 
 
 }

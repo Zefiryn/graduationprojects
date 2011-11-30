@@ -44,19 +44,19 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Id extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'id';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'id';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_Id object.
-     *
-     * @param string $text (optional) The ID being represented.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_Id object.
+	 *
+	 * @param string $text (optional) The ID being represented.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

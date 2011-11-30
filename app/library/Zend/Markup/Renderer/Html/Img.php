@@ -41,44 +41,44 @@ require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
 class Zend_Markup_Renderer_Html_Img extends Zend_Markup_Renderer_Html_HtmlAbstract
 {
 
-    /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function convert(Zend_Markup_Token $token, $text)
-    {
-        $uri = $text;
+	/**
+	 * Convert the token
+	 *
+	 * @param Zend_Markup_Token $token
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function convert(Zend_Markup_Token $token, $text)
+	{
+		$uri = $text;
 
-        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
-            $uri = 'http://' . $uri;
-        }
+		if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
+			$uri = 'http://' . $uri;
+		}
 
-        // check if the URL is valid
-        if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
-            return $text;
-        }
+		// check if the URL is valid
+		if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
+			return $text;
+		}
 
-        if ($token->hasAttribute('alt')) {
-            $alt = $token->getAttribute('alt');
-        } else {
-            // try to get the alternative from the URL
-            $alt = rtrim($text, '/');
-            $alt = strrchr($alt, '/');
-            if (false !== strpos($alt, '.')) {
-                $alt = substr($alt, 1, strpos($alt, '.') - 1);
-            }
-        }
+		if ($token->hasAttribute('alt')) {
+			$alt = $token->getAttribute('alt');
+		} else {
+			// try to get the alternative from the URL
+			$alt = rtrim($text, '/');
+			$alt = strrchr($alt, '/');
+			if (false !== strpos($alt, '.')) {
+				$alt = substr($alt, 1, strpos($alt, '.') - 1);
+			}
+		}
 
-        // run the URI and alt through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
-        $alt = htmlentities($alt, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
+		// run the URI and alt through htmlentities
+		$uri = htmlentities($uri, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
+		$alt = htmlentities($alt, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
 
 
-        return "<img src=\"{$uri}\" alt=\"{$alt}\"" . Zend_Markup_Renderer_Html::renderAttributes($token) . " />";
-    }
+		return "<img src=\"{$uri}\" alt=\"{$alt}\"" . Zend_Markup_Renderer_Html::renderAttributes($token) . " />";
+	}
 
 }

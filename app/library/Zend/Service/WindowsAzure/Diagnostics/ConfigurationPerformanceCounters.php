@@ -47,43 +47,43 @@ require_once 'Zend/Service/WindowsAzure/Diagnostics/PerformanceCounterSubscripti
  * @property    array    Subscriptions                        Subscriptions
  */
 class Zend_Service_WindowsAzure_Diagnostics_ConfigurationPerformanceCounters
-    extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
+extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
-    /**
-     * Constructor
-     *
+	/**
+	 * Constructor
+	 *
 	 * @param	int		$bufferQuotaInMB					Buffer quota in MB
 	 * @param	int		$scheduledTransferPeriodInMinutes	Scheduled transfer period in minutes
 	 */
-    public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0)
-    {	
-        $this->_data = array(
+	public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0)
+	{
+		$this->_data = array(
             'bufferquotainmb'                  => $bufferQuotaInMB,
             'scheduledtransferperiodinminutes' => $scheduledTransferPeriodInMinutes,
             'subscriptions'                    => array(),
-        );
-    }
+		);
+	}
 
 	/**
 	 * Add subscription
 	 *
- 	 * @param	string	$counterSpecifier					Counter specifier
- 	 * @param	int		$sampleRateInSeconds				Sample rate in seconds
+	 * @param	string	$counterSpecifier					Counter specifier
+	 * @param	int		$sampleRateInSeconds				Sample rate in seconds
 	 */
-    public function addSubscription($counterSpecifier, $sampleRateInSeconds = 1)
-    {
-        $this->_data['subscriptions'][$counterSpecifier] = new Zend_Service_WindowsAzure_Diagnostics_PerformanceCounterSubscription($counterSpecifier, $sampleRateInSeconds);
-    }
+	public function addSubscription($counterSpecifier, $sampleRateInSeconds = 1)
+	{
+		$this->_data['subscriptions'][$counterSpecifier] = new Zend_Service_WindowsAzure_Diagnostics_PerformanceCounterSubscription($counterSpecifier, $sampleRateInSeconds);
+	}
 
 	/**
 	 * Remove subscription
 	 *
- 	 * @param	string	$counterSpecifier					Counter specifier
+	 * @param	string	$counterSpecifier					Counter specifier
 	 */
-    public function removeSubscription($counterSpecifier)
-    {
-        if (isset($this->_data['subscriptions'][$counterSpecifier])) {
-            unset($this->_data['subscriptions'][$counterSpecifier]);
-        }
-    }
+	public function removeSubscription($counterSpecifier)
+	{
+		if (isset($this->_data['subscriptions'][$counterSpecifier])) {
+			unset($this->_data['subscriptions'][$counterSpecifier]);
+		}
+	}
 }

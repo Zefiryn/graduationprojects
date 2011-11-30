@@ -39,16 +39,16 @@ require_once 'Zend/Gdata/Entry.php';
 class Zend_Gdata_Docs_DocumentListEntry extends Zend_Gdata_Entry
 {
 
-    /**
-     * Create a new instance of an entry representing a document.
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Docs::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Create a new instance of an entry representing a document.
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Docs::$namespaces);
+		parent::__construct($element);
+	}
 
 }

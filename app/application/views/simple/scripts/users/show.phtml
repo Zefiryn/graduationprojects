@@ -1,24 +1,32 @@
 <?php if ($this->user->role == 'admin')
-		echo $this->partial('partials/delete_dialog.phtml',	array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
+echo $this->partial('partials/delete_dialog.phtml',	array('title' => 'users', 'delete_confirm' => $this->translate('user_delete_confirm')));
 ?>
 <div id="main">
-	<?php echo $this->partial(
+
+
+<?php echo $this->partial(
 							'users/_admin.phtml', 
-							array('user' => $this->account));	?>
-							
-	<h1><?php echo $this->account->getUserFullName();?></h1>
+array('user' => $this->account));	?>
+
+	<h1>
+
+	<?php echo $this->account->getUserFullName();?></h1>
 	<p class="clear">&nbsp;</p>
-	
+
 	<div class="account">
 		<p>
-			<span><?php echo $this->translate('nick');?></span>: 
+			<span><?php echo $this->translate('nick');?> </span>:
 			<?php echo $this->account->nick;?>
 		</p>
-		
+
 		<p>
-			<span><?php echo $this->translate('email');?></span>: 
+			<span><?php echo $this->translate('email');?> </span>:
 			<?php echo $this->account->email;?>
 		</p>
+		
+		
+		
+		
 		
 		<?php if ($this->account->phone != null):?>
 		<p>

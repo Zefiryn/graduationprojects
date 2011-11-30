@@ -34,42 +34,42 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * returns the response object or null
-     *
-     * @return mixed
-     */
-    public function getResponse()
-    {
-        $r = new ReflectionClass($this);
-        foreach ($r->getProperties() as $p) {
-            $name = $p->getName();
-            if (strpos($name, 'Response') !== false) {
-                return $p->getValue($this);
-            }
-        }
-        return null;
-    }
+	/**
+	 * returns the response object or null
+	 *
+	 * @return mixed
+	 */
+	public function getResponse()
+	{
+		$r = new ReflectionClass($this);
+		foreach ($r->getProperties() as $p) {
+			$name = $p->getName();
+			if (strpos($name, 'Response') !== false) {
+				return $p->getValue($this);
+			}
+		}
+		return null;
+	}
 
-    /**
-     * parse the response data and throws exceptions
-     *
-     * @throws Zend_Service_DeveloperGarden_Response_Exception
-     * @return mixed
-     */
-    public function parse()
-    {
-        $retVal = $this->getResponse();
-        if ($retVal === null) {
-            $this->statusCode    = 9999;
-            $this->statusMessage = 'Internal response property not found.';
-        } else {
-            $this->statusCode    = $retVal->getStatusCode();
-            $this->statusMessage = $retVal->getStatusMessage();
-        }
-        parent::parse();
-        return $retVal;
-    }
+	/**
+	 * parse the response data and throws exceptions
+	 *
+	 * @throws Zend_Service_DeveloperGarden_Response_Exception
+	 * @return mixed
+	 */
+	public function parse()
+	{
+		$retVal = $this->getResponse();
+		if ($retVal === null) {
+			$this->statusCode    = 9999;
+			$this->statusMessage = 'Internal response property not found.';
+		} else {
+			$this->statusCode    = $retVal->getStatusCode();
+			$this->statusMessage = $retVal->getStatusMessage();
+		}
+		parent::parse();
+		return $retVal;
+	}
 }

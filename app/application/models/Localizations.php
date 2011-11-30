@@ -10,27 +10,27 @@ class Application_Model_Localizations extends GP_Application_Model
 	protected $caption;
 	protected $_languages = array();
 	protected $_captions = array();
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_Localizations';
-	
-	public function __construct($id = null, array $options = null) 
+
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
+
 	public function getTranslationFromDb()
 	{
 		$translation = array();
 		$this->_getAllCaptions();
 		$this->_getAllLanguages();
-		
+
 		$rowset = $this->getDbTable()->fetchAll();
-		
+
 		if ($rowset)
 		{
 			foreach($rowset as $row)
 			{
-				$translation[$this->_getLanguage($row->lang_id)][$this->_getCaption($row->caption_id)] = $row->text; 
+				$translation[$this->_getLanguage($row->lang_id)][$this->_getCaption($row->caption_id)] = $row->text;
 			}
 		}
 
@@ -41,12 +41,12 @@ class Application_Model_Localizations extends GP_Application_Model
 	{
 		return $this->_captions[$caption_id];
 	}
-	
+
 	protected function _getLanguage($lang_id)
 	{
 		return $this->_languages[$lang_id];
 	}
-	
+
 	protected function _getAllCaptions()
 	{
 		$caption = new Application_Model_Captions();
@@ -55,7 +55,7 @@ class Application_Model_Localizations extends GP_Application_Model
 		{
 			$this->_captions[$row['caption_id']] = $row['name'];
 		}
-		
+
 	}
 	protected function _getAllLanguages()
 	{

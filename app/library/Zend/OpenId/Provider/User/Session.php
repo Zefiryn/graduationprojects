@@ -43,62 +43,62 @@ require_once "Zend/Session/Namespace.php";
  */
 class Zend_OpenId_Provider_User_Session extends Zend_OpenId_Provider_User
 {
-    /**
-     * Reference to an implementation of Zend_Session_Namespace object
-     *
-     * @var Zend_Session_Namespace $_session
-     */
-    private $_session = null;
+	/**
+	 * Reference to an implementation of Zend_Session_Namespace object
+	 *
+	 * @var Zend_Session_Namespace $_session
+	 */
+	private $_session = null;
 
-    /**
-     * Creates Zend_OpenId_Provider_User_Session object with given session
-     * namespace or creates new session namespace named "openid"
-     *
-     * @param Zend_Session_Namespace $session
-     */
-    public function __construct(Zend_Session_Namespace $session = null)
-    {
-        if ($session === null) {
-            $this->_session = new Zend_Session_Namespace("openid");
-        } else {
-            $this->_session = $session;
-        }
-    }
+	/**
+	 * Creates Zend_OpenId_Provider_User_Session object with given session
+	 * namespace or creates new session namespace named "openid"
+	 *
+	 * @param Zend_Session_Namespace $session
+	 */
+	public function __construct(Zend_Session_Namespace $session = null)
+	{
+		if ($session === null) {
+			$this->_session = new Zend_Session_Namespace("openid");
+		} else {
+			$this->_session = $session;
+		}
+	}
 
-    /**
-     * Stores information about logged in user in session data
-     *
-     * @param string $id user identity URL
-     * @return bool
-     */
-    public function setLoggedInUser($id)
-    {
-        $this->_session->logged_in = $id;
-        return true;
-    }
+	/**
+	 * Stores information about logged in user in session data
+	 *
+	 * @param string $id user identity URL
+	 * @return bool
+	 */
+	public function setLoggedInUser($id)
+	{
+		$this->_session->logged_in = $id;
+		return true;
+	}
 
-    /**
-     * Returns identity URL of logged in user or false
-     *
-     * @return mixed
-     */
-    public function getLoggedInUser()
-    {
-        if (isset($this->_session->logged_in)) {
-            return $this->_session->logged_in;
-        }
-        return false;
-    }
+	/**
+	 * Returns identity URL of logged in user or false
+	 *
+	 * @return mixed
+	 */
+	public function getLoggedInUser()
+	{
+		if (isset($this->_session->logged_in)) {
+			return $this->_session->logged_in;
+		}
+		return false;
+	}
 
-    /**
-     * Performs logout. Clears information about logged in user.
-     *
-     * @return bool
-     */
-    public function delLoggedInUser()
-    {
-        unset($this->_session->logged_in);
-        return true;
-    }
+	/**
+	 * Performs logout. Clears information about logged in user.
+	 *
+	 * @return bool
+	 */
+	public function delLoggedInUser()
+	{
+		unset($this->_session->logged_in);
+		return true;
+	}
 
 }

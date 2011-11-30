@@ -35,26 +35,26 @@ require_once 'Zend/XmlRpc/Value/Scalar.php';
 class Zend_XmlRpc_Value_String extends Zend_XmlRpc_Value_Scalar
 {
 
-    /**
-     * Set the value of a string native type
-     *
-     * @param string $value
-     */
-    public function __construct($value)
-    {
-        $this->_type = self::XMLRPC_TYPE_STRING;
+	/**
+	 * Set the value of a string native type
+	 *
+	 * @param string $value
+	 */
+	public function __construct($value)
+	{
+		$this->_type = self::XMLRPC_TYPE_STRING;
 
-        // Make sure this value is string and all XML characters are encoded
-        $this->_value = (string)$value;
-    }
+		// Make sure this value is string and all XML characters are encoded
+		$this->_value = (string)$value;
+	}
 
-    /**
-     * Return the value of this object, convert the XML-RPC native string value into a PHP string
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return (string)$this->_value;
-    }
+	/**
+	 * Return the value of this object, convert the XML-RPC native string value into a PHP string
+	 *
+	 * @return string
+	 */
+	public function getValue()
+	{
+		return (string)$this->_value;
+	}
 }

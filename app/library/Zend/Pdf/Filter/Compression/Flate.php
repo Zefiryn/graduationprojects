@@ -32,71 +32,71 @@ require_once 'Zend/Pdf/Filter/Compression.php';
  */
 class Zend_Pdf_Filter_Compression_Flate extends Zend_Pdf_Filter_Compression
 {
-    /**
-     * Encode data
-     *
-     * @param string $data
-     * @param array $params
-     * @return string
-     * @throws Zend_Pdf_Exception
-     */
-    public static function encode($data, $params = null)
-    {
-        if ($params != null) {
-            $data = self::_applyEncodeParams($data, $params);
-        }
+	/**
+	 * Encode data
+	 *
+	 * @param string $data
+	 * @param array $params
+	 * @return string
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function encode($data, $params = null)
+	{
+		if ($params != null) {
+			$data = self::_applyEncodeParams($data, $params);
+		}
 
-        if (extension_loaded('zlib')) {
-            $trackErrors = ini_get( "track_errors");
-            ini_set('track_errors', '1');
+		if (extension_loaded('zlib')) {
+			$trackErrors = ini_get( "track_errors");
+			ini_set('track_errors', '1');
 
-            if (($output = @gzcompress($data)) === false) {
-                ini_set('track_errors', $trackErrors);
-                require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception($php_errormsg);
-            }
+			if (($output = @gzcompress($data)) === false) {
+				ini_set('track_errors', $trackErrors);
+				require_once 'Zend/Pdf/Exception.php';
+				throw new Zend_Pdf_Exception($php_errormsg);
+			}
 
-            ini_set('track_errors', $trackErrors);
-        } else {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Not implemented yet. You have to use zlib extension.');
-        }
+			ini_set('track_errors', $trackErrors);
+		} else {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Not implemented yet. You have to use zlib extension.');
+		}
 
-        return $output;
-    }
+		return $output;
+	}
 
-    /**
-     * Decode data
-     *
-     * @param string $data
-     * @param array $params
-     * @return string
-     * @throws Zend_Pdf_Exception
-     */
-    public static function decode($data, $params = null)
-    {
-        global $php_errormsg;
+	/**
+	 * Decode data
+	 *
+	 * @param string $data
+	 * @param array $params
+	 * @return string
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function decode($data, $params = null)
+	{
+		global $php_errormsg;
 
-        if (extension_loaded('zlib')) {
-            $trackErrors = ini_get( "track_errors");
-            ini_set('track_errors', '1');
+		if (extension_loaded('zlib')) {
+			$trackErrors = ini_get( "track_errors");
+			ini_set('track_errors', '1');
 
-            if (($output = @gzuncompress($data)) === false) {
-                ini_set('track_errors', $trackErrors);
-                require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception($php_errormsg);
-            }
+			if (($output = @gzuncompress($data)) === false) {
+				ini_set('track_errors', $trackErrors);
+				require_once 'Zend/Pdf/Exception.php';
+				throw new Zend_Pdf_Exception($php_errormsg);
+			}
 
-            ini_set('track_errors', $trackErrors);
-        } else {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Not implemented yet');
-        }
+			ini_set('track_errors', $trackErrors);
+		} else {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Not implemented yet');
+		}
 
-        if ($params !== null) {
-            return self::_applyDecodeParams($output, $params);
-        } else {
-            return $output;
-        }
-    }
+		if ($params !== null) {
+			return self::_applyDecodeParams($output, $params);
+		} else {
+			return $output;
+		}
+	}
 }

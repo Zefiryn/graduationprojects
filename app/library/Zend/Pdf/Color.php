@@ -33,21 +33,21 @@
  */
 abstract class Zend_Pdf_Color
 {
-    /**
-     * Instructions, which can be directly inserted into content stream
-     * to switch color.
-     * Color set instructions differ for stroking and nonstroking operations.
-     *
-     * @param boolean $stroking
-     * @return string
-     */
-    abstract public function instructions($stroking);
+	/**
+	 * Instructions, which can be directly inserted into content stream
+	 * to switch color.
+	 * Color set instructions differ for stroking and nonstroking operations.
+	 *
+	 * @param boolean $stroking
+	 * @return string
+	 */
+	abstract public function instructions($stroking);
 
-    /**
-     * Get color components (color space dependent)
-     *
-     * @return array
-     */
-    abstract public function getComponents();
+	/**
+	 * Get color components (color space dependent)
+	 *
+	 * @return array
+	 */
+	abstract public function getComponents();
 }
 

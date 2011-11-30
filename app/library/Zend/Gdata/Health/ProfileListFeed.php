@@ -39,15 +39,15 @@ require_once 'Zend/Gdata/Feed.php';
  */
 class Zend_Gdata_Health_ProfileListFeed extends Zend_Gdata_Feed
 {
-    /**
-     * The class name for individual profile feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_Health_ProfileListEntry';
+	/**
+	 * The class name for individual profile feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Health_ProfileListEntry';
 
-    public function getEntries()
-    {
-        return $this->entry;
-    }
+	public function getEntries()
+	{
+		return $this->entry;
+	}
 }

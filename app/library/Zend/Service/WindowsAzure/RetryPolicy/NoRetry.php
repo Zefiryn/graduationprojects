@@ -34,25 +34,25 @@ require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
  */
 class Zend_Service_WindowsAzure_RetryPolicy_NoRetry extends Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
 {
-    /**
-     * Execute function under retry policy
-     *
-     * @param string|array $function       Function to execute
-     * @param array        $parameters     Parameters for function call
-     * @return mixed
-     */
-    public function execute($function, $parameters = array())
-    {
-        $returnValue = null;
+	/**
+	 * Execute function under retry policy
+	 *
+	 * @param string|array $function       Function to execute
+	 * @param array        $parameters     Parameters for function call
+	 * @return mixed
+	 */
+	public function execute($function, $parameters = array())
+	{
+		$returnValue = null;
 
-        try
-        {
-            $returnValue = call_user_func_array($function, $parameters);
-            return $returnValue;
-        }
-        catch (Exception $ex)
-        {
-            throw $ex;
-        }
-    }
+		try
+		{
+			$returnValue = call_user_func_array($function, $parameters);
+			return $returnValue;
+		}
+		catch (Exception $ex)
+		{
+			throw $ex;
+		}
+	}
 }

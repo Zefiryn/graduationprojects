@@ -32,42 +32,42 @@
  */
 interface Zend_Gdata_App_MediaSource
 {
-    /**
-     * Return a byte stream representation of this object.
-     *
-     * @return string
-     */
-    public function encode();
+	/**
+	 * Return a byte stream representation of this object.
+	 *
+	 * @return string
+	 */
+	public function encode();
 
-    /**
-     * Set the content type for the file attached (example image/png)
-     *
-     * @param string $value The content type
-     * @return Zend_Gdata_App_MediaFileSource Provides a fluent interface
-     */
-    public function setContentType($value);
+	/**
+	 * Set the content type for the file attached (example image/png)
+	 *
+	 * @param string $value The content type
+	 * @return Zend_Gdata_App_MediaFileSource Provides a fluent interface
+	 */
+	public function setContentType($value);
 
-    /**
-     * The content type for the file attached (example image/png)
-     *
-     * @return string The content type
-     */
-    public function getContentType();
+	/**
+	 * The content type for the file attached (example image/png)
+	 *
+	 * @return string The content type
+	 */
+	public function getContentType();
 
-    /**
-     * Sets the Slug header value.  Used by some services to determine the
-     * title for the uploaded file.  A null value indicates no slug header.
-     *
-     * @var string The slug value
-     * @return Zend_Gdata_App_MediaSource Provides a fluent interface
-     */
-    public function setSlug($value);
+	/**
+	 * Sets the Slug header value.  Used by some services to determine the
+	 * title for the uploaded file.  A null value indicates no slug header.
+	 *
+	 * @var string The slug value
+	 * @return Zend_Gdata_App_MediaSource Provides a fluent interface
+	 */
+	public function setSlug($value);
 
-    /**
-     * Returns the Slug header value.  Used by some services to determine the
-     * title for the uploaded file.  Returns null if no slug should be used.
-     *
-     * @return string The slug value
-     */
-    public function getSlug();
+	/**
+	 * Returns the Slug header value.  Used by some services to determine the
+	 * title for the uploaded file.  Returns null if no slug should be used.
+	 *
+	 * @return string The slug value
+	 */
+	public function getSlug();
 }

@@ -37,67 +37,67 @@ require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
 class Zend_Markup_Renderer_Html_List extends Zend_Markup_Renderer_Html_HtmlAbstract
 {
 
-    /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function convert(Zend_Markup_Token $token, $text)
-    {
-        $type = null;
-        if ($token->hasAttribute('list')) {
-            // because '01' == '1'
-            if ($token->getAttribute('list') === '01') {
-                $type = 'decimal-leading-zero';
-            } else {
-                switch ($token->getAttribute('list')) {
-                    case '1':
-                        $type = 'decimal';
-                        break;
-                    case 'i':
-                        $type = 'lower-roman';
-                        break;
-                    case 'I':
-                        $type = 'upper-roman';
-                        break;
-                    case 'a':
-                        $type = 'lower-alpha';
-                        break;
-                    case 'A':
-                        $type = 'upper-alpha';
-                        break;
+	/**
+	 * Convert the token
+	 *
+	 * @param Zend_Markup_Token $token
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function convert(Zend_Markup_Token $token, $text)
+	{
+		$type = null;
+		if ($token->hasAttribute('list')) {
+			// because '01' == '1'
+			if ($token->getAttribute('list') === '01') {
+				$type = 'decimal-leading-zero';
+			} else {
+				switch ($token->getAttribute('list')) {
+					case '1':
+						$type = 'decimal';
+						break;
+					case 'i':
+						$type = 'lower-roman';
+						break;
+					case 'I':
+						$type = 'upper-roman';
+						break;
+					case 'a':
+						$type = 'lower-alpha';
+						break;
+					case 'A':
+						$type = 'upper-alpha';
+						break;
 
-                    // the following type is unsupported by IE (including IE8)
-                    case 'alpha':
-                        $type = 'lower-greek';
-                        break;
+						// the following type is unsupported by IE (including IE8)
+					case 'alpha':
+						$type = 'lower-greek';
+						break;
 
-                    // the CSS names itself
-                    case 'armenian': // unsupported by IE (including IE8)
-                    case 'decimal':
-                    case 'decimal-leading-zero': // unsupported by IE (including IE8)
-                    case 'georgian': // unsupported by IE (including IE8)
-                    case 'lower-alpha':
-                    case 'lower-greek': // unsupported by IE (including IE8)
-                    case 'lower-latin': // unsupported by IE (including IE8)
-                    case 'lower-roman':
-                    case 'upper-alpha':
-                    case 'upper-latin': // unsupported by IE (including IE8)
-                    case 'upper-roman':
-                        $type = $token->getAttribute('list');
-                        break;
-                }
-            }
-        }
+						// the CSS names itself
+					case 'armenian': // unsupported by IE (including IE8)
+					case 'decimal':
+					case 'decimal-leading-zero': // unsupported by IE (including IE8)
+					case 'georgian': // unsupported by IE (including IE8)
+					case 'lower-alpha':
+					case 'lower-greek': // unsupported by IE (including IE8)
+					case 'lower-latin': // unsupported by IE (including IE8)
+					case 'lower-roman':
+					case 'upper-alpha':
+					case 'upper-latin': // unsupported by IE (including IE8)
+					case 'upper-roman':
+						$type = $token->getAttribute('list');
+						break;
+				}
+			}
+		}
 
-        if (null !== $type) {
-            return "<ol style=\"list-style-type: {$type}\">{$text}</ol>";
-        } else {
-            return "<ul>{$text}</ul>";
-        }
-    }
+		if (null !== $type) {
+			return "<ol style=\"list-style-type: {$type}\">{$text}</ol>";
+		} else {
+			return "<ul>{$text}</ul>";
+		}
+	}
 
 }

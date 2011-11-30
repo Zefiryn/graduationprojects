@@ -43,21 +43,21 @@ require_once 'Zend/Service/Yahoo/VideoResult.php';
  */
 class Zend_Service_Yahoo_VideoResultSet extends Zend_Service_Yahoo_ResultSet
 {
-    /**
-     * Video result set namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srchmv';
+	/**
+	 * Video result set namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srchmv';
 
 
-    /**
-     * Overrides Zend_Service_Yahoo_ResultSet::current()
-     *
-     * @return Zend_Service_Yahoo_VideoResult
-     */
-    public function current()
-    {
-        return new Zend_Service_Yahoo_VideoResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Overrides Zend_Service_Yahoo_ResultSet::current()
+	 *
+	 * @return Zend_Service_Yahoo_VideoResult
+	 */
+	public function current()
+	{
+		return new Zend_Service_Yahoo_VideoResult($this->_results->item($this->_currentIndex));
+	}
 }

@@ -34,47 +34,47 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  */
 class Zend_View_Helper_HtmlObject extends Zend_View_Helper_HtmlElement
 {
-    /**
-     * Output an object set
-     *
-     * @param string $data The data file
-     * @param string $type Data file type
-     * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
-     * @param string $content Alternative content for object
-     * @return string
-     */
-    public function htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)
-    {
-        // Merge data and type
-        $attribs = array_merge(array('data' => $data,
+	/**
+	 * Output an object set
+	 *
+	 * @param string $data The data file
+	 * @param string $type Data file type
+	 * @param array  $attribs Attribs for the object tag
+	 * @param array  $params Params for in the object tag
+	 * @param string $content Alternative content for object
+	 * @return string
+	 */
+	public function htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)
+	{
+		// Merge data and type
+		$attribs = array_merge(array('data' => $data,
                                      'type' => $type), $attribs);
 
-        // Params
-        $paramHtml = array();
-        $closingBracket = $this->getClosingBracket();
+		// Params
+		$paramHtml = array();
+		$closingBracket = $this->getClosingBracket();
 
-        foreach ($params as $param => $options) {
-            if (is_string($options)) {
-                $options = array('value' => $options);
-            }
+		foreach ($params as $param => $options) {
+			if (is_string($options)) {
+				$options = array('value' => $options);
+			}
 
-            $options = array_merge(array('name' => $param), $options);
+			$options = array_merge(array('name' => $param), $options);
 
-            $paramHtml[] = '<param' . $this->_htmlAttribs($options) . $closingBracket;
-        }
+			$paramHtml[] = '<param' . $this->_htmlAttribs($options) . $closingBracket;
+		}
 
-        // Content
-        if (is_array($content)) {
-            $content = implode(self::EOL, $content);
-        }
+		// Content
+		if (is_array($content)) {
+			$content = implode(self::EOL, $content);
+		}
 
-        // Object header
-        $xhtml = '<object' . $this->_htmlAttribs($attribs) . '>' . self::EOL
-                 . implode(self::EOL, $paramHtml) . self::EOL
-                 . ($content ? $content . self::EOL : '')
-                 . '</object>';
+		// Object header
+		$xhtml = '<object' . $this->_htmlAttribs($attribs) . '>' . self::EOL
+		. implode(self::EOL, $paramHtml) . self::EOL
+		. ($content ? $content . self::EOL : '')
+		. '</object>';
 
-        return $xhtml;
-    }
+		return $xhtml;
+	}
 }

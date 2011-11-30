@@ -31,30 +31,30 @@
  */
 class Zend_CodeGenerator_Php_Parameter_DefaultValue
 {
-    /**
-     * @var string
-     */
-    protected $_defaultValue = null;
+	/**
+	 * @var string
+	 */
+	protected $_defaultValue = null;
 
-    /**
-     *
-     * @param string $defaultValue
-     * @throws Zend_CodeGenerator_Php_Exception
-     */
-    public function __construct($defaultValue)
-    {
-        if(!is_string($defaultValue)) {
-            require_once "Zend/CodeGenerator/Php/Exception.php";
-            throw new Zend_CodeGenerator_Php_Exception(
+	/**
+	 *
+	 * @param string $defaultValue
+	 * @throws Zend_CodeGenerator_Php_Exception
+	 */
+	public function __construct($defaultValue)
+	{
+		if(!is_string($defaultValue)) {
+			require_once "Zend/CodeGenerator/Php/Exception.php";
+			throw new Zend_CodeGenerator_Php_Exception(
                 "Can only set a string as default value representation, ".
                 "but ".gettype($defaultValue)." was given."
-            );
-        }
-        $this->_defaultValue = $defaultValue;
-    }
+			);
+		}
+		$this->_defaultValue = $defaultValue;
+	}
 
-    public function __toString()
-    {
-        return $this->_defaultValue;
-    }
+	public function __toString()
+	{
+		return $this->_defaultValue;
+	}
 }

@@ -37,28 +37,28 @@ require_once 'Zend/Gdata/Feed.php';
 class Zend_Gdata_Spreadsheets_SpreadsheetFeed extends Zend_Gdata_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetEntry';
 
-    /**
-     * The classname for the feed.
-     *
-     * @var string
-     */
-    protected $_feedClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetFeed';
+	/**
+	 * The classname for the feed.
+	 *
+	 * @var string
+	 */
+	protected $_feedClassName = 'Zend_Gdata_Spreadsheets_SpreadsheetFeed';
 
-    /**
-     * Constructs a new Zend_Gdata_Spreadsheets_SpreadsheetFeed object.
-     * @param DOMElement $element (optional) The DOMElement on which to base this object.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Spreadsheets_SpreadsheetFeed object.
+	 * @param DOMElement $element (optional) The DOMElement on which to base this object.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
+		parent::__construct($element);
+	}
 
 }

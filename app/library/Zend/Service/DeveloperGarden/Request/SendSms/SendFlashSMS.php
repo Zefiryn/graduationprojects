@@ -34,13 +34,13 @@ require_once 'Zend/Service/DeveloperGarden/Request/SendSms/SendSmsAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_SendSms_SendFlashSMS
-    extends Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
+extends Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
 {
-    /**
-     * this is the sms type
-     * 2 = FlashSMS
-     *
-     * @var integer
-     */
-    protected $_smsType = 2;
+	/**
+	 * this is the sms type
+	 * 2 = FlashSMS
+	 *
+	 * @var integer
+	 */
+	protected $_smsType = 2;
 }

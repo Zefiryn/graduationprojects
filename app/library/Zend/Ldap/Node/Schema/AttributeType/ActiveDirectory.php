@@ -40,65 +40,65 @@ require_once 'Zend/Ldap/Node/Schema/AttributeType/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory extends Zend_Ldap_Node_Schema_Item
-    implements Zend_Ldap_Node_Schema_AttributeType_Interface
+implements Zend_Ldap_Node_Schema_AttributeType_Interface
 {
-    /**
-     * Gets the attribute name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->ldapdisplayname[0];
-    }
+	/**
+	 * Gets the attribute name
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->ldapdisplayname[0];
+	}
 
-    /**
-     * Gets the attribute OID
-     *
-     * @return string
-     */
-    public function getOid()
-    {
+	/**
+	 * Gets the attribute OID
+	 *
+	 * @return string
+	 */
+	public function getOid()
+	{
 
-    }
+	}
 
-    /**
-     * Gets the attribute syntax
-     *
-     * @return string
-     */
-    public function getSyntax()
-    {
+	/**
+	 * Gets the attribute syntax
+	 *
+	 * @return string
+	 */
+	public function getSyntax()
+	{
 
-    }
+	}
 
-    /**
-     * Gets the attribute maximum length
-     *
-     * @return int|null
-     */
-    public function getMaxLength()
-    {
+	/**
+	 * Gets the attribute maximum length
+	 *
+	 * @return int|null
+	 */
+	public function getMaxLength()
+	{
 
-    }
+	}
 
-    /**
-     * Returns if the attribute is single-valued.
-     *
-     * @return boolean
-     */
-    public function isSingleValued()
-    {
+	/**
+	 * Returns if the attribute is single-valued.
+	 *
+	 * @return boolean
+	 */
+	public function isSingleValued()
+	{
 
-    }
+	}
 
-    /**
-     * Gets the attribute description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
+	/**
+	 * Gets the attribute description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
 
-    }
+	}
 }

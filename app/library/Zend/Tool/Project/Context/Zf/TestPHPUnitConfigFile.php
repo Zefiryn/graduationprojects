@@ -39,24 +39,24 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_TestPHPUnitConfigFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'phpunit.xml';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'phpunit.xml';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestPHPUnitConfigFile';
-    }
-    
-    public function getContents()
-    {
-        return <<<EOS
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestPHPUnitConfigFile';
+	}
+
+	public function getContents()
+	{
+		return <<<EOS
 <phpunit bootstrap="./bootstrap.php">
     <testsuite name="Application Test Suite">
         <directory>./application</directory>
@@ -76,6 +76,6 @@ class Zend_Tool_Project_Context_Zf_TestPHPUnitConfigFile extends Zend_Tool_Proje
 </phpunit>
 
 EOS;
-    }
+	}
 
 }

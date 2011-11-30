@@ -35,6 +35,6 @@ require_once 'Zend/InfoCard/Cipher/Symmetric/Adapter/Aes256cbc.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_InfoCard_Cipher_Symmetric_Adapter_Aes128cbc
-    extends Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc
+extends Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc
 {
 }

@@ -36,268 +36,268 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 abstract class Zend_Dojo_Form_Element_DijitMulti extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Array of options for multi-item
-     * @var array
-     */
-    public $options = array();
+	/**
+	 * Array of options for multi-item
+	 * @var array
+	 */
+	public $options = array();
 
-    /**
-     * Flag: autoregister inArray validator?
-     * @var bool
-     */
-    protected $_registerInArrayValidator = true;
+	/**
+	 * Flag: autoregister inArray validator?
+	 * @var bool
+	 */
+	protected $_registerInArrayValidator = true;
 
-    /**
-     * Separator to use between options; defaults to '<br />'.
-     * @var string
-     */
-    protected $_separator = '<br />';
+	/**
+	 * Separator to use between options; defaults to '<br />'.
+	 * @var string
+	 */
+	protected $_separator = '<br />';
 
-    /**
-     * Which values are translated already?
-     * @var array
-     */
-    protected $_translated = array();
+	/**
+	 * Which values are translated already?
+	 * @var array
+	 */
+	protected $_translated = array();
 
-    /**
-     * Retrieve separator
-     *
-     * @return mixed
-     */
-    public function getSeparator()
-    {
-        return $this->_separator;
-    }
+	/**
+	 * Retrieve separator
+	 *
+	 * @return mixed
+	 */
+	public function getSeparator()
+	{
+		return $this->_separator;
+	}
 
-    /**
-     * Set separator
-     *
-     * @param mixed $separator
-     * @return self
-     */
-    public function setSeparator($separator)
-    {
-        $this->_separator = $separator;
-        return $this;
-    }
+	/**
+	 * Set separator
+	 *
+	 * @param mixed $separator
+	 * @return self
+	 */
+	public function setSeparator($separator)
+	{
+		$this->_separator = $separator;
+		return $this;
+	}
 
-    /**
-     * Retrieve options array
-     *
-     * @return array
-     */
-    protected function _getMultiOptions()
-    {
-        if (null === $this->options || !is_array($this->options)) {
-            $this->options = array();
-        }
+	/**
+	 * Retrieve options array
+	 *
+	 * @return array
+	 */
+	protected function _getMultiOptions()
+	{
+		if (null === $this->options || !is_array($this->options)) {
+			$this->options = array();
+		}
 
-        return $this->options;
-    }
+		return $this->options;
+	}
 
-    /**
-     * Add an option
-     *
-     * @param  string $option
-     * @param  string $value
-     * @return Zend_Form_Element_Multi
-     */
-    public function addMultiOption($option, $value = '')
-    {
-        $option  = (string) $option;
-        $this->_getMultiOptions();
-        if (!$this->_translateOption($option, $value)) {
-            $this->options[$option] = $value;
-        }
+	/**
+	 * Add an option
+	 *
+	 * @param  string $option
+	 * @param  string $value
+	 * @return Zend_Form_Element_Multi
+	 */
+	public function addMultiOption($option, $value = '')
+	{
+		$option  = (string) $option;
+		$this->_getMultiOptions();
+		if (!$this->_translateOption($option, $value)) {
+			$this->options[$option] = $value;
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Add many options at once
-     *
-     * @param  array $options
-     * @return Zend_Form_Element_Multi
-     */
-    public function addMultiOptions(array $options)
-    {
-        foreach ($options as $option => $value) {
-            if (is_array($value)
-                && array_key_exists('key', $value)
-                && array_key_exists('value', $value)
-            ) {
-                $this->addMultiOption($value['key'], $value['value']);
-            } else {
-                $this->addMultiOption($option, $value);
-            }
-        }
-        return $this;
-    }
+	/**
+	 * Add many options at once
+	 *
+	 * @param  array $options
+	 * @return Zend_Form_Element_Multi
+	 */
+	public function addMultiOptions(array $options)
+	{
+		foreach ($options as $option => $value) {
+			if (is_array($value)
+			&& array_key_exists('key', $value)
+			&& array_key_exists('value', $value)
+			) {
+				$this->addMultiOption($value['key'], $value['value']);
+			} else {
+				$this->addMultiOption($option, $value);
+			}
+		}
+		return $this;
+	}
 
-    /**
-     * Set all options at once (overwrites)
-     *
-     * @param  array $options
-     * @return Zend_Form_Element_Multi
-     */
-    public function setMultiOptions(array $options)
-    {
-        $this->clearMultiOptions();
-        return $this->addMultiOptions($options);
-    }
+	/**
+	 * Set all options at once (overwrites)
+	 *
+	 * @param  array $options
+	 * @return Zend_Form_Element_Multi
+	 */
+	public function setMultiOptions(array $options)
+	{
+		$this->clearMultiOptions();
+		return $this->addMultiOptions($options);
+	}
 
-    /**
-     * Retrieve single multi option
-     *
-     * @param  string $option
-     * @return mixed
-     */
-    public function getMultiOption($option)
-    {
-        $option  = (string) $option;
-        $this->_getMultiOptions();
-        if (isset($this->options[$option])) {
-            $this->_translateOption($option, $this->options[$option]);
-            return $this->options[$option];
-        }
+	/**
+	 * Retrieve single multi option
+	 *
+	 * @param  string $option
+	 * @return mixed
+	 */
+	public function getMultiOption($option)
+	{
+		$option  = (string) $option;
+		$this->_getMultiOptions();
+		if (isset($this->options[$option])) {
+			$this->_translateOption($option, $this->options[$option]);
+			return $this->options[$option];
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Retrieve options
-     *
-     * @return array
-     */
-    public function getMultiOptions()
-    {
-        $this->_getMultiOptions();
-        foreach ($this->options as $option => $value) {
-            $this->_translateOption($option, $value);
-        }
-        return $this->options;
-    }
+	/**
+	 * Retrieve options
+	 *
+	 * @return array
+	 */
+	public function getMultiOptions()
+	{
+		$this->_getMultiOptions();
+		foreach ($this->options as $option => $value) {
+			$this->_translateOption($option, $value);
+		}
+		return $this->options;
+	}
 
-    /**
-     * Remove a single multi option
-     *
-     * @param  string $option
-     * @return bool
-     */
-    public function removeMultiOption($option)
-    {
-        $option  = (string) $option;
-        $this->_getMultiOptions();
-        if (isset($this->options[$option])) {
-            unset($this->options[$option]);
-            if (isset($this->_translated[$option])) {
-                unset($this->_translated[$option]);
-            }
-            return true;
-        }
+	/**
+	 * Remove a single multi option
+	 *
+	 * @param  string $option
+	 * @return bool
+	 */
+	public function removeMultiOption($option)
+	{
+		$option  = (string) $option;
+		$this->_getMultiOptions();
+		if (isset($this->options[$option])) {
+			unset($this->options[$option]);
+			if (isset($this->_translated[$option])) {
+				unset($this->_translated[$option]);
+			}
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Clear all options
-     *
-     * @return Zend_Form_Element_Multi
-     */
-    public function clearMultiOptions()
-    {
-        $this->options = array();
-        $this->_translated = array();
-        return $this;
-    }
+	/**
+	 * Clear all options
+	 *
+	 * @return Zend_Form_Element_Multi
+	 */
+	public function clearMultiOptions()
+	{
+		$this->options = array();
+		$this->_translated = array();
+		return $this;
+	}
 
-    /**
-     * Set flag indicating whether or not to auto-register inArray validator
-     *
-     * @param  bool $flag
-     * @return Zend_Form_Element_Multi
-     */
-    public function setRegisterInArrayValidator($flag)
-    {
-        $this->_registerInArrayValidator = (bool) $flag;
-        return $this;
-    }
+	/**
+	 * Set flag indicating whether or not to auto-register inArray validator
+	 *
+	 * @param  bool $flag
+	 * @return Zend_Form_Element_Multi
+	 */
+	public function setRegisterInArrayValidator($flag)
+	{
+		$this->_registerInArrayValidator = (bool) $flag;
+		return $this;
+	}
 
-    /**
-     * Get status of auto-register inArray validator flag
-     *
-     * @return bool
-     */
-    public function registerInArrayValidator()
-    {
-        return $this->_registerInArrayValidator;
-    }
+	/**
+	 * Get status of auto-register inArray validator flag
+	 *
+	 * @return bool
+	 */
+	public function registerInArrayValidator()
+	{
+		return $this->_registerInArrayValidator;
+	}
 
-    /**
-     * Is the value provided valid?
-     *
-     * Autoregisters InArray validator if necessary.
-     *
-     * @param  string $value
-     * @param  mixed $context
-     * @return bool
-     */
-    public function isValid($value, $context = null)
-    {
-        if ($this->registerInArrayValidator()) {
-            if (!$this->getValidator('InArray')) {
-                $options = $this->getMultiOptions();
-                $this->addValidator(
+	/**
+	 * Is the value provided valid?
+	 *
+	 * Autoregisters InArray validator if necessary.
+	 *
+	 * @param  string $value
+	 * @param  mixed $context
+	 * @return bool
+	 */
+	public function isValid($value, $context = null)
+	{
+		if ($this->registerInArrayValidator()) {
+			if (!$this->getValidator('InArray')) {
+				$options = $this->getMultiOptions();
+				$this->addValidator(
                     'InArray',
-                    true,
-                    array(array_keys($options))
-                );
-            }
-        }
-        return parent::isValid($value, $context);
-    }
+				true,
+				array(array_keys($options))
+				);
+			}
+		}
+		return parent::isValid($value, $context);
+	}
 
-    /**
-     * Translate an option
-     *
-     * @param  string $option
-     * @param  string $value
-     * @return bool
-     */
-    protected function _translateOption($option, $value)
-    {
-        if (!isset($this->_translated[$option])) {
-            $this->options[$option] = $this->_translateValue($value);
-            if ($this->options[$option] === $value) {
-                return false;
-            }
-            $this->_translated[$option] = true;
-            return true;
-        }
+	/**
+	 * Translate an option
+	 *
+	 * @param  string $option
+	 * @param  string $value
+	 * @return bool
+	 */
+	protected function _translateOption($option, $value)
+	{
+		if (!isset($this->_translated[$option])) {
+			$this->options[$option] = $this->_translateValue($value);
+			if ($this->options[$option] === $value) {
+				return false;
+			}
+			$this->_translated[$option] = true;
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Translate a value
-     *
-     * @param  array|string $value
-     * @return array|string
-     */
-    protected function _translateValue($value)
-    {
-        if (is_array($value)) {
-            foreach ($value as $key => $val) {
-                $value[$key] = $this->_translateValue($val);
-            }
-            return $value;
-        } else {
-            if (null !== ($translator = $this->getTranslator())) {
-                return $translator->translate($value);
-            }
+	/**
+	 * Translate a value
+	 *
+	 * @param  array|string $value
+	 * @return array|string
+	 */
+	protected function _translateValue($value)
+	{
+		if (is_array($value)) {
+			foreach ($value as $key => $val) {
+				$value[$key] = $this->_translateValue($val);
+			}
+			return $value;
+		} else {
+			if (null !== ($translator = $this->getTranslator())) {
+				return $translator->translate($value);
+			}
 
-            return $value;
-        }
-    }
+			return $value;
+		}
+	}
 }

@@ -34,9 +34,9 @@ require_once 'Zend/Form/Element/Xhtml.php';
  */
 class Zend_Form_Element_Textarea extends Zend_Form_Element_Xhtml
 {
-    /**
-     * Use formTextarea view helper by default
-     * @var string
-     */
-    public $helper = 'formTextarea';
+	/**
+	 * Use formTextarea view helper by default
+	 * @var string
+	 */
+	public $helper = 'formTextarea';
 }

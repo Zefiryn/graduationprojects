@@ -1,18 +1,25 @@
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'editions', 'delete_confirm' => $this->translate('school_delete_confirm')));
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'editions', 'delete_confirm' => $this->translate('school_delete_confirm')));
 ?>
 
 <div id="main">
 	<h1>
-		<?php echo $this->translate('schools');?>
-		<a href="<?php echo $this->baseUrl('/schools/new');?>">
-			<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block"
-				alt="<?php echo $this->translate('add_new_school');?>" 
-				title="<?php echo $this->translate('add_new_school');?>" />
+
+
+	<?php echo $this->translate('schools');?>
+		<a href="<?php echo $this->baseUrl('/schools/new');?>"> <img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('add_new_school');?>"
+			title="<?php echo $this->translate('add_new_school');?>" />
 		</a>
 	</h1>
-	
+
 	<br />
+	
+	
+	
+	
 	<?php foreach ($this->schools as $id => $school):?>
 	<p>
 		<span style="margin-right: 30px;">

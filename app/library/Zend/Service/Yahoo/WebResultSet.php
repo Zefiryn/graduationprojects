@@ -43,21 +43,21 @@ require_once 'Zend/Service/Yahoo/WebResult.php';
  */
 class Zend_Service_Yahoo_WebResultSet extends Zend_Service_Yahoo_ResultSet
 {
-    /**
-     * Web result set namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srch';
+	/**
+	 * Web result set namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srch';
 
 
-    /**
-     * Overrides Zend_Service_Yahoo_ResultSet::current()
-     *
-     * @return Zend_Service_Yahoo_WebResult
-     */
-    public function current()
-    {
-        return new Zend_Service_Yahoo_WebResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Overrides Zend_Service_Yahoo_ResultSet::current()
+	 *
+	 * @return Zend_Service_Yahoo_WebResult
+	 */
+	public function current()
+	{
+		return new Zend_Service_Yahoo_WebResult($this->_results->item($this->_currentIndex));
+	}
 }

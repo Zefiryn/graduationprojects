@@ -52,67 +52,67 @@ require_once 'Zend/Tool/Project/Profile/FileParser/Xml.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Project_Context_System_ProjectProfileFile
-    extends Zend_Tool_Project_Context_Filesystem_File
-    implements Zend_Tool_Project_Context_System_Interface,
-               Zend_Tool_Project_Context_System_NotOverwritable
+extends Zend_Tool_Project_Context_Filesystem_File
+implements Zend_Tool_Project_Context_System_Interface,
+Zend_Tool_Project_Context_System_NotOverwritable
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = '.zfproject.xml';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = '.zfproject.xml';
 
-    /**
-     * @var Zend_Tool_Project_Profile
-     */
-    protected $_profile = null;
+	/**
+	 * @var Zend_Tool_Project_Profile
+	 */
+	protected $_profile = null;
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ProjectProfileFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'ProjectProfileFile';
+	}
 
-    /**
-     * setProfile()
-     *
-     * @param Zend_Tool_Project_Profile $profile
-     * @return Zend_Tool_Project_Context_System_ProjectProfileFile
-     */
-    public function setProfile($profile)
-    {
-        $this->_profile = $profile;
-        return $this;
-    }
+	/**
+	 * setProfile()
+	 *
+	 * @param Zend_Tool_Project_Profile $profile
+	 * @return Zend_Tool_Project_Context_System_ProjectProfileFile
+	 */
+	public function setProfile($profile)
+	{
+		$this->_profile = $profile;
+		return $this;
+	}
 
-    /**
-     * save()
-     *
-     * Proxy to create
-     *
-     * @return Zend_Tool_Project_Context_System_ProjectProfileFile
-     */
-    public function save()
-    {
-        parent::create();
-        return $this;
-    }
+	/**
+	 * save()
+	 *
+	 * Proxy to create
+	 *
+	 * @return Zend_Tool_Project_Context_System_ProjectProfileFile
+	 */
+	public function save()
+	{
+		parent::create();
+		return $this;
+	}
 
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
-        $parser = new Zend_Tool_Project_Profile_FileParser_Xml();
-        $profile = $this->_resource->getProfile();
-        $xml = $parser->serialize($profile);
-        return $xml;
-    }
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+		$parser = new Zend_Tool_Project_Profile_FileParser_Xml();
+		$profile = $this->_resource->getProfile();
+		$xml = $parser->serialize($profile);
+		return $xml;
+	}
 
 }

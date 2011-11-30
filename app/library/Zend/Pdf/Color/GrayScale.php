@@ -37,48 +37,52 @@ require_once 'Zend/Pdf/Color.php';
  */
 class Zend_Pdf_Color_GrayScale extends Zend_Pdf_Color
 {
-    /**
-     * GrayLevel.
-     * 0.0 (black) - 1.0 (white)
-     *
-     * @var Zend_Pdf_Element_Numeric
-     */
-    private $_grayLevel;
+	/**
+	 * GrayLevel.
+	 * 0.0 (black) - 1.0 (white)
+	 *
+	 * @var Zend_Pdf_Element_Numeric
+	 */
+	private $_grayLevel;
 
-    /**
-     * Object constructor
-     *
-     * @param float $grayLevel
-     */
-    public function __construct($grayLevel)
-    {
-        if ($grayLevel < 0) { $grayLevel = 0; }
-        if ($grayLevel > 1) { $grayLevel = 1; }
+	/**
+	 * Object constructor
+	 *
+	 * @param float $grayLevel
+	 */
+	public function __construct($grayLevel)
+	{
+		if ($grayLevel < 0) {
+			$grayLevel = 0;
+		}
+		if ($grayLevel > 1) {
+			$grayLevel = 1;
+		}
 
-        $this->_grayLevel = new Zend_Pdf_Element_Numeric($grayLevel);
-    }
+		$this->_grayLevel = new Zend_Pdf_Element_Numeric($grayLevel);
+	}
 
-    /**
-     * Instructions, which can be directly inserted into content stream
-     * to switch color.
-     * Color set instructions differ for stroking and nonstroking operations.
-     *
-     * @param boolean $stroking
-     * @return string
-     */
-    public function instructions($stroking)
-    {
-        return $this->_grayLevel->toString() . ($stroking? " G\n" : " g\n");
-    }
+	/**
+	 * Instructions, which can be directly inserted into content stream
+	 * to switch color.
+	 * Color set instructions differ for stroking and nonstroking operations.
+	 *
+	 * @param boolean $stroking
+	 * @return string
+	 */
+	public function instructions($stroking)
+	{
+		return $this->_grayLevel->toString() . ($stroking? " G\n" : " g\n");
+	}
 
-    /**
-     * Get color components (color space dependent)
-     *
-     * @return array
-     */
-    public function getComponents()
-    {
-        return array($this->_grayLevel->value);
-    }
+	/**
+	 * Get color components (color space dependent)
+	 *
+	 * @return array
+	 */
+	public function getComponents()
+	{
+		return array($this->_grayLevel->value);
+	}
 }
 

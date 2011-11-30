@@ -28,118 +28,118 @@
  */
 interface Zend_Cloud_StorageService_Adapter
 {
-    // HTTP adapter to use for connections
-    const HTTP_ADAPTER = 'http_adapter';
+	// HTTP adapter to use for connections
+	const HTTP_ADAPTER = 'http_adapter';
 
-    /**
-     * Get an item from the storage service.
-     *
-     * @param  string $path
-     * @param  array $options
-     * @return mixed
-     */
-    public function fetchItem($path, $options = null);
+	/**
+	 * Get an item from the storage service.
+	 *
+	 * @param  string $path
+	 * @param  array $options
+	 * @return mixed
+	 */
+	public function fetchItem($path, $options = null);
 
-    /**
-     * Store an item in the storage service.
-     * WARNING: This operation overwrites any item that is located at
-     * $destinationPath.
-     * @param string $destinationPath
-     * @param mixed  $data
-     * @param  array $options
-     * @return boolean
-     */
-    public function storeItem($destinationPath,
-                              $data,
-                              $options = null);
+	/**
+	 * Store an item in the storage service.
+	 * WARNING: This operation overwrites any item that is located at
+	 * $destinationPath.
+	 * @param string $destinationPath
+	 * @param mixed  $data
+	 * @param  array $options
+	 * @return boolean
+	 */
+	public function storeItem($destinationPath,
+	$data,
+	$options = null);
 
-    /**
-     * Delete an item in the storage service.
-     *
-     * @param  string $path
-     * @param  array $options
-     * @return void
-     */
-    public function deleteItem($path, $options = null);
+	/**
+	 * Delete an item in the storage service.
+	 *
+	 * @param  string $path
+	 * @param  array $options
+	 * @return void
+	 */
+	public function deleteItem($path, $options = null);
 
-    /**
-     * Copy an item in the storage service to a given path.
-     *
-     * The $destinationPath must be a directory.
-     *
-     * @param  string $sourcePath
-     * @param  string $destination path
-     * @param  array $options
-     * @return void
-     */
-    public function copyItem($sourcePath, $destinationPath, $options = null);
+	/**
+	 * Copy an item in the storage service to a given path.
+	 *
+	 * The $destinationPath must be a directory.
+	 *
+	 * @param  string $sourcePath
+	 * @param  string $destination path
+	 * @param  array $options
+	 * @return void
+	 */
+	public function copyItem($sourcePath, $destinationPath, $options = null);
 
-    /**
-     * Move an item in the storage service to a given path.
-     *
-     * The $destinationPath must be a directory.
-     *
-     * @param  string $sourcePath
-     * @param  string $destination path
-     * @param  array $options
-     * @return void
-     */
-    public function moveItem($sourcePath, $destinationPath, $options = null);
+	/**
+	 * Move an item in the storage service to a given path.
+	 *
+	 * The $destinationPath must be a directory.
+	 *
+	 * @param  string $sourcePath
+	 * @param  string $destination path
+	 * @param  array $options
+	 * @return void
+	 */
+	public function moveItem($sourcePath, $destinationPath, $options = null);
 
-    /**
-     * Rename an item in the storage service to a given name.
-     *
-     *
-     * @param  string $path
-     * @param  string $name
-     * @param  array $options
-     * @return void
-     */
-    public function renameItem($path, $name, $options = null);
+	/**
+	 * Rename an item in the storage service to a given name.
+	 *
+	 *
+	 * @param  string $path
+	 * @param  string $name
+	 * @param  array $options
+	 * @return void
+	 */
+	public function renameItem($path, $name, $options = null);
 
-    /**
-     * List items in the given directory in the storage service
-     *
-     * The $path must be a directory
-     *
-     *
-     * @param  string $path Must be a directory
-     * @param  array $options
-     * @return array A list of item names
-     */
-    public function listItems($path, $options = null);
+	/**
+	 * List items in the given directory in the storage service
+	 *
+	 * The $path must be a directory
+	 *
+	 *
+	 * @param  string $path Must be a directory
+	 * @param  array $options
+	 * @return array A list of item names
+	 */
+	public function listItems($path, $options = null);
 
-    /**
-     * Get a key/value array of metadata for the given path.
-     *
-     * @param  string $path
-     * @param  array $options
-     * @return array
-     */
-    public function fetchMetadata($path, $options = null);
+	/**
+	 * Get a key/value array of metadata for the given path.
+	 *
+	 * @param  string $path
+	 * @param  array $options
+	 * @return array
+	 */
+	public function fetchMetadata($path, $options = null);
 
-    /**
-     * Store a key/value array of metadata at the given path.
-     * WARNING: This operation overwrites any metadata that is located at
-     * $destinationPath.
-     *
-     * @param  string $destinationPath
-     * @param  array $options
-     * @return void
-     */
-    public function storeMetadata($destinationPath, $metadata, $options = null);
+	/**
+	 * Store a key/value array of metadata at the given path.
+	 * WARNING: This operation overwrites any metadata that is located at
+	 * $destinationPath.
+	 *
+	 * @param  string $destinationPath
+	 * @param  array $options
+	 * @return void
+	 */
+	public function storeMetadata($destinationPath, $metadata, $options = null);
 
-    /**
-     * Delete a key/value array of metadata at the given path.
-     *
-     * @param  string $path
-     * @param  array $options
-     * @return void
-     */
-    public function deleteMetadata($path);
+	/**
+	 * Delete a key/value array of metadata at the given path.
+	 *
+	 * @param  string $path
+	 * @param  array $options
+	 * @return void
+	 */
+	public function deleteMetadata($path);
 
-    /**
-     * Get the concrete client.
-     */
-    public function getClient();
+	/**
+	 * Get the concrete client.
+	 */
+	public function getClient();
 }

@@ -47,73 +47,73 @@ require_once 'Zend/Gdata/MediaMimeStream.php';
  */
 class Zend_Gdata_App_MediaEntry extends Zend_Gdata_App_Entry
 {
-    /**
-     * The attached MediaSource/file
-     *
-     * @var Zend_Gdata_App_MediaSource
-     */
-    protected $_mediaSource = null;
+	/**
+	 * The attached MediaSource/file
+	 *
+	 * @var Zend_Gdata_App_MediaSource
+	 */
+	protected $_mediaSource = null;
 
-    /**
-     * Constructs a new MediaEntry, representing XML data and optional
-     * file to upload
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null, $mediaSource = null)
-    {
-        parent::__construct($element);
-        $this->_mediaSource = $mediaSource;
-    }
+	/**
+	 * Constructs a new MediaEntry, representing XML data and optional
+	 * file to upload
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null, $mediaSource = null)
+	{
+		parent::__construct($element);
+		$this->_mediaSource = $mediaSource;
+	}
 
-    /**
-     * Return the MIME multipart representation of this MediaEntry.
-     *
-     * @return string|Zend_Gdata_MediaMimeStream The MIME multipart
-     *         representation of this MediaEntry. If the entry consisted only
-     *         of XML, a string is returned.
-     */
-    public function encode()
-    {
-        $xmlData = $this->saveXML();
-        $mediaSource = $this->getMediaSource();
-        if ($mediaSource === null) {
-            // No attachment, just send XML for entry
-            return $xmlData;
-        } else {
-            return new Zend_Gdata_MediaMimeStream($xmlData,
-                $mediaSource->getFilename(), $mediaSource->getContentType());
-        }
-    }
+	/**
+	 * Return the MIME multipart representation of this MediaEntry.
+	 *
+	 * @return string|Zend_Gdata_MediaMimeStream The MIME multipart
+	 *         representation of this MediaEntry. If the entry consisted only
+	 *         of XML, a string is returned.
+	 */
+	public function encode()
+	{
+		$xmlData = $this->saveXML();
+		$mediaSource = $this->getMediaSource();
+		if ($mediaSource === null) {
+			// No attachment, just send XML for entry
+			return $xmlData;
+		} else {
+			return new Zend_Gdata_MediaMimeStream($xmlData,
+			$mediaSource->getFilename(), $mediaSource->getContentType());
+		}
+	}
 
-    /**
-     * Return the MediaSource object representing the file attached to this
-     * MediaEntry.
-     *
-     * @return Zend_Gdata_App_MediaSource The attached MediaSource/file
-     */
-    public function getMediaSource()
-    {
-        return $this->_mediaSource;
-    }
+	/**
+	 * Return the MediaSource object representing the file attached to this
+	 * MediaEntry.
+	 *
+	 * @return Zend_Gdata_App_MediaSource The attached MediaSource/file
+	 */
+	public function getMediaSource()
+	{
+		return $this->_mediaSource;
+	}
 
-    /**
-     * Set the MediaSource object (file) for this MediaEntry
-     *
-     * @param Zend_Gdata_App_MediaSource $value The attached MediaSource/file
-     * @return Zend_Gdata_App_MediaEntry Provides a fluent interface
-     */
-    public function setMediaSource($value)
-    {
-        if ($value instanceof Zend_Gdata_App_MediaSource) {
-            $this->_mediaSource = $value;
-        } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
+	/**
+	 * Set the MediaSource object (file) for this MediaEntry
+	 *
+	 * @param Zend_Gdata_App_MediaSource $value The attached MediaSource/file
+	 * @return Zend_Gdata_App_MediaEntry Provides a fluent interface
+	 */
+	public function setMediaSource($value)
+	{
+		if ($value instanceof Zend_Gdata_App_MediaSource) {
+			$this->_mediaSource = $value;
+		} else {
+			require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+			throw new Zend_Gdata_App_InvalidArgumentException(
                     'You must specify the media data as a class that conforms to Zend_Gdata_App_MediaSource.');
-        }
-        return $this;
-    }
+		}
+		return $this;
+	}
 
 }

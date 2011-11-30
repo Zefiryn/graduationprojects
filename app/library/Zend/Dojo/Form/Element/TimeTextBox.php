@@ -34,119 +34,119 @@ require_once 'Zend/Dojo/Form/Element/DateTextBox.php';
  */
 class Zend_Dojo_Form_Element_TimeTextBox extends Zend_Dojo_Form_Element_DateTextBox
 {
-    /**
-     * Use TimeTextBox dijit view helper
-     * @var string
-     */
-    public $helper = 'TimeTextBox';
+	/**
+	 * Use TimeTextBox dijit view helper
+	 * @var string
+	 */
+	public $helper = 'TimeTextBox';
 
-    /**
-     * Validate ISO 8601 time format
-     *
-     * @param  string $format
-     * @return true
-     * @throws Zend_Form_Element_Exception
-     */
-    protected function _validateIso8601($format)
-    {
-        if (!preg_match('/^T\d{2}:\d{2}:\d{2}$/', $format)) {
-            require_once 'Zend/Form/Element/Exception.php';
-            throw new Zend_Form_Element_Exception(sprintf('Invalid format "%s" provided; must match T:00:00:00 format', $format));
-        }
-        return true;
-    }
+	/**
+	 * Validate ISO 8601 time format
+	 *
+	 * @param  string $format
+	 * @return true
+	 * @throws Zend_Form_Element_Exception
+	 */
+	protected function _validateIso8601($format)
+	{
+		if (!preg_match('/^T\d{2}:\d{2}:\d{2}$/', $format)) {
+			require_once 'Zend/Form/Element/Exception.php';
+			throw new Zend_Form_Element_Exception(sprintf('Invalid format "%s" provided; must match T:00:00:00 format', $format));
+		}
+		return true;
+	}
 
-    /**
-     * Set time format pattern
-     *
-     * @param  string $pattern
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setTimePattern($pattern)
-    {
-        $this->setConstraint('timePattern', (string) $pattern);
-        return $this;
-    }
+	/**
+	 * Set time format pattern
+	 *
+	 * @param  string $pattern
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setTimePattern($pattern)
+	{
+		$this->setConstraint('timePattern', (string) $pattern);
+		return $this;
+	}
 
-    /**
-     * Retrieve time format pattern
-     *
-     * @return string|null
-     */
-    public function getTimePattern()
-    {
-        return $this->getConstraint('timePattern');
-    }
+	/**
+	 * Retrieve time format pattern
+	 *
+	 * @return string|null
+	 */
+	public function getTimePattern()
+	{
+		return $this->getConstraint('timePattern');
+	}
 
-    /**
-     * Set clickableIncrement
-     *
-     * @param  string $format
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setClickableIncrement($format)
-    {
-        $format = (string) $format;
-        $this->_validateIso8601($format);
-        $this->setConstraint('clickableIncrement', $format);
-        return $this;
-    }
+	/**
+	 * Set clickableIncrement
+	 *
+	 * @param  string $format
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setClickableIncrement($format)
+	{
+		$format = (string) $format;
+		$this->_validateIso8601($format);
+		$this->setConstraint('clickableIncrement', $format);
+		return $this;
+	}
 
-    /**
-     * Retrieve clickableIncrement
-     *
-     * @return string|null
-     */
-    public function getClickableIncrement()
-    {
-        return $this->getConstraint('clickableIncrement');
-    }
+	/**
+	 * Retrieve clickableIncrement
+	 *
+	 * @return string|null
+	 */
+	public function getClickableIncrement()
+	{
+		return $this->getConstraint('clickableIncrement');
+	}
 
-    /**
-     * Set visibleIncrement
-     *
-     * @param  string $format
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setVisibleIncrement($format)
-    {
-        $format = (string) $format;
-        $this->_validateIso8601($format);
-        $this->setConstraint('visibleIncrement', $format);
-        return $this;
-    }
+	/**
+	 * Set visibleIncrement
+	 *
+	 * @param  string $format
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setVisibleIncrement($format)
+	{
+		$format = (string) $format;
+		$this->_validateIso8601($format);
+		$this->setConstraint('visibleIncrement', $format);
+		return $this;
+	}
 
-    /**
-     * Retrieve visibleIncrement
-     *
-     * @return string|null
-     */
-    public function getVisibleIncrement()
-    {
-        return $this->getConstraint('visibleIncrement');
-    }
+	/**
+	 * Retrieve visibleIncrement
+	 *
+	 * @return string|null
+	 */
+	public function getVisibleIncrement()
+	{
+		return $this->getConstraint('visibleIncrement');
+	}
 
-    /**
-     * Set visibleRange
-     *
-     * @param  string $format
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setVisibleRange($format)
-    {
-        $format = (string) $format;
-        $this->_validateIso8601($format);
-        $this->setConstraint('visibleRange', $format);
-        return $this;
-    }
+	/**
+	 * Set visibleRange
+	 *
+	 * @param  string $format
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setVisibleRange($format)
+	{
+		$format = (string) $format;
+		$this->_validateIso8601($format);
+		$this->setConstraint('visibleRange', $format);
+		return $this;
+	}
 
-    /**
-     * Retrieve visibleRange
-     *
-     * @return string|null
-     */
-    public function getVisibleRange()
-    {
-        return $this->getConstraint('visibleRange');
-    }
+	/**
+	 * Retrieve visibleRange
+	 *
+	 * @return string|null
+	 */
+	public function getVisibleRange()
+	{
+		return $this->getConstraint('visibleRange');
+	}
 }

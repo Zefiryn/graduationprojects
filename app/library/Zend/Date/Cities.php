@@ -33,14 +33,14 @@
  */
 class Zend_Date_Cities
 {
-    /**
-     * Array Collection of known cities
-     *
-     * The array contains 'latitude' and 'longitude' for every known city
-     *
-     * @var Array
-     */
-    public static $cities = array(
+	/**
+	 * Array Collection of known cities
+	 *
+	 * The array contains 'latitude' and 'longitude' for every known city
+	 *
+	 * @var Array
+	 */
+	public static $cities = array(
         'Abidjan'       => array('latitude' =>    5.3411111, 'longitude' =>   -4.0280556),
         'Abu Dhabi'     => array('latitude' =>   24.4666667, 'longitude' =>   54.3666667),
         'Abuja'       => array('latitude' =>    9.1758333, 'longitude' =>    7.1808333),
@@ -285,38 +285,38 @@ class Zend_Date_Cities
         'Yerevan'     => array('latitude' =>   40.1811111, 'longitude' =>   44.5136111),
         'Zürich'      => array('latitude' =>   47.3666667, 'longitude' =>    8.55),
         'Zagreb'      => array('latitude' =>   45.8,       'longitude' =>   16)
-    );
+	);
 
-    /**
-     * Returns the location from the selected city
-     *
-     * @param  string $city    City to get location for
-     * @param  string $horizon Horizon to use :
-     *                         default: effective
-     *                         others are civil, nautic, astronomic
-     * @return array
-     * @throws Zend_Date_Exception When city is unknown
-     */
-    public static function City($city, $horizon = false)
-    {
-        foreach (self::$cities as $key => $value) {
-            if (strtolower($key) === strtolower($city)) {
-                $return            = $value;
-                $return['horizon'] = $horizon;
-                return $return;
-            }
-        }
-        require_once 'Zend/Date/Exception.php';
-        throw new Zend_Date_Exception('unknown city');
-    }
+	/**
+	 * Returns the location from the selected city
+	 *
+	 * @param  string $city    City to get location for
+	 * @param  string $horizon Horizon to use :
+	 *                         default: effective
+	 *                         others are civil, nautic, astronomic
+	 * @return array
+	 * @throws Zend_Date_Exception When city is unknown
+	 */
+	public static function City($city, $horizon = false)
+	{
+		foreach (self::$cities as $key => $value) {
+			if (strtolower($key) === strtolower($city)) {
+				$return            = $value;
+				$return['horizon'] = $horizon;
+				return $return;
+			}
+		}
+		require_once 'Zend/Date/Exception.php';
+		throw new Zend_Date_Exception('unknown city');
+	}
 
-    /**
-     * Return a list with all known cities
-     *
-     * @return array
-     */
-    public static function getCityList()
-    {
-        return array_keys(self::$cities);
-    }
+	/**
+	 * Return a list with all known cities
+	 *
+	 * @return array
+	 */
+	public static function getCityList()
+	{
+		return array_keys(self::$cities);
+	}
 }

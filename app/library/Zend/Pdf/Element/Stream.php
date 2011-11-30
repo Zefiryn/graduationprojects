@@ -37,94 +37,94 @@ require_once 'Zend/Pdf/Element.php';
  */
 class Zend_Pdf_Element_Stream extends Zend_Pdf_Element
 {
-    /**
-     * Object value
-     *
-     * @var Zend_Memory_Container
-     */
-    public $value;
+	/**
+	 * Object value
+	 *
+	 * @var Zend_Memory_Container
+	 */
+	public $value;
 
 
-    /**
-     * Object constructor
-     *
-     * @param string $val
-     */
-    public function __construct($val)
-    {
-        $this->value = Zend_Pdf::getMemoryManager()->create($val);
-    }
+	/**
+	 * Object constructor
+	 *
+	 * @param string $val
+	 */
+	public function __construct($val)
+	{
+		$this->value = Zend_Pdf::getMemoryManager()->create($val);
+	}
 
 
-    /**
-     * Return type of the element.
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return Zend_Pdf_Element::TYPE_STREAM;
-    }
+	/**
+	 * Return type of the element.
+	 *
+	 * @return integer
+	 */
+	public function getType()
+	{
+		return Zend_Pdf_Element::TYPE_STREAM;
+	}
 
 
-    /**
-     * Stream length.
-     * (Method is used to avoid string copying, which may occurs in some cases)
-     *
-     * @return integer
-     */
-    public function length()
-    {
-        return strlen($this->value->getRef());
-    }
+	/**
+	 * Stream length.
+	 * (Method is used to avoid string copying, which may occurs in some cases)
+	 *
+	 * @return integer
+	 */
+	public function length()
+	{
+		return strlen($this->value->getRef());
+	}
 
 
-    /**
-     * Clear stream
-     *
-     */
-    public function clear()
-    {
-        $ref = &$this->value->getRef();
-        $ref = '';
-        $this->value->touch();
-    }
+	/**
+	 * Clear stream
+	 *
+	 */
+	public function clear()
+	{
+		$ref = &$this->value->getRef();
+		$ref = '';
+		$this->value->touch();
+	}
 
 
-    /**
-     * Append value to a stream
-     *
-     * @param mixed $val
-     */
-    public function append($val)
-    {
-        $ref = &$this->value->getRef();
-        $ref .= (string)$val;
-        $this->value->touch();
-    }
+	/**
+	 * Append value to a stream
+	 *
+	 * @param mixed $val
+	 */
+	public function append($val)
+	{
+		$ref = &$this->value->getRef();
+		$ref .= (string)$val;
+		$this->value->touch();
+	}
 
 
-    /**
-     * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
-     *
-     * @param Zend_Pdf_ElementFactory $factory  The factory to attach
-     * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
-     * @param integer $mode  Cloning mode (defines filter for objects cloning)
-     * @returns Zend_Pdf_Element
-     */
-    public function makeClone(Zend_Pdf_ElementFactory $factory, array &$processed, $mode)
-    {
-        return new self($this->value->getRef());
-    }
+	/**
+	 * Detach PDF object from the factory (if applicable), clone it and attach to new factory.
+	 *
+	 * @param Zend_Pdf_ElementFactory $factory  The factory to attach
+	 * @param array &$processed  List of already processed indirect objects, used to avoid objects duplication
+	 * @param integer $mode  Cloning mode (defines filter for objects cloning)
+	 * @returns Zend_Pdf_Element
+	 */
+	public function makeClone(Zend_Pdf_ElementFactory $factory, array &$processed, $mode)
+	{
+		return new self($this->value->getRef());
+	}
 
-    /**
-     * Return object as string
-     *
-     * @param Zend_Pdf_Factory $factory
-     * @return string
-     */
-    public function toString($factory = null)
-    {
-        return "stream\n" . $this->value->getRef() . "\nendstream";
-    }
+	/**
+	 * Return object as string
+	 *
+	 * @param Zend_Pdf_Factory $factory
+	 * @return string
+	 */
+	public function toString($factory = null)
+	{
+		return "stream\n" . $this->value->getRef() . "\nendstream";
+	}
 }

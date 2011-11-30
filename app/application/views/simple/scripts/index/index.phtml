@@ -1,25 +1,35 @@
 <div id="main">
-	<?php foreach($this->news_list as $id => $news):?>
-  	<div class="news"> 
-  		<!-- NEWS PHOTO -->
-	  	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
-	  		<img src="/assets/images/<?php echo $news->getImage();?>" alt="zdjecie" width="100%" />
-	  	</a>
-	    
-	    <h2>
-	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"><?php echo $news->getDetail('news_title', $this->lang);?></a>
-	    </h2>
-	    
-	    <p class="data"><?php echo date('d.m.Y H:i', $news->added);?></p> 
-	    
-	    <p><?php echo $news->getDetail('news_text', $this->lang);?></p>
-	    
-	    <p>
-	    	<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>" class="wiecej">
-	    		<img src="/img/simple/bullet.png" />
-	    	</a>
-	    </p>
+
+<?php foreach($this->news_list as $id => $news):?>
+	<div class="news">
+		<!-- NEWS PHOTO -->
+		<a
+			href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
+			<img src="/assets/images/<?php echo $news->getImage();?>"
+			alt="zdjecie" width="100%" />
+		</a>
+
+		<h2>
+			<a
+				href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"><?php echo $news->getDetail('news_title', $this->lang);?>
+			</a>
+		</h2>
+
+		<p class="data">
+		<?php echo date('d.m.Y H:i', $news->added);?></p>
+
+		<p>
+		<?php echo $news->getDetail('news_text', $this->lang);?></p>
+
+		<p>
+			<a
+				href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>"
+				class="wiecej"> <img src="/img/simple/bullet.png" />
+			</a>
+		</p>
 	</div>
+	
+	
 	 	<?php if ($id % 4 == 0 or ($id+1) == count($this->news_list)): ?>
 	 	<!-- every 4 news -->
 		<div class="clear" />

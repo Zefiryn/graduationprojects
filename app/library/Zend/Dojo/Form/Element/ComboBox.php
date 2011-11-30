@@ -34,153 +34,153 @@ require_once 'Zend/Dojo/Form/Element/DijitMulti.php';
  */
 class Zend_Dojo_Form_Element_ComboBox extends Zend_Dojo_Form_Element_DijitMulti
 {
-    /**
-     * Use ComboBox dijit view helper
-     * @var string
-     */
-    public $helper = 'ComboBox';
+	/**
+	 * Use ComboBox dijit view helper
+	 * @var string
+	 */
+	public $helper = 'ComboBox';
 
-    /**
-     * Flag: autoregister inArray validator?
-     * @var bool
-     */
-    protected $_registerInArrayValidator = false;
+	/**
+	 * Flag: autoregister inArray validator?
+	 * @var bool
+	 */
+	protected $_registerInArrayValidator = false;
 
-    /**
-     * Get datastore information
-     *
-     * @return array
-     */
-    public function getStoreInfo()
-    {
-        if (!$this->hasDijitParam('store')) {
-            $this->dijitParams['store'] = array();
-        }
-        return $this->dijitParams['store'];
-    }
+	/**
+	 * Get datastore information
+	 *
+	 * @return array
+	 */
+	public function getStoreInfo()
+	{
+		if (!$this->hasDijitParam('store')) {
+			$this->dijitParams['store'] = array();
+		}
+		return $this->dijitParams['store'];
+	}
 
-    /**
-     * Set datastore identifier
-     *
-     * @param  string $identifier
-     * @return Zend_Dojo_Form_Element_ComboBox
-     */
-    public function setStoreId($identifier)
-    {
-        $store = $this->getStoreInfo();
-        $store['store'] = (string) $identifier;
-        $this->setDijitParam('store', $store);
-        return $this;
-    }
+	/**
+	 * Set datastore identifier
+	 *
+	 * @param  string $identifier
+	 * @return Zend_Dojo_Form_Element_ComboBox
+	 */
+	public function setStoreId($identifier)
+	{
+		$store = $this->getStoreInfo();
+		$store['store'] = (string) $identifier;
+		$this->setDijitParam('store', $store);
+		return $this;
+	}
 
-    /**
-     * Get datastore identifier
-     *
-     * @return string|null
-     */
-    public function getStoreId()
-    {
-        $store = $this->getStoreInfo();
-        if (array_key_exists('store', $store)) {
-            return $store['store'];
-        }
-        return null;
-    }
+	/**
+	 * Get datastore identifier
+	 *
+	 * @return string|null
+	 */
+	public function getStoreId()
+	{
+		$store = $this->getStoreInfo();
+		if (array_key_exists('store', $store)) {
+			return $store['store'];
+		}
+		return null;
+	}
 
-    /**
-     * Set datastore dijit type
-     *
-     * @param  string $dojoType
-     * @return Zend_Dojo_Form_Element_ComboBox
-     */
-    public function setStoreType($dojoType)
-    {
-        $store = $this->getStoreInfo();
-        $store['type'] = (string) $dojoType;
-        $this->setDijitParam('store', $store);
-        return $this;
-    }
+	/**
+	 * Set datastore dijit type
+	 *
+	 * @param  string $dojoType
+	 * @return Zend_Dojo_Form_Element_ComboBox
+	 */
+	public function setStoreType($dojoType)
+	{
+		$store = $this->getStoreInfo();
+		$store['type'] = (string) $dojoType;
+		$this->setDijitParam('store', $store);
+		return $this;
+	}
 
-    /**
-     * Get datastore dijit type
-     *
-     * @return string|null
-     */
-    public function getStoreType()
-    {
-        $store = $this->getStoreInfo();
-        if (array_key_exists('type', $store)) {
-            return $store['type'];
-        }
-        return null;
-    }
+	/**
+	 * Get datastore dijit type
+	 *
+	 * @return string|null
+	 */
+	public function getStoreType()
+	{
+		$store = $this->getStoreInfo();
+		if (array_key_exists('type', $store)) {
+			return $store['type'];
+		}
+		return null;
+	}
 
-    /**
-     * Set datastore parameters
-     *
-     * @param  array $params
-     * @return Zend_Dojo_Form_Element_ComboBox
-     */
-    public function setStoreParams(array $params)
-    {
-        $store = $this->getStoreInfo();
-        $store['params'] = $params;
-        $this->setDijitParam('store', $store);
-        return $this;
-    }
+	/**
+	 * Set datastore parameters
+	 *
+	 * @param  array $params
+	 * @return Zend_Dojo_Form_Element_ComboBox
+	 */
+	public function setStoreParams(array $params)
+	{
+		$store = $this->getStoreInfo();
+		$store['params'] = $params;
+		$this->setDijitParam('store', $store);
+		return $this;
+	}
 
-    /**
-     * Get datastore params
-     *
-     * @return array
-     */
-    public function getStoreParams()
-    {
-        $store = $this->getStoreInfo();
-        if (array_key_exists('params', $store)) {
-            return $store['params'];
-        }
-        return array();
-    }
+	/**
+	 * Get datastore params
+	 *
+	 * @return array
+	 */
+	public function getStoreParams()
+	{
+		$store = $this->getStoreInfo();
+		if (array_key_exists('params', $store)) {
+			return $store['params'];
+		}
+		return array();
+	}
 
-    /**
-     * Set autocomplete flag
-     *
-     * @param  bool $flag
-     * @return Zend_Dojo_Form_Element_ComboBox
-     */
-    public function setAutocomplete($flag)
-    {
-        $this->setDijitParam('autocomplete', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set autocomplete flag
+	 *
+	 * @param  bool $flag
+	 * @return Zend_Dojo_Form_Element_ComboBox
+	 */
+	public function setAutocomplete($flag)
+	{
+		$this->setDijitParam('autocomplete', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Get autocomplete flag
-     *
-     * @return bool
-     */
-    public function getAutocomplete()
-    {
-        if (!$this->hasDijitParam('autocomplete')) {
-            return false;
-        }
-        return $this->getDijitParam('autocomplete');
-    }
+	/**
+	 * Get autocomplete flag
+	 *
+	 * @return bool
+	 */
+	public function getAutocomplete()
+	{
+		if (!$this->hasDijitParam('autocomplete')) {
+			return false;
+		}
+		return $this->getDijitParam('autocomplete');
+	}
 
-    /**
-     * Is the value valid?
-     *
-     * @param  string $value
-     * @param  mixed $context
-     * @return bool
-     */
-    public function isValid($value, $context = null)
-    {
-        $storeInfo = $this->getStoreInfo();
-        if (!empty($storeInfo)) {
-            $this->setRegisterInArrayValidator(false);
-        }
-        return parent::isValid($value, $context);
-    }
+	/**
+	 * Is the value valid?
+	 *
+	 * @param  string $value
+	 * @param  mixed $context
+	 * @return bool
+	 */
+	public function isValid($value, $context = null)
+	{
+		$storeInfo = $this->getStoreInfo();
+		if (!empty($storeInfo)) {
+			$this->setRegisterInArrayValidator(false);
+		}
+		return parent::isValid($value, $context);
+	}
 }

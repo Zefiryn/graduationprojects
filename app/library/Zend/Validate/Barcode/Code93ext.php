@@ -32,27 +32,27 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  */
 class Zend_Validate_Barcode_Code93ext extends Zend_Validate_Barcode_AdapterAbstract
 {
-    /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = -1;
+	/**
+	 * Allowed barcode lengths
+	 * @var integer
+	 */
+	protected $_length = -1;
 
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = 128;
+	/**
+	 * Allowed barcode characters
+	 * @var string
+	 */
+	protected $_characters = 128;
 
-    /**
-     * Constructor
-     *
-     * Sets check flag to false.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setCheck(false);
-    }
+	/**
+	 * Constructor
+	 *
+	 * Sets check flag to false.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->setCheck(false);
+	}
 }

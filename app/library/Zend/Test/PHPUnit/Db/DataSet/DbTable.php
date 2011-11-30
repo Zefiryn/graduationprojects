@@ -42,84 +42,84 @@ require_once "Zend/Db/Table/Abstract.php";
  */
 class Zend_Test_PHPUnit_Db_DataSet_DbTable extends PHPUnit_Extensions_Database_DataSet_QueryTable
 {
-    /**
-     * Zend_Db_Table object
-     *
-     * @var Zend_Db_Table_Abstract
-     */
-    protected $_table = null;
+	/**
+	 * Zend_Db_Table object
+	 *
+	 * @var Zend_Db_Table_Abstract
+	 */
+	protected $_table = null;
 
-    /**
-     * @var array
-     */
-    protected $_columns = array();
+	/**
+	 * @var array
+	 */
+	protected $_columns = array();
 
-    /**
-     * @var string
-     */
-    protected $_where = null;
+	/**
+	 * @var string
+	 */
+	protected $_where = null;
 
-    /**
-     * @var string
-     */
-    protected $_orderBy = null;
+	/**
+	 * @var string
+	 */
+	protected $_orderBy = null;
 
-    /**
-     * @var string
-     */
-    protected $_count = null;
+	/**
+	 * @var string
+	 */
+	protected $_count = null;
 
-    /**
-     * @var int
-     */
-    protected $_offset = null;
+	/**
+	 * @var int
+	 */
+	protected $_offset = null;
 
-    /**
-     * Construct Dataset Table from Zend_Db_Table object
-     *
-     * @param Zend_Db_Table_Abstract        $table
-     * @param string|Zend_Db_Select|null    $where
-     * @param string|null                   $order
-     * @param int                           $count
-     * @param int                           $offset
-     */
-    public function __construct(Zend_Db_Table_Abstract $table, $where=null, $order=null, $count=null, $offset=null)
-    {
-        $this->tableName = $table->info('name');
-        $this->_columns = $table->info('cols');
+	/**
+	 * Construct Dataset Table from Zend_Db_Table object
+	 *
+	 * @param Zend_Db_Table_Abstract        $table
+	 * @param string|Zend_Db_Select|null    $where
+	 * @param string|null                   $order
+	 * @param int                           $count
+	 * @param int                           $offset
+	 */
+	public function __construct(Zend_Db_Table_Abstract $table, $where=null, $order=null, $count=null, $offset=null)
+	{
+		$this->tableName = $table->info('name');
+		$this->_columns = $table->info('cols');
 
-        $this->_table = $table;
-        $this->_where = $where;
-        $this->_order = $order;
-        $this->_count = $count;
-        $this->_offset = $offset;
-    }
+		$this->_table = $table;
+		$this->_where = $where;
+		$this->_order = $order;
+		$this->_count = $count;
+		$this->_offset = $offset;
+	}
 
-    /**
-     * Lazy load data via table fetchAll() method.
-     *
-     * @return void
-     */
-    protected function loadData()
-    {
-        if ($this->data === null) {
-            $this->data = $this->_table->fetchAll(
-                $this->_where, $this->_order, $this->_count, $this->_offset
-            );
-            if($this->data instanceof Zend_Db_Table_Rowset_Abstract) {
-                $this->data = $this->data->toArray();
-            }
-        }
-    }
+	/**
+	 * Lazy load data via table fetchAll() method.
+	 *
+	 * @return void
+	 */
+	protected function loadData()
+	{
+		if ($this->data === null) {
+			$this->data = $this->_table->fetchAll(
+			$this->_where, $this->_order, $this->_count, $this->_offset
+			);
+			if($this->data instanceof Zend_Db_Table_Rowset_Abstract) {
+				$this->data = $this->data->toArray();
+			}
+		}
+	}
 
-    /**
-     * Create Table Metadata object
-     */
-    protected function createTableMetaData()
-    {
-        if ($this->tableMetaData === NULL) {
-            $this->loadData();
-            $this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData($this->tableName, $this->_columns);
-        }
-    }
+	/**
+	 * Create Table Metadata object
+	 */
+	protected function createTableMetaData()
+	{
+		if ($this->tableMetaData === NULL) {
+			$this->loadData();
+			$this->tableMetaData = new PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData($this->tableName, $this->_columns);
+		}
+	}
 }

@@ -1,7 +1,11 @@
 <?php echo $this->doctype('HTML5') ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+
 	<?php echo $this->headTitle();?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
@@ -35,10 +39,18 @@
 
 <body>
 	<header id="header" name="<?php echo $this->lang;?>">
-		<?php if ($this->flash):?>
+
+
+	<?php if ($this->flash):?>
 		<div id="flash">
-			<p class="flash <?php echo $this->flash_bg;?>"><?php echo $this->translation($this->flash);?></p>
-      	</div>
+			<p class="flash <?php echo $this->flash_bg;?>">
+
+			<?php echo $this->translation($this->flash);?></p>
+		</div>
+		
+		
+		
+		
       	<?php endif;?>
 	  	<div class="header">
 		    <div class="logo">
@@ -80,6 +92,10 @@
 		<p class="hr"><span>&nbsp;</span></p>
 		
 	</header>
+	
+	
+	
+	
 	
 	<?php if (isset($this->path)):?>
 	<nav class="path">

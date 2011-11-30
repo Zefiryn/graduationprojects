@@ -33,6 +33,6 @@ require_once 'Zend/InfoCard/Cipher/Symmetric/Aes256cbc/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Zend_InfoCard_Cipher_Symmetric_Aes128cbc_Interface
-    extends Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface
+extends Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface
 {
 }

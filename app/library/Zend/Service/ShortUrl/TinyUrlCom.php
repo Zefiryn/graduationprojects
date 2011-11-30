@@ -34,67 +34,67 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
  */
 class Zend_Service_ShortUrl_TinyUrlCom extends Zend_Service_ShortUrl_AbstractShortener
 {
-    /**
-     * Base URI of the service
-     *
-     * @var string
-     */
-    protected $_baseUri = 'http://tinyurl.com';
+	/**
+	 * Base URI of the service
+	 *
+	 * @var string
+	 */
+	protected $_baseUri = 'http://tinyurl.com';
 
-    /**
-     * This function shortens long url
-     *
-     * @param string $url URL to Shorten
-     * @throws Zend_Service_ShortUrl_Exception When URL is not valid
-     * @return string New URL
-     */
-    public function shorten($url)
-    {
-        $this->_validateUri($url);
+	/**
+	 * This function shortens long url
+	 *
+	 * @param string $url URL to Shorten
+	 * @throws Zend_Service_ShortUrl_Exception When URL is not valid
+	 * @return string New URL
+	 */
+	public function shorten($url)
+	{
+		$this->_validateUri($url);
 
-        $serviceUri = 'http://tinyurl.com/api-create.php';
+		$serviceUri = 'http://tinyurl.com/api-create.php';
 
-        $this->getHttpClient()->setUri($serviceUri);
-        $this->getHttpClient()->setParameterGet('url', $url);
+		$this->getHttpClient()->setUri($serviceUri);
+		$this->getHttpClient()->setParameterGet('url', $url);
 
-        $response = $this->getHttpClient()->request();
+		$response = $this->getHttpClient()->request();
 
-        return $response->getBody();
-    }
+		return $response->getBody();
+	}
 
-    /**
-     * Reveals target for short URL
-     *
-     * @param string $shortenedUrl URL to reveal target of
-     * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
-     * @return string
-     */
-    public function unshorten($shortenedUrl)
-    {
-        $this->_validateUri($shortenedUrl);
+	/**
+	 * Reveals target for short URL
+	 *
+	 * @param string $shortenedUrl URL to reveal target of
+	 * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
+	 * @return string
+	 */
+	public function unshorten($shortenedUrl)
+	{
+		$this->_validateUri($shortenedUrl);
 
-        $this->_verifyBaseUri($shortenedUrl);
+		$this->_verifyBaseUri($shortenedUrl);
 
-        //TinyUrl.com does not have an API for that, but we can use preview feature
-        //we need new Zend_Http_Client
-        $this->setHttpClient(new Zend_Http_Client());
+		//TinyUrl.com does not have an API for that, but we can use preview feature
+		//we need new Zend_Http_Client
+		$this->setHttpClient(new Zend_Http_Client());
 
-        $this->getHttpClient()
-             ->setCookie('preview', 1)
-             ->setUri($shortenedUrl);
+		$this->getHttpClient()
+		->setCookie('preview', 1)
+		->setUri($shortenedUrl);
 
-        //get response
-        $response = $this->getHttpClient()->request();
+		//get response
+		$response = $this->getHttpClient()->request();
 
-        require_once 'Zend/Dom/Query.php';
-        $dom = new Zend_Dom_Query($response->getBody());
+		require_once 'Zend/Dom/Query.php';
+		$dom = new Zend_Dom_Query($response->getBody());
 
-        //find the redirect url link
-        $results = $dom->query('a#redirecturl');
+		//find the redirect url link
+		$results = $dom->query('a#redirecturl');
 
-        //get href
-        $originalUrl = $results->current()->getAttribute('href');
+		//get href
+		$originalUrl = $results->current()->getAttribute('href');
 
-        return $originalUrl;
-    }
+		return $originalUrl;
+	}
 }

@@ -33,45 +33,45 @@ require_once 'Zend/Log/Filter/Abstract.php';
  */
 class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
 {
-    /**
-     * @var boolean
-     */
-    protected $_accept = true;
+	/**
+	 * @var boolean
+	 */
+	protected $_accept = true;
 
-    /**
-     * This is a simple boolean filter.
-     *
-     * Call suppress(true) to suppress all log events.
-     * Call suppress(false) to accept all log events.
-     *
-     * @param  boolean  $suppress  Should all log events be suppressed?
-     * @return  void
-     */
-    public function suppress($suppress)
-    {
-        $this->_accept = (! $suppress);
-    }
+	/**
+	 * This is a simple boolean filter.
+	 *
+	 * Call suppress(true) to suppress all log events.
+	 * Call suppress(false) to accept all log events.
+	 *
+	 * @param  boolean  $suppress  Should all log events be suppressed?
+	 * @return  void
+	 */
+	public function suppress($suppress)
+	{
+		$this->_accept = (! $suppress);
+	}
 
-    /**
-     * Returns TRUE to accept the message, FALSE to block it.
-     *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
-     */
-    public function accept($event)
-    {
-        return $this->_accept;
-    }
+	/**
+	 * Returns TRUE to accept the message, FALSE to block it.
+	 *
+	 * @param  array    $event    event data
+	 * @return boolean            accepted?
+	 */
+	public function accept($event)
+	{
+		return $this->_accept;
+	}
 
-    /**
-     * Create a new instance of Zend_Log_Filter_Suppress
-     *
-     * @param  array|Zend_Config $config
-     * @return Zend_Log_Filter_Suppress
-     * @throws Zend_Log_Exception
-     */
-    static public function factory($config)
-    {
-        return new self();
-    }
+	/**
+	 * Create a new instance of Zend_Log_Filter_Suppress
+	 *
+	 * @param  array|Zend_Config $config
+	 * @return Zend_Log_Filter_Suppress
+	 * @throws Zend_Log_Exception
+	 */
+	static public function factory($config)
+	{
+		return new self();
+	}
 }

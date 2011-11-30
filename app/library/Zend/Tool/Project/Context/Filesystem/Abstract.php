@@ -39,127 +39,127 @@ require_once 'Zend/Tool/Project/Context/Interface.php';
 abstract class Zend_Tool_Project_Context_Filesystem_Abstract implements Zend_Tool_Project_Context_Interface
 {
 
-    /**
-     * @var Zend_Tool_Project_Profile_Resource
-     */
-    protected $_resource = null;
+	/**
+	 * @var Zend_Tool_Project_Profile_Resource
+	 */
+	protected $_resource = null;
 
-    /**
-     * @var string
-     */
-    protected $_baseDirectory = null;
+	/**
+	 * @var string
+	 */
+	protected $_baseDirectory = null;
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = null;
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = null;
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Filesystem_Abstract
-     */
-    public function init()
-    {
-        $parentBaseDirectory = $this->_resource->getParentResource()->getContext()->getPath();
-        $this->_baseDirectory = $parentBaseDirectory;
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Filesystem_Abstract
+	 */
+	public function init()
+	{
+		$parentBaseDirectory = $this->_resource->getParentResource()->getContext()->getPath();
+		$this->_baseDirectory = $parentBaseDirectory;
+		return $this;
+	}
 
-    /**
-     * setResource()
-     *
-     * @param Zend_Tool_Project_Profile_Resource $resource
-     * @return Zend_Tool_Project_Context_Filesystem_Abstract
-     */
-    public function setResource(Zend_Tool_Project_Profile_Resource $resource)
-    {
-        $this->_resource = $resource;
-        return $this;
-    }
+	/**
+	 * setResource()
+	 *
+	 * @param Zend_Tool_Project_Profile_Resource $resource
+	 * @return Zend_Tool_Project_Context_Filesystem_Abstract
+	 */
+	public function setResource(Zend_Tool_Project_Profile_Resource $resource)
+	{
+		$this->_resource = $resource;
+		return $this;
+	}
 
-    /**
-     * setBaseDirectory()
-     *
-     * @param string $baseDirectory
-     * @return Zend_Tool_Project_Context_Filesystem_Abstract
-     */
-    public function setBaseDirectory($baseDirectory)
-    {
-        $this->_baseDirectory = rtrim(str_replace('\\', '/', $baseDirectory), '/');
-        return $this;
-    }
+	/**
+	 * setBaseDirectory()
+	 *
+	 * @param string $baseDirectory
+	 * @return Zend_Tool_Project_Context_Filesystem_Abstract
+	 */
+	public function setBaseDirectory($baseDirectory)
+	{
+		$this->_baseDirectory = rtrim(str_replace('\\', '/', $baseDirectory), '/');
+		return $this;
+	}
 
-    /**
-     * getBaseDirectory()
-     *
-     * @return string
-     */
-    public function getBaseDirectory()
-    {
-        return $this->_baseDirectory;
-    }
+	/**
+	 * getBaseDirectory()
+	 *
+	 * @return string
+	 */
+	public function getBaseDirectory()
+	{
+		return $this->_baseDirectory;
+	}
 
-    /**
-     * setFilesystemName()
-     *
-     * @param string $filesystemName
-     * @return Zend_Tool_Project_Context_Filesystem_Abstract
-     */
-    public function setFilesystemName($filesystemName)
-    {
-        $this->_filesystemName = $filesystemName;
-        return $this;
-    }
+	/**
+	 * setFilesystemName()
+	 *
+	 * @param string $filesystemName
+	 * @return Zend_Tool_Project_Context_Filesystem_Abstract
+	 */
+	public function setFilesystemName($filesystemName)
+	{
+		$this->_filesystemName = $filesystemName;
+		return $this;
+	}
 
-    /**
-     * getFilesystemName()
-     *
-     * @return string
-     */
-    public function getFilesystemName()
-    {
-        return $this->_filesystemName;
-    }
+	/**
+	 * getFilesystemName()
+	 *
+	 * @return string
+	 */
+	public function getFilesystemName()
+	{
+		return $this->_filesystemName;
+	}
 
-    /**
-     * getPath()
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        $path = $this->_baseDirectory;
-        if ($this->_filesystemName) {
-            $path .= '/' . $this->_filesystemName;
-        }
-        return $path;
-    }
+	/**
+	 * getPath()
+	 *
+	 * @return string
+	 */
+	public function getPath()
+	{
+		$path = $this->_baseDirectory;
+		if ($this->_filesystemName) {
+			$path .= '/' . $this->_filesystemName;
+		}
+		return $path;
+	}
 
-    /**
-     * exists()
-     *
-     * @return bool
-     */
-    public function exists()
-    {
-        return file_exists($this->getPath());
-    }
+	/**
+	 * exists()
+	 *
+	 * @return bool
+	 */
+	public function exists()
+	{
+		return file_exists($this->getPath());
+	}
 
-    /**
-     * create()
-     *
-     * Create this resource/context
-     *
-     */
-    abstract public function create();
+	/**
+	 * create()
+	 *
+	 * Create this resource/context
+	 *
+	 */
+	abstract public function create();
 
-    /**
-     * delete()
-     *
-     * Delete this resouce/context
-     *
-     */
-    abstract public function delete();
+	/**
+	 * delete()
+	 *
+	 * Delete this resouce/context
+	 *
+	 */
+	abstract public function delete();
 
 }

@@ -39,10 +39,10 @@ require_once 'Zend/Gdata/Gbase/Feed.php';
  */
 class Zend_Gdata_Gbase_SnippetFeed extends Zend_Gdata_Feed
 {
-    /**
-     * The classname for individual snippet feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_Gbase_SnippetEntry';
+	/**
+	 * The classname for individual snippet feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Gbase_SnippetEntry';
 }

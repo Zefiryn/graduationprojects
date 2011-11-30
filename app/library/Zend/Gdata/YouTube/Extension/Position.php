@@ -38,53 +38,53 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_YouTube_Extension_Position extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'position';
-    protected $_rootNamespace = 'yt';
+	protected $_rootElement = 'position';
+	protected $_rootNamespace = 'yt';
 
-    /**
-     * Constructs a new Zend_Gdata_YouTube_Extension_Position object.
-     *
-     * @param string $value (optional) The 1-based position in the playlist
-     */
-    public function __construct($value = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct();
-        $this->_text = $value;
-    }
+	/**
+	 * Constructs a new Zend_Gdata_YouTube_Extension_Position object.
+	 *
+	 * @param string $value (optional) The 1-based position in the playlist
+	 */
+	public function __construct($value = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct();
+		$this->_text = $value;
+	}
 
-    /**
-     * Get the value for the position in the playlist
-     *
-     * @return int The 1-based position in the playlist
-     */
-    public function getValue()
-    {
-        return $this->_text;
-    }
+	/**
+	 * Get the value for the position in the playlist
+	 *
+	 * @return int The 1-based position in the playlist
+	 */
+	public function getValue()
+	{
+		return $this->_text;
+	}
 
-    /**
-     * Set the value for the position in the playlist
-     *
-     * @param int $value The 1-based position in the playlist
-     * @return Zend_Gdata_Extension_Visibility The element being modified
-     */
-    public function setValue($value)
-    {
-        $this->_text = $value;
-        return $this;
-    }
+	/**
+	 * Set the value for the position in the playlist
+	 *
+	 * @param int $value The 1-based position in the playlist
+	 * @return Zend_Gdata_Extension_Visibility The element being modified
+	 */
+	public function setValue($value)
+	{
+		$this->_text = $value;
+		return $this;
+	}
 
-    /**
-     * Magic toString method allows using this directly via echo
-     * Works best in PHP >= 4.2.0
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getValue();
-    }
+	/**
+	 * Magic toString method allows using this directly via echo
+	 * Works best in PHP >= 4.2.0
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getValue();
+	}
 
 }
 

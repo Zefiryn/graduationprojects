@@ -1,15 +1,23 @@
-<?php $form = $this->element; 
-	$appSettings = Zend_Registry::get('appSettings');
+<?php $form = $this->element;
+$appSettings = Zend_Registry::get('appSettings');
 ?>
 
 <form action="<?php echo $this->escape($form->getAction()); ?>"
-      method="<?php echo $this->escape($form->getMethod()); ?>"
-      enctype="<?php echo $form->getEnctype(); ?>"
-      class="contact" id="applicationForm">
+	method="<?php echo $this->escape($form->getMethod()); ?>"
+	enctype="<?php echo $form->getEnctype(); ?>" class="contact"
+	id="applicationForm">
+
+
 	<?php if ($form->csrf->hasErrors()):?>
-		<div id="error-csrf" class="error-div">
-			<p class="error"><?php echo $this->translate('csrf_error')?></p>
-		</div>
+	<div id="error-csrf" class="error-div">
+		<p class="error">
+			
+		<?php echo $this->translate('csrf_error')?></p>
+	</div>
+	
+	
+	
+	
 	<?php endif;?>
 	<?php echo $form->csrf->renderViewHelper(); ?>
 	<?php echo $form->application_id; ?>  

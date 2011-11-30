@@ -34,45 +34,45 @@ require_once 'Zend/Service/DeveloperGarden/Request/VoiceButler/VoiceButlerAbstra
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_VoiceButler_TearDownCall
-    extends Zend_Service_DeveloperGarden_Request_VoiceButler_VoiceButlerAbstract
+extends Zend_Service_DeveloperGarden_Request_VoiceButler_VoiceButlerAbstract
 {
-    /**
-     * the session id
-     *
-     * @var string
-     */
-    public $sessionId = null;
+	/**
+	 * the session id
+	 *
+	 * @var string
+	 */
+	public $sessionId = null;
 
-    /**
-     * constructor give them the environment and the sessionId
-     *
-     * @param integer $environment
-     * @param string $sessionId
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
-     */
-    public function __construct($environment, $sessionId)
-    {
-        parent::__construct($environment);
-        $this->setSessionId($sessionId);
-    }
+	/**
+	 * constructor give them the environment and the sessionId
+	 *
+	 * @param integer $environment
+	 * @param string $sessionId
+	 * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+	 */
+	public function __construct($environment, $sessionId)
+	{
+		parent::__construct($environment);
+		$this->setSessionId($sessionId);
+	}
 
-    /**
-     * @return string
-     */
-    public function getSessionId()
-    {
-        return $this->sessionId;
-    }
+	/**
+	 * @return string
+	 */
+	public function getSessionId()
+	{
+		return $this->sessionId;
+	}
 
-    /**
-     * sets new sessionId
-     *
-     * @param string $sessionId
-     * @return Zend_Service_DeveloperGarden_Request_VoiceButler_TearDownCall
-     */
-    public function setSessionId($sessionId)
-    {
-        $this->sessionId = $sessionId;
-        return $this;
-    }
+	/**
+	 * sets new sessionId
+	 *
+	 * @param string $sessionId
+	 * @return Zend_Service_DeveloperGarden_Request_VoiceButler_TearDownCall
+	 */
+	public function setSessionId($sessionId)
+	{
+		$this->sessionId = $sessionId;
+		return $this;
+	}
 }

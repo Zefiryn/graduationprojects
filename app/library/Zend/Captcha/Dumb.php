@@ -33,20 +33,20 @@ require_once 'Zend/Captcha/Word.php';
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: Dumb.php 23775 2011-03-01 17:25:24Z ralph $
-*/
+ */
 class Zend_Captcha_Dumb extends Zend_Captcha_Word
 {
-    /**
-     * Render the captcha
-     *
-     * @param  Zend_View_Interface $view
-     * @param  mixed $element
-     * @return string
-     */
-    public function render(Zend_View_Interface $view = null, $element = null)
-    {
-        return 'Please type this word backwards: <b>'
-             . strrev($this->getWord())
-             . '</b>';
-    }
+	/**
+	 * Render the captcha
+	 *
+	 * @param  Zend_View_Interface $view
+	 * @param  mixed $element
+	 * @return string
+	 */
+	public function render(Zend_View_Interface $view = null, $element = null)
+	{
+		return 'Please type this word backwards: <b>'
+		. strrev($this->getWord())
+		. '</b>';
+	}
 }

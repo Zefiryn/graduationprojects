@@ -1,15 +1,22 @@
 <div id="main">
 	<h1>
-		<?php echo $this->translate('users_header');?>
-		<?php if ($this->user->_role == 'admin'):?>
-		<a href="<?php echo $this->baseUrl('/users/new');?>">
-			<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block"
-				alt="<?php echo $this->translate('add_new_user');?>" 
-				title="<?php echo $this->translate('add_new_user');?>" />
+
+	<?php echo $this->translate('users_header');?>
+
+	<?php if ($this->user->_role == 'admin'):?>
+		<a href="<?php echo $this->baseUrl('/users/new');?>"> <img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('add_new_user');?>"
+			title="<?php echo $this->translate('add_new_user');?>" />
 		</a>
+		
+		
 		<?php endif;?>
 	</h1>
 	<p class="clear">&nbsp;</p>
+	
+	
 	<?php foreach ($this->users as $role => $groupedUsers):?>
 		<h3><?php echo $this->translate($role.'s');?></h3>
 		<?php foreach($groupedUsers as $user):?>

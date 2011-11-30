@@ -39,41 +39,41 @@ require_once 'Zend/InfoCard/Adapter/Interface.php';
  */
 class Zend_InfoCard_Adapter_Default implements Zend_InfoCard_Adapter_Interface
 {
-    /**
-     * Store the assertion (pass-thru does nothing)
-     *
-     * @param string $assertionURI The assertion type URI
-     * @param string $assertionID The specific assertion ID
-     * @param array $conditions An array of claims to store associated with the assertion
-     * @return bool Always returns true (would return false on store failure)
-     */
-    public function storeAssertion($assertionURI, $assertionID, $conditions)
-    {
-        return true;
-    }
+	/**
+	 * Store the assertion (pass-thru does nothing)
+	 *
+	 * @param string $assertionURI The assertion type URI
+	 * @param string $assertionID The specific assertion ID
+	 * @param array $conditions An array of claims to store associated with the assertion
+	 * @return bool Always returns true (would return false on store failure)
+	 */
+	public function storeAssertion($assertionURI, $assertionID, $conditions)
+	{
+		return true;
+	}
 
-    /**
-     * Retrieve an assertion (pass-thru does nothing)
-     *
-     * @param string $assertionURI The assertion type URI
-     * @param string $assertionID The assertion ID to retrieve
-     * @return mixed False if the assertion ID was not found for that URI, or an array of
-     *               conditions associated with that assertion if found (always returns false)
-     */
-    public function retrieveAssertion($assertionURI, $assertionID)
-    {
-        return false;
-    }
+	/**
+	 * Retrieve an assertion (pass-thru does nothing)
+	 *
+	 * @param string $assertionURI The assertion type URI
+	 * @param string $assertionID The assertion ID to retrieve
+	 * @return mixed False if the assertion ID was not found for that URI, or an array of
+	 *               conditions associated with that assertion if found (always returns false)
+	 */
+	public function retrieveAssertion($assertionURI, $assertionID)
+	{
+		return false;
+	}
 
-    /**
-     * Remove an assertion (pass-thru does nothing)
-     *
-     * @param string $assertionURI The assertion type URI
-     * @param string $assertionID The assertion ID to remove
-     * @return bool Always returns true (false on removal failure)
-     */
-    public function removeAssertion($assertionURI, $assertionID)
-    {
-        return null;
-    }
+	/**
+	 * Remove an assertion (pass-thru does nothing)
+	 *
+	 * @param string $assertionURI The assertion type URI
+	 * @param string $assertionID The assertion ID to remove
+	 * @return bool Always returns true (false on removal failure)
+	 */
+	public function removeAssertion($assertionURI, $assertionID)
+	{
+		return null;
+	}
 }

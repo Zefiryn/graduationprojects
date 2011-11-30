@@ -37,44 +37,44 @@ require_once 'Zend/Amf/Request.php';
  */
 class Zend_Amf_Request_Http extends Zend_Amf_Request
 {
-    /**
-     * Raw AMF request
-     * @var string
-     */
-    protected $_rawRequest;
+	/**
+	 * Raw AMF request
+	 * @var string
+	 */
+	protected $_rawRequest;
 
-    /**
-     * Constructor
-     *
-     * Attempts to read from php://input to get raw POST request; if an error
-     * occurs in doing so, or if the AMF body is invalid, the request is declared a
-     * fault.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // php://input allows you to read raw POST data. It is a less memory
-        // intensive alternative to $HTTP_RAW_POST_DATA and does not need any
-        // special php.ini directives
-        $amfRequest = file_get_contents('php://input');
+	/**
+	 * Constructor
+	 *
+	 * Attempts to read from php://input to get raw POST request; if an error
+	 * occurs in doing so, or if the AMF body is invalid, the request is declared a
+	 * fault.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		// php://input allows you to read raw POST data. It is a less memory
+		// intensive alternative to $HTTP_RAW_POST_DATA and does not need any
+		// special php.ini directives
+		$amfRequest = file_get_contents('php://input');
 
-        // Check to make sure that we have data on the input stream.
-        if ($amfRequest != '') {
-            $this->_rawRequest = $amfRequest;
-            $this->initialize($amfRequest);
-        } else {
-            echo '<p>Zend Amf Endpoint</p>' ;
-        }
-    }
+		// Check to make sure that we have data on the input stream.
+		if ($amfRequest != '') {
+			$this->_rawRequest = $amfRequest;
+			$this->initialize($amfRequest);
+		} else {
+			echo '<p>Zend Amf Endpoint</p>' ;
+		}
+	}
 
-    /**
-     * Retrieve raw AMF Request
-     *
-     * @return string
-     */
-    public function getRawRequest()
-    {
-        return $this->_rawRequest;
-    }
+	/**
+	 * Retrieve raw AMF Request
+	 *
+	 * @return string
+	 */
+	public function getRawRequest()
+	{
+		return $this->_rawRequest;
+	}
 }

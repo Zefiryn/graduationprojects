@@ -39,43 +39,43 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_ApplicationDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    protected $_filesystemName = 'application';
+	protected $_filesystemName = 'application';
 
-    protected $_classNamePrefix = 'Application_';
+	protected $_classNamePrefix = 'Application_';
 
-    public function init()
-    {
-        if ($this->_resource->hasAttribute('classNamePrefix')) {
-            $this->_classNamePrefix = $this->_resource->getAttribute('classNamePrefix');
-        }
-        parent::init();
-    }
+	public function init()
+	{
+		if ($this->_resource->hasAttribute('classNamePrefix')) {
+			$this->_classNamePrefix = $this->_resource->getAttribute('classNamePrefix');
+		}
+		parent::init();
+	}
 
-    /**
-     * getPersistentAttributes
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'classNamePrefix' => $this->getClassNamePrefix()
-            );
-    }
+		);
+	}
 
-    public function getName()
-    {
-        return 'ApplicationDirectory';
-    }
+	public function getName()
+	{
+		return 'ApplicationDirectory';
+	}
 
-    public function setClassNamePrefix($classNamePrefix)
-    {
-        $this->_classNamePrefix = $classNamePrefix;
-    }
+	public function setClassNamePrefix($classNamePrefix)
+	{
+		$this->_classNamePrefix = $classNamePrefix;
+	}
 
-    public function getClassNamePrefix()
-    {
-        return $this->_classNamePrefix;
-    }
+	public function getClassNamePrefix()
+	{
+		return $this->_classNamePrefix;
+	}
 
 }

@@ -39,93 +39,93 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_TestApplicationControllerFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_forControllerName = '';
+	/**
+	 * @var string
+	 */
+	protected $_forControllerName = '';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestApplicationControllerFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestApplicationControllerFile';
+	}
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_TestApplicationControllerFile
-     */
-    public function init()
-    {
-        $this->_forControllerName = $this->_resource->getAttribute('forControllerName');
-        $this->_filesystemName = ucfirst($this->_forControllerName) . 'ControllerTest.php';
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_TestApplicationControllerFile
+	 */
+	public function init()
+	{
+		$this->_forControllerName = $this->_resource->getAttribute('forControllerName');
+		$this->_filesystemName = ucfirst($this->_forControllerName) . 'ControllerTest.php';
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getPersistentAttributes()
-     *
-     * @return unknown
-     */
-    public function getPersistentAttributes()
-    {
-        $attributes = array();
+	/**
+	 * getPersistentAttributes()
+	 *
+	 * @return unknown
+	 */
+	public function getPersistentAttributes()
+	{
+		$attributes = array();
 
-        if ($this->_forControllerName) {
-            $attributes['forControllerName'] = $this->getForControllerName();
-        }
+		if ($this->_forControllerName) {
+			$attributes['forControllerName'] = $this->getForControllerName();
+		}
 
-        return $attributes;
-    }
-    
-    public function getForControllerName()
-    {
-        return $this->_forControllerName;
-    }
-    
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
+		return $attributes;
+	}
 
-        $filter = new Zend_Filter_Word_DashToCamelCase();
+	public function getForControllerName()
+	{
+		return $this->_forControllerName;
+	}
 
-        $className = $filter->filter($this->_forControllerName) . 'ControllerTest';
-        
-        /* @var $controllerDirectoryResource Zend_Tool_Project_Profile_Resource */
-        $controllerDirectoryResource = $this->_resource->getParentResource();
-        if ($controllerDirectoryResource->getParentResource()->getName() == 'TestApplicationModuleDirectory') {
-            $className = $filter->filter(ucfirst($controllerDirectoryResource->getParentResource()->getForModuleName()))
-                . '_' . $className;
-        }        
-        
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+
+		$filter = new Zend_Filter_Word_DashToCamelCase();
+
+		$className = $filter->filter($this->_forControllerName) . 'ControllerTest';
+
+		/* @var $controllerDirectoryResource Zend_Tool_Project_Profile_Resource */
+		$controllerDirectoryResource = $this->_resource->getParentResource();
+		if ($controllerDirectoryResource->getParentResource()->getName() == 'TestApplicationModuleDirectory') {
+			$className = $filter->filter(ucfirst($controllerDirectoryResource->getParentResource()->getForModuleName()))
+			. '_' . $className;
+		}
+
+		$codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+		new Zend_CodeGenerator_Php_Class(array(
                     'name' => $className,
                     'extendedClass' => 'Zend_Test_PHPUnit_ControllerTestCase',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+		new Zend_CodeGenerator_Php_Method(array(
                             'name' => 'setUp',
                             'body' => <<<EOS
 \$this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
 parent::setUp();
 EOS
-                            ))
-                        )
-                    ))
-                )
-            ));
+		))
+		)
+		))
+		)
+		));
 
-        return $codeGenFile->generate();
-    }
+		return $codeGenFile->generate();
+	}
 
 }

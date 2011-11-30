@@ -34,51 +34,51 @@ require_once 'Zend/Validate/File/Exists.php';
  */
 class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists
 {
-    /**
-     * @const string Error constants
-     */
-    const DOES_EXIST = 'fileNotExistsDoesExist';
+	/**
+	 * @const string Error constants
+	 */
+	const DOES_EXIST = 'fileNotExistsDoesExist';
 
-    /**
-     * @var array Error message templates
-     */
-    protected $_messageTemplates = array(
-        self::DOES_EXIST => "File '%value%' exists",
-    );
+	/**
+	 * @var array Error message templates
+	 */
+	protected $_messageTemplates = array(
+	self::DOES_EXIST => "File '%value%' exists",
+	);
 
-    /**
-     * Defined by Zend_Validate_Interface
-     *
-     * Returns true if and only if the file does not exist in the set destinations
-     *
-     * @param  string  $value Real file to check for
-     * @param  array   $file  File data from Zend_File_Transfer
-     * @return boolean
-     */
-    public function isValid($value, $file = null)
-    {
-        $directories = $this->getDirectory(true);
-        if (($file !== null) and (!empty($file['destination']))) {
-            $directories[] = $file['destination'];
-        } else if (!isset($file['name'])) {
-            $file['name'] = $value;
-        }
+	/**
+	 * Defined by Zend_Validate_Interface
+	 *
+	 * Returns true if and only if the file does not exist in the set destinations
+	 *
+	 * @param  string  $value Real file to check for
+	 * @param  array   $file  File data from Zend_File_Transfer
+	 * @return boolean
+	 */
+	public function isValid($value, $file = null)
+	{
+		$directories = $this->getDirectory(true);
+		if (($file !== null) and (!empty($file['destination']))) {
+			$directories[] = $file['destination'];
+		} else if (!isset($file['name'])) {
+			$file['name'] = $value;
+		}
 
-        foreach ($directories as $directory) {
-            if (empty($directory)) {
-                continue;
-            }
+		foreach ($directories as $directory) {
+			if (empty($directory)) {
+				continue;
+			}
 
-            $check = true;
-            if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
-                return $this->_throw($file, self::DOES_EXIST);
-            }
-        }
+			$check = true;
+			if (file_exists($directory . DIRECTORY_SEPARATOR . $file['name'])) {
+				return $this->_throw($file, self::DOES_EXIST);
+			}
+		}
 
-        if (!isset($check)) {
-            return $this->_throw($file, self::DOES_EXIST);
-        }
+		if (!isset($check)) {
+			return $this->_throw($file, self::DOES_EXIST);
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

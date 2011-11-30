@@ -37,25 +37,25 @@ require_once 'Zend/Dojo/Form/Decorator/DijitContainer.php';
  */
 class Zend_Dojo_Form_Decorator_DijitForm extends Zend_Dojo_Form_Decorator_DijitContainer
 {
-    /**
-     * Render a form
-     *
-     * Replaces $content entirely from currently set element.
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $element = $this->getElement();
-        $view    = $element->getView();
-        if (null === $view) {
-            return $content;
-        }
+	/**
+	 * Render a form
+	 *
+	 * Replaces $content entirely from currently set element.
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$element = $this->getElement();
+		$view    = $element->getView();
+		if (null === $view) {
+			return $content;
+		}
 
-        $dijitParams = $this->getDijitParams();
-        $attribs     = array_merge($this->getAttribs(), $this->getOptions());
+		$dijitParams = $this->getDijitParams();
+		$attribs     = array_merge($this->getAttribs(), $this->getOptions());
 
-        return $view->form($element->getName(), $attribs, $content);
-    }
+		return $view->form($element->getName(), $attribs, $content);
+	}
 }

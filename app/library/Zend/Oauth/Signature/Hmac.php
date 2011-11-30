@@ -33,22 +33,22 @@ require_once 'Zend/Crypt/Hmac.php';
  */
 class Zend_Oauth_Signature_Hmac extends Zend_Oauth_Signature_SignatureAbstract
 {
-    /**
-     * Sign a request
-     *
-     * @param  array $params
-     * @param  mixed $method
-     * @param  mixed $url
-     * @return string
-     */
-    public function sign(array $params, $method = null, $url = null)
-    {
-        $binaryHash = Zend_Crypt_Hmac::compute(
-            $this->_key,
-            $this->_hashAlgorithm,
-            $this->_getBaseSignatureString($params, $method, $url),
-            Zend_Crypt_Hmac::BINARY
-        );
-        return base64_encode($binaryHash);
-    }
+	/**
+	 * Sign a request
+	 *
+	 * @param  array $params
+	 * @param  mixed $method
+	 * @param  mixed $url
+	 * @return string
+	 */
+	public function sign(array $params, $method = null, $url = null)
+	{
+		$binaryHash = Zend_Crypt_Hmac::compute(
+		$this->_key,
+		$this->_hashAlgorithm,
+		$this->_getBaseSignatureString($params, $method, $url),
+		Zend_Crypt_Hmac::BINARY
+		);
+		return base64_encode($binaryHash);
+	}
 }

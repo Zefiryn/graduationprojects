@@ -28,41 +28,41 @@
  */
 class Zend_Cloud_QueueService_MessageSet implements Countable, IteratorAggregate
 {
-    /** @var int */
-    protected $_messageCount;
+	/** @var int */
+	protected $_messageCount;
 
-    /** @var ArrayAccess Messages */
-    protected $_messages;
+	/** @var ArrayAccess Messages */
+	protected $_messages;
 
-    /**
-     * Constructor
-     *
-     * @param  array $messages
-     * @return void
-     */
-    public function __construct(array $messages)
-    {
-        $this->_messageCount = count($messages);
-        $this->_messages     = new ArrayIterator($messages);
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  array $messages
+	 * @return void
+	 */
+	public function __construct(array $messages)
+	{
+		$this->_messageCount = count($messages);
+		$this->_messages     = new ArrayIterator($messages);
+	}
 
-    /**
-     * Countable: number of messages in collection
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return $this->_messageCount;
-    }
+	/**
+	 * Countable: number of messages in collection
+	 *
+	 * @return int
+	 */
+	public function count()
+	{
+		return $this->_messageCount;
+	}
 
-    /**
-     * IteratorAggregate: return iterable object
-     *
-     * @return Traversable
-     */
-    public function getIterator()
-    {
-        return $this->_messages;
-    }
+	/**
+	 * IteratorAggregate: return iterable object
+	 *
+	 * @return Traversable
+	 */
+	public function getIterator()
+	{
+		return $this->_messages;
+	}
 }

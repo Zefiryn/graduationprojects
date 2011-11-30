@@ -48,17 +48,17 @@ require_once 'Zend/Gdata/Geo/Entry.php';
 class Zend_Gdata_Geo_Feed extends Zend_Gdata_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_Geo_Entry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Geo_Entry';
 
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
-        parent::__construct($element);
-    }
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
+		parent::__construct($element);
+	}
 
 }

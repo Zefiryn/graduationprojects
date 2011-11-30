@@ -27,5 +27,5 @@
  */
 interface Zend_Tool_Framework_Provider_Initializable
 {
-    public function initialize();
+	public function initialize();
 }

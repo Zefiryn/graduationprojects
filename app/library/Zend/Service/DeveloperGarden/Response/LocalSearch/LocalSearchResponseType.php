@@ -34,11 +34,11 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * contains the result object
-     * @var mixed
-     */
-    public $searchResult = null;
+	/**
+	 * contains the result object
+	 * @var mixed
+	 */
+	public $searchResult = null;
 }

@@ -39,27 +39,27 @@ require_once 'Zend/Gdata.php';
 class Zend_Gdata_Media extends Zend_Gdata
 {
 
-    /**
-     * Namespaces used for Zend_Gdata_Photos
-     *
-     * @var array
-     */
-    public static $namespaces = array(
-        array('media', 'http://search.yahoo.com/mrss/', 1, 0)
-    );
+	/**
+	 * Namespaces used for Zend_Gdata_Photos
+	 *
+	 * @var array
+	 */
+	public static $namespaces = array(
+	array('media', 'http://search.yahoo.com/mrss/', 1, 0)
+	);
 
-    /**
-     * Create Gdata_Media object
-     *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
-     */
-    public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
-    {
-        $this->registerPackage('Zend_Gdata_Media');
-        $this->registerPackage('Zend_Gdata_Media_Extension');
-        parent::__construct($client, $applicationId);
-    }
+	/**
+	 * Create Gdata_Media object
+	 *
+	 * @param Zend_Http_Client $client (optional) The HTTP client to use when
+	 *          when communicating with the Google Apps servers.
+	 * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+	 */
+	public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
+	{
+		$this->registerPackage('Zend_Gdata_Media');
+		$this->registerPackage('Zend_Gdata_Media_Extension');
+		parent::__construct($client, $applicationId);
+	}
 
 }

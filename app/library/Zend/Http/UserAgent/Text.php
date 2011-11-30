@@ -32,101 +32,101 @@ require_once 'Zend/Http/UserAgent/AbstractDevice.php';
  */
 class Zend_Http_UserAgent_Text extends Zend_Http_UserAgent_AbstractDevice
 {
-    /**
-     * User Agent Signatures
-     *
-     * @var array
-     */
-    protected static $_uaSignatures = array(
+	/**
+	 * User Agent Signatures
+	 *
+	 * @var array
+	 */
+	protected static $_uaSignatures = array(
         'lynx',
         'retawq',
         'w3m',
-    );
+	);
 
-    /**
-     * Comparison of the UserAgent chain and User Agent signatures
-     *
-     * @param string $userAgent User Agent chain
-     * @param  array $server $_SERVER like param
-     * @return bool
-     */
-    public static function match($userAgent, $server)
-    {
-        return self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures);
-    }
+	/**
+	 * Comparison of the UserAgent chain and User Agent signatures
+	 *
+	 * @param string $userAgent User Agent chain
+	 * @param  array $server $_SERVER like param
+	 * @return bool
+	 */
+	public static function match($userAgent, $server)
+	{
+		return self::_matchAgentAgainstSignatures($userAgent, self::$_uaSignatures);
+	}
 
-    /**
-     * Gives the current browser type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return 'text';
-    }
+	/**
+	 * Gives the current browser type
+	 *
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'text';
+	}
 
-    /**
-     * Look for features
-     *
-     * @return string
-     */
-    protected function _defineFeatures()
-    {
-        $this->setFeature('images', false, 'product_capability');
-        $this->setFeature('iframes', false, 'product_capability');
-        $this->setFeature('frames', false, 'product_capability');
-        $this->setFeature('javascript', false, 'product_capability');
-        return parent::_defineFeatures();
-    }
+	/**
+	 * Look for features
+	 *
+	 * @return string
+	 */
+	protected function _defineFeatures()
+	{
+		$this->setFeature('images', false, 'product_capability');
+		$this->setFeature('iframes', false, 'product_capability');
+		$this->setFeature('frames', false, 'product_capability');
+		$this->setFeature('javascript', false, 'product_capability');
+		return parent::_defineFeatures();
+	}
 
-    /**
-     * Determine supported image formats
-     *
-     * @return null
-     */
-    public function getImageFormatSupport()
-    {
-        return null;
-    }
+	/**
+	 * Determine supported image formats
+	 *
+	 * @return null
+	 */
+	public function getImageFormatSupport()
+	{
+		return null;
+	}
 
-    /**
-     * Get preferred markup format
-     *
-     * @return string
-     */
-    public function getPreferredMarkup()
-    {
-        return 'xhtml';
-    }
+	/**
+	 * Get preferred markup format
+	 *
+	 * @return string
+	 */
+	public function getPreferredMarkup()
+	{
+		return 'xhtml';
+	}
 
-    /**
-     * Get supported X/HTML markup level
-     *
-     * @return int
-     */
-    public function getXhtmlSupportLevel()
-    {
-        return 1;
-    }
+	/**
+	 * Get supported X/HTML markup level
+	 *
+	 * @return int
+	 */
+	public function getXhtmlSupportLevel()
+	{
+		return 1;
+	}
 
-    /**
-     * Does the device support Flash?
-     *
-     * @return bool
-     */
-    public function hasFlashSupport()
-    {
+	/**
+	 * Does the device support Flash?
+	 *
+	 * @return bool
+	 */
+	public function hasFlashSupport()
+	{
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Does the device support PDF?
-     *
-     * @return bool
-     */
-    public function hasPdfSupport()
-    {
-        return false;
-    }
+	/**
+	 * Does the device support PDF?
+	 *
+	 * @return bool
+	 */
+	public function hasPdfSupport()
+	{
+		return false;
+	}
 }

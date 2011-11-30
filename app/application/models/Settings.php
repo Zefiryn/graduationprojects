@@ -13,14 +13,14 @@ class Application_Model_Settings extends GP_Application_Model
 	public $result_date;
 	protected $edition;
 	protected $template;
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_Settings';
 
-	public function __construct($id = null, array $options = null) 
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
+
 	public function prepareFormArray()
 	{
 		$data = array(
@@ -34,21 +34,21 @@ class Application_Model_Settings extends GP_Application_Model
 			'application_deadline' => date('d-m-Y', $this->application_deadline),
 			'result_date' => date('d-m-Y', $this->result_date),
 		);
-		
+
 		return $data;
 	}
-	
+
 	public function populateFromForm($data)
 	{
 		parent::populateFromForm($data);
-		
+
 		$this->current_edition			= (int)$this->current_edition;
 		$this->max_file_size			= ($this->max_file_size) * 1024 * 1024;
-		$this->work_start_date 			= strtotime($this->work_start_date);
-		$this->work_end_date 			= strtotime($this->work_end_date);
-		$this->application_deadline 	= strtotime($this->application_deadline);
+		$this->work_start_date 			= strtotime($this->work_start_date.' 00:00');
+		$this->work_end_date 			= strtotime($this->work_end_date. '23:59');
+		$this->application_deadline 	= strtotime($this->application_deadline.' 23:59');
 		$this->result_date			 	= strtotime($this->result_date);
-		
+
 		return $this;
 	}
 }

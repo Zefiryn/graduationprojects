@@ -35,29 +35,29 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Search_Result extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * Container for the data of a single item that matches the search criteria.
-     *
-     * @var Zend_Service_Ebay_Finding_Search_Item_Set
-     */
-    public $item;
+	/**
+	 * Container for the data of a single item that matches the search criteria.
+	 *
+	 * @var Zend_Service_Ebay_Finding_Search_Item_Set
+	 */
+	public $item;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
 
-        $nodes = $this->_xPath->query(".//$ns:item", $this->_dom);
-        if ($nodes) {
-            /**
-             * @see Zend_Service_Ebay_Finding_Search_Item_Set
-             */
-            require_once 'Zend/Service/Ebay/Finding/Search/Item/Set.php';
-            $this->item = new Zend_Service_Ebay_Finding_Search_Item_Set($nodes);
-        }
-    }
+		$nodes = $this->_xPath->query(".//$ns:item", $this->_dom);
+		if ($nodes) {
+			/**
+			 * @see Zend_Service_Ebay_Finding_Search_Item_Set
+			 */
+			require_once 'Zend/Service/Ebay/Finding/Search/Item/Set.php';
+			$this->item = new Zend_Service_Ebay_Finding_Search_Item_Set($nodes);
+		}
+	}
 }

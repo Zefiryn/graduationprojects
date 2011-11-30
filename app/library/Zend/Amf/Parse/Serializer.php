@@ -30,31 +30,31 @@
  */
 abstract class Zend_Amf_Parse_Serializer
 {
-    /**
-     * Reference to the current output stream being constructed
-     *
-     * @var string
-     */
-    protected $_stream;
+	/**
+	 * Reference to the current output stream being constructed
+	 *
+	 * @var string
+	 */
+	protected $_stream;
 
-    /**
-     * Constructor
-     *
-     * @param  Zend_Amf_Parse_OutputStream $stream
-     * @return void
-     */
-    public function __construct(Zend_Amf_Parse_OutputStream $stream)
-    {
-        $this->_stream = $stream;
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  Zend_Amf_Parse_OutputStream $stream
+	 * @return void
+	 */
+	public function __construct(Zend_Amf_Parse_OutputStream $stream)
+	{
+		$this->_stream = $stream;
+	}
 
-    /**
-     * Find the PHP object type and convert it into an AMF object type
-     *
-     * @param  mixed $content
-     * @param  int $markerType
-     * @param  mixed $contentByVal
-     * @return void
-     */
-    public abstract function writeTypeMarker(&$content, $markerType = null, $contentByVal = false);
+	/**
+	 * Find the PHP object type and convert it into an AMF object type
+	 *
+	 * @param  mixed $content
+	 * @param  int $markerType
+	 * @param  mixed $contentByVal
+	 * @return void
+	 */
+	public abstract function writeTypeMarker(&$content, $markerType = null, $contentByVal = false);
 }

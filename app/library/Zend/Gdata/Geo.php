@@ -42,29 +42,29 @@ require_once 'Zend/Gdata.php';
 class Zend_Gdata_Geo extends Zend_Gdata
 {
 
-    /**
-     * Namespaces used for Zend_Gdata_Geo
-     *
-     * @var array
-     */
-    public static $namespaces = array(
-        array('georss', 'http://www.georss.org/georss', 1, 0),
-        array('gml', 'http://www.opengis.net/gml', 1, 0)
-    );
+	/**
+	 * Namespaces used for Zend_Gdata_Geo
+	 *
+	 * @var array
+	 */
+	public static $namespaces = array(
+	array('georss', 'http://www.georss.org/georss', 1, 0),
+	array('gml', 'http://www.opengis.net/gml', 1, 0)
+	);
 
 
-    /**
-     * Create Zend_Gdata_Geo object
-     *
-     * @param Zend_Http_Client $client (optional) The HTTP client to use when
-     *          when communicating with the Google Apps servers.
-     * @param string $applicationId The identity of the app in the form of Company-AppName-Version
-     */
-    public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
-    {
-        $this->registerPackage('Zend_Gdata_Geo');
-        $this->registerPackage('Zend_Gdata_Geo_Extension');
-        parent::__construct($client, $applicationId);
-    }
+	/**
+	 * Create Zend_Gdata_Geo object
+	 *
+	 * @param Zend_Http_Client $client (optional) The HTTP client to use when
+	 *          when communicating with the Google Apps servers.
+	 * @param string $applicationId The identity of the app in the form of Company-AppName-Version
+	 */
+	public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
+	{
+		$this->registerPackage('Zend_Gdata_Geo');
+		$this->registerPackage('Zend_Gdata_Geo_Extension');
+		parent::__construct($client, $applicationId);
+	}
 
 }

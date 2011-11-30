@@ -43,92 +43,92 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  */
 class Zend_Form_Decorator_Form extends Zend_Form_Decorator_Abstract
 {
-    /**
-     * Default view helper
-     * @var string
-     */
-    protected $_helper = 'form';
+	/**
+	 * Default view helper
+	 * @var string
+	 */
+	protected $_helper = 'form';
 
-    /**
-     * Set view helper for rendering form
-     *
-     * @param  string $helper
-     * @return Zend_Form_Decorator_Form
-     */
-    public function setHelper($helper)
-    {
-        $this->_helper = (string) $helper;
-        return $this;
-    }
+	/**
+	 * Set view helper for rendering form
+	 *
+	 * @param  string $helper
+	 * @return Zend_Form_Decorator_Form
+	 */
+	public function setHelper($helper)
+	{
+		$this->_helper = (string) $helper;
+		return $this;
+	}
 
-    /**
-     * Get view helper for rendering form
-     *
-     * @return string
-     */
-    public function getHelper()
-    {
-        if (null !== ($helper = $this->getOption('helper'))) {
-            $this->setHelper($helper);
-            $this->removeOption('helper');
-        }
-        return $this->_helper;
-    }
+	/**
+	 * Get view helper for rendering form
+	 *
+	 * @return string
+	 */
+	public function getHelper()
+	{
+		if (null !== ($helper = $this->getOption('helper'))) {
+			$this->setHelper($helper);
+			$this->removeOption('helper');
+		}
+		return $this->_helper;
+	}
 
-    /**
-     * Retrieve decorator options
-     *
-     * Assures that form action and method are set, and sets appropriate
-     * encoding type if current method is POST.
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        if (null !== ($element = $this->getElement())) {
-            if ($element instanceof Zend_Form) {
-                $element->getAction();
-                $method = $element->getMethod();
-                if ($method == Zend_Form::METHOD_POST) {
-                    $this->setOption('enctype', 'application/x-www-form-urlencoded');
-                }
-                foreach ($element->getAttribs() as $key => $value) {
-                    $this->setOption($key, $value);
-                }
-            } elseif ($element instanceof Zend_Form_DisplayGroup) {
-                foreach ($element->getAttribs() as $key => $value) {
-                    $this->setOption($key, $value);
-                }
-            }
-        }
+	/**
+	 * Retrieve decorator options
+	 *
+	 * Assures that form action and method are set, and sets appropriate
+	 * encoding type if current method is POST.
+	 *
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		if (null !== ($element = $this->getElement())) {
+			if ($element instanceof Zend_Form) {
+				$element->getAction();
+				$method = $element->getMethod();
+				if ($method == Zend_Form::METHOD_POST) {
+					$this->setOption('enctype', 'application/x-www-form-urlencoded');
+				}
+				foreach ($element->getAttribs() as $key => $value) {
+					$this->setOption($key, $value);
+				}
+			} elseif ($element instanceof Zend_Form_DisplayGroup) {
+				foreach ($element->getAttribs() as $key => $value) {
+					$this->setOption($key, $value);
+				}
+			}
+		}
 
-        if (isset($this->_options['method'])) {
-            $this->_options['method'] = strtolower($this->_options['method']);
-        }
+		if (isset($this->_options['method'])) {
+			$this->_options['method'] = strtolower($this->_options['method']);
+		}
 
-        return $this->_options;
-    }
+		return $this->_options;
+	}
 
-    /**
-     * Render a form
-     *
-     * Replaces $content entirely from currently set element.
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $form    = $this->getElement();
-        $view    = $form->getView();
-        if (null === $view) {
-            return $content;
-        }
+	/**
+	 * Render a form
+	 *
+	 * Replaces $content entirely from currently set element.
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$form    = $this->getElement();
+		$view    = $form->getView();
+		if (null === $view) {
+			return $content;
+		}
 
-        $helper        = $this->getHelper();
-        $attribs       = $this->getOptions();
-        $name          = $form->getFullyQualifiedName();
-        $attribs['id'] = $form->getId();
-        return $view->$helper($name, $attribs, $content);
-    }
+		$helper        = $this->getHelper();
+		$attribs       = $this->getOptions();
+		$name          = $form->getFullyQualifiedName();
+		$attribs['id'] = $form->getId();
+		return $view->$helper($name, $attribs, $content);
+	}
 }

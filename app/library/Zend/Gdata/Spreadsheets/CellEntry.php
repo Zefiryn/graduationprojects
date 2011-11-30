@@ -43,62 +43,62 @@ require_once 'Zend/Gdata/Spreadsheets/Extension/Cell.php';
 class Zend_Gdata_Spreadsheets_CellEntry extends Zend_Gdata_Entry
 {
 
-    protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
-    protected $_cell;
+	protected $_entryClassName = 'Zend_Gdata_Spreadsheets_CellEntry';
+	protected $_cell;
 
-    /**
-     * Constructs a new Zend_Gdata_Spreadsheets_CellEntry object.
-     * @param string $uri (optional)
-     * @param DOMElement $element (optional) The DOMElement on which to base this object.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Spreadsheets_CellEntry object.
+	 * @param string $uri (optional)
+	 * @param DOMElement $element (optional) The DOMElement on which to base this object.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
+		parent::__construct($element);
+	}
 
-    public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
-    {
-        $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_cell != null) {
-            $element->appendChild($this->_cell->getDOM($element->ownerDocument));
-        }
-        return $element;
-    }
+	public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
+	{
+		$element = parent::getDOM($doc, $majorVersion, $minorVersion);
+		if ($this->_cell != null) {
+			$element->appendChild($this->_cell->getDOM($element->ownerDocument));
+		}
+		return $element;
+	}
 
-    protected function takeChildFromDOM($child)
-    {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
-        switch ($absoluteNodeName) {
-        case $this->lookupNamespace('gs') . ':' . 'cell';
-            $cell = new Zend_Gdata_Spreadsheets_Extension_Cell();
-            $cell->transferFromDOM($child);
-            $this->_cell = $cell;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
-        }
-    }
+	protected function takeChildFromDOM($child)
+	{
+		$absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+		switch ($absoluteNodeName) {
+			case $this->lookupNamespace('gs') . ':' . 'cell';
+			$cell = new Zend_Gdata_Spreadsheets_Extension_Cell();
+			$cell->transferFromDOM($child);
+			$this->_cell = $cell;
+			break;
+			default:
+				parent::takeChildFromDOM($child);
+			break;
+		}
+	}
 
-    /**
-     * Gets the Cell element of this Cell Entry.
-     * @return Zend_Gdata_Spreadsheets_Extension_Cell
-     */
-    public function getCell()
-    {
-        return $this->_cell;
-    }
+	/**
+	 * Gets the Cell element of this Cell Entry.
+	 * @return Zend_Gdata_Spreadsheets_Extension_Cell
+	 */
+	public function getCell()
+	{
+		return $this->_cell;
+	}
 
-    /**
-     * Sets the Cell element of this Cell Entry.
-     * @param Zend_Gdata_Spreadsheets_Extension_Cell $cell
-		 * @return Zend_Gdata_Spreadsheets_CellEntry
-     */
-    public function setCell($cell)
-    {
-        $this->_cell = $cell;
-        return $this;
-    }
+	/**
+	 * Sets the Cell element of this Cell Entry.
+	 * @param Zend_Gdata_Spreadsheets_Extension_Cell $cell
+	 * @return Zend_Gdata_Spreadsheets_CellEntry
+	 */
+	public function setCell($cell)
+	{
+		$this->_cell = $cell;
+		return $this;
+	}
 
 }

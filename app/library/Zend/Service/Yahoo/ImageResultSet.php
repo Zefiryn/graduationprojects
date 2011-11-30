@@ -43,21 +43,21 @@ require_once 'Zend/Service/Yahoo/ImageResult.php';
  */
 class Zend_Service_Yahoo_ImageResultSet extends Zend_Service_Yahoo_ResultSet
 {
-    /**
-     * Image result set namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srchmi';
+	/**
+	 * Image result set namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srchmi';
 
 
-    /**
-     * Overrides Zend_Service_Yahoo_ResultSet::current()
-     *
-     * @return Zend_Service_Yahoo_ImageResult
-     */
-    public function current()
-    {
-        return new Zend_Service_Yahoo_ImageResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Overrides Zend_Service_Yahoo_ResultSet::current()
+	 *
+	 * @return Zend_Service_Yahoo_ImageResult
+	 */
+	public function current()
+	{
+		return new Zend_Service_Yahoo_ImageResult($this->_results->item($this->_currentIndex));
+	}
 }

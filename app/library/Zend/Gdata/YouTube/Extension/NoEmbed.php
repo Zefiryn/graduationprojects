@@ -38,17 +38,17 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_YouTube_Extension_NoEmbed extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'yt';
-    protected $_rootElement = 'noembed';
+	protected $_rootNamespace = 'yt';
+	protected $_rootElement = 'noembed';
 
-    /**
-     * Constructs a new Zend_Gdata_YouTube_Extension_VideoShare object.
-     * @param bool $enabled(optional) The enabled value of the element.
-     */
-    public function __construct($enabled = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct();
-    }
+	/**
+	 * Constructs a new Zend_Gdata_YouTube_Extension_VideoShare object.
+	 * @param bool $enabled(optional) The enabled value of the element.
+	 */
+	public function __construct($enabled = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct();
+	}
 
 }

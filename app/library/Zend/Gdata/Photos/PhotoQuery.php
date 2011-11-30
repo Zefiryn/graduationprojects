@@ -43,56 +43,56 @@ require_once('Zend/Gdata/Photos/AlbumQuery.php');
 class Zend_Gdata_Photos_PhotoQuery extends Zend_Gdata_Photos_AlbumQuery
 {
 
-    /**
-     * The ID of the photo to query for.
-     *
-     * @var string
-     */
-    protected $_photoId = null;
+	/**
+	 * The ID of the photo to query for.
+	 *
+	 * @var string
+	 */
+	protected $_photoId = null;
 
-    /**
-     * Set the photo ID to query for. When set, this photo's comments/tags
-     * will be returned. If not set or null, the default user's feed will be
-     * returned instead.
-     *
-     * @param string $value The ID of the photo to retrieve, or null to
-     *          clear.
-     */
-     public function setPhotoId($value)
-     {
-         $this->_photoId = $value;
-     }
+	/**
+	 * Set the photo ID to query for. When set, this photo's comments/tags
+	 * will be returned. If not set or null, the default user's feed will be
+	 * returned instead.
+	 *
+	 * @param string $value The ID of the photo to retrieve, or null to
+	 *          clear.
+	 */
+	public function setPhotoId($value)
+	{
+		$this->_photoId = $value;
+	}
 
-    /**
-     * Get the photo ID which is to be returned.
-     *
-     * @see setPhoto
-     * @return string The ID of the photo to retrieve.
-     */
-    public function getPhotoId()
-    {
-        return $this->_photoId;
-    }
+	/**
+	 * Get the photo ID which is to be returned.
+	 *
+	 * @see setPhoto
+	 * @return string The ID of the photo to retrieve.
+	 */
+	public function getPhotoId()
+	{
+		return $this->_photoId;
+	}
 
-    /**
-     * Returns the URL generated for this query, based on it's current
-     * parameters.
-     *
-     * @return string A URL generated based on the state of this query.
-     * @throws Zend_Gdata_App_InvalidArgumentException
-     */
-    public function getQueryUrl($incomingUri = '')
-    {
-        $uri = '';
-        if ($this->getPhotoId() !== null) {
-            $uri .= '/photoid/' . $this->getPhotoId();
-        } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
-            throw new Zend_Gdata_App_InvalidArgumentException(
+	/**
+	 * Returns the URL generated for this query, based on it's current
+	 * parameters.
+	 *
+	 * @return string A URL generated based on the state of this query.
+	 * @throws Zend_Gdata_App_InvalidArgumentException
+	 */
+	public function getQueryUrl($incomingUri = '')
+	{
+		$uri = '';
+		if ($this->getPhotoId() !== null) {
+			$uri .= '/photoid/' . $this->getPhotoId();
+		} else {
+			require_once 'Zend/Gdata/App/InvalidArgumentException.php';
+			throw new Zend_Gdata_App_InvalidArgumentException(
                     'PhotoId cannot be null');
-        }
-        $uri .= $incomingUri;
-        return parent::getQueryUrl($uri);
-    }
+		}
+		$uri .= $incomingUri;
+		return parent::getQueryUrl($uri);
+	}
 
 }

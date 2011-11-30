@@ -37,30 +37,30 @@ require_once 'Zend/Ldap/Filter/String.php';
  */
 class Zend_Ldap_Filter_Mask extends Zend_Ldap_Filter_String
 {
-    /**
-     * Creates a Zend_Ldap_Filter_String.
-     *
-     * @param string $mask
-     * @param string $value,...
-     */
-    public function __construct($mask, $value)
-    {
-        $args = func_get_args();
-        array_shift($args);
-        for ($i = 0; $i<count($args); $i++) {
-            $args[$i] = self::escapeValue($args[$i]);
-        }
-        $filter = vsprintf($mask, $args);
-        parent::__construct($filter);
-    }
+	/**
+	 * Creates a Zend_Ldap_Filter_String.
+	 *
+	 * @param string $mask
+	 * @param string $value,...
+	 */
+	public function __construct($mask, $value)
+	{
+		$args = func_get_args();
+		array_shift($args);
+		for ($i = 0; $i<count($args); $i++) {
+			$args[$i] = self::escapeValue($args[$i]);
+		}
+		$filter = vsprintf($mask, $args);
+		parent::__construct($filter);
+	}
 
-    /**
-     * Returns a string representation of the filter.
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return $this->_filter;
-    }
+	/**
+	 * Returns a string representation of the filter.
+	 *
+	 * @return string
+	 */
+	public function toString()
+	{
+		return $this->_filter;
+	}
 }

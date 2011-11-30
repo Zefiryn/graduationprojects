@@ -36,96 +36,96 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Volume extends Zend_Measure_Abstract
 {
-    const STANDARD = 'CUBIC_METER';
+	const STANDARD = 'CUBIC_METER';
 
-    const ACRE_FOOT           = 'ACRE_FOOT';
-    const ACRE_FOOT_SURVEY    = 'ACRE_FOOT_SURVEY';
-    const ACRE_INCH           = 'ACRE_INCH';
-    const BARREL_WINE         = 'BARREL_WINE';
-    const BARREL              = 'BARREL';
-    const BARREL_US_DRY       = 'BARREL_US_DRY';
-    const BARREL_US_FEDERAL   = 'BARREL_US_FEDERAL';
-    const BARREL_US           = 'BARREL_US';
-    const BARREL_US_PETROLEUM = 'BARREL_US_PETROLEUM';
-    const BOARD_FOOT          = 'BOARD_FOOT';
-    const BUCKET              = 'BUCKET';
-    const BUCKET_US           = 'BUCKET_US';
-    const BUSHEL              = 'BUSHEL';
-    const BUSHEL_US           = 'BUSHEL_US';
-    const CENTILTER           = 'CENTILITER';
-    const CORD                = 'CORD';
-    const CORD_FOOT           = 'CORD_FOOT';
-    const CUBIC_CENTIMETER    = 'CUBIC_CENTIMETER';
-    const CUBIC_CUBIT         = 'CUBIC_CUBIT';
-    const CUBIC_DECIMETER     = 'CUBIC_DECIMETER';
-    const CUBIC_DEKAMETER     = 'CUBIC_DEKAMETER';
-    const CUBIC_FOOT          = 'CUBIC_FOOT';
-    const CUBIC_INCH          = 'CUBIC_INCH';
-    const CUBIC_KILOMETER     = 'CUBIC_KILOMETER';
-    const CUBIC_METER         = 'CUBIC_METER';
-    const CUBIC_MILE          = 'CUBIC_MILE';
-    const CUBIC_MICROMETER    = 'CUBIC_MICROMETER';
-    const CUBIC_MILLIMETER    = 'CUBIC_MILLIMETER';
-    const CUBIC_YARD          = 'CUBIC_YARD';
-    const CUP_CANADA          = 'CUP_CANADA';
-    const CUP                 = 'CUP';
-    const CUP_US              = 'CUP_US';
-    const DECILITER           = 'DECILITER';
-    const DEKALITER           = 'DEKALITER';
-    const DRAM                = 'DRAM';
-    const DRUM_US             = 'DRUM_US';
-    const DRUM                = 'DRUM';
-    const FIFTH               = 'FIFTH';
-    const GALLON              = 'GALLON';
-    const GALLON_US_DRY       = 'GALLON_US_DRY';
-    const GALLON_US           = 'GALLON_US';
-    const GILL                = 'GILL';
-    const GILL_US             = 'GILL_US';
-    const HECTARE_METER       = 'HECTARE_METER';
-    const HECTOLITER          = 'HECTOLITER';
-    const HOGSHEAD            = 'HOGSHEAD';
-    const HOGSHEAD_US         = 'HOGSHEAD_US';
-    const JIGGER              = 'JIGGER';
-    const KILOLITER           = 'KILOLITER';
-    const LITER               = 'LITER';
-    const MEASURE             = 'MEASURE';
-    const MEGALITER           = 'MEGALITER';
-    const MICROLITER          = 'MICROLITER';
-    const MILLILITER          = 'MILLILITER';
-    const MINIM               = 'MINIM';
-    const MINIM_US            = 'MINIM_US';
-    const OUNCE               = 'OUNCE';
-    const OUNCE_US            = 'OUNCE_US';
-    const PECK                = 'PECK';
-    const PECK_US             = 'PECK_US';
-    const PINT                = 'PINT';
-    const PINT_US_DRY         = 'PINT_US_DRY';
-    const PINT_US             = 'PINT_US';
-    const PIPE                = 'PIPE';
-    const PIPE_US             = 'PIPE_US';
-    const PONY                = 'PONY';
-    const QUART_GERMANY       = 'QUART_GERMANY';
-    const QUART_ANCIENT       = 'QUART_ANCIENT';
-    const QUART               = 'QUART';
-    const QUART_US_DRY        = 'QUART_US_DRY';
-    const QUART_US            = 'QUART_US';
-    const QUART_UK            = 'QUART_UK';
-    const SHOT                = 'SHOT';
-    const STERE               = 'STERE';
-    const TABLESPOON          = 'TABLESPOON';
-    const TABLESPOON_UK       = 'TABLESPOON_UK';
-    const TABLESPOON_US       = 'TABLESPOON_US';
-    const TEASPOON            = 'TEASPOON';
-    const TEASPOON_UK         = 'TEASPOON_UK';
-    const TEASPOON_US         = 'TEASPOON_US';
-    const YARD                = 'YARD';
+	const ACRE_FOOT           = 'ACRE_FOOT';
+	const ACRE_FOOT_SURVEY    = 'ACRE_FOOT_SURVEY';
+	const ACRE_INCH           = 'ACRE_INCH';
+	const BARREL_WINE         = 'BARREL_WINE';
+	const BARREL              = 'BARREL';
+	const BARREL_US_DRY       = 'BARREL_US_DRY';
+	const BARREL_US_FEDERAL   = 'BARREL_US_FEDERAL';
+	const BARREL_US           = 'BARREL_US';
+	const BARREL_US_PETROLEUM = 'BARREL_US_PETROLEUM';
+	const BOARD_FOOT          = 'BOARD_FOOT';
+	const BUCKET              = 'BUCKET';
+	const BUCKET_US           = 'BUCKET_US';
+	const BUSHEL              = 'BUSHEL';
+	const BUSHEL_US           = 'BUSHEL_US';
+	const CENTILTER           = 'CENTILITER';
+	const CORD                = 'CORD';
+	const CORD_FOOT           = 'CORD_FOOT';
+	const CUBIC_CENTIMETER    = 'CUBIC_CENTIMETER';
+	const CUBIC_CUBIT         = 'CUBIC_CUBIT';
+	const CUBIC_DECIMETER     = 'CUBIC_DECIMETER';
+	const CUBIC_DEKAMETER     = 'CUBIC_DEKAMETER';
+	const CUBIC_FOOT          = 'CUBIC_FOOT';
+	const CUBIC_INCH          = 'CUBIC_INCH';
+	const CUBIC_KILOMETER     = 'CUBIC_KILOMETER';
+	const CUBIC_METER         = 'CUBIC_METER';
+	const CUBIC_MILE          = 'CUBIC_MILE';
+	const CUBIC_MICROMETER    = 'CUBIC_MICROMETER';
+	const CUBIC_MILLIMETER    = 'CUBIC_MILLIMETER';
+	const CUBIC_YARD          = 'CUBIC_YARD';
+	const CUP_CANADA          = 'CUP_CANADA';
+	const CUP                 = 'CUP';
+	const CUP_US              = 'CUP_US';
+	const DECILITER           = 'DECILITER';
+	const DEKALITER           = 'DEKALITER';
+	const DRAM                = 'DRAM';
+	const DRUM_US             = 'DRUM_US';
+	const DRUM                = 'DRUM';
+	const FIFTH               = 'FIFTH';
+	const GALLON              = 'GALLON';
+	const GALLON_US_DRY       = 'GALLON_US_DRY';
+	const GALLON_US           = 'GALLON_US';
+	const GILL                = 'GILL';
+	const GILL_US             = 'GILL_US';
+	const HECTARE_METER       = 'HECTARE_METER';
+	const HECTOLITER          = 'HECTOLITER';
+	const HOGSHEAD            = 'HOGSHEAD';
+	const HOGSHEAD_US         = 'HOGSHEAD_US';
+	const JIGGER              = 'JIGGER';
+	const KILOLITER           = 'KILOLITER';
+	const LITER               = 'LITER';
+	const MEASURE             = 'MEASURE';
+	const MEGALITER           = 'MEGALITER';
+	const MICROLITER          = 'MICROLITER';
+	const MILLILITER          = 'MILLILITER';
+	const MINIM               = 'MINIM';
+	const MINIM_US            = 'MINIM_US';
+	const OUNCE               = 'OUNCE';
+	const OUNCE_US            = 'OUNCE_US';
+	const PECK                = 'PECK';
+	const PECK_US             = 'PECK_US';
+	const PINT                = 'PINT';
+	const PINT_US_DRY         = 'PINT_US_DRY';
+	const PINT_US             = 'PINT_US';
+	const PIPE                = 'PIPE';
+	const PIPE_US             = 'PIPE_US';
+	const PONY                = 'PONY';
+	const QUART_GERMANY       = 'QUART_GERMANY';
+	const QUART_ANCIENT       = 'QUART_ANCIENT';
+	const QUART               = 'QUART';
+	const QUART_US_DRY        = 'QUART_US_DRY';
+	const QUART_US            = 'QUART_US';
+	const QUART_UK            = 'QUART_UK';
+	const SHOT                = 'SHOT';
+	const STERE               = 'STERE';
+	const TABLESPOON          = 'TABLESPOON';
+	const TABLESPOON_UK       = 'TABLESPOON_UK';
+	const TABLESPOON_US       = 'TABLESPOON_US';
+	const TEASPOON            = 'TEASPOON';
+	const TEASPOON_UK         = 'TEASPOON_UK';
+	const TEASPOON_US         = 'TEASPOON_US';
+	const YARD                = 'YARD';
 
-    /**
-     * Calculations for all volume units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all volume units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'ACRE_FOOT'           => array('1233.48185532', 'ac ft'),
         'ACRE_FOOT_SURVEY'    => array('1233.489',      'ac ft'),
         'ACRE_INCH'           => array('102.79015461',  'ac in'),
@@ -209,5 +209,5 @@ class Zend_Measure_Volume extends Zend_Measure_Abstract
         'TEASPOON_US'         => array(array('' => '0.0037854118', '/' => '768'),   'tsp'),
         'YARD'                => array(array('' => '176.6121729408', '/' => '231'), 'yd'),
         'STANDARD'            => 'CUBIC_METER'
-    );
+        );
 }

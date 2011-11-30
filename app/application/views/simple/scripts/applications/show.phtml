@@ -1,20 +1,32 @@
 <div id="main">
 
 	<div class="application_gallery" id="application_gallery">
-		<?php foreach($this->application->files as $file):?> 
-			<img id="<?php echo $file->file_id?>" class="sort_item" src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small'));?>" alt="<?php echo $this->application->work_subject.'?'.time();?>" class="application_image" />
+
+	<?php foreach($this->application->files as $file):?>
+		<img id="<?php echo $file->file_id?>" class="sort_item"
+			src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small'));?>"
+			alt="<?php echo $this->application->work_subject.'?'.time();?>"
+			class="application_image" />
+		
+		
 		<?php endforeach;?>
 	</div>
 
-	<div class="application" id="<?php echo $this->application->application_id?>">
+	<div class="application"
+		id="<?php echo $this->application->application_id?>">
+
 		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
 		<p class="admin">
-			<a href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->application->application_id), 'lang_edit_application');?>">
-				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
-					alt="<?php echo $this->translate('edit');?>" 
-					title="<?php echo $this->translate('edit');?>">
+			<a
+				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->application->application_id), 'lang_edit_application');?>">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+				class="ui-icon ui-icon-pencil no-block"
+				alt="<?php echo $this->translate('edit');?>"
+				title="<?php echo $this->translate('edit');?>">
 			</a>
 		</p>
+		
+		
 		<?php endif?>
 		<p class="application_field"><?php echo strtolower($this->translate('edition'));?></p>
 		<p class="application_data application_edition">
@@ -64,5 +76,5 @@
 			
 		</nav>
     </div>
-	
+
 </div>

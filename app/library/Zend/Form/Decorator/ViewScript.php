@@ -52,141 +52,141 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  */
 class Zend_Form_Decorator_ViewScript extends Zend_Form_Decorator_Abstract
 {
-    /**
-     * Default placement: append
-     * @var string
-     */
-    protected $_placement = 'APPEND';
+	/**
+	 * Default placement: append
+	 * @var string
+	 */
+	protected $_placement = 'APPEND';
 
-    /**
-     * View script to render
-     * @var string
-     */
-    protected $_viewScript;
+	/**
+	 * View script to render
+	 * @var string
+	 */
+	protected $_viewScript;
 
-    /**
-     * View script module
-     * @var string
-     */
-    protected $_viewModule;
+	/**
+	 * View script module
+	 * @var string
+	 */
+	protected $_viewModule;
 
-    /**
-     * Set view script
-     *
-     * @param  string $script
-     * @return Zend_Form_Decorator_ViewScript
-     */
-    public function setViewScript($script)
-    {
-        $this->_viewScript = (string) $script;
-        return $this;
-    }
+	/**
+	 * Set view script
+	 *
+	 * @param  string $script
+	 * @return Zend_Form_Decorator_ViewScript
+	 */
+	public function setViewScript($script)
+	{
+		$this->_viewScript = (string) $script;
+		return $this;
+	}
 
-    /**
-     * Get view script
-     *
-     * @return string|null
-     */
-    public function getViewScript()
-    {
-        if (null === $this->_viewScript) {
-            if (null !== ($element = $this->getElement())) {
-                if (null !== ($viewScript = $element->getAttrib('viewScript'))) {
-                    $this->setViewScript($viewScript);
-                    return $viewScript;
-                }
-            }
+	/**
+	 * Get view script
+	 *
+	 * @return string|null
+	 */
+	public function getViewScript()
+	{
+		if (null === $this->_viewScript) {
+			if (null !== ($element = $this->getElement())) {
+				if (null !== ($viewScript = $element->getAttrib('viewScript'))) {
+					$this->setViewScript($viewScript);
+					return $viewScript;
+				}
+			}
 
-            if (null !== ($viewScript = $this->getOption('viewScript'))) {
-                $this->setViewScript($viewScript)
-                     ->removeOption('viewScript');
-            }
-        }
+			if (null !== ($viewScript = $this->getOption('viewScript'))) {
+				$this->setViewScript($viewScript)
+				->removeOption('viewScript');
+			}
+		}
 
-        return $this->_viewScript;
-    }
+		return $this->_viewScript;
+	}
 
-    /**
-     * Set view script module
-     *
-     * @param  string $module
-     * @return Zend_Form_Decorator_ViewScript
-     */
-    public function setViewModule($viewModule)
-    {
-        $this->_viewModule = (string) $viewModule;
-        return $this;
-    }
+	/**
+	 * Set view script module
+	 *
+	 * @param  string $module
+	 * @return Zend_Form_Decorator_ViewScript
+	 */
+	public function setViewModule($viewModule)
+	{
+		$this->_viewModule = (string) $viewModule;
+		return $this;
+	}
 
-    /**
-     * Get view script module
-     *
-     * @return string|null
-     */
-    public function getViewModule()
-    {
-        if (null === $this->_viewModule) {
-            if (null !== ($element = $this->getElement())) {
-                if (null !== ($viewModule = $element->getAttrib('viewModule'))) {
-                    $this->setViewModule($viewModule);
-                    return $viewModule;
-                }
-            }
+	/**
+	 * Get view script module
+	 *
+	 * @return string|null
+	 */
+	public function getViewModule()
+	{
+		if (null === $this->_viewModule) {
+			if (null !== ($element = $this->getElement())) {
+				if (null !== ($viewModule = $element->getAttrib('viewModule'))) {
+					$this->setViewModule($viewModule);
+					return $viewModule;
+				}
+			}
 
-            if (null !== ($viewModule = $this->getOption('viewModule'))) {
-                $this->setViewModule($viewModule)
-                     ->removeOption('viewModule');
-            }
-        }
+			if (null !== ($viewModule = $this->getOption('viewModule'))) {
+				$this->setViewModule($viewModule)
+				->removeOption('viewModule');
+			}
+		}
 
-        return $this->_viewModule;
-    }
+		return $this->_viewModule;
+	}
 
-    /**
-     * Render a view script
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $element = $this->getElement();
-        $view    = $element->getView();
-        if (null === $view) {
-            return $content;
-        }
+	/**
+	 * Render a view script
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$element = $this->getElement();
+		$view    = $element->getView();
+		if (null === $view) {
+			return $content;
+		}
 
-        $viewScript = $this->getViewScript();
-        if (empty($viewScript)) {
-            require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception('No view script registered with ViewScript decorator');
-        }
+		$viewScript = $this->getViewScript();
+		if (empty($viewScript)) {
+			require_once 'Zend/Form/Exception.php';
+			throw new Zend_Form_Exception('No view script registered with ViewScript decorator');
+		}
 
-        $separator = $this->getSeparator();
-        $placement = $this->getPlacement();
+		$separator = $this->getSeparator();
+		$placement = $this->getPlacement();
 
-        $vars              = $this->getOptions();
-        $vars['element']   = $element;
-        $vars['content']   = $content;
-        $vars['decorator'] = $this;
+		$vars              = $this->getOptions();
+		$vars['element']   = $element;
+		$vars['content']   = $content;
+		$vars['decorator'] = $this;
 
-        $viewModule = $this->getViewModule();
-        if (empty($viewModule)) {
-            $renderedContent = $view->partial($viewScript, $vars);
-        } else {
-            $renderedContent = $view->partial($viewScript, $viewModule, $vars);
-        }
+		$viewModule = $this->getViewModule();
+		if (empty($viewModule)) {
+			$renderedContent = $view->partial($viewScript, $vars);
+		} else {
+			$renderedContent = $view->partial($viewScript, $viewModule, $vars);
+		}
 
-        // Get placement again to see if it has changed
-        $placement = $this->getPlacement();
+		// Get placement again to see if it has changed
+		$placement = $this->getPlacement();
 
-        switch ($placement) {
-            case self::PREPEND:
-                return $renderedContent . $separator . $content;
-            case self::APPEND:
-                return $content . $separator . $renderedContent;
-            default:
-                return $renderedContent;
-        }
-    }
+		switch ($placement) {
+			case self::PREPEND:
+				return $renderedContent . $separator . $content;
+			case self::APPEND:
+				return $content . $separator . $renderedContent;
+			default:
+				return $renderedContent;
+		}
+	}
 }

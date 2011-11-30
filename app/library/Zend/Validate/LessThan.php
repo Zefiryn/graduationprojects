@@ -32,91 +32,91 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_LessThan extends Zend_Validate_Abstract
 {
-    const NOT_LESS = 'notLessThan';
+	const NOT_LESS = 'notLessThan';
 
-    /**
-     * @var array
-     */
-    protected $_messageTemplates = array(
-        self::NOT_LESS => "'%value%' is not less than '%max%'"
-    );
+	/**
+	 * @var array
+	 */
+	protected $_messageTemplates = array(
+	self::NOT_LESS => "'%value%' is not less than '%max%'"
+	);
 
-    /**
-     * @var array
-     */
-    protected $_messageVariables = array(
+	/**
+	 * @var array
+	 */
+	protected $_messageVariables = array(
         'max' => '_max'
-    );
+	);
 
-    /**
-     * Maximum value
-     *
-     * @var mixed
-     */
-    protected $_max;
+	/**
+	 * Maximum value
+	 *
+	 * @var mixed
+	 */
+	protected $_max;
 
-    /**
-     * Sets validator options
-     *
-     * @param  mixed|Zend_Config $max
-     * @return void
-     */
-    public function __construct($max)
-    {
-        if ($max instanceof Zend_Config) {
-            $max = $max->toArray();
-        }
+	/**
+	 * Sets validator options
+	 *
+	 * @param  mixed|Zend_Config $max
+	 * @return void
+	 */
+	public function __construct($max)
+	{
+		if ($max instanceof Zend_Config) {
+			$max = $max->toArray();
+		}
 
-        if (is_array($max)) {
-            if (array_key_exists('max', $max)) {
-                $max = $max['max'];
-            } else {
-                require_once 'Zend/Validate/Exception.php';
-                throw new Zend_Validate_Exception("Missing option 'max'");
-            }
-        }
+		if (is_array($max)) {
+			if (array_key_exists('max', $max)) {
+				$max = $max['max'];
+			} else {
+				require_once 'Zend/Validate/Exception.php';
+				throw new Zend_Validate_Exception("Missing option 'max'");
+			}
+		}
 
-        $this->setMax($max);
-    }
+		$this->setMax($max);
+	}
 
-    /**
-     * Returns the max option
-     *
-     * @return mixed
-     */
-    public function getMax()
-    {
-        return $this->_max;
-    }
+	/**
+	 * Returns the max option
+	 *
+	 * @return mixed
+	 */
+	public function getMax()
+	{
+		return $this->_max;
+	}
 
-    /**
-     * Sets the max option
-     *
-     * @param  mixed $max
-     * @return Zend_Validate_LessThan Provides a fluent interface
-     */
-    public function setMax($max)
-    {
-        $this->_max = $max;
-        return $this;
-    }
+	/**
+	 * Sets the max option
+	 *
+	 * @param  mixed $max
+	 * @return Zend_Validate_LessThan Provides a fluent interface
+	 */
+	public function setMax($max)
+	{
+		$this->_max = $max;
+		return $this;
+	}
 
-    /**
-     * Defined by Zend_Validate_Interface
-     *
-     * Returns true if and only if $value is less than max option
-     *
-     * @param  mixed $value
-     * @return boolean
-     */
-    public function isValid($value)
-    {
-        $this->_setValue($value);
-        if ($this->_max <= $value) {
-            $this->_error(self::NOT_LESS);
-            return false;
-        }
-        return true;
-    }
+	/**
+	 * Defined by Zend_Validate_Interface
+	 *
+	 * Returns true if and only if $value is less than max option
+	 *
+	 * @param  mixed $value
+	 * @return boolean
+	 */
+	public function isValid($value)
+	{
+		$this->_setValue($value);
+		if ($this->_max <= $value) {
+			$this->_error(self::NOT_LESS);
+			return false;
+		}
+		return true;
+	}
 
 }

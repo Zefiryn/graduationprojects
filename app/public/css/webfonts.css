@@ -17,9 +17,9 @@
  * 
  * © 2011 Bitstream Inc
 */
-
-
- @font-face {
- 	font-family: "Gesta-Bold";
-	src: url('webfonts/152B99_0.eot?') format('eot'), url('webfonts/152B99_0.ttf') format('truetype'),url('webfonts/152B99_0.svg#wf') format('svg');
+@font-face {
+	font-family: "Gesta-Bold";
+	src: url('webfonts/152B99_0.eot?') format('eot'),
+		url('webfonts/152B99_0.ttf') format('truetype'),
+		url('webfonts/152B99_0.svg#wf') format('svg');
 }

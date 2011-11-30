@@ -43,70 +43,70 @@ require_once('Zend/Gdata/Query.php');
 class Zend_Gdata_Books_VolumeQuery extends Zend_Gdata_Query
 {
 
-    /**
-     * Create Gdata_Books_VolumeQuery object
-     *
-     * @param string|null $url If non-null, pre-initializes the instance to
-     *        use a given URL.
-     */
-    public function __construct($url = null)
-    {
-        parent::__construct($url);
-    }
+	/**
+	 * Create Gdata_Books_VolumeQuery object
+	 *
+	 * @param string|null $url If non-null, pre-initializes the instance to
+	 *        use a given URL.
+	 */
+	public function __construct($url = null)
+	{
+		parent::__construct($url);
+	}
 
-    /**
-     * Sets the minimum level of viewability of volumes to return in the search results
-     *
-     * @param string|null $value The minimum viewability - 'full' or 'partial'
-     * @return Zend_Gdata_Books_VolumeQuery Provides a fluent interface
-     */
-    public function setMinViewability($value = null)
-    {
-        switch ($value) {
-            case 'full_view':
-                $this->_params['min-viewability'] = 'full';
-                break;
-            case 'partial_view':
-                $this->_params['min-viewability'] = 'partial';
-                break;
-            case null:
-                unset($this->_params['min-viewability']);
-                break;
-        }
-        return $this;
-    }
+	/**
+	 * Sets the minimum level of viewability of volumes to return in the search results
+	 *
+	 * @param string|null $value The minimum viewability - 'full' or 'partial'
+	 * @return Zend_Gdata_Books_VolumeQuery Provides a fluent interface
+	 */
+	public function setMinViewability($value = null)
+	{
+		switch ($value) {
+			case 'full_view':
+				$this->_params['min-viewability'] = 'full';
+				break;
+			case 'partial_view':
+				$this->_params['min-viewability'] = 'partial';
+				break;
+			case null:
+				unset($this->_params['min-viewability']);
+				break;
+		}
+		return $this;
+	}
 
-    /**
-     * Minimum viewability of volumes to include in search results
-     *
-     * @return string|null min-viewability
-     */
-    public function getMinViewability()
-    {
-        if (array_key_exists('min-viewability', $this->_params)) {
-            return $this->_params['min-viewability'];
-        } else {
-            return null;
-        }
-    }
+	/**
+	 * Minimum viewability of volumes to include in search results
+	 *
+	 * @return string|null min-viewability
+	 */
+	public function getMinViewability()
+	{
+		if (array_key_exists('min-viewability', $this->_params)) {
+			return $this->_params['min-viewability'];
+		} else {
+			return null;
+		}
+	}
 
-    /**
-     * Returns the generated full query URL
-     *
-     * @return string The URL
-     */
-    public function getQueryUrl()
-    {
-        if (isset($this->_url)) {
-            $url = $this->_url;
-        } else {
-            $url = Zend_Gdata_Books::VOLUME_FEED_URI;
-        }
-        if ($this->getCategory() !== null) {
-            $url .= '/-/' . $this->getCategory();
-        }
-        $url = $url . $this->getQueryString();
-        return $url;
-    }
+	/**
+	 * Returns the generated full query URL
+	 *
+	 * @return string The URL
+	 */
+	public function getQueryUrl()
+	{
+		if (isset($this->_url)) {
+			$url = $this->_url;
+		} else {
+			$url = Zend_Gdata_Books::VOLUME_FEED_URI;
+		}
+		if ($this->getCategory() !== null) {
+			$url .= '/-/' . $this->getCategory();
+		}
+		$url = $url . $this->getQueryString();
+		return $url;
+	}
 
 }

@@ -45,20 +45,20 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_CommentingEnabled extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'commentingEnabled';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'commentingEnabled';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_CommentingEnabled object.
-     *
-     * @param string $text (optional) Whether commenting should be enabled
-     *          or not.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_CommentingEnabled object.
+	 *
+	 * @param string $text (optional) Whether commenting should be enabled
+	 *          or not.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

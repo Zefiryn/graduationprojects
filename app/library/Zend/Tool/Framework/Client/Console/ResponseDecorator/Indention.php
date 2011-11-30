@@ -28,29 +28,29 @@ require_once "Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Console_ResponseDecorator_Indention
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
-    public function getName()
-    {
-        return 'indention';
-    }
+	public function getName()
+	{
+		return 'indention';
+	}
 
-    /**
-     * @param string $content
-     * @param integer $indention
-     */
-    public function decorate($content, $indention)
-    {
-        if(strval(intval($indention)) != $indention) {
-            return $content;
-        }
+	/**
+	 * @param string $content
+	 * @param integer $indention
+	 */
+	public function decorate($content, $indention)
+	{
+		if(strval(intval($indention)) != $indention) {
+			return $content;
+		}
 
-        $newContent = "";
-        $lines = preg_split('((\r\n|\r|\n)+)', $content);
-        $lineIndention = str_repeat(' ', $indention);
-        foreach($lines AS $line) {
-            $newContent .= $lineIndention.$line.PHP_EOL;
-        }
-        return rtrim($newContent);
-    }
+		$newContent = "";
+		$lines = preg_split('((\r\n|\r|\n)+)', $content);
+		$lineIndention = str_repeat(' ', $indention);
+		foreach($lines AS $line) {
+			$newContent .= $lineIndention.$line.PHP_EOL;
+		}
+		return rtrim($newContent);
+	}
 }

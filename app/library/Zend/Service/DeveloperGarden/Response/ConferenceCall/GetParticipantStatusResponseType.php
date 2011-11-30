@@ -34,22 +34,22 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponseType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * @var array
-     */
-    public $status = null;
+	/**
+	 * @var array
+	 */
+	public $status = null;
 
-    /**
-     * returns the status array
-     * a array of
-     * Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
-     *
-     * @return array
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
+	/**
+	 * returns the status array
+	 * a array of
+	 * Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
+	 *
+	 * @return array
+	 */
+	public function getStatus()
+	{
+		return $this->status;
+	}
 }

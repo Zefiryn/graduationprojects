@@ -34,140 +34,140 @@ require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
  */
 class Zend_Dojo_Form_Element_NumberTextBox extends Zend_Dojo_Form_Element_ValidationTextBox
 {
-    /**
-     * Use NumberTextBox dijit view helper
-     * @var string
-     */
-    public $helper = 'NumberTextBox';
+	/**
+	 * Use NumberTextBox dijit view helper
+	 * @var string
+	 */
+	public $helper = 'NumberTextBox';
 
-    /**
-     * Allowed numeric type formats
-     * @var array
-     */
-    protected $_allowedTypes = array(
+	/**
+	 * Allowed numeric type formats
+	 * @var array
+	 */
+	protected $_allowedTypes = array(
         'decimal',
         'scientific',
         'percent',
         'currency',
-    );
+	);
 
-    /**
-     * Set locale
-     *
-     * @param  string $locale
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setLocale($locale)
-    {
-        $this->setConstraint('locale', (string) $locale);
-        return $this;
-    }
+	/**
+	 * Set locale
+	 *
+	 * @param  string $locale
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setLocale($locale)
+	{
+		$this->setConstraint('locale', (string) $locale);
+		return $this;
+	}
 
-    /**
-     * Retrieve locale
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        return $this->getConstraint('locale');
-    }
+	/**
+	 * Retrieve locale
+	 *
+	 * @return string|null
+	 */
+	public function getLocale()
+	{
+		return $this->getConstraint('locale');
+	}
 
-    /**
-     * Set numeric format pattern
-     *
-     * @param  string $pattern
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setPattern($pattern)
-    {
-        $this->setConstraint('pattern', (string) $pattern);
-        return $this;
-    }
+	/**
+	 * Set numeric format pattern
+	 *
+	 * @param  string $pattern
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setPattern($pattern)
+	{
+		$this->setConstraint('pattern', (string) $pattern);
+		return $this;
+	}
 
-    /**
-     * Retrieve numeric format pattern
-     *
-     * @return string|null
-     */
-    public function getPattern()
-    {
-        return $this->getConstraint('pattern');
-    }
+	/**
+	 * Retrieve numeric format pattern
+	 *
+	 * @return string|null
+	 */
+	public function getPattern()
+	{
+		return $this->getConstraint('pattern');
+	}
 
-    /**
-     * Set numeric format type
-     *
-     * @see    $_allowedTypes
-     * @param  string $type
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setType($type)
-    {
-        $type = strtolower($type);
-        if (!in_array($type, $this->_allowedTypes)) {
-            require_once 'Zend/Form/Element/Exception.php';
-            throw new Zend_Form_Element_Exception(sprintf('Invalid numeric type "%s" specified', $type));
-        }
+	/**
+	 * Set numeric format type
+	 *
+	 * @see    $_allowedTypes
+	 * @param  string $type
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setType($type)
+	{
+		$type = strtolower($type);
+		if (!in_array($type, $this->_allowedTypes)) {
+			require_once 'Zend/Form/Element/Exception.php';
+			throw new Zend_Form_Element_Exception(sprintf('Invalid numeric type "%s" specified', $type));
+		}
 
-        $this->setConstraint('type', $type);
-        return $this;
-    }
+		$this->setConstraint('type', $type);
+		return $this;
+	}
 
-    /**
-     * Retrieve type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->getConstraint('type');
-    }
+	/**
+	 * Retrieve type
+	 *
+	 * @return string|null
+	 */
+	public function getType()
+	{
+		return $this->getConstraint('type');
+	}
 
-    /**
-     * Set decimal places
-     *
-     * @param  int $places
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setPlaces($places)
-    {
-        $this->setConstraint('places', (int) $places);
-        return $this;
-    }
+	/**
+	 * Set decimal places
+	 *
+	 * @param  int $places
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setPlaces($places)
+	{
+		$this->setConstraint('places', (int) $places);
+		return $this;
+	}
 
-    /**
-     * Retrieve decimal places
-     *
-     * @return int|null
-     */
-    public function getPlaces()
-    {
-        return $this->getConstraint('places');
-    }
+	/**
+	 * Retrieve decimal places
+	 *
+	 * @return int|null
+	 */
+	public function getPlaces()
+	{
+		return $this->getConstraint('places');
+	}
 
-    /**
-     * Set strict flag
-     *
-     * @param  bool $strict
-     * @return Zend_Dojo_Form_Element_NumberTextBox
-     */
-    public function setStrict($flag)
-    {
-        $this->setConstraint('strict', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set strict flag
+	 *
+	 * @param  bool $strict
+	 * @return Zend_Dojo_Form_Element_NumberTextBox
+	 */
+	public function setStrict($flag)
+	{
+		$this->setConstraint('strict', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve strict flag
-     *
-     * @return bool
-     */
-    public function getStrict()
-    {
-        if (!$this->hasConstraint('strict')) {
-            return false;
-        }
-        return ('true' == $this->getConstraint('strict'));
-    }
+	/**
+	 * Retrieve strict flag
+	 *
+	 * @return bool
+	 */
+	public function getStrict()
+	{
+		if (!$this->hasConstraint('strict')) {
+			return false;
+		}
+		return ('true' == $this->getConstraint('strict'));
+	}
 }

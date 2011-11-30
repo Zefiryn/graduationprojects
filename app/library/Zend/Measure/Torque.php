@@ -36,31 +36,31 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Torque extends Zend_Measure_Abstract
 {
-    const STANDARD = 'NEWTON_METER';
+	const STANDARD = 'NEWTON_METER';
 
-    const DYNE_CENTIMETER     = 'DYNE_CENTIMETER';
-    const GRAM_CENTIMETER     = 'GRAM_CENTIMETER';
-    const KILOGRAM_CENTIMETER = 'KILOGRAM_CENTIMETER';
-    const KILOGRAM_METER      = 'KILOGRAM_METER';
-    const KILONEWTON_METER    = 'KILONEWTON_METER';
-    const KILOPOND_METER      = 'KILOPOND_METER';
-    const MEGANEWTON_METER    = 'MEGANEWTON_METER';
-    const MICRONEWTON_METER   = 'MICRONEWTON_METER';
-    const MILLINEWTON_METER   = 'MILLINEWTON_METER';
-    const NEWTON_CENTIMETER   = 'NEWTON_CENTIMETER';
-    const NEWTON_METER        = 'NEWTON_METER';
-    const OUNCE_FOOT          = 'OUNCE_FOOT';
-    const OUNCE_INCH          = 'OUNCE_INCH';
-    const POUND_FOOT          = 'POUND_FOOT';
-    const POUNDAL_FOOT        = 'POUNDAL_FOOT';
-    const POUND_INCH          = 'POUND_INCH';
+	const DYNE_CENTIMETER     = 'DYNE_CENTIMETER';
+	const GRAM_CENTIMETER     = 'GRAM_CENTIMETER';
+	const KILOGRAM_CENTIMETER = 'KILOGRAM_CENTIMETER';
+	const KILOGRAM_METER      = 'KILOGRAM_METER';
+	const KILONEWTON_METER    = 'KILONEWTON_METER';
+	const KILOPOND_METER      = 'KILOPOND_METER';
+	const MEGANEWTON_METER    = 'MEGANEWTON_METER';
+	const MICRONEWTON_METER   = 'MICRONEWTON_METER';
+	const MILLINEWTON_METER   = 'MILLINEWTON_METER';
+	const NEWTON_CENTIMETER   = 'NEWTON_CENTIMETER';
+	const NEWTON_METER        = 'NEWTON_METER';
+	const OUNCE_FOOT          = 'OUNCE_FOOT';
+	const OUNCE_INCH          = 'OUNCE_INCH';
+	const POUND_FOOT          = 'POUND_FOOT';
+	const POUNDAL_FOOT        = 'POUNDAL_FOOT';
+	const POUND_INCH          = 'POUND_INCH';
 
-    /**
-     * Calculations for all torque units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all torque units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'DYNE_CENTIMETER'     => array('0.0000001',          'dyncm'),
         'GRAM_CENTIMETER'     => array('0.0000980665',       'gcm'),
         'KILOGRAM_CENTIMETER' => array('0.0980665',          'kgcm'),
@@ -78,5 +78,5 @@ class Zend_Measure_Torque extends Zend_Measure_Abstract
         'POUNDAL_FOOT'        => array('0.0421401099752144', 'plft'),
         'POUND_INCH'          => array(array('' => '0.084738622', '/' => '12', '*' => '16'), 'lbin'),
         'STANDARD'            => 'NEWTON_METER'
-    );
+        );
 }

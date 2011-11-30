@@ -34,24 +34,24 @@ require_once 'Zend/Search/Lucene/Search/Weight.php';
  */
 class Zend_Search_Lucene_Search_Weight_Empty extends Zend_Search_Lucene_Search_Weight
 {
-    /**
-     * The sum of squared weights of contained query clauses.
-     *
-     * @return float
-     */
-    public function sumOfSquaredWeights()
-    {
-        return 1;
-    }
+	/**
+	 * The sum of squared weights of contained query clauses.
+	 *
+	 * @return float
+	 */
+	public function sumOfSquaredWeights()
+	{
+		return 1;
+	}
 
 
-    /**
-     * Assigns the query normalization factor to this.
-     *
-     * @param float $queryNorm
-     */
-    public function normalize($queryNorm)
-    {
-    }
+	/**
+	 * Assigns the query normalization factor to this.
+	 *
+	 * @param float $queryNorm
+	 */
+	public function normalize($queryNorm)
+	{
+	}
 }
 

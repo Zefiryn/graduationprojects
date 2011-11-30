@@ -17,32 +17,32 @@ class Application_Model_DiplomaFiles extends GP_Application_Model
 			'height' => 210,
 			'crop' => false,
 			'ratio' => 'width' //save ratio according to new width
-		),
+	),
 		'small' => array(
 			'width' => 470,
 			'height' => 260,
 			'crop' => false,
 			'ratio' => 'width'	//save ratio according to new width
-		)
+	)
 	);
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_DiplomaFiles';
-	
-	public function __construct($id = null, array $options = null) 
+
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
+
 	public function getFileFolder()
 	{
 		return '/'.substr($this->path, 0, strrpos($this->path, '/'));
-	} 
-	
+	}
+
 	public function getFileName()
 	{
 		return substr($this->path, strrpos($this->path, '/')+1);
 	}
-	
+
 	public function recreateThumbnails()
 	{
 		$options = Zend_Registry::get('options');
@@ -52,6 +52,6 @@ class Application_Model_DiplomaFiles extends GP_Application_Model
 			$this->getDbTable()->rerunResize($this, 'path', $dir, $key);
 		}
 	}
-	
+
 }
 

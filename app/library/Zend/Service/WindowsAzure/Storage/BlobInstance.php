@@ -55,35 +55,35 @@ require_once 'Zend/Service/WindowsAzure/Storage/StorageEntityAbstract.php';
  */
 class Zend_Service_WindowsAzure_Storage_BlobInstance
 {
-    /**
-     * Data
-     *
-     * @var array
-     */
-    protected $_data = null;
+	/**
+	 * Data
+	 *
+	 * @var array
+	 */
+	protected $_data = null;
 
-    /**
-     * Constructor
-     *
-     * @param string  $containerName   Container name
-     * @param string  $name            Name
-     * @param string  $snapshotId      Snapshot id
-     * @param string  $etag            Etag
-     * @param string  $lastModified    Last modified date
-     * @param string  $url             Url
-     * @param int     $size            Size
-     * @param string  $contentType     Content Type
-     * @param string  $contentEncoding Content Encoding
-     * @param string  $contentLanguage Content Language
-     * @param string  $cacheControl    Cache control
-     * @param string  $blobType        Blob type
-     * @param string  $leaseStatus     Lease status
-     * @param boolean $isPrefix        Is Prefix?
-     * @param array   $metadata        Key/value pairs of meta data
-     */
-    public function __construct($containerName, $name, $snapshotId, $etag, $lastModified, $url = '', $size = 0, $contentType = '', $contentEncoding = '', $contentLanguage = '', $cacheControl = '', $blobType = '', $leaseStatus = '', $isPrefix = false, $metadata = array())
-    {	
-        $this->_data = array(
+	/**
+	 * Constructor
+	 *
+	 * @param string  $containerName   Container name
+	 * @param string  $name            Name
+	 * @param string  $snapshotId      Snapshot id
+	 * @param string  $etag            Etag
+	 * @param string  $lastModified    Last modified date
+	 * @param string  $url             Url
+	 * @param int     $size            Size
+	 * @param string  $contentType     Content Type
+	 * @param string  $contentEncoding Content Encoding
+	 * @param string  $contentLanguage Content Language
+	 * @param string  $cacheControl    Cache control
+	 * @param string  $blobType        Blob type
+	 * @param string  $leaseStatus     Lease status
+	 * @param boolean $isPrefix        Is Prefix?
+	 * @param array   $metadata        Key/value pairs of meta data
+	 */
+	public function __construct($containerName, $name, $snapshotId, $etag, $lastModified, $url = '', $size = 0, $contentType = '', $contentEncoding = '', $contentLanguage = '', $cacheControl = '', $blobType = '', $leaseStatus = '', $isPrefix = false, $metadata = array())
+	{
+		$this->_data = array(
             'container'        => $containerName,
             'name'             => $name,
             'snapshotid'       => $snapshotId,
@@ -99,34 +99,34 @@ class Zend_Service_WindowsAzure_Storage_BlobInstance
             'leasestatus'      => $leaseStatus,
             'isprefix'         => $isPrefix,
             'metadata'         => $metadata
-        );
-    }
+		);
+	}
 
-    /**
-     * Magic overload for setting properties
-     *
-     * @param string $name     Name of the property
-     * @param string $value    Value to set
-     */
-    public function __set($name, $value) {
-        if (array_key_exists(strtolower($name), $this->_data)) {
-            $this->_data[strtolower($name)] = $value;
-            return;
-        }
+	/**
+	 * Magic overload for setting properties
+	 *
+	 * @param string $name     Name of the property
+	 * @param string $value    Value to set
+	 */
+	public function __set($name, $value) {
+		if (array_key_exists(strtolower($name), $this->_data)) {
+			$this->_data[strtolower($name)] = $value;
+			return;
+		}
 
-        throw new Exception("Unknown property: " . $name);
-    }
+		throw new Exception("Unknown property: " . $name);
+	}
 
-    /**
-     * Magic overload for getting properties
-     *
-     * @param string $name     Name of the property
-     */
-    public function __get($name) {
-        if (array_key_exists(strtolower($name), $this->_data)) {
-            return $this->_data[strtolower($name)];
-        }
+	/**
+	 * Magic overload for getting properties
+	 *
+	 * @param string $name     Name of the property
+	 */
+	public function __get($name) {
+		if (array_key_exists(strtolower($name), $this->_data)) {
+			return $this->_data[strtolower($name)];
+		}
 
-        throw new Exception("Unknown property: " . $name);
-    }
+		throw new Exception("Unknown property: " . $name);
+	}
 }

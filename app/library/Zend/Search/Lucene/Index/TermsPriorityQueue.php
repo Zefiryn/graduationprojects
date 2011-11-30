@@ -32,18 +32,18 @@ require_once 'Zend/Search/Lucene/PriorityQueue.php';
  */
 class Zend_Search_Lucene_Index_TermsPriorityQueue extends Zend_Search_Lucene_PriorityQueue
 {
-    /**
-     * Compare elements
-     *
-     * Returns true, if $termsStream1 is "less" than $termsStream2; else otherwise
-     *
-     * @param mixed $termsStream1
-     * @param mixed $termsStream2
-     * @return boolean
-     */
-    protected function _less($termsStream1, $termsStream2)
-    {
-        return strcmp($termsStream1->currentTerm()->key(), $termsStream2->currentTerm()->key()) < 0;
-    }
+	/**
+	 * Compare elements
+	 *
+	 * Returns true, if $termsStream1 is "less" than $termsStream2; else otherwise
+	 *
+	 * @param mixed $termsStream1
+	 * @param mixed $termsStream2
+	 * @return boolean
+	 */
+	protected function _less($termsStream1, $termsStream2)
+	{
+		return strcmp($termsStream1->currentTerm()->key(), $termsStream2->currentTerm()->key()) < 0;
+	}
 
 }

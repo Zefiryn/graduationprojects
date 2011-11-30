@@ -1,16 +1,23 @@
 <div id="main">
-	<h1><?php echo $this->translate('localizations_header'); ?>
-	<a href="<?php echo $this->url(array(), 'new_caption');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block" 
-					alt="<?php echo $this->translate('new_caption');?>" 
-					title="<?php echo $this->translate('new_caption');?>" />
-			</a>
+	<h1>
+	<?php echo $this->translate('localizations_header'); ?>
+		<a href="<?php echo $this->url(array(), 'new_caption');?>"> <img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('new_caption');?>"
+			title="<?php echo $this->translate('new_caption');?>" />
+		</a>
 	</h1>
 	<div class="column-left">
+
 	<?php $divide = count($this->captions)/2;?>
+
 	<?php foreach ($this->captions as $index => $caption):?>
 		<div class="caption">
-			<h3><?php echo $caption->name;?></h3>
+			<h3>
+			<?php echo $caption->name;?></h3>
+			
+			
 			<?php foreach($this->translations as $lang => $strings):?>
 			<p>
 				<strong><?php echo $lang;?></strong>:
@@ -36,14 +43,19 @@
 			<?php endforeach;?>
 		</div>
 		
+		
+		
 	<?php if (($index + 1) >= $divide):?>
 	</div>
 	<div class="column-right">
+
 	<?php endif;?>
+
 	<?php endforeach;?>
 	</div>
 </div>
 
-<?php echo $this->partial('partials/delete_dialog.phtml', 
-			array('title' => 'translation', 'delete_confirm' => $this->translate('translation_delete_confirm')));
+
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'translation', 'delete_confirm' => $this->translate('translation_delete_confirm')));
 ?>

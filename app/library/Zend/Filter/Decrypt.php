@@ -34,16 +34,16 @@ require_once 'Zend/Filter/Encrypt.php';
  */
 class Zend_Filter_Decrypt extends Zend_Filter_Encrypt
 {
-    /**
-     * Defined by Zend_Filter_Interface
-     *
-     * Decrypts the content $value with the defined settings
-     *
-     * @param  string $value Content to decrypt
-     * @return string The decrypted content
-     */
-    public function filter($value)
-    {
-        return $this->_adapter->decrypt($value);
-    }
+	/**
+	 * Defined by Zend_Filter_Interface
+	 *
+	 * Decrypts the content $value with the defined settings
+	 *
+	 * @param  string $value Content to decrypt
+	 * @return string The decrypted content
+	 */
+	public function filter($value)
+	{
+		return $this->_adapter->decrypt($value);
+	}
 }

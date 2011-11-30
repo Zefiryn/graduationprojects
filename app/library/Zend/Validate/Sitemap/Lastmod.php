@@ -38,51 +38,51 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
 {
-    /**
-     * Regular expression to use when validating
-     *
-     */
-    const LASTMOD_REGEX = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])(T([0-1][0-9]|2[0-3])(:[0-5][0-9])(:[0-5][0-9])?(\\+|-)([0-1][0-9]|2[0-3]):[0-5][0-9])?$/';
+	/**
+	 * Regular expression to use when validating
+	 *
+	 */
+	const LASTMOD_REGEX = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])(T([0-1][0-9]|2[0-3])(:[0-5][0-9])(:[0-5][0-9])?(\\+|-)([0-1][0-9]|2[0-3]):[0-5][0-9])?$/';
 
-    /**
-     * Validation key for not valid
-     *
-     */
-    const NOT_VALID = 'sitemapLastmodNotValid';
-    const INVALID   = 'sitemapLastmodInvalid';
+	/**
+	 * Validation key for not valid
+	 *
+	 */
+	const NOT_VALID = 'sitemapLastmodNotValid';
+	const INVALID   = 'sitemapLastmodInvalid';
 
-    /**
-     * Validation failure message template definitions
-     *
-     * @var array
-     */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is no valid sitemap lastmod",
-        self::INVALID   => "Invalid type given. String expected",
-    );
+	/**
+	 * Validation failure message template definitions
+	 *
+	 * @var array
+	 */
+	protected $_messageTemplates = array(
+	self::NOT_VALID => "'%value%' is no valid sitemap lastmod",
+	self::INVALID   => "Invalid type given. String expected",
+	);
 
-    /**
-     * Validates if a string is valid as a sitemap lastmod
-     *
-     * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
-     *
-     * @param  string  $value  value to validate
-     * @return boolean
-     */
-    public function isValid($value)
-    {
-        if (!is_string($value)) {
-            $this->_error(self::INVALID);
-            return false;
-        }
+	/**
+	 * Validates if a string is valid as a sitemap lastmod
+	 *
+	 * @link http://www.sitemaps.org/protocol.php#lastmoddef <lastmod>
+	 *
+	 * @param  string  $value  value to validate
+	 * @return boolean
+	 */
+	public function isValid($value)
+	{
+		if (!is_string($value)) {
+			$this->_error(self::INVALID);
+			return false;
+		}
 
-        $this->_setValue($value);
-        $result = @preg_match(self::LASTMOD_REGEX, $value);
-        if ($result != 1) {
-            $this->_error(self::NOT_VALID);
-            return false;
-        }
+		$this->_setValue($value);
+		$result = @preg_match(self::LASTMOD_REGEX, $value);
+		if ($result != 1) {
+			$this->_error(self::NOT_VALID);
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

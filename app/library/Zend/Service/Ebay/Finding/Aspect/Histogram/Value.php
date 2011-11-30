@@ -35,22 +35,22 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Aspect_Histogram_Value extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * Number of items that share the characteristic the respective aspect
-     * value.
-     *
-     * @var integer
-     */
-    public $count;
+	/**
+	 * Number of items that share the characteristic the respective aspect
+	 * value.
+	 *
+	 * @var integer
+	 */
+	public $count;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        parent::_init();
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		parent::_init();
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
 
-        $this->count = $this->_query(".//$ns:count[1]", 'integer');
-    }
+		$this->count = $this->_query(".//$ns:count[1]", 'integer');
+	}
 }

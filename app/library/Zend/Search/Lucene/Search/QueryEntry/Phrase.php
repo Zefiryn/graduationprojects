@@ -32,85 +32,85 @@ require_once 'Zend/Search/Lucene/Search/QueryEntry.php';
  */
 class Zend_Search_Lucene_Search_QueryEntry_Phrase extends Zend_Search_Lucene_Search_QueryEntry
 {
-    /**
-     * Phrase value
-     *
-     * @var string
-     */
-    private $_phrase;
+	/**
+	 * Phrase value
+	 *
+	 * @var string
+	 */
+	private $_phrase;
 
-    /**
-     * Field
-     *
-     * @var string|null
-     */
-    private $_field;
-
-
-    /**
-     * Proximity phrase query
-     *
-     * @var boolean
-     */
-    private $_proximityQuery = false;
-
-    /**
-     * Words distance, used for proximiti queries
-     *
-     * @var integer
-     */
-    private $_wordsDistance = 0;
+	/**
+	 * Field
+	 *
+	 * @var string|null
+	 */
+	private $_field;
 
 
-    /**
-     * Object constractor
-     *
-     * @param string $phrase
-     * @param string $field
-     */
-    public function __construct($phrase, $field)
-    {
-        $this->_phrase = $phrase;
-        $this->_field  = $field;
-    }
+	/**
+	 * Proximity phrase query
+	 *
+	 * @var boolean
+	 */
+	private $_proximityQuery = false;
 
-    /**
-     * Process modifier ('~')
-     *
-     * @param mixed $parameter
-     */
-    public function processFuzzyProximityModifier($parameter = null)
-    {
-        $this->_proximityQuery = true;
+	/**
+	 * Words distance, used for proximiti queries
+	 *
+	 * @var integer
+	 */
+	private $_wordsDistance = 0;
 
-        if ($parameter !== null) {
-            $this->_wordsDistance = $parameter;
-        }
-    }
 
-    /**
-     * Transform entry to a subquery
-     *
-     * @param string $encoding
-     * @return Zend_Search_Lucene_Search_Query
-     * @throws Zend_Search_Lucene_Search_QueryParserException
-     */
-    public function getQuery($encoding)
-    {
-        /** Zend_Search_Lucene_Search_Query_Preprocessing_Phrase */
-        require_once 'Zend/Search/Lucene/Search/Query/Preprocessing/Phrase.php';
-        $query = new Zend_Search_Lucene_Search_Query_Preprocessing_Phrase($this->_phrase,
-                                                                          $encoding,
-                                                                          ($this->_field !== null)?
-                                                                              iconv($encoding, 'UTF-8', $this->_field) :
-                                                                              null);
+	/**
+	 * Object constractor
+	 *
+	 * @param string $phrase
+	 * @param string $field
+	 */
+	public function __construct($phrase, $field)
+	{
+		$this->_phrase = $phrase;
+		$this->_field  = $field;
+	}
 
-        if ($this->_proximityQuery) {
-            $query->setSlop($this->_wordsDistance);
-        }
+	/**
+	 * Process modifier ('~')
+	 *
+	 * @param mixed $parameter
+	 */
+	public function processFuzzyProximityModifier($parameter = null)
+	{
+		$this->_proximityQuery = true;
 
-        $query->setBoost($this->_boost);
+		if ($parameter !== null) {
+			$this->_wordsDistance = $parameter;
+		}
+	}
 
-        return $query;
-    }
+	/**
+	 * Transform entry to a subquery
+	 *
+	 * @param string $encoding
+	 * @return Zend_Search_Lucene_Search_Query
+	 * @throws Zend_Search_Lucene_Search_QueryParserException
+	 */
+	public function getQuery($encoding)
+	{
+		/** Zend_Search_Lucene_Search_Query_Preprocessing_Phrase */
+		require_once 'Zend/Search/Lucene/Search/Query/Preprocessing/Phrase.php';
+		$query = new Zend_Search_Lucene_Search_Query_Preprocessing_Phrase($this->_phrase,
+		$encoding,
+		($this->_field !== null)?
+		iconv($encoding, 'UTF-8', $this->_field) :
+		null);
+
+		if ($this->_proximityQuery) {
+			$query->setSlop($this->_wordsDistance);
+		}
+
+		$query->setBoost($this->_boost);
+
+		return $query;
+	}
 }

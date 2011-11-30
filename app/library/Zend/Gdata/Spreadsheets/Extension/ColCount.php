@@ -43,17 +43,17 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_Spreadsheets_Extension_ColCount extends Zend_Gdata_Extension
 {
 
-    protected $_rootElement = 'colCount';
-    protected $_rootNamespace = 'gs';
+	protected $_rootElement = 'colCount';
+	protected $_rootNamespace = 'gs';
 
-    /**
-     * Constructs a new Zend_Gdata_Spreadsheets_Extension_ColCount element.
-     * @param string $text (optional) Text contents of the element.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
-        parent::__construct();
-        $this->_text = $text;
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Spreadsheets_Extension_ColCount element.
+	 * @param string $text (optional) Text contents of the element.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Spreadsheets::$namespaces);
+		parent::__construct();
+		$this->_text = $text;
+	}
 }

@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Response/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Exception
-    extends Zend_Service_DeveloperGarden_Response_Exception
+extends Zend_Service_DeveloperGarden_Response_Exception
 {
 }

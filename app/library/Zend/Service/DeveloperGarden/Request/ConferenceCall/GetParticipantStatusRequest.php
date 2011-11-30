@@ -34,57 +34,57 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the conference id
-     *
-     * @var string
-     */
-    public $conferenceId = null;
+	/**
+	 * the conference id
+	 *
+	 * @var string
+	 */
+	public $conferenceId = null;
 
-    /**
-     * the participant id
-     *
-     * @var string
-     */
-    public $participantId = null;
+	/**
+	 * the participant id
+	 *
+	 * @var string
+	 */
+	public $participantId = null;
 
-    /**
-     * constructor
-     *
-     * @param integer $environment
-     * @param string $conferenceId
-     * @param string $participantId
-     */
-    public function __construct($environment, $conferenceId, $participantId)
-    {
-        parent::__construct($environment);
-        $this->setConferenceId($conferenceId)
-             ->setParticipantId($participantId);
-    }
+	/**
+	 * constructor
+	 *
+	 * @param integer $environment
+	 * @param string $conferenceId
+	 * @param string $participantId
+	 */
+	public function __construct($environment, $conferenceId, $participantId)
+	{
+		parent::__construct($environment);
+		$this->setConferenceId($conferenceId)
+		->setParticipantId($participantId);
+	}
 
-    /**
-     * set the conference id
-     *
-     * @param string $conferenceId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
-     */
-    public function setConferenceId($conferenceId)
-    {
-        $this->conferenceId = $conferenceId;
-        return $this;
-    }
+	/**
+	 * set the conference id
+	 *
+	 * @param string $conferenceId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
+	 */
+	public function setConferenceId($conferenceId)
+	{
+		$this->conferenceId = $conferenceId;
+		return $this;
+	}
 
-    /**
-     * set the participant id
-     *
-     * @param string $participantId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
-     */
-    public function setParticipantId($participantId)
-    {
-        $this->participantId = $participantId;
-        return $this;
-    }
+	/**
+	 * set the participant id
+	 *
+	 * @param string $participantId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
+	 */
+	public function setParticipantId($participantId)
+	{
+		$this->participantId = $participantId;
+		return $this;
+	}
 }

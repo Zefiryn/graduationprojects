@@ -34,61 +34,61 @@ require_once 'Zend/Form/SubForm.php';
  */
 class Zend_Dojo_Form_SubForm extends Zend_Form_SubForm
 {
-    /**
-     * Has the dojo view helper path been registered?
-     * @var bool
-     */
-    protected $_dojoViewPathRegistered = false;
+	/**
+	 * Has the dojo view helper path been registered?
+	 * @var bool
+	 */
+	protected $_dojoViewPathRegistered = false;
 
-    /**
-     * Constructor
-     *
-     * @param  array|Zend_Config|null $options
-     * @return void
-     */
-    public function __construct($options = null)
-    {
-        $this->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addPrefixPath('Zend_Dojo_Form_Element', 'Zend/Dojo/Form/Element', 'element')
-             ->addElementPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
-             ->addDisplayGroupPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator')
-             ->setDefaultDisplayGroupClass('Zend_Dojo_Form_DisplayGroup');
-        parent::__construct($options);
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  array|Zend_Config|null $options
+	 * @return void
+	 */
+	public function __construct($options = null)
+	{
+		$this->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+		->addPrefixPath('Zend_Dojo_Form_Element', 'Zend/Dojo/Form/Element', 'element')
+		->addElementPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator', 'decorator')
+		->addDisplayGroupPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator')
+		->setDefaultDisplayGroupClass('Zend_Dojo_Form_DisplayGroup');
+		parent::__construct($options);
+	}
 
-    /**
-     * Load the default decorators
-     *
-     * @return void
-     */
-    public function loadDefaultDecorators()
-    {
-        if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
-        }
+	/**
+	 * Load the default decorators
+	 *
+	 * @return void
+	 */
+	public function loadDefaultDecorators()
+	{
+		if ($this->loadDefaultDecoratorsIsDisabled()) {
+			return;
+		}
 
-        $decorators = $this->getDecorators();
-        if (empty($decorators)) {
-            $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag', array('tag' => 'dl'))
-                 ->addDecorator('ContentPane');
-        }
-    }
+		$decorators = $this->getDecorators();
+		if (empty($decorators)) {
+			$this->addDecorator('FormElements')
+			->addDecorator('HtmlTag', array('tag' => 'dl'))
+			->addDecorator('ContentPane');
+		}
+	}
 
-    /**
-     * Get view
-     *
-     * @return Zend_View_Interface
-     */
-    public function getView()
-    {
-        $view = parent::getView();
-        if (!$this->_dojoViewPathRegistered) {
-            if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
-                $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
-            }
-            $this->_dojoViewPathRegistered = true;
-        }
-        return $view;
-    }
+	/**
+	 * Get view
+	 *
+	 * @return Zend_View_Interface
+	 */
+	public function getView()
+	{
+		$view = parent::getView();
+		if (!$this->_dojoViewPathRegistered) {
+			if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
+				$view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+			}
+			$this->_dojoViewPathRegistered = true;
+		}
+		return $view;
+	}
 }

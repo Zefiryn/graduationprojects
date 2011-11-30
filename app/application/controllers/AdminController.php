@@ -3,15 +3,15 @@
 class AdminController extends Zefir_Controller_Action
 {
 
-    public function init()
-    {
-        parent::init();
-    }
+	public function init()
+	{
+		parent::init();
+	}
 
-    public function indexAction()
-    {
+	public function indexAction()
+	{
 		Zend_Registry::isRegistered($index)
-    }
+	}
 
 
 }

@@ -28,23 +28,23 @@
  */
 interface Zend_Pdf_Filter_Interface
 {
-    /**
-     * Encode data
-     *
-     * @param string $data
-     * @param array $params
-     * @return string
-     * @throws Zend_Pdf_Exception
-     */
-    public static function encode($data, $params = null);
+	/**
+	 * Encode data
+	 *
+	 * @param string $data
+	 * @param array $params
+	 * @return string
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function encode($data, $params = null);
 
-    /**
-     * Decode data
-     *
-     * @param string $data
-     * @param array $params
-     * @return string
-     * @throws Zend_Pdf_Exception
-     */
-    public static function decode($data, $params = null);
+	/**
+	 * Decode data
+	 *
+	 * @param string $data
+	 * @param array $params
+	 * @return string
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function decode($data, $params = null);
 }

@@ -30,33 +30,33 @@
  */
 class Zend_Service_DeveloperGarden_ConferenceCall_ConferenceAccount
 {
-    /**
-     * type of billing
-     *
-     * @var string
-     */
-    public $billingtype = null;
+	/**
+	 * type of billing
+	 *
+	 * @var string
+	 */
+	public $billingtype = null;
 
-    /**
-     * account id
-     *
-     * @var integer
-     */
-    public $account = null;
+	/**
+	 * account id
+	 *
+	 * @var integer
+	 */
+	public $account = null;
 
-    /**
-     * @return integer
-     */
-    public function getAccount()
-    {
-        return $this->account;
-    }
+	/**
+	 * @return integer
+	 */
+	public function getAccount()
+	{
+		return $this->account;
+	}
 
-    /**
-     * @return string
-     */
-    public function getBillingType()
-    {
-        return $this->billingtype;
-    }
+	/**
+	 * @return string
+	 */
+	public function getBillingType()
+	{
+		return $this->billingtype;
+	}
 }

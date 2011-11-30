@@ -32,52 +32,52 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Zend_View_Helper_UserAgent extends Zend_View_Helper_Abstract
 {
-    /**
-     * UserAgent instance
-     *
-     * @var Zend_Http_UserAgent
-     */
-    protected $_userAgent = null;
+	/**
+	 * UserAgent instance
+	 *
+	 * @var Zend_Http_UserAgent
+	 */
+	protected $_userAgent = null;
 
-    /**
-     * Helper method: retrieve or set UserAgent instance
-     *
-     * @param  null|Zend_Http_UserAgent $userAgent
-     * @return Zend_Http_UserAgent
-     */
-    public function userAgent(Zend_Http_UserAgent $userAgent = null)
-    {
-        if (null !== $userAgent) {
-            $this->setUserAgent($userAgent);
-        }
-        return $this->getUserAgent();
-    }
+	/**
+	 * Helper method: retrieve or set UserAgent instance
+	 *
+	 * @param  null|Zend_Http_UserAgent $userAgent
+	 * @return Zend_Http_UserAgent
+	 */
+	public function userAgent(Zend_Http_UserAgent $userAgent = null)
+	{
+		if (null !== $userAgent) {
+			$this->setUserAgent($userAgent);
+		}
+		return $this->getUserAgent();
+	}
 
-    /**
-     * Set UserAgent instance
-     *
-     * @param  Zend_Http_UserAgent $userAgent
-     * @return Zend_View_Helper_UserAgent
-     */
-    public function setUserAgent(Zend_Http_UserAgent $userAgent)
-    {
-        $this->_userAgent = $userAgent;
-        return $this;
-    }
+	/**
+	 * Set UserAgent instance
+	 *
+	 * @param  Zend_Http_UserAgent $userAgent
+	 * @return Zend_View_Helper_UserAgent
+	 */
+	public function setUserAgent(Zend_Http_UserAgent $userAgent)
+	{
+		$this->_userAgent = $userAgent;
+		return $this;
+	}
 
-    /**
-     * Retrieve UserAgent instance
-     *
-     * If none set, instantiates one using no configuration
-     *
-     * @return Zend_Http_UserAgent
-     */
-    public function getUserAgent()
-    {
-        if (null === $this->_userAgent) {
-            require_once 'Zend/Http/UserAgent.php';
-            $this->setUserAgent(new Zend_Http_UserAgent());
-        }
-        return $this->_userAgent;
-    }
+	/**
+	 * Retrieve UserAgent instance
+	 *
+	 * If none set, instantiates one using no configuration
+	 *
+	 * @return Zend_Http_UserAgent
+	 */
+	public function getUserAgent()
+	{
+		if (null === $this->_userAgent) {
+			require_once 'Zend/Http/UserAgent.php';
+			$this->setUserAgent(new Zend_Http_UserAgent());
+		}
+		return $this->_userAgent;
+	}
 }

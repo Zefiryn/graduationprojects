@@ -31,31 +31,31 @@
  */
 class Zend_Service_Amazon_SimilarProduct
 {
-    /**
-     * @var string
-     */
-    public $ASIN;
+	/**
+	 * @var string
+	 */
+	public $ASIN;
 
-    /**
-     * @var string
-     */
-    public $Title;
+	/**
+	 * @var string
+	 */
+	public $Title;
 
-    /**
-     * Assigns values to properties relevant to SimilarProduct
-     *
-     * @param  DOMElement $dom
-     * @return void
-     */
-    public function __construct(DOMElement $dom)
-    {
-        $xpath = new DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
-        foreach (array('ASIN', 'Title') as $el) {
-            $text = $xpath->query("./az:$el/text()", $dom)->item(0);
-            if($text instanceof DOMText) {
-                $this->$el = (string)$text->data;
-            }
-        }
-    }
+	/**
+	 * Assigns values to properties relevant to SimilarProduct
+	 *
+	 * @param  DOMElement $dom
+	 * @return void
+	 */
+	public function __construct(DOMElement $dom)
+	{
+		$xpath = new DOMXPath($dom->ownerDocument);
+		$xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+		foreach (array('ASIN', 'Title') as $el) {
+			$text = $xpath->query("./az:$el/text()", $dom)->item(0);
+			if($text instanceof DOMText) {
+				$this->$el = (string)$text->data;
+			}
+		}
+	}
 }

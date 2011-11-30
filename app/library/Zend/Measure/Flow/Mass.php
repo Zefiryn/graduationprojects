@@ -36,51 +36,51 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Flow_Mass extends Zend_Measure_Abstract
 {
-    const STANDARD = 'KILOGRAM_PER_SECOND';
+	const STANDARD = 'KILOGRAM_PER_SECOND';
 
-    const CENTIGRAM_PER_DAY    = 'CENTIGRAM_PER_DAY';
-    const CENTIGRAM_PER_HOUR   = 'CENTIGRAM_PER_HOUR';
-    const CENTIGRAM_PER_MINUTE = 'CENTIGRAM_PER_MINUTE';
-    const CENTIGRAM_PER_SECOND = 'CENTIGRAM_PER_SECOND';
-    const GRAM_PER_DAY         = 'GRAM_PER_DAY';
-    const GRAM_PER_HOUR        = 'GRAM_PER_HOUR';
-    const GRAM_PER_MINUTE      = 'GRAM_PER_MINUTE';
-    const GRAM_PER_SECOND      = 'GRAM_PER_SECOND';
-    const KILOGRAM_PER_DAY     = 'KILOGRAM_PER_DAY';
-    const KILOGRAM_PER_HOUR    = 'KILOGRAM_PER_HOUR';
-    const KILOGRAM_PER_MINUTE  = 'KILOGRAM_PER_MINUTE';
-    const KILOGRAM_PER_SECOND  = 'KILOGRAM_PER_SECOND';
-    const MILLIGRAM_PER_DAY    = 'MILLIGRAM_PER_DAY';
-    const MILLIGRAM_PER_HOUR   = 'MILLIGRAM_PER_HOUR';
-    const MILLIGRAM_PER_MINUTE = 'MILLIGRAM_PER_MINUTE';
-    const MILLIGRAM_PER_SECOND = 'MILLIGRAM_PER_SECOND';
-    const OUNCE_PER_DAY        = 'OUNCE_PER_DAY';
-    const OUNCE_PER_HOUR       = 'OUNCE_PER_HOUR';
-    const OUNCE_PER_MINUTE     = 'OUNCE_PER_MINUTE';
-    const OUNCE_PER_SECOND     = 'OUNCE_PER_SECOND';
-    const POUND_PER_DAY        = 'POUND_PER_DAY';
-    const POUND_PER_HOUR       = 'POUND_PER_HOUR';
-    const POUND_PER_MINUTE     = 'POUND_PER_MINUTE';
-    const POUND_PER_SECOND     = 'POUND_PER_SECOND';
-    const TON_LONG_PER_DAY     = 'TON_LONG_PER_DAY';
-    const TON_LONG_PER_HOUR    = 'TON_LONG_PER_HOUR';
-    const TON_LONG_PER_MINUTE  = 'TON_LONG_PER_MINUTE';
-    const TON_LONG_PER_SECOND  = 'TON_LONG_PER_SECOND';
-    const TON_PER_DAY          = 'TON_PER_DAY';
-    const TON_PER_HOUR         = 'TON_PER_HOUR';
-    const TON_PER_MINUTE       = 'TON_PER_MINUTE';
-    const TON_PER_SECOND       = 'TON_PER_SECOND';
-    const TON_SHORT_PER_DAY    = 'TON_SHORT_PER_DAY';
-    const TON_SHORT_PER_HOUR   = 'TON_SHORT_PER_HOUR';
-    const TON_SHORT_PER_MINUTE = 'TON_SHORT_PER_MINUTE';
-    const TON_SHORT_PER_SECOND = 'TON_SHORT_PER_SECOND';
+	const CENTIGRAM_PER_DAY    = 'CENTIGRAM_PER_DAY';
+	const CENTIGRAM_PER_HOUR   = 'CENTIGRAM_PER_HOUR';
+	const CENTIGRAM_PER_MINUTE = 'CENTIGRAM_PER_MINUTE';
+	const CENTIGRAM_PER_SECOND = 'CENTIGRAM_PER_SECOND';
+	const GRAM_PER_DAY         = 'GRAM_PER_DAY';
+	const GRAM_PER_HOUR        = 'GRAM_PER_HOUR';
+	const GRAM_PER_MINUTE      = 'GRAM_PER_MINUTE';
+	const GRAM_PER_SECOND      = 'GRAM_PER_SECOND';
+	const KILOGRAM_PER_DAY     = 'KILOGRAM_PER_DAY';
+	const KILOGRAM_PER_HOUR    = 'KILOGRAM_PER_HOUR';
+	const KILOGRAM_PER_MINUTE  = 'KILOGRAM_PER_MINUTE';
+	const KILOGRAM_PER_SECOND  = 'KILOGRAM_PER_SECOND';
+	const MILLIGRAM_PER_DAY    = 'MILLIGRAM_PER_DAY';
+	const MILLIGRAM_PER_HOUR   = 'MILLIGRAM_PER_HOUR';
+	const MILLIGRAM_PER_MINUTE = 'MILLIGRAM_PER_MINUTE';
+	const MILLIGRAM_PER_SECOND = 'MILLIGRAM_PER_SECOND';
+	const OUNCE_PER_DAY        = 'OUNCE_PER_DAY';
+	const OUNCE_PER_HOUR       = 'OUNCE_PER_HOUR';
+	const OUNCE_PER_MINUTE     = 'OUNCE_PER_MINUTE';
+	const OUNCE_PER_SECOND     = 'OUNCE_PER_SECOND';
+	const POUND_PER_DAY        = 'POUND_PER_DAY';
+	const POUND_PER_HOUR       = 'POUND_PER_HOUR';
+	const POUND_PER_MINUTE     = 'POUND_PER_MINUTE';
+	const POUND_PER_SECOND     = 'POUND_PER_SECOND';
+	const TON_LONG_PER_DAY     = 'TON_LONG_PER_DAY';
+	const TON_LONG_PER_HOUR    = 'TON_LONG_PER_HOUR';
+	const TON_LONG_PER_MINUTE  = 'TON_LONG_PER_MINUTE';
+	const TON_LONG_PER_SECOND  = 'TON_LONG_PER_SECOND';
+	const TON_PER_DAY          = 'TON_PER_DAY';
+	const TON_PER_HOUR         = 'TON_PER_HOUR';
+	const TON_PER_MINUTE       = 'TON_PER_MINUTE';
+	const TON_PER_SECOND       = 'TON_PER_SECOND';
+	const TON_SHORT_PER_DAY    = 'TON_SHORT_PER_DAY';
+	const TON_SHORT_PER_HOUR   = 'TON_SHORT_PER_HOUR';
+	const TON_SHORT_PER_MINUTE = 'TON_SHORT_PER_MINUTE';
+	const TON_SHORT_PER_SECOND = 'TON_SHORT_PER_SECOND';
 
-    /**
-     * Calculations for all flow mass units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all flow mass units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'CENTIGRAM_PER_DAY'    => array(array('' => '0.00001', '/' => '86400'),    'cg/day'),
         'CENTIGRAM_PER_HOUR'   => array(array('' => '0.00001', '/' => '3600'),     'cg/h'),
         'CENTIGRAM_PER_MINUTE' => array(array('' => '0.00001', '/' => '60'),       'cg/m'),
@@ -118,5 +118,5 @@ class Zend_Measure_Flow_Mass extends Zend_Measure_Abstract
         'TON_SHORT_PER_MINUTE' => array(array('' => '907.184', '/' => '60'),       't/m'),
         'TON_SHORT_PER_SECOND' => array('907.184',                               't/s'),
         'STANDARD'             => 'KILOGRAM_PER_SECOND'
-    );
+        );
 }

@@ -14,5 +14,5 @@ class GP_Application_Model extends Zefir_Application_Model
 	{
 		return parent::__construct($id, $options);
 	}
-	
+
 }

@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Response/ResponseAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_BaseUserService_GetAccountBalanceResponse
-    extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
+extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
 {
 }

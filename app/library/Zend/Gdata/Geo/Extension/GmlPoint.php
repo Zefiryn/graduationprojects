@@ -49,88 +49,88 @@ require_once 'Zend/Gdata/Geo/Extension/GmlPos.php';
 class Zend_Gdata_Geo_Extension_GmlPoint extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gml';
-    protected $_rootElement = 'Point';
+	protected $_rootNamespace = 'gml';
+	protected $_rootElement = 'Point';
 
-    /**
-     * The position represented by this GmlPoint
-     *
-     * @var Zend_Gdata_Geo_Extension_GmlPos
-     */
-    protected $_pos = null;
+	/**
+	 * The position represented by this GmlPoint
+	 *
+	 * @var Zend_Gdata_Geo_Extension_GmlPos
+	 */
+	protected $_pos = null;
 
-    /**
-     * Create a new instance.
-     *
-     * @param Zend_Gdata_Geo_Extension_GmlPos $pos (optional) Pos to which this
-     *          object should be initialized.
-     */
-    public function __construct($pos = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
-        parent::__construct();
-        $this->setPos($pos);
-    }
+	/**
+	 * Create a new instance.
+	 *
+	 * @param Zend_Gdata_Geo_Extension_GmlPos $pos (optional) Pos to which this
+	 *          object should be initialized.
+	 */
+	public function __construct($pos = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Geo::$namespaces);
+		parent::__construct();
+		$this->setPos($pos);
+	}
 
-    /**
-     * Retrieves a DOMElement which corresponds to this element and all
-     * child properties.  This is used to build an entry back into a DOM
-     * and eventually XML text for application storage/persistence.
-     *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
-     */
-    public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
-    {
-        $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        if ($this->_pos !== null) {
-            $element->appendChild($this->_pos->getDOM($element->ownerDocument));
-        }
-        return $element;
-    }
+	/**
+	 * Retrieves a DOMElement which corresponds to this element and all
+	 * child properties.  This is used to build an entry back into a DOM
+	 * and eventually XML text for application storage/persistence.
+	 *
+	 * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+	 * @return DOMElement The DOMElement representing this element and all
+	 *          child properties.
+	 */
+	public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
+	{
+		$element = parent::getDOM($doc, $majorVersion, $minorVersion);
+		if ($this->_pos !== null) {
+			$element->appendChild($this->_pos->getDOM($element->ownerDocument));
+		}
+		return $element;
+	}
 
-    /**
-     * Creates individual Entry objects of the appropriate type and
-     * stores them as members of this entry based upon DOM data.
-     *
-     * @param DOMNode $child The DOMNode to process
-     */
-    protected function takeChildFromDOM($child)
-    {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+	/**
+	 * Creates individual Entry objects of the appropriate type and
+	 * stores them as members of this entry based upon DOM data.
+	 *
+	 * @param DOMNode $child The DOMNode to process
+	 */
+	protected function takeChildFromDOM($child)
+	{
+		$absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
 
-        switch ($absoluteNodeName) {
-            case $this->lookupNamespace('gml') . ':' . 'pos';
-                $pos = new Zend_Gdata_Geo_Extension_GmlPos();
-                $pos->transferFromDOM($child);
-                $this->_pos = $pos;
-                break;
-        }
-    }
+		switch ($absoluteNodeName) {
+			case $this->lookupNamespace('gml') . ':' . 'pos';
+			$pos = new Zend_Gdata_Geo_Extension_GmlPos();
+			$pos->transferFromDOM($child);
+			$this->_pos = $pos;
+			break;
+		}
+	}
 
-    /**
-     * Get the value for this element's pos attribute.
-     *
-     * @see setPos
-     * @return Zend_Gdata_Geo_Extension_GmlPos The requested attribute.
-     */
-    public function getPos()
-    {
-        return $this->_pos;
-    }
+	/**
+	 * Get the value for this element's pos attribute.
+	 *
+	 * @see setPos
+	 * @return Zend_Gdata_Geo_Extension_GmlPos The requested attribute.
+	 */
+	public function getPos()
+	{
+		return $this->_pos;
+	}
 
-    /**
-     * Set the value for this element's distance attribute.
-     *
-     * @param Zend_Gdata_Geo_Extension_GmlPos $value The desired value for this attribute
-     * @return Zend_Gdata_Geo_Extension_GmlPoint Provides a fluent interface
-     */
-    public function setPos($value)
-    {
-        $this->_pos = $value;
-        return $this;
-    }
+	/**
+	 * Set the value for this element's distance attribute.
+	 *
+	 * @param Zend_Gdata_Geo_Extension_GmlPos $value The desired value for this attribute
+	 * @return Zend_Gdata_Geo_Extension_GmlPoint Provides a fluent interface
+	 */
+	public function setPos($value)
+	{
+		$this->_pos = $value;
+		return $this;
+	}
 
 
 }

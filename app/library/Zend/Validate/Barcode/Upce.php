@@ -32,38 +32,38 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  */
 class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
 {
-    /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = array(6, 7, 8);
+	/**
+	 * Allowed barcode lengths
+	 * @var integer
+	 */
+	protected $_length = array(6, 7, 8);
 
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
+	/**
+	 * Allowed barcode characters
+	 * @var string
+	 */
+	protected $_characters = '0123456789';
 
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_gtin';
+	/**
+	 * Checksum function
+	 * @var string
+	 */
+	protected $_checksum = '_gtin';
 
-    /**
-     * Overrides parent checkLength
-     *
-     * @param string $value Value
-     * @return boolean
-     */
-    public function checkLength($value)
-    {
-        if (strlen($value) != 8) {
-            $this->setCheck(false);
-        } else {
-            $this->setCheck(true);
-        }
+	/**
+	 * Overrides parent checkLength
+	 *
+	 * @param string $value Value
+	 * @return boolean
+	 */
+	public function checkLength($value)
+	{
+		if (strlen($value) != 8) {
+			$this->setCheck(false);
+		} else {
+			$this->setCheck(true);
+		}
 
-        return parent::checkLength($value);
-    }
+		return parent::checkLength($value);
+	}
 }

@@ -41,63 +41,63 @@ require_once "Zend/Test/PHPUnit/Db/DataSet/DbTable.php";
  */
 class Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet extends PHPUnit_Extensions_Database_DataSet_AbstractDataSet
 {
-    /**
-     * @var array
-     */
-    protected $tables = array();
+	/**
+	 * @var array
+	 */
+	protected $tables = array();
 
-    /**
-     * Add a Table dataset representation by specifiying an arbitrary select query.
-     *
-     * By default a select * will be done on the given tablename.
-     *
-     * @param Zend_Db_Table_Abstract $table
-     * @param string|Zend_Db_Select $query
-     * @param string $where
-     * @param string $order
-     * @param string $count
-     * @param string $offset
-     */
-    public function addTable(Zend_Db_Table_Abstract $table, $where = null, $order = null, $count = null, $offset = null)
-    {
-        $tableName = $table->info('name');
-        $this->tables[$tableName] = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table, $where, $order, $count, $offset);
-    }
+	/**
+	 * Add a Table dataset representation by specifiying an arbitrary select query.
+	 *
+	 * By default a select * will be done on the given tablename.
+	 *
+	 * @param Zend_Db_Table_Abstract $table
+	 * @param string|Zend_Db_Select $query
+	 * @param string $where
+	 * @param string $order
+	 * @param string $count
+	 * @param string $offset
+	 */
+	public function addTable(Zend_Db_Table_Abstract $table, $where = null, $order = null, $count = null, $offset = null)
+	{
+		$tableName = $table->info('name');
+		$this->tables[$tableName] = new Zend_Test_PHPUnit_Db_DataSet_DbTable($table, $where, $order, $count, $offset);
+	}
 
-    /**
-     * Creates an iterator over the tables in the data set. If $reverse is
-     * true a reverse iterator will be returned.
-     *
-     * @param bool $reverse
-     * @return PHPUnit_Extensions_Database_DB_TableIterator
-     */
-    protected function createIterator($reverse = FALSE)
-    {
-        return new PHPUnit_Extensions_Database_DataSet_DefaultTableIterator($this->tables, $reverse);
-    }
+	/**
+	 * Creates an iterator over the tables in the data set. If $reverse is
+	 * true a reverse iterator will be returned.
+	 *
+	 * @param bool $reverse
+	 * @return PHPUnit_Extensions_Database_DB_TableIterator
+	 */
+	protected function createIterator($reverse = FALSE)
+	{
+		return new PHPUnit_Extensions_Database_DataSet_DefaultTableIterator($this->tables, $reverse);
+	}
 
-    /**
-     * Returns a table object for the given table.
-     *
-     * @param string $tableName
-     * @return PHPUnit_Extensions_Database_DB_Table
-     */
-    public function getTable($tableName)
-    {
-        if (!isset($this->tables[$tableName])) {
-            throw new InvalidArgumentException("$tableName is not a table in the current database.");
-        }
+	/**
+	 * Returns a table object for the given table.
+	 *
+	 * @param string $tableName
+	 * @return PHPUnit_Extensions_Database_DB_Table
+	 */
+	public function getTable($tableName)
+	{
+		if (!isset($this->tables[$tableName])) {
+			throw new InvalidArgumentException("$tableName is not a table in the current database.");
+		}
 
-        return $this->tables[$tableName];
-    }
+		return $this->tables[$tableName];
+	}
 
-    /**
-     * Returns a list of table names for the database
-     *
-     * @return Array
-     */
-    public function getTableNames()
-    {
-        return array_keys($this->tables);
-    }
+	/**
+	 * Returns a list of table names for the database
+	 *
+	 * @return Array
+	 */
+	public function getTableNames()
+	{
+		return array_keys($this->tables);
+	}
 }

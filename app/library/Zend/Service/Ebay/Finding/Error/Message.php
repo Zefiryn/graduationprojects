@@ -35,26 +35,26 @@ require_once 'Zend/Service/Ebay/Finding/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Error_Message extends Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * A container for error details.
-     *
-     * @var Zend_Service_Ebay_Finding_Error_Data_Set
-     */
-    public $error;
+	/**
+	 * A container for error details.
+	 *
+	 * @var Zend_Service_Ebay_Finding_Error_Data_Set
+	 */
+	public $error;
 
-    /**
-     * @return void
-     */
-    protected function _init()
-    {
-        $ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
-        $nodes = $this->_xPath->query(".//$ns:error", $this->_dom);
-        if ($nodes->length > 0) {
-            /**
-             * @see Zend_Service_Ebay_Finding_Error_Data_Set
-             */
-            require_once 'Zend/Service/Ebay/Finding/Error/Data/Set.php';
-            $this->error = new Zend_Service_Ebay_Finding_Error_Data_Set($nodes);
-        }
-    }
+	/**
+	 * @return void
+	 */
+	protected function _init()
+	{
+		$ns = Zend_Service_Ebay_Finding::XMLNS_FINDING;
+		$nodes = $this->_xPath->query(".//$ns:error", $this->_dom);
+		if ($nodes->length > 0) {
+			/**
+			 * @see Zend_Service_Ebay_Finding_Error_Data_Set
+			 */
+			require_once 'Zend/Service/Ebay/Finding/Error/Data/Set.php';
+			$this->error = new Zend_Service_Ebay_Finding_Error_Data_Set($nodes);
+		}
+	}
 }

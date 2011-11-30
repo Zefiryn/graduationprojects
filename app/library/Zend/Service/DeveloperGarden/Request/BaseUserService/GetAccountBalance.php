@@ -30,43 +30,43 @@
  */
 class Zend_Service_DeveloperGarden_Request_BaseUserService_GetAccountBalance
 {
-    /**
-     * array of accounts
-     *
-     * @var array
-     */
-    public $Account = array();
+	/**
+	 * array of accounts
+	 *
+	 * @var array
+	 */
+	public $Account = array();
 
-    /**
-     * constructor give them the account ids or an empty array
-     *
-     * @param array $Account
-     * @return Zend_Service_DeveloperGarden_Request_GetAccountBalance
-     */
-    public function __construct(array $Account = array())
-    {
-        $this->setAccount($Account);
-    }
+	/**
+	 * constructor give them the account ids or an empty array
+	 *
+	 * @param array $Account
+	 * @return Zend_Service_DeveloperGarden_Request_GetAccountBalance
+	 */
+	public function __construct(array $Account = array())
+	{
+		$this->setAccount($Account);
+	}
 
-    /**
-     * sets a new Account array
-     *
-     * @param array $Account
-     * @return Zend_Service_DeveloperGarden_Request_BaseUserService
-     */
-    public function setAccount(array $Account = array())
-    {
-        $this->Account = $Account;
-        return $this;
-    }
+	/**
+	 * sets a new Account array
+	 *
+	 * @param array $Account
+	 * @return Zend_Service_DeveloperGarden_Request_BaseUserService
+	 */
+	public function setAccount(array $Account = array())
+	{
+		$this->Account = $Account;
+		return $this;
+	}
 
-    /**
-     * returns the moduleId
-     *
-     * @return string
-     */
-    public function getAccount()
-    {
-        return $this->Account;
-    }
+	/**
+	 * returns the moduleId
+	 *
+	 * @return string
+	 */
+	public function getAccount()
+	{
+		return $this->Account;
+	}
 }

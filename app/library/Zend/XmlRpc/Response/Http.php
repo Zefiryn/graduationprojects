@@ -35,17 +35,17 @@ require_once 'Zend/XmlRpc/Response.php';
  */
 class Zend_XmlRpc_Response_Http extends Zend_XmlRpc_Response
 {
-    /**
-     * Override __toString() to send HTTP Content-Type header
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        if (!headers_sent()) {
-            header('Content-Type: text/xml; charset=' . strtolower($this->getEncoding()));
-        }
+	/**
+	 * Override __toString() to send HTTP Content-Type header
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		if (!headers_sent()) {
+			header('Content-Type: text/xml; charset=' . strtolower($this->getEncoding()));
+		}
 
-        return parent::__toString();
-    }
+		return parent::__toString();
+	}
 }

@@ -36,29 +36,29 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Angle extends Zend_Measure_Abstract
 {
-    const STANDARD = 'RADIAN';
+	const STANDARD = 'RADIAN';
 
-    const RADIAN      = 'RADIAN';
-    const MIL         = 'MIL';
-    const GRAD        = 'GRAD';
-    const DEGREE      = 'DEGREE';
-    const MINUTE      = 'MINUTE';
-    const SECOND      = 'SECOND';
-    const POINT       = 'POINT';
-    const CIRCLE_16   = 'CIRCLE_16';
-    const CIRCLE_10   = 'CIRCLE_10';
-    const CIRCLE_8    = 'CIRCLE_8';
-    const CIRCLE_6    = 'CIRCLE_6';
-    const CIRCLE_4    = 'CIRCLE_4';
-    const CIRCLE_2    = 'CIRCLE_2';
-    const FULL_CIRCLE = 'FULL_CIRCLE';
+	const RADIAN      = 'RADIAN';
+	const MIL         = 'MIL';
+	const GRAD        = 'GRAD';
+	const DEGREE      = 'DEGREE';
+	const MINUTE      = 'MINUTE';
+	const SECOND      = 'SECOND';
+	const POINT       = 'POINT';
+	const CIRCLE_16   = 'CIRCLE_16';
+	const CIRCLE_10   = 'CIRCLE_10';
+	const CIRCLE_8    = 'CIRCLE_8';
+	const CIRCLE_6    = 'CIRCLE_6';
+	const CIRCLE_4    = 'CIRCLE_4';
+	const CIRCLE_2    = 'CIRCLE_2';
+	const FULL_CIRCLE = 'FULL_CIRCLE';
 
-    /**
-     * Calculations for all angle units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all angle units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'RADIAN'      => array('1','rad'),
         'MIL'         => array(array('' => M_PI,'/' => '3200'),   'mil'),
         'GRAD'        => array(array('' => M_PI,'/' => '200'),    'gr'),
@@ -74,5 +74,5 @@ class Zend_Measure_Angle extends Zend_Measure_Abstract
         'CIRCLE_2'    => array(M_PI,                            'per 2 circle'),
         'FULL_CIRCLE' => array(array('' => M_PI,'*' => '2'),      'cir'),
         'STANDARD'    => 'RADIAN'
-    );
+        );
 }

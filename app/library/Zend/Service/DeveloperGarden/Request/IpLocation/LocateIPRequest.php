@@ -39,76 +39,76 @@ require_once 'Zend/Service/DeveloperGarden/IpLocation/IpAddress.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the ip addresses to lookup for
-     *
-     * @var Zend_Service_DeveloperGarden_Request_IpLocation_IpAddress
-     */
-    public $address = null;
+	/**
+	 * the ip addresses to lookup for
+	 *
+	 * @var Zend_Service_DeveloperGarden_Request_IpLocation_IpAddress
+	 */
+	public $address = null;
 
-    /**
-     * the account
-     *
-     * @var string
-     */
-    public $account = null;
+	/**
+	 * the account
+	 *
+	 * @var string
+	 */
+	public $account = null;
 
-    /**
-     * constructor give them the environment
-     *
-     * @param integer $environment
-     * @param Zend_Service_DeveloperGarden_IpLocation_IpAddress|array $ip
-     *
-     * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
-     */
-    public function __construct($environment, $ip = null)
-    {
-        parent::__construct($environment);
+	/**
+	 * constructor give them the environment
+	 *
+	 * @param integer $environment
+	 * @param Zend_Service_DeveloperGarden_IpLocation_IpAddress|array $ip
+	 *
+	 * @return Zend_Service_DeveloperGarden_Request_RequestAbstract
+	 */
+	public function __construct($environment, $ip = null)
+	{
+		parent::__construct($environment);
 
-        if ($ip !== null) {
-            $this->setIp($ip);
-        }
-    }
+		if ($ip !== null) {
+			$this->setIp($ip);
+		}
+	}
 
-    /**
-     * sets new ip or array of ips
-     *
-     * @param Zend_Service_DeveloperGarden_IpLocation_IpAddress|array $ip
-     *
-     * @return Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
-     */
-    public function setIp($ip)
-    {
-        if ($ip instanceof Zend_Service_DeveloperGarden_IpLocation_IpAddress) {
-            $this->address[] = array(
+	/**
+	 * sets new ip or array of ips
+	 *
+	 * @param Zend_Service_DeveloperGarden_IpLocation_IpAddress|array $ip
+	 *
+	 * @return Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
+	 */
+	public function setIp($ip)
+	{
+		if ($ip instanceof Zend_Service_DeveloperGarden_IpLocation_IpAddress) {
+			$this->address[] = array(
                 'ipType'    => $ip->getVersion(),
                 'ipAddress' => $ip->getIp(),
-            );
-            return $this;
-        }
+			);
+			return $this;
+		}
 
-        if (is_array($ip)) {
-            foreach ($ip as $ipObject) {
-                if (!$ipObject instanceof Zend_Service_DeveloperGarden_IpLocation_IpAddress
-                    && !is_string($ipObject)
-                ) {
-                    require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
-                    throw new Zend_Service_DeveloperGarden_Request_Exception(
+		if (is_array($ip)) {
+			foreach ($ip as $ipObject) {
+				if (!$ipObject instanceof Zend_Service_DeveloperGarden_IpLocation_IpAddress
+				&& !is_string($ipObject)
+				) {
+					require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
+					throw new Zend_Service_DeveloperGarden_Request_Exception(
                         'Not a valid Ip Address object found.'
-                    );
-                }
-                $this->setIp($ipObject);
-            }
-            return $this;
-        }
+					);
+				}
+				$this->setIp($ipObject);
+			}
+			return $this;
+		}
 
-        if (!is_string($ip)) {
-            require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
-            throw new Zend_Service_DeveloperGarden_Request_Exception('Not a valid Ip Address object found.');
-        }
+		if (!is_string($ip)) {
+			require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
+			throw new Zend_Service_DeveloperGarden_Request_Exception('Not a valid Ip Address object found.');
+		}
 
-        return $this->setIp(new Zend_Service_DeveloperGarden_IpLocation_IpAddress($ip));
-    }
+		return $this->setIp(new Zend_Service_DeveloperGarden_IpLocation_IpAddress($ip));
+	}
 }

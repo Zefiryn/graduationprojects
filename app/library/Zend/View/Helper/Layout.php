@@ -33,49 +33,49 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Zend_View_Helper_Layout extends Zend_View_Helper_Abstract
 {
-    /** @var Zend_Layout */
-    protected $_layout;
+	/** @var Zend_Layout */
+	protected $_layout;
 
-    /**
-     * Get layout object
-     *
-     * @return Zend_Layout
-     */
-    public function getLayout()
-    {
-        if (null === $this->_layout) {
-            require_once 'Zend/Layout.php';
-            $this->_layout = Zend_Layout::getMvcInstance();
-            if (null === $this->_layout) {
-                // Implicitly creates layout object
-                $this->_layout = new Zend_Layout();
-            }
-        }
+	/**
+	 * Get layout object
+	 *
+	 * @return Zend_Layout
+	 */
+	public function getLayout()
+	{
+		if (null === $this->_layout) {
+			require_once 'Zend/Layout.php';
+			$this->_layout = Zend_Layout::getMvcInstance();
+			if (null === $this->_layout) {
+				// Implicitly creates layout object
+				$this->_layout = new Zend_Layout();
+			}
+		}
 
-        return $this->_layout;
-    }
+		return $this->_layout;
+	}
 
-    /**
-     * Set layout object
-     *
-     * @param  Zend_Layout $layout
-     * @return Zend_Layout_Controller_Action_Helper_Layout
-     */
-    public function setLayout(Zend_Layout $layout)
-    {
-        $this->_layout = $layout;
-        return $this;
-    }
+	/**
+	 * Set layout object
+	 *
+	 * @param  Zend_Layout $layout
+	 * @return Zend_Layout_Controller_Action_Helper_Layout
+	 */
+	public function setLayout(Zend_Layout $layout)
+	{
+		$this->_layout = $layout;
+		return $this;
+	}
 
-    /**
-     * Return layout object
-     *
-     * Usage: $this->layout()->setLayout('alternate');
-     *
-     * @return Zend_Layout
-     */
-    public function layout()
-    {
-        return $this->getLayout();
-    }
+	/**
+	 * Return layout object
+	 *
+	 * Usage: $this->layout()->setLayout('alternate');
+	 *
+	 * @return Zend_Layout
+	 */
+	public function layout()
+	{
+		return $this->getLayout();
+	}
 }

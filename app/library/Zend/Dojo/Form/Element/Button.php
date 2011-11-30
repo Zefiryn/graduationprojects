@@ -34,88 +34,88 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 class Zend_Dojo_Form_Element_Button extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Use Button dijit view helper
-     * @var string
-     */
-    public $helper = 'Button';
+	/**
+	 * Use Button dijit view helper
+	 * @var string
+	 */
+	public $helper = 'Button';
 
-    /**
-     * Constructor
-     *
-     * @param  string|array|Zend_Config $spec Element name or configuration
-     * @param  string|array|Zend_Config $options Element value or configuration
-     * @return void
-     */
-    public function __construct($spec, $options = null)
-    {
-        if (is_string($spec) && ((null !== $options) && is_string($options))) {
-            $options = array('label' => $options);
-        }
+	/**
+	 * Constructor
+	 *
+	 * @param  string|array|Zend_Config $spec Element name or configuration
+	 * @param  string|array|Zend_Config $options Element value or configuration
+	 * @return void
+	 */
+	public function __construct($spec, $options = null)
+	{
+		if (is_string($spec) && ((null !== $options) && is_string($options))) {
+			$options = array('label' => $options);
+		}
 
-        parent::__construct($spec, $options);
-    }
+		parent::__construct($spec, $options);
+	}
 
-    /**
-     * Return label
-     *
-     * If no label is present, returns the currently set name.
-     *
-     * If a translator is present, returns the translated label.
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        $value = parent::getLabel();
+	/**
+	 * Return label
+	 *
+	 * If no label is present, returns the currently set name.
+	 *
+	 * If a translator is present, returns the translated label.
+	 *
+	 * @return string
+	 */
+	public function getLabel()
+	{
+		$value = parent::getLabel();
 
-        if (null === $value) {
-            $value = $this->getName();
-        }
+		if (null === $value) {
+			$value = $this->getName();
+		}
 
-        if (null !== ($translator = $this->getTranslator())) {
-            return $translator->translate($value);
-        }
+		if (null !== ($translator = $this->getTranslator())) {
+			return $translator->translate($value);
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
-    /**
-     * Has this submit button been selected?
-     *
-     * @return bool
-     */
-    public function isChecked()
-    {
-        $value = $this->getValue();
+	/**
+	 * Has this submit button been selected?
+	 *
+	 * @return bool
+	 */
+	public function isChecked()
+	{
+		$value = $this->getValue();
 
-        if (empty($value)) {
-            return false;
-        }
-        if ($value != $this->getLabel()) {
-            return false;
-        }
+		if (empty($value)) {
+			return false;
+		}
+		if ($value != $this->getLabel()) {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Default decorators
-     *
-     * Uses only 'DijitElement' and 'DtDdWrapper' decorators by default.
-     *
-     * @return void
-     */
-    public function loadDefaultDecorators()
-    {
-        if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return;
-        }
+	/**
+	 * Default decorators
+	 *
+	 * Uses only 'DijitElement' and 'DtDdWrapper' decorators by default.
+	 *
+	 * @return void
+	 */
+	public function loadDefaultDecorators()
+	{
+		if ($this->loadDefaultDecoratorsIsDisabled()) {
+			return;
+		}
 
-        $decorators = $this->getDecorators();
-        if (empty($decorators)) {
-            $this->addDecorator('DijitElement')
-                 ->addDecorator('DtDdWrapper');
-        }
-    }
+		$decorators = $this->getDecorators();
+		if (empty($decorators)) {
+			$this->addDecorator('DijitElement')
+			->addDecorator('DtDdWrapper');
+		}
+	}
 }

@@ -35,23 +35,23 @@ require_once 'Zend/Service/Ebay/Finding/Set/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Aspect_Histogram_Value_Set extends Zend_Service_Ebay_Finding_Set_Abstract
 {
-    /**
-     * Implement SeekableIterator::current()
-     *
-     * @return Zend_Service_Ebay_Finding_Aspect_Histogram_Value
-     */
-    public function current()
-    {
-        // check node
-        $node = $this->_nodes->item($this->_key);
-        if (!$node) {
-            return null;
-        }
+	/**
+	 * Implement SeekableIterator::current()
+	 *
+	 * @return Zend_Service_Ebay_Finding_Aspect_Histogram_Value
+	 */
+	public function current()
+	{
+		// check node
+		$node = $this->_nodes->item($this->_key);
+		if (!$node) {
+			return null;
+		}
 
-        /**
-         * @see Zend_Service_Ebay_Finding_Aspect_Histogram_Value
-         */
-        require_once 'Zend/Service/Ebay/Finding/Aspect/Histogram/Value.php';
-        return new Zend_Service_Ebay_Finding_Aspect_Histogram_Value($node);
-    }
+		/**
+		 * @see Zend_Service_Ebay_Finding_Aspect_Histogram_Value
+		 */
+		require_once 'Zend/Service/Ebay/Finding/Aspect/Histogram/Value.php';
+		return new Zend_Service_Ebay_Finding_Aspect_Histogram_Value($node);
+	}
 }

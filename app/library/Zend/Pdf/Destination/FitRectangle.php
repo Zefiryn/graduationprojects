@@ -48,124 +48,124 @@ require_once 'Zend/Pdf/Destination/Explicit.php';
  */
 class Zend_Pdf_Destination_FitRectangle extends Zend_Pdf_Destination_Explicit
 {
-    /**
-     * Create destination object
-     *
-     * @param Zend_Pdf_Page|integer $page  Page object or page number
-     * @param float $left    Left edge of displayed page
-     * @param float $bottom  Bottom edge of displayed page
-     * @param float $right   Right edge of displayed page
-     * @param float $top     Top edge of displayed page
-     * @return Zend_Pdf_Destination_FitRectangle
-     * @throws Zend_Pdf_Exception
-     */
-    public static function create($page, $left, $bottom, $right, $top)
-    {
-        $destinationArray = new Zend_Pdf_Element_Array();
+	/**
+	 * Create destination object
+	 *
+	 * @param Zend_Pdf_Page|integer $page  Page object or page number
+	 * @param float $left    Left edge of displayed page
+	 * @param float $bottom  Bottom edge of displayed page
+	 * @param float $right   Right edge of displayed page
+	 * @param float $top     Top edge of displayed page
+	 * @return Zend_Pdf_Destination_FitRectangle
+	 * @throws Zend_Pdf_Exception
+	 */
+	public static function create($page, $left, $bottom, $right, $top)
+	{
+		$destinationArray = new Zend_Pdf_Element_Array();
 
-        if ($page instanceof Zend_Pdf_Page) {
-            $destinationArray->items[] = $page->getPageDictionary();
-        } else if (is_integer($page)) {
-            $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
-        } else {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or a page number.');
-        }
+		if ($page instanceof Zend_Pdf_Page) {
+			$destinationArray->items[] = $page->getPageDictionary();
+		} else if (is_integer($page)) {
+			$destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
+		} else {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or a page number.');
+		}
 
-        $destinationArray->items[] = new Zend_Pdf_Element_Name('FitR');
-        $destinationArray->items[] = new Zend_Pdf_Element_Numeric($left);
-        $destinationArray->items[] = new Zend_Pdf_Element_Numeric($bottom);
-        $destinationArray->items[] = new Zend_Pdf_Element_Numeric($right);
-        $destinationArray->items[] = new Zend_Pdf_Element_Numeric($top);
+		$destinationArray->items[] = new Zend_Pdf_Element_Name('FitR');
+		$destinationArray->items[] = new Zend_Pdf_Element_Numeric($left);
+		$destinationArray->items[] = new Zend_Pdf_Element_Numeric($bottom);
+		$destinationArray->items[] = new Zend_Pdf_Element_Numeric($right);
+		$destinationArray->items[] = new Zend_Pdf_Element_Numeric($top);
 
-        return new Zend_Pdf_Destination_FitRectangle($destinationArray);
-    }
+		return new Zend_Pdf_Destination_FitRectangle($destinationArray);
+	}
 
-    /**
-     * Get left edge of the displayed page
-     *
-     * @return float
-     */
-    public function getLeftEdge()
-    {
-        return $this->_destinationArray->items[2]->value;
-    }
+	/**
+	 * Get left edge of the displayed page
+	 *
+	 * @return float
+	 */
+	public function getLeftEdge()
+	{
+		return $this->_destinationArray->items[2]->value;
+	}
 
-    /**
-     * Set left edge of the displayed page
-     *
-     * @param float $left
-     * @return Zend_Pdf_Action_FitRectangle
-     */
-    public function setLeftEdge($left)
-    {
-        $this->_destinationArray->items[2] = new Zend_Pdf_Element_Numeric($left);
-        return $this;
-    }
+	/**
+	 * Set left edge of the displayed page
+	 *
+	 * @param float $left
+	 * @return Zend_Pdf_Action_FitRectangle
+	 */
+	public function setLeftEdge($left)
+	{
+		$this->_destinationArray->items[2] = new Zend_Pdf_Element_Numeric($left);
+		return $this;
+	}
 
-    /**
-     * Get bottom edge of the displayed page
-     *
-     * @return float
-     */
-    public function getBottomEdge()
-    {
-        return $this->_destinationArray->items[3]->value;
-    }
+	/**
+	 * Get bottom edge of the displayed page
+	 *
+	 * @return float
+	 */
+	public function getBottomEdge()
+	{
+		return $this->_destinationArray->items[3]->value;
+	}
 
-    /**
-     * Set bottom edge of the displayed page
-     *
-     * @param float $bottom
-     * @return Zend_Pdf_Action_FitRectangle
-     */
-    public function setBottomEdge($bottom)
-    {
-        $this->_destinationArray->items[3] = new Zend_Pdf_Element_Numeric($bottom);
-        return $this;
-    }
+	/**
+	 * Set bottom edge of the displayed page
+	 *
+	 * @param float $bottom
+	 * @return Zend_Pdf_Action_FitRectangle
+	 */
+	public function setBottomEdge($bottom)
+	{
+		$this->_destinationArray->items[3] = new Zend_Pdf_Element_Numeric($bottom);
+		return $this;
+	}
 
-    /**
-     * Get right edge of the displayed page
-     *
-     * @return float
-     */
-    public function getRightEdge()
-    {
-        return $this->_destinationArray->items[4]->value;
-    }
+	/**
+	 * Get right edge of the displayed page
+	 *
+	 * @return float
+	 */
+	public function getRightEdge()
+	{
+		return $this->_destinationArray->items[4]->value;
+	}
 
-    /**
-     * Set right edge of the displayed page
-     *
-     * @param float $right
-     * @return Zend_Pdf_Action_FitRectangle
-     */
-    public function setRightEdge($right)
-    {
-        $this->_destinationArray->items[4] = new Zend_Pdf_Element_Numeric($right);
-        return $this;
-    }
+	/**
+	 * Set right edge of the displayed page
+	 *
+	 * @param float $right
+	 * @return Zend_Pdf_Action_FitRectangle
+	 */
+	public function setRightEdge($right)
+	{
+		$this->_destinationArray->items[4] = new Zend_Pdf_Element_Numeric($right);
+		return $this;
+	}
 
-    /**
-     * Get top edge of the displayed page
-     *
-     * @return float
-     */
-    public function getTopEdge()
-    {
-        return $this->_destinationArray->items[5]->value;
-    }
+	/**
+	 * Get top edge of the displayed page
+	 *
+	 * @return float
+	 */
+	public function getTopEdge()
+	{
+		return $this->_destinationArray->items[5]->value;
+	}
 
-    /**
-     * Set top edge of the displayed page
-     *
-     * @param float $top
-     * @return Zend_Pdf_Action_FitRectangle
-     */
-    public function setTopEdge($top)
-    {
-        $this->_destinationArray->items[5] = new Zend_Pdf_Element_Numeric($top);
-        return $this;
-    }
+	/**
+	 * Set top edge of the displayed page
+	 *
+	 * @param float $top
+	 * @return Zend_Pdf_Action_FitRectangle
+	 */
+	public function setTopEdge($top)
+	{
+		$this->_destinationArray->items[5] = new Zend_Pdf_Element_Numeric($top);
+		return $this;
+	}
 }

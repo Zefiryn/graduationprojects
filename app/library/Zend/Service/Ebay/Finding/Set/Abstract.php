@@ -29,100 +29,100 @@
  */
 abstract class Zend_Service_Ebay_Finding_Set_Abstract implements SeekableIterator, Countable
 {
-    /**
-     * @var DOMNodeList
-     */
-    protected $_nodes;
+	/**
+	 * @var DOMNodeList
+	 */
+	protected $_nodes;
 
-    /**
-     * @var integer
-     */
-    protected $_key = 0;
+	/**
+	 * @var integer
+	 */
+	protected $_key = 0;
 
-    /**
-     * @param  DOMNodeList $nodes
-     * @return void
-     */
-    public function __construct(DOMNodeList $nodes)
-    {
-        $this->_nodes = $nodes;
-        $this->_init();
-    }
+	/**
+	 * @param  DOMNodeList $nodes
+	 * @return void
+	 */
+	public function __construct(DOMNodeList $nodes)
+	{
+		$this->_nodes = $nodes;
+		$this->_init();
+	}
 
-    /**
-     * Initialize object.
-     *
-     * Called from {@link __construct()} as final step of object initialization.
-     *
-     * @return void
-     */
-    protected function _init()
-    {
-    }
+	/**
+	 * Initialize object.
+	 *
+	 * Called from {@link __construct()} as final step of object initialization.
+	 *
+	 * @return void
+	 */
+	protected function _init()
+	{
+	}
 
-    /**
-     * Implement SeekableIterator::seek()
-     *
-     * @param  integer $key
-     * @throws OutOfBoundsException When $key is not seekable
-     * @return void
-     */
-    public function seek($key)
-    {
-        if ($key < 0 || $key >= $this->count()) {
-            $message = "Position '{$key}' is not seekable.";
-            throw new OutOfBoundsException($message);
-        }
-        $this->_key = $key;
-    }
+	/**
+	 * Implement SeekableIterator::seek()
+	 *
+	 * @param  integer $key
+	 * @throws OutOfBoundsException When $key is not seekable
+	 * @return void
+	 */
+	public function seek($key)
+	{
+		if ($key < 0 || $key >= $this->count()) {
+			$message = "Position '{$key}' is not seekable.";
+			throw new OutOfBoundsException($message);
+		}
+		$this->_key = $key;
+	}
 
-    /**
-     * Implement Iterator::key()
-     *
-     * @return integer
-     */
-    public function key()
-    {
-        return $this->_key;
-    }
+	/**
+	 * Implement Iterator::key()
+	 *
+	 * @return integer
+	 */
+	public function key()
+	{
+		return $this->_key;
+	}
 
-    /**
-     * Implement Iterator::next()
-     *
-     * @return void
-     */
-    public function next()
-    {
-        $this->_key++;
-    }
+	/**
+	 * Implement Iterator::next()
+	 *
+	 * @return void
+	 */
+	public function next()
+	{
+		$this->_key++;
+	}
 
-    /**
-     * Implement Iterator::rewind()
-     *
-     * @return void
-     */
-    public function rewind()
-    {
-        $this->_key = 0;
-    }
+	/**
+	 * Implement Iterator::rewind()
+	 *
+	 * @return void
+	 */
+	public function rewind()
+	{
+		$this->_key = 0;
+	}
 
-    /**
-     * Implement Iterator::valid()
-     *
-     * @return boolean
-     */
-    public function valid()
-    {
-        return $this->_key >= 0 && $this->_key < $this->count();
-    }
+	/**
+	 * Implement Iterator::valid()
+	 *
+	 * @return boolean
+	 */
+	public function valid()
+	{
+		return $this->_key >= 0 && $this->_key < $this->count();
+	}
 
-    /**
-     * Implement Countable::current()
-     *
-     * @return integer
-     */
-    public function count()
-    {
-        return $this->_nodes ? $this->_nodes->length : 0;
-    }
+	/**
+	 * Implement Countable::current()
+	 *
+	 * @return integer
+	 */
+	public function count()
+	{
+		return $this->_nodes ? $this->_nodes->length : 0;
+	}
 }

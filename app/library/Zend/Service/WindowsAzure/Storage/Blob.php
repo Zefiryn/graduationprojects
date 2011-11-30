@@ -101,7 +101,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	 * @deprecated Use ACL_PUBLIC_CONTAINER or ACL_PUBLIC_BLOB instead.
 	 */
 	const ACL_PUBLIC = 'container';
-	
+
 	/**
 	 * ACL - Blob Public access (read all blobs)
 	 */
@@ -537,7 +537,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$queryString[] = 'include=' . $include;
 		}
 		$queryString = self::createQueryStringFromArray($queryString);
-		
+
 		// Perform request
 		$response = $this->_performRequest('', $queryString, Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_LIST);
 		if ($response->isSuccessful()) {
@@ -564,7 +564,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			if ($maxResults !== null && count($containers) > $maxResults) {
 				$containers = array_slice($containers, 0, $maxResults);
 			}
-			
+				
 			return $containers;
 		} else {
 			throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
@@ -736,13 +736,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		for ($i = 0; $i < $numberOfParts; $i++) {
 			// Seek position in file
 			fseek($fp, $i * self::MAX_BLOB_TRANSFER_SIZE);
-				
+
 			// Read contents
 			$fileContents = fread($fp, self::MAX_BLOB_TRANSFER_SIZE);
-				
+
 			// Put block
 			$this->putBlock($containerName, $blobName, $blockIdentifiers[$i], $fileContents, $leaseId);
-				
+
 			// Dispose file contents
 			$fileContents = null;
 			unset($fileContents);
@@ -757,7 +757,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		// Return information of the blob
 		return $this->getBlobInstance($containerName, $blobName, null, $leaseId);
 	}
-		
+
 	/**
 	 * Put large blob block
 	 *
@@ -843,28 +843,28 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			'<BlockList>',
 		$blocks,
 			'</BlockList>'
-			)));
+		)));
 
-			// Create metadata headers
-			$headers = array();
-			if ($leaseId !== null) {
-				$headers['x-ms-lease-id'] = $leaseId;
-			}
-			$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata));
+		// Create metadata headers
+		$headers = array();
+		if ($leaseId !== null) {
+			$headers['x-ms-lease-id'] = $leaseId;
+		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata));
 
-			// Additional headers?
-			foreach ($additionalHeaders as $key => $value) {
-				$headers[$key] = $value;
-			}
+		// Additional headers?
+		foreach ($additionalHeaders as $key => $value) {
+			$headers[$key] = $value;
+		}
 
-			// Resource name
-			$resourceName = self::createResourceName($containerName , $blobName);
+		// Resource name
+		$resourceName = self::createResourceName($containerName , $blobName);
 
-			// Perform request
-			$response = $this->_performRequest($resourceName, '?comp=blocklist', Zend_Http_Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_WRITE);
-			if (!$response->isSuccessful()) {
-				throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
-			}
+		// Perform request
+		$response = $this->_performRequest($resourceName, '?comp=blocklist', Zend_Http_Client::PUT, $headers, false, $fileContents, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_WRITE);
+		if (!$response->isSuccessful()) {
+			throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
+		}
 	}
 
 	/**
@@ -1152,13 +1152,13 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 				(int)$xmlRanges[$i]->End
 				);
 			}
-			
+				
 			return $ranges;
 		} else {
 			throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
 	}
-		
+
 	/**
 	 * Copy blob
 	 *
@@ -1357,7 +1357,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			$queryString[] = 'snapshot=' . $snapshotId;
 		}
 		$queryString = self::createQueryStringFromArray($queryString);
-		
+
 		// Additional headers?
 		$headers = array();
 		if ($leaseId !== null) {
@@ -1747,7 +1747,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$properties = (array)$xmlBlobs[$i]->Properties;
-						
+
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
 					$containerName,
 					(string)$xmlBlobs[$i]->Name,
@@ -1767,10 +1767,10 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 					);
 				}
 			}
-				
+
 			// Blob prefixes (folders)
 			$xmlBlobs = $this->_parseResponse($response)->Blobs->BlobPrefix;
-				
+
 			if ($xmlBlobs !== null) {
 				for ($i = 0; $i < count($xmlBlobs); $i++) {
 					$blobs[] = new Zend_Service_WindowsAzure_Storage_BlobInstance(
@@ -1792,7 +1792,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 					);
 				}
 			}
-				
+
 			// More blobs?
 			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 			$currentResultCount = $currentResultCount + count($blobs);
@@ -1804,7 +1804,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			if ($maxResults !== null && count($blobs) > $maxResults) {
 				$blobs = array_slice($blobs, 0, $maxResults);
 			}
-				
+
 			return $blobs;
 		} else {
 			throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));

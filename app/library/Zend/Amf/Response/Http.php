@@ -33,41 +33,41 @@ require_once 'Zend/Amf/Response.php';
  */
 class Zend_Amf_Response_Http extends Zend_Amf_Response
 {
-    /**
-     * Create the application response header for AMF and sends the serialized AMF string
-     *
-     * @return string
-     */
-    public function getResponse()
-    {
-        if (!headers_sent()) {
-            if ($this->isIeOverSsl()) {
-                header('Cache-Control: cache, must-revalidate');
-                header('Pragma: public');
-            } else {
-                header('Cache-Control: no-cache, must-revalidate');
-                header('Pragma: no-cache');
-            }
-            header('Expires: Thu, 19 Nov 1981 08:52:00 GMT');
-            header('Content-Type: application/x-amf');
-        }
-        return parent::getResponse();
-    }
+	/**
+	 * Create the application response header for AMF and sends the serialized AMF string
+	 *
+	 * @return string
+	 */
+	public function getResponse()
+	{
+		if (!headers_sent()) {
+			if ($this->isIeOverSsl()) {
+				header('Cache-Control: cache, must-revalidate');
+				header('Pragma: public');
+			} else {
+				header('Cache-Control: no-cache, must-revalidate');
+				header('Pragma: no-cache');
+			}
+			header('Expires: Thu, 19 Nov 1981 08:52:00 GMT');
+			header('Content-Type: application/x-amf');
+		}
+		return parent::getResponse();
+	}
 
-    protected function isIeOverSsl()
-    {
-        $ssl = $_SERVER['HTTPS'];
-        if (!$ssl || ($ssl == 'off')) {
-            // IIS reports "off", whereas other browsers simply don't populate
-            return false;
-        }
+	protected function isIeOverSsl()
+	{
+		$ssl = $_SERVER['HTTPS'];
+		if (!$ssl || ($ssl == 'off')) {
+			// IIS reports "off", whereas other browsers simply don't populate
+			return false;
+		}
 
-        $ua  = $_SERVER['HTTP_USER_AGENT'];
-        if (!preg_match('/; MSIE \d+\.\d+;/', $ua)) {
-            // Not MicroSoft Internet Explorer
-            return false;
-        }
+		$ua  = $_SERVER['HTTP_USER_AGENT'];
+		if (!preg_match('/; MSIE \d+\.\d+;/', $ua)) {
+			// Not MicroSoft Internet Explorer
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

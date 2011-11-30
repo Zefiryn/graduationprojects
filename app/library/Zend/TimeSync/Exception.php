@@ -34,31 +34,31 @@ require_once 'Zend/Exception.php';
  */
 class Zend_TimeSync_Exception extends Zend_Exception
 {
-    /**
-     * Contains array of exceptions thrown in queried server
-     *
-     * @var array
-     */
-    protected $_exceptions;
+	/**
+	 * Contains array of exceptions thrown in queried server
+	 *
+	 * @var array
+	 */
+	protected $_exceptions;
 
-    /**
-     * Adds an exception to the exception list
-     *
-     * @param  Zend_TimeSync_Exception $exception New exteption to throw
-     * @return void
-     */
-    public function addException(Zend_TimeSync_Exception $exception)
-    {
-        $this->_exceptions[] = $exception;
-    }
+	/**
+	 * Adds an exception to the exception list
+	 *
+	 * @param  Zend_TimeSync_Exception $exception New exteption to throw
+	 * @return void
+	 */
+	public function addException(Zend_TimeSync_Exception $exception)
+	{
+		$this->_exceptions[] = $exception;
+	}
 
-    /**
-     * Returns an array of exceptions that were thrown
-     *
-     * @return array
-     */
-    public function get()
-    {
-        return $this->_exceptions;
-    }
+	/**
+	 * Returns an array of exceptions that were thrown
+	 *
+	 * @return array
+	 */
+	public function get()
+	{
+		return $this->_exceptions;
+	}
 }

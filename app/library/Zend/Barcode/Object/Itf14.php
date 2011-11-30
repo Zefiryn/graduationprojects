@@ -37,13 +37,13 @@ require_once 'Zend/Validate/Barcode.php';
 class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Code25interleaved
 {
 
-    /**
-     * Default options for Identcode barcode
-     * @return void
-     */
-    protected function _getDefaultOptions()
-    {
-        $this->_barcodeLength = 14;
-        $this->_mandatoryChecksum = true;
-    }
+	/**
+	 * Default options for Identcode barcode
+	 * @return void
+	 */
+	protected function _getDefaultOptions()
+	{
+		$this->_barcodeLength = 14;
+		$this->_mandatoryChecksum = true;
+	}
 }

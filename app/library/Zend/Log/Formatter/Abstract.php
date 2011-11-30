@@ -35,6 +35,6 @@ require_once 'Zend/Log/FactoryInterface.php';
  * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
  */
 abstract class Zend_Log_Formatter_Abstract
-    implements Zend_Log_Formatter_Interface, Zend_Log_FactoryInterface
+implements Zend_Log_Formatter_Interface, Zend_Log_FactoryInterface
 {
 }
