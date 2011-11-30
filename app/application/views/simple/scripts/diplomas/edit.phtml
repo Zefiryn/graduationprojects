@@ -1,5 +1,8 @@
 <div id="main">
-	<h1><?php echo $this->translate('edit_diploma');?></h1>
+	<h1>
+	<?php echo $this->translate('edit_diploma');?></h1>
+	
+	
 	<?php if ($this->form->csrf->hasErrors()):?>
 		<p class="spacer">&nbsp;</p>
 		<div id="error-csrf" class="error-div">

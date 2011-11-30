@@ -34,17 +34,17 @@ require_once 'Zend/Service/DeveloperGarden/Response/VoiceButler/VoiceButlerAbstr
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_VoiceButler_TearDownCallResponse
-    extends Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
+extends Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
 {
-    /**
-     * returns the session id
-     * @return string
-     */
-    public function getSessionId()
-    {
-        if (isset($this->return->sessionId)) {
-            return $this->return->sessionId;
-        }
-        return null;
-    }
+	/**
+	 * returns the session id
+	 * @return string
+	 */
+	public function getSessionId()
+	{
+		if (isset($this->return->sessionId)) {
+			return $this->return->sessionId;
+		}
+		return null;
+	}
 }

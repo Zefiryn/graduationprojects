@@ -21,13 +21,13 @@
  */
 
 if (class_exists("Zend_Exception")) {
-    abstract class Zend_InfoCard_Exception_Abstract extends Zend_Exception
-    {
-    }
+	abstract class Zend_InfoCard_Exception_Abstract extends Zend_Exception
+	{
+	}
 } else {
-    abstract class Zend_InfoCard_Exception_Abstract extends Exception
-    {
-    }
+	abstract class Zend_InfoCard_Exception_Abstract extends Exception
+	{
+	}
 }
 
 /**

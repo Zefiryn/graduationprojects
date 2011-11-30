@@ -50,7 +50,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 	 * @var Zend_Service_WindowsAzure_Storage_Blob
 	 */
 	protected $_blobStorageClient = null;
-	
+
 	/**
 	 * Control container name
 	 *
@@ -68,8 +68,8 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 	{
 		$this->_blobStorageClient = $blobStorageClient;
 		$this->_controlContainer  = $controlContainer;
-        $this->_ensureStorageInitialized();
-    }
+		$this->_ensureStorageInitialized();
+	}
 
 	/**
 	 * Ensure storage has been initialized
@@ -80,7 +80,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 			$this->_blobStorageClient->createContainer($this->_controlContainer);
 		}
 	}
-	
+
 	/**
 	 * Get default configuration values
 	 *
@@ -90,7 +90,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 	{
 		return new Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance();
 	}
-	
+
 	/**
 	 * Checks if a configuration for a specific role instance exists.
 	 *
@@ -106,7 +106,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 
 		return $this->_blobStorageClient->blobExists($this->_controlContainer, $roleInstance);
 	}
-	
+
 	/**
 	 * Checks if a configuration for current role instance exists. Only works on Development Fabric or Windows Azure Fabric.
 	 *
@@ -121,7 +121,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 
 		return $this->_blobStorageClient->blobExists($this->_controlContainer, $_SERVER['RdRoleId']);
 	}
-	
+
 	/**
 	 * Get configuration for current role instance. Only works on Development Fabric or Windows Azure Fabric.
 	 *
@@ -135,7 +135,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 		}
 		return $this->getConfigurationForRoleInstance($_SERVER['RdRoleId']);
 	}
-	
+
 	/**
 	 * Set configuration for current role instance. Only works on Development Fabric or Windows Azure Fabric.
 	 *
@@ -149,7 +149,7 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 		}
 		$this->setConfigurationForRoleInstance($_SERVER['RdRoleId'], $configuration);
 	}
-	
+
 	/**
 	 * Get configuration for a specific role instance
 	 *
@@ -163,15 +163,15 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 			throw new Zend_Service_WindowsAzure_Diagnostics_Exception('Role instance should be specified. Try reading $_SERVER[\'RdRoleId\'] for this information if the application is hosted on Windows Azure Fabric or Development Fabric.');
 		}
 
-        if ($this->_blobStorageClient->blobExists($this->_controlContainer, $roleInstance)) {
-            $configurationInstance = new Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance();
-            $configurationInstance->loadXml( $this->_blobStorageClient->getBlobData($this->_controlContainer, $roleInstance) );
-            return $configurationInstance;
-        }
+		if ($this->_blobStorageClient->blobExists($this->_controlContainer, $roleInstance)) {
+			$configurationInstance = new Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance();
+			$configurationInstance->loadXml( $this->_blobStorageClient->getBlobData($this->_controlContainer, $roleInstance) );
+			return $configurationInstance;
+		}
 
 		return new Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance();
 	}
-	
+
 	/**
 	 * Set configuration for a specific role instance
 	 *
@@ -185,6 +185,6 @@ class Zend_Service_WindowsAzure_Diagnostics_Manager
 			throw new Zend_Service_WindowsAzure_Diagnostics_Exception('Role instance should be specified. Try reading $_SERVER[\'RdRoleId\'] for this information if the application is hosted on Windows Azure Fabric or Development Fabric.');
 		}
 
-        $this->_blobStorageClient->putBlobData($this->_controlContainer, $roleInstance, $configuration->toXml(), array(), null, array('Content-Type' => 'text/xml'));
-    }
+		$this->_blobStorageClient->putBlobData($this->_controlContainer, $roleInstance, $configuration->toXml(), array(), null, array('Content-Type' => 'text/xml'));
+	}
 }

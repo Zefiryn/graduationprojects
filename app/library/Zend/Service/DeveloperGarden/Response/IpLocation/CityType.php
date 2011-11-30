@@ -34,44 +34,44 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_IpLocation_CityType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * @var string
-     */
-    public $countryCode = null;
+	/**
+	 * @var string
+	 */
+	public $countryCode = null;
 
-    /**
-     * @var string
-     */
-    public $cityCode = null;
+	/**
+	 * @var string
+	 */
+	public $cityCode = null;
 
-    /**
-     * @var string
-     */
-    public $cityName = null;
+	/**
+	 * @var string
+	 */
+	public $cityName = null;
 
-    /**
-     * @return string
-     */
-    public function getCountryCode()
-    {
-        return $this->countryCode;
-    }
+	/**
+	 * @return string
+	 */
+	public function getCountryCode()
+	{
+		return $this->countryCode;
+	}
 
-    /**
-     * @return string
-     */
-    public function getCityCode()
-    {
-        return $this->cityCode;
-    }
+	/**
+	 * @return string
+	 */
+	public function getCityCode()
+	{
+		return $this->cityCode;
+	}
 
-    /**
-     * @return string
-     */
-    public function getCityName()
-    {
-        return $this->cityName;
-    }
+	/**
+	 * @return string
+	 */
+	public function getCityName()
+	{
+		return $this->cityName;
+	}
 }

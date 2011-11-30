@@ -32,46 +32,46 @@ require_once 'Zend/Pdf/Trailer.php';
  */
 class Zend_Pdf_Trailer_Generator extends Zend_Pdf_Trailer
 {
-    /**
-     * Object constructor
-     *
-     * @param Zend_Pdf_Element_Dictionary $dict
-     */
-    public function __construct(Zend_Pdf_Element_Dictionary $dict)
-    {
-        parent::__construct($dict);
-    }
+	/**
+	 * Object constructor
+	 *
+	 * @param Zend_Pdf_Element_Dictionary $dict
+	 */
+	public function __construct(Zend_Pdf_Element_Dictionary $dict)
+	{
+		parent::__construct($dict);
+	}
 
-    /**
-     * Get length of source PDF
-     *
-     * @return string
-     */
-    public function getPDFLength()
-    {
-        require_once 'Zend/Pdf.php';
-        return strlen(Zend_Pdf::PDF_HEADER);
-    }
+	/**
+	 * Get length of source PDF
+	 *
+	 * @return string
+	 */
+	public function getPDFLength()
+	{
+		require_once 'Zend/Pdf.php';
+		return strlen(Zend_Pdf::PDF_HEADER);
+	}
 
-    /**
-     * Get PDF String
-     *
-     * @return string
-     */
-    public function getPDFString()
-    {
-        require_once 'Zend/Pdf.php';
-        return Zend_Pdf::PDF_HEADER;
-    }
+	/**
+	 * Get PDF String
+	 *
+	 * @return string
+	 */
+	public function getPDFString()
+	{
+		require_once 'Zend/Pdf.php';
+		return Zend_Pdf::PDF_HEADER;
+	}
 
-    /**
-     * Get header of free objects list
-     * Returns object number of last free object
-     *
-     * @return integer
-     */
-    public function getLastFreeObject()
-    {
-        return 0;
-    }
+	/**
+	 * Get header of free objects list
+	 * Returns object number of last free object
+	 *
+	 * @return integer
+	 */
+	public function getLastFreeObject()
+	{
+		return 0;
+	}
 }

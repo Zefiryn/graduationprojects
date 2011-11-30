@@ -34,18 +34,18 @@ require_once 'Zend/Db/Table/Abstract.php';
  */
 class Zend_Queue_Adapter_Db_Message extends Zend_Db_Table_Abstract
 {
-    /**
-     * @var string
-     */
-    protected $_name = 'message';
+	/**
+	 * @var string
+	 */
+	protected $_name = 'message';
 
-    /**
-     * @var string
-     */
-    protected $_primary = 'message_id';
+	/**
+	 * @var string
+	 */
+	protected $_primary = 'message_id';
 
-    /**
-     * @var mixed
-     */
-    protected $_sequence = true;
+	/**
+	 * @var mixed
+	 */
+	protected $_sequence = true;
 }

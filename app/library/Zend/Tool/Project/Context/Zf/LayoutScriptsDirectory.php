@@ -39,19 +39,19 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_LayoutScriptsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'scripts';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'scripts';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'LayoutScriptsDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'LayoutScriptsDirectory';
+	}
 
 }

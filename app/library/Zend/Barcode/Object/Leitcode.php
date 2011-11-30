@@ -41,24 +41,24 @@ require_once 'Zend/Validate/Barcode.php';
 class Zend_Barcode_Object_Leitcode extends Zend_Barcode_Object_Identcode
 {
 
-    /**
-     * Default options for Leitcode barcode
-     * @return void
-     */
-    protected function _getDefaultOptions()
-    {
-        $this->_barcodeLength = 14;
-        $this->_mandatoryChecksum = true;
-    }
+	/**
+	 * Default options for Leitcode barcode
+	 * @return void
+	 */
+	protected function _getDefaultOptions()
+	{
+		$this->_barcodeLength = 14;
+		$this->_mandatoryChecksum = true;
+	}
 
-    /**
-     * Retrieve text to display
-     * @return string
-     */
-    public function getTextToDisplay()
-    {
-        return preg_replace('/([0-9]{5})([0-9]{3})([0-9]{3})([0-9]{2})([0-9])/',
+	/**
+	 * Retrieve text to display
+	 * @return string
+	 */
+	public function getTextToDisplay()
+	{
+		return preg_replace('/([0-9]{5})([0-9]{3})([0-9]{3})([0-9]{2})([0-9])/',
                             '$1.$2.$3.$4 $5',
-                            $this->getText());
-    }
+		$this->getText());
+	}
 }

@@ -30,29 +30,29 @@
  */
 class Zend_Amf_Value_ByteArray
 {
-    /**
-     * @var string ByteString Data
-     */
-    protected $_data = '';
+	/**
+	 * @var string ByteString Data
+	 */
+	protected $_data = '';
 
-    /**
-     * Create a ByteArray
-     *
-     * @param  string $data
-     * @return void
-     */
-    public function __construct($data)
-    {
-        $this->_data = $data;
-    }
+	/**
+	 * Create a ByteArray
+	 *
+	 * @param  string $data
+	 * @return void
+	 */
+	public function __construct($data)
+	{
+		$this->_data = $data;
+	}
 
-    /**
-     * Return the byte stream
-     *
-     * @return string
-     */
-    public function getData()
-    {
-        return $this->_data;
-    }
+	/**
+	 * Return the byte stream
+	 *
+	 * @return string
+	 */
+	public function getData()
+	{
+		return $this->_data;
+	}
 }

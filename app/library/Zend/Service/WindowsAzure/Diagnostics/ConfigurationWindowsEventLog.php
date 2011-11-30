@@ -48,44 +48,44 @@ require_once 'Zend/Service/WindowsAzure/Diagnostics/LogLevel.php';
  * @property    array    Subscriptions                        Subscriptions
  */
 class Zend_Service_WindowsAzure_Diagnostics_ConfigurationWindowsEventLog
-    extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
+extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
-    /**
-     * Constructor
-     *
+	/**
+	 * Constructor
+	 *
 	 * @param	int		$bufferQuotaInMB					Buffer quota in MB
 	 * @param	int		$scheduledTransferPeriodInMinutes	Scheduled transfer period in minutes
 	 * @param	string	$scheduledTransferLogLevelFilter	Scheduled transfer log level filter
 	 */
-    public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0, $scheduledTransferLogLevelFilter = Zend_Service_WindowsAzure_Diagnostics_LogLevel::UNDEFINED)
-    {	
-        $this->_data = array(
+	public function __construct($bufferQuotaInMB = 0, $scheduledTransferPeriodInMinutes = 0, $scheduledTransferLogLevelFilter = Zend_Service_WindowsAzure_Diagnostics_LogLevel::UNDEFINED)
+	{
+		$this->_data = array(
             'bufferquotainmb'                    => $bufferQuotaInMB,
             'scheduledtransferperiodinminutes'     => $scheduledTransferPeriodInMinutes,
             'scheduledtransferloglevelfilter'    => $scheduledTransferLogLevelFilter,
             'subscriptions'                        => array()
-        );
-    }
+		);
+	}
 
 	/**
 	 * Add subscription
 	 *
- 	 * @param	string	$filter	Event log filter
+	 * @param	string	$filter	Event log filter
 	 */
-    public function addSubscription($filter)
-    {
-        $this->_data['subscriptions'][$filter] = $filter;
-    }
+	public function addSubscription($filter)
+	{
+		$this->_data['subscriptions'][$filter] = $filter;
+	}
 
 	/**
 	 * Remove subscription
 	 *
- 	 * @param	string	$filter	Event log filter
+	 * @param	string	$filter	Event log filter
 	 */
-    public function removeSubscription($filter)
-    {
-        if (isset($this->_data['subscriptions'][$filter])) {
-            unset($this->_data['subscriptions'][$filter]);
-        }
-    }
+	public function removeSubscription($filter)
+	{
+		if (isset($this->_data['subscriptions'][$filter])) {
+			unset($this->_data['subscriptions'][$filter]);
+		}
+	}
 }

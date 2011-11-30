@@ -33,60 +33,60 @@
 class Zend_Gdata_MimeBodyString
 {
 
-    /**
-     * The source string.
-     *
-     * @var string
-     */
-    protected $_sourceString = '';
+	/**
+	 * The source string.
+	 *
+	 * @var string
+	 */
+	protected $_sourceString = '';
 
-    /**
-     * The size of the MIME message.
-     * @var integer
-     */
-    protected $_bytesRead = 0;
+	/**
+	 * The size of the MIME message.
+	 * @var integer
+	 */
+	protected $_bytesRead = 0;
 
-    /**
-     * Create a new MimeBodyString object.
-     *
-     * @param string $sourceString The string we are wrapping.
-     */
-    public function __construct($sourceString)
-    {
-        $this->_sourceString = $sourceString;
-        $this->_bytesRead = 0;
-    }
+	/**
+	 * Create a new MimeBodyString object.
+	 *
+	 * @param string $sourceString The string we are wrapping.
+	 */
+	public function __construct($sourceString)
+	{
+		$this->_sourceString = $sourceString;
+		$this->_bytesRead = 0;
+	}
 
-    /**
-     * Read the next chunk of the string.
-     *
-     * @param integer $bytesRequested The size of the chunk that is to be read.
-     * @return string A corresponding piece of the string.
-     */
-    public function read($bytesRequested)
-    {
-      $len = strlen($this->_sourceString);
-      if($this->_bytesRead == $len) {
-          return FALSE;
-      } else if($bytesRequested > $len - $this->_bytesRead) {
-          $bytesRequested = $len - $this->_bytesRead;
-      }
+	/**
+	 * Read the next chunk of the string.
+	 *
+	 * @param integer $bytesRequested The size of the chunk that is to be read.
+	 * @return string A corresponding piece of the string.
+	 */
+	public function read($bytesRequested)
+	{
+		$len = strlen($this->_sourceString);
+		if($this->_bytesRead == $len) {
+			return FALSE;
+		} else if($bytesRequested > $len - $this->_bytesRead) {
+			$bytesRequested = $len - $this->_bytesRead;
+		}
 
-      $buffer = substr($this->_sourceString, $this->_bytesRead, $bytesRequested);
-      $this->_bytesRead += $bytesRequested;
+		$buffer = substr($this->_sourceString, $this->_bytesRead, $bytesRequested);
+		$this->_bytesRead += $bytesRequested;
 
-      return $buffer;
-    }
+		return $buffer;
+	}
 
-    /**
-     * The length of the string.
-     *
-     * @return int The length of the string contained in the object.
-     */
-    public function getSize()
-    {
-      return strlen($this->_sourceString);
-    }
+	/**
+	 * The length of the string.
+	 *
+	 * @return int The length of the string contained in the object.
+	 */
+	public function getSize()
+	{
+		return strlen($this->_sourceString);
+	}
 
 
 }

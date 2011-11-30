@@ -41,37 +41,37 @@ require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
 class Zend_Markup_Renderer_Html_Url extends Zend_Markup_Renderer_Html_HtmlAbstract
 {
 
-    /**
-     * Convert the token
-     *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function convert(Zend_Markup_Token $token, $text)
-    {
-        if ($token->hasAttribute('url')) {
-            $uri = $token->getAttribute('url');
-        } else {
-            $uri = $text;
-        }
+	/**
+	 * Convert the token
+	 *
+	 * @param Zend_Markup_Token $token
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function convert(Zend_Markup_Token $token, $text)
+	{
+		if ($token->hasAttribute('url')) {
+			$uri = $token->getAttribute('url');
+		} else {
+			$uri = $text;
+		}
 
-        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
-            $uri = 'http://' . $uri;
-        }
+		if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
+			$uri = 'http://' . $uri;
+		}
 
-        // check if the URL is valid
-        if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
-            return $text;
-        }
+		// check if the URL is valid
+		if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
+			return $text;
+		}
 
-        $attributes = Zend_Markup_Renderer_Html::renderAttributes($token);
+		$attributes = Zend_Markup_Renderer_Html::renderAttributes($token);
 
-        // run the URI through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
+		// run the URI through htmlentities
+		$uri = htmlentities($uri, ENT_QUOTES, Zend_Markup_Renderer_Html::getEncoding());
 
-        return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
-    }
+		return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
+	}
 
 }

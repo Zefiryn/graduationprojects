@@ -34,49 +34,49 @@ require_once 'Zend/View/Helper/HtmlObject.php';
  */
 class Zend_View_Helper_HtmlQuicktime extends Zend_View_Helper_HtmlObject
 {
-    /**
-     * Default file type for a movie applet
-     *
-     */
-    const TYPE = 'video/quicktime';
+	/**
+	 * Default file type for a movie applet
+	 *
+	 */
+	const TYPE = 'video/quicktime';
 
-    /**
-     * Object classid
-     *
-     */
-    const ATTRIB_CLASSID  = 'clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B';
+	/**
+	 * Object classid
+	 *
+	 */
+	const ATTRIB_CLASSID  = 'clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B';
 
-    /**
-     * Object Codebase
-     *
-     */
-    const ATTRIB_CODEBASE = 'http://www.apple.com/qtactivex/qtplugin.cab';
+	/**
+	 * Object Codebase
+	 *
+	 */
+	const ATTRIB_CODEBASE = 'http://www.apple.com/qtactivex/qtplugin.cab';
 
-    /**
-     * Default attributes
-     *
-     * @var array
-     */
-    protected $_attribs = array('classid'  => self::ATTRIB_CLASSID,
+	/**
+	 * Default attributes
+	 *
+	 * @var array
+	 */
+	protected $_attribs = array('classid'  => self::ATTRIB_CLASSID,
                                 'codebase' => self::ATTRIB_CODEBASE);
 
-    /**
-     * Output a quicktime movie object tag
-     *
-     * @param string $data The quicktime file
-     * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
-     * @param string $content Alternative content
-     * @return string
-     */
-    public function htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
-    {
-        // Attrs
-        $attribs = array_merge($this->_attribs, $attribs);
+	/**
+	 * Output a quicktime movie object tag
+	 *
+	 * @param string $data The quicktime file
+	 * @param array  $attribs Attribs for the object tag
+	 * @param array  $params Params for in the object tag
+	 * @param string $content Alternative content
+	 * @return string
+	 */
+	public function htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
+	{
+		// Attrs
+		$attribs = array_merge($this->_attribs, $attribs);
 
-        // Params
-        $params = array_merge(array('src' => $data), $params);
+		// Params
+		$params = array_merge(array('src' => $data), $params);
 
-        return $this->htmlObject($data, self::TYPE, $attribs, $params, $content);
-    }
+		return $this->htmlObject($data, self::TYPE, $attribs, $params, $content);
+	}
 }

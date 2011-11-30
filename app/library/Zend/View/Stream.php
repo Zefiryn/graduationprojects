@@ -39,145 +39,145 @@
  */
 class Zend_View_Stream
 {
-    /**
-     * Current stream position.
-     *
-     * @var int
-     */
-    protected $_pos = 0;
+	/**
+	 * Current stream position.
+	 *
+	 * @var int
+	 */
+	protected $_pos = 0;
 
-    /**
-     * Data for streaming.
-     *
-     * @var string
-     */
-    protected $_data;
+	/**
+	 * Data for streaming.
+	 *
+	 * @var string
+	 */
+	protected $_data;
 
-    /**
-     * Stream stats.
-     *
-     * @var array
-     */
-    protected $_stat;
+	/**
+	 * Stream stats.
+	 *
+	 * @var array
+	 */
+	protected $_stat;
 
-    /**
-     * Opens the script file and converts markup.
-     */
-    public function stream_open($path, $mode, $options, &$opened_path)
-    {
-        // get the view script source
-        $path        = str_replace('zend.view://', '', $path);
-        $this->_data = file_get_contents($path);
+	/**
+	 * Opens the script file and converts markup.
+	 */
+	public function stream_open($path, $mode, $options, &$opened_path)
+	{
+		// get the view script source
+		$path        = str_replace('zend.view://', '', $path);
+		$this->_data = file_get_contents($path);
 
-        /**
-         * If reading the file failed, update our local stat store
-         * to reflect the real stat of the file, then return on failure
-         */
-        if ($this->_data === false) {
-            $this->_stat = stat($path);
-            return false;
-        }
+		/**
+		 * If reading the file failed, update our local stat store
+		 * to reflect the real stat of the file, then return on failure
+		 */
+		if ($this->_data === false) {
+			$this->_stat = stat($path);
+			return false;
+		}
 
-        /**
-         * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
-         *
-         */
-        $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
-        $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
+		/**
+		 * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
+		 *
+		 */
+		$this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
+		$this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
 
-        /**
-         * file_get_contents() won't update PHP's stat cache, so we grab a stat
-         * of the file to prevent additional reads should the script be
-         * requested again, which will make include() happy.
-         */
-        $this->_stat = stat($path);
+		/**
+		 * file_get_contents() won't update PHP's stat cache, so we grab a stat
+		 * of the file to prevent additional reads should the script be
+		 * requested again, which will make include() happy.
+		 */
+		$this->_stat = stat($path);
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Included so that __FILE__ returns the appropriate info
-     *
-     * @return array
-     */
-    public function url_stat()
-    {
-        return $this->_stat;
-    }
+	/**
+	 * Included so that __FILE__ returns the appropriate info
+	 *
+	 * @return array
+	 */
+	public function url_stat()
+	{
+		return $this->_stat;
+	}
 
-    /**
-     * Reads from the stream.
-     */
-    public function stream_read($count)
-    {
-        $ret = substr($this->_data, $this->_pos, $count);
-        $this->_pos += strlen($ret);
-        return $ret;
-    }
-
-
-    /**
-     * Tells the current position in the stream.
-     */
-    public function stream_tell()
-    {
-        return $this->_pos;
-    }
+	/**
+	 * Reads from the stream.
+	 */
+	public function stream_read($count)
+	{
+		$ret = substr($this->_data, $this->_pos, $count);
+		$this->_pos += strlen($ret);
+		return $ret;
+	}
 
 
-    /**
-     * Tells if we are at the end of the stream.
-     */
-    public function stream_eof()
-    {
-        return $this->_pos >= strlen($this->_data);
-    }
+	/**
+	 * Tells the current position in the stream.
+	 */
+	public function stream_tell()
+	{
+		return $this->_pos;
+	}
 
 
-    /**
-     * Stream statistics.
-     */
-    public function stream_stat()
-    {
-        return $this->_stat;
-    }
+	/**
+	 * Tells if we are at the end of the stream.
+	 */
+	public function stream_eof()
+	{
+		return $this->_pos >= strlen($this->_data);
+	}
 
 
-    /**
-     * Seek to a specific point in the stream.
-     */
-    public function stream_seek($offset, $whence)
-    {
-        switch ($whence) {
-            case SEEK_SET:
-                if ($offset < strlen($this->_data) && $offset >= 0) {
-                $this->_pos = $offset;
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
+	/**
+	 * Stream statistics.
+	 */
+	public function stream_stat()
+	{
+		return $this->_stat;
+	}
 
-            case SEEK_CUR:
-                if ($offset >= 0) {
-                    $this->_pos += $offset;
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
 
-            case SEEK_END:
-                if (strlen($this->_data) + $offset >= 0) {
-                    $this->_pos = strlen($this->_data) + $offset;
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
+	/**
+	 * Seek to a specific point in the stream.
+	 */
+	public function stream_seek($offset, $whence)
+	{
+		switch ($whence) {
+			case SEEK_SET:
+				if ($offset < strlen($this->_data) && $offset >= 0) {
+					$this->_pos = $offset;
+					return true;
+				} else {
+					return false;
+				}
+				break;
 
-            default:
-                return false;
-        }
-    }
+			case SEEK_CUR:
+				if ($offset >= 0) {
+					$this->_pos += $offset;
+					return true;
+				} else {
+					return false;
+				}
+				break;
+
+			case SEEK_END:
+				if (strlen($this->_data) + $offset >= 0) {
+					$this->_pos = strlen($this->_data) + $offset;
+					return true;
+				} else {
+					return false;
+				}
+				break;
+
+			default:
+				return false;
+		}
+	}
 }

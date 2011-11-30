@@ -36,28 +36,28 @@ require_once 'Zend/Gdata/Books/Extension/BooksLink.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Books_Extension_AnnotationLink extends
-    Zend_Gdata_Books_Extension_BooksLink
+Zend_Gdata_Books_Extension_BooksLink
 {
 
-    /**
-     * Constructor for Zend_Gdata_Books_Extension_AnnotationLink which
-     * Describes an annotation link
-     *
-     * @param string|null $href Linked resource URI
-     * @param string|null $rel Forward relationship
-     * @param string|null $type Resource MIME type
-     * @param string|null $hrefLang Resource language
-     * @param string|null $title Human-readable resource title
-     * @param string|null $length Resource length in octets
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($href = null, $rel = null, $type = null,
-            $hrefLang = null, $title = null, $length = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
-        parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
-    }
+	/**
+	 * Constructor for Zend_Gdata_Books_Extension_AnnotationLink which
+	 * Describes an annotation link
+	 *
+	 * @param string|null $href Linked resource URI
+	 * @param string|null $rel Forward relationship
+	 * @param string|null $type Resource MIME type
+	 * @param string|null $hrefLang Resource language
+	 * @param string|null $title Human-readable resource title
+	 * @param string|null $length Resource length in octets
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($href = null, $rel = null, $type = null,
+	$hrefLang = null, $title = null, $length = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Books::$namespaces);
+		parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
+	}
 
 }
 

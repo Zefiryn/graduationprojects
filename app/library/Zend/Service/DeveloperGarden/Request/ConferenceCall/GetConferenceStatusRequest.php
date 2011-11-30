@@ -34,73 +34,73 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the conference id
-     *
-     * @var string
-     */
-    public $conferenceId = null;
+	/**
+	 * the conference id
+	 *
+	 * @var string
+	 */
+	public $conferenceId = null;
 
-    /**
-     * what
-     *
-     * @var integer
-     */
-    public $what = null;
+	/**
+	 * what
+	 *
+	 * @var integer
+	 */
+	public $what = null;
 
-    /**
-     * possible what values
-     *
-     * @var array
-     */
-    private $_whatValues = array(
-        0 => 'all conferences',
-        1 => 'just detail, acc and startTime',
-        2 => 'just participants',
-        3 => 'just schedule',
-    );
+	/**
+	 * possible what values
+	 *
+	 * @var array
+	 */
+	private $_whatValues = array(
+	0 => 'all conferences',
+	1 => 'just detail, acc and startTime',
+	2 => 'just participants',
+	3 => 'just schedule',
+	);
 
-    /**
-     * constructor
-     *
-     * @param integer $environment
-     * @param string $conferenceId
-     * @param integer $what
-     */
-    public function __construct($environment, $conferenceId, $what)
-    {
-        parent::__construct($environment);
-        $this->setConferenceId($conferenceId)
-             ->setWhat($what);
-    }
+	/**
+	 * constructor
+	 *
+	 * @param integer $environment
+	 * @param string $conferenceId
+	 * @param integer $what
+	 */
+	public function __construct($environment, $conferenceId, $what)
+	{
+		parent::__construct($environment);
+		$this->setConferenceId($conferenceId)
+		->setWhat($what);
+	}
 
-    /**
-     * set the conference id
-     *
-     * @param string $conferenceId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
-     */
-    public function setConferenceId($conferenceId)
-    {
-        $this->conferenceId = $conferenceId;
-        return $this;
-    }
+	/**
+	 * set the conference id
+	 *
+	 * @param string $conferenceId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
+	 */
+	public function setConferenceId($conferenceId)
+	{
+		$this->conferenceId = $conferenceId;
+		return $this;
+	}
 
-    /**
-     * sets $what
-     *
-     * @param integer $what
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
-     */
-    public function setWhat($what)
-    {
-        if (!array_key_exists($what, $this->_whatValues)) {
-            require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
-            throw new Zend_Service_DeveloperGarden_Request_Exception('What value not allowed.');
-        }
-        $this->what = $what;
-        return $this;
-    }
+	/**
+	 * sets $what
+	 *
+	 * @param integer $what
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
+	 */
+	public function setWhat($what)
+	{
+		if (!array_key_exists($what, $this->_whatValues)) {
+			require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
+			throw new Zend_Service_DeveloperGarden_Request_Exception('What value not allowed.');
+		}
+		$this->what = $what;
+		return $this;
+	}
 }

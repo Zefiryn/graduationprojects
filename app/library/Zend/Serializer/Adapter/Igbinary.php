@@ -32,67 +32,67 @@ require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
  */
 class Zend_Serializer_Adapter_Igbinary extends Zend_Serializer_Adapter_AdapterAbstract
 {
-    /**
-     * @var string Serialized null value
-     */
-    private static $_serializedNull = null;
+	/**
+	 * @var string Serialized null value
+	 */
+	private static $_serializedNull = null;
 
-    /**
-     * Constructor
-     *
-     * @param  array|Zend_Config $opts
-     * @return void
-     * @throws Zend_Serializer_Exception If igbinary extension is not present
-     */
-    public function __construct($opts = array())
-    {
-        if (!extension_loaded('igbinary')) {
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('PHP extension "igbinary" is required for this adapter');
-        }
+	/**
+	 * Constructor
+	 *
+	 * @param  array|Zend_Config $opts
+	 * @return void
+	 * @throws Zend_Serializer_Exception If igbinary extension is not present
+	 */
+	public function __construct($opts = array())
+	{
+		if (!extension_loaded('igbinary')) {
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception('PHP extension "igbinary" is required for this adapter');
+		}
 
-        parent::__construct($opts);
+		parent::__construct($opts);
 
-        if (self::$_serializedNull === null) {
-            self::$_serializedNull = igbinary_serialize(null);
-        }
-    }
+		if (self::$_serializedNull === null) {
+			self::$_serializedNull = igbinary_serialize(null);
+		}
+	}
 
-    /**
-     * Serialize PHP value to igbinary
-     *
-     * @param  mixed $value
-     * @param  array $opts
-     * @return string
-     * @throws Zend_Serializer_Exception on igbinary error
-     */
-    public function serialize($value, array $opts = array())
-    {
-        $ret = igbinary_serialize($value);
-        if ($ret === false) {
-            $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($lastErr['message']);
-        }
-        return $ret;
-    }
+	/**
+	 * Serialize PHP value to igbinary
+	 *
+	 * @param  mixed $value
+	 * @param  array $opts
+	 * @return string
+	 * @throws Zend_Serializer_Exception on igbinary error
+	 */
+	public function serialize($value, array $opts = array())
+	{
+		$ret = igbinary_serialize($value);
+		if ($ret === false) {
+			$lastErr = error_get_last();
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception($lastErr['message']);
+		}
+		return $ret;
+	}
 
-    /**
-     * Deserialize igbinary string to PHP value
-     *
-     * @param  string|binary $serialized
-     * @param  array $opts
-     * @return mixed
-     * @throws Zend_Serializer_Exception on igbinary error
-     */
-    public function unserialize($serialized, array $opts = array())
-    {
-        $ret = igbinary_unserialize($serialized);
-        if ($ret === null && $serialized !== self::$_serializedNull) {
-            $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($lastErr['message']);
-        }
-        return $ret;
-    }
+	/**
+	 * Deserialize igbinary string to PHP value
+	 *
+	 * @param  string|binary $serialized
+	 * @param  array $opts
+	 * @return mixed
+	 * @throws Zend_Serializer_Exception on igbinary error
+	 */
+	public function unserialize($serialized, array $opts = array())
+	{
+		$ret = igbinary_unserialize($serialized);
+		if ($ret === null && $serialized !== self::$_serializedNull) {
+			$lastErr = error_get_last();
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception($lastErr['message']);
+		}
+		return $ret;
+	}
 }

@@ -33,16 +33,16 @@ require_once 'Zend/Filter/Interface.php';
 class Zend_Filter_StripNewlines implements Zend_Filter_Interface
 {
 
-    /**
-     * Defined by Zend_Filter_Interface
-     *
-     * Returns $value without newline control characters
-     *
-     * @param  string $value
-     * @return string
-     */
-    public function filter ($value)
-    {
-        return str_replace(array("\n", "\r"), '', $value);
-    }
+	/**
+	 * Defined by Zend_Filter_Interface
+	 *
+	 * Returns $value without newline control characters
+	 *
+	 * @param  string $value
+	 * @return string
+	 */
+	public function filter ($value)
+	{
+		return str_replace(array("\n", "\r"), '', $value);
+	}
 }

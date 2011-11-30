@@ -33,49 +33,49 @@
  */
 class Zend_Amf_Value_MessageHeader
 {
-    /**
-     * Name of the header
-     *
-     * @var string
-     */
-    public $name;
+	/**
+	 * Name of the header
+	 *
+	 * @var string
+	 */
+	public $name;
 
-    /**
-     * Flag if the data has to be parsed on return
-     *
-     * @var boolean
-     */
-    public $mustRead;
+	/**
+	 * Flag if the data has to be parsed on return
+	 *
+	 * @var boolean
+	 */
+	public $mustRead;
 
-    /**
-     * Length of the data field
-     *
-     * @var int
-     */
-    public $length;
+	/**
+	 * Length of the data field
+	 *
+	 * @var int
+	 */
+	public $length;
 
-    /**
-     * Data sent with the header name
-     *
-     * @var mixed
-     */
-    public $data;
+	/**
+	 * Data sent with the header name
+	 *
+	 * @var mixed
+	 */
+	public $data;
 
-    /**
-     * Used to create and store AMF Header data.
-     *
-     * @param String $name
-     * @param Boolean $mustRead
-     * @param misc $content
-     * @param integer $length
-     */
-    public function __construct($name, $mustRead, $data, $length=null)
-    {
-        $this->name     = $name;
-        $this->mustRead = (bool) $mustRead;
-        $this->data     = $data;
-        if (null !== $length) {
-            $this->length = (int) $length;
-        }
-    }
+	/**
+	 * Used to create and store AMF Header data.
+	 *
+	 * @param String $name
+	 * @param Boolean $mustRead
+	 * @param misc $content
+	 * @param integer $length
+	 */
+	public function __construct($name, $mustRead, $data, $length=null)
+	{
+		$this->name     = $name;
+		$this->mustRead = (bool) $mustRead;
+		$this->data     = $data;
+		if (null !== $length) {
+			$this->length = (int) $length;
+		}
+	}
 }

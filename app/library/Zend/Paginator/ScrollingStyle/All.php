@@ -36,15 +36,15 @@ require_once 'Zend/Paginator/ScrollingStyle/Interface.php';
  */
 class Zend_Paginator_ScrollingStyle_All implements Zend_Paginator_ScrollingStyle_Interface
 {
-    /**
-     * Returns an array of all pages given a page number and range.
-     *
-     * @param  Zend_Paginator $paginator
-     * @param  integer $pageRange Unused
-     * @return array
-     */
-    public function getPages(Zend_Paginator $paginator, $pageRange = null)
-    {
-        return $paginator->getPagesInRange(1, $paginator->count());
-    }
+	/**
+	 * Returns an array of all pages given a page number and range.
+	 *
+	 * @param  Zend_Paginator $paginator
+	 * @param  integer $pageRange Unused
+	 * @return array
+	 */
+	public function getPages(Zend_Paginator $paginator, $pageRange = null)
+	{
+		return $paginator->getPagesInRange(1, $paginator->count());
+	}
 }

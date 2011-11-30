@@ -39,19 +39,19 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_TestLibraryBootstrapFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'bootstrap.php';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'bootstrap.php';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestLibraryBootstrapFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestLibraryBootstrapFile';
+	}
 
 }

@@ -35,64 +35,64 @@ require_once 'Zend/View/Helper/Partial.php';
 class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
 {
 
-    /**
-     * Marker to where the pointer is at in the loop
-     * @var integer
-     */
-    protected $partialCounter = 0;
+	/**
+	 * Marker to where the pointer is at in the loop
+	 * @var integer
+	 */
+	protected $partialCounter = 0;
 
-    /**
-     * Renders a template fragment within a variable scope distinct from the
-     * calling View object.
-     *
-     * If no arguments are provided, returns object instance.
-     *
-     * @param  string $name Name of view script
-     * @param  string|array $module If $model is empty, and $module is an array,
-     *                              these are the variables to populate in the
-     *                              view. Otherwise, the module in which the
-     *                              partial resides
-     * @param  array $model Variables to populate in the view
-     * @return string
-     */
-    public function partialLoop($name = null, $module = null, $model = null)
-    {
-        if (0 == func_num_args()) {
-            return $this;
-        }
+	/**
+	 * Renders a template fragment within a variable scope distinct from the
+	 * calling View object.
+	 *
+	 * If no arguments are provided, returns object instance.
+	 *
+	 * @param  string $name Name of view script
+	 * @param  string|array $module If $model is empty, and $module is an array,
+	 *                              these are the variables to populate in the
+	 *                              view. Otherwise, the module in which the
+	 *                              partial resides
+	 * @param  array $model Variables to populate in the view
+	 * @return string
+	 */
+	public function partialLoop($name = null, $module = null, $model = null)
+	{
+		if (0 == func_num_args()) {
+			return $this;
+		}
 
-        if ((null === $model) && (null !== $module)) {
-            $model  = $module;
-            $module = null;
-        }
+		if ((null === $model) && (null !== $module)) {
+			$model  = $module;
+			$module = null;
+		}
 
-        if (!is_array($model)
-            && (!$model instanceof Traversable)
-            && (is_object($model) && !method_exists($model, 'toArray'))
-        ) {
-            require_once 'Zend/View/Helper/Partial/Exception.php';
-            $e = new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
-            $e->setView($this->view);
-            throw $e;
-        }
+		if (!is_array($model)
+		&& (!$model instanceof Traversable)
+		&& (is_object($model) && !method_exists($model, 'toArray'))
+		) {
+			require_once 'Zend/View/Helper/Partial/Exception.php';
+			$e = new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
+			$e->setView($this->view);
+			throw $e;
+		}
 
-        if (is_object($model)
-            && (!$model instanceof Traversable)
-            && method_exists($model, 'toArray')
-        ) {
-            $model = $model->toArray();
-        }
+		if (is_object($model)
+		&& (!$model instanceof Traversable)
+		&& method_exists($model, 'toArray')
+		) {
+			$model = $model->toArray();
+		}
 
-        $content = '';
-        // reset the counter if it's call again
-        $this->partialCounter = 0;
-        foreach ($model as $item) {
-            // increment the counter variable
-            $this->partialCounter++;
+		$content = '';
+		// reset the counter if it's call again
+		$this->partialCounter = 0;
+		foreach ($model as $item) {
+			// increment the counter variable
+			$this->partialCounter++;
 
-            $content .= $this->partial($name, $module, $item);
-        }
+			$content .= $this->partial($name, $module, $item);
+		}
 
-        return $content;
-    }
+		return $content;
+	}
 }

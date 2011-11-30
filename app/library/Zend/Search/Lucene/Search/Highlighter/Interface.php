@@ -30,24 +30,24 @@
  */
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
-    /**
-     * Set document for highlighting.
-     *
-     * @param Zend_Search_Lucene_Document_Html $document
-     */
-    public function setDocument(Zend_Search_Lucene_Document_Html $document);
+	/**
+	 * Set document for highlighting.
+	 *
+	 * @param Zend_Search_Lucene_Document_Html $document
+	 */
+	public function setDocument(Zend_Search_Lucene_Document_Html $document);
 
-    /**
-     * Get document for highlighting.
-     *
-     * @return Zend_Search_Lucene_Document_Html $document
-     */
-    public function getDocument();
+	/**
+	 * Get document for highlighting.
+	 *
+	 * @return Zend_Search_Lucene_Document_Html $document
+	 */
+	public function getDocument();
 
-    /**
-     * Highlight specified words (method is invoked once per subquery)
-     *
-     * @param string|array $words  Words to highlight. They could be organized using the array or string.
-     */
-    public function highlight($words);
+	/**
+	 * Highlight specified words (method is invoked once per subquery)
+	 *
+	 * @param string|array $words  Words to highlight. They could be organized using the array or string.
+	 */
+	public function highlight($words);
 }

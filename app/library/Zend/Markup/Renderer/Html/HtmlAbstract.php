@@ -37,33 +37,33 @@ require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
 abstract class Zend_Markup_Renderer_Html_HtmlAbstract implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
-    /**
-     * The HTML renderer
-     *
-     * @var Zend_Markup_Renderer_Html
-     */
-    protected $_renderer;
+	/**
+	 * The HTML renderer
+	 *
+	 * @var Zend_Markup_Renderer_Html
+	 */
+	protected $_renderer;
 
 
-    /**
-     * Set the HTML renderer instance
-     *
-     * @param Zend_Markup_Renderer_Html $renderer
-     *
-     * @return Zend_Markup_Renderer_Html_HtmlAbstract
-     */
-    public function setRenderer(Zend_Markup_Renderer_Html $renderer)
-    {
-        $this->_renderer = $renderer;
-    }
+	/**
+	 * Set the HTML renderer instance
+	 *
+	 * @param Zend_Markup_Renderer_Html $renderer
+	 *
+	 * @return Zend_Markup_Renderer_Html_HtmlAbstract
+	 */
+	public function setRenderer(Zend_Markup_Renderer_Html $renderer)
+	{
+		$this->_renderer = $renderer;
+	}
 
-    /**
-     * Get the HTML renderer instance
-     *
-     * @return Zend_Markup_Renderer_Html
-     */
-    public function getRenderer()
-    {
-        return $this->_renderer;
-    }
+	/**
+	 * Get the HTML renderer instance
+	 *
+	 * @return Zend_Markup_Renderer_Html
+	 */
+	public function getRenderer()
+	{
+		return $this->_renderer;
+	}
 }

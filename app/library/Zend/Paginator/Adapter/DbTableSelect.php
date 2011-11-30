@@ -32,17 +32,17 @@ require_once 'Zend/Paginator/Adapter/DbSelect.php';
  */
 class Zend_Paginator_Adapter_DbTableSelect extends Zend_Paginator_Adapter_DbSelect
 {
-    /**
-     * Returns a Zend_Db_Table_Rowset_Abstract of items for a page.
-     *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
-     * @return Zend_Db_Table_Rowset_Abstract
-     */
-    public function getItems($offset, $itemCountPerPage)
-    {
-        $this->_select->limit($itemCountPerPage, $offset);
+	/**
+	 * Returns a Zend_Db_Table_Rowset_Abstract of items for a page.
+	 *
+	 * @param  integer $offset Page offset
+	 * @param  integer $itemCountPerPage Number of items per page
+	 * @return Zend_Db_Table_Rowset_Abstract
+	 */
+	public function getItems($offset, $itemCountPerPage)
+	{
+		$this->_select->limit($itemCountPerPage, $offset);
 
-        return $this->_select->getTable()->fetchAll($this->_select);
-    }
+		return $this->_select->getTable()->fetchAll($this->_select);
+	}
 }

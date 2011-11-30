@@ -29,26 +29,26 @@
  */
 interface Zend_Filter_Compress_CompressInterface
 {
-    /**
-     * Compresses $value with the defined settings
-     *
-     * @param  string $value Data to compress
-     * @return string The compressed data
-     */
-    public function compress($value);
+	/**
+	 * Compresses $value with the defined settings
+	 *
+	 * @param  string $value Data to compress
+	 * @return string The compressed data
+	 */
+	public function compress($value);
 
-    /**
-     * Decompresses $value with the defined settings
-     *
-     * @param  string $value Data to decompress
-     * @return string The decompressed data
-     */
-    public function decompress($value);
+	/**
+	 * Decompresses $value with the defined settings
+	 *
+	 * @param  string $value Data to decompress
+	 * @return string The decompressed data
+	 */
+	public function decompress($value);
 
-    /**
-     * Return the adapter name
-     *
-     * @return string
-     */
-    public function toString();
+	/**
+	 * Return the adapter name
+	 *
+	 * @return string
+	 */
+	public function toString();
 }

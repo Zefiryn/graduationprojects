@@ -38,97 +38,97 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  */
 class Zend_Application_Resource_Translate extends Zend_Application_Resource_ResourceAbstract
 {
-    const DEFAULT_REGISTRY_KEY = 'Zend_Translate';
+	const DEFAULT_REGISTRY_KEY = 'Zend_Translate';
 
-    /**
-     * @var Zend_Translate
-     */
-    protected $_translate;
+	/**
+	 * @var Zend_Translate
+	 */
+	protected $_translate;
 
-    /**
-     * Defined by Zend_Application_Resource_Resource
-     *
-     * @return Zend_Translate
-     */
-    public function init()
-    {
-        return $this->getTranslate();
-    }
+	/**
+	 * Defined by Zend_Application_Resource_Resource
+	 *
+	 * @return Zend_Translate
+	 */
+	public function init()
+	{
+		return $this->getTranslate();
+	}
 
-    /**
-     * Retrieve translate object
-     *
-     * @return Zend_Translate
-     * @throws Zend_Application_Resource_Exception if registry key was used
-     *          already but is no instance of Zend_Translate
-     */
-    public function getTranslate()
-    {
-        if (null === $this->_translate) {
-            $options = $this->getOptions();
+	/**
+	 * Retrieve translate object
+	 *
+	 * @return Zend_Translate
+	 * @throws Zend_Application_Resource_Exception if registry key was used
+	 *          already but is no instance of Zend_Translate
+	 */
+	public function getTranslate()
+	{
+		if (null === $this->_translate) {
+			$options = $this->getOptions();
 
-            if (!isset($options['content']) && !isset($options['data'])) {
-                require_once 'Zend/Application/Resource/Exception.php';
-                throw new Zend_Application_Resource_Exception('No translation source data provided.');
-            } else if (array_key_exists('content', $options) && array_key_exists('data', $options)) {
-                require_once 'Zend/Application/Resource/Exception.php';
-                throw new Zend_Application_Resource_Exception(
+			if (!isset($options['content']) && !isset($options['data'])) {
+				require_once 'Zend/Application/Resource/Exception.php';
+				throw new Zend_Application_Resource_Exception('No translation source data provided.');
+			} else if (array_key_exists('content', $options) && array_key_exists('data', $options)) {
+				require_once 'Zend/Application/Resource/Exception.php';
+				throw new Zend_Application_Resource_Exception(
                     'Conflict on translation source data: choose only one key between content and data.'
-                );
-            }
+				);
+			}
 
-            if (empty($options['adapter'])) {
-                $options['adapter'] = Zend_Translate::AN_ARRAY;
-            }
+			if (empty($options['adapter'])) {
+				$options['adapter'] = Zend_Translate::AN_ARRAY;
+			}
 
-            if (!empty($options['data'])) {
-                $options['content'] = $options['data'];
-                unset($options['data']);
-            }
+			if (!empty($options['data'])) {
+				$options['content'] = $options['data'];
+				unset($options['data']);
+			}
 
-            if (isset($options['options'])) {
-                foreach($options['options'] as $key => $value) {
-                    $options[$key] = $value;
-                }
-            }
+			if (isset($options['options'])) {
+				foreach($options['options'] as $key => $value) {
+					$options[$key] = $value;
+				}
+			}
 
-            if (!empty($options['cache']) && is_string($options['cache'])) {
-                $bootstrap = $this->getBootstrap();
-                if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
-                    $bootstrap->hasPluginResource('CacheManager')
-                ) {
-                    $cacheManager = $bootstrap->bootstrap('CacheManager')
-                        ->getResource('CacheManager');
-                    if (null !== $cacheManager &&
-                        $cacheManager->hasCache($options['cache'])
-                    ) {
-                        $options['cache'] = $cacheManager->getCache($options['cache']);
-                    }
-                }
-            }
+			if (!empty($options['cache']) && is_string($options['cache'])) {
+				$bootstrap = $this->getBootstrap();
+				if ($bootstrap instanceof Zend_Application_Bootstrap_ResourceBootstrapper &&
+				$bootstrap->hasPluginResource('CacheManager')
+				) {
+					$cacheManager = $bootstrap->bootstrap('CacheManager')
+					->getResource('CacheManager');
+					if (null !== $cacheManager &&
+					$cacheManager->hasCache($options['cache'])
+					) {
+						$options['cache'] = $cacheManager->getCache($options['cache']);
+					}
+				}
+			}
 
-            $key = (isset($options['registry_key']) && !is_numeric($options['registry_key']))
-                 ? $options['registry_key']
-                 : self::DEFAULT_REGISTRY_KEY;
-            unset($options['registry_key']);
+			$key = (isset($options['registry_key']) && !is_numeric($options['registry_key']))
+			? $options['registry_key']
+			: self::DEFAULT_REGISTRY_KEY;
+			unset($options['registry_key']);
 
-            if(Zend_Registry::isRegistered($key)) {
-                $translate = Zend_Registry::get($key);
-                if(!$translate instanceof Zend_Translate) {
-                    require_once 'Zend/Application/Resource/Exception.php';
-                    throw new Zend_Application_Resource_Exception($key
-                                   . ' already registered in registry but is '
-                                   . 'no instance of Zend_Translate');
-                }
+			if(Zend_Registry::isRegistered($key)) {
+				$translate = Zend_Registry::get($key);
+				if(!$translate instanceof Zend_Translate) {
+					require_once 'Zend/Application/Resource/Exception.php';
+					throw new Zend_Application_Resource_Exception($key
+					. ' already registered in registry but is '
+					. 'no instance of Zend_Translate');
+				}
 
-                $translate->addTranslation($options);
-                $this->_translate = $translate;
-            } else {
-                $this->_translate = new Zend_Translate($options);
-                Zend_Registry::set($key, $this->_translate);
-            }
-        }
+				$translate->addTranslation($options);
+				$this->_translate = $translate;
+			} else {
+				$this->_translate = new Zend_Translate($options);
+				Zend_Registry::set($key, $this->_translate);
+			}
+		}
 
-        return $this->_translate;
-    }
+		return $this->_translate;
+	}
 }

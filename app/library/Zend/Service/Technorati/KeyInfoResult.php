@@ -33,86 +33,86 @@
  */
 class Zend_Service_Technorati_KeyInfoResult
 {
-    /**
-     * Technorati API key
-     *
-     * @var     string
-     * @access  protected
-     */
-    protected $_apiKey;
+	/**
+	 * Technorati API key
+	 *
+	 * @var     string
+	 * @access  protected
+	 */
+	protected $_apiKey;
 
-    /**
-     * Number of queries used today
-     *
-     * @var     int
-     * @access  protected
-     */
-    protected $_apiQueries;
+	/**
+	 * Number of queries used today
+	 *
+	 * @var     int
+	 * @access  protected
+	 */
+	protected $_apiQueries;
 
-    /**
-     * Total number of available queries per day
-     *
-     * @var     int
-     * @access  protected
-     */
-    protected $_maxQueries;
-
-
-    /**
-     * Constructs a new object from DOM Element.
-     * Parses given Key element from $dom and sets API key string.
-     *
-     * @param   DomElement $dom the ReST fragment for this object
-     * @param   string $apiKey  the API Key string
-     */
-    public function __construct(DomDocument $dom, $apiKey = null)
-    {
-        // $this->_dom   = $dom;
-        // $this->_xpath = new DOMXPath($dom);
-        $xpath = new DOMXPath($dom);
-
-        $this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
-        $this->_maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
-        $this->setApiKey($apiKey);
-    }
+	/**
+	 * Total number of available queries per day
+	 *
+	 * @var     int
+	 * @access  protected
+	 */
+	protected $_maxQueries;
 
 
-    /**
-     * Returns API Key string.
-     *
-     * @return  string  API Key string
-     */
-    public function getApiKey() {
-        return $this->_apiKey;
-    }
+	/**
+	 * Constructs a new object from DOM Element.
+	 * Parses given Key element from $dom and sets API key string.
+	 *
+	 * @param   DomElement $dom the ReST fragment for this object
+	 * @param   string $apiKey  the API Key string
+	 */
+	public function __construct(DomDocument $dom, $apiKey = null)
+	{
+		// $this->_dom   = $dom;
+		// $this->_xpath = new DOMXPath($dom);
+		$xpath = new DOMXPath($dom);
 
-    /**
-     * Returns the number of queries sent today.
-     *
-     * @return  int     number of queries sent today
-     */
-    public function getApiQueries() {
-        return $this->_apiQueries;
-    }
-
-    /**
-     * Returns Key's daily query limit.
-     *
-     * @return  int     maximum number of available queries per day
-     */
-    public function getMaxQueries() {
-        return $this->_maxQueries;
-    }
+		$this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
+		$this->_maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
+		$this->setApiKey($apiKey);
+	}
 
 
-    /**
-     * Sets API Key string.
-     *
-     * @param   string $apiKey  the API Key
-     * @return  Zend_Service_Technorati_KeyInfoResult $this instance
-     */
-    public function setApiKey($apiKey) {
-        $this->_apiKey = $apiKey;
-        return $this;
-    }
+	/**
+	 * Returns API Key string.
+	 *
+	 * @return  string  API Key string
+	 */
+	public function getApiKey() {
+		return $this->_apiKey;
+	}
+
+	/**
+	 * Returns the number of queries sent today.
+	 *
+	 * @return  int     number of queries sent today
+	 */
+	public function getApiQueries() {
+		return $this->_apiQueries;
+	}
+
+	/**
+	 * Returns Key's daily query limit.
+	 *
+	 * @return  int     maximum number of available queries per day
+	 */
+	public function getMaxQueries() {
+		return $this->_maxQueries;
+	}
+
+
+	/**
+	 * Sets API Key string.
+	 *
+	 * @param   string $apiKey  the API Key
+	 * @return  Zend_Service_Technorati_KeyInfoResult $this instance
+	 */
+	public function setApiKey($apiKey) {
+		$this->_apiKey = $apiKey;
+		return $this;
+	}
 }

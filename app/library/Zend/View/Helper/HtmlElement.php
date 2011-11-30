@@ -34,123 +34,123 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
 {
-    /**
-     * EOL character
-     */
-    const EOL = "\n";
+	/**
+	 * EOL character
+	 */
+	const EOL = "\n";
 
-    /**
-     * The tag closing bracket
-     *
-     * @var string
-     */
-    protected $_closingBracket = null;
+	/**
+	 * The tag closing bracket
+	 *
+	 * @var string
+	 */
+	protected $_closingBracket = null;
 
-    /**
-     * Get the tag closing bracket
-     *
-     * @return string
-     */
-    public function getClosingBracket()
-    {
-        if (!$this->_closingBracket) {
-            if ($this->_isXhtml()) {
-                $this->_closingBracket = ' />';
-            } else {
-                $this->_closingBracket = '>';
-            }
-        }
+	/**
+	 * Get the tag closing bracket
+	 *
+	 * @return string
+	 */
+	public function getClosingBracket()
+	{
+		if (!$this->_closingBracket) {
+			if ($this->_isXhtml()) {
+				$this->_closingBracket = ' />';
+			} else {
+				$this->_closingBracket = '>';
+			}
+		}
 
-        return $this->_closingBracket;
-    }
+		return $this->_closingBracket;
+	}
 
-    /**
-     * Is doctype XHTML?
-     *
-     * @return boolean
-     */
-    protected function _isXhtml()
-    {
-        $doctype = $this->view->doctype();
-        return $doctype->isXhtml();
-    }
+	/**
+	 * Is doctype XHTML?
+	 *
+	 * @return boolean
+	 */
+	protected function _isXhtml()
+	{
+		$doctype = $this->view->doctype();
+		return $doctype->isXhtml();
+	}
 
-    /**
-     * Is doctype strict?
-     *
-     * @return boolean
-     */
-    protected function _isStrictDoctype()
-    {
-        $doctype = $this->view->doctype();
-        return $doctype->isStrict();
-    }
-    
-    /**
-     * Converts an associative array to a string of tag attributes.
-     *
-     * @access public
-     *
-     * @param array $attribs From this array, each key-value pair is
-     * converted to an attribute name and value.
-     *
-     * @return string The XHTML for the attributes.
-     */
-    protected function _htmlAttribs($attribs)
-    {
-        $xhtml = '';
-        foreach ((array) $attribs as $key => $val) {
-            $key = $this->view->escape($key);
+	/**
+	 * Is doctype strict?
+	 *
+	 * @return boolean
+	 */
+	protected function _isStrictDoctype()
+	{
+		$doctype = $this->view->doctype();
+		return $doctype->isStrict();
+	}
 
-            if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
-                // Don't escape event attributes; _do_ substitute double quotes with singles
-                if (!is_scalar($val)) {
-                    // non-scalar data should be cast to JSON first
-                    require_once 'Zend/Json.php';
-                    $val = Zend_Json::encode($val);
-                }
-                // Escape single quotes inside event attribute values.
-                // This will create html, where the attribute value has
-                // single quotes around it, and escaped single quotes or
-                // non-escaped double quotes inside of it
-                $val = str_replace('\'', '&#39;', $val);
-            } else {
-                if (is_array($val)) {
-                    $val = implode(' ', $val);
-                }
-                $val = $this->view->escape($val);
-            }
+	/**
+	 * Converts an associative array to a string of tag attributes.
+	 *
+	 * @access public
+	 *
+	 * @param array $attribs From this array, each key-value pair is
+	 * converted to an attribute name and value.
+	 *
+	 * @return string The XHTML for the attributes.
+	 */
+	protected function _htmlAttribs($attribs)
+	{
+		$xhtml = '';
+		foreach ((array) $attribs as $key => $val) {
+			$key = $this->view->escape($key);
 
-            if ('id' == $key) {
-                $val = $this->_normalizeId($val);
-            }
+			if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
+				// Don't escape event attributes; _do_ substitute double quotes with singles
+				if (!is_scalar($val)) {
+					// non-scalar data should be cast to JSON first
+					require_once 'Zend/Json.php';
+					$val = Zend_Json::encode($val);
+				}
+				// Escape single quotes inside event attribute values.
+				// This will create html, where the attribute value has
+				// single quotes around it, and escaped single quotes or
+				// non-escaped double quotes inside of it
+				$val = str_replace('\'', '&#39;', $val);
+			} else {
+				if (is_array($val)) {
+					$val = implode(' ', $val);
+				}
+				$val = $this->view->escape($val);
+			}
 
-            if (strpos($val, '"') !== false) {
-                $xhtml .= " $key='$val'";
-            } else {
-                $xhtml .= " $key=\"$val\"";
-            }
+			if ('id' == $key) {
+				$val = $this->_normalizeId($val);
+			}
 
-        }
-        return $xhtml;
-    }
+			if (strpos($val, '"') !== false) {
+				$xhtml .= " $key='$val'";
+			} else {
+				$xhtml .= " $key=\"$val\"";
+			}
 
-    /**
-     * Normalize an ID
-     *
-     * @param  string $value
-     * @return string
-     */
-    protected function _normalizeId($value)
-    {
-        if (strstr($value, '[')) {
-            if ('[]' == substr($value, -2)) {
-                $value = substr($value, 0, strlen($value) - 2);
-            }
-            $value = trim($value, ']');
-            $value = str_replace('][', '-', $value);
-            $value = str_replace('[', '-', $value);
-        }
-        return $value;
-    }
+		}
+		return $xhtml;
+	}
+
+	/**
+	 * Normalize an ID
+	 *
+	 * @param  string $value
+	 * @return string
+	 */
+	protected function _normalizeId($value)
+	{
+		if (strstr($value, '[')) {
+			if ('[]' == substr($value, -2)) {
+				$value = substr($value, 0, strlen($value) - 2);
+			}
+			$value = trim($value, ']');
+			$value = str_replace('][', '-', $value);
+			$value = str_replace('[', '-', $value);
+		}
+		return $value;
+	}
 }

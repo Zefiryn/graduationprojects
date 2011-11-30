@@ -28,41 +28,41 @@
  */
 class Zend_Cloud_DocumentService_DocumentSet implements Countable, IteratorAggregate
 {
-    /** @var int */
-    protected $_documentCount;
+	/** @var int */
+	protected $_documentCount;
 
-    /** @var ArrayIterator */
-    protected $_documents;
+	/** @var ArrayIterator */
+	protected $_documents;
 
-    /**
-     * Constructor
-     *
-     * @param  array $documents
-     * @return void
-     */
-    public function __construct(array $documents)
-    {
-        $this->_documentCount = count($documents);
-        $this->_documents     = new ArrayIterator($documents);
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  array $documents
+	 * @return void
+	 */
+	public function __construct(array $documents)
+	{
+		$this->_documentCount = count($documents);
+		$this->_documents     = new ArrayIterator($documents);
+	}
 
-    /**
-     * Countable: number of documents in set
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return $this->_documentCount;
-    }
+	/**
+	 * Countable: number of documents in set
+	 *
+	 * @return int
+	 */
+	public function count()
+	{
+		return $this->_documentCount;
+	}
 
-    /**
-     * IteratorAggregate: retrieve iterator
-     *
-     * @return Traversable
-     */
-    public function getIterator()
-    {
-        return $this->_documents;
-    }
+	/**
+	 * IteratorAggregate: retrieve iterator
+	 *
+	 * @return Traversable
+	 */
+	public function getIterator()
+	{
+		return $this->_documents;
+	}
 }

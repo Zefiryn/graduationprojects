@@ -37,95 +37,95 @@ require_once 'Zend/Search/Lucene/Field.php';
 class Zend_Search_Lucene_Document
 {
 
-    /**
-     * Associative array Zend_Search_Lucene_Field objects where the keys to the
-     * array are the names of the fields.
-     *
-     * @var array
-     */
-    protected $_fields = array();
+	/**
+	 * Associative array Zend_Search_Lucene_Field objects where the keys to the
+	 * array are the names of the fields.
+	 *
+	 * @var array
+	 */
+	protected $_fields = array();
 
-    /**
-     * Field boost factor
-     * It's not stored directly in the index, but affects on normalization factor
-     *
-     * @var float
-     */
-    public $boost = 1.0;
+	/**
+	 * Field boost factor
+	 * It's not stored directly in the index, but affects on normalization factor
+	 *
+	 * @var float
+	 */
+	public $boost = 1.0;
 
-    /**
-     * Proxy method for getFieldValue(), provides more convenient access to
-     * the string value of a field.
-     *
-     * @param  string $offset
-     * @return string
-     */
-    public function __get($offset)
-    {
-        return $this->getFieldValue($offset);
-    }
-
-
-    /**
-     * Add a field object to this document.
-     *
-     * @param Zend_Search_Lucene_Field $field
-     * @return Zend_Search_Lucene_Document
-     */
-    public function addField(Zend_Search_Lucene_Field $field)
-    {
-        $this->_fields[$field->name] = $field;
-
-        return $this;
-    }
+	/**
+	 * Proxy method for getFieldValue(), provides more convenient access to
+	 * the string value of a field.
+	 *
+	 * @param  string $offset
+	 * @return string
+	 */
+	public function __get($offset)
+	{
+		return $this->getFieldValue($offset);
+	}
 
 
-    /**
-     * Return an array with the names of the fields in this document.
-     *
-     * @return array
-     */
-    public function getFieldNames()
-    {
-        return array_keys($this->_fields);
-    }
+	/**
+	 * Add a field object to this document.
+	 *
+	 * @param Zend_Search_Lucene_Field $field
+	 * @return Zend_Search_Lucene_Document
+	 */
+	public function addField(Zend_Search_Lucene_Field $field)
+	{
+		$this->_fields[$field->name] = $field;
+
+		return $this;
+	}
 
 
-    /**
-     * Returns Zend_Search_Lucene_Field object for a named field in this document.
-     *
-     * @param string $fieldName
-     * @return Zend_Search_Lucene_Field
-     */
-    public function getField($fieldName)
-    {
-        if (!array_key_exists($fieldName, $this->_fields)) {
-            require_once 'Zend/Search/Lucene/Exception.php';
-            throw new Zend_Search_Lucene_Exception("Field name \"$fieldName\" not found in document.");
-        }
-        return $this->_fields[$fieldName];
-    }
+	/**
+	 * Return an array with the names of the fields in this document.
+	 *
+	 * @return array
+	 */
+	public function getFieldNames()
+	{
+		return array_keys($this->_fields);
+	}
 
 
-    /**
-     * Returns the string value of a named field in this document.
-     *
-     * @see __get()
-     * @return string
-     */
-    public function getFieldValue($fieldName)
-    {
-        return $this->getField($fieldName)->value;
-    }
+	/**
+	 * Returns Zend_Search_Lucene_Field object for a named field in this document.
+	 *
+	 * @param string $fieldName
+	 * @return Zend_Search_Lucene_Field
+	 */
+	public function getField($fieldName)
+	{
+		if (!array_key_exists($fieldName, $this->_fields)) {
+			require_once 'Zend/Search/Lucene/Exception.php';
+			throw new Zend_Search_Lucene_Exception("Field name \"$fieldName\" not found in document.");
+		}
+		return $this->_fields[$fieldName];
+	}
 
-    /**
-     * Returns the string value of a named field in UTF-8 encoding.
-     *
-     * @see __get()
-     * @return string
-     */
-    public function getFieldUtf8Value($fieldName)
-    {
-        return $this->getField($fieldName)->getUtf8Value();
-    }
+
+	/**
+	 * Returns the string value of a named field in this document.
+	 *
+	 * @see __get()
+	 * @return string
+	 */
+	public function getFieldValue($fieldName)
+	{
+		return $this->getField($fieldName)->value;
+	}
+
+	/**
+	 * Returns the string value of a named field in UTF-8 encoding.
+	 *
+	 * @see __get()
+	 * @return string
+	 */
+	public function getFieldUtf8Value($fieldName)
+	{
+		return $this->getField($fieldName)->getUtf8Value();
+	}
 }

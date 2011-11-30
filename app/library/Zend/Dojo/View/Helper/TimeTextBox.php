@@ -31,38 +31,38 @@ require_once 'Zend/Dojo/View/Helper/Dijit.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_TimeTextBox extends Zend_Dojo_View_Helper_Dijit
 {
-    /**
-     * Dijit being used
-     * @var string
-     */
-    protected $_dijit  = 'dijit.form.TimeTextBox';
+	/**
+	 * Dijit being used
+	 * @var string
+	 */
+	protected $_dijit  = 'dijit.form.TimeTextBox';
 
-    /**
-     * HTML element type
-     * @var string
-     */
-    protected $_elementType = 'text';
+	/**
+	 * HTML element type
+	 * @var string
+	 */
+	protected $_elementType = 'text';
 
-    /**
-     * Dojo module to use
-     * @var string
-     */
-    protected $_module = 'dijit.form.TimeTextBox';
+	/**
+	 * Dojo module to use
+	 * @var string
+	 */
+	protected $_module = 'dijit.form.TimeTextBox';
 
-    /**
-     * dijit.form.TimeTextBox
-     *
-     * @param  int $id
-     * @param  mixed $value
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
-     * @return string
-     */
-    public function timeTextBox($id, $value = null, array $params = array(), array $attribs = array())
-    {
-        return $this->_createFormElement($id, $value, $params, $attribs);
-    }
+	/**
+	 * dijit.form.TimeTextBox
+	 *
+	 * @param  int $id
+	 * @param  mixed $value
+	 * @param  array $params  Parameters to use for dijit creation
+	 * @param  array $attribs HTML attributes
+	 * @return string
+	 */
+	public function timeTextBox($id, $value = null, array $params = array(), array $attribs = array())
+	{
+		return $this->_createFormElement($id, $value, $params, $attribs);
+	}
 }

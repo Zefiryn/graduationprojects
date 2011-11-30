@@ -52,39 +52,39 @@ require_once "Zend/Db/Select.php";
  */
 class Zend_Test_PHPUnit_Db_DataSet_QueryDataSet extends PHPUnit_Extensions_Database_DataSet_QueryDataSet
 {
-    /**
-     * Creates a new dataset using the given database connection.
-     *
-     * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection
-     */
-    public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
-    {
-        if( !($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection) ) {
-            require_once "Zend/Test/PHPUnit/Db/Exception.php";
-            throw new Zend_Test_PHPUnit_Db_Exception("Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-");
-        }
-        $this->databaseConnection = $databaseConnection;
-    }
+	/**
+	 * Creates a new dataset using the given database connection.
+	 *
+	 * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection
+	 */
+	public function __construct(PHPUnit_Extensions_Database_DB_IDatabaseConnection $databaseConnection)
+	{
+		if( !($databaseConnection instanceof Zend_Test_PHPUnit_Db_Connection) ) {
+			require_once "Zend/Test/PHPUnit/Db/Exception.php";
+			throw new Zend_Test_PHPUnit_Db_Exception("Zend_Test_PHPUnit_Db_DataSet_QueryDataSet only works with Zend_Test_PHPUnit_Db_Connection connections-");
+		}
+		$this->databaseConnection = $databaseConnection;
+	}
 
-    /**
-     * Add a Table dataset representation by specifiying an arbitrary select query.
-     *
-     * By default a select * will be done on the given tablename.
-     *
-     * @param string                $tableName
-     * @param string|Zend_Db_Select $query
-     */
-    public function addTable($tableName, $query = NULL)
-    {
-        if ($query === NULL) {
-            $query = $this->databaseConnection->getConnection()->select();
-            $query->from($tableName, Zend_Db_Select::SQL_WILDCARD);
-        }
+	/**
+	 * Add a Table dataset representation by specifiying an arbitrary select query.
+	 *
+	 * By default a select * will be done on the given tablename.
+	 *
+	 * @param string                $tableName
+	 * @param string|Zend_Db_Select $query
+	 */
+	public function addTable($tableName, $query = NULL)
+	{
+		if ($query === NULL) {
+			$query = $this->databaseConnection->getConnection()->select();
+			$query->from($tableName, Zend_Db_Select::SQL_WILDCARD);
+		}
 
-        if($query instanceof Zend_Db_Select) {
-            $query = $query->__toString();
-        }
+		if($query instanceof Zend_Db_Select) {
+			$query = $query->__toString();
+		}
 
-        $this->tables[$tableName] = new Zend_Test_PHPUnit_Db_DataSet_QueryTable($tableName, $query, $this->databaseConnection);
-    }
+		$this->tables[$tableName] = new Zend_Test_PHPUnit_Db_DataSet_QueryTable($tableName, $query, $this->databaseConnection);
+	}
 }

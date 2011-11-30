@@ -43,107 +43,107 @@ require_once 'Zend/Memory/Container/Interface.php';
  */
 class Zend_Memory_AccessController implements Zend_Memory_Container_Interface
 {
-    /**
-     * Memory container object
-     *
-     * @var Zend_Memory_Container
-     */
-    private $_memContainer;
+	/**
+	 * Memory container object
+	 *
+	 * @var Zend_Memory_Container
+	 */
+	private $_memContainer;
 
 
-    /**
-     * Object constructor
-     *
-     * @param Zend_Memory_Container_Movable $memoryManager
-     */
-    public function __construct(Zend_Memory_Container_Movable $memContainer)
-    {
-        $this->_memContainer = $memContainer;
-    }
+	/**
+	 * Object constructor
+	 *
+	 * @param Zend_Memory_Container_Movable $memoryManager
+	 */
+	public function __construct(Zend_Memory_Container_Movable $memContainer)
+	{
+		$this->_memContainer = $memContainer;
+	}
 
-    /**
-     * Object destructor
-     */
-    public function __destruct()
-    {
-        $this->_memContainer->destroy();
-    }
-
-
-    /**
-     * Get string value reference
-     *
-     * _Must_ be used for value access before PHP v 5.2
-     * or _may_ be used for performance considerations
-     *
-     * @return &string
-     */
-    public function &getRef()
-    {
-        return $this->_memContainer->getRef();
-    }
-
-    /**
-     * Signal, that value is updated by external code.
-     *
-     * Should be used together with getRef()
-     */
-    public function touch()
-    {
-        $this->_memContainer->touch();
-    }
-
-    /**
-     * Lock object in memory.
-     */
-    public function lock()
-    {
-        $this->_memContainer->lock();
-    }
+	/**
+	 * Object destructor
+	 */
+	public function __destruct()
+	{
+		$this->_memContainer->destroy();
+	}
 
 
-    /**
-     * Unlock object
-     */
-    public function unlock()
-    {
-        $this->_memContainer->unlock();
-    }
+	/**
+	 * Get string value reference
+	 *
+	 * _Must_ be used for value access before PHP v 5.2
+	 * or _may_ be used for performance considerations
+	 *
+	 * @return &string
+	 */
+	public function &getRef()
+	{
+		return $this->_memContainer->getRef();
+	}
 
-    /**
-     * Return true if object is locked
-     *
-     * @return boolean
-     */
-    public function isLocked()
-    {
-        return $this->_memContainer->isLocked();
-    }
+	/**
+	 * Signal, that value is updated by external code.
+	 *
+	 * Should be used together with getRef()
+	 */
+	public function touch()
+	{
+		$this->_memContainer->touch();
+	}
 
-    /**
-     * Get handler
-     *
-     * Loads object if necessary and moves it to the top of loaded objects list.
-     * Swaps objects from the bottom of loaded objects list, if necessary.
-     *
-     * @param string $property
-     * @return string
-     * @throws Zend_Memory_Exception
-     */
-    public function __get($property)
-    {
-        return $this->_memContainer->$property;
-    }
+	/**
+	 * Lock object in memory.
+	 */
+	public function lock()
+	{
+		$this->_memContainer->lock();
+	}
 
-    /**
-     * Set handler
-     *
-     * @param string $property
-     * @param  string $value
-     * @throws Zend_Exception
-     */
-    public function __set($property, $value)
-    {
-        $this->_memContainer->$property = $value;
-    }
+
+	/**
+	 * Unlock object
+	 */
+	public function unlock()
+	{
+		$this->_memContainer->unlock();
+	}
+
+	/**
+	 * Return true if object is locked
+	 *
+	 * @return boolean
+	 */
+	public function isLocked()
+	{
+		return $this->_memContainer->isLocked();
+	}
+
+	/**
+	 * Get handler
+	 *
+	 * Loads object if necessary and moves it to the top of loaded objects list.
+	 * Swaps objects from the bottom of loaded objects list, if necessary.
+	 *
+	 * @param string $property
+	 * @return string
+	 * @throws Zend_Memory_Exception
+	 */
+	public function __get($property)
+	{
+		return $this->_memContainer->$property;
+	}
+
+	/**
+	 * Set handler
+	 *
+	 * @param string $property
+	 * @param  string $value
+	 * @throws Zend_Exception
+	 */
+	public function __set($property, $value)
+	{
+		$this->_memContainer->$property = $value;
+	}
 }

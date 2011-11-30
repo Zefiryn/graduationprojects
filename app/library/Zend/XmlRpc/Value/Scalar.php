@@ -36,18 +36,18 @@ require_once 'Zend/XmlRpc/Value.php';
  */
 abstract class Zend_XmlRpc_Value_Scalar extends Zend_XmlRpc_Value
 {
-    /**
-     * Generate the XML code that represent a scalar native MXL-RPC value
-     *
-     * @return void
-     */
-    protected function _generateXml()
-    {
-        $generator = $this->getGenerator();
+	/**
+	 * Generate the XML code that represent a scalar native MXL-RPC value
+	 *
+	 * @return void
+	 */
+	protected function _generateXml()
+	{
+		$generator = $this->getGenerator();
 
-        $generator->openElement('value')
-                  ->openElement($this->_type, $this->_value)
-                  ->closeElement($this->_type)
-                  ->closeElement('value');
-    }
+		$generator->openElement('value')
+		->openElement($this->_type, $this->_value)
+		->closeElement($this->_type)
+		->closeElement('value');
+	}
 }

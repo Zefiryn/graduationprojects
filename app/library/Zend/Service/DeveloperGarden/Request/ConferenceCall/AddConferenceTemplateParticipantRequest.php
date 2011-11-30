@@ -34,58 +34,58 @@ require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
-    extends Zend_Service_DeveloperGarden_Request_RequestAbstract
+extends Zend_Service_DeveloperGarden_Request_RequestAbstract
 {
-    /**
-     * the template id
-     *
-     * @var string
-     */
-    public $templateId = null;
+	/**
+	 * the template id
+	 *
+	 * @var string
+	 */
+	public $templateId = null;
 
-    /**
-     * the participant details
-     *
-     * @var Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
-     */
-    public $participant = null;
+	/**
+	 * the participant details
+	 *
+	 * @var Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
+	 */
+	public $participant = null;
 
-    /**
-     * constructor
-     *
-     * @param integer $environment
-     * @param string $templateId
-     * @param Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant
-     */
-    public function __construct($environment, $templateId,
-        Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant = null
-    ) {
-        parent::__construct($environment);
-        $this->setTemplateId($templateId)
-             ->setParticipant($participant);
-    }
+	/**
+	 * constructor
+	 *
+	 * @param integer $environment
+	 * @param string $templateId
+	 * @param Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant
+	 */
+	public function __construct($environment, $templateId,
+	Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant = null
+	) {
+		parent::__construct($environment);
+		$this->setTemplateId($templateId)
+		->setParticipant($participant);
+	}
 
-    /**
-     * set the template id
-     *
-     * @param string $templateId
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-        return $this;
-    }
+	/**
+	 * set the template id
+	 *
+	 * @param string $templateId
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
+	 */
+	public function setTemplateId($templateId)
+	{
+		$this->templateId = $templateId;
+		return $this;
+	}
 
-    /**
-     * sets new participant
-     *
-     * @param Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant
-     * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
-     */
-    public function setParticipant(Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant)
-    {
-        $this->participant = $participant;
-        return $this;
-    }
+	/**
+	 * sets new participant
+	 *
+	 * @param Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant
+	 * @return Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
+	 */
+	public function setParticipant(Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail $participant)
+	{
+		$this->participant = $participant;
+		return $this;
+	}
 }

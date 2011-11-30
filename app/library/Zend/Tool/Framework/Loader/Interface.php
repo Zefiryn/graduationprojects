@@ -31,12 +31,12 @@
  */
 interface Zend_Tool_Framework_Loader_Interface
 {
-    /**
-     * Load Providers and Manifests
-     *
-     * Returns an array of all loaded class names.
-     *
-     * @return array
-     */
-    public function load();
+	/**
+	 * Load Providers and Manifests
+	 *
+	 * Returns an array of all loaded class names.
+	 *
+	 * @return array
+	 */
+	public function load();
 }

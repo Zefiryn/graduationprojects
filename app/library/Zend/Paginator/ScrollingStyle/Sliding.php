@@ -38,41 +38,41 @@ require_once 'Zend/Paginator/ScrollingStyle/Interface.php';
  */
 class Zend_Paginator_ScrollingStyle_Sliding implements Zend_Paginator_ScrollingStyle_Interface
 {
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Zend_Paginator $paginator
-     * @param  integer $pageRange (Optional) Page range
-     * @return array
-     */
-    public function getPages(Zend_Paginator $paginator, $pageRange = null)
-    {
-        if ($pageRange === null) {
-            $pageRange = $paginator->getPageRange();
-        }
+	/**
+	 * Returns an array of "local" pages given a page number and range.
+	 *
+	 * @param  Zend_Paginator $paginator
+	 * @param  integer $pageRange (Optional) Page range
+	 * @return array
+	 */
+	public function getPages(Zend_Paginator $paginator, $pageRange = null)
+	{
+		if ($pageRange === null) {
+			$pageRange = $paginator->getPageRange();
+		}
 
-        $pageNumber = $paginator->getCurrentPageNumber();
-        $pageCount  = count($paginator);
+		$pageNumber = $paginator->getCurrentPageNumber();
+		$pageCount  = count($paginator);
 
-        if ($pageRange > $pageCount) {
-            $pageRange = $pageCount;
-        }
+		if ($pageRange > $pageCount) {
+			$pageRange = $pageCount;
+		}
 
-        $delta = ceil($pageRange / 2);
+		$delta = ceil($pageRange / 2);
 
-        if ($pageNumber - $delta > $pageCount - $pageRange) {
-            $lowerBound = $pageCount - $pageRange + 1;
-            $upperBound = $pageCount;
-        } else {
-            if ($pageNumber - $delta < 0) {
-                $delta = $pageNumber;
-            }
+		if ($pageNumber - $delta > $pageCount - $pageRange) {
+			$lowerBound = $pageCount - $pageRange + 1;
+			$upperBound = $pageCount;
+		} else {
+			if ($pageNumber - $delta < 0) {
+				$delta = $pageNumber;
+			}
 
-            $offset     = $pageNumber - $delta;
-            $lowerBound = $offset + 1;
-            $upperBound = $offset + $pageRange;
-        }
+			$offset     = $pageNumber - $delta;
+			$lowerBound = $offset + 1;
+			$upperBound = $offset + $pageRange;
+		}
 
-        return $paginator->getPagesInRange($lowerBound, $upperBound);
-    }
+		return $paginator->getPagesInRange($lowerBound, $upperBound);
+	}
 }

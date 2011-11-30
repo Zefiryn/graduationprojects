@@ -1,14 +1,19 @@
 <div id="main">
-	<h1><?php echo $this->translate('new_news');?></h1>
-	
+	<h1>
+	<?php echo $this->translate('new_news');?></h1>
+
 	<div class="column-left">
+
 	<?php echo $this->form;?>
 	</div>
-	
+
 	<div class="column-right">
-		<p class="label"><?php echo $this->translate('news_files');?></p>
-		<iframe id="newsfiles" src="<?php echo $this->url(array(), 'news_image');?>" width="480px" height="500px" scrolling="no" frameborder="0" seamless="seamless"></iframe>
+		<p class="label">
+		<?php echo $this->translate('news_files');?></p>
+		<iframe id="newsfiles"
+			src="<?php echo $this->url(array(), 'news_image');?>" width="480px"
+			height="500px" scrolling="no" frameborder="0" seamless="seamless"></iframe>
 	</div>
 	<p class="clearfix"></p>
-	
+
 </div>

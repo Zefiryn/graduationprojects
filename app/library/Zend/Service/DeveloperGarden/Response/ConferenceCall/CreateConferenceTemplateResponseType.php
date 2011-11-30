@@ -34,22 +34,22 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceTemplateResponseType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * the template Id
-     *
-     * @var string
-     */
-    public $templateId = null;
+	/**
+	 * the template Id
+	 *
+	 * @var string
+	 */
+	public $templateId = null;
 
-    /**
-     * return the template id
-     *
-     * @return string
-     */
-    public function getTemplateId()
-    {
-        return $this->templateId;
-    }
+	/**
+	 * return the template id
+	 *
+	 * @return string
+	 */
+	public function getTemplateId()
+	{
+		return $this->templateId;
+	}
 }

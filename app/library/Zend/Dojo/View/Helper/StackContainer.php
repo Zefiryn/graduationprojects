@@ -31,36 +31,36 @@ require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_StackContainer extends Zend_Dojo_View_Helper_DijitContainer
 {
-    /**
-     * Dijit being used
-     * @var string
-     */
-    protected $_dijit  = 'dijit.layout.StackContainer';
+	/**
+	 * Dijit being used
+	 * @var string
+	 */
+	protected $_dijit  = 'dijit.layout.StackContainer';
 
-    /**
-     * Dojo module to use
-     * @var string
-     */
-    protected $_module = 'dijit.layout.StackContainer';
+	/**
+	 * Dojo module to use
+	 * @var string
+	 */
+	protected $_module = 'dijit.layout.StackContainer';
 
-    /**
-     * dijit.layout.StackContainer
-     *
-     * @param  string $id
-     * @param  string $content
-     * @param  array $params  Parameters to use for dijit creation
-     * @param  array $attribs HTML attributes
-     * @return string
-     */
-    public function stackContainer($id = null, $content = '', array $params = array(), array $attribs = array())
-    {
-        if (0 === func_num_args()) {
-            return $this;
-        }
+	/**
+	 * dijit.layout.StackContainer
+	 *
+	 * @param  string $id
+	 * @param  string $content
+	 * @param  array $params  Parameters to use for dijit creation
+	 * @param  array $attribs HTML attributes
+	 * @return string
+	 */
+	public function stackContainer($id = null, $content = '', array $params = array(), array $attribs = array())
+	{
+		if (0 === func_num_args()) {
+			return $this;
+		}
 
-        return $this->_createLayoutContainer($id, $content, $params, $attribs);
-    }
+		return $this->_createLayoutContainer($id, $content, $params, $attribs);
+	}
 }

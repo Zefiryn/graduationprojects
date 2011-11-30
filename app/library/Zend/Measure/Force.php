@@ -36,53 +36,53 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Force extends Zend_Measure_Abstract
 {
-    const STANDARD = 'NEWTON';
+	const STANDARD = 'NEWTON';
 
-    const ATTONEWTON      = 'ATTONEWTON';
-    const CENTINEWTON     = 'CENTINEWTON';
-    const DECIGRAM_FORCE  = 'DECIGRAM_FORCE';
-    const DECINEWTON      = 'DECINEWTON';
-    const DEKAGRAM_FORCE  = 'DEKAGRAM_FORCE';
-    const DEKANEWTON      = 'DEKANEWTON';
-    const DYNE            = 'DYNE';
-    const EXANEWTON       = 'EXANEWTON';
-    const FEMTONEWTON     = 'FEMTONEWTON';
-    const GIGANEWTON      = 'GIGANEWTON';
-    const GRAM_FORCE      = 'GRAM_FORCE';
-    const HECTONEWTON     = 'HECTONEWTON';
-    const JOULE_PER_METER = 'JOULE_PER_METER';
-    const KILOGRAM_FORCE  = 'KILOGRAM_FORCE';
-    const KILONEWTON      = 'KILONEWTON';
-    const KILOPOND        = 'KILOPOND';
-    const KIP             = 'KIP';
-    const MEGANEWTON      = 'MEGANEWTON';
-    const MEGAPOND        = 'MEGAPOND';
-    const MICRONEWTON     = 'MICRONEWTON';
-    const MILLINEWTON     = 'MILLINEWTON';
-    const NANONEWTON      = 'NANONEWTON';
-    const NEWTON          = 'NEWTON';
-    const OUNCE_FORCE     = 'OUNCE_FORCE';
-    const PETANEWTON      = 'PETANEWTON';
-    const PICONEWTON      = 'PICONEWTON';
-    const POND            = 'POND';
-    const POUND_FORCE     = 'POUND_FORCE';
-    const POUNDAL         = 'POUNDAL';
-    const STHENE          = 'STHENE';
-    const TERANEWTON      = 'TERANEWTON';
-    const TON_FORCE_LONG  = 'TON_FORCE_LONG';
-    const TON_FORCE       = 'TON_FORCE';
-    const TON_FORCE_SHORT = 'TON_FORCE_SHORT';
-    const YOCTONEWTON     = 'YOCTONEWTON';
-    const YOTTANEWTON     = 'YOTTANEWTON';
-    const ZEPTONEWTON     = 'ZEPTONEWTON';
-    const ZETTANEWTON     = 'ZETTANEWTON';
+	const ATTONEWTON      = 'ATTONEWTON';
+	const CENTINEWTON     = 'CENTINEWTON';
+	const DECIGRAM_FORCE  = 'DECIGRAM_FORCE';
+	const DECINEWTON      = 'DECINEWTON';
+	const DEKAGRAM_FORCE  = 'DEKAGRAM_FORCE';
+	const DEKANEWTON      = 'DEKANEWTON';
+	const DYNE            = 'DYNE';
+	const EXANEWTON       = 'EXANEWTON';
+	const FEMTONEWTON     = 'FEMTONEWTON';
+	const GIGANEWTON      = 'GIGANEWTON';
+	const GRAM_FORCE      = 'GRAM_FORCE';
+	const HECTONEWTON     = 'HECTONEWTON';
+	const JOULE_PER_METER = 'JOULE_PER_METER';
+	const KILOGRAM_FORCE  = 'KILOGRAM_FORCE';
+	const KILONEWTON      = 'KILONEWTON';
+	const KILOPOND        = 'KILOPOND';
+	const KIP             = 'KIP';
+	const MEGANEWTON      = 'MEGANEWTON';
+	const MEGAPOND        = 'MEGAPOND';
+	const MICRONEWTON     = 'MICRONEWTON';
+	const MILLINEWTON     = 'MILLINEWTON';
+	const NANONEWTON      = 'NANONEWTON';
+	const NEWTON          = 'NEWTON';
+	const OUNCE_FORCE     = 'OUNCE_FORCE';
+	const PETANEWTON      = 'PETANEWTON';
+	const PICONEWTON      = 'PICONEWTON';
+	const POND            = 'POND';
+	const POUND_FORCE     = 'POUND_FORCE';
+	const POUNDAL         = 'POUNDAL';
+	const STHENE          = 'STHENE';
+	const TERANEWTON      = 'TERANEWTON';
+	const TON_FORCE_LONG  = 'TON_FORCE_LONG';
+	const TON_FORCE       = 'TON_FORCE';
+	const TON_FORCE_SHORT = 'TON_FORCE_SHORT';
+	const YOCTONEWTON     = 'YOCTONEWTON';
+	const YOTTANEWTON     = 'YOTTANEWTON';
+	const ZEPTONEWTON     = 'ZEPTONEWTON';
+	const ZETTANEWTON     = 'ZETTANEWTON';
 
-    /**
-     * Calculations for all force units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all force units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'ATTONEWTON'      => array('1.0e-18',     'aN'),
         'CENTINEWTON'     => array('0.01',        'cN'),
         'DECIGRAM_FORCE'  => array('0.000980665', 'dgf'),
@@ -122,5 +122,5 @@ class Zend_Measure_Force extends Zend_Measure_Abstract
         'ZEPTONEWTON'     => array('1.0e-21',     'zN'),
         'ZETTANEWTON'     => array('1.0e+21',     'ZN'),
         'STANDARD'        => 'NEWTON'
-    );
+        );
 }

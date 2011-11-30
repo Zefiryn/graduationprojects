@@ -39,131 +39,131 @@ require_once 'Zend/Service/Ebay/Finding.php';
  */
 abstract class Zend_Service_Ebay_Finding_Abstract
 {
-    /**
-     * @var DOMElement
-     */
-    protected $_dom;
+	/**
+	 * @var DOMElement
+	 */
+	protected $_dom;
 
-    /**
-     * @var DOMXPath
-     */
-    protected $_xPath;
+	/**
+	 * @var DOMXPath
+	 */
+	protected $_xPath;
 
-    /**
-     * @var array
-     */
-    protected $_attributes = array();
+	/**
+	 * @var array
+	 */
+	protected $_attributes = array();
 
-    /**
-     * @param  DOMElement $dom
-     * @return void
-     */
-    public function __construct(DOMElement $dom)
-    {
-        $this->_dom = $dom;
-        $this->_initXPath();
-        $this->_init();
-    }
+	/**
+	 * @param  DOMElement $dom
+	 * @return void
+	 */
+	public function __construct(DOMElement $dom)
+	{
+		$this->_dom = $dom;
+		$this->_initXPath();
+		$this->_init();
+	}
 
-    /**
-     * @param  string $tag
-     * @param  string $attribute
-     * @return mixed
-     */
-    public function attributes($tag, $attribute = null)
-    {
-        if (null === $attribute) {
-            // all attributes
-            if (array_key_exists($tag, $this->_attributes)) {
-                return $this->_attributes[$tag];
-            }
-            return array();
-        }
+	/**
+	 * @param  string $tag
+	 * @param  string $attribute
+	 * @return mixed
+	 */
+	public function attributes($tag, $attribute = null)
+	{
+		if (null === $attribute) {
+			// all attributes
+			if (array_key_exists($tag, $this->_attributes)) {
+				return $this->_attributes[$tag];
+			}
+			return array();
+		}
 
-        // a specific attribute
-        if (isset($this->_attributes[$tag][$attribute])) {
-            return $this->_attributes[$tag][$attribute];
-        }
-        return null;
-    }
+		// a specific attribute
+		if (isset($this->_attributes[$tag][$attribute])) {
+			return $this->_attributes[$tag][$attribute];
+		}
+		return null;
+	}
 
-    /**
-     * Initialize object.
-     *
-     * Post construct logic, classes must read their members here. Called from
-     * {@link __construct()} as final step of object initialization.
-     *
-     * @return void
-     */
-    protected function _init()
-    {
-    }
+	/**
+	 * Initialize object.
+	 *
+	 * Post construct logic, classes must read their members here. Called from
+	 * {@link __construct()} as final step of object initialization.
+	 *
+	 * @return void
+	 */
+	protected function _init()
+	{
+	}
 
-    /**
-     * Load DOMXPath for current DOM object.
-     *
-     * @see    Zend_Service_Ebay_Finding::_parseResponse()
-     * @return void
-     */
-    protected function _initXPath()
-    {
-        $document = $this->_dom->ownerDocument;
-        if (!isset($document->ebayFindingXPath)) {
-            $xpath = new DOMXPath($document);
-            foreach (Zend_Service_Ebay_Finding::getXmlNamespaces() as $alias => $uri) {
-                $xpath->registerNamespace($alias, $uri);
-            }
-            $document->ebayFindingXPath = $xpath;
-        }
-        $this->_xPath = $document->ebayFindingXPath;
-    }
+	/**
+	 * Load DOMXPath for current DOM object.
+	 *
+	 * @see    Zend_Service_Ebay_Finding::_parseResponse()
+	 * @return void
+	 */
+	protected function _initXPath()
+	{
+		$document = $this->_dom->ownerDocument;
+		if (!isset($document->ebayFindingXPath)) {
+			$xpath = new DOMXPath($document);
+			foreach (Zend_Service_Ebay_Finding::getXmlNamespaces() as $alias => $uri) {
+				$xpath->registerNamespace($alias, $uri);
+			}
+			$document->ebayFindingXPath = $xpath;
+		}
+		$this->_xPath = $document->ebayFindingXPath;
+	}
 
-    /**
-     * @return DOMElement
-     */
-    public function getDom()
-    {
-        return $this->_dom;
-    }
+	/**
+	 * @return DOMElement
+	 */
+	public function getDom()
+	{
+		return $this->_dom;
+	}
 
-    /**
-     * @return DOMXPath
-     */
-    public function getXPath()
-    {
-        return $this->_xPath;
-    }
+	/**
+	 * @return DOMXPath
+	 */
+	public function getXPath()
+	{
+		return $this->_xPath;
+	}
 
-    /**
-     * @param  string $path
-     * @param  string $type
-     * @param  string $array When true means it expects more than one node occurence
-     * @return mixed
-     */
-    protected function _query($path, $type, $array = false)
-    {
-        // find values
-        $values = array();
-        $nodes  = $this->_xPath->query($path, $this->_dom);
-        foreach ($nodes as $node) {
-            $value    = (string) $node->nodeValue;
-            $values[] = Zend_Service_Ebay_Abstract::toPhpValue($value, $type);
-            if (!$array) {
-                break;
-            }
-        }
+	/**
+	 * @param  string $path
+	 * @param  string $type
+	 * @param  string $array When true means it expects more than one node occurence
+	 * @return mixed
+	 */
+	protected function _query($path, $type, $array = false)
+	{
+		// find values
+		$values = array();
+		$nodes  = $this->_xPath->query($path, $this->_dom);
+		foreach ($nodes as $node) {
+			$value    = (string) $node->nodeValue;
+			$values[] = Zend_Service_Ebay_Abstract::toPhpValue($value, $type);
+			if (!$array) {
+				break;
+			}
+		}
 
-        // array
-        if ($array) {
-            return $values;
-        }
+		// array
+		if ($array) {
+			return $values;
+		}
 
-        // single value
-        if (count($values)) {
-            return reset($values);
-        }
+		// single value
+		if (count($values)) {
+			return reset($values);
+		}
 
-        // no nodes fount
-        return null;
-    }
+		// no nodes fount
+		return null;
+	}
 }

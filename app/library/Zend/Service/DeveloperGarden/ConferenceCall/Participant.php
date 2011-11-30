@@ -35,50 +35,50 @@ require_once 'Zend/Validate/Ip.php';
  */
 class Zend_Service_DeveloperGarden_ConferenceCall_Participant
 {
-    /**
-     * @var Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
-     */
-    public $detail = null;
+	/**
+	 * @var Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
+	 */
+	public $detail = null;
 
-    /**
-     * @var string
-     */
-    public $participantId = null;
+	/**
+	 * @var string
+	 */
+	public $participantId = null;
 
-    /**
-     * @var array
-     */
-    public $status = null;
+	/**
+	 * @var array
+	 */
+	public $status = null;
 
-    /**
-     * participant details
-     *
-     * @return Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
-     */
-    public function getDetail()
-    {
-        return $this->detail;
-    }
+	/**
+	 * participant details
+	 *
+	 * @return Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
+	 */
+	public function getDetail()
+	{
+		return $this->detail;
+	}
 
-    /**
-     * participant id
-     *
-     * @return string
-     */
-    public function getParticipantId()
-    {
-        return $this->participantId;
-    }
+	/**
+	 * participant id
+	 *
+	 * @return string
+	 */
+	public function getParticipantId()
+	{
+		return $this->participantId;
+	}
 
-    /**
-     * get the status
-     * returns an
-     * array of Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
-     *
-     * @return array
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
+	/**
+	 * get the status
+	 * returns an
+	 * array of Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
+	 *
+	 * @return array
+	 */
+	public function getStatus()
+	{
+		return $this->status;
+	}
 }

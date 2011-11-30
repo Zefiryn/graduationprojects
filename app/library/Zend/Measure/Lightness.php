@@ -36,30 +36,30 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Lightness extends Zend_Measure_Abstract
 {
-    const STANDARD = 'CANDELA_PER_SQUARE_METER';
+	const STANDARD = 'CANDELA_PER_SQUARE_METER';
 
-    const APOSTILB                          = 'APOSTILB';
-    const BLONDEL                           = 'BLONDEL';
-    const CANDELA_PER_SQUARE_CENTIMETER     = 'CANDELA_PER_SQUARE_CENTIMETER';
-    const CANDELA_PER_SQUARE_FOOT           = 'CANDELA_PER_SQUARE_FOOT';
-    const CANDELA_PER_SQUARE_INCH           = 'CANDELA_PER_SQUARE_INCH';
-    const CANDELA_PER_SQUARE_METER          = 'CANDELA_PER_SQUARE_METER';
-    const FOOTLAMBERT                       = 'FOOTLAMBERT';
-    const KILOCANDELA_PER_SQUARE_CENTIMETER = 'KILOCANDELA_PER_SQUARE_CENTIMETER';
-    const KILOCANDELA_PER_SQUARE_FOOT       = 'KILOCANDELA_PER_SQUARE_FOOT';
-    const KILOCANDELA_PER_SQUARE_INCH       = 'KILOCANDELA_PER_SQUARE_INCH';
-    const KILOCANDELA_PER_SQUARE_METER      = 'KILOCANDELA_PER_SQUARE_METER';
-    const LAMBERT                           = 'LAMBERT';
-    const MILLILAMBERT                      = 'MILLILAMBERT';
-    const NIT                               = 'NIT';
-    const STILB                             = 'STILB';
+	const APOSTILB                          = 'APOSTILB';
+	const BLONDEL                           = 'BLONDEL';
+	const CANDELA_PER_SQUARE_CENTIMETER     = 'CANDELA_PER_SQUARE_CENTIMETER';
+	const CANDELA_PER_SQUARE_FOOT           = 'CANDELA_PER_SQUARE_FOOT';
+	const CANDELA_PER_SQUARE_INCH           = 'CANDELA_PER_SQUARE_INCH';
+	const CANDELA_PER_SQUARE_METER          = 'CANDELA_PER_SQUARE_METER';
+	const FOOTLAMBERT                       = 'FOOTLAMBERT';
+	const KILOCANDELA_PER_SQUARE_CENTIMETER = 'KILOCANDELA_PER_SQUARE_CENTIMETER';
+	const KILOCANDELA_PER_SQUARE_FOOT       = 'KILOCANDELA_PER_SQUARE_FOOT';
+	const KILOCANDELA_PER_SQUARE_INCH       = 'KILOCANDELA_PER_SQUARE_INCH';
+	const KILOCANDELA_PER_SQUARE_METER      = 'KILOCANDELA_PER_SQUARE_METER';
+	const LAMBERT                           = 'LAMBERT';
+	const MILLILAMBERT                      = 'MILLILAMBERT';
+	const NIT                               = 'NIT';
+	const STILB                             = 'STILB';
 
-    /**
-     * Calculations for all lightness units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all lightness units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'APOSTILB'                      => array('0.31830989',   'asb'),
         'BLONDEL'                       => array('0.31830989',   'blondel'),
         'CANDELA_PER_SQUARE_CENTIMETER' => array('10000',        'cd/cm²'),
@@ -76,5 +76,5 @@ class Zend_Measure_Lightness extends Zend_Measure_Abstract
         'NIT'                           => array('1',            'nt'),
         'STILB'                         => array('10000',        'sb'),
         'STANDARD'                      => 'CANDELA_PER_SQUARE_METER'
-    );
+        );
 }

@@ -35,9 +35,9 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 class Zend_Dojo_Form_Element_SimpleTextarea extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Use SimpleTextarea dijit view helper
-     * @var string
-     */
-    public $helper = 'SimpleTextarea';
+	/**
+	 * Use SimpleTextarea dijit view helper
+	 * @var string
+	 */
+	public $helper = 'SimpleTextarea';
 }

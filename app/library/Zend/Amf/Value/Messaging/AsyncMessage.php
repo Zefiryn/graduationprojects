@@ -35,9 +35,9 @@ require_once 'Zend/Amf/Value/Messaging/AbstractMessage.php';
  */
 class Zend_Amf_Value_Messaging_AsyncMessage extends Zend_Amf_Value_Messaging_AbstractMessage
 {
-    /**
-     * The message id to be responded to.
-     * @var String
-     */
-    public $correlationId;
+	/**
+	 * The message id to be responded to.
+	 * @var String
+	 */
+	public $correlationId;
 }

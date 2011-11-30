@@ -42,21 +42,21 @@ require_once 'Zend/Service/WindowsAzure/Diagnostics/ConfigurationObjectBaseAbstr
  * @property    int        DirectoryQuotaInMB        Directory quota in MB
  */
 class Zend_Service_WindowsAzure_Diagnostics_DirectoryConfigurationSubscription
-    extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
+extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
-    /**
-     * Constructor
-     *
+	/**
+	 * Constructor
+	 *
 	 * @param	string	$path					Path
 	 * @param	string	$container				Container
 	 * @param	int		$directoryQuotaInMB		Directory quota in MB
 	 */
-    public function __construct($path, $container, $directoryQuotaInMB = 1024)
-    {	
-        $this->_data = array(
+	public function __construct($path, $container, $directoryQuotaInMB = 1024)
+	{
+		$this->_data = array(
             'path'                  => $path,
             'container'             => $container,
             'directoryquotainmb'    => $directoryQuotaInMB,
-        );
-    }
+		);
+	}
 }

@@ -43,23 +43,23 @@ require_once 'Zend/Gdata/YouTube/VideoEntry.php';
 class Zend_Gdata_YouTube_VideoFeed extends Zend_Gdata_Media_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_YouTube_VideoEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_YouTube_VideoEntry';
 
-    /**
-     * Creates a Video feed, representing a list of videos
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Creates a Video feed, representing a list of videos
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct($element);
+	}
 
 }

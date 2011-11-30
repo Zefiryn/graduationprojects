@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Response/SendSms/SendSmsAbstract.php'
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_SendSms_SendFlashSMSResponse
-    extends Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
+extends Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
 {
 }

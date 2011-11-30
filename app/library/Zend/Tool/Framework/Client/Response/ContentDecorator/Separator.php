@@ -32,62 +32,62 @@ require_once 'Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
-    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
+implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
 
-    /**
-     * @var string
-     */
-    protected $_separator = PHP_EOL;
+	/**
+	 * @var string
+	 */
+	protected $_separator = PHP_EOL;
 
-    /**
-     * getName() - name of the decorator
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'separator';
-    }
+	/**
+	 * getName() - name of the decorator
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'separator';
+	}
 
-    /**
-     * setSeparator()
-     *
-     * @param string $separator
-     * @return Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
-     */
-    public function setSeparator($separator)
-    {
-        $this->_separator = $separator;
-        return $this;
-    }
+	/**
+	 * setSeparator()
+	 *
+	 * @param string $separator
+	 * @return Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
+	 */
+	public function setSeparator($separator)
+	{
+		$this->_separator = $separator;
+		return $this;
+	}
 
-    /**
-     * getSeparator()
-     *
-     * @return string
-     */
-    public function getSeparator()
-    {
-        return $this->_separator;
-    }
+	/**
+	 * getSeparator()
+	 *
+	 * @return string
+	 */
+	public function getSeparator()
+	{
+		return $this->_separator;
+	}
 
-    public function decorate($content, $decoratorValue)
-    {
-        $run = 1;
-        if (is_bool($decoratorValue) && $decoratorValue === false) {
-            return $content;
-        }
+	public function decorate($content, $decoratorValue)
+	{
+		$run = 1;
+		if (is_bool($decoratorValue) && $decoratorValue === false) {
+			return $content;
+		}
 
-        if (is_int($decoratorValue)) {
-            $run = $decoratorValue;
-        }
+		if (is_int($decoratorValue)) {
+			$run = $decoratorValue;
+		}
 
-        for ($i = 0; $i < $run; $i++) {
-            $content .= $this->_separator;
-        }
+		for ($i = 0; $i < $run; $i++) {
+			$content .= $this->_separator;
+		}
 
-        return $content;
-    }
+		return $content;
+	}
 
 }

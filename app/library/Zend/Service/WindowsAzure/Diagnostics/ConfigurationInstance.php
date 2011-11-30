@@ -45,17 +45,17 @@ require_once 'Zend/Service/WindowsAzure/Diagnostics/ConfigurationDataSources.php
  * @property Zend_Service_WindowsAzure_Diagnostics_ConfigurationDataSources    DataSources    Data sources
  */
 class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
-    extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
+extends Zend_Service_WindowsAzure_Diagnostics_ConfigurationObjectBaseAbstract
 {
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->_data = array(
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->_data = array(
             'datasources'    => new Zend_Service_WindowsAzure_Diagnostics_ConfigurationDataSources()
-        );
-    }
+		);
+	}
 
 	/**
 	 * Load configuration XML
@@ -66,25 +66,25 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 	{
 		// Convert to SimpleXMLElement
 		$configurationXml = simplexml_load_string($configurationXml);
-	
+
 		// Assign general settings
 		$this->DataSources->OverallQuotaInMB = (int)$configurationXml->DataSources->OverallQuotaInMB;
 
-        // Assign Logs settings    
-        $this->DataSources->Logs->BufferQuotaInMB = (int)$configurationXml->DataSources->Logs->BufferQuotaInMB;
-        $this->DataSources->Logs->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->Logs->ScheduledTransferPeriodInMinutes;
-        $this->DataSources->Logs->ScheduledTransferLogLevelFilter = (string)$configurationXml->DataSources->Logs->ScheduledTransferLogLevelFilter;
+		// Assign Logs settings
+		$this->DataSources->Logs->BufferQuotaInMB = (int)$configurationXml->DataSources->Logs->BufferQuotaInMB;
+		$this->DataSources->Logs->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->Logs->ScheduledTransferPeriodInMinutes;
+		$this->DataSources->Logs->ScheduledTransferLogLevelFilter = (string)$configurationXml->DataSources->Logs->ScheduledTransferLogLevelFilter;
 
-        // Assign DiagnosticInfrastructureLogs settings
-        $this->DataSources->DiagnosticInfrastructureLogs->BufferQuotaInMB = (int)$configurationXml->DataSources->DiagnosticInfrastructureLogs->BufferQuotaInMB;
-        $this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferPeriodInMinutes;
-        $this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferLogLevelFilter = (string)$configurationXml->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferLogLevelFilter;
+		// Assign DiagnosticInfrastructureLogs settings
+		$this->DataSources->DiagnosticInfrastructureLogs->BufferQuotaInMB = (int)$configurationXml->DataSources->DiagnosticInfrastructureLogs->BufferQuotaInMB;
+		$this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferPeriodInMinutes;
+		$this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferLogLevelFilter = (string)$configurationXml->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferLogLevelFilter;
 
 		// Assign PerformanceCounters settings
 		$this->DataSources->PerformanceCounters->BufferQuotaInMB = (int)$configurationXml->DataSources->PerformanceCounters->BufferQuotaInMB;
 		$this->DataSources->PerformanceCounters->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->PerformanceCounters->ScheduledTransferPeriodInMinutes;
 		if ($configurationXml->DataSources->PerformanceCounters->Subscriptions
-			&& $configurationXml->DataSources->PerformanceCounters->Subscriptions->PerformanceCounterConfiguration) {
+		&& $configurationXml->DataSources->PerformanceCounters->Subscriptions->PerformanceCounterConfiguration) {
 			$subscriptions = $configurationXml->DataSources->PerformanceCounters->Subscriptions;
 			if (count($subscriptions->PerformanceCounterConfiguration) > 1) {
 				$subscriptions = $subscriptions->PerformanceCounterConfiguration;
@@ -95,13 +95,13 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 				$this->DataSources->PerformanceCounters->addSubscription((string)$subscription->CounterSpecifier, (int)$subscription->SampleRateInSeconds);
 			}
 		}
-				
+
 		// Assign WindowsEventLog settings
 		$this->DataSources->WindowsEventLog->BufferQuotaInMB = (int)$configurationXml->DataSources->WindowsEventLog->BufferQuotaInMB;
 		$this->DataSources->WindowsEventLog->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->WindowsEventLog->ScheduledTransferPeriodInMinutes;
 		$this->DataSources->WindowsEventLog->ScheduledTransferLogLevelFilter = (string)$configurationXml->DataSources->WindowsEventLog->ScheduledTransferLogLevelFilter;
 		if ($configurationXml->DataSources->WindowsEventLog->Subscriptions
-			&& $configurationXml->DataSources->WindowsEventLog->Subscriptions->string) {
+		&& $configurationXml->DataSources->WindowsEventLog->Subscriptions->string) {
 			$subscriptions = $configurationXml->DataSources->WindowsEventLog->Subscriptions;
 			if (count($subscriptions->string) > 1) {
 				$subscriptions = $subscriptions->string;
@@ -112,12 +112,12 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 				$this->DataSources->WindowsEventLog->addSubscription((string)$subscription);
 			}
 		}
-		
+
 		// Assign Directories settings
 		$this->DataSources->Directories->BufferQuotaInMB = (int)$configurationXml->DataSources->Directories->BufferQuotaInMB;
 		$this->DataSources->Directories->ScheduledTransferPeriodInMinutes = (int)$configurationXml->DataSources->Directories->ScheduledTransferPeriodInMinutes;
 		if ($configurationXml->DataSources->Directories->Subscriptions
-			&& $configurationXml->DataSources->Directories->Subscriptions->DirectoryConfiguration) {
+		&& $configurationXml->DataSources->Directories->Subscriptions->DirectoryConfiguration) {
 			$subscriptions = $configurationXml->DataSources->WindowsEventLog->Subscriptions;
 			if (count($subscriptions->DirectoryConfiguration) > 1) {
 				$subscriptions = $subscriptions->DirectoryConfiguration;
@@ -129,7 +129,7 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 			}
 		}
 	}
-	
+
 	/**
 	 * Create configuration XML
 	 *
@@ -139,28 +139,28 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 	{
 		// Return value
 		$returnValue = array();
-		
+
 		// Build XML
 		$returnValue[] = '<?xml version="1.0"?>';
 		$returnValue[] = '<ConfigRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-		
+
 		// Add data sources
 		$returnValue[] = '  <DataSources>';
-		
+
 		$returnValue[] = '    <OverallQuotaInMB>' . $this->DataSources->OverallQuotaInMB . '</OverallQuotaInMB>';
-		
+
 		$returnValue[] = '    <Logs>';
 		$returnValue[] = '      <BufferQuotaInMB>' . $this->DataSources->Logs->BufferQuotaInMB . '</BufferQuotaInMB>';
 		$returnValue[] = '      <ScheduledTransferPeriodInMinutes>' . $this->DataSources->Logs->ScheduledTransferPeriodInMinutes . '</ScheduledTransferPeriodInMinutes>';
 		$returnValue[] = '      <ScheduledTransferLogLevelFilter>' . $this->DataSources->Logs->ScheduledTransferLogLevelFilter . '</ScheduledTransferLogLevelFilter>';
 		$returnValue[] = '    </Logs>';
-		
+
 		$returnValue[] = '    <DiagnosticInfrastructureLogs>';
 		$returnValue[] = '      <BufferQuotaInMB>' . $this->DataSources->DiagnosticInfrastructureLogs->BufferQuotaInMB . '</BufferQuotaInMB>';
 		$returnValue[] = '      <ScheduledTransferPeriodInMinutes>' . $this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferPeriodInMinutes . '</ScheduledTransferPeriodInMinutes>';
 		$returnValue[] = '      <ScheduledTransferLogLevelFilter>' . $this->DataSources->DiagnosticInfrastructureLogs->ScheduledTransferLogLevelFilter . '</ScheduledTransferLogLevelFilter>';
 		$returnValue[] = '    </DiagnosticInfrastructureLogs>';
-		
+
 		$returnValue[] = '    <PerformanceCounters>';
 		$returnValue[] = '      <BufferQuotaInMB>' . $this->DataSources->PerformanceCounters->BufferQuotaInMB . '</BufferQuotaInMB>';
 		$returnValue[] = '      <ScheduledTransferPeriodInMinutes>' . $this->DataSources->PerformanceCounters->ScheduledTransferPeriodInMinutes . '</ScheduledTransferPeriodInMinutes>';
@@ -177,11 +177,11 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 			$returnValue[] = '      </Subscriptions>';
 		}
 		$returnValue[] = '    </PerformanceCounters>';
-		
+
 		$returnValue[] = '    <WindowsEventLog>';
 		$returnValue[] = '      <BufferQuotaInMB>' . $this->DataSources->WindowsEventLog->BufferQuotaInMB . '</BufferQuotaInMB>';
 		$returnValue[] = '      <ScheduledTransferPeriodInMinutes>' . $this->DataSources->WindowsEventLog->ScheduledTransferPeriodInMinutes . '</ScheduledTransferPeriodInMinutes>';
-			if (count($this->DataSources->WindowsEventLog->Subscriptions) == 0) {
+		if (count($this->DataSources->WindowsEventLog->Subscriptions) == 0) {
 			$returnValue[] = '      <Subscriptions />';
 		} else {
 			$returnValue[] = '      <Subscriptions>';
@@ -192,7 +192,7 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 		}
 		$returnValue[] = '      <ScheduledTransferLogLevelFilter>' . $this->DataSources->WindowsEventLog->ScheduledTransferLogLevelFilter . '</ScheduledTransferLogLevelFilter>';
 		$returnValue[] = '    </WindowsEventLog>';
-		
+
 		$returnValue[] = '    <Directories>';
 		$returnValue[] = '      <BufferQuotaInMB>' . $this->DataSources->Directories->BufferQuotaInMB . '</BufferQuotaInMB>';
 		$returnValue[] = '      <ScheduledTransferPeriodInMinutes>' . $this->DataSources->Directories->ScheduledTransferPeriodInMinutes . '</ScheduledTransferPeriodInMinutes>';
@@ -210,10 +210,10 @@ class Zend_Service_WindowsAzure_Diagnostics_ConfigurationInstance
 			$returnValue[] = '      </Subscriptions>';
 		}
 		$returnValue[] = '    </Directories>';
-		
+
 		$returnValue[] = '  </DataSources>';
 		$returnValue[] = '</ConfigRequest>';
-		
+
 		// Return
 		return implode("\r\n", $returnValue);
 	}

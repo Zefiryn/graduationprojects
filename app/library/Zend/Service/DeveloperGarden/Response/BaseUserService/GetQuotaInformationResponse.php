@@ -34,57 +34,57 @@ require_once 'Zend/Service/DeveloperGarden/Response/ResponseAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_BaseUserService_GetQuotaInformationResponse
-    extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
+extends Zend_Service_DeveloperGarden_Response_ResponseAbstract
 {
-    /**
-     * System defined limit of quota points per day
-     *
-     * @var integer
-     */
-    public $maxQuota = null;
+	/**
+	 * System defined limit of quota points per day
+	 *
+	 * @var integer
+	 */
+	public $maxQuota = null;
 
-    /**
-     * User specific limit of quota points per day
-     * cant be more than $maxQuota
-     *
-     * @var integer
-     */
-    public $maxUserQuota = null;
+	/**
+	 * User specific limit of quota points per day
+	 * cant be more than $maxQuota
+	 *
+	 * @var integer
+	 */
+	public $maxUserQuota = null;
 
-    /**
-     * Used quota points for the current day
-     *
-     * @var integer
-     */
-    public $quotaLevel = null;
+	/**
+	 * Used quota points for the current day
+	 *
+	 * @var integer
+	 */
+	public $quotaLevel = null;
 
-    /**
-     * returns the quotaLevel
-     *
-     * @return integer
-     */
-    public function getQuotaLevel()
-    {
-        return $this->quotaLevel;
-    }
+	/**
+	 * returns the quotaLevel
+	 *
+	 * @return integer
+	 */
+	public function getQuotaLevel()
+	{
+		return $this->quotaLevel;
+	}
 
-    /**
-     * returns the maxUserQuota
-     *
-     * @return integer
-     */
-    public function getMaxUserQuota()
-    {
-        return $this->maxUserQuota;
-    }
+	/**
+	 * returns the maxUserQuota
+	 *
+	 * @return integer
+	 */
+	public function getMaxUserQuota()
+	{
+		return $this->maxUserQuota;
+	}
 
-    /**
-     * return the maxQuota
-     *
-     * @return integer
-     */
-    public function getMaxQuota()
-    {
-        return $this->maxQuota;
-    }
+	/**
+	 * return the maxQuota
+	 *
+	 * @return integer
+	 */
+	public function getMaxQuota()
+	{
+		return $this->maxQuota;
+	}
 }

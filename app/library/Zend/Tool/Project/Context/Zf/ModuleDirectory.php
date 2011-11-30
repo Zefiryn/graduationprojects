@@ -39,59 +39,59 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_ModuleDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_moduleName = null;
+	/**
+	 * @var string
+	 */
+	protected $_moduleName = null;
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'moduleDirectory';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'moduleDirectory';
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_ControllerFile
-     */
-    public function init()
-    {
-        $this->_filesystemName = $this->_moduleName = $this->_resource->getAttribute('moduleName');
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_ControllerFile
+	 */
+	public function init()
+	{
+		$this->_filesystemName = $this->_moduleName = $this->_resource->getAttribute('moduleName');
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ModuleDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'ModuleDirectory';
+	}
 
-    /**
-     * getPersistentAttributes
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'moduleName' => $this->getModuleName()
-            );
-    }
+		);
+	}
 
-    /**
-     * getModuleName()
-     *
-     * @return string
-     */
-    public function getModuleName()
-    {
-        return $this->_moduleName;
-    }
+	/**
+	 * getModuleName()
+	 *
+	 * @return string
+	 */
+	public function getModuleName()
+	{
+		return $this->_moduleName;
+	}
 
 
 }

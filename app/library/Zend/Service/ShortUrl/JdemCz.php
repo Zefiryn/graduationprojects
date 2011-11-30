@@ -34,51 +34,51 @@ require_once 'Zend/Service/ShortUrl/AbstractShortener.php';
  */
 class Zend_Service_ShortUrl_JdemCz extends Zend_Service_ShortUrl_AbstractShortener
 {
-    /**
-     * Base URI of the service
-     *
-     * @var string
-     */
-    protected $_baseUri = 'http://jdem.cz';
+	/**
+	 * Base URI of the service
+	 *
+	 * @var string
+	 */
+	protected $_baseUri = 'http://jdem.cz';
 
-    /**
-     * This function shortens long url
-     *
-     * @param string $url URL to Shorten
-     * @throws Zend_Service_ShortUrl_Exception When URL is not valid
-     * @return string New URL
-     */
-    public function shorten($url)
-    {
-        $this->_validateUri($url);
+	/**
+	 * This function shortens long url
+	 *
+	 * @param string $url URL to Shorten
+	 * @throws Zend_Service_ShortUrl_Exception When URL is not valid
+	 * @return string New URL
+	 */
+	public function shorten($url)
+	{
+		$this->_validateUri($url);
 
-        $serviceUri = 'http://www.jdem.cz/get';
+		$serviceUri = 'http://www.jdem.cz/get';
 
-        $this->getHttpClient()->setUri($serviceUri);
-        $this->getHttpClient()->setParameterGet('url', $url);
+		$this->getHttpClient()->setUri($serviceUri);
+		$this->getHttpClient()->setParameterGet('url', $url);
 
-        $response = $this->getHttpClient()->request();
+		$response = $this->getHttpClient()->request();
 
-        return $response->getBody();
-    }
+		return $response->getBody();
+	}
 
-   /**
-     * Reveals target for short URL
-     *
-     * @param string $shortenedUrl URL to reveal target of
-     * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
-     * @return string
-     */
-    public function unshorten($shortenedUrl)
-    {
-        $this->_validateUri($shortenedUrl);
+	/**
+	 * Reveals target for short URL
+	 *
+	 * @param string $shortenedUrl URL to reveal target of
+	 * @throws Zend_Service_ShortUrl_Exception When URL is not valid or is not shortened by this service
+	 * @return string
+	 */
+	public function unshorten($shortenedUrl)
+	{
+		$this->_validateUri($shortenedUrl);
 
-        $this->_verifyBaseUri($shortenedUrl);
+		$this->_verifyBaseUri($shortenedUrl);
 
-        $this->getHttpClient()->setUri($shortenedUrl)->setParameterGet('kam', 1);
+		$this->getHttpClient()->setUri($shortenedUrl)->setParameterGet('kam', 1);
 
-        $response = $this->getHttpClient()->request();
+		$response = $this->getHttpClient()->request();
 
-        return $response->getBody();
-    }
+		return $response->getBody();
+	}
 }

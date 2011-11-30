@@ -34,50 +34,50 @@ require_once 'Zend/Pdf/Element.php';
  */
 class Zend_Pdf_Element_Boolean extends Zend_Pdf_Element
 {
-    /**
-     * Object value
-     *
-     * @var boolean
-     */
-    public $value;
+	/**
+	 * Object value
+	 *
+	 * @var boolean
+	 */
+	public $value;
 
 
-    /**
-     * Object constructor
-     *
-     * @param boolean $val
-     * @throws Zend_Pdf_Exception
-     */
-    public function __construct($val)
-    {
-        if (! is_bool($val)) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Argument must be boolean.');
-        }
+	/**
+	 * Object constructor
+	 *
+	 * @param boolean $val
+	 * @throws Zend_Pdf_Exception
+	 */
+	public function __construct($val)
+	{
+		if (! is_bool($val)) {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Argument must be boolean.');
+		}
 
-        $this->value   = $val;
-    }
-
-
-    /**
-     * Return type of the element.
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return Zend_Pdf_Element::TYPE_BOOL;
-    }
+		$this->value   = $val;
+	}
 
 
-    /**
-     * Return object as string
-     *
-     * @param Zend_Pdf_Factory $factory
-     * @return string
-     */
-    public function toString($factory = null)
-    {
-        return $this->value ? 'true' : 'false';
-    }
+	/**
+	 * Return type of the element.
+	 *
+	 * @return integer
+	 */
+	public function getType()
+	{
+		return Zend_Pdf_Element::TYPE_BOOL;
+	}
+
+
+	/**
+	 * Return object as string
+	 *
+	 * @param Zend_Pdf_Factory $factory
+	 * @return string
+	 */
+	public function toString($factory = null)
+	{
+		return $this->value ? 'true' : 'false';
+	}
 }

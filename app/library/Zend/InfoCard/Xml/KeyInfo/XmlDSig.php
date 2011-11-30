@@ -43,34 +43,34 @@ require_once 'Zend/InfoCard/Xml/KeyInfo/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_InfoCard_Xml_KeyInfo_XmlDSig
-    extends Zend_InfoCard_Xml_KeyInfo_Abstract
-    implements Zend_InfoCard_Xml_KeyInfo_Interface
+extends Zend_InfoCard_Xml_KeyInfo_Abstract
+implements Zend_InfoCard_Xml_KeyInfo_Interface
 {
-    /**
-     * Returns an instance of the EncryptedKey Data Block
-     *
-     * @throws Zend_InfoCard_Xml_Exception
-     * @return Zend_InfoCard_Xml_EncryptedKey
-     */
-    public function getEncryptedKey()
-    {
-        $this->registerXPathNamespace('e', 'http://www.w3.org/2001/04/xmlenc#');
-        list($encryptedkey) = $this->xpath('//e:EncryptedKey');
+	/**
+	 * Returns an instance of the EncryptedKey Data Block
+	 *
+	 * @throws Zend_InfoCard_Xml_Exception
+	 * @return Zend_InfoCard_Xml_EncryptedKey
+	 */
+	public function getEncryptedKey()
+	{
+		$this->registerXPathNamespace('e', 'http://www.w3.org/2001/04/xmlenc#');
+		list($encryptedkey) = $this->xpath('//e:EncryptedKey');
 
-        if(!($encryptedkey instanceof Zend_InfoCard_Xml_Element)) {
-            throw new Zend_InfoCard_Xml_Exception("Failed to retrieve encrypted key");
-        }
+		if(!($encryptedkey instanceof Zend_InfoCard_Xml_Element)) {
+			throw new Zend_InfoCard_Xml_Exception("Failed to retrieve encrypted key");
+		}
 
-        return Zend_InfoCard_Xml_EncryptedKey::getInstance($encryptedkey);
-    }
+		return Zend_InfoCard_Xml_EncryptedKey::getInstance($encryptedkey);
+	}
 
-    /**
-     * Returns the KeyInfo Block within the encrypted key
-     *
-     * @return Zend_InfoCard_Xml_KeyInfo_Default
-     */
-    public function getKeyInfo()
-    {
-        return $this->getEncryptedKey()->getKeyInfo();
-    }
+	/**
+	 * Returns the KeyInfo Block within the encrypted key
+	 *
+	 * @return Zend_InfoCard_Xml_KeyInfo_Default
+	 */
+	public function getKeyInfo()
+	{
+		return $this->getEncryptedKey()->getKeyInfo();
+	}
 }

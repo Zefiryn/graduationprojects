@@ -37,75 +37,75 @@ require_once 'Zend/Service/Yahoo/Result.php';
  */
 class Zend_Service_Yahoo_ImageResult extends Zend_Service_Yahoo_Result
 {
-    /**
-     * Summary info for the image
-     *
-     * @var string
-     */
-    public $Summary;
+	/**
+	 * Summary info for the image
+	 *
+	 * @var string
+	 */
+	public $Summary;
 
-    /**
-     * The URL of the webpage hosting the image
-     *
-     * @var string
-     */
-    public $RefererUrl;
+	/**
+	 * The URL of the webpage hosting the image
+	 *
+	 * @var string
+	 */
+	public $RefererUrl;
 
-    /**
-     * The size of the files in bytes
-     *
-     * @var string
-     */
-    public $FileSize;
+	/**
+	 * The size of the files in bytes
+	 *
+	 * @var string
+	 */
+	public $FileSize;
 
-    /**
-     * The type of file (bmp, gif, jpeg, etc.)
-     *
-     * @var string
-     */
-    public $FileFormat;
+	/**
+	 * The type of file (bmp, gif, jpeg, etc.)
+	 *
+	 * @var string
+	 */
+	public $FileFormat;
 
-    /**
-     * The height of the image in pixels
-     *
-     * @var string
-     */
-    public $Height;
+	/**
+	 * The height of the image in pixels
+	 *
+	 * @var string
+	 */
+	public $Height;
 
-    /**
-     * The width of the image in pixels
-     *
-     * @var string
-     */
-    public $Width;
+	/**
+	 * The width of the image in pixels
+	 *
+	 * @var string
+	 */
+	public $Width;
 
-    /**
-     * The thubmnail image for the article, if it exists
-     *
-     * @var Zend_Service_Yahoo_Image
-     */
-    public $Thumbnail;
+	/**
+	 * The thubmnail image for the article, if it exists
+	 *
+	 * @var Zend_Service_Yahoo_Image
+	 */
+	public $Thumbnail;
 
-    /**
-     * Image result namespace
-     *
-     * @var string
-     */
-    protected $_namespace = 'urn:yahoo:srchmi';
+	/**
+	 * Image result namespace
+	 *
+	 * @var string
+	 */
+	protected $_namespace = 'urn:yahoo:srchmi';
 
 
-    /**
-     * Initializes the image result
-     *
-     * @param  DOMElement $result
-     * @return void
-     */
-    public function __construct(DOMElement $result)
-    {
-        $this->_fields = array('Summary', 'RefererUrl', 'FileSize', 'FileFormat', 'Height', 'Width', 'Thumbnail');
+	/**
+	 * Initializes the image result
+	 *
+	 * @param  DOMElement $result
+	 * @return void
+	 */
+	public function __construct(DOMElement $result)
+	{
+		$this->_fields = array('Summary', 'RefererUrl', 'FileSize', 'FileFormat', 'Height', 'Width', 'Thumbnail');
 
-        parent::__construct($result);
+		parent::__construct($result);
 
-        $this->_setThumbnail();
-    }
+		$this->_setThumbnail();
+	}
 }

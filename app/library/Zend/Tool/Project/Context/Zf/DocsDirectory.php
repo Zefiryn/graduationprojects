@@ -39,23 +39,23 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_DocsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'docs';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'docs';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'DocsDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'DocsDirectory';
+	}
 
-    public function create(){
-        parent::create();
-    }
+	public function create(){
+		parent::create();
+	}
 
 }

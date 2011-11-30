@@ -57,25 +57,25 @@ require_once "Zend/Test/PHPUnit/Db/Connection.php";
  */
 class Zend_Test_PHPUnit_Db_Operation_DeleteAll implements PHPUnit_Extensions_Database_Operation_IDatabaseOperation
 {
-    /**
-     * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection
-     * @param PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet
-     */
-    public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
-    {
-        if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            require_once "Zend/Test/PHPUnit/Db/Exception.php";
-            throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
-        }
+	/**
+	 * @param PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection
+	 * @param PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet
+	 */
+	public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
+	{
+		if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
+			require_once "Zend/Test/PHPUnit/Db/Exception.php";
+			throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
+		}
 
-        foreach ($dataSet as $table) {
-            try {
-                $tableName = $table->getTableMetaData()->getTableName();
-                $connection->getConnection()->delete($tableName);
-            } catch (Exception $e) {
-                require_once "PHPUnit/Extensions/Database/Operation/Exception.php";
-                throw new PHPUnit_Extensions_Database_Operation_Exception('DELETEALL', 'DELETE FROM '.$tableName.'', array(), $table, $e->getMessage());
-            }
-        }
-    }
+		foreach ($dataSet as $table) {
+			try {
+				$tableName = $table->getTableMetaData()->getTableName();
+				$connection->getConnection()->delete($tableName);
+			} catch (Exception $e) {
+				require_once "PHPUnit/Extensions/Database/Operation/Exception.php";
+				throw new PHPUnit_Extensions_Database_Operation_Exception('DELETEALL', 'DELETE FROM '.$tableName.'', array(), $table, $e->getMessage());
+			}
+		}
+	}
 }

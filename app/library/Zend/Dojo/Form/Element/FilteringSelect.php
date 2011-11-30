@@ -34,15 +34,15 @@ require_once 'Zend/Dojo/Form/Element/ComboBox.php';
  */
 class Zend_Dojo_Form_Element_FilteringSelect extends Zend_Dojo_Form_Element_ComboBox
 {
-    /**
-     * Use FilteringSelect dijit view helper
-     * @var string
-     */
-    public $helper = 'FilteringSelect';
+	/**
+	 * Use FilteringSelect dijit view helper
+	 * @var string
+	 */
+	public $helper = 'FilteringSelect';
 
-    /**
-     * Flag: autoregister inArray validator?
-     * @var bool
-     */
-    protected $_registerInArrayValidator = true;
+	/**
+	 * Flag: autoregister inArray validator?
+	 * @var bool
+	 */
+	protected $_registerInArrayValidator = true;
 }

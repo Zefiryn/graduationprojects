@@ -31,14 +31,14 @@
  */
 interface Zend_InfoCard_Xml_Element_Interface
 {
-    /**
-     * Return the data within the object as an XML document
-     */
-    public function asXML();
+	/**
+	 * Return the data within the object as an XML document
+	 */
+	public function asXML();
 
-    /**
-     * Magic function which allows us to treat the object as a string to return XML
-     * (same as the asXML() method)
-     */
-    public function __toString();
+	/**
+	 * Magic function which allows us to treat the object as a string to return XML
+	 * (same as the asXML() method)
+	 */
+	public function __toString();
 }

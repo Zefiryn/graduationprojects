@@ -39,50 +39,50 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
 class Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    /**
-     * @var string
-     */
-    protected $_namespaceName  = '';
+	/**
+	 * @var string
+	 */
+	protected $_namespaceName  = '';
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'library';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'library';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestLibraryNamespaceDirectory';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestLibraryNamespaceDirectory';
+	}
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory
-     */
-    public function init()
-    {
-        $this->_namespaceName  = $this->_resource->getAttribute('namespaceName');
-        $this->_filesystemName = $this->_namespaceName;
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_TestLibraryNamespaceDirectory
+	 */
+	public function init()
+	{
+		$this->_namespaceName  = $this->_resource->getAttribute('namespaceName');
+		$this->_filesystemName = $this->_namespaceName;
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getPersistentAttributes()
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        $attributes = array();
-        $attributes['namespaceName'] = $this->_namespaceName;
+	/**
+	 * getPersistentAttributes()
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		$attributes = array();
+		$attributes['namespaceName'] = $this->_namespaceName;
 
-        return $attributes;
-    }
+		return $attributes;
+	}
 
 }

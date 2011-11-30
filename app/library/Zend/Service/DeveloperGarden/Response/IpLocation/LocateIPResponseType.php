@@ -34,13 +34,13 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponseType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     * internal data object array of
-     * elements
-     *
-     * @var array|Zend_Service_DeveloperGarden_Response_IpLocation_IPAddressLocationType
-     */
-    public $ipAddressLocation = array();
+	/**
+	 * internal data object array of
+	 * elements
+	 *
+	 * @var array|Zend_Service_DeveloperGarden_Response_IpLocation_IPAddressLocationType
+	 */
+	public $ipAddressLocation = array();
 }

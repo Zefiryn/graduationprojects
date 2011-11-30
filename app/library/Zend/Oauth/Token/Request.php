@@ -30,21 +30,21 @@ require_once 'Zend/Oauth/Token.php';
  */
 class Zend_Oauth_Token_Request extends Zend_Oauth_Token
 {
-    /**
-     * Constructor
-     *
-     * @param null|Zend_Http_Response $response
-     * @param null|Zend_Oauth_Http_Utility $utility
-     */
-    public function __construct(
-        Zend_Http_Response $response = null,
-        Zend_Oauth_Http_Utility $utility = null
-    ) {
-        parent::__construct($response, $utility);
+	/**
+	 * Constructor
+	 *
+	 * @param null|Zend_Http_Response $response
+	 * @param null|Zend_Oauth_Http_Utility $utility
+	 */
+	public function __construct(
+	Zend_Http_Response $response = null,
+	Zend_Oauth_Http_Utility $utility = null
+	) {
+		parent::__construct($response, $utility);
 
-        // detect if server supports OAuth 1.0a
-        if (isset($this->_params[Zend_Oauth_Token::TOKEN_PARAM_CALLBACK_CONFIRMED])) {
-            Zend_Oauth_Client::$supportsRevisionA = true;
-        }
-    }
+		// detect if server supports OAuth 1.0a
+		if (isset($this->_params[Zend_Oauth_Token::TOKEN_PARAM_CALLBACK_CONFIRMED])) {
+			Zend_Oauth_Client::$supportsRevisionA = true;
+		}
+	}
 }

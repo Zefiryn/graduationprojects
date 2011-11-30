@@ -44,58 +44,58 @@ require_once 'Zend/Pdf/Destination.php';
  */
 class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
 {
-    /**
-     * Destination name
-     *
-     * @var Zend_Pdf_Element_Name|Zend_Pdf_Element_String
-     */
-    protected $_nameElement;
+	/**
+	 * Destination name
+	 *
+	 * @var Zend_Pdf_Element_Name|Zend_Pdf_Element_String
+	 */
+	protected $_nameElement;
 
-    /**
-     * Named destination object constructor
-     *
-     * @param Zend_Pdf_Element $resource
-     * @throws Zend_Pdf_Exception
-     */
-    public function __construct(Zend_Pdf_Element $resource)
-    {
-        if ($resource->getType() != Zend_Pdf_Element::TYPE_NAME  &&  $resource->getType() != Zend_Pdf_Element::TYPE_STRING) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Named destination resource must be a PDF name or a PDF string.');
-        }
+	/**
+	 * Named destination object constructor
+	 *
+	 * @param Zend_Pdf_Element $resource
+	 * @throws Zend_Pdf_Exception
+	 */
+	public function __construct(Zend_Pdf_Element $resource)
+	{
+		if ($resource->getType() != Zend_Pdf_Element::TYPE_NAME  &&  $resource->getType() != Zend_Pdf_Element::TYPE_STRING) {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Named destination resource must be a PDF name or a PDF string.');
+		}
 
-        $this->_nameElement = $resource;
-    }
+		$this->_nameElement = $resource;
+	}
 
-    /**
-     * Create named destination object
-     *
-     * @param string $name
-     * @return Zend_Pdf_Destination_Named
-     */
-    public static function create($name)
-    {
-        return new Zend_Pdf_Destination_Named(new Zend_Pdf_Element_String($name));
-    }
+	/**
+	 * Create named destination object
+	 *
+	 * @param string $name
+	 * @return Zend_Pdf_Destination_Named
+	 */
+	public static function create($name)
+	{
+		return new Zend_Pdf_Destination_Named(new Zend_Pdf_Element_String($name));
+	}
 
-    /**
-     * Get name
-     *
-     * @return Zend_Pdf_Element
-     */
-    public function getName()
-    {
-        return $this->_nameElement->value;
-    }
+	/**
+	 * Get name
+	 *
+	 * @return Zend_Pdf_Element
+	 */
+	public function getName()
+	{
+		return $this->_nameElement->value;
+	}
 
-    /**
-     * Get resource
-     *
-     * @internal
-     * @return Zend_Pdf_Element
-     */
-    public function getResource()
-    {
-        return $this->_nameElement;
-    }
+	/**
+	 * Get resource
+	 *
+	 * @internal
+	 * @return Zend_Pdf_Element
+	 */
+	public function getResource()
+	{
+		return $this->_nameElement;
+	}
 }

@@ -1,16 +1,31 @@
 <?php 	$form = $this->element;
-		$file = 'file_'.$this->number;
-		$cache = $file.'Cache'; 
-		$appSettings = Zend_Registry::get('appSettings');
+$file = 'file_'.$this->number;
+$cache = $file.'Cache';
+$appSettings = Zend_Registry::get('appSettings');
 ?>
 <div class="fileField">
-	<p class="file_number"><?php echo $this->number;?></p>
-	<fieldset class="fileFieldset <?php if ($form->$file->hasErrors()) echo 'error';?>">
+	<p class="file_number">
+
+	<?php echo $this->number;?></p>
+	<fieldset
+		class="fileFieldset <?php if ($form->$file->hasErrors()) echo 'error';?>">
+
+
 		<?php echo $form->$cache;?>
+
+
 		<?php echo $form->application_id;?>
+
+
 		<?php echo $form->file_id;?>
+
+
 		<?php echo $form->$file->renderFile();?>
-		
+
 	</fieldset>
+	
+	
+	
+	
 	<?php if ($form->$file->hasErrors()){ echo $form->$file->renderErrorMsg(); }?>
 </div>

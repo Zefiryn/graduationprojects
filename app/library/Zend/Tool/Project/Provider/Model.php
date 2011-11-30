@@ -29,150 +29,150 @@
 class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstract
 {
 
-    public static function createResource(Zend_Tool_Project_Profile $profile, $modelName, $moduleName = null)
-    {
-        if (!is_string($modelName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
-        }
+	public static function createResource(Zend_Tool_Project_Profile $profile, $modelName, $moduleName = null)
+	{
+		if (!is_string($modelName)) {
+			throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to create.');
+		}
 
-        if (!($modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName))) {
-            if ($moduleName) {
-                $exceptionMessage = 'A model directory for module "' . $moduleName . '" was not found.';
-            } else {
-                $exceptionMessage = 'A model directory was not found.';
-            }
-            throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
-        }
+		if (!($modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName))) {
+			if ($moduleName) {
+				$exceptionMessage = 'A model directory for module "' . $moduleName . '" was not found.';
+			} else {
+				$exceptionMessage = 'A model directory was not found.';
+			}
+			throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
+		}
 
-        $newModel = $modelsDirectory->createResource(
+		$newModel = $modelsDirectory->createResource(
             'modelFile',
-            array('modelName' => $modelName, 'moduleName' => $moduleName)
-            );
+		array('modelName' => $modelName, 'moduleName' => $moduleName)
+		);
 
-        return $newModel;
-    }
+		return $newModel;
+	}
 
-    /**
-     * hasResource()
-     *
-     * @param Zend_Tool_Project_Profile $profile
-     * @param string $modelName
-     * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
-     */
-    public static function hasResource(Zend_Tool_Project_Profile $profile, $modelName, $moduleName = null)
-    {
-        if (!is_string($modelName)) {
-            throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
-        }
+	/**
+	 * hasResource()
+	 *
+	 * @param Zend_Tool_Project_Profile $profile
+	 * @param string $modelName
+	 * @param string $moduleName
+	 * @return Zend_Tool_Project_Profile_Resource
+	 */
+	public static function hasResource(Zend_Tool_Project_Profile $profile, $modelName, $moduleName = null)
+	{
+		if (!is_string($modelName)) {
+			throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Model::createResource() expects \"modelName\" is the name of a model resource to check for existence.');
+		}
 
-        $modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
-        
-        if (!$modelsDirectory instanceof Zend_Tool_Project_Profile_Resource) {
-            return false;
-        }
-        
-        return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof Zend_Tool_Project_Profile_Resource);
-    }
+		$modelsDirectory = self::_getModelsDirectoryResource($profile, $moduleName);
 
-    /**
-     * _getModelsDirectoryResource()
-     *
-     * @param Zend_Tool_Project_Profile $profile
-     * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
-     */
-    protected static function _getModelsDirectoryResource(Zend_Tool_Project_Profile $profile, $moduleName = null)
-    {
-        $profileSearchParams = array();
+		if (!$modelsDirectory instanceof Zend_Tool_Project_Profile_Resource) {
+			return false;
+		}
 
-        if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
-        }
+		return (($modelsDirectory->search(array('modelFile' => array('modelName' => $modelName)))) instanceof Zend_Tool_Project_Profile_Resource);
+	}
 
-        $profileSearchParams[] = 'modelsDirectory';
+	/**
+	 * _getModelsDirectoryResource()
+	 *
+	 * @param Zend_Tool_Project_Profile $profile
+	 * @param string $moduleName
+	 * @return Zend_Tool_Project_Profile_Resource
+	 */
+	protected static function _getModelsDirectoryResource(Zend_Tool_Project_Profile $profile, $moduleName = null)
+	{
+		$profileSearchParams = array();
 
-        return $profile->search($profileSearchParams);
-    }
+		if ($moduleName != null && is_string($moduleName)) {
+			$profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+		}
 
-    /**
-     * Create a new model
-     *
-     * @param string $name
-     * @param string $module
-     */
-    public function create($name, $module = null)
-    {
-        $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
+		$profileSearchParams[] = 'modelsDirectory';
 
-        $originalName = $name;
+		return $profile->search($profileSearchParams);
+	}
 
-        $name = ucwords($name);
+	/**
+	 * Create a new model
+	 *
+	 * @param string $name
+	 * @param string $module
+	 */
+	public function create($name, $module = null)
+	{
+		$this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
 
-        // determine if testing is enabled in the project
-        $testingEnabled = false; //Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
-        $testModelResource = null;
+		$originalName = $name;
 
-        // Check that there is not a dash or underscore, return if doesnt match regex
-        if (preg_match('#[_-]#', $name)) {
-            throw new Zend_Tool_Project_Provider_Exception('Model names should be camel cased.');
-        }
+		$name = ucwords($name);
 
-        if (self::hasResource($this->_loadedProfile, $name, $module)) {
-            throw new Zend_Tool_Project_Provider_Exception('This project already has a model named ' . $name);
-        }
+		// determine if testing is enabled in the project
+		$testingEnabled = false; //Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
+		$testModelResource = null;
 
-        // get request/response object
-        $request = $this->_registry->getRequest();
-        $response = $this->_registry->getResponse();
+		// Check that there is not a dash or underscore, return if doesnt match regex
+		if (preg_match('#[_-]#', $name)) {
+			throw new Zend_Tool_Project_Provider_Exception('Model names should be camel cased.');
+		}
 
-        // alert the user about inline converted names
-        $tense = (($request->isPretend()) ? 'would be' : 'is');
+		if (self::hasResource($this->_loadedProfile, $name, $module)) {
+			throw new Zend_Tool_Project_Provider_Exception('This project already has a model named ' . $name);
+		}
 
-        if ($name !== $originalName) {
-            $response->appendContent(
+		// get request/response object
+		$request = $this->_registry->getRequest();
+		$response = $this->_registry->getResponse();
+
+		// alert the user about inline converted names
+		$tense = (($request->isPretend()) ? 'would be' : 'is');
+
+		if ($name !== $originalName) {
+			$response->appendContent(
                 'Note: The canonical model name that ' . $tense
-                    . ' used with other providers is "' . $name . '";'
-                    . ' not "' . $originalName . '" as supplied',
-                array('color' => array('yellow'))
-                );
-        }
+			. ' used with other providers is "' . $name . '";'
+			. ' not "' . $originalName . '" as supplied',
+			array('color' => array('yellow'))
+			);
+		}
 
-        try {
-            $modelResource = self::createResource($this->_loadedProfile, $name, $module);
+		try {
+			$modelResource = self::createResource($this->_loadedProfile, $name, $module);
 
-            if ($testingEnabled) {
-                // $testModelResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
-            }
+			if ($testingEnabled) {
+				// $testModelResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
+			}
 
-        } catch (Exception $e) {
-            $response->setException($e);
-            return;
-        }
+		} catch (Exception $e) {
+			$response->setException($e);
+			return;
+		}
 
-        // do the creation
-        if ($request->isPretend()) {
+		// do the creation
+		if ($request->isPretend()) {
 
-            $response->appendContent('Would create a model at '  . $modelResource->getContext()->getPath());
+			$response->appendContent('Would create a model at '  . $modelResource->getContext()->getPath());
 
-            if ($testModelResource) {
-                $response->appendContent('Would create a model test file at ' . $testModelResource->getContext()->getPath());
-            }
+			if ($testModelResource) {
+				$response->appendContent('Would create a model test file at ' . $testModelResource->getContext()->getPath());
+			}
 
-        } else {
+		} else {
 
-            $response->appendContent('Creating a model at ' . $modelResource->getContext()->getPath());
-            $modelResource->create();
+			$response->appendContent('Creating a model at ' . $modelResource->getContext()->getPath());
+			$modelResource->create();
 
-            if ($testModelResource) {
-                $response->appendContent('Creating a model test file at ' . $testModelResource->getContext()->getPath());
-                $testModelResource->create();
-            }
+			if ($testModelResource) {
+				$response->appendContent('Creating a model test file at ' . $testModelResource->getContext()->getPath());
+				$testModelResource->create();
+			}
 
-            $this->_storeProfile();
-        }
+			$this->_storeProfile();
+		}
 
-    }
+	}
 
 
 }

@@ -32,11 +32,11 @@ require_once 'Zend/Service/StrikeIron/Base.php';
  */
 class Zend_Service_StrikeIron_SalesUseTaxBasic extends Zend_Service_StrikeIron_Base
 {
-    /**
-     * Configuration options
-     * @param array
-     */
-    protected $_options = array('username' => null,
+	/**
+	 * Configuration options
+	 * @param array
+	 */
+	protected $_options = array('username' => null,
                                 'password' => null,
                                 'client'   => null,
                                 'options'  => null,

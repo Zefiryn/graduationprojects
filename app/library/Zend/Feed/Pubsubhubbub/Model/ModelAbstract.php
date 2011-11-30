@@ -37,29 +37,29 @@ require_once 'Zend/Registry.php';
  */
 class Zend_Feed_Pubsubhubbub_Model_ModelAbstract
 {
-    /**
-     * Zend_Db_Table instance to host database methods
-     *
-     * @var Zend_Db_Table
-     */
-    protected $_db = null;
+	/**
+	 * Zend_Db_Table instance to host database methods
+	 *
+	 * @var Zend_Db_Table
+	 */
+	protected $_db = null;
 
-    /**
-     * Constructor
-     *
-     * @param  array $data
-     * @param  Zend_Db_Table_Abstract $tableGateway
-     * @return void
-     */
-    public function __construct(Zend_Db_Table_Abstract $tableGateway = null)
-    {
-        if ($tableGateway === null) {
-            $parts = explode('_', get_class($this));
-            $table = strtolower(array_pop($parts));
-            $this->_db = new Zend_Db_Table($table);
-        } else {
-            $this->_db = $tableGateway;
-        }
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  array $data
+	 * @param  Zend_Db_Table_Abstract $tableGateway
+	 * @return void
+	 */
+	public function __construct(Zend_Db_Table_Abstract $tableGateway = null)
+	{
+		if ($tableGateway === null) {
+			$parts = explode('_', get_class($this));
+			$table = strtolower(array_pop($parts));
+			$this->_db = new Zend_Db_Table($table);
+		} else {
+			$this->_db = $tableGateway;
+		}
+	}
 
 }

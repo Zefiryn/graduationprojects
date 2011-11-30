@@ -10,16 +10,16 @@ class Application_Model_DiplomaFields extends GP_Application_Model
 	protected $diploma;
 	protected $lang;
 	protected $field;
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_DiplomaFields';
-	
-	public function __construct($id = null, array $options = null) 
+
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
-	
-	
+
+
+
 
 }
 

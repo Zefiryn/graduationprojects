@@ -54,52 +54,52 @@ require_once 'Zend/Service/DeveloperGarden/LocalSearch/SearchParameters.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_LocalSearch
-    extends Zend_Service_DeveloperGarden_Client_ClientAbstract
+extends Zend_Service_DeveloperGarden_Client_ClientAbstract
 {
-    /**
-     * wsdl file
-     *
-     * @var string
-     */
-    protected $_wsdlFile = 'https://gateway.developer.telekom.com/p3gw-mod-odg-localsearch/services/localsearch?wsdl';
+	/**
+	 * wsdl file
+	 *
+	 * @var string
+	 */
+	protected $_wsdlFile = 'https://gateway.developer.telekom.com/p3gw-mod-odg-localsearch/services/localsearch?wsdl';
 
-    /**
-     * wsdl file local
-     *
-     * @var string
-     */
-    protected $_wsdlFileLocal = 'Wsdl/localsearch.wsdl';
+	/**
+	 * wsdl file local
+	 *
+	 * @var string
+	 */
+	protected $_wsdlFileLocal = 'Wsdl/localsearch.wsdl';
 
-    /**
-     * Response, Request Classmapping
-     *
-     * @var array
-     *
-     */
-    protected $_classMap = array(
+	/**
+	 * Response, Request Classmapping
+	 *
+	 * @var array
+	 *
+	 */
+	protected $_classMap = array(
         'LocalSearchResponseType' => 'Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType'
-    );
+	);
 
-    /**
-     * localSearch with the given parameters
-     *
-     * @param Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters
-     * @param integer $account
-     * @return Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
-     */
-    public function localSearch(
-        Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters,
-        $account = null
-    ) {
-        $request = new Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest(
-            $this->getEnvironment(),
-            $searchParameters,
-            $account
-        );
+	/**
+	 * localSearch with the given parameters
+	 *
+	 * @param Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters
+	 * @param integer $account
+	 * @return Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
+	 */
+	public function localSearch(
+	Zend_Service_DeveloperGarden_LocalSearch_SearchParameters $searchParameters,
+	$account = null
+	) {
+		$request = new Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest(
+		$this->getEnvironment(),
+		$searchParameters,
+		$account
+		);
 
-        $result = $this->getSoapClient()->localSearch($request);
+		$result = $this->getSoapClient()->localSearch($request);
 
-        $response = new Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse($result);
-        return $response->parse();
-    }
+		$response = new Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse($result);
+		return $response->parse();
+	}
 }

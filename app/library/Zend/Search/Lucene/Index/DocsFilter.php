@@ -35,25 +35,25 @@
  */
 class Zend_Search_Lucene_Index_DocsFilter
 {
-    /**
-     * Set of segment filters:
-     *  array( <segmentName> => array(<docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                ...                          ),
-     *         <segmentName> => array(<docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                ...                          ),
-     *         <segmentName> => array(<docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                <docId> => <undefined_value>,
-     *                                ...                          ),
-     *         ...
-     *       )
-     *
-     * @var array
-     */
-    public $segmentFilters = array();
+	/**
+	 * Set of segment filters:
+	 *  array( <segmentName> => array(<docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                ...                          ),
+	 *         <segmentName> => array(<docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                ...                          ),
+	 *         <segmentName> => array(<docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                <docId> => <undefined_value>,
+	 *                                ...                          ),
+	 *         ...
+	 *       )
+	 *
+	 * @var array
+	 */
+	public $segmentFilters = array();
 }
 

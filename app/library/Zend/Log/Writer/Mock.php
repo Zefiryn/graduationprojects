@@ -33,49 +33,49 @@ require_once 'Zend/Log/Writer/Abstract.php';
  */
 class Zend_Log_Writer_Mock extends Zend_Log_Writer_Abstract
 {
-    /**
-     * array of log events
-     *
-     * @var array
-     */
-    public $events = array();
+	/**
+	 * array of log events
+	 *
+	 * @var array
+	 */
+	public $events = array();
 
-    /**
-     * shutdown called?
-     *
-     * @var boolean
-     */
-    public $shutdown = false;
+	/**
+	 * shutdown called?
+	 *
+	 * @var boolean
+	 */
+	public $shutdown = false;
 
-    /**
-     * Write a message to the log.
-     *
-     * @param  array  $event  event data
-     * @return void
-     */
-    public function _write($event)
-    {
-        $this->events[] = $event;
-    }
+	/**
+	 * Write a message to the log.
+	 *
+	 * @param  array  $event  event data
+	 * @return void
+	 */
+	public function _write($event)
+	{
+		$this->events[] = $event;
+	}
 
-    /**
-     * Record shutdown
-     *
-     * @return void
-     */
-    public function shutdown()
-    {
-        $this->shutdown = true;
-    }
+	/**
+	 * Record shutdown
+	 *
+	 * @return void
+	 */
+	public function shutdown()
+	{
+		$this->shutdown = true;
+	}
 
-    /**
-     * Create a new instance of Zend_Log_Writer_Mock
-     *
-     * @param  array|Zend_Config $config
-     * @return Zend_Log_Writer_Mock
-     */
-    static public function factory($config)
-    {
-        return new self();
-    }
+	/**
+	 * Create a new instance of Zend_Log_Writer_Mock
+	 *
+	 * @param  array|Zend_Config $config
+	 * @return Zend_Log_Writer_Mock
+	 */
+	static public function factory($config)
+	{
+		return new self();
+	}
 }

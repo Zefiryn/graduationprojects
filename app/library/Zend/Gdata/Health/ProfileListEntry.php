@@ -39,62 +39,62 @@ require_once 'Zend/Gdata/Entry.php';
  */
 class Zend_Gdata_Health_ProfileListEntry extends Zend_Gdata_Entry
 {
-    /**
-     * The classname for individual profile list entry elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_Health_ProfileListEntry';
+	/**
+	 * The classname for individual profile list entry elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_Health_ProfileListEntry';
 
-    /**
-     * Constructs a new Zend_Gdata_Health_ProfileListEntry object.
-     * @param DOMElement $element (optional) The DOMElement on which to base this object.
-     */
-    public function __construct($element = null)
-    {
-        parent::__construct($element);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Health_ProfileListEntry object.
+	 * @param DOMElement $element (optional) The DOMElement on which to base this object.
+	 */
+	public function __construct($element = null)
+	{
+		parent::__construct($element);
+	}
 
-    /**
-     * Retrieves a DOMElement which corresponds to this element and all
-     * child properties.  This is used to build an entry back into a DOM
-     * and eventually XML text for application storage/persistence.
-     *
-     * @param DOMDocument $doc The DOMDocument used to construct DOMElements
-     * @return DOMElement The DOMElement representing this element and all
-     *          child properties.
-     */
-    public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
-    {
-        $element = parent::getDOM($doc, $majorVersion, $minorVersion);
-        return $element;
-    }
+	/**
+	 * Retrieves a DOMElement which corresponds to this element and all
+	 * child properties.  This is used to build an entry back into a DOM
+	 * and eventually XML text for application storage/persistence.
+	 *
+	 * @param DOMDocument $doc The DOMDocument used to construct DOMElements
+	 * @return DOMElement The DOMElement representing this element and all
+	 *          child properties.
+	 */
+	public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
+	{
+		$element = parent::getDOM($doc, $majorVersion, $minorVersion);
+		return $element;
+	}
 
-    /**
-     * Creates individual Entry objects of the appropriate type and
-     * stores them as members of this entry based upon DOM data.
-     *
-     * @param DOMNode $child The DOMNode to process
-     */
-    protected function takeChildFromDOM($child)
-    {
-        parent::takeChildFromDOM($child);
-    }
+	/**
+	 * Creates individual Entry objects of the appropriate type and
+	 * stores them as members of this entry based upon DOM data.
+	 *
+	 * @param DOMNode $child The DOMNode to process
+	 */
+	protected function takeChildFromDOM($child)
+	{
+		parent::takeChildFromDOM($child);
+	}
 
-    /**
-     * Retrieves the profile ID for the entry, which is contained in <atom:content>
-     * @return string The profile id
-     */
-    public function getProfileID() {
-        return $this->getContent()->text;
-    }
+	/**
+	 * Retrieves the profile ID for the entry, which is contained in <atom:content>
+	 * @return string The profile id
+	 */
+	public function getProfileID() {
+		return $this->getContent()->text;
+	}
 
-    /**
-     * Retrieves the profile's title, which is contained in <atom:title>
-     * @return string The profile name
-     */
-    public function getProfileName() {
-        return $this->getTitle()->text;
-    }
+	/**
+	 * Retrieves the profile's title, which is contained in <atom:title>
+	 * @return string The profile name
+	 */
+	public function getProfileName() {
+		return $this->getTitle()->text;
+	}
 
 }

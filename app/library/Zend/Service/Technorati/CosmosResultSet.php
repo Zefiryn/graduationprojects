@@ -38,139 +38,139 @@ require_once 'Zend/Service/Technorati/ResultSet.php';
  */
 class Zend_Service_Technorati_CosmosResultSet extends Zend_Service_Technorati_ResultSet
 {
-    /**
-     * Technorati weblog url, if queried URL is a valid weblog.
-     *
-     * @var     Zend_Uri_Http
-     * @access  protected
-     */
-    protected $_url;
+	/**
+	 * Technorati weblog url, if queried URL is a valid weblog.
+	 *
+	 * @var     Zend_Uri_Http
+	 * @access  protected
+	 */
+	protected $_url;
 
-    /**
-     * Technorati weblog, if queried URL is a valid weblog.
-     *
-     * @var     Zend_Service_Technorati_Weblog
-     * @access  protected
-     */
-    protected $_weblog;
+	/**
+	 * Technorati weblog, if queried URL is a valid weblog.
+	 *
+	 * @var     Zend_Service_Technorati_Weblog
+	 * @access  protected
+	 */
+	protected $_weblog;
 
-    /**
-     * Number of unique blogs linking this blog
-     *
-     * @var     integer
-     * @access  protected
-     */
-    protected $_inboundBlogs;
+	/**
+	 * Number of unique blogs linking this blog
+	 *
+	 * @var     integer
+	 * @access  protected
+	 */
+	protected $_inboundBlogs;
 
-    /**
-     * Number of incoming links to this blog
-     *
-     * @var     integer
-     * @access  protected
-     */
-    protected $_inboundLinks;
+	/**
+	 * Number of incoming links to this blog
+	 *
+	 * @var     integer
+	 * @access  protected
+	 */
+	protected $_inboundLinks;
 
-    /**
-     * Parses the search response and retrieve the results for iteration.
-     *
-     * @param   DomDocument $dom    the ReST fragment for this object
-     * @param   array $options      query options as associative array
-     */
-    public function __construct(DomDocument $dom, $options = array())
-    {
-        parent::__construct($dom, $options);
+	/**
+	 * Parses the search response and retrieve the results for iteration.
+	 *
+	 * @param   DomDocument $dom    the ReST fragment for this object
+	 * @param   array $options      query options as associative array
+	 */
+	public function __construct(DomDocument $dom, $options = array())
+	{
+		parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/inboundlinks/text()');
-        if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
+		$result = $this->_xpath->query('/tapi/document/result/inboundlinks/text()');
+		if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/inboundblogs/text()');
-        if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
+		$result = $this->_xpath->query('/tapi/document/result/inboundblogs/text()');
+		if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/weblog');
-        if ($result->length == 1) {
-            /**
-             * @see Zend_Service_Technorati_Weblog
-             */
-            require_once 'Zend/Service/Technorati/Weblog.php';
-            $this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
-        }
+		$result = $this->_xpath->query('/tapi/document/result/weblog');
+		if ($result->length == 1) {
+			/**
+			 * @see Zend_Service_Technorati_Weblog
+			 */
+			require_once 'Zend/Service/Technorati/Weblog.php';
+			$this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
+		}
 
-        $result = $this->_xpath->query('/tapi/document/result/url/text()');
-        if ($result->length == 1) {
-            try {
-                // fetched URL often doens't include schema
-                // and this issue causes the following line to fail
-                $this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
-            } catch(Zend_Service_Technorati_Exception $e) {
-                if ($this->getWeblog() instanceof Zend_Service_Technorati_Weblog) {
-                    $this->_url = $this->getWeblog()->getUrl();
-                }
-            }
-        }
+		$result = $this->_xpath->query('/tapi/document/result/url/text()');
+		if ($result->length == 1) {
+			try {
+				// fetched URL often doens't include schema
+				// and this issue causes the following line to fail
+				$this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
+			} catch(Zend_Service_Technorati_Exception $e) {
+				if ($this->getWeblog() instanceof Zend_Service_Technorati_Weblog) {
+					$this->_url = $this->getWeblog()->getUrl();
+				}
+			}
+		}
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+		$this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
 
-        // total number of results depends on query type
-        // for now check only getInboundLinks() and getInboundBlogs() value
-        if ((int) $this->getInboundLinks() > 0) {
-            $this->_totalResultsAvailable = $this->getInboundLinks();
-        } elseif ((int) $this->getInboundBlogs() > 0) {
-            $this->_totalResultsAvailable = $this->getInboundBlogs();
-        } else {
-            $this->_totalResultsAvailable = 0;
-        }
-    }
+		// total number of results depends on query type
+		// for now check only getInboundLinks() and getInboundBlogs() value
+		if ((int) $this->getInboundLinks() > 0) {
+			$this->_totalResultsAvailable = $this->getInboundLinks();
+		} elseif ((int) $this->getInboundBlogs() > 0) {
+			$this->_totalResultsAvailable = $this->getInboundBlogs();
+		} else {
+			$this->_totalResultsAvailable = 0;
+		}
+	}
 
 
-    /**
-     * Returns the weblog URL.
-     *
-     * @return  Zend_Uri_Http
-     */
-    public function getUrl() {
-        return $this->_url;
-    }
+	/**
+	 * Returns the weblog URL.
+	 *
+	 * @return  Zend_Uri_Http
+	 */
+	public function getUrl() {
+		return $this->_url;
+	}
 
-    /**
-     * Returns the weblog.
-     *
-     * @return  Zend_Service_Technorati_Weblog
-     */
-    public function getWeblog() {
-        return $this->_weblog;
-    }
+	/**
+	 * Returns the weblog.
+	 *
+	 * @return  Zend_Service_Technorati_Weblog
+	 */
+	public function getWeblog() {
+		return $this->_weblog;
+	}
 
-    /**
-     * Returns number of unique blogs linking this blog.
-     *
-     * @return  integer the number of inbound blogs
-     */
-    public function getInboundBlogs()
-    {
-        return $this->_inboundBlogs;
-    }
+	/**
+	 * Returns number of unique blogs linking this blog.
+	 *
+	 * @return  integer the number of inbound blogs
+	 */
+	public function getInboundBlogs()
+	{
+		return $this->_inboundBlogs;
+	}
 
-    /**
-     * Returns number of incoming links to this blog.
-     *
-     * @return  integer the number of inbound links
-     */
-    public function getInboundLinks()
-    {
-        return $this->_inboundLinks;
-    }
+	/**
+	 * Returns number of incoming links to this blog.
+	 *
+	 * @return  integer the number of inbound links
+	 */
+	public function getInboundLinks()
+	{
+		return $this->_inboundLinks;
+	}
 
-    /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
-     *
-     * @return Zend_Service_Technorati_CosmosResult current result
-     */
-    public function current()
-    {
-        /**
-         * @see Zend_Service_Technorati_CosmosResult
-         */
-        require_once 'Zend/Service/Technorati/CosmosResult.php';
-        return new Zend_Service_Technorati_CosmosResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Implements Zend_Service_Technorati_ResultSet::current().
+	 *
+	 * @return Zend_Service_Technorati_CosmosResult current result
+	 */
+	public function current()
+	{
+		/**
+		 * @see Zend_Service_Technorati_CosmosResult
+		 */
+		require_once 'Zend/Service/Technorati/CosmosResult.php';
+		return new Zend_Service_Technorati_CosmosResult($this->_results->item($this->_currentIndex));
+	}
 }

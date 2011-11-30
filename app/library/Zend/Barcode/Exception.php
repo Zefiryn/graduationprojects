@@ -33,31 +33,31 @@ require_once 'Zend/Exception.php';
  */
 class Zend_Barcode_Exception extends Zend_Exception
 {
-    /**
-     * Is this exception renderable?
-     * @var bool
-     */
-    protected $_isRenderable = true;
+	/**
+	 * Is this exception renderable?
+	 * @var bool
+	 */
+	protected $_isRenderable = true;
 
-    /**
-     * Set renderable flag
-     *
-     * @param  bool $flag
-     * @return Zend_Barcode_Exception
-     */
-    public function setIsRenderable($flag)
-    {
-        $this->_isRenderable = (bool) $flag;
-        return $this;
-    }
+	/**
+	 * Set renderable flag
+	 *
+	 * @param  bool $flag
+	 * @return Zend_Barcode_Exception
+	 */
+	public function setIsRenderable($flag)
+	{
+		$this->_isRenderable = (bool) $flag;
+		return $this;
+	}
 
-    /**
-     * Retrieve renderable flag
-     *
-     * @return bool
-     */
-    public function isRenderable()
-    {
-        return $this->_isRenderable;
-    }
+	/**
+	 * Retrieve renderable flag
+	 *
+	 * @return bool
+	 */
+	public function isRenderable()
+	{
+		return $this->_isRenderable;
+	}
 }

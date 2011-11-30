@@ -34,33 +34,33 @@ require_once 'Zend/Service/DeveloperGarden/Response/BaseType.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     *
-     * @var float
-     */
-    public $geoLatitude = null;
+	/**
+	 *
+	 * @var float
+	 */
+	public $geoLatitude = null;
 
-    /**
-     *
-     * @var float
-     */
-    public $geoLongitude = null;
+	/**
+	 *
+	 * @var float
+	 */
+	public $geoLongitude = null;
 
-    /**
-     * @return float
-     */
-    public function getLatitude()
-    {
-        return $this->geoLatitude;
-    }
+	/**
+	 * @return float
+	 */
+	public function getLatitude()
+	{
+		return $this->geoLatitude;
+	}
 
-    /**
-     * @return float
-     */
-    public function getLongitude()
-    {
-        return $this->geoLongitude;
-    }
+	/**
+	 * @return float
+	 */
+	public function getLongitude()
+	{
+		return $this->geoLongitude;
+	}
 }

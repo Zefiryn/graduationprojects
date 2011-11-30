@@ -34,35 +34,35 @@ require_once 'Zend/Form/DisplayGroup.php';
  */
 class Zend_Dojo_Form_DisplayGroup extends Zend_Form_DisplayGroup
 {
-    /**
-     * Constructor
-     *
-     * @param  string $name
-     * @param  Zend_Loader_PluginLoader $loader
-     * @param  array|Zend_Config|null $options
-     * @return void
-     */
-    public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
-    {
-        parent::__construct($name, $loader, $options);
-        $this->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  string $name
+	 * @param  Zend_Loader_PluginLoader $loader
+	 * @param  array|Zend_Config|null $options
+	 * @return void
+	 */
+	public function __construct($name, Zend_Loader_PluginLoader $loader, $options = null)
+	{
+		parent::__construct($name, $loader, $options);
+		$this->addPrefixPath('Zend_Dojo_Form_Decorator', 'Zend/Dojo/Form/Decorator');
+	}
 
-    /**
-     * Set the view object
-     *
-     * Ensures that the view object has the dojo view helper path set.
-     *
-     * @param  Zend_View_Interface $view
-     * @return Zend_Dojo_Form_Element_Dijit
-     */
-    public function setView(Zend_View_Interface $view = null)
-    {
-        if (null !== $view) {
-            if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
-                $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
-            }
-        }
-        return parent::setView($view);
-    }
+	/**
+	 * Set the view object
+	 *
+	 * Ensures that the view object has the dojo view helper path set.
+	 *
+	 * @param  Zend_View_Interface $view
+	 * @return Zend_Dojo_Form_Element_Dijit
+	 */
+	public function setView(Zend_View_Interface $view = null)
+	{
+		if (null !== $view) {
+			if (false === $view->getPluginLoader('helper')->getPaths('Zend_Dojo_View_Helper')) {
+				$view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+			}
+		}
+		return parent::setView($view);
+	}
 }

@@ -29,18 +29,18 @@
  */
 interface Zend_View_Helper_Interface
 {
-    /**
-     * Set the View object
-     *
-     * @param  Zend_View_Interface $view
-     * @return Zend_View_Helper_Interface
-     */
-    public function setView(Zend_View_Interface $view);
+	/**
+	 * Set the View object
+	 *
+	 * @param  Zend_View_Interface $view
+	 * @return Zend_View_Helper_Interface
+	 */
+	public function setView(Zend_View_Interface $view);
 
-    /**
-     * Strategy pattern: helper method to invoke
-     *
-     * @return mixed
-     */
-    public function direct();
+	/**
+	 * Strategy pattern: helper method to invoke
+	 *
+	 * @return mixed
+	 */
+	public function direct();
 }

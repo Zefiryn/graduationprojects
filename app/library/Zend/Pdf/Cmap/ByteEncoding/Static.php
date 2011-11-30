@@ -37,26 +37,26 @@ require_once 'Zend/Pdf/Cmap/ByteEncoding.php';
  */
 class Zend_Pdf_Cmap_ByteEncoding_Static extends Zend_Pdf_Cmap_ByteEncoding
 {
-  /**** Public Interface ****/
+	/**** Public Interface ****/
 
 
-  /* Object Lifecycle */
+	/* Object Lifecycle */
 
-    /**
-     * Object constructor
-     *
-     * @param array $cmapData Array whose keys are Unicode character codes and
-     *   values are glyph numbers.
-     * @throws Zend_Pdf_Exception
-     */
-    public function __construct($cmapData)
-    {
-        if (! is_array($cmapData)) {
-            require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Constructor parameter must be an array',
-                                         Zend_Pdf_Exception::BAD_PARAMETER_TYPE);
-        }
-        $this->_glyphIndexArray = $cmapData;
-    }
+	/**
+	 * Object constructor
+	 *
+	 * @param array $cmapData Array whose keys are Unicode character codes and
+	 *   values are glyph numbers.
+	 * @throws Zend_Pdf_Exception
+	 */
+	public function __construct($cmapData)
+	{
+		if (! is_array($cmapData)) {
+			require_once 'Zend/Pdf/Exception.php';
+			throw new Zend_Pdf_Exception('Constructor parameter must be an array',
+			Zend_Pdf_Exception::BAD_PARAMETER_TYPE);
+		}
+		$this->_glyphIndexArray = $cmapData;
+	}
 
 }

@@ -45,19 +45,19 @@ require_once 'Zend/Gdata/Photos.php';
 class Zend_Gdata_Photos_Extension_Timestamp extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'gphoto';
-    protected $_rootElement = 'timestamp';
+	protected $_rootNamespace = 'gphoto';
+	protected $_rootElement = 'timestamp';
 
-    /**
-     * Constructs a new Zend_Gdata_Photos_Extension_Timestamp object.
-     *
-     * @param string $text (optional) The value to represent.
-     */
-    public function __construct($text = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
-        parent::__construct();
-        $this->setText($text);
-    }
+	/**
+	 * Constructs a new Zend_Gdata_Photos_Extension_Timestamp object.
+	 *
+	 * @param string $text (optional) The value to represent.
+	 */
+	public function __construct($text = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_Photos::$namespaces);
+		parent::__construct();
+		$this->setText($text);
+	}
 
 }

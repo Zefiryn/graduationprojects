@@ -38,45 +38,45 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Sitemap_Priority extends Zend_Validate_Abstract
 {
-    /**
-     * Validation key for not valid
-     *
-     */
-    const NOT_VALID = 'sitemapPriorityNotValid';
-    const INVALID   = 'sitemapPriorityInvalid';
+	/**
+	 * Validation key for not valid
+	 *
+	 */
+	const NOT_VALID = 'sitemapPriorityNotValid';
+	const INVALID   = 'sitemapPriorityInvalid';
 
-    /**
-     * Validation failure message template definitions
-     *
-     * @var array
-     */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is no valid sitemap priority",
-        self::INVALID   => "Invalid type given. Numeric string, integer or float expected",
-    );
+	/**
+	 * Validation failure message template definitions
+	 *
+	 * @var array
+	 */
+	protected $_messageTemplates = array(
+	self::NOT_VALID => "'%value%' is no valid sitemap priority",
+	self::INVALID   => "Invalid type given. Numeric string, integer or float expected",
+	);
 
-    /**
-     * Validates if a string is valid as a sitemap priority
-     *
-     * @link http://www.sitemaps.org/protocol.php#prioritydef <priority>
-     *
-     * @param  string  $value  value to validate
-     * @return boolean
-     */
-    public function isValid($value)
-    {
-        if (!is_numeric($value)) {
-            $this->_error(self::INVALID);
-            return false;
-        }
+	/**
+	 * Validates if a string is valid as a sitemap priority
+	 *
+	 * @link http://www.sitemaps.org/protocol.php#prioritydef <priority>
+	 *
+	 * @param  string  $value  value to validate
+	 * @return boolean
+	 */
+	public function isValid($value)
+	{
+		if (!is_numeric($value)) {
+			$this->_error(self::INVALID);
+			return false;
+		}
 
-        $this->_setValue($value);
-        $value = (float) $value;
-        if ($value < 0 || $value > 1) {
-            $this->_error(self::NOT_VALID);
-            return false;
-        }
+		$this->_setValue($value);
+		$value = (float) $value;
+		if ($value < 0 || $value > 1) {
+			$this->_error(self::NOT_VALID);
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

@@ -35,23 +35,23 @@ require_once 'Zend/Service/Ebay/Finding/Set/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Aspect_Set extends Zend_Service_Ebay_Finding_Set_Abstract
 {
-    /**
-     * Implement SeekableIterator::current()
-     *
-     * @return Zend_Service_Ebay_Finding_Aspect
-     */
-    public function current()
-    {
-        // check node
-        $node = $this->_nodes->item($this->_key);
-        if (!$node) {
-            return null;
-        }
+	/**
+	 * Implement SeekableIterator::current()
+	 *
+	 * @return Zend_Service_Ebay_Finding_Aspect
+	 */
+	public function current()
+	{
+		// check node
+		$node = $this->_nodes->item($this->_key);
+		if (!$node) {
+			return null;
+		}
 
-        /**
-         * @see Zend_Service_Ebay_Finding_Aspect
-         */
-        require_once 'Zend/Service/Ebay/Finding/Aspect.php';
-        return new Zend_Service_Ebay_Finding_Aspect($node);
-    }
+		/**
+		 * @see Zend_Service_Ebay_Finding_Aspect
+		 */
+		require_once 'Zend/Service/Ebay/Finding/Aspect.php';
+		return new Zend_Service_Ebay_Finding_Aspect($node);
+	}
 }

@@ -43,45 +43,45 @@ require_once 'Zend/Uri.php';
  */
 class Zend_Validate_Sitemap_Loc extends Zend_Validate_Abstract
 {
-    /**
-     * Validation key for not valid
-     *
-     */
-    const NOT_VALID = 'sitemapLocNotValid';
-    const INVALID   = 'sitemapLocInvalid';
+	/**
+	 * Validation key for not valid
+	 *
+	 */
+	const NOT_VALID = 'sitemapLocNotValid';
+	const INVALID   = 'sitemapLocInvalid';
 
-    /**
-     * Validation failure message template definitions
-     *
-     * @var array
-     */
-    protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is no valid sitemap location",
-        self::INVALID   => "Invalid type given. String expected",
-    );
+	/**
+	 * Validation failure message template definitions
+	 *
+	 * @var array
+	 */
+	protected $_messageTemplates = array(
+	self::NOT_VALID => "'%value%' is no valid sitemap location",
+	self::INVALID   => "Invalid type given. String expected",
+	);
 
-    /**
-     * Validates if a string is valid as a sitemap location
-     *
-     * @link http://www.sitemaps.org/protocol.php#locdef <loc>
-     *
-     * @param  string  $value  value to validate
-     * @return boolean
-     */
-    public function isValid($value)
-    {
-        if (!is_string($value)) {
-            $this->_error(self::INVALID);
-            return false;
-        }
+	/**
+	 * Validates if a string is valid as a sitemap location
+	 *
+	 * @link http://www.sitemaps.org/protocol.php#locdef <loc>
+	 *
+	 * @param  string  $value  value to validate
+	 * @return boolean
+	 */
+	public function isValid($value)
+	{
+		if (!is_string($value)) {
+			$this->_error(self::INVALID);
+			return false;
+		}
 
-        $this->_setValue($value);
-        $result = Zend_Uri::check($value);
-        if ($result !== true) {
-            $this->_error(self::NOT_VALID);
-            return false;
-        }
+		$this->_setValue($value);
+		$result = Zend_Uri::check($value);
+		if ($result !== true) {
+			$this->_error(self::NOT_VALID);
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

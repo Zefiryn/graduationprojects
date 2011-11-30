@@ -34,9 +34,9 @@ require_once 'Zend/Form/Element/Submit.php';
  */
 class Zend_Form_Element_Button extends Zend_Form_Element_Submit
 {
-    /**
-     * Use formButton view helper by default
-     * @var string
-     */
-    public $helper = 'formButton';
+	/**
+	 * Use formButton view helper by default
+	 * @var string
+	 */
+	public $helper = 'formButton';
 }

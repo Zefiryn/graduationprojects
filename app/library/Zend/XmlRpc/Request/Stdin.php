@@ -38,47 +38,47 @@ require_once 'Zend/XmlRpc/Request.php';
  */
 class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
 {
-    /**
-     * Raw XML as received via request
-     * @var string
-     */
-    protected $_xml;
+	/**
+	 * Raw XML as received via request
+	 * @var string
+	 */
+	protected $_xml;
 
-    /**
-     * Constructor
-     *
-     * Attempts to read from php://stdin to get raw POST request; if an error
-     * occurs in doing so, or if the XML is invalid, the request is declared a
-     * fault.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $fh = fopen('php://stdin', 'r');
-        if (!$fh) {
-            $this->_fault = new Zend_XmlRpc_Server_Exception(630);
-            return;
-        }
+	/**
+	 * Constructor
+	 *
+	 * Attempts to read from php://stdin to get raw POST request; if an error
+	 * occurs in doing so, or if the XML is invalid, the request is declared a
+	 * fault.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$fh = fopen('php://stdin', 'r');
+		if (!$fh) {
+			$this->_fault = new Zend_XmlRpc_Server_Exception(630);
+			return;
+		}
 
-        $xml = '';
-        while (!feof($fh)) {
-            $xml .= fgets($fh);
-        }
-        fclose($fh);
+		$xml = '';
+		while (!feof($fh)) {
+			$xml .= fgets($fh);
+		}
+		fclose($fh);
 
-        $this->_xml = $xml;
+		$this->_xml = $xml;
 
-        $this->loadXml($xml);
-    }
+		$this->loadXml($xml);
+	}
 
-    /**
-     * Retrieve the raw XML request
-     *
-     * @return string
-     */
-    public function getRawRequest()
-    {
-        return $this->_xml;
-    }
+	/**
+	 * Retrieve the raw XML request
+	 *
+	 * @return string
+	 */
+	public function getRawRequest()
+	{
+		return $this->_xml;
+	}
 }

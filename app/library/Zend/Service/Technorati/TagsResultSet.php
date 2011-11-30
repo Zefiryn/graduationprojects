@@ -38,30 +38,30 @@ require_once 'Zend/Service/Technorati/ResultSet.php';
  */
 class Zend_Service_Technorati_TagsResultSet extends Zend_Service_Technorati_ResultSet
 {
-    /**
-     * Constructs a new object object from DOM Document.
-     *
-     * @param   DomDocument $dom the ReST fragment for this object
-     */
-    public function __construct(DomDocument $dom, $options = array())
-    {
-        parent::__construct($dom, $options);
+	/**
+	 * Constructs a new object object from DOM Document.
+	 *
+	 * @param   DomDocument $dom the ReST fragment for this object
+	 */
+	public function __construct(DomDocument $dom, $options = array())
+	{
+		parent::__construct($dom, $options);
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
-        $this->_totalResultsAvailable = (int) $this->_totalResultsReturned;
-    }
+		$this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+		$this->_totalResultsAvailable = (int) $this->_totalResultsReturned;
+	}
 
-    /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
-     *
-     * @return Zend_Service_Technorati_TagsResult current result
-     */
-    public function current()
-    {
-        /**
-         * @see Zend_Service_Technorati_TagsResult
-         */
-        require_once 'Zend/Service/Technorati/TagsResult.php';
-        return new Zend_Service_Technorati_TagsResult($this->_results->item($this->_currentIndex));
-    }
+	/**
+	 * Implements Zend_Service_Technorati_ResultSet::current().
+	 *
+	 * @return Zend_Service_Technorati_TagsResult current result
+	 */
+	public function current()
+	{
+		/**
+		 * @see Zend_Service_Technorati_TagsResult
+		 */
+		require_once 'Zend/Service/Technorati/TagsResult.php';
+		return new Zend_Service_Technorati_TagsResult($this->_results->item($this->_currentIndex));
+	}
 }

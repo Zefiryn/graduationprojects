@@ -31,56 +31,56 @@
  */
 class Zend_Service_Amazon_CustomerReview
 {
-    /**
-     * @var string
-     */
-    public $Rating;
+	/**
+	 * @var string
+	 */
+	public $Rating;
 
-    /**
-     * @var string
-     */
-    public $HelpfulVotes;
+	/**
+	 * @var string
+	 */
+	public $HelpfulVotes;
 
-    /**
-     * @var string
-     */
-    public $CustomerId;
+	/**
+	 * @var string
+	 */
+	public $CustomerId;
 
-    /**
-     * @var string
-     */
-    public $TotalVotes;
+	/**
+	 * @var string
+	 */
+	public $TotalVotes;
 
-    /**
-     * @var string
-     */
-    public $Date;
+	/**
+	 * @var string
+	 */
+	public $Date;
 
-    /**
-     * @var string
-     */
-    public $Summary;
+	/**
+	 * @var string
+	 */
+	public $Summary;
 
-    /**
-     * @var string
-     */
-    public $Content;
+	/**
+	 * @var string
+	 */
+	public $Content;
 
-    /**
-     * Assigns values to properties relevant to CustomerReview
-     *
-     * @param  DOMElement $dom
-     * @return void
-     */
-    public function __construct(DOMElement $dom)
-    {
-        $xpath = new DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
-        foreach (array('Rating', 'HelpfulVotes', 'CustomerId', 'TotalVotes', 'Date', 'Summary', 'Content') as $el) {
-            $result = $xpath->query("./az:$el/text()", $dom);
-            if ($result->length == 1) {
-                $this->$el = (string) $result->item(0)->data;
-            }
-        }
-    }
+	/**
+	 * Assigns values to properties relevant to CustomerReview
+	 *
+	 * @param  DOMElement $dom
+	 * @return void
+	 */
+	public function __construct(DOMElement $dom)
+	{
+		$xpath = new DOMXPath($dom->ownerDocument);
+		$xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+		foreach (array('Rating', 'HelpfulVotes', 'CustomerId', 'TotalVotes', 'Date', 'Summary', 'Content') as $el) {
+			$result = $xpath->query("./az:$el/text()", $dom);
+			if ($result->length == 1) {
+				$this->$el = (string) $result->item(0)->data;
+			}
+		}
+	}
 }

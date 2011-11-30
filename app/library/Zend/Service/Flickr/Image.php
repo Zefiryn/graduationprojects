@@ -31,46 +31,46 @@
  */
 class Zend_Service_Flickr_Image
 {
-    /**
-     * The URI of the image
-     *
-     * @var string
-     */
-    public $uri;
+	/**
+	 * The URI of the image
+	 *
+	 * @var string
+	 */
+	public $uri;
 
-    /**
-     * The URI for linking to the photo on Flickr
-     *
-     * @var string
-     */
-    public $clickUri;
+	/**
+	 * The URI for linking to the photo on Flickr
+	 *
+	 * @var string
+	 */
+	public $clickUri;
 
-    /**
-     * The height of the image in pixels
-     *
-     * @var string
-     */
-    public $height;
+	/**
+	 * The height of the image in pixels
+	 *
+	 * @var string
+	 */
+	public $height;
 
-    /**
-     * The width of the image in pixels
-     *
-     * @var string
-     */
-    public $width;
+	/**
+	 * The width of the image in pixels
+	 *
+	 * @var string
+	 */
+	public $width;
 
-    /**
-     * Parse given Flickr Image element
-     *
-     * @param  DOMElement $image
-     * @return void
-     */
-    public function __construct(DOMElement $image)
-    {
-        $this->uri      = (string) $image->getAttribute('source');
-        $this->clickUri = (string) $image->getAttribute('url');
-        $this->height   = (int) $image->getAttribute('height');
-        $this->width    = (int) $image->getAttribute('width');
-    }
+	/**
+	 * Parse given Flickr Image element
+	 *
+	 * @param  DOMElement $image
+	 * @return void
+	 */
+	public function __construct(DOMElement $image)
+	{
+		$this->uri      = (string) $image->getAttribute('source');
+		$this->clickUri = (string) $image->getAttribute('url');
+		$this->height   = (int) $image->getAttribute('height');
+		$this->width    = (int) $image->getAttribute('width');
+	}
 }
 

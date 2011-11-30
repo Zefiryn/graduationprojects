@@ -45,24 +45,24 @@ require_once 'Zend/Gdata/YouTube/SubscriptionEntry.php';
 class Zend_Gdata_YouTube_SubscriptionFeed extends Zend_Gdata_Media_Feed
 {
 
-    /**
-     * The classname for individual feed elements.
-     *
-     * @var string
-     */
-    protected $_entryClassName = 'Zend_Gdata_YouTube_SubscriptionEntry';
+	/**
+	 * The classname for individual feed elements.
+	 *
+	 * @var string
+	 */
+	protected $_entryClassName = 'Zend_Gdata_YouTube_SubscriptionEntry';
 
-    /**
-     * Creates a Subscription feed, representing a list of subscriptions,
-     * usually associated with an individual user.
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($element = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
-        parent::__construct($element);
-    }
+	/**
+	 * Creates a Subscription feed, representing a list of subscriptions,
+	 * usually associated with an individual user.
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($element = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_YouTube::$namespaces);
+		parent::__construct($element);
+	}
 
 }

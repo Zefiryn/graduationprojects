@@ -32,13 +32,13 @@ require_once 'Zend/Filter/Word/SeparatorToCamelCase.php';
  */
 class Zend_Filter_Word_DashToCamelCase extends Zend_Filter_Word_SeparatorToCamelCase
 {
-    /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct('-');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct('-');
+	}
 }

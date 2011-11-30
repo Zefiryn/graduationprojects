@@ -34,85 +34,85 @@ require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
  */
 class Zend_Serializer_Adapter_Wddx extends Zend_Serializer_Adapter_AdapterAbstract
 {
-    /**
-     * @var array Default options
-     */
-    protected $_options = array(
+	/**
+	 * @var array Default options
+	 */
+	protected $_options = array(
         'comment' => null,
-    );
+	);
 
-    /**
-     * Constructor
-     *
-     * @param  array $opts
-     * @return void
-     * @throws Zend_Serializer_Exception if wddx extension not found
-     */
-    public function __construct($opts = array())
-    {
-        if (!extension_loaded('wddx')) {
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception('PHP extension "wddx" is required for this adapter');
-        }
+	/**
+	 * Constructor
+	 *
+	 * @param  array $opts
+	 * @return void
+	 * @throws Zend_Serializer_Exception if wddx extension not found
+	 */
+	public function __construct($opts = array())
+	{
+		if (!extension_loaded('wddx')) {
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception('PHP extension "wddx" is required for this adapter');
+		}
 
-        parent::__construct($opts);
-    }
+		parent::__construct($opts);
+	}
 
-    /**
-     * Serialize PHP to WDDX
-     *
-     * @param  mixed $value
-     * @param  array $opts
-     * @return string
-     * @throws Zend_Serializer_Exception on wddx error
-     */
-    public function serialize($value, array $opts = array())
-    {
-        $opts = $opts + $this->_options;
+	/**
+	 * Serialize PHP to WDDX
+	 *
+	 * @param  mixed $value
+	 * @param  array $opts
+	 * @return string
+	 * @throws Zend_Serializer_Exception on wddx error
+	 */
+	public function serialize($value, array $opts = array())
+	{
+		$opts = $opts + $this->_options;
 
-        if (isset($opts['comment']) && $opts['comment']) {
-            $wddx = wddx_serialize_value($value, (string)$opts['comment']);
-        } else {
-            $wddx = wddx_serialize_value($value);
-        }
+		if (isset($opts['comment']) && $opts['comment']) {
+			$wddx = wddx_serialize_value($value, (string)$opts['comment']);
+		} else {
+			$wddx = wddx_serialize_value($value);
+		}
 
-        if ($wddx === false) {
-            $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($lastErr['message']);
-        }
-        return $wddx;
-    }
+		if ($wddx === false) {
+			$lastErr = error_get_last();
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception($lastErr['message']);
+		}
+		return $wddx;
+	}
 
-    /**
-     * Unserialize from WDDX to PHP
-     *
-     * @param  string $wddx
-     * @param  array $opts
-     * @return mixed
-     * @throws Zend_Serializer_Exception on wddx error
-     */
-    public function unserialize($wddx, array $opts = array())
-    {
-        $ret = wddx_deserialize($wddx);
+	/**
+	 * Unserialize from WDDX to PHP
+	 *
+	 * @param  string $wddx
+	 * @param  array $opts
+	 * @return mixed
+	 * @throws Zend_Serializer_Exception on wddx error
+	 */
+	public function unserialize($wddx, array $opts = array())
+	{
+		$ret = wddx_deserialize($wddx);
 
-        if ($ret === null) {
-            // check if the returned NULL is valid
-            // or based on an invalid wddx string
-            try {
-                $simpleXml = new SimpleXMLElement($wddx);
-                if (isset($simpleXml->data[0]->null[0])) {
-                    return null; // valid null
-                }
-                $errMsg = 'Can\'t unserialize wddx string';
-            } catch (Exception $e) {
-                $errMsg = $e->getMessage();
-            }
+		if ($ret === null) {
+			// check if the returned NULL is valid
+			// or based on an invalid wddx string
+			try {
+				$simpleXml = new SimpleXMLElement($wddx);
+				if (isset($simpleXml->data[0]->null[0])) {
+					return null; // valid null
+				}
+				$errMsg = 'Can\'t unserialize wddx string';
+			} catch (Exception $e) {
+				$errMsg = $e->getMessage();
+			}
 
-            require_once 'Zend/Serializer/Exception.php';
-            throw new Zend_Serializer_Exception($errMsg);
-        }
+			require_once 'Zend/Serializer/Exception.php';
+			throw new Zend_Serializer_Exception($errMsg);
+		}
 
-        return $ret;
-    }
+		return $ret;
+	}
 }

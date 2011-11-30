@@ -35,23 +35,23 @@ require_once 'Zend/Service/Ebay/Finding/Set/Abstract.php';
  */
 class Zend_Service_Ebay_Finding_Error_Data_Set extends Zend_Service_Ebay_Finding_Set_Abstract
 {
-    /**
-     * Implement SeekableIterator::current()
-     *
-     * @return Zend_Service_Ebay_Finding_Error_Data
-     */
-    public function current()
-    {
-        // check node
-        $node = $this->_nodes->item($this->_key);
-        if (!$node) {
-            return null;
-        }
+	/**
+	 * Implement SeekableIterator::current()
+	 *
+	 * @return Zend_Service_Ebay_Finding_Error_Data
+	 */
+	public function current()
+	{
+		// check node
+		$node = $this->_nodes->item($this->_key);
+		if (!$node) {
+			return null;
+		}
 
-        /**
-         * @see Zend_Service_Ebay_Finding_Error_Data
-         */
-        require_once 'Zend/Service/Ebay/Finding/Error/Data.php';
-        return new Zend_Service_Ebay_Finding_Error_Data($node);
-    }
+		/**
+		 * @see Zend_Service_Ebay_Finding_Error_Data
+		 */
+		require_once 'Zend/Service/Ebay/Finding/Error/Data.php';
+		return new Zend_Service_Ebay_Finding_Error_Data($node);
+	}
 }

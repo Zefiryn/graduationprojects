@@ -1,303 +1,356 @@
 <?xml version="1.0"?>
 <projectProfile type="default" version="1.10">
-  <projectDirectory>
-    <projectProfileFile filesystemName=".zfproject.xml"/>
-    <applicationDirectory classNamePrefix="Application_">
-      <apisDirectory enabled="false"/>
-      <configsDirectory>
-        <applicationConfigFile type="ini"/>
-      </configsDirectory>
-      <controllersDirectory>
-        <controllerFile controllerName="Index">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Error"/>
-        <controllerFile controllerName="About">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Regulations">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Auth">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="login"/>
-          <actionMethod actionName="logout"/>
-        </controllerFile>
-        <controllerFile controllerName="Faq">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Contact">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="send"/>
-        </controllerFile>
-        <controllerFile controllerName="Applications">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="new"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="show"/>
-          <actionMethod actionName="update"/>
-        </controllerFile>
-        <controllerFile controllerName="Press">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Users">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="show"/>
-          <actionMethod actionName="new"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="promote"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="restore"/>
-        </controllerFile>
-        <controllerFile controllerName="Admin">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="School">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Schools">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="new"/>
-          <actionMethod actionName="edit"/>
-        </controllerFile>
-        <controllerFile controllerName="WorkTypes">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="edit"/>
-          <actionMethod actionName="delete"/>
-          <actionMethod actionName="new"/>
-        </controllerFile>
-        <controllerFile controllerName="Localizations">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Editions">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-        <controllerFile controllerName="Settings">
-          <actionMethod actionName="index"/>
-        </controllerFile>
-      </controllersDirectory>
-      <formsDirectory>
-        <formFile formName="Login"/>
-        <formFile formName="Contact"/>
-        <formFile formName="Application"/>
-        <formFile formName="Vote"/>
-        <formFile formName="Regulations"/>
-        <formFile formName="Settings"/>
-        <formFile formName="School"/>
-        <formFile formName="WorkType"/>
-        <formFile formName="Edition"/>
-        <formFile formName="Faq"/>
-        <formFile formName="Question"/>
-        <formFile formName="News"/>
-        <formFile formName="NewsText"/>
-        <formFile formName="NewsFile"/>
-        <formFile formName="Diploma"/>
-      </formsDirectory>
-      <layoutsDirectory enabled="false"/>
-      <modelsDirectory>
-        <modelFile modelName="TemplateSettings"/>
-        <dbTableDirectory>
-          <dbTableFile dbTableName="TemplateSettings"/>
-          <dbTableFile dbTableName="Settings"/>
-          <dbTableFile dbTableName="Files"/>
-          <dbTableFile dbTableName="Applications"/>
-          <dbTableFile dbTableName="WorkTypes"/>
-          <dbTableFile dbTableName="Degrees"/>
-          <dbTableFile dbTableName="Schools"/>
-          <dbTableFile dbTableName="Users"/>
-          <dbTableFile dbTableName="Editions"/>
-          <dbTableFile dbTableName="Localizations"/>
-          <dbTableFile dbTableName="Regulations"/>
-          <dbTableFile dbTableName="Faqs"/>
-          <dbTableFile dbTableName="NewsTexts"/>
-          <dbTableFile dbTableName="NewsFiles"/>
-          <dbTableFile dbTableName="About"/>
-        </dbTableDirectory>
-        <modelFile modelName="Editions"/>
-        <modelFile modelName="Users"/>
-        <modelFile modelName="Schools"/>
-        <modelFile modelName="Degrees"/>
-        <modelFile modelName="WorkTypes"/>
-        <modelFile modelName="Applications"/>
-        <modelFile modelName="Files"/>
-        <modelFile modelName="Settings"/>
-        <modelFile modelName="Localizations"/>
-        <modelFile modelName="Regualtions"/>
-        <modelFile modelName="Faqs"/>
-        <modelFile modelName="NewsTexts"/>
-        <modelFile modelName="NewsFiles"/>
-        <modelFile modelName="About"/>
-      </modelsDirectory>
-      <modulesDirectory enabled="false"/>
-      <viewsDirectory>
-        <viewScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Error">
-            <viewScriptFile forActionName="error"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="About">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Regulations">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Auth">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Auth">
-            <viewScriptFile forActionName="login"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Auth">
-            <viewScriptFile forActionName="logout"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Faq">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Contact">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Contact">
-            <viewScriptFile forActionName="send"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="new"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="show"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Applications">
-            <viewScriptFile forActionName="update"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Press">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="show"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="new"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="promote"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Users">
-            <viewScriptFile forActionName="restore"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Admin">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="School">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Schools">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="WorkTypes">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Localizations">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Editions">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Settings">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="WorkTypes">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Schools">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="WorkTypes">
-            <viewScriptFile forActionName="delete"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="WorkTypes">
-            <viewScriptFile forActionName="new"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Schools">
-            <viewScriptFile forActionName="new"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Schools">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-        </viewScriptsDirectory>
-        <viewHelpersDirectory/>
-        <viewFiltersDirectory enabled="false"/>
-      </viewsDirectory>
-      <bootstrapFile filesystemName="Bootstrap.php"/>
-    </applicationDirectory>
-    <dataDirectory enabled="false">
-      <cacheDirectory enabled="false"/>
-      <searchIndexesDirectory enabled="false"/>
-      <localesDirectory enabled="false"/>
-      <logsDirectory enabled="false"/>
-      <sessionsDirectory enabled="false"/>
-      <uploadsDirectory enabled="false"/>
-    </dataDirectory>
-    <docsDirectory>
-      <file filesystemName="README.txt"/>
-    </docsDirectory>
-    <libraryDirectory>
-      <zfStandardLibraryDirectory enabled="false"/>
-    </libraryDirectory>
-    <publicDirectory>
-      <publicStylesheetsDirectory enabled="false"/>
-      <publicScriptsDirectory enabled="false"/>
-      <publicImagesDirectory enabled="false"/>
-      <publicIndexFile filesystemName="index.php"/>
-      <htaccessFile filesystemName=".htaccess"/>
-    </publicDirectory>
-    <projectProvidersDirectory enabled="false"/>
-    <temporaryDirectory enabled="false"/>
-    <testsDirectory>
-      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
-      <testApplicationDirectory>
-        <testApplicationBootstrapFile filesystemName="bootstrap.php"/>
-        <testApplicationControllerDirectory>
-          <testApplicationControllerFile filesystemName="AboutControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="RegulationsControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="AuthControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="FaqControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="ContactControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="ApplicationsControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="PressControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="UsersControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="AdminControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="SchoolControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="SchoolsControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="WorkTypesControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="LocalizationsControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="EditionsControllerTest.php"/>
-          <testApplicationControllerFile filesystemName="SettingsControllerTest.php"/>
-        </testApplicationControllerDirectory>
-      </testApplicationDirectory>
-      <testLibraryDirectory>
-        <testLibraryBootstrapFile filesystemName="bootstrap.php"/>
-      </testLibraryDirectory>
-    </testsDirectory>
-  </projectDirectory>
+	<projectDirectory>
+		<projectProfileFile filesystemName=".zfproject.xml" />
+		<applicationDirectory classNamePrefix="Application_">
+			<apisDirectory enabled="false" />
+			<configsDirectory>
+				<applicationConfigFile type="ini" />
+			</configsDirectory>
+			<controllersDirectory>
+				<controllerFile controllerName="Index">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Error" />
+				<controllerFile controllerName="About">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Regulations">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Auth">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="login" />
+					<actionMethod actionName="logout" />
+				</controllerFile>
+				<controllerFile controllerName="Faq">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Contact">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="send" />
+				</controllerFile>
+				<controllerFile controllerName="Applications">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="new" />
+					<actionMethod actionName="edit" />
+					<actionMethod actionName="delete" />
+					<actionMethod actionName="show" />
+					<actionMethod actionName="update" />
+				</controllerFile>
+				<controllerFile controllerName="Press">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Users">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="show" />
+					<actionMethod actionName="new" />
+					<actionMethod actionName="edit" />
+					<actionMethod actionName="promote" />
+					<actionMethod actionName="delete" />
+					<actionMethod actionName="restore" />
+				</controllerFile>
+				<controllerFile controllerName="Admin">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="School">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Schools">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="delete" />
+					<actionMethod actionName="new" />
+					<actionMethod actionName="edit" />
+				</controllerFile>
+				<controllerFile controllerName="WorkTypes">
+					<actionMethod actionName="index" />
+					<actionMethod actionName="edit" />
+					<actionMethod actionName="delete" />
+					<actionMethod actionName="new" />
+				</controllerFile>
+				<controllerFile controllerName="Localizations">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Editions">
+					<actionMethod actionName="index" />
+				</controllerFile>
+				<controllerFile controllerName="Settings">
+					<actionMethod actionName="index" />
+				</controllerFile>
+			</controllersDirectory>
+			<formsDirectory>
+				<formFile formName="Login" />
+				<formFile formName="Contact" />
+				<formFile formName="Application" />
+				<formFile formName="Vote" />
+				<formFile formName="Regulations" />
+				<formFile formName="Settings" />
+				<formFile formName="School" />
+				<formFile formName="WorkType" />
+				<formFile formName="Edition" />
+				<formFile formName="Faq" />
+				<formFile formName="Question" />
+				<formFile formName="News" />
+				<formFile formName="NewsText" />
+				<formFile formName="NewsFile" />
+				<formFile formName="Diploma" />
+			</formsDirectory>
+			<layoutsDirectory enabled="false" />
+			<modelsDirectory>
+				<modelFile modelName="TemplateSettings" />
+				<dbTableDirectory>
+					<dbTableFile dbTableName="TemplateSettings" />
+					<dbTableFile dbTableName="Settings" />
+					<dbTableFile dbTableName="Files" />
+					<dbTableFile dbTableName="Applications" />
+					<dbTableFile dbTableName="WorkTypes" />
+					<dbTableFile dbTableName="Degrees" />
+					<dbTableFile dbTableName="Schools" />
+					<dbTableFile dbTableName="Users" />
+					<dbTableFile dbTableName="Editions" />
+					<dbTableFile dbTableName="Localizations" />
+					<dbTableFile dbTableName="Regulations" />
+					<dbTableFile dbTableName="Faqs" />
+					<dbTableFile dbTableName="NewsTexts" />
+					<dbTableFile dbTableName="NewsFiles" />
+					<dbTableFile dbTableName="About" />
+				</dbTableDirectory>
+				<modelFile modelName="Editions" />
+				<modelFile modelName="Users" />
+				<modelFile modelName="Schools" />
+				<modelFile modelName="Degrees" />
+				<modelFile modelName="WorkTypes" />
+				<modelFile modelName="Applications" />
+				<modelFile modelName="Files" />
+				<modelFile modelName="Settings" />
+				<modelFile modelName="Localizations" />
+				<modelFile modelName="Regualtions" />
+				<modelFile modelName="Faqs" />
+				<modelFile modelName="NewsTexts" />
+				<modelFile modelName="NewsFiles" />
+				<modelFile modelName="About" />
+			</modelsDirectory>
+			<modulesDirectory enabled="false" />
+			<viewsDirectory>
+				<viewScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Index">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Error">
+						<viewScriptFile forActionName="error" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="About">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Regulations">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Auth">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Auth">
+						<viewScriptFile forActionName="login" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Auth">
+						<viewScriptFile forActionName="logout" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Faq">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Contact">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Contact">
+						<viewScriptFile forActionName="send" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="new" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="edit" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="delete" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="show" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Applications">
+						<viewScriptFile forActionName="update" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Press">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="show" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="new" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="edit" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="promote" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="delete" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Users">
+						<viewScriptFile forActionName="restore" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Admin">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="School">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Schools">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="WorkTypes">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Localizations">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Editions">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Settings">
+						<viewScriptFile forActionName="index" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="WorkTypes">
+						<viewScriptFile forActionName="edit" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Schools">
+						<viewScriptFile forActionName="delete" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="WorkTypes">
+						<viewScriptFile forActionName="delete" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="WorkTypes">
+						<viewScriptFile forActionName="new" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Schools">
+						<viewScriptFile forActionName="new" />
+					</viewControllerScriptsDirectory>
+					<viewControllerScriptsDirectory
+						forControllerName="Schools">
+						<viewScriptFile forActionName="edit" />
+					</viewControllerScriptsDirectory>
+				</viewScriptsDirectory>
+				<viewHelpersDirectory />
+				<viewFiltersDirectory enabled="false" />
+			</viewsDirectory>
+			<bootstrapFile filesystemName="Bootstrap.php" />
+		</applicationDirectory>
+		<dataDirectory enabled="false">
+			<cacheDirectory enabled="false" />
+			<searchIndexesDirectory enabled="false" />
+			<localesDirectory enabled="false" />
+			<logsDirectory enabled="false" />
+			<sessionsDirectory enabled="false" />
+			<uploadsDirectory enabled="false" />
+		</dataDirectory>
+		<docsDirectory>
+			<file filesystemName="README.txt" />
+		</docsDirectory>
+		<libraryDirectory>
+			<zfStandardLibraryDirectory enabled="false" />
+		</libraryDirectory>
+		<publicDirectory>
+			<publicStylesheetsDirectory enabled="false" />
+			<publicScriptsDirectory enabled="false" />
+			<publicImagesDirectory enabled="false" />
+			<publicIndexFile filesystemName="index.php" />
+			<htaccessFile filesystemName=".htaccess" />
+		</publicDirectory>
+		<projectProvidersDirectory enabled="false" />
+		<temporaryDirectory enabled="false" />
+		<testsDirectory>
+			<testPHPUnitConfigFile filesystemName="phpunit.xml" />
+			<testApplicationDirectory>
+				<testApplicationBootstrapFile
+					filesystemName="bootstrap.php" />
+				<testApplicationControllerDirectory>
+					<testApplicationControllerFile
+						filesystemName="AboutControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="RegulationsControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="AuthControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="FaqControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="ContactControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="ApplicationsControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="PressControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="UsersControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="AdminControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="SchoolControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="SchoolsControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="WorkTypesControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="LocalizationsControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="EditionsControllerTest.php" />
+					<testApplicationControllerFile
+						filesystemName="SettingsControllerTest.php" />
+				</testApplicationControllerDirectory>
+			</testApplicationDirectory>
+			<testLibraryDirectory>
+				<testLibraryBootstrapFile filesystemName="bootstrap.php" />
+			</testLibraryDirectory>
+		</testsDirectory>
+	</projectDirectory>
 </projectProfile>

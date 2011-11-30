@@ -28,33 +28,33 @@
  */
 class Zend_Cloud_QueueService_Message
 {
-    protected $_body;
-    protected $_clientMessage;
+	protected $_body;
+	protected $_clientMessage;
 
-    /**
-     * @param string $body Message text
-     * @param string $message Original message
-     */
-    function __construct($body, $message)
-    {
-        $this->_body = $body;
-        $this->_clientMessage = $message;
-    }
+	/**
+	 * @param string $body Message text
+	 * @param string $message Original message
+	 */
+	function __construct($body, $message)
+	{
+		$this->_body = $body;
+		$this->_clientMessage = $message;
+	}
 
-    /**
-     * Get the message body
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->_body;
-    }
+	/**
+	 * Get the message body
+	 * @return string
+	 */
+	public function getBody()
+	{
+		return $this->_body;
+	}
 
-    /**
-     * Get the original adapter-specific message
-     */
-    public function getMessage()
-    {
-        return $this->_clientMessage;
-    }
+	/**
+	 * Get the original adapter-specific message
+	 */
+	public function getMessage()
+	{
+		return $this->_clientMessage;
+	}
 }

@@ -28,11 +28,11 @@
 interface Zend_Wildfire_Channel_Interface
 {
 
-    /**
-     * Determine if channel is ready.
-     *
-     * @return boolean Returns TRUE if channel is ready.
-     */
-    public function isReady();
+	/**
+	 * Determine if channel is ready.
+	 *
+	 * @return boolean Returns TRUE if channel is ready.
+	 */
+	public function isReady();
 
 }

@@ -50,79 +50,79 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  */
 class Zend_Form_Decorator_Callback extends Zend_Form_Decorator_Abstract
 {
-    /**
-     * Callback
-     * @var string|array
-     */
-    protected $_callback;
+	/**
+	 * Callback
+	 * @var string|array
+	 */
+	protected $_callback;
 
-    /**
-     * Set callback
-     *
-     * @param  callback $callback
-     * @return Zend_Form_Decorator_Callback
-     * @throws Zend_Form_Exception
-     */
-    public function setCallback($callback)
-    {
-        if (!is_callable($callback)) {
-            require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception('Invalid callback provided to callback decorator');
-        }
-        $this->_callback = $callback;
-        return $this;
-    }
+	/**
+	 * Set callback
+	 *
+	 * @param  callback $callback
+	 * @return Zend_Form_Decorator_Callback
+	 * @throws Zend_Form_Exception
+	 */
+	public function setCallback($callback)
+	{
+		if (!is_callable($callback)) {
+			require_once 'Zend/Form/Exception.php';
+			throw new Zend_Form_Exception('Invalid callback provided to callback decorator');
+		}
+		$this->_callback = $callback;
+		return $this;
+	}
 
-    /**
-     * Get registered callback
-     *
-     * If not previously registered, checks to see if it exists in registered
-     * options.
-     *
-     * @return null|string|array
-     */
-    public function getCallback()
-    {
-        if (null === $this->_callback) {
-            if (null !== ($callback = $this->getOption('callback'))) {
-                $this->setCallback($callback);
-                $this->removeOption('callback');
-            }
-        }
+	/**
+	 * Get registered callback
+	 *
+	 * If not previously registered, checks to see if it exists in registered
+	 * options.
+	 *
+	 * @return null|string|array
+	 */
+	public function getCallback()
+	{
+		if (null === $this->_callback) {
+			if (null !== ($callback = $this->getOption('callback'))) {
+				$this->setCallback($callback);
+				$this->removeOption('callback');
+			}
+		}
 
-        return $this->_callback;
-    }
+		return $this->_callback;
+	}
 
-    /**
-     * Render
-     *
-     * If no callback registered, returns callback. Otherwise, gets return
-     * value of callback and either appends, prepends, or replaces passed in
-     * content.
-     *
-     * @param  string $content
-     * @return string
-     */
-    public function render($content)
-    {
-        $callback = $this->getCallback();
-        if (null === $callback) {
-            return $content;
-        }
+	/**
+	 * Render
+	 *
+	 * If no callback registered, returns callback. Otherwise, gets return
+	 * value of callback and either appends, prepends, or replaces passed in
+	 * content.
+	 *
+	 * @param  string $content
+	 * @return string
+	 */
+	public function render($content)
+	{
+		$callback = $this->getCallback();
+		if (null === $callback) {
+			return $content;
+		}
 
-        $placement = $this->getPlacement();
-        $separator = $this->getSeparator();
+		$placement = $this->getPlacement();
+		$separator = $this->getSeparator();
 
-        $response = call_user_func($callback, $content, $this->getElement(), $this->getOptions());
+		$response = call_user_func($callback, $content, $this->getElement(), $this->getOptions());
 
-        switch ($placement) {
-            case self::APPEND:
-                return $content . $separator . $response;
-            case self::PREPEND:
-                return $response . $separator . $content;
-            default:
-                // replace content
-                return $response;
-        }
-    }
+		switch ($placement) {
+			case self::APPEND:
+				return $content . $separator . $response;
+			case self::PREPEND:
+				return $response . $separator . $content;
+			default:
+				// replace content
+				return $response;
+		}
+	}
 }

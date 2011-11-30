@@ -36,48 +36,48 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Time extends Zend_Measure_Abstract
 {
-    const STANDARD = 'SECOND';
+	const STANDARD = 'SECOND';
 
-    const ANOMALISTIC_YEAR  = 'ANOMALISTIC_YEAR';
-    const ATTOSECOND        = 'ATTOSECOND';
-    const CENTURY           = 'CENTURY';
-    const DAY               = 'DAY';
-    const DECADE            = 'DECADE';
-    const DRACONIC_YEAR     = 'DRACONTIC_YEAR';
-    const EXASECOND         = 'EXASECOND';
-    const FEMTOSECOND       = 'FEMTOSECOND';
-    const FORTNIGHT         = 'FORTNIGHT';
-    const GAUSSIAN_YEAR     = 'GAUSSIAN_YEAR';
-    const GIGASECOND        = 'GIGASECOND';
-    const GREGORIAN_YEAR    = 'GREGORIAN_YEAR';
-    const HOUR              = 'HOUR';
-    const JULIAN_YEAR       = 'JULIAN_YEAR';
-    const KILOSECOND        = 'KILOSECOND';
-    const LEAPYEAR          = 'LEAPYEAR';
-    const MEGASECOND        = 'MEGASECOND';
-    const MICROSECOND       = 'MICROSECOND';
-    const MILLENIUM         = 'MILLENIUM';
-    const MILLISECOND       = 'MILLISECOND';
-    const MINUTE            = 'MINUTE';
-    const MONTH             = 'MONTH';
-    const NANOSECOND        = 'NANOSECOND';
-    const PETASECOND        = 'PETASECOND';
-    const PICOSECOND        = 'PICOSECOND';
-    const QUARTER           = 'QUARTER';
-    const SECOND            = 'SECOND';
-    const SHAKE             = 'SHAKE';
-    const SIDEREAL_YEAR     = 'SYNODIC_MONTH';
-    const TERASECOND        = 'TERASECOND';
-    const TROPICAL_YEAR     = 'TROPIC_YEAR';
-    const WEEK              = 'WEEK';
-    const YEAR              = 'YEAR';
+	const ANOMALISTIC_YEAR  = 'ANOMALISTIC_YEAR';
+	const ATTOSECOND        = 'ATTOSECOND';
+	const CENTURY           = 'CENTURY';
+	const DAY               = 'DAY';
+	const DECADE            = 'DECADE';
+	const DRACONIC_YEAR     = 'DRACONTIC_YEAR';
+	const EXASECOND         = 'EXASECOND';
+	const FEMTOSECOND       = 'FEMTOSECOND';
+	const FORTNIGHT         = 'FORTNIGHT';
+	const GAUSSIAN_YEAR     = 'GAUSSIAN_YEAR';
+	const GIGASECOND        = 'GIGASECOND';
+	const GREGORIAN_YEAR    = 'GREGORIAN_YEAR';
+	const HOUR              = 'HOUR';
+	const JULIAN_YEAR       = 'JULIAN_YEAR';
+	const KILOSECOND        = 'KILOSECOND';
+	const LEAPYEAR          = 'LEAPYEAR';
+	const MEGASECOND        = 'MEGASECOND';
+	const MICROSECOND       = 'MICROSECOND';
+	const MILLENIUM         = 'MILLENIUM';
+	const MILLISECOND       = 'MILLISECOND';
+	const MINUTE            = 'MINUTE';
+	const MONTH             = 'MONTH';
+	const NANOSECOND        = 'NANOSECOND';
+	const PETASECOND        = 'PETASECOND';
+	const PICOSECOND        = 'PICOSECOND';
+	const QUARTER           = 'QUARTER';
+	const SECOND            = 'SECOND';
+	const SHAKE             = 'SHAKE';
+	const SIDEREAL_YEAR     = 'SYNODIC_MONTH';
+	const TERASECOND        = 'TERASECOND';
+	const TROPICAL_YEAR     = 'TROPIC_YEAR';
+	const WEEK              = 'WEEK';
+	const YEAR              = 'YEAR';
 
-    /**
-     * Calculations for all time units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all time units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'ANOMALISTIC_YEAR'  => array('31558432', 'anomalistic year'),
         'ATTOSECOND'        => array('1.0e-18', 'as'),
         'CENTURY'           => array('3153600000', 'century'),
@@ -113,5 +113,5 @@ class Zend_Measure_Time extends Zend_Measure_Abstract
         'WEEK'              => array('604800', 'week'),
         'YEAR'              => array('31536000', 'year'),
         'STANDARD'          => 'SECOND'
-    );
+        );
 }

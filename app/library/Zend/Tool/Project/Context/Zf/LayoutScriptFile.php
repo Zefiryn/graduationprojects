@@ -39,71 +39,71 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'layout.phtml';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'layout.phtml';
 
-    /**
-     * @var string
-     */
-    protected $_layoutName = null;
+	/**
+	 * @var string
+	 */
+	protected $_layoutName = null;
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'LayoutScriptFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'LayoutScriptFile';
+	}
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
-     */
-    public function init()
-    {
-        if ($layoutName = $this->_resource->getAttribute('layoutName')) {
-            $this->_layoutName = $layoutName;
-        } else {
-            throw new Exception('Either a forActionName or scriptName is required.');
-        }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
+	 */
+	public function init()
+	{
+		if ($layoutName = $this->_resource->getAttribute('layoutName')) {
+			$this->_layoutName = $layoutName;
+		} else {
+			throw new Exception('Either a forActionName or scriptName is required.');
+		}
 
-        parent::init();
-        return $this;
-    }
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getPersistentAttributes()
-     *
-     * @return unknown
-     */
-    public function getPersistentAttributes()
-    {
-        $attributes = array();
+	/**
+	 * getPersistentAttributes()
+	 *
+	 * @return unknown
+	 */
+	public function getPersistentAttributes()
+	{
+		$attributes = array();
 
-        if ($this->_layoutName) {
-            $attributes['layoutName'] = $this->_layoutName;
-        }
+		if ($this->_layoutName) {
+			$attributes['layoutName'] = $this->_layoutName;
+		}
 
-        return $attributes;
-    }
+		return $attributes;
+	}
 
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
-        $contents = <<<EOS
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+		$contents = <<<EOS
 <?php echo \$this->layout()->content; ?>
 EOS;
 
-        return $contents;
-    }
+		return $contents;
+	}
 
 }

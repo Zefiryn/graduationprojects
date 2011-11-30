@@ -36,40 +36,40 @@ require_once 'Zend/Ldap/Filter/Abstract.php';
  */
 class Zend_Ldap_Filter_Not extends Zend_Ldap_Filter_Abstract
 {
-    /**
-     * The underlying filter.
-     *
-     * @var Zend_Ldap_Filter_Abstract
-     */
-    private $_filter;
+	/**
+	 * The underlying filter.
+	 *
+	 * @var Zend_Ldap_Filter_Abstract
+	 */
+	private $_filter;
 
-    /**
-     * Creates a Zend_Ldap_Filter_Not.
-     *
-     * @param Zend_Ldap_Filter_Abstract $filter
-     */
-    public function __construct(Zend_Ldap_Filter_Abstract $filter)
-    {
-        $this->_filter = $filter;
-    }
+	/**
+	 * Creates a Zend_Ldap_Filter_Not.
+	 *
+	 * @param Zend_Ldap_Filter_Abstract $filter
+	 */
+	public function __construct(Zend_Ldap_Filter_Abstract $filter)
+	{
+		$this->_filter = $filter;
+	}
 
-    /**
-     * Negates the filter.
-     *
-     * @return Zend_Ldap_Filter_Abstract
-     */
-    public function negate()
-    {
-        return $this->_filter;
-    }
+	/**
+	 * Negates the filter.
+	 *
+	 * @return Zend_Ldap_Filter_Abstract
+	 */
+	public function negate()
+	{
+		return $this->_filter;
+	}
 
-    /**
-     * Returns a string representation of the filter.
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return '(!' . $this->_filter->toString() . ')';
-    }
+	/**
+	 * Returns a string representation of the filter.
+	 *
+	 * @return string
+	 */
+	public function toString()
+	{
+		return '(!' . $this->_filter->toString() . ')';
+	}
 }

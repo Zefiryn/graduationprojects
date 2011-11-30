@@ -37,27 +37,27 @@ require_once 'Zend/Paginator/ScrollingStyle/Sliding.php';
  */
 class Zend_Paginator_ScrollingStyle_Elastic extends Zend_Paginator_ScrollingStyle_Sliding
 {
-    /**
-     * Returns an array of "local" pages given a page number and range.
-     *
-     * @param  Zend_Paginator $paginator
-     * @param  integer $pageRange Unused
-     * @return array
-     */
-    public function getPages(Zend_Paginator $paginator, $pageRange = null)
-    {
-        $pageRange  = $paginator->getPageRange();
-        $pageNumber = $paginator->getCurrentPageNumber();
+	/**
+	 * Returns an array of "local" pages given a page number and range.
+	 *
+	 * @param  Zend_Paginator $paginator
+	 * @param  integer $pageRange Unused
+	 * @return array
+	 */
+	public function getPages(Zend_Paginator $paginator, $pageRange = null)
+	{
+		$pageRange  = $paginator->getPageRange();
+		$pageNumber = $paginator->getCurrentPageNumber();
 
-        $originalPageRange = $pageRange;
-        $pageRange         = $pageRange * 2 - 1;
+		$originalPageRange = $pageRange;
+		$pageRange         = $pageRange * 2 - 1;
 
-        if ($originalPageRange + $pageNumber - 1 < $pageRange) {
-            $pageRange = $originalPageRange + $pageNumber - 1;
-        } else if ($originalPageRange + $pageNumber - 1 > count($paginator)) {
-            $pageRange = $originalPageRange + count($paginator) - $pageNumber;
-        }
+		if ($originalPageRange + $pageNumber - 1 < $pageRange) {
+			$pageRange = $originalPageRange + $pageNumber - 1;
+		} else if ($originalPageRange + $pageNumber - 1 > count($paginator)) {
+			$pageRange = $originalPageRange + count($paginator) - $pageNumber;
+		}
 
-        return parent::getPages($paginator, $pageRange);
-    }
+		return parent::getPages($paginator, $pageRange);
+	}
 }

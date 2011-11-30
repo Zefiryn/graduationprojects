@@ -39,69 +39,69 @@ require_once 'Zend/Tool/Project/Context/Zf/AbstractClassFile.php';
 class Zend_Tool_Project_Context_Zf_ModelFile extends Zend_Tool_Project_Context_Zf_AbstractClassFile
 {
 
-    /**
-     * @var string
-     */
-    protected $_modelName = 'Base';
+	/**
+	 * @var string
+	 */
+	protected $_modelName = 'Base';
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = 'modelName';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = 'modelName';
 
-    /**
-     * init()
-     *
-     */
-    public function init()
-    {
-        $this->_modelName = $this->_resource->getAttribute('modelName');
-        $this->_filesystemName = ucfirst($this->_modelName) . '.php';
-        parent::init();
-    }
+	/**
+	 * init()
+	 *
+	 */
+	public function init()
+	{
+		$this->_modelName = $this->_resource->getAttribute('modelName');
+		$this->_filesystemName = ucfirst($this->_modelName) . '.php';
+		parent::init();
+	}
 
-    /**
-     * getPersistentAttributes
-     *
-     * @return array
-     */
-    public function getPersistentAttributes()
-    {
-        return array(
+	/**
+	 * getPersistentAttributes
+	 *
+	 * @return array
+	 */
+	public function getPersistentAttributes()
+	{
+		return array(
             'modelName' => $this->getModelName()
-            );
-    }
+		);
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'ModelFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'ModelFile';
+	}
 
-    public function getModelName()
-    {
-        return $this->_modelName;
-    }
+	public function getModelName()
+	{
+		return $this->_modelName;
+	}
 
-    public function getContents()
-    {
+	public function getContents()
+	{
 
-        $className = $this->getFullClassName($this->_modelName, 'Model');
+		$className = $this->getFullClassName($this->_modelName, 'Model');
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+		$codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'fileName' => $this->getPath(),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+		new Zend_CodeGenerator_Php_Class(array(
                     'name' => $className,
-                    ))
-                )
-            ));
-        return $codeGenFile->generate();
-    }
+		))
+		)
+		));
+		return $codeGenFile->generate();
+	}
 
 
 }

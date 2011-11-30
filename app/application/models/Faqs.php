@@ -8,36 +8,36 @@ class Application_Model_Faqs extends GP_Application_Model
 	public $faq_answer;
 	public $position;
 	protected $lang;
-	
+
 	protected $_dbTableModelName = 'Application_Model_DbTable_Faqs';
-	
-	
-	public function __construct($id = null, array $options = null) 
+
+
+	public function __construct($id = null, array $options = null)
 	{
-	    return parent::__construct($id, $options);
+		return parent::__construct($id, $options);
 	}
-	
+
 	public function getFaqs()
 	{
 		$lang = Zend_Registry::get('Zend_Translate');
 		$rowset = $this->getDbTable()->getFaq($lang->getLocale());
-		
+
 		$faq = array();
 		foreach($rowset as $row)
 		{
 			$question = new $this;
 			$faq[] = $question->populate($row);
 		}
-		
+
 		return($faq);
-		
+
 	}
-	
+
 	public function deleteFaq($lang)
 	{
 		$this->getDbTable()->deleteFaq($lang);
 	}
-	
+
 	public function prepareFormArray()
 	{
 		$data = array(
@@ -46,24 +46,24 @@ class Application_Model_Faqs extends GP_Application_Model
 			'faq_question' => $this->_faq_question,
 			'faq_answer' => $this->_faq_answer
 		);
-		
+
 		return $data;
 	}
-	
+
 	public function positionLast()
 	{
 		if ($this->lang_id != null)
 		{
 			$last = $this->getDbTable()->findLastQuestion($this->lang_id);
 			if ($last)
-				$this->position = $last->position++;
-			else 
-				$this->position = 1; 
+			$this->position = $last->position++;
+			else
+			$this->position = 1;
 		}
-		
+
 		return $this;
 	}
-	
+
 	public function getFaqLength($lang)
 	{
 		return $this->getDbTable()->getStringLength($lang);

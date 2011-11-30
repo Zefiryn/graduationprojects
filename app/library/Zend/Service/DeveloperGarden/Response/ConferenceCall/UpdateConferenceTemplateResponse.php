@@ -34,13 +34,13 @@ require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/ConferenceCal
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceTemplateResponse
-    extends Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
+extends Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
 {
-    /**
-     * response data
-     *
-     * @codingStandardsIgnoreFile
-     * @var Zend_Service_DeveloperGarden_Response_ConferenceCall_CCSResponseType
-     */
-    public $CCSResponse = null;
+	/**
+	 * response data
+	 *
+	 * @codingStandardsIgnoreFile
+	 * @var Zend_Service_DeveloperGarden_Response_ConferenceCall_CCSResponseType
+	 */
+	public $CCSResponse = null;
 }

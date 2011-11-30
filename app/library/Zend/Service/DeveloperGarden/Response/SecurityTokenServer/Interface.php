@@ -31,10 +31,10 @@
  */
 interface Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Interface
 {
-    /**
-     * returns true if the stored token data is valid
-     *
-     * @return boolean
-     */
-    public function isValid();
+	/**
+	 * returns true if the stored token data is valid
+	 *
+	 * @return boolean
+	 */
+	public function isValid();
 }

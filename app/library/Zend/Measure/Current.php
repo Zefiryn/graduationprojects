@@ -36,41 +36,41 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Current extends Zend_Measure_Abstract
 {
-    const STANDARD = 'AMPERE';
+	const STANDARD = 'AMPERE';
 
-    const ABAMPERE             = 'ABAMPERE';
-    const AMPERE               = 'AMPERE';
-    const BIOT                 = 'BIOT';
-    const CENTIAMPERE          = 'CENTIAMPERE';
-    const COULOMB_PER_SECOND   = 'COULOMB_PER_SECOND';
-    const DECIAMPERE           = 'DECIAMPERE';
-    const DEKAAMPERE           = 'DEKAAMPERE';
-    const ELECTROMAGNETIC_UNIT = 'ELECTROMAGNATIC_UNIT';
-    const ELECTROSTATIC_UNIT   = 'ELECTROSTATIC_UNIT';
-    const FRANCLIN_PER_SECOND  = 'FRANCLIN_PER_SECOND';
-    const GAUSSIAN             = 'GAUSSIAN';
-    const GIGAAMPERE           = 'GIGAAMPERE';
-    const GILBERT              = 'GILBERT';
-    const HECTOAMPERE          = 'HECTOAMPERE';
-    const KILOAMPERE           = 'KILOAMPERE';
-    const MEGAAMPERE           = 'MEGAAMPERE';
-    const MICROAMPERE          = 'MICROAMPERE';
-    const MILLIAMPERE          = 'MILLIAMPERE';
-    const NANOAMPERE           = 'NANOAMPERE';
-    const PICOAMPERE           = 'PICOAMPERE';
-    const SIEMENS_VOLT         = 'SIEMENS_VOLT';
-    const STATAMPERE           = 'STATAMPERE';
-    const TERAAMPERE           = 'TERAAMPERE';
-    const VOLT_PER_OHM         = 'VOLT_PER_OHM';
-    const WATT_PER_VOLT        = 'WATT_PER_VOLT';
-    const WEBER_PER_HENRY      = 'WEBER_PER_HENRY';
+	const ABAMPERE             = 'ABAMPERE';
+	const AMPERE               = 'AMPERE';
+	const BIOT                 = 'BIOT';
+	const CENTIAMPERE          = 'CENTIAMPERE';
+	const COULOMB_PER_SECOND   = 'COULOMB_PER_SECOND';
+	const DECIAMPERE           = 'DECIAMPERE';
+	const DEKAAMPERE           = 'DEKAAMPERE';
+	const ELECTROMAGNETIC_UNIT = 'ELECTROMAGNATIC_UNIT';
+	const ELECTROSTATIC_UNIT   = 'ELECTROSTATIC_UNIT';
+	const FRANCLIN_PER_SECOND  = 'FRANCLIN_PER_SECOND';
+	const GAUSSIAN             = 'GAUSSIAN';
+	const GIGAAMPERE           = 'GIGAAMPERE';
+	const GILBERT              = 'GILBERT';
+	const HECTOAMPERE          = 'HECTOAMPERE';
+	const KILOAMPERE           = 'KILOAMPERE';
+	const MEGAAMPERE           = 'MEGAAMPERE';
+	const MICROAMPERE          = 'MICROAMPERE';
+	const MILLIAMPERE          = 'MILLIAMPERE';
+	const NANOAMPERE           = 'NANOAMPERE';
+	const PICOAMPERE           = 'PICOAMPERE';
+	const SIEMENS_VOLT         = 'SIEMENS_VOLT';
+	const STATAMPERE           = 'STATAMPERE';
+	const TERAAMPERE           = 'TERAAMPERE';
+	const VOLT_PER_OHM         = 'VOLT_PER_OHM';
+	const WATT_PER_VOLT        = 'WATT_PER_VOLT';
+	const WEBER_PER_HENRY      = 'WEBER_PER_HENRY';
 
-    /**
-     * Calculations for all current units
-     *
-     * @var array
-     */
-    protected $_units = array(
+	/**
+	 * Calculations for all current units
+	 *
+	 * @var array
+	 */
+	protected $_units = array(
         'ABAMPERE'             => array('10',           'abampere'),
         'AMPERE'               => array('1',            'A'),
         'BIOT'                 => array('10',           'Bi'),
@@ -98,5 +98,5 @@ class Zend_Measure_Current extends Zend_Measure_Abstract
         'WATT_PER_VOLT'        => array('1',            'W/V'),
         'WEBER_PER_HENRY'      => array('1',            'Wb/H'),
         'STANDARD'             => 'AMPERE'
-    );
+        );
 }

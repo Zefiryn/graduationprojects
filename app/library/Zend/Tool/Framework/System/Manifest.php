@@ -36,28 +36,28 @@ require_once 'Zend/Tool/Framework/System/Action/Delete.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_System_Manifest
-    implements Zend_Tool_Framework_Manifest_ProviderManifestable, Zend_Tool_Framework_Manifest_ActionManifestable
+implements Zend_Tool_Framework_Manifest_ProviderManifestable, Zend_Tool_Framework_Manifest_ActionManifestable
 {
 
-    public function getProviders()
-    {
-        $providers = array(
-            new Zend_Tool_Framework_System_Provider_Version(),
-            new Zend_Tool_Framework_System_Provider_Config(),
-            new Zend_Tool_Framework_System_Provider_Phpinfo(),
-            new Zend_Tool_Framework_System_Provider_Manifest()
-            );
+	public function getProviders()
+	{
+		$providers = array(
+		new Zend_Tool_Framework_System_Provider_Version(),
+		new Zend_Tool_Framework_System_Provider_Config(),
+		new Zend_Tool_Framework_System_Provider_Phpinfo(),
+		new Zend_Tool_Framework_System_Provider_Manifest()
+		);
 
-        return $providers;
-    }
+		return $providers;
+	}
 
-    public function getActions()
-    {
-        $actions = array(
-            new Zend_Tool_Framework_System_Action_Create(),
-            new Zend_Tool_Framework_System_Action_Delete()
-            );
+	public function getActions()
+	{
+		$actions = array(
+		new Zend_Tool_Framework_System_Action_Create(),
+		new Zend_Tool_Framework_System_Action_Delete()
+		);
 
-        return $actions;
-    }
+		return $actions;
+	}
 }

@@ -35,26 +35,26 @@ require_once 'Zend/InfoCard/Xml/Security/Transform/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_InfoCard_Xml_Security_Transform_EnvelopedSignature
-    implements Zend_InfoCard_Xml_Security_Transform_Interface
+implements Zend_InfoCard_Xml_Security_Transform_Interface
 {
-    /**
-     * Transforms the XML Document according to the EnvelopedSignature Transform
-     *
-     * @throws Zend_InfoCard_Xml_Security_Transform_Exception
-     * @param string $strXMLData The input XML data
-     * @return string the transformed XML data
-     */
-    public function transform($strXMLData)
-    {
-        $sxe = simplexml_load_string($strXMLData);
+	/**
+	 * Transforms the XML Document according to the EnvelopedSignature Transform
+	 *
+	 * @throws Zend_InfoCard_Xml_Security_Transform_Exception
+	 * @param string $strXMLData The input XML data
+	 * @return string the transformed XML data
+	 */
+	public function transform($strXMLData)
+	{
+		$sxe = simplexml_load_string($strXMLData);
 
-        if(!$sxe->Signature) {
-            require_once 'Zend/InfoCard/Xml/Security/Transform/Exception.php';
-            throw new Zend_InfoCard_Xml_Security_Transform_Exception("Unable to locate Signature Block for EnvelopedSignature Transform");
-        }
+		if(!$sxe->Signature) {
+			require_once 'Zend/InfoCard/Xml/Security/Transform/Exception.php';
+			throw new Zend_InfoCard_Xml_Security_Transform_Exception("Unable to locate Signature Block for EnvelopedSignature Transform");
+		}
 
-        unset($sxe->Signature);
+		unset($sxe->Signature);
 
-        return $sxe->asXML();
-    }
+		return $sxe->asXML();
+	}
 }

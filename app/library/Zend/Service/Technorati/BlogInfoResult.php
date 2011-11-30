@@ -38,124 +38,124 @@ require_once 'Zend/Service/Technorati/Utils.php';
  */
 class Zend_Service_Technorati_BlogInfoResult
 {
-    /**
-     * Technorati weblog url, if queried URL is a valid weblog.
-     *
-     * @var     Zend_Uri_Http
-     * @access  protected
-     */
-    protected $_url;
+	/**
+	 * Technorati weblog url, if queried URL is a valid weblog.
+	 *
+	 * @var     Zend_Uri_Http
+	 * @access  protected
+	 */
+	protected $_url;
 
-    /**
-     * Technorati weblog, if queried URL is a valid weblog.
-     *
-     * @var     Zend_Service_Technorati_Weblog
-     * @access  protected
-     */
-    protected $_weblog;
+	/**
+	 * Technorati weblog, if queried URL is a valid weblog.
+	 *
+	 * @var     Zend_Service_Technorati_Weblog
+	 * @access  protected
+	 */
+	protected $_weblog;
 
-    /**
-     * Number of unique blogs linking this blog
-     *
-     * @var     integer
-     * @access  protected
-     */
-    protected $_inboundBlogs;
+	/**
+	 * Number of unique blogs linking this blog
+	 *
+	 * @var     integer
+	 * @access  protected
+	 */
+	protected $_inboundBlogs;
 
-    /**
-     * Number of incoming links to this blog
-     *
-     * @var     integer
-     * @access  protected
-     */
-    protected $_inboundLinks;
+	/**
+	 * Number of incoming links to this blog
+	 *
+	 * @var     integer
+	 * @access  protected
+	 */
+	protected $_inboundLinks;
 
 
-    /**
-     * Constructs a new object object from DOM Document.
-     *
-     * @param   DomDocument $dom the ReST fragment for this object
-     */
-    public function __construct(DomDocument $dom)
-    {
-        $xpath = new DOMXPath($dom);
-        /**
-         * @see Zend_Service_Technorati_Weblog
-         */
-        require_once 'Zend/Service/Technorati/Weblog.php';
+	/**
+	 * Constructs a new object object from DOM Document.
+	 *
+	 * @param   DomDocument $dom the ReST fragment for this object
+	 */
+	public function __construct(DomDocument $dom)
+	{
+		$xpath = new DOMXPath($dom);
+		/**
+		 * @see Zend_Service_Technorati_Weblog
+		 */
+		require_once 'Zend/Service/Technorati/Weblog.php';
 
-        $result = $xpath->query('//result/weblog');
-        if ($result->length == 1) {
-            $this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
-        } else {
-            // follow the same behavior of blogPostTags
-            // and raise an Exception if the URL is not a valid weblog
-            /**
-             * @see Zend_Service_Technorati_Exception
-             */
-            require_once 'Zend/Service/Technorati/Exception.php';
-            throw new Zend_Service_Technorati_Exception(
+		$result = $xpath->query('//result/weblog');
+		if ($result->length == 1) {
+			$this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
+		} else {
+			// follow the same behavior of blogPostTags
+			// and raise an Exception if the URL is not a valid weblog
+			/**
+			 * @see Zend_Service_Technorati_Exception
+			 */
+			require_once 'Zend/Service/Technorati/Exception.php';
+			throw new Zend_Service_Technorati_Exception(
                 "Your URL is not a recognized Technorati weblog");
-        }
+		}
 
-        $result = $xpath->query('//result/url/text()');
-        if ($result->length == 1) {
-            try {
-                // fetched URL often doens't include schema
-                // and this issue causes the following line to fail
-                $this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
-            } catch(Zend_Service_Technorati_Exception $e) {
-                if ($this->getWeblog() instanceof Zend_Service_Technorati_Weblog) {
-                    $this->_url = $this->getWeblog()->getUrl();
-                }
-            }
-        }
+		$result = $xpath->query('//result/url/text()');
+		if ($result->length == 1) {
+			try {
+				// fetched URL often doens't include schema
+				// and this issue causes the following line to fail
+				$this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
+			} catch(Zend_Service_Technorati_Exception $e) {
+				if ($this->getWeblog() instanceof Zend_Service_Technorati_Weblog) {
+					$this->_url = $this->getWeblog()->getUrl();
+				}
+			}
+		}
 
-        $result = $xpath->query('//result/inboundblogs/text()');
-        if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
+		$result = $xpath->query('//result/inboundblogs/text()');
+		if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
 
-        $result = $xpath->query('//result/inboundlinks/text()');
-        if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
+		$result = $xpath->query('//result/inboundlinks/text()');
+		if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
 
-    }
+	}
 
 
-    /**
-     * Returns the weblog URL.
-     *
-     * @return  Zend_Uri_Http
-     */
-    public function getUrl() {
-        return $this->_url;
-    }
+	/**
+	 * Returns the weblog URL.
+	 *
+	 * @return  Zend_Uri_Http
+	 */
+	public function getUrl() {
+		return $this->_url;
+	}
 
-    /**
-     * Returns the weblog.
-     *
-     * @return  Zend_Service_Technorati_Weblog
-     */
-    public function getWeblog() {
-        return $this->_weblog;
-    }
+	/**
+	 * Returns the weblog.
+	 *
+	 * @return  Zend_Service_Technorati_Weblog
+	 */
+	public function getWeblog() {
+		return $this->_weblog;
+	}
 
-    /**
-     * Returns number of unique blogs linking this blog.
-     *
-     * @return  integer the number of inbound blogs
-     */
-    public function getInboundBlogs()
-    {
-        return (int) $this->_inboundBlogs;
-    }
+	/**
+	 * Returns number of unique blogs linking this blog.
+	 *
+	 * @return  integer the number of inbound blogs
+	 */
+	public function getInboundBlogs()
+	{
+		return (int) $this->_inboundBlogs;
+	}
 
-    /**
-     * Returns number of incoming links to this blog.
-     *
-     * @return  integer the number of inbound links
-     */
-    public function getInboundLinks()
-    {
-        return (int) $this->_inboundLinks;
-    }
+	/**
+	 * Returns number of incoming links to this blog.
+	 *
+	 * @return  integer the number of inbound links
+	 */
+	public function getInboundLinks()
+	{
+		return (int) $this->_inboundLinks;
+	}
 
 }

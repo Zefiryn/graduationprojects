@@ -1,9 +1,13 @@
 <?php $form = $this->element; ?>
 
 <form action="<?php echo $this->escape($form->getAction()); ?>"
-      method="<?php echo $this->escape($form->getMethod()); ?>"
-      class="contact">
+	method="<?php echo $this->escape($form->getMethod()); ?>"
+	class="contact">
 	<br />
+	
+	
+	
+	
 	<?php if ($form->csrf->hasErrors()):?>
 		<div id="error-csrf" class="error-div">
 			<p class="error"><?php echo $this->translate('csrf_error')?></p>

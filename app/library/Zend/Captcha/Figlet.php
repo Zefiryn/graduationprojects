@@ -39,47 +39,47 @@ require_once 'Zend/Text/Figlet.php';
  */
 class Zend_Captcha_Figlet extends Zend_Captcha_Word
 {
-    /**
-     * Figlet text renderer
-     *
-     * @var Zend_Text_Figlet
-     */
-    protected $_figlet;
+	/**
+	 * Figlet text renderer
+	 *
+	 * @var Zend_Text_Figlet
+	 */
+	protected $_figlet;
 
-    /**
-     * Constructor
-     *
-     * @param  null|string|array|Zend_Config $options
-     * @return void
-     */
-    public function __construct($options = null)
-    {
-        parent::__construct($options);
-        $this->_figlet = new Zend_Text_Figlet($options);
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param  null|string|array|Zend_Config $options
+	 * @return void
+	 */
+	public function __construct($options = null)
+	{
+		parent::__construct($options);
+		$this->_figlet = new Zend_Text_Figlet($options);
+	}
 
-    /**
-     * Generate new captcha
-     *
-     * @return string
-     */
-    public function generate()
-    {
-        $this->_useNumbers = false;
-        return parent::generate();
-    }
+	/**
+	 * Generate new captcha
+	 *
+	 * @return string
+	 */
+	public function generate()
+	{
+		$this->_useNumbers = false;
+		return parent::generate();
+	}
 
-    /**
-     * Display the captcha
-     *
-     * @param Zend_View_Interface $view
-     * @param mixed $element
-     * @return string
-     */
-    public function render(Zend_View_Interface $view = null, $element = null)
-    {
-        return '<pre>'
-             . $this->_figlet->render($this->getWord())
-             . "</pre>\n";
-    }
+	/**
+	 * Display the captcha
+	 *
+	 * @param Zend_View_Interface $view
+	 * @param mixed $element
+	 * @return string
+	 */
+	public function render(Zend_View_Interface $view = null, $element = null)
+	{
+		return '<pre>'
+		. $this->_figlet->render($this->getWord())
+		. "</pre>\n";
+	}
 }

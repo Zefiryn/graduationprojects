@@ -39,29 +39,29 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_HtaccessFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_filesystemName = '.htaccess';
+	/**
+	 * @var string
+	 */
+	protected $_filesystemName = '.htaccess';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'HtaccessFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'HtaccessFile';
+	}
 
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
-        $output = <<<EOS
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
+		$output = <<<EOS
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
@@ -71,7 +71,7 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 
 EOS;
-        return $output;
-    }
+		return $output;
+	}
 
 }

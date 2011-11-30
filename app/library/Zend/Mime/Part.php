@@ -34,197 +34,197 @@ require_once 'Zend/Mime.php';
  */
 class Zend_Mime_Part {
 
-    public $type = Zend_Mime::TYPE_OCTETSTREAM;
-    public $encoding = Zend_Mime::ENCODING_8BIT;
-    public $id;
-    public $disposition;
-    public $filename;
-    public $description;
-    public $charset;
-    public $boundary;
-    public $location;
-    public $language;
-    protected $_content;
-    protected $_isStream = false;
+	public $type = Zend_Mime::TYPE_OCTETSTREAM;
+	public $encoding = Zend_Mime::ENCODING_8BIT;
+	public $id;
+	public $disposition;
+	public $filename;
+	public $description;
+	public $charset;
+	public $boundary;
+	public $location;
+	public $language;
+	protected $_content;
+	protected $_isStream = false;
 
 
-    /**
-     * create a new Mime Part.
-     * The (unencoded) content of the Part as passed
-     * as a string or stream
-     *
-     * @param mixed $content  String or Stream containing the content
-     */
-    public function __construct($content)
-    {
-        $this->_content = $content;
-        if (is_resource($content)) {
-            $this->_isStream = true;
-        }
-    }
+	/**
+	 * create a new Mime Part.
+	 * The (unencoded) content of the Part as passed
+	 * as a string or stream
+	 *
+	 * @param mixed $content  String or Stream containing the content
+	 */
+	public function __construct($content)
+	{
+		$this->_content = $content;
+		if (is_resource($content)) {
+			$this->_isStream = true;
+		}
+	}
 
-    /**
-     * @todo setters/getters
-     * @todo error checking for setting $type
-     * @todo error checking for setting $encoding
-     */
+	/**
+	 * @todo setters/getters
+	 * @todo error checking for setting $type
+	 * @todo error checking for setting $encoding
+	 */
 
-    /**
-     * check if this part can be read as a stream.
-     * if true, getEncodedStream can be called, otherwise
-     * only getContent can be used to fetch the encoded
-     * content of the part
-     *
-     * @return bool
-     */
-    public function isStream()
-    {
-      return $this->_isStream;
-    }
+	/**
+	 * check if this part can be read as a stream.
+	 * if true, getEncodedStream can be called, otherwise
+	 * only getContent can be used to fetch the encoded
+	 * content of the part
+	 *
+	 * @return bool
+	 */
+	public function isStream()
+	{
+		return $this->_isStream;
+	}
 
-    /**
-     * if this was created with a stream, return a filtered stream for
-     * reading the content. very useful for large file attachments.
-     *
-     * @return stream
-     * @throws Zend_Mime_Exception if not a stream or unable to append filter
-     */
-    public function getEncodedStream()
-    {
-        if (!$this->_isStream) {
-            require_once 'Zend/Mime/Exception.php';
-            throw new Zend_Mime_Exception('Attempt to get a stream from a string part');
-        }
+	/**
+	 * if this was created with a stream, return a filtered stream for
+	 * reading the content. very useful for large file attachments.
+	 *
+	 * @return stream
+	 * @throws Zend_Mime_Exception if not a stream or unable to append filter
+	 */
+	public function getEncodedStream()
+	{
+		if (!$this->_isStream) {
+			require_once 'Zend/Mime/Exception.php';
+			throw new Zend_Mime_Exception('Attempt to get a stream from a string part');
+		}
 
-        //stream_filter_remove(); // ??? is that right?
-        switch ($this->encoding) {
-            case Zend_Mime::ENCODING_QUOTEDPRINTABLE:
-                $filter = stream_filter_append(
-                    $this->_content,
+		//stream_filter_remove(); // ??? is that right?
+		switch ($this->encoding) {
+			case Zend_Mime::ENCODING_QUOTEDPRINTABLE:
+				$filter = stream_filter_append(
+				$this->_content,
                     'convert.quoted-printable-encode',
-                    STREAM_FILTER_READ,
-                    array(
+				STREAM_FILTER_READ,
+				array(
                         'line-length'      => 76,
                         'line-break-chars' => Zend_Mime::LINEEND
-                    )
-                );
-                if (!is_resource($filter)) {
-                    require_once 'Zend/Mime/Exception.php';
-                    throw new Zend_Mime_Exception('Failed to append quoted-printable filter');
-                }
-                break;
-            case Zend_Mime::ENCODING_BASE64:
-                $filter = stream_filter_append(
-                    $this->_content,
+				)
+				);
+				if (!is_resource($filter)) {
+					require_once 'Zend/Mime/Exception.php';
+					throw new Zend_Mime_Exception('Failed to append quoted-printable filter');
+				}
+				break;
+			case Zend_Mime::ENCODING_BASE64:
+				$filter = stream_filter_append(
+				$this->_content,
                     'convert.base64-encode',
-                    STREAM_FILTER_READ,
-                    array(
+				STREAM_FILTER_READ,
+				array(
                         'line-length'      => 76,
                         'line-break-chars' => Zend_Mime::LINEEND
-                    )
-                );
-                if (!is_resource($filter)) {
-                    require_once 'Zend/Mime/Exception.php';
-                    throw new Zend_Mime_Exception('Failed to append base64 filter');
-                }
-                break;
-            default:
-        }
-        return $this->_content;
-    }
+				)
+				);
+				if (!is_resource($filter)) {
+					require_once 'Zend/Mime/Exception.php';
+					throw new Zend_Mime_Exception('Failed to append base64 filter');
+				}
+				break;
+			default:
+		}
+		return $this->_content;
+	}
 
-    /**
-     * Get the Content of the current Mime Part in the given encoding.
-     *
-     * @return String
-     */
-    public function getContent($EOL = Zend_Mime::LINEEND)
-    {
-        if ($this->_isStream) {
-            return stream_get_contents($this->getEncodedStream());
-        } else {
-            return Zend_Mime::encode($this->_content, $this->encoding, $EOL);
-        }
-    }
-    
-    /**
-     * Get the RAW unencoded content from this part
-     * @return string
-     */
-    public function getRawContent()
-    {
-        if ($this->_isStream) {
-            return stream_get_contents($this->_content);
-        } else {
-            return $this->_content;
-        }
-    }
+	/**
+	 * Get the Content of the current Mime Part in the given encoding.
+	 *
+	 * @return String
+	 */
+	public function getContent($EOL = Zend_Mime::LINEEND)
+	{
+		if ($this->_isStream) {
+			return stream_get_contents($this->getEncodedStream());
+		} else {
+			return Zend_Mime::encode($this->_content, $this->encoding, $EOL);
+		}
+	}
 
-    /**
-     * Create and return the array of headers for this MIME part
-     *
-     * @access public
-     * @return array
-     */
-    public function getHeadersArray($EOL = Zend_Mime::LINEEND)
-    {
-        $headers = array();
+	/**
+	 * Get the RAW unencoded content from this part
+	 * @return string
+	 */
+	public function getRawContent()
+	{
+		if ($this->_isStream) {
+			return stream_get_contents($this->_content);
+		} else {
+			return $this->_content;
+		}
+	}
 
-        $contentType = $this->type;
-        if ($this->charset) {
-            $contentType .= '; charset=' . $this->charset;
-        }
+	/**
+	 * Create and return the array of headers for this MIME part
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function getHeadersArray($EOL = Zend_Mime::LINEEND)
+	{
+		$headers = array();
 
-        if ($this->boundary) {
-            $contentType .= ';' . $EOL
-                          . " boundary=\"" . $this->boundary . '"';
-        }
+		$contentType = $this->type;
+		if ($this->charset) {
+			$contentType .= '; charset=' . $this->charset;
+		}
 
-        $headers[] = array('Content-Type', $contentType);
+		if ($this->boundary) {
+			$contentType .= ';' . $EOL
+			. " boundary=\"" . $this->boundary . '"';
+		}
 
-        if ($this->encoding) {
-            $headers[] = array('Content-Transfer-Encoding', $this->encoding);
-        }
+		$headers[] = array('Content-Type', $contentType);
 
-        if ($this->id) {
-            $headers[]  = array('Content-ID', '<' . $this->id . '>');
-        }
+		if ($this->encoding) {
+			$headers[] = array('Content-Transfer-Encoding', $this->encoding);
+		}
 
-        if ($this->disposition) {
-            $disposition = $this->disposition;
-            if ($this->filename) {
-                $disposition .= '; filename="' . $this->filename . '"';
-            }
-            $headers[] = array('Content-Disposition', $disposition);
-        }
+		if ($this->id) {
+			$headers[]  = array('Content-ID', '<' . $this->id . '>');
+		}
 
-        if ($this->description) {
-            $headers[] = array('Content-Description', $this->description);
-        }
+		if ($this->disposition) {
+			$disposition = $this->disposition;
+			if ($this->filename) {
+				$disposition .= '; filename="' . $this->filename . '"';
+			}
+			$headers[] = array('Content-Disposition', $disposition);
+		}
 
-        if ($this->location) {
-            $headers[] = array('Content-Location', $this->location);
-        }
+		if ($this->description) {
+			$headers[] = array('Content-Description', $this->description);
+		}
 
-        if ($this->language){
-            $headers[] = array('Content-Language', $this->language);
-        }
+		if ($this->location) {
+			$headers[] = array('Content-Location', $this->location);
+		}
 
-        return $headers;
-    }
+		if ($this->language){
+			$headers[] = array('Content-Language', $this->language);
+		}
 
-    /**
-     * Return the headers for this part as a string
-     *
-     * @return String
-     */
-    public function getHeaders($EOL = Zend_Mime::LINEEND)
-    {
-        $res = '';
-        foreach ($this->getHeadersArray($EOL) as $header) {
-            $res .= $header[0] . ': ' . $header[1] . $EOL;
-        }
+		return $headers;
+	}
 
-        return $res;
-    }
+	/**
+	 * Return the headers for this part as a string
+	 *
+	 * @return String
+	 */
+	public function getHeaders($EOL = Zend_Mime::LINEEND)
+	{
+		$res = '';
+		foreach ($this->getHeadersArray($EOL) as $header) {
+			$res .= $header[0] . ': ' . $header[1] . $EOL;
+		}
+
+		return $res;
+	}
 }

@@ -39,51 +39,51 @@ require_once 'Zend/Service/DeveloperGarden/Response/LocalSearch/LocalSearchRespo
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse
-    extends Zend_Service_DeveloperGarden_Response_BaseType
+extends Zend_Service_DeveloperGarden_Response_BaseType
 {
-    /**
-     *
-     * @var Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
-     */
-    public $searchResult = null;
+	/**
+	 *
+	 * @var Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
+	 */
+	public $searchResult = null;
 
-    /**
-     * constructor
-     *
-     * @param Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType $response
-     * @todo implement special result methods
-     */
-    public function __construct(
-        Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType $response
-    ) {
-        $this->errorCode     = $response->getErrorCode();
-        $this->errorMessage  = $response->getErrorMessage();
-        $this->statusCode    = $response->getStatusCode();
-        $this->statusMessage = $response->getStatusMessage();
-        $this->searchResult  = $response;
-    }
+	/**
+	 * constructor
+	 *
+	 * @param Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType $response
+	 * @todo implement special result methods
+	 */
+	public function __construct(
+	Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType $response
+	) {
+		$this->errorCode     = $response->getErrorCode();
+		$this->errorMessage  = $response->getErrorMessage();
+		$this->statusCode    = $response->getStatusCode();
+		$this->statusMessage = $response->getStatusMessage();
+		$this->searchResult  = $response;
+	}
 
-    /**
-     * returns the raw search result
-     *
-     * @return Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
-     */
-    public function getSearchResult()
-    {
-        return $this->searchResult;
-    }
+	/**
+	 * returns the raw search result
+	 *
+	 * @return Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
+	 */
+	public function getSearchResult()
+	{
+		return $this->searchResult;
+	}
 
-    /**
-     * overwrite hasError to not handle 0103 error (empty result)
-     *
-     * @return boolean
-     */
-    public function hasError()
-    {
-        $result = parent::hasError();
-        if (!$result && $this->statusCode == '0103') {
-            $result = false;
-        }
-        return $result;
-    }
+	/**
+	 * overwrite hasError to not handle 0103 error (empty result)
+	 *
+	 * @return boolean
+	 */
+	public function hasError()
+	{
+		$result = parent::hasError();
+		if (!$result && $this->statusCode == '0103') {
+			$result = false;
+		}
+		return $result;
+	}
 }

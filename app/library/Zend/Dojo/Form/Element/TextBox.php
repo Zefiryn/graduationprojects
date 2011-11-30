@@ -34,131 +34,131 @@ require_once 'Zend/Dojo/Form/Element/Dijit.php';
  */
 class Zend_Dojo_Form_Element_TextBox extends Zend_Dojo_Form_Element_Dijit
 {
-    /**
-     * Use TextBox dijit view helper
-     * @var string
-     */
-    public $helper = 'TextBox';
+	/**
+	 * Use TextBox dijit view helper
+	 * @var string
+	 */
+	public $helper = 'TextBox';
 
-    /**
-     * Set lowercase flag
-     *
-     * @param  bool $lowercase
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setLowercase($flag)
-    {
-        $this->setDijitParam('lowercase', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set lowercase flag
+	 *
+	 * @param  bool $lowercase
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setLowercase($flag)
+	{
+		$this->setDijitParam('lowercase', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve lowercase flag
-     *
-     * @return bool
-     */
-    public function getLowercase()
-    {
-        if (!$this->hasDijitParam('lowercase')) {
-            return false;
-        }
-        return $this->getDijitParam('lowercase');
-    }
+	/**
+	 * Retrieve lowercase flag
+	 *
+	 * @return bool
+	 */
+	public function getLowercase()
+	{
+		if (!$this->hasDijitParam('lowercase')) {
+			return false;
+		}
+		return $this->getDijitParam('lowercase');
+	}
 
-    /**
-     * Set propercase flag
-     *
-     * @param  bool $propercase
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setPropercase($flag)
-    {
-        $this->setDijitParam('propercase', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set propercase flag
+	 *
+	 * @param  bool $propercase
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setPropercase($flag)
+	{
+		$this->setDijitParam('propercase', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve propercase flag
-     *
-     * @return bool
-     */
-    public function getPropercase()
-    {
-        if (!$this->hasDijitParam('propercase')) {
-            return false;
-        }
-        return $this->getDijitParam('propercase');
-    }
+	/**
+	 * Retrieve propercase flag
+	 *
+	 * @return bool
+	 */
+	public function getPropercase()
+	{
+		if (!$this->hasDijitParam('propercase')) {
+			return false;
+		}
+		return $this->getDijitParam('propercase');
+	}
 
-    /**
-     * Set uppercase flag
-     *
-     * @param  bool $uppercase
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setUppercase($flag)
-    {
-        $this->setDijitParam('uppercase', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set uppercase flag
+	 *
+	 * @param  bool $uppercase
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setUppercase($flag)
+	{
+		$this->setDijitParam('uppercase', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve uppercase flag
-     *
-     * @return bool
-     */
-    public function getUppercase()
-    {
-        if (!$this->hasDijitParam('uppercase')) {
-            return false;
-        }
-        return $this->getDijitParam('uppercase');
-    }
+	/**
+	 * Retrieve uppercase flag
+	 *
+	 * @return bool
+	 */
+	public function getUppercase()
+	{
+		if (!$this->hasDijitParam('uppercase')) {
+			return false;
+		}
+		return $this->getDijitParam('uppercase');
+	}
 
-    /**
-     * Set trim flag
-     *
-     * @param  bool $trim
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setTrim($flag)
-    {
-        $this->setDijitParam('trim', (bool) $flag);
-        return $this;
-    }
+	/**
+	 * Set trim flag
+	 *
+	 * @param  bool $trim
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setTrim($flag)
+	{
+		$this->setDijitParam('trim', (bool) $flag);
+		return $this;
+	}
 
-    /**
-     * Retrieve trim flag
-     *
-     * @return bool
-     */
-    public function getTrim()
-    {
-        if (!$this->hasDijitParam('trim')) {
-            return false;
-        }
-        return $this->getDijitParam('trim');
-    }
+	/**
+	 * Retrieve trim flag
+	 *
+	 * @return bool
+	 */
+	public function getTrim()
+	{
+		if (!$this->hasDijitParam('trim')) {
+			return false;
+		}
+		return $this->getDijitParam('trim');
+	}
 
-    /**
-     * Set maxLength
-     *
-     * @param  int $length
-     * @return Zend_Dojo_Form_Element_TextBox
-     */
-    public function setMaxLength($length)
-    {
-        $this->setDijitParam('maxLength', (int) $length);
-        return $this;
-    }
+	/**
+	 * Set maxLength
+	 *
+	 * @param  int $length
+	 * @return Zend_Dojo_Form_Element_TextBox
+	 */
+	public function setMaxLength($length)
+	{
+		$this->setDijitParam('maxLength', (int) $length);
+		return $this;
+	}
 
-    /**
-     * Retrieve maxLength
-     *
-     * @return int|null
-     */
-    public function getMaxLength()
-    {
-        return $this->getDijitParam('maxLength');
-    }
+	/**
+	 * Retrieve maxLength
+	 *
+	 * @return int|null
+	 */
+	public function getMaxLength()
+	{
+		return $this->getDijitParam('maxLength');
+	}
 }

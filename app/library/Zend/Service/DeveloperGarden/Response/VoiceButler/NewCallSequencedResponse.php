@@ -34,6 +34,6 @@ require_once 'Zend/Service/DeveloperGarden/Response/VoiceButler/NewCallResponse.
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallSequencedResponse
-    extends Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse
+extends Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse
 {
 }

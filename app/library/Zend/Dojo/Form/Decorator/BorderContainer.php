@@ -35,9 +35,9 @@ require_once 'Zend/Dojo/Form/Decorator/DijitContainer.php';
  */
 class Zend_Dojo_Form_Decorator_BorderContainer extends Zend_Dojo_Form_Decorator_DijitContainer
 {
-    /**
-     * View helper
-     * @var string
-     */
-    protected $_helper = 'BorderContainer';
+	/**
+	 * View helper
+	 * @var string
+	 */
+	protected $_helper = 'BorderContainer';
 }

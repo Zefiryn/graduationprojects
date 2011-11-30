@@ -39,69 +39,69 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_TestLibraryFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
-    /**
-     * @var string
-     */
-    protected $_forClassName = '';
+	/**
+	 * @var string
+	 */
+	protected $_forClassName = '';
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'TestLibraryFile';
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'TestLibraryFile';
+	}
 
-    /**
-     * init()
-     *
-     * @return Zend_Tool_Project_Context_Zf_TestLibraryFile
-     */
-    public function init()
-    {
-        $this->_forClassName = $this->_resource->getAttribute('forClassName');
-        $this->_filesystemName = ucfirst(ltrim(strrchr($this->_forClassName, '_'), '_')) . 'Test.php';
-        parent::init();
-        return $this;
-    }
+	/**
+	 * init()
+	 *
+	 * @return Zend_Tool_Project_Context_Zf_TestLibraryFile
+	 */
+	public function init()
+	{
+		$this->_forClassName = $this->_resource->getAttribute('forClassName');
+		$this->_filesystemName = ucfirst(ltrim(strrchr($this->_forClassName, '_'), '_')) . 'Test.php';
+		parent::init();
+		return $this;
+	}
 
-    /**
-     * getContents()
-     *
-     * @return string
-     */
-    public function getContents()
-    {
+	/**
+	 * getContents()
+	 *
+	 * @return string
+	 */
+	public function getContents()
+	{
 
-        $filter = new Zend_Filter_Word_DashToCamelCase();
+		$filter = new Zend_Filter_Word_DashToCamelCase();
 
-        $className = $filter->filter($this->_forClassName) . 'Test';
+		$className = $filter->filter($this->_forClassName) . 'Test';
 
-        $codeGenFile = new Zend_CodeGenerator_Php_File(array(
+		$codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'requiredFiles' => array(
                 'PHPUnit/Framework/TestCase.php'
-                ),
+		),
             'classes' => array(
-                new Zend_CodeGenerator_Php_Class(array(
+		new Zend_CodeGenerator_Php_Class(array(
                     'name' => $className,
                     'extendedClass' => 'PHPUnit_Framework_TestCase',
                     'methods' => array(
-                        new Zend_CodeGenerator_Php_Method(array(
+		new Zend_CodeGenerator_Php_Method(array(
                             'name' => 'setUp',
                             'body' => '        /* Setup Routine */'
-                            )),
-                        new Zend_CodeGenerator_Php_Method(array(
+		)),
+		new Zend_CodeGenerator_Php_Method(array(
                             'name' => 'tearDown',
                             'body' => '        /* Tear Down Routine */'
-                            ))
-                        )
-                    ))
-                )
-            ));
+		))
+		)
+		))
+		)
+		));
 
-        return $codeGenFile->generate();
-    }
+		return $codeGenFile->generate();
+	}
 
 }

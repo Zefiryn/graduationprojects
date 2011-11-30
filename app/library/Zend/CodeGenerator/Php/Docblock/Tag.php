@@ -34,145 +34,145 @@ require_once 'Zend/CodeGenerator/Php/Abstract.php';
 class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstract
 {
 
-    /**
-     * @var Zend_Loader_PluginLoader
-     */
-    protected static $_pluginLoader = null;
+	/**
+	 * @var Zend_Loader_PluginLoader
+	 */
+	protected static $_pluginLoader = null;
 
-    /**
-     * @var string
-     */
-    protected $_name = null;
+	/**
+	 * @var string
+	 */
+	protected $_name = null;
 
-    /**
-     * @var string
-     */
-    protected $_description = null;
+	/**
+	 * @var string
+	 */
+	protected $_description = null;
 
-    /**
-     * fromReflection()
-     *
-     * @param Zend_Reflection_Docblock_Tag $reflectionTag
-     * @return Zend_CodeGenerator_Php_Docblock_Tag
-     */
-    public static function fromReflection(Zend_Reflection_Docblock_Tag $reflectionTag)
-    {
-        $tagName = $reflectionTag->getName();
+	/**
+	 * fromReflection()
+	 *
+	 * @param Zend_Reflection_Docblock_Tag $reflectionTag
+	 * @return Zend_CodeGenerator_Php_Docblock_Tag
+	 */
+	public static function fromReflection(Zend_Reflection_Docblock_Tag $reflectionTag)
+	{
+		$tagName = $reflectionTag->getName();
 
-        $codeGenDocblockTag = self::factory($tagName);
+		$codeGenDocblockTag = self::factory($tagName);
 
-        // transport any properties via accessors and mutators from reflection to codegen object
-        $reflectionClass = new ReflectionClass($reflectionTag);
-        foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            if (substr($method->getName(), 0, 3) == 'get') {
-                $propertyName = substr($method->getName(), 3);
-                if (method_exists($codeGenDocblockTag, 'set' . $propertyName)) {
-                    $codeGenDocblockTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
-                }
-            }
-        }
+		// transport any properties via accessors and mutators from reflection to codegen object
+		$reflectionClass = new ReflectionClass($reflectionTag);
+		foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+			if (substr($method->getName(), 0, 3) == 'get') {
+				$propertyName = substr($method->getName(), 3);
+				if (method_exists($codeGenDocblockTag, 'set' . $propertyName)) {
+					$codeGenDocblockTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
+				}
+			}
+		}
 
-        return $codeGenDocblockTag;
-    }
+		return $codeGenDocblockTag;
+	}
 
-    /**
-     * setPluginLoader()
-     *
-     * @param Zend_Loader_PluginLoader $pluginLoader
-     */
-    public static function setPluginLoader(Zend_Loader_PluginLoader $pluginLoader)
-    {
-        self::$_pluginLoader = $pluginLoader;
-        return;
-    }
+	/**
+	 * setPluginLoader()
+	 *
+	 * @param Zend_Loader_PluginLoader $pluginLoader
+	 */
+	public static function setPluginLoader(Zend_Loader_PluginLoader $pluginLoader)
+	{
+		self::$_pluginLoader = $pluginLoader;
+		return;
+	}
 
-    /**
-     * getPluginLoader()
-     *
-     * @return Zend_Loader_PluginLoader
-     */
-    public static function getPluginLoader()
-    {
-        if (self::$_pluginLoader == null) {
-            require_once 'Zend/Loader/PluginLoader.php';
-            self::setPluginLoader(new Zend_Loader_PluginLoader(array(
+	/**
+	 * getPluginLoader()
+	 *
+	 * @return Zend_Loader_PluginLoader
+	 */
+	public static function getPluginLoader()
+	{
+		if (self::$_pluginLoader == null) {
+			require_once 'Zend/Loader/PluginLoader.php';
+			self::setPluginLoader(new Zend_Loader_PluginLoader(array(
                 'Zend_CodeGenerator_Php_Docblock_Tag' => dirname(__FILE__) . '/Tag/'))
-                );
-        }
+			);
+		}
 
-        return self::$_pluginLoader;
-    }
+		return self::$_pluginLoader;
+	}
 
-    public static function factory($tagName)
-    {
-        $pluginLoader = self::getPluginLoader();
+	public static function factory($tagName)
+	{
+		$pluginLoader = self::getPluginLoader();
 
-        try {
-            $tagClass = $pluginLoader->load($tagName);
-        } catch (Zend_Loader_Exception $exception) {
-            $tagClass = 'Zend_CodeGenerator_Php_Docblock_Tag';
-        }
+		try {
+			$tagClass = $pluginLoader->load($tagName);
+		} catch (Zend_Loader_Exception $exception) {
+			$tagClass = 'Zend_CodeGenerator_Php_Docblock_Tag';
+		}
 
-        $tag = new $tagClass(array('name' => $tagName));
-        return $tag;
-    }
+		$tag = new $tagClass(array('name' => $tagName));
+		return $tag;
+	}
 
-    /**
-     * setName()
-     *
-     * @param string $name
-     * @return Zend_CodeGenerator_Php_Docblock_Tag
-     */
-    public function setName($name)
-    {
-        $this->_name = ltrim($name, '@');
-        return $this;
-    }
+	/**
+	 * setName()
+	 *
+	 * @param string $name
+	 * @return Zend_CodeGenerator_Php_Docblock_Tag
+	 */
+	public function setName($name)
+	{
+		$this->_name = ltrim($name, '@');
+		return $this;
+	}
 
-    /**
-     * getName()
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
+	/**
+	 * getName()
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->_name;
+	}
 
-    /**
-     * setDescription()
-     *
-     * @param string $description
-     * @return Zend_CodeGenerator_Php_Docblock_Tag
-     */
-    public function setDescription($description)
-    {
-        $this->_description = $description;
-        return $this;
-    }
+	/**
+	 * setDescription()
+	 *
+	 * @param string $description
+	 * @return Zend_CodeGenerator_Php_Docblock_Tag
+	 */
+	public function setDescription($description)
+	{
+		$this->_description = $description;
+		return $this;
+	}
 
-    /**
-     * getDescription()
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
+	/**
+	 * getDescription()
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->_description;
+	}
 
-    /**
-     * generate()
-     *
-     * @return string
-     */
-    public function generate()
-    {
-        $tag = '@' . $this->_name;
-        if ($this->_description) {
-            $tag .= ' ' . $this->_description;
-        }
-        return $tag;
-    }
+	/**
+	 * generate()
+	 *
+	 * @return string
+	 */
+	public function generate()
+	{
+		$tag = '@' . $this->_name;
+		if ($this->_description) {
+			$tag .= ' ' . $this->_description;
+		}
+		return $tag;
+	}
 
 }

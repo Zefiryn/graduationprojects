@@ -34,24 +34,24 @@ require_once 'Zend/Db/Exception.php';
  */
 class Zend_Db_Adapter_Exception extends Zend_Db_Exception
 {
-    protected $_chainedException = null;
+	protected $_chainedException = null;
 
-    public function __construct($message = '', $code = 0, Exception $e = null)
-    {
-        if ($e && (0 === $code)) {
-            $code = $e->getCode();
-        }
-        parent::__construct($message, $code, $e);
-    }
+	public function __construct($message = '', $code = 0, Exception $e = null)
+	{
+		if ($e && (0 === $code)) {
+			$code = $e->getCode();
+		}
+		parent::__construct($message, $code, $e);
+	}
 
-    public function hasChainedException()
-    {
-        return ($this->_previous !== null);
-    }
+	public function hasChainedException()
+	{
+		return ($this->_previous !== null);
+	}
 
-    public function getChainedException()
-    {
-        return $this->getPrevious();
-    }
+	public function getChainedException()
+	{
+		return $this->getPrevious();
+	}
 
 }

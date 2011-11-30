@@ -32,44 +32,44 @@
  */
 final class Zend_InfoCard_Xml_EncryptedData
 {
-    /**
-     * Constructor (disabled)
-     *
-     * @return void
-     */
-    private function __construct()
-    {
-    }
+	/**
+	 * Constructor (disabled)
+	 *
+	 * @return void
+	 */
+	private function __construct()
+	{
+	}
 
-    /**
-     * Returns an instance of the class
-     *
-     * @param string $xmlData The XML EncryptedData String
-     * @return Zend_InfoCard_Xml_EncryptedData_Abstract
-     * @throws Zend_InfoCard_Xml_Exception
-     */
-    static public function getInstance($xmlData)
-    {
+	/**
+	 * Returns an instance of the class
+	 *
+	 * @param string $xmlData The XML EncryptedData String
+	 * @return Zend_InfoCard_Xml_EncryptedData_Abstract
+	 * @throws Zend_InfoCard_Xml_Exception
+	 */
+	static public function getInstance($xmlData)
+	{
 
-        if($xmlData instanceof Zend_InfoCard_Xml_Element) {
-            $strXmlData = $xmlData->asXML();
-        } else if (is_string($xmlData)) {
-            $strXmlData = $xmlData;
-        } else {
-            require_once 'Zend/InfoCard/Xml/Exception.php';
-            throw new Zend_InfoCard_Xml_Exception("Invalid Data provided to create instance");
-        }
+		if($xmlData instanceof Zend_InfoCard_Xml_Element) {
+			$strXmlData = $xmlData->asXML();
+		} else if (is_string($xmlData)) {
+			$strXmlData = $xmlData;
+		} else {
+			require_once 'Zend/InfoCard/Xml/Exception.php';
+			throw new Zend_InfoCard_Xml_Exception("Invalid Data provided to create instance");
+		}
 
-        $sxe = simplexml_load_string($strXmlData);
+		$sxe = simplexml_load_string($strXmlData);
 
-        switch($sxe['Type']) {
-            case 'http://www.w3.org/2001/04/xmlenc#Element':
-                include_once 'Zend/InfoCard/Xml/EncryptedData/XmlEnc.php';
-                return simplexml_load_string($strXmlData, 'Zend_InfoCard_Xml_EncryptedData_XmlEnc');
-            default:
-                require_once 'Zend/InfoCard/Xml/Exception.php';
-                throw new Zend_InfoCard_Xml_Exception("Unknown EncryptedData type found");
-                break;
-        }
-    }
+		switch($sxe['Type']) {
+			case 'http://www.w3.org/2001/04/xmlenc#Element':
+				include_once 'Zend/InfoCard/Xml/EncryptedData/XmlEnc.php';
+				return simplexml_load_string($strXmlData, 'Zend_InfoCard_Xml_EncryptedData_XmlEnc');
+			default:
+				require_once 'Zend/InfoCard/Xml/Exception.php';
+			throw new Zend_InfoCard_Xml_Exception("Unknown EncryptedData type found");
+			break;
+		}
+	}
 }

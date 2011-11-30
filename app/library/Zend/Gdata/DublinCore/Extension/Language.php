@@ -38,21 +38,21 @@ require_once 'Zend/Gdata/Extension.php';
 class Zend_Gdata_DublinCore_Extension_Language extends Zend_Gdata_Extension
 {
 
-    protected $_rootNamespace = 'dc';
-    protected $_rootElement = 'language';
+	protected $_rootNamespace = 'dc';
+	protected $_rootElement = 'language';
 
-    /**
-     * Constructor for Zend_Gdata_DublinCore_Extension_Language which
-     * Language of the resource
-     *
-     * @param DOMElement $element (optional) DOMElement from which this
-     *          object should be constructed.
-     */
-    public function __construct($value = null)
-    {
-        $this->registerAllNamespaces(Zend_Gdata_DublinCore::$namespaces);
-        parent::__construct();
-        $this->_text = $value;
-    }
+	/**
+	 * Constructor for Zend_Gdata_DublinCore_Extension_Language which
+	 * Language of the resource
+	 *
+	 * @param DOMElement $element (optional) DOMElement from which this
+	 *          object should be constructed.
+	 */
+	public function __construct($value = null)
+	{
+		$this->registerAllNamespaces(Zend_Gdata_DublinCore::$namespaces);
+		parent::__construct();
+		$this->_text = $value;
+	}
 
 }

@@ -48,34 +48,34 @@ require_once 'Zend/Gdata/YouTube/Extension/MediaGroup.php';
 class Zend_Gdata_YouTube_MediaEntry extends Zend_Gdata_Media_Entry
 {
 
-    protected $_entryClassName = 'Zend_Gdata_YouTube_MediaEntry';
+	protected $_entryClassName = 'Zend_Gdata_YouTube_MediaEntry';
 
-    /**
-     * media:group element
-     *
-     * @var Zend_Gdata_YouTube_Extension_MediaGroup
-     */
-    protected $_mediaGroup = null;
+	/**
+	 * media:group element
+	 *
+	 * @var Zend_Gdata_YouTube_Extension_MediaGroup
+	 */
+	protected $_mediaGroup = null;
 
-    /**
-     * Creates individual Entry objects of the appropriate type and
-     * stores them as members of this entry based upon DOM data.
-     *
-     * @param DOMNode $child The DOMNode to process
-     */
-    protected function takeChildFromDOM($child)
-    {
-        $absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
-        switch ($absoluteNodeName) {
-        case $this->lookupNamespace('media') . ':' . 'group':
-            $mediaGroup = new Zend_Gdata_YouTube_Extension_MediaGroup();
-            $mediaGroup->transferFromDOM($child);
-            $this->_mediaGroup = $mediaGroup;
-            break;
-        default:
-            parent::takeChildFromDOM($child);
-            break;
-        }
-    }
+	/**
+	 * Creates individual Entry objects of the appropriate type and
+	 * stores them as members of this entry based upon DOM data.
+	 *
+	 * @param DOMNode $child The DOMNode to process
+	 */
+	protected function takeChildFromDOM($child)
+	{
+		$absoluteNodeName = $child->namespaceURI . ':' . $child->localName;
+		switch ($absoluteNodeName) {
+			case $this->lookupNamespace('media') . ':' . 'group':
+				$mediaGroup = new Zend_Gdata_YouTube_Extension_MediaGroup();
+				$mediaGroup->transferFromDOM($child);
+				$this->_mediaGroup = $mediaGroup;
+				break;
+			default:
+				parent::takeChildFromDOM($child);
+			break;
+		}
+	}
 
 }

@@ -34,18 +34,18 @@ class Zend_Feed_Reader_Collection_Author
 extends Zend_Feed_Reader_Collection_CollectionAbstract
 {
 
-    /**
-     * Return a simple array of the most relevant slice of
-     * the author values, i.e. all author names.
-     *
-     * @return array
-     */
-    public function getValues() {
-        $authors = array();
-        foreach ($this->getIterator() as $element) {
-            $authors[] = $element['name'];
-        }
-        return array_unique($authors);
-    }
+	/**
+	 * Return a simple array of the most relevant slice of
+	 * the author values, i.e. all author names.
+	 *
+	 * @return array
+	 */
+	public function getValues() {
+		$authors = array();
+		foreach ($this->getIterator() as $element) {
+			$authors[] = $element['name'];
+		}
+		return array_unique($authors);
+	}
 
 }

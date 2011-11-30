@@ -37,47 +37,47 @@ require_once 'Zend/Service/Simpy/Link.php';
  */
 class Zend_Service_Simpy_LinkSet implements IteratorAggregate
 {
-    /**
-     * List of links
-     *
-     * @var array of Zend_Service_Simpy_Link objects
-     */
-    protected $_links;
+	/**
+	 * List of links
+	 *
+	 * @var array of Zend_Service_Simpy_Link objects
+	 */
+	protected $_links;
 
-    /**
-     * Constructor to initialize the object with data
-     *
-     * @param  DOMDocument $doc Parsed response from a GetLinks operation
-     * @return void
-     */
-    public function __construct(DOMDocument $doc)
-    {
-        $xpath = new DOMXPath($doc);
-        $list = $xpath->query('//links/link');
-        $this->_links = array();
+	/**
+	 * Constructor to initialize the object with data
+	 *
+	 * @param  DOMDocument $doc Parsed response from a GetLinks operation
+	 * @return void
+	 */
+	public function __construct(DOMDocument $doc)
+	{
+		$xpath = new DOMXPath($doc);
+		$list = $xpath->query('//links/link');
+		$this->_links = array();
 
-        for ($x = 0; $x < $list->length; $x++) {
-            $this->_links[$x] = new Zend_Service_Simpy_Link($list->item($x));
-        }
-    }
+		for ($x = 0; $x < $list->length; $x++) {
+			$this->_links[$x] = new Zend_Service_Simpy_Link($list->item($x));
+		}
+	}
 
-    /**
-     * Returns an iterator for the link set
-     *
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->_links);
-    }
+	/**
+	 * Returns an iterator for the link set
+	 *
+	 * @return ArrayIterator
+	 */
+	public function getIterator()
+	{
+		return new ArrayIterator($this->_links);
+	}
 
-    /**
-     * Returns the number of links in the set
-     *
-     * @return int
-     */
-    public function getLength()
-    {
-        return count($this->_links);
-    }
+	/**
+	 * Returns the number of links in the set
+	 *
+	 * @return int
+	 */
+	public function getLength()
+	{
+		return count($this->_links);
+	}
 }

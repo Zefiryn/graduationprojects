@@ -36,53 +36,53 @@ require_once 'Zend/InfoCard/Cipher/Pki/Interface.php';
  */
 abstract class Zend_InfoCard_Cipher_Pki_Adapter_Abstract implements Zend_InfoCard_Cipher_Pki_Interface
 {
-    /**
-     * OAEP Padding public key encryption
-     */
-    const OAEP_PADDING = 1;
+	/**
+	 * OAEP Padding public key encryption
+	 */
+	const OAEP_PADDING = 1;
 
-    /**
-     * No padding public key encryption
-     */
-    const NO_PADDING = 2;
+	/**
+	 * No padding public key encryption
+	 */
+	const NO_PADDING = 2;
 
-    /**
-     * The type of padding to use
-     *
-     * @var integer one of the padding constants in this class
-     */
-    protected $_padding;
+	/**
+	 * The type of padding to use
+	 *
+	 * @var integer one of the padding constants in this class
+	 */
+	protected $_padding;
 
-    /**
-     * Set the padding of the public key encryption
-     *
-     * @throws Zend_InfoCard_Cipher_Exception
-     * @param integer $padding One of the constnats in this class
-     * @return Zend_InfoCard_Pki_Adapter_Abstract
-     */
-    public function setPadding($padding)
-    {
-        switch($padding) {
-            case self::OAEP_PADDING:
-            case self::NO_PADDING:
-                $this->_padding = $padding;
-                break;
-            default:
-                require_once 'Zend/InfoCard/Cipher/Exception.php';
-                throw new Zend_InfoCard_Cipher_Exception("Invalid Padding Type Provided");
-                break;
-        }
+	/**
+	 * Set the padding of the public key encryption
+	 *
+	 * @throws Zend_InfoCard_Cipher_Exception
+	 * @param integer $padding One of the constnats in this class
+	 * @return Zend_InfoCard_Pki_Adapter_Abstract
+	 */
+	public function setPadding($padding)
+	{
+		switch($padding) {
+			case self::OAEP_PADDING:
+			case self::NO_PADDING:
+				$this->_padding = $padding;
+				break;
+			default:
+				require_once 'Zend/InfoCard/Cipher/Exception.php';
+			throw new Zend_InfoCard_Cipher_Exception("Invalid Padding Type Provided");
+			break;
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Retruns the public-key padding used
-     *
-     * @return integer One of the padding constants in this class
-     */
-    public function getPadding()
-    {
-        return $this->_padding;
-    }
+	/**
+	 * Retruns the public-key padding used
+	 *
+	 * @return integer One of the padding constants in this class
+	 */
+	public function getPadding()
+	{
+		return $this->_padding;
+	}
 }

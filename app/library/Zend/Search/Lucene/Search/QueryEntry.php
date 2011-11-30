@@ -29,39 +29,39 @@
  */
 abstract class Zend_Search_Lucene_Search_QueryEntry
 {
-    /**
-     * Query entry boost factor
-     *
-     * @var float
-     */
-    protected $_boost = 1.0;
+	/**
+	 * Query entry boost factor
+	 *
+	 * @var float
+	 */
+	protected $_boost = 1.0;
 
 
-    /**
-     * Process modifier ('~')
-     *
-     * @param mixed $parameter
-     */
-    abstract public function processFuzzyProximityModifier($parameter = null);
+	/**
+	 * Process modifier ('~')
+	 *
+	 * @param mixed $parameter
+	 */
+	abstract public function processFuzzyProximityModifier($parameter = null);
 
 
-    /**
-     * Transform entry to a subquery
-     *
-     * @param string $encoding
-     * @return Zend_Search_Lucene_Search_Query
-     */
-    abstract public function getQuery($encoding);
+	/**
+	 * Transform entry to a subquery
+	 *
+	 * @param string $encoding
+	 * @return Zend_Search_Lucene_Search_Query
+	 */
+	abstract public function getQuery($encoding);
 
-    /**
-     * Boost query entry
-     *
-     * @param float $boostFactor
-     */
-    public function boost($boostFactor)
-    {
-        $this->_boost *= $boostFactor;
-    }
+	/**
+	 * Boost query entry
+	 *
+	 * @param float $boostFactor
+	 */
+	public function boost($boostFactor)
+	{
+		$this->_boost *= $boostFactor;
+	}
 
 
 }

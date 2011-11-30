@@ -37,13 +37,13 @@ require_once 'Zend/Amf/Util/BinaryStream.php';
  */
 class Zend_Amf_Parse_OutputStream extends Zend_Amf_Util_BinaryStream
 {
-    /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct('');
-    }
+	/**
+	 * Constructor
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct('');
+	}
 }

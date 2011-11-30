@@ -43,147 +43,147 @@ require_once 'Zend/Feed/Reader/Entry/Rss.php';
  */
 abstract class Zend_Feed_Reader_Extension_FeedAbstract
 {
-    /**
-     * Parsed feed data
-     *
-     * @var array
-     */
-    protected $_data = array();
+	/**
+	 * Parsed feed data
+	 *
+	 * @var array
+	 */
+	protected $_data = array();
 
-    /**
-     * Parsed feed data in the shape of a DOMDocument
-     *
-     * @var DOMDocument
-     */
-    protected $_domDocument = null;
+	/**
+	 * Parsed feed data in the shape of a DOMDocument
+	 *
+	 * @var DOMDocument
+	 */
+	protected $_domDocument = null;
 
-    /**
-     * The base XPath query used to retrieve feed data
-     *
-     * @var DOMXPath
-     */
-    protected $_xpath = null;
+	/**
+	 * The base XPath query used to retrieve feed data
+	 *
+	 * @var DOMXPath
+	 */
+	protected $_xpath = null;
 
-    /**
-     * The XPath prefix
-     *
-     * @var string
-     */
-    protected $_xpathPrefix = '';
+	/**
+	 * The XPath prefix
+	 *
+	 * @var string
+	 */
+	protected $_xpathPrefix = '';
 
-    /**
-     * Constructor
-     *
-     * @param  Zend_Feed_Abstract $feed The source Zend_Feed object
-     * @param  string $type Feed type
-     * @return void
-     */
-    public function __construct(DomDocument $dom, $type = null, DOMXPath $xpath = null)
-    {
-        $this->_domDocument = $dom;
+	/**
+	 * Constructor
+	 *
+	 * @param  Zend_Feed_Abstract $feed The source Zend_Feed object
+	 * @param  string $type Feed type
+	 * @return void
+	 */
+	public function __construct(DomDocument $dom, $type = null, DOMXPath $xpath = null)
+	{
+		$this->_domDocument = $dom;
 
-        if ($type !== null) {
-            $this->_data['type'] = $type;
-        } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($dom);
-        }
+		if ($type !== null) {
+			$this->_data['type'] = $type;
+		} else {
+			$this->_data['type'] = Zend_Feed_Reader::detectType($dom);
+		}
 
-        if ($xpath !== null) {
-            $this->_xpath = $xpath;
-        } else {
-            $this->_xpath = new DOMXPath($this->_domDocument);
-        }
+		if ($xpath !== null) {
+			$this->_xpath = $xpath;
+		} else {
+			$this->_xpath = new DOMXPath($this->_domDocument);
+		}
 
-        $this->_registerNamespaces();
-    }
+		$this->_registerNamespaces();
+	}
 
-    /**
-     * Get the DOM
-     *
-     * @return DOMDocument
-     */
-    public function getDomDocument()
-    {
-        return $this->_domDocument;
-    }
+	/**
+	 * Get the DOM
+	 *
+	 * @return DOMDocument
+	 */
+	public function getDomDocument()
+	{
+		return $this->_domDocument;
+	}
 
-    /**
-     * Get the Feed's encoding
-     *
-     * @return string
-     */
-    public function getEncoding()
-    {
-        $assumed = $this->getDomDocument()->encoding;
-        return $assumed;
-    }
+	/**
+	 * Get the Feed's encoding
+	 *
+	 * @return string
+	 */
+	public function getEncoding()
+	{
+		$assumed = $this->getDomDocument()->encoding;
+		return $assumed;
+	}
 
-    /**
-     * Get the feed type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_data['type'];
-    }
+	/**
+	 * Get the feed type
+	 *
+	 * @return string
+	 */
+	public function getType()
+	{
+		return $this->_data['type'];
+	}
 
 
-    /**
-     * Return the feed as an array
-     *
-     * @return array
-     */
-    public function toArray() // untested
-    {
-        return $this->_data;
-    }
+	/**
+	 * Return the feed as an array
+	 *
+	 * @return array
+	 */
+	public function toArray() // untested
+	{
+		return $this->_data;
+	}
 
-    /**
-     * Set the XPath query
-     *
-     * @param  DOMXPath $xpath
-     * @return Zend_Feed_Reader_Extension_EntryAbstract
-     */
-    public function setXpath(DOMXPath $xpath)
-    {
-        $this->_xpath = $xpath;
-        $this->_registerNamespaces();
-        return $this;
-    }
+	/**
+	 * Set the XPath query
+	 *
+	 * @param  DOMXPath $xpath
+	 * @return Zend_Feed_Reader_Extension_EntryAbstract
+	 */
+	public function setXpath(DOMXPath $xpath)
+	{
+		$this->_xpath = $xpath;
+		$this->_registerNamespaces();
+		return $this;
+	}
 
-    /**
-     * Get the DOMXPath object
-     *
-     * @return string
-     */
-    public function getXpath()
-    {
-        return $this->_xpath;
-    }
+	/**
+	 * Get the DOMXPath object
+	 *
+	 * @return string
+	 */
+	public function getXpath()
+	{
+		return $this->_xpath;
+	}
 
-    /**
-     * Get the XPath prefix
-     *
-     * @return string
-     */
-    public function getXpathPrefix()
-    {
-        return $this->_xpathPrefix;
-    }
+	/**
+	 * Get the XPath prefix
+	 *
+	 * @return string
+	 */
+	public function getXpathPrefix()
+	{
+		return $this->_xpathPrefix;
+	}
 
-    /**
-     * Set the XPath prefix
-     *
-     * @return Zend_Feed_Reader_Feed_Atom
-     */
-    public function setXpathPrefix($prefix)
-    {
-        $this->_xpathPrefix = $prefix;
-    }
+	/**
+	 * Set the XPath prefix
+	 *
+	 * @return Zend_Feed_Reader_Feed_Atom
+	 */
+	public function setXpathPrefix($prefix)
+	{
+		$this->_xpathPrefix = $prefix;
+	}
 
-    /**
-     * Register the default namespaces for the current feed format
-     */
-    abstract protected function _registerNamespaces();
+	/**
+	 * Register the default namespaces for the current feed format
+	 */
+	abstract protected function _registerNamespaces();
 }

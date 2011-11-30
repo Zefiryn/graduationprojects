@@ -32,100 +32,100 @@
 class Zend_Db_Table_Definition
 {
 
-    /**
-     * @var array
-     */
-    protected $_tableConfigs = array();
+	/**
+	 * @var array
+	 */
+	protected $_tableConfigs = array();
 
-    /**
-     * __construct()
-     *
-     * @param array|Zend_Config $options
-     */
-    public function __construct($options = null)
-    {
-        if ($options instanceof Zend_Config) {
-            $this->setConfig($options);
-        } elseif (is_array($options)) {
-            $this->setOptions($options);
-        }
-    }
+	/**
+	 * __construct()
+	 *
+	 * @param array|Zend_Config $options
+	 */
+	public function __construct($options = null)
+	{
+		if ($options instanceof Zend_Config) {
+			$this->setConfig($options);
+		} elseif (is_array($options)) {
+			$this->setOptions($options);
+		}
+	}
 
-    /**
-     * setConfig()
-     *
-     * @param Zend_Config $config
-     * @return Zend_Db_Table_Definition
-     */
-    public function setConfig(Zend_Config $config)
-    {
-        $this->setOptions($config->toArray());
-        return $this;
-    }
+	/**
+	 * setConfig()
+	 *
+	 * @param Zend_Config $config
+	 * @return Zend_Db_Table_Definition
+	 */
+	public function setConfig(Zend_Config $config)
+	{
+		$this->setOptions($config->toArray());
+		return $this;
+	}
 
-    /**
-     * setOptions()
-     *
-     * @param array $options
-     * @return Zend_Db_Table_Definition
-     */
-    public function setOptions(Array $options)
-    {
-        foreach ($options as $optionName => $optionValue) {
-            $this->setTableConfig($optionName, $optionValue);
-        }
-        return $this;
-    }
+	/**
+	 * setOptions()
+	 *
+	 * @param array $options
+	 * @return Zend_Db_Table_Definition
+	 */
+	public function setOptions(Array $options)
+	{
+		foreach ($options as $optionName => $optionValue) {
+			$this->setTableConfig($optionName, $optionValue);
+		}
+		return $this;
+	}
 
-    /**
-     * @param string $tableName
-     * @param array  $tableConfig
-     * @return Zend_Db_Table_Definition
-     */
-    public function setTableConfig($tableName, array $tableConfig)
-    {
-        // @todo logic here
-        $tableConfig[Zend_Db_Table::DEFINITION_CONFIG_NAME] = $tableName;
-        $tableConfig[Zend_Db_Table::DEFINITION] = $this;
+	/**
+	 * @param string $tableName
+	 * @param array  $tableConfig
+	 * @return Zend_Db_Table_Definition
+	 */
+	public function setTableConfig($tableName, array $tableConfig)
+	{
+		// @todo logic here
+		$tableConfig[Zend_Db_Table::DEFINITION_CONFIG_NAME] = $tableName;
+		$tableConfig[Zend_Db_Table::DEFINITION] = $this;
 
-        if (!isset($tableConfig[Zend_Db_Table::NAME])) {
-            $tableConfig[Zend_Db_Table::NAME] = $tableName;
-        }
+		if (!isset($tableConfig[Zend_Db_Table::NAME])) {
+			$tableConfig[Zend_Db_Table::NAME] = $tableName;
+		}
 
-        $this->_tableConfigs[$tableName] = $tableConfig;
-        return $this;
-    }
+		$this->_tableConfigs[$tableName] = $tableConfig;
+		return $this;
+	}
 
-    /**
-     * getTableConfig()
-     *
-     * @param string $tableName
-     * @return array
-     */
-    public function getTableConfig($tableName)
-    {
-        return $this->_tableConfigs[$tableName];
-    }
+	/**
+	 * getTableConfig()
+	 *
+	 * @param string $tableName
+	 * @return array
+	 */
+	public function getTableConfig($tableName)
+	{
+		return $this->_tableConfigs[$tableName];
+	}
 
-    /**
-     * removeTableConfig()
-     *
-     * @param string $tableName
-     */
-    public function removeTableConfig($tableName)
-    {
-        unset($this->_tableConfigs[$tableName]);
-    }
+	/**
+	 * removeTableConfig()
+	 *
+	 * @param string $tableName
+	 */
+	public function removeTableConfig($tableName)
+	{
+		unset($this->_tableConfigs[$tableName]);
+	}
 
-    /**
-     * hasTableConfig()
-     *
-     * @param string $tableName
-     * @return bool
-     */
-    public function hasTableConfig($tableName)
-    {
-        return (isset($this->_tableConfigs[$tableName]));
-    }
+	/**
+	 * hasTableConfig()
+	 *
+	 * @param string $tableName
+	 * @return bool
+	 */
+	public function hasTableConfig($tableName)
+	{
+		return (isset($this->_tableConfigs[$tableName]));
+	}
 
 }
