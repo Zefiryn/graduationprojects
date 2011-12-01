@@ -225,16 +225,22 @@ class ApplicationsController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$id = $request->getParam('id', '');
 
-		if ($this->user->_role != 'admin'
-		&& $this->user->applications[0]->application_id != $id)
+		if ($this->view->user->_role != 'admin'
+			&& $this->user->applications[0]->application_id != $id)
 		{
 			$this->flashMe('not_allowed', 'FAILURE');
 			$this->_redirect('/index');
 		}
 		$application = new Application_Model_Applications($id);
 		$application->delete();
-		$this->flashMe('application_deleted', 'SUCCESS');
-		$this->_redirect('applications');
+		
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->flashMe('application_deleted', 'SUCCESS');		
+		echo json_encode(array('link' => $this->view->url(array('sort' => 'surname'), 'applications_sort')));
+		
+		
+		
 	}
 
 	public function showAction()
@@ -449,9 +455,13 @@ class ApplicationsController extends Zefir_Controller_Action
 	{
 		$appSettings = Zend_Registry::get('appSettings');
 		 
-		if ($appSettings->application_deadline >= time())
-		return TRUE;
+		if ($appSettings->application_deadline >= time() || $this->view->user->_role == 'admin')
+		{
+			return TRUE;
+		}
 		else
-		return FALSE;
+		{
+			return FALSE;
+		}
 	}
 }
