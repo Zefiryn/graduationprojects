@@ -10,7 +10,12 @@ function _ajax_request(url, data, callback, type, method) {
         url: url,
         global: false,
         data: data,
+        error: function(data) {
+        	console.log('error');
+        	console.log(data);
+        },
         success: function(data) {
+        	console.log(data);
         	callback(data);
         },
         dataType: type
@@ -88,11 +93,10 @@ function ajaxLinks(){
     schoolAutocomplete();
 }
 
-function redirect(link)
+function redirect(data)
 {
-	var url = link.substring(3, link.lastIndexOf('"'));
-	url = url.replace('\\/', '/');
-	window.location.href =  url;
+	data.link ? link = data.link : link = data; 
+	window.location.href =  link;
 	
 }
 
