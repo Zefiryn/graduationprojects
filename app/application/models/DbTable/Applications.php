@@ -86,9 +86,8 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
 		->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
 		->order($sort);
-		//echo $select;
-		return $this->fetchAll($select);
-		 
+		
+		return $this->fetchAll($select); 
 	}
 
 	/**
@@ -361,6 +360,78 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		}
 		 
 		//rmdir($dir);
+	}
+	
+	public function getAdjacentApplication($application)
+	{
+			
+		$adjacentApplication['previous'] = $this->_getPreviousApplication($application);
+		$adjacentApplication['next'] = $this->_getNextApplication($application);
+		
+		return $adjacentApplication;
+	}
+	
+	protected function _getPreviousApplication($application)
+	{
+		$select = $this->getAdapter()->query(
+	    		'SELECT * FROM (
+	    			(
+	    			SELECT * FROM users 
+	    				WHERE (users.surname < ? ) AND users.role = "user" 
+	    				ORDER BY surname DESC, name DESC, user_id DESC 
+	    				LIMIT 1
+	    			) 
+	    			UNION 
+	    			
+	    			(
+	    			SELECT * FROM users
+	    			WHERE surname > ?  AND users.role = "user"
+	    			ORDER BY surname DESC, name DESC, user_id DESC
+	    			LIMIT 1
+	    			)
+	    		) as previous',
+		array($application->user->surname, $application->user->surname)
+		);
+			
+		$row = $select->fetch();
+		$applicationClass = get_class($application);
+		$user = new Application_Model_Users();
+		$user->populate($row);
+		
+		$previousApplication = $user->applications[0];
+		return $previousApplication;
+	}
+	
+	protected function _getNextApplication($application)
+	{
+		$select = $this->getAdapter()->query(
+	    		'SELECT * FROM (
+	    			(
+	    			SELECT * FROM users 
+	    				WHERE surname > ? AND users.role = "user"
+	    				ORDER BY surname ASC, name ASC, user_id ASC
+	    				LIMIT 1
+	    			) 
+	    			UNION 
+	    			
+	    			(
+	    			SELECT * FROM users 
+	    				WHERE surname < ? AND users.role = "user"
+	    				ORDER BY surname ASC, name ASC, user_id ASC
+	    				LIMIT 1
+	    			)
+	    		) as next',
+		array($application->user->surname, $application->user->surname)
+		);
+			
+		
+		$row = $select->fetch();
+		$applicationClass = get_class($application);
+		$user = new Application_Model_Users();
+		$user->populate($row);
+		
+		$nextApplication = $user->applications[0];
+		return $nextApplication;
 	}
 }
 

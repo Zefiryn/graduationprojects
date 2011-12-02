@@ -42,9 +42,9 @@ class RegulationsController extends Zefir_Controller_Action
 		);
 
 		if ($this->view->user->role == 'admin' || $this->view->user->role == 'juror')
-		$this->render('index');
+			$this->render('index');
 		else
-		$this->render('show');
+			$this->render('show');
 
 	}
 

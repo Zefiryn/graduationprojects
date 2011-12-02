@@ -10,12 +10,11 @@ class ApplicationsController extends Zefir_Controller_Action
 
 	public function indexAction()
 	{
-		//get edition
-		$edition = new Application_Model_Editions();
-		$edition->getEditionByName(Zend_Registry::get('edition'));
-		 
+		Zefir_Pqp_Classes_Console::logSpeed('start action');
+		
 		$application = new Application_Model_Applications();
-		$applications = $application->getApplications($edition->edition_id, $this->_getSort());
+		$applications = $application->getApplications($this->_getSort());
+		
 		$this->view->statistics = $this->_createStatistics($applications);
 		$this->view->applications = $applications;
 	}
@@ -237,7 +236,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 		$this->flashMe('application_deleted', 'SUCCESS');		
-		echo json_encode(array('link' => $this->view->url(array('sort' => 'surname'), 'applications_sort')));
+		echo json_encode(array('link' => $this->view->url(array(), 'applications')));
 		
 		
 		
@@ -260,6 +259,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 				
 			$this->view->application = $application;
+			$this->view->adjacent = $application->getAdjacentApplication();
 		}
 		else
 		{
@@ -385,6 +385,7 @@ class ApplicationsController extends Zefir_Controller_Action
 
 	protected function _createStatistics($applications)
 	{
+		Zefir_Pqp_Classes_Console::logSpeed('start statistics');
 		$work_type = new Application_Model_WorkTypes();
 		$types = $work_type->getWorkTypes();
 		unset($types[0]);
@@ -409,7 +410,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			$statistics[$application->country][$application->work_type->work_type_name]++;
 			$statistics[$application->country]['all']++;
 		}
-		 
+		Zefir_Pqp_Classes_Console::logSpeed('end statistics');
 		return $statistics;
 	}
 
@@ -419,7 +420,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$sortApplication = new Zend_Session_Namespace('app_sort');
 		 
 		$currentSort = $request->getParam('sort', NULL);
-		$lastSort = $sortApplication->sort;
+		$lastSort = $sortApplication->sort != null ? $sortApplication->sort : 'surname';
 		 
 		if (strstr($lastSort, $currentSort))
 		{
@@ -427,11 +428,15 @@ class ApplicationsController extends Zefir_Controller_Action
 			$currentSort .= $order == 'ASC' ? ' DESC' : ' ASC';
 		}
 		elseif ($currentSort != NULL)
-		$currentSort .= ' ASC';
-		 
+		{
+			$currentSort .= ' ASC';
+		}
+		else
+		{
+			$currentSort = 'surname ASC';
+		}
 		//save current sort
 		$sortApplication->sort = $currentSort;
-		 
 		return $currentSort;
 	}
 

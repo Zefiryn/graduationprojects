@@ -282,10 +282,14 @@ function hintImages()
 		});
 		
 		//clear
-		$(this).mouseout(function(){
-			$(this).attr('alt', text).attr('title', text);
-			$('.img_hint').remove();
-		});
+		$(this).bind('mouseout click mousedown mouseup', (function(){
+				if ($('.img_hint'))
+				{
+					$(this).attr('alt', text).attr('title', text);
+					$('.img_hint').remove();
+				}
+			})
+		);
 	});	
 }
 
