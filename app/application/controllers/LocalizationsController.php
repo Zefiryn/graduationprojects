@@ -14,7 +14,7 @@ class LocalizationsController extends Zefir_Controller_Action
 		$localization = new Application_Model_Localizations();
 
 		$caption = new Application_Model_Captions();
-		$this->view->captions = $caption->fetchAll($caption->order('name ASC'));
+		$this->view->captions = $caption->getDbTable()->fetchAll(null, 'name ASC');
 		$this->view->translations = $localization->getTranslationFromDb();
 	}
 

@@ -75,7 +75,7 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 
-	public function getApplications($edition, $sort = NULL)
+	public function getApplications($sort = NULL)
 	{
 		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
 
@@ -85,7 +85,7 @@ class Application_Model_Applications extends GP_Application_Model
 		foreach($rowset as $row)
 		{
 			$application = new $this;
-			$applications[] = $application->populate($row, $application);
+			$applications[] = $application->populate($row);
 		}
 
 		return $applications;
@@ -134,6 +134,11 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 
 		return $data;
+	}
+	
+	public function getAdjacentApplication()
+	{
+		return $this->getDbTable()->getAdjacentApplication($this);
 	}
 
 }

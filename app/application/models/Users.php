@@ -29,12 +29,18 @@ class Application_Model_Users extends GP_Application_Model
 		return parent::__get($var);
 	}
 
-	public function populate(Zend_Db_Table_Row $row)
+	public function populate($row)
 	{
 		parent::populate($row);
 
-		$this->_role = $row->role;
-
+		if (is_array($row))
+		{
+			$this->_role = $row['role'];
+		}
+		else 
+		{
+			$this->_role = $row->role;
+		}
 		return $this;
 	}
 

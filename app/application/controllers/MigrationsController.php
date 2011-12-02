@@ -611,5 +611,22 @@ class MigrationsController extends Zefir_Controller_Action
 		$this->_helper->viewRenderer->setNoRender(true);
 		phpinfo();
 	}
+	
+	public function appAction() {
+		
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
+		$files = new Application_Model_Files();
+		foreach($files->fetchAll() as $file)
+		{
+			$dir = substr($file->path, 0, strrpos($file->path, '/'));
+			$dir = APPLICATION_PATH.'/../public/assets/applications/'.$dir;
+			if (!is_dir($dir))
+			{
+				mkdir($dir);
+			}
+		}
+	}
 }
 
