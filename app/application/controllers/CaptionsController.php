@@ -14,7 +14,7 @@ class CAptionsController extends Zefir_Controller_Action
 		$lang = $request->getParam('loc_lang', 'pl');
 
 		$caption = new Application_Model_Captions();
-		$this->view->captions = $caption->fetchAll($caption->order('name ASC'));
+		$this->view->captions = $caption->fetchAll(null, 'name ASC');
 		$this->view->caption_lang = $lang;
 	}
 
