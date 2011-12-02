@@ -10,7 +10,7 @@ class AdminController extends Zefir_Controller_Action
 
 	public function indexAction()
 	{
-		Zend_Registry::isRegistered($index)
+		//Zend_Registry::isRegistered($index);
 	}
 
 

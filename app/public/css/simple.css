@@ -1378,6 +1378,10 @@ div.caption h3 {
 	display: inline !important;
 }
 
+.enable-sort {
+	cursor: move;
+}
+
 .ui-autocomplete,.ui-corner-all {
 	font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
 	font-size: 14px;

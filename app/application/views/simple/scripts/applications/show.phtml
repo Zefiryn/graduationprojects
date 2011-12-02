@@ -3,11 +3,15 @@
 	<div class="application_gallery" id="application_gallery">
 
 	<?php foreach($this->application->files as $file):?>
+		<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
+			class="application_files" rel="images" >
 		<img id="<?php echo $file->file_id?>" class="sort_item"
-			src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small'));?>"
-			alt="<?php echo $this->application->work_subject.'?'.time();?>"
-			class="application_image" />
-		
+			src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small').'?'.time());?>"
+			alt="<?php echo $this->application->work_subject;?>"
+			class="application_image application_files"
+			rel="images"
+			/>
+		</a>
 		
 		<?php endforeach;?>
 	</div>
@@ -71,8 +75,10 @@
 			<p><?php echo nl2br($this->application->work_desc);?></p>
 		</div>
 		
-		<nav class="application_nav">
+		<nav class="diploma_nav">
 			
+			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
 			
 		</nav>
     </div>

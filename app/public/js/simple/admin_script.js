@@ -5,10 +5,11 @@
 $(document).ready(function(){
 	
 	if ($("#regulation").length)
-		sortElements('#left, #right', "/regulation/sort/", function(){sortNumbers($("#regulation"), "&sect; ", "");});
-	
+	{
+		sortElements('#left, #right', "/regulation/sort/", function(){sortNumbers($("#regulation"), "&sect; ", "");}, true);
+	}
 	if ($("#faq").length)
-		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");});
+		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");}, true);
 	
 	if ($("#diploma_gallery").length)
 	{
@@ -31,21 +32,43 @@ function showCaptions()
 }
 
 
-function sortElements(id, link, sortCallback)
+function sortElements(id, link, sortCallback, disable)
 {	
 	$( id ).sortable({
 		placeholder: "ui-state-highlight",
 		connectWith: ".connected",
+		disabled: disable,
 		start: function(event, ui) {
 			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
+		stop: function (event, ui) {
+			
+		},
 		update: function(event, ui) {
 			sort(event, ui, link, sortCallback);
 			sortElements(id, link, sortCallback);
 		}
 	});
 	
-	$( id ).disableSelection();
+	//$( id ).disableSelection();
+	
+	if (disable) 
+	{
+		$('.enable-sort').mousedown(function(){
+			
+			$( id ).sortable({
+				disabled: false,
+			});
+		});
+		
+		$('.enable-sort').mouseup(function(){
+			
+			$( id ).sortable({
+				disabled: true,
+			});
+		});
+		
+	}
 }
 
 function sortColumnElements(id, link)
