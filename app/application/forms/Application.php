@@ -111,50 +111,55 @@
 
 			$element = $this->createElement('text', 'work_subject');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('work_subject')
-			->setDecorators($this->_getZefirDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-			new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
-			));
+				->setLabel('work_subject')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addFilters(array(
+					new Zend_Filter_StringTrim()
+				))
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+					new Zend_Validate_StringLength(array('min' => 3, 'max' => 300))
+				));
 			$this->addElement($element);
 
 			$work_type = new Application_Model_WorkTypes();
 			$element = $this->createElement('select', 'work_type_id');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('work_type')
-			->setMultiOptions($work_type->getWorkTypes())
-			->setDecorators($this->_getStandardDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
-			new Zend_Validate_Digits()
-			));
+				->setLabel('work_type')
+				->setMultiOptions($work_type->getWorkTypes())
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
+					new Zend_Validate_Digits()
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('textarea', 'work_desc');
 			$element->setAttribs(array('class' => 'desc'))
-			->setLabel('work_desc')
-			->setDescription('work_desc_count')
-			->setDecorators($this->_getZefirDecorators())
-			->setRequired(TRUE)
-			//->addFilter('HtmlSpecialChars')
-			->addValidators(array(
-			//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
-			new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
-			));
+				->setLabel('work_desc')
+				->setDescription('work_desc_count')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addFilters(array(
+					new Zend_Filter_StringTrim()
+				))
+				->addValidators(array(
+				//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
+					new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('text', 'supervisor_degree');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('supervisor_degree')
-			->setDecorators($this->_getZefirDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_Regex('/^['.$L.$S.'\s ]+$/'),
-			new Zend_Validate_StringLength(array('min' => 0, 'max' => 15))
-			));
+				->setLabel('supervisor_degree')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$S.'\s ]+$/'),
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 15))
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('text', 'supervisor');
