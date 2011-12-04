@@ -134,6 +134,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('news'));
 		$acl->addResource(new Zend_Acl_Resource('migrations'));
 		$acl->addResource(new Zend_Acl_Resource('diplomas'));
+		$acl->addResource(new Zend_Acl_Resource('votes'));
+		$acl->addResource(new Zend_Acl_Resource('jurors'));
+		$acl->addResource(new Zend_Acl_Resource('stages'));
 
 		//clearance
 		$acl->allow(null, array('error', 'index'), null);
@@ -160,10 +163,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('juror', array('about'), null);
 		$acl->allow('juror', array('faq'), null);
 		$acl->allow('juror', array('regulations'), null);
+		$acl->allow('juror', array('votes'), ('vote'));
 
 		$acl->allow('admin', array('users'), array('new', 'index'));
 		$acl->allow('admin', null, null);
 		$acl->allow('admin', 'applications', null);
+		$acl->allow('admin', array('votes'), ('settings'));
 
 		Zend_Registry::set('acl', $acl);
 

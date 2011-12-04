@@ -11,8 +11,10 @@ class Application_Model_Users extends GP_Application_Model
 	public $phone;
 	public $email;
 	public $show_email;
+	public $juror_id;
 	protected $_role;
 	protected $applications;
+	protected $juror;
 
 	protected $_dbTableModelName = 'Application_Model_DbTable_Users';
 
@@ -96,9 +98,9 @@ class Application_Model_Users extends GP_Application_Model
 	public function getUserFullName()
 	{
 		if ($this->name != null || $this->surname != null)
-		$name = $this->name.' '.$this->surname;
+			$name = $this->name.' '.$this->surname;
 		else
-		$name = $this->nick;
+			$name = $this->nick;
 			
 		return $name;
 	}

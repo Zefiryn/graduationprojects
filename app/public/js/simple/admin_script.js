@@ -21,6 +21,18 @@ $(document).ready(function(){
 	{
 		showCaptions();
 	}
+	
+	if ($('.admin_button').length)
+	{
+		$('.ui-icon-check').click(function(){
+			var self = $(this);
+			var id = self.attr('id').substring(6);
+			var checkbox = $('#'+id);
+			checkbox.attr('checked', !checkbox.attr('checked'));
+			self.toggleClass('ui-icon-checked');
+		});
+		
+	}
 });
 
 function showCaptions()

@@ -28,6 +28,14 @@ $(document).ready(function(){
 	if ($('a.application_files').length )
 	{
 		runFancyBox('a.application_files', true);
+		
+		if ($('.miniature').length)
+		{
+			$('.miniature').click(function(){
+				var rel = $(this).attr('rel');
+				$('a.application_files[rel='+rel+']:first-child').click();
+			});
+		}
 	}
 	
 	if ($('a.files').length )
@@ -348,11 +356,12 @@ function hideFileFields()
 
 function runFancyBox(obj, autoScale)
 {
-		$(obj).click(function(e){
+		var obj = $(obj);
+		obj.click(function(e){
 			e.preventDefault();
 		});
 		
-		$(obj).fancybox({
+		obj.fancybox({
 			'transitionIn'	:	'elastic',
 			'transitionOut'	:	'elastic',
 			'titlePosition'	: 	'over',

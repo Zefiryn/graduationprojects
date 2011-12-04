@@ -71,6 +71,21 @@ CREATE TABLE faq (
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE jurors(
+	juror_id int not null auto_increment,
+	juror_name varchar(255) not null,
+	country char(2) not null,
+	wage INT( 11 ) NOT NULL DEFAULT '1'
+	PRIMARY KEY(juror_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE stages (
+	stage_id smallint(6) NOT NULL AUTO_INCREMENT,
+	stage_name char(10) NOT NULL,
+	stage_max_vote SMALLINT(6) NOT NULL,
+	PRIMARY KEY (stage_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 CREATE TABLE users(
 	user_id int NOT NULL AUTO_INCREMENT,
 	nick varchar(50) NOT NULL,
@@ -82,6 +97,7 @@ CREATE TABLE users(
 	email varchar(35) NOT NULL,
 	show_email boolean DEFAULT FALSE,
 	role varchar(20) NOT NULL DEFAULT 'user',
+	juror_id int null,
 	PRIMARY KEY (user_id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -255,16 +271,6 @@ CREATE TABLE news_files(
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE jurors(
-	juror_id int not null auto_increment,
-	user_id int(6) not null,
-	max_point smallint not null,
-	country char(2) not null,
-	PRIMARY KEY(juror_id),
-	FOREIGN KEY(user_id)
-		REFERENCES users(user_id)
-		ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE about(
 	about_id int not null auto_increment,

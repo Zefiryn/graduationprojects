@@ -11,6 +11,18 @@ $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 	
 	<?php if (count($this->applications) > 0):?>
 	<p class="clear">&nbsp;</p>
+	<div class="filter_applications">
+		<p><?php echo $this->translate('filter_applications')?></p>
+		<form>
+			<select>
+				<option value="0" ><?php echo $this->translate('unrated')?></option>
+				<option value="1" ><?php echo $this->translate('disqualified')?></option>
+				<option value="2" ><?php echo $this->translate('qualified')?></option>
+			</select>
+		</form>
+		<p><?php echo $this->translate('voting_stage');?></p>
+		
+	</div>
 	
 	<table class="applications">
 		<!--TABLE HEADERS-->
@@ -18,87 +30,121 @@ $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 			<!--CHECKBOX FOR MANAGING-->
 			<th class="left" style="width: 15px;">
 				&nbsp;
-			</th>
+			</th>			
 			<!--ID-->	
 			<th class="normal" style="width: 20px;">
 				#
 			</th>
+			<!--UID-->
+			<th class="left" style="width: 15px;">
+				UID
+			</th>
+			<!--MINIATURE-->
+			<th class="left" style="width: 80px;">
+				<?php echo $this->translate('miniature');?>
+			</th>
 			<!--NAME-->
-			<th class="normal" style="width: 100px;">
+			<th class="normal" style="width: 70px;">
 				<a href="<?php echo $this->url(array('sort' => 'surname'), 'applications_sort');?>">
 				<?php echo $this->translate('user_name_and_surname');?>
 				</a>
 			</th>
+			
 			<!--COUNTRY-->
 			<th class="normal" style="width: 20px;">
 				<a href="<?php echo $this->url(array('sort' => 'country'), 'applications_sort');?>">
 				<?php echo $this->translate('country');?>
 				</a>
 			</th>
-			<!--SUBJECT-->
-			<th class="normal" style="width: 85px;">
-				<a href="<?php echo $this->url(array('sort' => 'work_subject'), 'applications_sort');?>">
-				<?php echo $this->translate('work_subject');?>
-				</a>
-			</th>
+			
 			<!--2d/3d-->
 			<th class="normal" style="width: 35px;">
 				<a href="<?php echo $this->url(array('sort' => 'work_type_name'), 'applications_sort');?>">
 				<?php echo $this->translate('work_type');?>
 				</a>
 			</th>
+			
+			<!--SUBJECT-->
+			<th class="normal" style="width: 160px;">
+				<a href="<?php echo $this->url(array('sort' => 'work_subject'), 'applications_sort');?>">
+				<?php echo $this->translate('work_subject');?>
+				</a>
+			</th>
+			
+			
 			<!--FILES LIST-->
-			<th class="normal" style="width: 50px;">
+			<th class="normal" style="width: 130px;">
 				<?php echo $this->translate('application_files');?>
 			</th>
 			<!--VOTE LINK-->
-			<th class="normal" style="width: 90px;">
+			<th class="normal" style="width: 100px;">
 				<?php echo $this->translate('vote');?>
 			</th>
 		</tr>
 		<!--END OF TABLE HEADERS-->
 		
 		<!--APPLICATIONS DATA -->
-		<?php 
-		Zefir_Pqp_Classes_Console::logSpeed('start making rows');
-		foreach ($this->applications as $no => $application):
-		Zefir_Pqp_Classes_Console::logSpeed('start making app '.$no);?>
+		<?php foreach ($this->applications as $no => $application):?>
 		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
+			<!-- ADMIN ACTION -->
 			<td class="left" style="width: 15px;vertical-align: top;">
 				
 				<?php if ($admin):?>
 				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block" 
+				
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block"
+					id="check_app<?php echo $application->application_id?>" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
+				
 				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
 				<?php endif;?>
 				
 			</td>	
 			
+			<!-- # -->
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
-			<td class="normal" style="width: 100px;">
+			
+			<!-- UID -->
+			<td class="normal" style="width: 15px;"><?php echo $application->application_id;?></td>
+			
+			<!-- MINIATURE -->
+			<td class="left" style="width: 80px;">
+				<img src="<?php echo $this->baseUrl('/assets/applications/'.$application->getMiniature()); ?>" 
+					class="miniature" rel="application_<?php echo $application->application_id;?>"/>
+			</td>
+			<!-- USER -->
+			<td class="normal" style="width: 70px;">
 				<a href="<?php echo $this->url(array('id' => $application->application_id, 'lang' => $this->lang), 'lang_application');?>">
-					<?php echo $application->user->getUserFullName();?>
+					<?php echo $application->user->name?><br />
+					<span class="bold"><?php echo $application->user->surname ?></span>
 				</a>
 			</td>
 			
+			<!-- COUNTRY -->
 			<td class="normal" style="width: 20px;"><?php echo $this->translate($application->country);?></td>
-			<td class="normal" style="width: 85px;"><?php echo $application->work_subject;?></td>
+			
+			<!-- WORK TYPE -->
 			<td class="normal" style="width: 35px;"><?php echo $application->work_type->work_type_name;?></td>
-			<td class="normal" style="width: 50px;">
+			
+			<!-- SUBJECT -->
+			<td class="normal" style="width: 160px;"><?php echo $application->work_subject;?></td>
+			
+			
+			<!-- FILES -->
+			<td class="normal" style="width: 130px;">
 				<?php foreach($application->files as $id => $file):?>
 				<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
-					class="application_files"
+					class="application_files index_application_files"
 					rel="application_<?php echo $application->application_id;?>">
-					<?php echo $this->translate('file').' '.++$id;?>, 
+					<?php echo ++$id;?> 
 				</a>
 				<?php endforeach;?>
 			
 			</td>
 			
 			<!-- VOTES -->
-			<td class="normal" style="width: 90px;"></td>
+			<td class="normal" style="width: 100px;"></td>
 		</tr>
 		<?php endforeach;?>
 	</table>

@@ -301,9 +301,9 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 				if ($this->_copy($uploaded_file['file'], $options['upload']['applications'].'/'.$userDir.'/'.$fileName))
 				{
 					if ($uploaded_file['file_id'] != null)
-					$file = new Application_Model_Files($uploaded_file['file_id']);
+						$file = new Application_Model_Files($uploaded_file['file_id']);
 					else
-					$file = new Application_Model_Files();
+						$file = new Application_Model_Files();
 						
 					$file->path = $userDir.'/'.$fileName;
 					$file->application_id = $application->application_id;

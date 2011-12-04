@@ -27,6 +27,8 @@ class Application_Model_Applications extends GP_Application_Model
 	protected $_update = FALSE;
 
 	protected $_dbTableModelName = 'Application_Model_DbTable_Applications';
+	
+	protected $_miniature = array('name' => 'miniature','files' => 1);
 
 	public function __construct($id = null, array $options = null)
 	{
@@ -139,6 +141,34 @@ class Application_Model_Applications extends GP_Application_Model
 	public function getAdjacentApplication()
 	{
 		return $this->getDbTable()->getAdjacentApplication($this);
+	}
+	
+	public function createMiniature()
+	{
+		for ($i = 0; $i < $this->_miniature['files']; $i++) 
+		{
+			$file = $this->files[$i];
+			$path = $file->getImage('miniature');
+			if (!file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$path)) 
+			{
+				$file->getDbTable()->rerunResize($file, 'path', APPLICATION_PATH.'/../public/assets/applications/', 'miniature'); 
+			} 
+		}
+		
+	}
+	
+	public function getMiniature($index = 1) 
+	{
+		$this->__get('files');
+		$file = $this->files[$index - 1];
+		$path = $file->getImage('miniature');
+		
+		if (!file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$path))
+		{
+			$this->createMiniature();
+		}
+		
+		return $path;
 	}
 
 }

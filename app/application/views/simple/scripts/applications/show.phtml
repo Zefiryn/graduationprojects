@@ -1,6 +1,8 @@
 <div id="main">
 
 	<div class="application_gallery" id="application_gallery">
+	
+	<?php $this->application->getMiniature(); ?>
 
 	<?php foreach($this->application->files as $file):?>
 		<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
