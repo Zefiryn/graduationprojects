@@ -28,15 +28,15 @@
 	<?php if ($file != ''):?>
 		<div>
 			<p class="admin">
-				<a href="<?php echo $file;?>" class="remove-image"> <img
-					src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+				<a href="<?php echo $file;?>" class="remove-image"> 
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
 					class="ui-icon ui-icon-trash no-block"
 					alt="<?php echo $this->translate('delete');?>"
-					title="<?php echo $this->translate('delete');?>">
+					title="<?php echo $this->translate('delete');?>" />
 				</a>
 			</p>
-			<a class="form_file" href="<?php echo $this->baseUrl($file);?>"
-				rel="cache"> <img src="<?php echo $this->baseUrl($file);?>" alt="" />
+			<a class="form_file" href="<?php echo $this->baseUrl($file);?>" rel="cache">
+				<img src="<?php echo $this->baseUrl($file);?>" alt="" />
 			</a>
 		</div>
 		

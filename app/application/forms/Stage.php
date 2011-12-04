@@ -43,6 +43,17 @@ class Application_Form_Stage extends Zefir_Form
 			));
 		$this->addElement($element);
 		
+		$element = $this->createElement('checkbox', 'active');
+		$element->setAttribs(array('class' => 'checkbox'))
+			->setLabel('active', array('tag' => 'label'))
+			->setDecorators($this->_getStandardDecorators())
+			->setRequired(FALSE)
+			->addValidators(array(
+				new Zend_Validate_Regex('/^0|1$/')
+			));
+		$this->addElement($element);
+		
+		
 		$this->_createCsrfElement();
 		$this->_createStandardSubmit('submit');
 		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')

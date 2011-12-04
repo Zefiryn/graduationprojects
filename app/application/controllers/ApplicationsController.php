@@ -14,9 +14,12 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		$application = new Application_Model_Applications();
 		$applications = $application->getApplications($this->_getSort());
-		
+		$stages = new Application_Model_Stages();
+			
 		$this->view->statistics = $this->_createStatistics($applications);
 		$this->view->applications = $applications;
+		$this->view->stages = $stages->fetchAll();
+		$this->view->currentStage = $this->_getCurrentStage();
 	}
 
 	public function newAction()
@@ -468,5 +471,23 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 			return FALSE;
 		}
+	}
+	
+	protected function _getCurrentStage()
+	{
+		$request = $this->getRequest();
+		$stage = $request->getParam('stage', null);
+
+		if (!$stage)
+		{
+			$stages = new Application_Model_Stages();
+			$firstStage = $stages->getDbTable()->fetchAll('active = 1')->current();
+			$stage = $firstStage->stage_id;  
+		}
+		
+		$stageObj = new Application_Model_Stages($stage);
+		return $stageObj;
+		
+		
 	}
 }

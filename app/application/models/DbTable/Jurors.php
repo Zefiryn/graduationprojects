@@ -14,7 +14,7 @@ class Application_Model_DbTable_Jurors extends Zefir_Application_Model_DbTable
 		),
 		'votes' => array(
 	       		'model' => 'Application_Model_Votes',
-				'refColumn' => 'stage_id',
+				'refColumn' => 'juror_id',
 		),
 	);
 	

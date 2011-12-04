@@ -44,11 +44,8 @@ class Application_Form_News_Detail extends Zefir_Form
 
 		$element = $this->createElement('textarea', 'news_text');
 		$element->setLabel('news_text')
-		->setAttribs(array('class' => 'width1'))
-		->setDecorators($this->_getZefirDecorators())
-		->addValidators(array(
-		new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.'\ ]*$/')
-		));
+		->setAttribs(array('class' => 'width1 wide ckeditor'))
+		->setDecorators($this->_getZefirDecorators());
 		$this->addElement($element);
 
 		$this->_createCsrfElement();
