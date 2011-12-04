@@ -33,12 +33,22 @@ class Application_Form_News extends Zefir_Form
 
 		$element = $this->createElement('checkbox', 'published');
 		$element->setAttribs(array('class' => 'checkbox'))
-		->setLabel('publish', array('tag' => 'label'))
-		->setDecorators($this->_getStandardDecorators())
-		->setRequired(FALSE)
-		->addValidators(array(
-		new Zend_Validate_Regex('/^0|1$/')
-		));
+			->setLabel('publish', array('tag' => 'label'))
+			->setDecorators($this->_getStandardDecorators())
+			->setRequired(FALSE)
+			->addValidators(array(
+				new Zend_Validate_Regex('/^0|1$/')
+			));
+		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'added');
+		$element->setAttribs(array('class' => 'width1 date'))
+			->setLabel('added')
+			->setDecorators($this->_getZefirDecorators())
+			->setRequired(TRUE)
+			->addValidators(array(
+				
+			));
 		$this->addElement($element);
 
 		$element = $this->createElement('text', 'link');

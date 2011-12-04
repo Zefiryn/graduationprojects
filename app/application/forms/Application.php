@@ -175,12 +175,12 @@
 
 			$element = $this->createElement('text', 'graduation_time');
 			$element->setAttribs(array('class' => 'width1 date'))
-			->setLabel('graduation_time')
-			->setDecorators($this->_getZefirDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zefir_Validate_DatePeriod($appSettings->work_start_date, $appSettings->work_end_date)
-			));
+				->setLabel('graduation_time')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zefir_Validate_DatePeriod($appSettings->work_start_date, $appSettings->work_end_date)
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('checkbox', 'personal_data_agreement');

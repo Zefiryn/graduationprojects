@@ -87,7 +87,8 @@ class Application_Model_News extends GP_Application_Model
 	{
 		$data = array(
 			'news_id' => $this->news_id,
-			'link' => $this->link
+			'link' => $this->link,
+			'added' => date('d-m-Y', $this->added)
 		);
 		$languages = new Application_Model_Languages();
 		foreach($languages->fetchAll() as $lang)
@@ -103,6 +104,7 @@ class Application_Model_News extends GP_Application_Model
 
 	public function populateFromForm($values)
 	{
+		$values['added'] = strtotime($values['added']);
 		parent::populateFromForm($values);
 
 		$languages = new Application_Model_Languages();

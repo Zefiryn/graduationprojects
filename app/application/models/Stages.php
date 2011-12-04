@@ -4,7 +4,6 @@ class Application_Model_Stages extends GP_Application_Model
 	public $stage_id;
 	public $stage_name;
 	public $stage_max_vote;
-	protected $wages;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Stages';
 	
