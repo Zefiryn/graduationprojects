@@ -72,6 +72,14 @@ $(document).ready(function(){
 	{
 		disableSubmitOnEnter();
 	}
+	
+	if ($('.editor').length)
+	{	
+		$('.editor').ckeditor({
+			 skin: 'kama',
+			 uiColor: '#3c9'
+		});
+	}
 });
 
 function disableSubmitOnEnter()

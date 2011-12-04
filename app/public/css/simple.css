@@ -972,6 +972,10 @@ fieldset.upload {
 	width: 450px;
 }
 
+.wide {
+	width: 700px;
+}
+
 select.width1 {
 	width: 460px;
 }
@@ -1265,6 +1269,16 @@ a.path_end:link,a.path_end:visited {
 .clearfix {
 	clear: both;
 }
+.filter_applications {
+	margin: 0px 0px 20px 0px;
+}
+
+.filter_applications div {
+	float: right;
+	width: 200px;
+	margin: 0px 20px;
+	font-size: 14px;
+}
 
 table.applications {
 	width: 100%;
@@ -1272,8 +1286,12 @@ table.applications {
 	margin: 10px 0px 30px 0px;
 	padding: 0px;
 	border-collapse: collapse;
-	border: 1px solid #28A279 !important;
+	border: 0px solid #28A279 !important;
 	cell-padding: 5px;
+}
+
+table.applications tr {
+	border-bottom: 3px solid #fff !important;
 }
 
 table.applications td {
@@ -1282,16 +1300,16 @@ table.applications td {
 }
 
 tr.header th,tr td {
-	border: 0px solid #3c9;
+	border: 0px solid #fff;
 	margin: 0px;
 	padding: 0px;
 }
 
 tr.header th {
-	border: 1px solid #28A279 !important;
 	background-color: rgba(0, 221, 179, 0.8);
 	padding: 10px 2px !important;
-	text-align: center;
+	text-align: left;
+	color: #000;
 }
 table.applications tr {
 	background: rgba(245,245,245, 0.4);
@@ -1317,15 +1335,35 @@ table.stats td {
 	cursor: pointer;
 }
 
+span.vote {
+	display: block;
+	float: left;
+	text-align: center;
+	width: 50px;
+	height: 20px;
+	line-height: 24px;
+	background-color: #999;
+	margin: 0px 5px;
+	cursor: pointer;
+}
+
+span.voted_0 {
+	background-color: #800000;
+}
+
+span.voted_1 {
+	background-color: #008000;
+}
+
 a.index_application_files:link, a.index_application_files:visited {
 	display: block;
 	float: left;
 	border: 1px solid #3c9;
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	margin: 3px;
 	text-align: center;
-	line-height: 30px;
+	line-height: 20px;
 	background: rgba(51, 204, 153, 0.1);
 }
 a.index_application_files:hover {

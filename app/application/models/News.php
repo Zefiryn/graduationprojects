@@ -88,7 +88,8 @@ class Application_Model_News extends GP_Application_Model
 		$data = array(
 			'news_id' => $this->news_id,
 			'link' => $this->link,
-			'added' => date('d-m-Y', $this->added)
+			'added' => date('d-m-Y', $this->added),
+			'published' => $this->published
 		);
 		$languages = new Application_Model_Languages();
 		foreach($languages->fetchAll() as $lang)
