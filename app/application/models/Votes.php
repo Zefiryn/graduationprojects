@@ -5,6 +5,7 @@ class Application_Model_Votes extends GP_Application_Model
 	public $stage_id;
 	public $juror_id;
 	public $application_id;
+	public $vote;
 	protected $juror;
 	protected $stage;
 	protected $application;

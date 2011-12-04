@@ -24,6 +24,7 @@ class Application_Model_Applications extends GP_Application_Model
 	protected $work_type;
 	protected $files;
 	protected $votes;
+	protected static $_jurorCount;
 
 	protected $_update = FALSE;
 
@@ -181,11 +182,63 @@ class Application_Model_Applications extends GP_Application_Model
 		{
 			if ($vote->stage_id = $stage)
 			{
-				$votes[] = $vote;
+				$votes[$vote->vote][] = $vote;
 			}
 		}
 		
 		return $votes;		
+	}
+	
+	public function countVotes($stage, $voteVal)
+	{
+		if ($this->votes === null)
+		{
+			$this->__get('votes');
+		}
+
+		$count = 0;		
+		
+		foreach ($this->votes as $vote)
+		{
+			if ($vote->stage_id == $stage && $vote->vote == $voteVal)
+			{
+				$count++;
+			}
+		}
+		
+		return $count;
+	}
+	
+	public function countEmptyVotes($stage)
+	{
+		if ($this->votes === null)
+		{
+			$this->__get('votes');
+		}
+		
+		if( self::$_jurorCount == null)
+		{
+			$jurors = new Application_Model_Jurors();
+			self::$_jurorCount = $jurors->countAll();
+		}
+		
+		if (count($this->votes) == 0)
+		{ 
+			return self::$_jurorCount;
+		}
+		else 
+		{
+			$count = 0;
+			foreach ($this->votes as $vote)
+			{
+				if ($vote->stage_id == $stage)
+				{
+					$count++;
+				}
+			}
+			return self::$_jurorCount - $count;
+		}
+		
 	}
 
 }

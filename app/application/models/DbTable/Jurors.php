@@ -8,12 +8,12 @@ class Application_Model_DbTable_Jurors extends Zefir_Application_Model_DbTable
 	
 	protected $_hasMany = array(
 	
-       	'users' => array(
+       'users' => array(
        		'model' => 'Application_Model_Users',
-			'refColumn' => 'juror_id',
+				'refColumn' => 'juror_id',
 		),
 		'votes' => array(
-	       		'model' => 'Application_Model_Votes',
+	      	'model' => 'Application_Model_Votes',
 				'refColumn' => 'juror_id',
 		),
 	);

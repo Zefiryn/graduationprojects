@@ -25,7 +25,7 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 
 		if ($args[1])
 			$select = $select->where('published = 1');
-
+		
 		if ($args[0])
 		{
 			$tplSettings = Zend_Registry::get('tplSettings');

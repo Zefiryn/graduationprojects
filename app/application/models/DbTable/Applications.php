@@ -24,26 +24,26 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 			'refColumn' => 'edition_id'
 		),
 
-       	'user' => array(
-       		'model' => 'Application_Model_Users',
+       'user' => array(
+       	'model' => 'Application_Model_Users',
 			'column' => 'user_id',
 			'refColumn' => 'user_id'
 		),
 
 		'school' => array(
-       		'model' => 'Application_Model_Schools',
+       	'model' => 'Application_Model_Schools',
 			'column' => 'school_id',
 			'refColumn' => 'school_id'
 		),
 
 		'degree' => array(
-       		'model' => 'Application_Model_Degrees',
+       	'model' => 'Application_Model_Degrees',
 			'column' => 'degree_id',
 			'refColumn' => 'degree_id'
 		),
 
 		'work_type' => array(
-       		'model' => 'Application_Model_WorkTypes',
+       	'model' => 'Application_Model_WorkTypes',
 			'column' => 'work_type_id',
 			'refColumn' => 'work_type_id'
 		),
@@ -154,6 +154,20 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		 
 		//remove application
 		parent::delete($application);
+	}
+	
+	public function countVotes($stage, $vote, $app)
+	{
+		/*$select = $this->select()
+						->from($this->_prefix.'votes', array('count(*) as count' ))
+						->setIntegrityCheck(false)
+						->where('application_id = ?', $app)
+						->where('stage_id = ?', $stage)
+						->group('vote')
+						->having('vote = ?', $vote);
+		$row = $this->fetchAll($select)->current();
+		return $row['count'];*/
+		return 0;
 	}
 
 	protected function _addNewSchool($application)
