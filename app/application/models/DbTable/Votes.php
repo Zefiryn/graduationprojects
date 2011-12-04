@@ -6,22 +6,22 @@ class Application_Model_DbTable_Votes extends Zefir_Application_Model_DbTable
 	
 	protected $_primary = 'vote_id';
 	
-	protected $_belonsTo = array(
+	protected $_belongsTo = array(
 	
-       	'juror' => array(
+		'juror' => array(
        		'model' => 'Application_Model_Jurors',
-			'column' => 'juror_id',
-			'refColumn' => 'juror_id',
+				'column' => 'juror_id',
+				'refColumn' => 'juror_id',
 		),
 		'stage' => array(
        		'model' => 'Application_Model_Stages',
-			'column' => 'stage_id',
-			'refColumn' => 'stage_id',
+				'column' => 'stage_id',
+				'refColumn' => 'stage_id',
 		),
 		'application' => array(
-			'model' => 'Application_Model_Applications',
-			'column' => 'application_id',
-			'refColumn' => 'application_id',
+				'model' => 'Application_Model_Applications',
+				'column' => 'application_id',
+				'refColumn' => 'application_id',
 		)
 	);
 	
