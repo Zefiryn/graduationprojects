@@ -6,7 +6,7 @@
 		<h1>
 		<?php echo $this->news->getDetail('news_title', $this->lang);?></h1>
 		<p class="data-artykulu">
-		<?php echo date('d.m.Y H:i', $this->news->added);?></p>
+		<?php echo date('d.m.Y', $this->news->added);?></p>
 		<p class="lead">
 		<?php echo $this->news->getDetail('news_lead', $this->lang);?></p>
 		

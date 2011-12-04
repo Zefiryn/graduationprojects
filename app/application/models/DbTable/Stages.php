@@ -8,8 +8,8 @@ class Application_Model_DbTable_Stages extends Zefir_Application_Model_DbTable
 	
 	protected $_hasMany = array(
 	
-       	'wages' => array(
-       		'model' => 'Application_Model_Wages',
+       	'votes' => array(
+       		'model' => 'Application_Model_Votes',
 			'refColumn' => 'stage_id',
 		),
 	);
