@@ -11,18 +11,24 @@ class Application_Model_Files extends GP_Application_Model
 		'dir' => '/assets/editions'
 	);
 	protected $_imageData = array(
-		'thumb' => array(
-			'width' => 220,
-			'height' => 210,
-			'crop' => false,
-			'ratio' => 'width' //save ratio according to new width
-	),
-		'small' => array(
-			'width' => 470,
-			'height' => 260,
-			'crop' => false,
-			'ratio' => 'width'	//save ratio according to new width
-	)
+			'thumb' => array(
+				'width' => 220,
+				'height' => 210,
+				'crop' => false,
+				'ratio' => 'width' //save ratio according to new width
+			),
+			'small' => array(
+				'width' => 470,
+				'height' => 260,
+				'crop' => false,
+				'ratio' => 'width'	//save ratio according to new width
+			),
+			'miniature' =>array(
+				'width' => 80,
+				'height' => 80,
+				'crop' => false,
+				'ratio' => 'both'	//save ratio according to bigger dimension
+			)
 	);
 
 	protected $_dbTableModelName = 'Application_Model_DbTable_Files';
@@ -88,5 +94,7 @@ class Application_Model_Files extends GP_Application_Model
 
 		return $this;
 	}
+	
+	
 }
 

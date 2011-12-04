@@ -15,4 +15,3 @@ class AdminController extends Zefir_Controller_Action
 
 
 }
-
