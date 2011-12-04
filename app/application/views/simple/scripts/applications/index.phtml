@@ -2,6 +2,7 @@
 array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
 Zefir_Pqp_Classes_Console::logSpeed('start rendering');
 $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
+$juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 ?>
 
 <div id="main">
@@ -12,6 +13,7 @@ $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 	<?php if (count($this->applications) > 0):?>
 	<p class="clear">&nbsp;</p>
 	<div class="filter_applications">
+		<div>
 		<p><?php echo $this->translate('filter_applications')?></p>
 		<form>
 			<select>
@@ -20,10 +22,20 @@ $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 				<option value="2" ><?php echo $this->translate('qualified')?></option>
 			</select>
 		</form>
-		<p><?php echo $this->translate('voting_stage');?></p>
+		</div>
 		
+		<div>
+		<p><?php echo $this->translate('voting_stage');?></p>
+		<form>
+			<select>
+				<?php foreach($this->stages as $stage):?>
+				<option value="<?php echo $stage->stage_id;?>" ><?php echo $stage->stage_name?></option>
+				<?php endforeach;?>
+			</select>
+		</form>
+		</div>
 	</div>
-	
+	<div class="clear"></div>
 	<table class="applications">
 		<!--TABLE HEADERS-->
 		<tr class="header">
@@ -144,7 +156,18 @@ $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 			</td>
 			
 			<!-- VOTES -->
-			<td class="normal" style="width: 100px;"></td>
+			<td class="normal" style="width: 100px;">
+				<?php if ($juror):?>
+					<?php $vote = (int)$juror->getJurorVote($this->currentStage->stage_id, $application->application_id);?>
+					
+					<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+						<span class="vote <?php if ($i === $vote) echo 'voted_'.$i;?>"><?php echo $this->translate('vote_'.$i);?></span>
+					<?php endfor;?>
+					<p class="clear"></p>
+				<?php elseif ($admin):?>
+				
+				<?php endif;?>
+			</td>
 		</tr>
 		<?php endforeach;?>
 	</table>

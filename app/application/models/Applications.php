@@ -23,6 +23,7 @@ class Application_Model_Applications extends GP_Application_Model
 	protected $degree;
 	protected $work_type;
 	protected $files;
+	protected $votes;
 
 	protected $_update = FALSE;
 
@@ -169,6 +170,22 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 		
 		return $path;
+	}
+	
+	public function getVotes($stage)
+	{
+		$this->__get('votes');
+		
+		$votes = array();
+		foreach($this->votes as $vote)
+		{
+			if ($vote->stage_id = $stage)
+			{
+				$votes[] = $vote;
+			}
+		}
+		
+		return $votes;		
 	}
 
 }

@@ -14,10 +14,15 @@ class Application_Model_DbTable_Votes extends Zefir_Application_Model_DbTable
 			'refColumn' => 'juror_id',
 		),
 		'stage' => array(
-		       		'model' => 'Application_Model_Stages',
-					'column' => 'stage_id',
-					'refColumn' => 'stage_id',
+       		'model' => 'Application_Model_Stages',
+			'column' => 'stage_id',
+			'refColumn' => 'stage_id',
 		),
+		'application' => array(
+			'model' => 'Application_Model_Applications',
+			'column' => 'application_id',
+			'refColumn' => 'application_id',
+		)
 	);
 	
 	public function __construct($config = array())
