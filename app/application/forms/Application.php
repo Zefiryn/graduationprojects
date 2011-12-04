@@ -58,10 +58,10 @@
 			$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic', 'hu' => 'Hungary');
 			$element = $this->createElement('select', 'country');
 			$element->setAttribs(array('class' => 'width1', 'size' => 1))
-			->setLabel('country')
-			->setDecorators($this->_getStandardDecorators())
-			->setMultiOptions($country)
-			->setRequired(TRUE);
+				->setLabel('country')
+				->setDecorators($this->_getStandardDecorators())
+				->setMultiOptions($country)
+				->setRequired(TRUE);
 			$this->addElement($element);
 
 			if ($this->_type == 'new')
@@ -75,38 +75,38 @@
 
 			$element = $this->createElement('text', 'school');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('school')
-			->setDecorators($this->_getZefirDecorators())
-			->setDescription('school_suggestion')
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-			new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
-			));
+				->setLabel('school')
+				->setDecorators($this->_getZefirDecorators())
+				->setDescription('school_suggestion')
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+					new Zend_Validate_StringLength(array('min' => 0, 'max' => 60))
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('text', 'department');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('department')
-			->setDecorators($this->_getZefirDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-			new Zend_Validate_StringLength(array('min' => 3, 'max' => 60))
-			));
+				->setLabel('department')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+					new Zend_Validate_StringLength(array('min' => 3, 'max' => 60))
+				));
 			$this->addElement($element);
 
 			$degree = new Application_Model_Degrees();
 			$element = $this->createElement('select', 'degree_id');
 			$element->setAttribs(array('class' => 'width1'))
-			->setLabel('degree')
-			->setMultiOptions($degree->getDegreesList())
-			->setDecorators($this->_getStandardDecorators())
-			->setRequired(TRUE)
-			->addValidators(array(
-			new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
-			new Zend_Validate_Digits()
-			));
+				->setLabel('degree')
+				->setMultiOptions($degree->getDegreesList())
+				->setDecorators($this->_getStandardDecorators())
+				->setRequired(TRUE)
+				->addValidators(array(
+					new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::ZERO),
+					new Zend_Validate_Digits()
+				));
 			$this->addElement($element);
 
 			$element = $this->createElement('text', 'work_subject');

@@ -7,6 +7,13 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
 	protected $_name = '';
 	protected $_primary = 'user_id';
 
+	protected $_belongsTo = array(
+		'juror' => array(
+			'model' => 'Application_Model_Jurors',
+			'column' => 'juror_id',
+			'refColumn' => 'juror_id'
+		)
+	);
 	/**
 	 * An array of parent table information
 	 * @var array
@@ -60,6 +67,7 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
 		$row->phone			= $user->phone;
 		$row->email			= $user->email;
 		$row->show_email	= $user->show_email;
+		$row->juror_id		= $user->juror_id;
 		if ($user->_role != null)
 		$row->role = $user->_role;
 		if ($user->_password != null)
