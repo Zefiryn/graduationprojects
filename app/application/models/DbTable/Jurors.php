@@ -12,6 +12,10 @@ class Application_Model_DbTable_Jurors extends Zefir_Application_Model_DbTable
        		'model' => 'Application_Model_Users',
 			'refColumn' => 'juror_id',
 		),
+		'votes' => array(
+	       		'model' => 'Application_Model_Votes',
+				'refColumn' => 'stage_id',
+		),
 	);
 	
 	public function __construct($config = array())

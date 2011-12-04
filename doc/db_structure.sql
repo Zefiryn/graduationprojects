@@ -71,21 +71,6 @@ CREATE TABLE faq (
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-CREATE TABLE jurors(
-	juror_id int not null auto_increment,
-	juror_name varchar(255) not null,
-	country char(2) not null,
-	wage INT( 11 ) NOT NULL DEFAULT '1'
-	PRIMARY KEY(juror_id)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-CREATE TABLE stages (
-	stage_id smallint(6) NOT NULL AUTO_INCREMENT,
-	stage_name char(10) NOT NULL,
-	stage_max_vote SMALLINT(6) NOT NULL,
-	PRIMARY KEY (stage_id)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 CREATE TABLE users(
 	user_id int NOT NULL AUTO_INCREMENT,
 	nick varchar(50) NOT NULL,
@@ -280,5 +265,34 @@ CREATE TABLE about(
 	PRIMARY KEY(about_id),
 	FOREIGN KEY(lang_id)
 		REFERENCES languages(lang_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE jurors(
+	juror_id int not null auto_increment,
+	juror_name varchar(255) not null,
+	country char(2) not null,
+	wage INT( 11 ) NOT NULL DEFAULT '1',
+	PRIMARY KEY(juror_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE stages (
+	stage_id smallint(6) NOT NULL AUTO_INCREMENT,
+	stage_name char(10) NOT NULL,
+	stage_max_vote SMALLINT(6) NOT NULL,
+	PRIMARY KEY (stage_id)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE votes (
+	vote_id int NOT NULL AUTO_INCREMENT,
+	stage_id smallint(6) not null,
+	juror_id int not null,
+	vote int not null,
+	PRIMARY KEY (vote_id),
+	FOREIGN KEY(stage_id)
+		REFERENCES stages(stage_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(juror_id)
+		REFERENCES jurors(juror_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
