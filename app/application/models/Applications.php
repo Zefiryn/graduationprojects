@@ -79,7 +79,7 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 
-	public function getApplications($sort = NULL)
+	public function getApplications($sort = NULL, $currentStage = NULL)
 	{
 		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
 

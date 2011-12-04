@@ -40,10 +40,6 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	<table class="applications">
 		<!--TABLE HEADERS-->
 		<tr class="header">
-			<!--CHECKBOX FOR MANAGING-->
-			<th class="left" style="width: 15px;">
-				&nbsp;
-			</th>			
 			<!--ID-->	
 			<th class="normal" style="width: 20px;">
 				#
@@ -93,28 +89,17 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			<th class="normal" style="width: 100px;">
 				<?php echo $this->translate('vote');?>
 			</th>
+			
+			<!--CHECKBOX FOR MANAGING-->
+			<th class="left" style="width: 15px;">
+				
+			</th>
 		</tr>
 		<!--END OF TABLE HEADERS-->
 		
 		<!--APPLICATIONS DATA -->
 		<?php foreach ($this->applications as $no => $application):?>
 		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
-			<!-- ADMIN ACTION -->
-			<td class="left" style="width: 15px;vertical-align: top;">
-				
-				<?php if ($admin):?>
-				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
-				
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block"
-					id="check_app<?php echo $application->application_id?>" 
-					alt="<?php echo $this->translate('check');?>" 
-					title="<?php echo $this->translate('check');?>"/>
-				
-				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
-				<?php endif;?>
-				
-			</td>	
-			
 			<!-- # -->
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
 			
@@ -127,7 +112,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 					class="miniature" rel="application_<?php echo $application->application_id;?>"/>
 			</td>
 			<!-- USER -->
-			<td class="normal" style="width: 70px;">
+			<td class="normal username" style="width: 70px;">
 				<a href="<?php echo $this->url(array('id' => $application->application_id, 'lang' => $this->lang), 'lang_application');?>">
 					<?php echo $application->user->name?><br />
 					<span class="bold"><?php echo $application->user->surname ?></span>
@@ -174,6 +159,22 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php endfor;?>
 				<?php endif;?>
 			</td>
+			
+			<!-- ADMIN ACTION -->
+			<td class="admin_column" style="width: 15px;vertical-align: top;">
+				
+				<?php if ($admin):?>
+				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
+				
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block"
+					id="check_app<?php echo $application->application_id?>" 
+					alt="<?php echo $this->translate('check');?>" 
+					title="<?php echo $this->translate('check');?>"/>
+				
+				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
+				<?php endif;?>
+				
+			</td>	
 		</tr>
 		<?php endforeach;?>
 	</table>
