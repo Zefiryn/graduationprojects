@@ -12,14 +12,16 @@ class ApplicationsController extends Zefir_Controller_Action
 	{
 		Zefir_Pqp_Classes_Console::logSpeed('start action');
 		
+		$currentStage = $this->_getCurrentStage();
 		$application = new Application_Model_Applications();
-		$applications = $application->getApplications($this->_getSort());
+		$applications = $application->getApplications($this->_getSort(), $currentStage);
+		
 		$stages = new Application_Model_Stages();
 			
 		$this->view->statistics = $this->_createStatistics($applications);
 		$this->view->applications = $applications;
 		$this->view->stages = $stages->fetchAll();
-		$this->view->currentStage = $this->_getCurrentStage();
+		$this->view->currentStage = $currentStage;
 	}
 
 	public function newAction()
