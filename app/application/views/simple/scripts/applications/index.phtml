@@ -17,9 +17,10 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		<p><?php echo $this->translate('filter_applications')?></p>
 		<form>
 			<select>
-				<option value="0" ><?php echo $this->translate('unrated')?></option>
-				<option value="1" ><?php echo $this->translate('disqualified')?></option>
-				<option value="2" ><?php echo $this->translate('qualified')?></option>
+				<option value="-1" ><?php echo $this->translate('unrated')?></option>
+				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+				<option value="<?php echo $i;?>" ><?php echo $this->translate('vote_'.$i)?></option>
+				<?php endfor;?>
 			</select>
 		</form>
 		</div>
@@ -158,14 +159,19 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			<!-- VOTES -->
 			<td class="normal" style="width: 100px;">
 				<?php if ($juror):?>
-					<?php $vote = (int)$juror->getJurorVote($this->currentStage->stage_id, $application->application_id);?>
-					
+					<?php 
+						$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
+						$vote = $vote != null ? (int)$vote : $vote;
+					?>
 					<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
 						<span class="vote <?php if ($i === $vote) echo 'voted_'.$i;?>"><?php echo $this->translate('vote_'.$i);?></span>
 					<?php endfor;?>
 					<p class="clear"></p>
 				<?php elseif ($admin):?>
-				
+					<span><?php echo $this->translate('unrated');?>: </span><?php echo $application->countEmptyVotes($this->currentStage->stage_id);?><br />
+				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+					<span><?php echo $this->translate('vote_'.$i);?>: </span><?php echo $application->countVotes($this->currentStage->stage_id, $i);?><br />
+				<?php endfor;?>
 				<?php endif;?>
 			</td>
 		</tr>

@@ -1348,11 +1348,11 @@ span.vote {
 }
 
 span.voted_0 {
-	background-color: #800000;
+	background-color: #e80000;
 }
 
 span.voted_1 {
-	background-color: #008000;
+	background-color: #00b000;
 }
 
 a.index_application_files:link, a.index_application_files:visited {
