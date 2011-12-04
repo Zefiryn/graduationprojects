@@ -104,7 +104,7 @@ class Application_Model_News extends GP_Application_Model
 
 	public function populateFromForm($values)
 	{
-		$values['added'] = strtotime($values['added']);
+		$values['added'] = $values['added'] != null ? strtotime($values['added']) : time();
 		parent::populateFromForm($values);
 
 		$languages = new Application_Model_Languages();
