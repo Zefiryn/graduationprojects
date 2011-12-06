@@ -103,7 +103,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 								->from($vote->getDbTable()->getTableName(), 'application_id')
 								->where('stage_id = ?', $stage->getPreviousStageId())
 								->group('application_id')
-								->having('count(vote) >= ?', $stage->qualification_score);
+								->having('SUM(vote) >= ?', $stage->qualification_score);
 							
 				$select->where('application_id IN ('. $select2->__toString(). ')');
 			}
