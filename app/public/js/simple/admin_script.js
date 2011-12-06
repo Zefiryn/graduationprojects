@@ -43,6 +43,12 @@ $(document).ready(function(){
 	{
 		stageSelect();
 	}
+	
+	if ($('#filterForm').length)
+	{
+		
+		filterForm();
+	}
 });
 
 function showCaptions()
@@ -205,15 +211,22 @@ function voting()
 			application_id: self.data('application-id'),
 			vote: self.data('vote'),
 		};
+		var loader = $('#loader').clone().addClass('cloned');
+		
 		console.log(data);
 		$.ajax({
 			url: '/application/vote',
 			data: data,
 			type: 'POST',
 			dataType: 'json',
+			beforeSend: function(){
+				loader.css('display', 'inline-block');
+				self.parent().append(loader);
+			},
 			error: function(data){
 				console.log(data);
 				alert(data.error);
+				loader.remove();
 			},
 			success: function(data){
 				console.log(data);
@@ -221,8 +234,48 @@ function voting()
 				console.log(vote);
 				self.parent().find('span.voted').removeClass().addClass(mainClass);
 				self.parent().find('span[data-vote=' + vote + ']').addClass('voted voted_' + vote);
+				var filtered = $('#filter').val();
+				loader.remove();
+				if (filtered != -2)
+				{
+					if (filtered != vote) self.closest('tr').hide();
+				}
+				
 			},
 		});
+		
+	});
+}
+
+function filterForm()
+{
+	$('#filter').change(function(){
+		
+		val = $(this).val();
+		console.log('Selected ' + val);
+		if (val == -2) 
+		{
+			$('tr.applicationData').show();
+		}
+		else if (val == -1)
+		{
+			$('tr.applicationData').show();
+			$('.voted').each(function(){
+				$(this).closest('tr').hide();
+			})
+		}
+		else
+		{
+			$('tr.applicationData').hide();
+			$('.voted').each(function(){
+				var self = $(this);
+				if (self.data('vote') == val)
+				{
+					self.closest('tr').show();
+				} 
+			});
+		}
+		
 		
 	});
 }
