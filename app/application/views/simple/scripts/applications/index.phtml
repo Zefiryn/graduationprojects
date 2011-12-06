@@ -153,7 +153,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 						?>
 						<p class="votes">
 						<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-							<span class="vote <?php if ($i === $vote) echo 'voted voted_'.$i;?>"
+							<span class="vote <?php if (($i*$juror->wage) === $vote) echo 'voted voted_'.$i;?>"
 								data-juror-id="<?php echo $juror->juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
 								data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>">
 								<?php if ($this->currentStage->translate)
@@ -181,7 +181,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 								<p class="votes">
 									<span class="juror_name"><?php echo $juror_vote['juror_name']?>:</span>
 									<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-										<span class="admin_vote <?php if ($i === $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
+										<span class="admin_vote <?php if(($i*$juror_vote['wage']) === $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
 												data-juror-id="<?php echo $juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
 												data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>"
 												
