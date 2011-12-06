@@ -82,7 +82,7 @@ class Application_Model_Applications extends GP_Application_Model
 	public function getApplications($sort = NULL, $stage = NULL)
 	{
 		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
-
+		
 		$rowset = $this->getDbTable()->getAllApplications($sort, $stage);
 
 		$applications = array();
