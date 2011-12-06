@@ -288,6 +288,7 @@ CREATE TABLE votes (
 	vote_id int NOT NULL AUTO_INCREMENT,
 	stage_id smallint(6) not null,
 	juror_id int not null,
+	application_id smallint(6) not null,
 	vote int not null,
 	PRIMARY KEY (vote_id),
 	FOREIGN KEY(stage_id)
@@ -295,5 +296,8 @@ CREATE TABLE votes (
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY(juror_id)
 		REFERENCES jurors(juror_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(application_id)
+		REFERENCES applications(application_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;

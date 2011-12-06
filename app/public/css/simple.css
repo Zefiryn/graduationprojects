@@ -1359,6 +1359,10 @@ span.vote {
 	cursor: pointer;
 }
 
+span.vote:hover, span.admin_vote:hover {
+	background-color: #ddd;
+}
+
 div.application_votes {
 	margin: 0px;
 	padding: 0px
