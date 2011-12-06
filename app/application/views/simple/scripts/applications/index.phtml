@@ -14,11 +14,21 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	<div class="filter_applications">
 		<div>
 		<p><?php echo $this->translate('filter_applications')?></p>
-		<form>
-			<select>
+		<form name="filterForm" id="filterForm" method="POST" action="">
+			<select name="filter" id="filter">
+				<option value="-2" ><?php echo $this->translate('all_applications')?></option>
 				<option value="-1" ><?php echo $this->translate('unrated')?></option>
 				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-				<option value="<?php echo $i;?>" ><?php echo $this->translate('vote_'.$i)?></option>
+				<option value="<?php echo $i;?>" >
+					<?php if ($this->translate('stage_'. $this->currentStage->order .'_vote_'.$i) != 'stage_'. $this->currentStage->order .'_vote_'.$i)
+						{ 
+							echo $this->translate('stage_'. $this->currentStage->order .'_vote_'.$i);
+						}
+						else {
+							echo $this->translate('voted') . ' ' . $i;
+						}
+						?>
+				</option>
 				<?php endfor;?>
 			</select>
 		</form>
@@ -99,7 +109,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		<?php if (count($this->applications) > 0):?>
 		<!--APPLICATIONS DATA -->
 		<?php foreach ($this->applications as $no => $application):?>
-		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
+		<tr class="applicationData" <?php if ($no%2 == 0):?>grey<?php endif;?>">
 			<!-- # -->
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
 			
@@ -246,3 +256,4 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	</table>
 	
 </div>
+<img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
