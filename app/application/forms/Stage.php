@@ -43,9 +43,39 @@ class Application_Form_Stage extends Zefir_Form
 			));
 		$this->addElement($element);
 		
+		$element = $this->createElement('text', 'qualification_score');
+		$element->setAttribs(array('class' => 'width1'))
+			->setLabel('qualification_score')
+			->setDecorators($this->_getZefirDecorators())
+			->setRequired(TRUE)
+			->addValidators(array(
+				new Zend_Validate_Digits()
+			));
+		$this->addElement($element);
+		
+		$element = $this->createElement('text', 'order');
+		$element->setAttribs(array('class' => 'width1'))
+			->setLabel('order')
+			->setDecorators($this->_getZefirDecorators())
+			->setRequired(TRUE)
+			->addValidators(array(
+				new Zend_Validate_Digits()
+			));
+		$this->addElement($element);
+		
 		$element = $this->createElement('checkbox', 'active');
 		$element->setAttribs(array('class' => 'checkbox'))
 			->setLabel('active', array('tag' => 'label'))
+			->setDecorators($this->_getStandardDecorators())
+			->setRequired(FALSE)
+			->addValidators(array(
+				new Zend_Validate_Regex('/^0|1$/')
+			));
+		$this->addElement($element);
+		
+		$element = $this->createElement('checkbox', 'translate');
+		$element->setAttribs(array('class' => 'checkbox'))
+			->setLabel('translate_stage', array('tag' => 'label'))
 			->setDecorators($this->_getStandardDecorators())
 			->setRequired(FALSE)
 			->addValidators(array(

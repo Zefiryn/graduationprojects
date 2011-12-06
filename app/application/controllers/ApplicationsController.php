@@ -17,11 +17,18 @@ class ApplicationsController extends Zefir_Controller_Action
 		$applications = $application->getApplications($this->_getSort(), $currentStage);
 		
 		$stages = new Application_Model_Stages();
+		$jurors = new Application_Model_Jurors();
+		$jurors = $jurors->fetchAll();
 			
 		$this->view->statistics = $this->_createStatistics($applications);
 		$this->view->applications = $applications;
 		$this->view->stages = $stages->fetchAll();
+		if ($this->view->user->_role == 'admin')
+		{
+			$this->view->votes = $this->_getAllVotes($currentStage, $applications, $jurors);
+		}
 		$this->view->currentStage = $currentStage;
+		
 	}
 
 	public function newAction()
@@ -243,8 +250,6 @@ class ApplicationsController extends Zefir_Controller_Action
 		$this->flashMe('application_deleted', 'SUCCESS');		
 		echo json_encode(array('link' => $this->view->url(array(), 'applications')));
 		
-		
-		
 	}
 
 	public function showAction()
@@ -305,6 +310,44 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 			$this->flashMe('ajax_only', 'FAILURE');
 			$this->_redirectToRoute(array(), 'root');
+		}
+	}
+	
+	public function voteAction()
+	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
+		$request = $this->getRequest();
+		$post = $request->getPost();
+		
+		if (!isset($post['application_id']) 
+			|| !isset($post['stage_id']) 
+			|| !isset($post['juror_id']))
+		{
+			echo Zend_Json::encode(array('error' => 'We ar unable to process your request due to missing data'));
+		}
+		else
+		{
+			$vote = new Application_Model_Votes();
+			$vote->find(array(
+					'stage_id' => $post['stage_id'], 
+					'juror_id' => $post['juror_id'],
+					'application_id' => $post['application_id']));
+			
+			if ($vote->isEmpty())
+			{
+				$vote->populate($post);
+			}
+			
+			$vote->vote = $post['vote'];
+			try {
+				$vote->save();
+				echo Zend_Json::encode(array('success' => $vote->vote));
+			}
+			catch (Zend_Exception $e) {
+				echo Zend_Json::encode(array('error' => $e->getMessage()));
+			}
 		}
 	}
 
@@ -483,13 +526,38 @@ class ApplicationsController extends Zefir_Controller_Action
 		if (!$stage)
 		{
 			$stages = new Application_Model_Stages();
-			$firstStage = $stages->getDbTable()->fetchAll('active = 1')->current();
-			$stage = $firstStage->stage_id;  
+			$stageObj = $stages->getDbTable()->fetchAll('active = 1', 'order')->current();  
+		}
+		else 
+		{
+			$stageObj = new Application_Model_Stages();
+			$stageObj->getBy('order', $stage);
+			
 		}
 		
-		$stageObj = new Application_Model_Stages($stage);
 		return $stageObj;
+	}
+	
+	protected function _getAllVotes($stage, $applications, $jurors)
+	{
+		$vote = new Application_Model_Votes();
+		$appVotes = $vote->getVotesByJurors($stage->stage_id);
 		
+		$votes = array();
+		foreach($applications as $application)
+		{
+			//get current application votes
+			$appVote = (isset($appVotes[$application->application_id])) ? $appVotes[$application->application_id] : array();
+			foreach($jurors as $juror)
+			{
+				
+				$vote = isset($appVote[$juror->juror_id]) ? $appVote[$juror->juror_id] : -1;
+				$votes[$application->application_id][$juror->juror_id] = array('juror_name' => $juror->juror_name,
+																				'vote' => (int)$vote); 
+			} 
+		}
+		
+		return $votes;
 		
 	}
 }

@@ -1342,17 +1342,61 @@ table.stats td {
 	padding: 2px;
 	cursor: pointer;
 }
+p.votes {
+	text-align: center;
+}
 
 span.vote {
 	display: block;
 	float: left;
 	text-align: center;
-	width: 50px;
+	width: auto;
 	height: 20px;
-	line-height: 24px;
+	line-height: 20px;
+	background-color: #999;
+	margin: 0px 5px;
+	padding: 0px 8px;
+	cursor: pointer;
+}
+
+div.application_votes {
+	margin: 0px;
+	padding: 0px
+	border: 0px solid yellow !important;
+}
+
+div.application_votes p{
+	margin: 2px 0px;
+	padding: 0px
+	border: 0px solid yellow !important;
+}
+
+span.admin_vote {
+	display: block;
+	float: left;
+	text-align: center;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+	font-size: 11px;
 	background-color: #999;
 	margin: 0px 5px;
 	cursor: pointer;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+span.juror_name {
+	display: block;
+	float: left;
+	text-align: left;
+	width: 90px; 
+	height: 15px;
+	line-height: 15px;
+	font-size: 11px;
+	margin: 0px;
+	border: 0px solid yellow;
 }
 
 span.voted_0 {
