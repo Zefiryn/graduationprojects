@@ -344,7 +344,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			$vote->vote = $post['vote'] * $juror->wage;
 			try {
 				$vote->save();
-				echo Zend_Json::encode(array('success' => $vote->vote));
+				echo Zend_Json::encode(array('success' => $post['vote']));
 			}
 			catch (Zend_Exception $e) {
 				echo Zend_Json::encode(array('error' => $e->getMessage()));
@@ -554,6 +554,7 @@ class ApplicationsController extends Zefir_Controller_Action
 				
 				$vote = isset($appVote[$juror->juror_id]) ? $appVote[$juror->juror_id] : -1;
 				$votes[$application->application_id][$juror->juror_id] = array('juror_name' => $juror->juror_name,
+																				'wage' => $juror->wage,
 																				'vote' => (int)$vote); 
 			} 
 		}
