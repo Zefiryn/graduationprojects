@@ -330,6 +330,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		else
 		{
 			$vote = new Application_Model_Votes();
+			$juror = new Application_Model_Jurors($post['juror_id']);
 			$vote->find(array(
 					'stage_id' => $post['stage_id'], 
 					'juror_id' => $post['juror_id'],
@@ -340,7 +341,7 @@ class ApplicationsController extends Zefir_Controller_Action
 				$vote->populate($post);
 			}
 			
-			$vote->vote = $post['vote'];
+			$vote->vote = $post['vote'] * $juror->wage;
 			try {
 				$vote->save();
 				echo Zend_Json::encode(array('success' => $vote->vote));
