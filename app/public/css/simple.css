@@ -1370,8 +1370,10 @@ div.application_votes {
 }
 
 div.application_votes p{
-	margin: 2px 0px;
+	margin: 0px 0px;
 	padding: 0px
+	overflow: hidden;
+	height: 22px;
 	border: 0px solid yellow !important;
 }
 
@@ -1379,9 +1381,9 @@ span.admin_vote {
 	display: block;
 	float: left;
 	text-align: center;
-	width: 15px;
-	height: 15px;
-	line-height: 15px;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
 	font-size: 11px;
 	background-color: #999;
 	margin: 0px 5px;
@@ -1396,12 +1398,17 @@ span.juror_name {
 	float: left;
 	text-align: left;
 	width: 90px; 
-	height: 15px;
-	line-height: 15px;
+	height: 18x;
+	line-height: 18px;
 	font-size: 11px;
 	margin: 0px;
 	border: 0px solid yellow;
 }
+
+span.voted {
+	background-color: #e8b000;
+}
+
 
 span.voted_0 {
 	background-color: #e80000;
@@ -1437,6 +1444,14 @@ a.index_application_files:hover {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	background-color: #333;
+}
+
+#loader {
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	width: 16px;
+	height: 16px;
 }
 
 .captions {
