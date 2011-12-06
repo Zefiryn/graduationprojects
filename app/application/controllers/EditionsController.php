@@ -94,7 +94,7 @@ class EditionsController extends Zefir_Controller_Action
 		$edition = new Application_Model_Editions($id);
 		$edition->delete();
 		$this->flashMe('edition_deleted', 'SUCCESS');
-		$this->_redirect('editions');
+		$this->_redirectToRoute(array(), 'editions');
 	}
 
 

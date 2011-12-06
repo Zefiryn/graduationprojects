@@ -10,7 +10,6 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 
 	<?php echo $this->translate('applications_header'); ?></h1>
 	
-	<?php if (count($this->applications) > 0):?>
 	<p class="clear">&nbsp;</p>
 	<div class="filter_applications">
 		<div>
@@ -27,16 +26,17 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		
 		<div>
 		<p><?php echo $this->translate('voting_stage');?></p>
-		<form>
-			<select>
+		<form name="stage_select" id="stageSelectForm" action="" method="post">
+			<select name="stage" id="stageSelect">
 				<?php foreach($this->stages as $stage):?>
-				<option value="<?php echo $stage->stage_id;?>" ><?php echo $stage->stage_name?></option>
+				<option value="<?php echo $stage->order;?>" <?php if ($stage->stage_id == $this->currentStage->stage_id) echo 'selected="selected"';?>><?php echo $stage->stage_name?></option>
 				<?php endforeach;?>
 			</select>
 		</form>
 		</div>
 	</div>
 	<div class="clear"></div>
+		
 	<table class="applications">
 		<!--TABLE HEADERS-->
 		<tr class="header">
@@ -86,7 +86,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php echo $this->translate('application_files');?>
 			</th>
 			<!--VOTE LINK-->
-			<th class="normal" style="width: 100px;">
+			<th class="normal" style="width: 150px;">
 				<?php echo $this->translate('vote');?>
 			</th>
 			
@@ -96,7 +96,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			</th>
 		</tr>
 		<!--END OF TABLE HEADERS-->
-		
+		<?php if (count($this->applications) > 0):?>
 		<!--APPLICATIONS DATA -->
 		<?php foreach ($this->applications as $no => $application):?>
 		<tr <?php if ($no%2 == 0):?>class="grey"<?php endif;?>>
@@ -142,22 +142,58 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			</td>
 			
 			<!-- VOTES -->
-			<td class="normal" style="width: 100px;">
-				<?php if ($juror):?>
-					<?php 
-						$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
-						$vote = $vote != null ? (int)$vote : $vote;
-					?>
-					<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-						<span class="vote <?php if ($i === $vote) echo 'voted_'.$i;?>"><?php echo $this->translate('vote_'.$i);?></span>
-					<?php endfor;?>
-					<p class="clear"></p>
-				<?php elseif ($admin):?>
-					<span><?php echo $this->translate('unrated');?>: </span><?php echo $application->countEmptyVotes($this->currentStage->stage_id);?><br />
-				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-					<span><?php echo $this->translate('vote_'.$i);?>: </span><?php echo $application->countVotes($this->currentStage->stage_id, $i);?><br />
-				<?php endfor;?>
-				<?php endif;?>
+			<td class="normal" style="width: 150px;">
+				
+				
+					<?php if ($juror && $this->currentStage->active)  :?>
+					
+						<?php 
+							$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
+							$vote = $vote != null ? (int)$vote : $vote;
+						?>
+						<p class="votes">
+						<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+							<span class="vote <?php if ($i === $vote) echo 'voted voted_'.$i;?>"
+								data-juror-id="<?=$juror->juror_id?>" data-stage-id="<?=$this->currentStage->stage_id?>" 
+								data-vote="<?=$i?>" data-application-id="<?=$application->application_id?>">
+								<?php if ($this->currentStage->translate)
+									{
+										 echo $this->translate('stage_'.$this->currentStage->order.'_vote_'.$i);
+									}
+									else 
+									{
+										echo $i;
+									}
+								?>
+							</span>
+						
+						<?php endfor;?>
+						</p>
+						<p class="clear"></p>
+					<?php elseif ($juror && $this->currentState->active == 0):?>
+					<p><?php echo $this->translate('stage_closed');?></p>
+					
+					<?php elseif ($admin):?>
+						<!-- GET EACH JURORS VOTE -->
+						<div class="application_votes">
+						<?php foreach($this->votes[$application->application_id] as $juror_id =>  $juror_vote):?>
+							<!-- CREATE FIELDS FOR VOTES FOR EACH JUROR-->
+								<p class="votes">
+									<span class="juror_name"><?php echo $juror_vote['juror_name']?>:</span>
+									<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+										<span class="admin_vote <?php if ($i === $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
+												data-juror-id="<?=$juror_id?>" data-stage-id="<?=$this->currentStage->stage_id?>" 
+												data-vote="<?=$i?>" data-application-id="<?=$application->application_id?>"
+												
+										><?= $i; ?></span>
+									<?php endfor;?>
+								</p>					
+								<p class="clear" style="height: 2px;"></p>	
+						<?php endforeach;?>
+						</div>
+					<?php endif;?>
+					
+				
 			</td>
 			
 			<!-- ADMIN ACTION -->
@@ -177,6 +213,16 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			</td>	
 		</tr>
 		<?php endforeach;?>
+		
+		<?php else: ?>
+		<!-- NO APPLICATIONS -->
+		<tr>
+			<td colspan="10" style="font-size: 24px;text-align: center;padding: 20px 0px;">
+				<?php echo $this->translate('no_applications_for_current_selection');?>
+			</td>
+		</tr>		
+		
+		<?php endif;?>
 	</table>
 
 	<table class="stats"> 
@@ -198,12 +244,5 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		</tr>
 		<?php endforeach;?>
 	</table>
-	<?php else:?>
-	<p class="empty">
-		<br />
-		<?php echo $this->translate('no_applications');?>
-		<br /><br /><br />
-	</p>
-		
-	<?php endif;?>
+	
 </div>

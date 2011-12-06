@@ -78,5 +78,16 @@ class JurorsController extends Zefir_Controller_Action
 		$this->view->form = $form;
 	}
 	
+	public function deleteAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+	
+		$juror = new Application_Model_Jurors($id);
+		$juror->delete();
+		$this->flashMe('juror_deleted', 'SUCCESS');
+		$this->_redirectToRoute(array(), 'vote_settings');
+	}
+	
 	
 }

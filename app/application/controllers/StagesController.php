@@ -50,5 +50,36 @@ class StagesController extends Zefir_Controller_Action
 		$this->view->form = $form;
 	}
 	
+	public function deleteAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+		
+		$stage = new Application_Model_Stages($id);
+		$stage->delete();
+		$this->flashMe('stage_deleted', 'SUCCESS');
+		$this->_redirectToRoute(array(), 'vote_settings');
+	}
+	
+	public function blockAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+		$stage = new Application_Model_Stages($id);
+		$stage->block();
+		$this->flashMe('stage_blocked', 'SUCCESS');
+		$this->_redirectToRoute(array(), 'vote_settings');
+	}
+	
+	public function activateAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+		$stage = new Application_Model_Stages($id);
+		$stage->activate();
+		$this->flashMe('stage_activated', 'SUCCESS');
+		$this->_redirectToRoute(array(), 'vote_settings');
+	}
+	
 	
 }

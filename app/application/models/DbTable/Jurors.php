@@ -22,4 +22,5 @@ class Application_Model_DbTable_Jurors extends Zefir_Application_Model_DbTable
 	{
 		parent::__construct($config);
 	}
+	
 }
