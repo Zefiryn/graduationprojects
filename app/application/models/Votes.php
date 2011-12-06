@@ -16,4 +16,17 @@ class Application_Model_Votes extends GP_Application_Model
 	{
 		return parent::__construct($id, $options);
 	}
+	
+	public function getVotesByJurors($stage_id)
+	{
+		$rowset = $this->getDbTable()->fetchAll('stage_id = '.$stage_id);
+		
+		$votes = array();
+		foreach($rowset as $row)
+		{
+			$votes[$row['application_id']][$row['juror_id']] = $row['vote'];
+		}
+		
+		return $votes;
+	}
 }

@@ -280,6 +280,7 @@ CREATE TABLE stages (
 	stage_id smallint(6) NOT NULL AUTO_INCREMENT,
 	stage_name char(10) NOT NULL,
 	stage_max_vote SMALLINT(6) NOT NULL,
+	active tinyint default '1',
 	PRIMARY KEY (stage_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

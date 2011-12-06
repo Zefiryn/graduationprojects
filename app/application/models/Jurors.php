@@ -44,4 +44,5 @@ class Application_Model_Jurors extends GP_Application_Model
 			return null;
 		}
 	}
+	
 }

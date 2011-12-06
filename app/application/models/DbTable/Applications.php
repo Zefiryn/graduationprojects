@@ -77,13 +77,14 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		parent::__construct(array());
 	}
 
-	public function getAllApplications($sort)
+	public function getAllApplications($sort, $stage)
 	{
 		$user = new Application_Model_Users();
 		$user_table = $user->getDbTable()->getTablename();
 		 
 		$work_type = new Application_Model_WorkTypes();
 		$work_type_table = $work_type->getDbTable()->getTablename();
+		
 		 
 		$select = $this->select()
 		->setIntegrityCheck(FALSE)
@@ -91,6 +92,23 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
 		->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
 		->order($sort);
+		
+		if ($stage)
+		{
+			if ($stage->order > 1)
+			{
+				$vote = new Application_Model_Votes();
+				$select2 = $vote->getDbTable()
+								->select()
+								->from($vote->getDbTable()->getTableName(), 'application_id')
+								->where('stage_id = ?', $stage->getPreviousStageId())
+								->group('application_id')
+								->having('count(vote) >= ?', $stage->qualification_score);
+							
+				$select->where('application_id IN ('. $select2->__toString(). ')');
+			}
+			
+		}
 		
 		return $this->fetchAll($select); 
 	}

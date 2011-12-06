@@ -79,11 +79,11 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 
-	public function getApplications($sort = NULL, $currentStage = NULL)
+	public function getApplications($sort = NULL, $stage = NULL)
 	{
 		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
 
-		$rowset = $this->getDbTable()->getAllApplications($sort);
+		$rowset = $this->getDbTable()->getAllApplications($sort, $stage);
 
 		$applications = array();
 		foreach($rowset as $row)
@@ -175,7 +175,10 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function getVotes($stage)
 	{
-		$this->__get('votes');
+		if ($this->votes === null)
+		{
+			$this->__get('votes');
+		}
 		
 		$votes = array();
 		foreach($this->votes as $vote)
@@ -187,6 +190,25 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 		
 		return $votes;		
+	}
+	
+	public function getVotesByJurors($stage)
+	{
+		if ($this->votes === null)
+		{
+			$this->__get('votes');
+		}
+	
+		$votes = array();
+		foreach($this->votes as $vote)
+		{
+			if ($vote->stage_id = $stage)
+			{
+				$votes[$vote->juror_id]= $vote->vote;
+			}
+		}
+	
+		return $votes;
 	}
 	
 	public function countVotes($stage, $voteVal)

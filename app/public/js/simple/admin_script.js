@@ -33,6 +33,16 @@ $(document).ready(function(){
 		});
 		
 	}
+	
+	if ($('p.votes').length)
+	{
+		voting();
+		 
+	}
+	if ($('#stageSelectForm').length)
+	{
+		stageSelect();
+	}
 });
 
 function showCaptions()
@@ -169,5 +179,50 @@ function sortNumbers(elem, prev, post)
 	$(".regulation_number, .position").each(function(index){
 		var id = index + 1; 
 		$(this).html(prev+id+post);
+	});
+}
+
+function stageSelect()
+{
+	$('#stageSelect').change(function(){
+		$('#stageSelectForm').submit();}
+	);
+}
+
+function voting()
+{
+	$('p.votes span.vote, p.votes span.admin_vote').click(function(){
+		var self = $(this);
+		
+		if (self.hasClass('vote'))
+			var mainClass = 'vote';
+		else
+			var mainClass = 'admin_vote';
+		
+		var data = {
+			juror_id: self.data('juror-id'),
+			stage_id: self.data('stage-id'),
+			application_id: self.data('application-id'),
+			vote: self.data('vote'),
+		};
+		console.log(data);
+		$.ajax({
+			url: '/application/vote',
+			data: data,
+			type: 'POST',
+			dataType: 'json',
+			error: function(data){
+				console.log(data);
+				alert(data.error);
+			},
+			success: function(data){
+				console.log(data);
+				var vote = data.success;
+				console.log(vote);
+				self.parent().find('span.voted').removeClass().addClass(mainClass);
+				self.parent().find('span[data-vote=' + vote + ']').addClass('voted voted_' + vote);
+			},
+		});
+		
 	});
 }
