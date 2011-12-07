@@ -46,8 +46,11 @@ $(document).ready(function(){
 	
 	if ($('#filterForm').length)
 	{
-		
 		filterForm();
+	}
+	if ($('.stage_choice').length)
+	{
+		changeStage();
 	}
 });
 
@@ -197,7 +200,7 @@ function stageSelect()
 
 function voting()
 {
-	$('p.votes span.vote, p.votes span.admin_vote').click(function(){
+	$('p.votes span.vote, p.votes span.admin_vote').live('click', function(){
 		var self = $(this);
 		
 		if (self.hasClass('vote'))
@@ -276,6 +279,38 @@ function filterForm()
 			});
 		}
 		
+		
+	});
+}
+
+function changeStage()
+{
+	$('.stage_choice').live('click', function(){
+		var self = $(this);
+		var votebox = $('div.vote_box');
+		var application_id = votebox.data('application-id');
+		var stage = self.data('stage');
+		var loader = $('#loader').clone().addClass('cloned');
+		
+		$.ajax({
+			url: '/applications/getstage',
+			data: {'id': application_id, 'stage': stage},
+			type: 'GET',
+			beforeSend: function(){
+				loader.css('display', 'inline-block');
+				self.parent().append(loader);
+			},
+			error: function(data){
+				console.log(data);
+				alert(data.error);
+				loader.remove();
+			},
+			success: function(data){
+				console.log(data);
+				votebox.replaceWith(data);
+				
+			},
+		});
 		
 	});
 }

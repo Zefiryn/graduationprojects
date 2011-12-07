@@ -267,9 +267,58 @@ class ApplicationsController extends Zefir_Controller_Action
 		|| $this->view->user->role == 'juror'
 		|| $this->view->user->user_id == $application->user->user_id)
 		{
+			$stages = new Application_Model_Stages();
+			$currentStage = $this->_getCurrentStage();
 				
 			$this->view->application = $application;
+			$this->view->currentStage = $currentStage;
+			$this->view->stages = $stages->fetchAll();
 			$this->view->adjacent = $application->getAdjacentApplication();
+				
+			if ($this->view->user->_role == 'admin')
+			{
+				$jurors = new Application_Model_Jurors();
+				$jurors = $jurors->fetchAll();
+				$this->view->votes = $this->_getAllVotes($currentStage, array($application), $jurors);
+			}
+		}
+		else
+		{
+			$this->flashMe('not_allowed', 'FAILURE');
+			$this->_redirect('/index');
+		}
+	}
+	
+	public function getstageAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', '');
+		
+		if ($id == null)
+			throw new Zend_Exception('Wrong id parameter');
+		
+		$application = new Application_Model_Applications($id);
+			
+		if ($this->view->user->role == 'admin'
+		|| $this->view->user->role == 'juror'
+		|| $this->view->user->user_id == $application->user->user_id)
+		{
+			$this->_helper->layout()->disableLayout();
+			
+			$stages = new Application_Model_Stages();
+			$currentStage = $this->_getCurrentStage();
+			
+			$this->view->application = $application;
+			$this->view->currentStage = $currentStage;
+			$this->view->stages = $stages->fetchAll();
+			
+			if ($this->view->user->_role == 'admin')
+			{
+				$jurors = new Application_Model_Jurors();
+				$jurors = $jurors->fetchAll();
+				$this->view->votes = $this->_getAllVotes($currentStage, array($application), $jurors);
+			}
+			$this->render('vote_box');
 		}
 		else
 		{
@@ -549,6 +598,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		{
 			//get current application votes
 			$appVote = (isset($appVotes[$application->application_id])) ? $appVotes[$application->application_id] : array();
+			
 			foreach($jurors as $juror)
 			{
 				

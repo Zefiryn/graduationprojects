@@ -153,55 +153,53 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			
 			<!-- VOTES -->
 			<td class="normal" style="width: 150px;">
-				
-				
-					<?php if ($juror && $this->currentStage->active)  :?>
-					
-						<?php 
-							$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
-							$vote = $vote != null ? (int)$vote : $vote;
+		
+			<?php if ($juror && $this->currentStage->active)  :?>
+				<?php 
+					$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
+					$vote = $vote != null ? (int)$vote : $vote;
+				?>
+				<p class="votes">
+				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+					<span class="vote <?php if (($i*$juror->wage) === $vote) echo 'voted voted_'.$i;?>"
+						data-juror-id="<?php echo $juror->juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
+						data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>">
+						<?php if ($this->currentStage->translate)
+							{
+								 echo $this->translate('stage_'.$this->currentStage->order.'_vote_'.$i);
+							}
+							else 
+							{
+								echo $i;
+							}
 						?>
-						<p class="votes">
-						<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-							<span class="vote <?php if (($i*$juror->wage) === $vote) echo 'voted voted_'.$i;?>"
-								data-juror-id="<?php echo $juror->juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
-								data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>">
-								<?php if ($this->currentStage->translate)
-									{
-										 echo $this->translate('stage_'.$this->currentStage->order.'_vote_'.$i);
-									}
-									else 
-									{
-										echo $i;
-									}
-								?>
-							</span>
-						
-						<?php endfor;?>
-						</p>
-						<p class="clear"></p>
-					<?php elseif ($juror && $this->currentState->active == 0):?>
-					<p><?php echo $this->translate('stage_closed');?></p>
+					</span>
+				
+				<?php endfor;?>
+				</p>
+				<p class="clear"></p>
+				<?php elseif ($juror && $this->currentState->active == 0):?>
+				<p><?php echo $this->translate('stage_closed');?></p>
 					
-					<?php elseif ($admin):?>
-						<!-- GET EACH JURORS VOTE -->
-						<div class="application_votes">
-						<?php foreach($this->votes[$application->application_id] as $juror_id =>  $juror_vote):?>
-							<!-- CREATE FIELDS FOR VOTES FOR EACH JUROR-->
-								<p class="votes">
-									<span class="juror_name"><?php echo $juror_vote['juror_name']?>:</span>
-									<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-										<span class="admin_vote <?php if(($i*$juror_vote['wage']) === $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
-												data-juror-id="<?php echo $juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
-												data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>"
-												
-										><?php echo  $i; ?></span>
-									<?php endfor;?>
-								</p>					
-								<p class="clear" style="height: 2px;"></p>	
-						<?php endforeach;?>
-						</div>
-					<?php endif;?>
+				<?php elseif ($admin):?>
+					<!-- GET EACH JURORS VOTE -->
+					<div class="application_votes">
+					<?php foreach($this->votes[$application->application_id] as $juror_id =>  $juror_vote):?>
+						<!-- CREATE FIELDS FOR VOTES FOR EACH JUROR-->
+							<p class="votes">
+								<span class="juror_name"><?php echo $juror_vote['juror_name']?>:</span>
+								<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
+									<span class="admin_vote <?php if(($i*$juror_vote['wage']) === $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
+											data-juror-id="<?php echo $juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
+											data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>"
+											
+									><?php echo  $i; ?></span>
+								<?php endfor;?>
+							</p>					
+							<p class="clear" style="height: 2px;"></p>	
+					<?php endforeach;?>
+					</div>
+				<?php endif;?>
 					
 				
 			</td>

@@ -174,18 +174,15 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		parent::delete($application);
 	}
 	
-	public function countVotes($stage, $vote, $app)
+	public function countVotes($stage, $app)
 	{
-		/*$select = $this->select()
-						->from($this->_prefix.'votes', array('count(*) as count' ))
+		$select = $this->select()
+						->from($this->_prefix.'votes', array('SUM(vote) as votes' ))
 						->setIntegrityCheck(false)
 						->where('application_id = ?', $app)
-						->where('stage_id = ?', $stage)
-						->group('vote')
-						->having('vote = ?', $vote);
-		$row = $this->fetchAll($select)->current();
-		return $row['count'];*/
-		return 0;
+						->where('stage_id = ?', $stage);
+		$row = $this->fetchRow($select);
+		return $row['votes'];
 	}
 
 	protected function _addNewSchool($application)
