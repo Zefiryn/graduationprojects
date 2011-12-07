@@ -2,7 +2,6 @@
 class Application_Model_Jurors extends GP_Application_Model
 {
 	public $juror_id;
-	public $user_id;
 	public $juror_name;
 	public $country;
 	public $wage;

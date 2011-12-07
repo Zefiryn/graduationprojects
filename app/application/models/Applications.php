@@ -200,12 +200,16 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 	
 		$votes = array();
+		
 		foreach($this->votes as $vote)
 		{
-			if ($vote->stage_id = $stage)
+			if ($vote->stage_id == $stage)
 			{
-				$votes[$vote->juror_id]= $vote->vote;
+				$votes[$vote->juror_id]= array('vote' => $vote->vote,
+												'wage' => $vote->juror->wage,
+												'juror_name' => $vote->juror->juror_name);
 			}
+			
 		}
 	
 		return $votes;
@@ -261,6 +265,26 @@ class Application_Model_Applications extends GP_Application_Model
 			return self::$_jurorCount - $count;
 		}
 		
+	}
+	
+	public function inStage($stage)
+	{
+		if ($stage->order > 1)
+		{
+			$votes = $this->getDbTable()->countVotes($stage->getPreviousStageId(), $this->application_id);
+			if ($votes >= $stage->qualification_score) 
+			{
+				return TRUE;
+			}
+			else
+			{
+				return FALSE;
+			}
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 }
