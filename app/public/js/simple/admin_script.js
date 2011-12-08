@@ -56,13 +56,31 @@ $(document).ready(function(){
 	{
 		bindSpanHint();
 	}
+	
+	if ($('div.caption'))
+	{
+		editTranslation();
+	}
 });
 
 function showCaptions()
 {
+	//show only the one that has no translation
+	$('.caption p').hide();
+	$('span.translation_missing').closest('p').show();
 	
 	$('.caption h3').click(function(){
-		$(this).siblings('p').toggle();//slideToggle('slow');
+		var par = $(this).siblings('p');
+		var visible = $(this).siblings('p:visible');
+		
+		if ((visible.length > 0 && visible.length < par.length) || visible.length == 0)
+		{
+			par.show();
+		}
+		else
+		{
+			par.hide();
+		}
 	});
 }
 
@@ -220,7 +238,6 @@ function voting()
 		};
 		var loader = $('#loader').clone().addClass('cloned');
 		
-		console.log(data);
 		$.ajax({
 			url: '/application/vote',
 			data: data,
@@ -236,18 +253,34 @@ function voting()
 				loader.remove();
 			},
 			success: function(data){
-				console.log(data);
-				var vote = data.success;
-				console.log(vote);
-				self.parent().find('span.voted').removeClass().addClass(mainClass);
-				self.parent().find('span[data-vote=' + vote + ']').addClass('voted voted_' + vote);
-				var filtered = $('#filter').val();
-				loader.remove();
-				if (filtered != -2)
-				{
-					if (filtered != vote) self.closest('tr').hide();
-				}
 				
+				if (data.success)
+				{
+					var vote = data.success;
+					self.parent().find('span.voted').removeClass().addClass(mainClass);
+					
+					var lastVote = self.parent().find('span.'+ mainClass + ':last').data('vote');
+					if (vote == 0)
+						var voteClass = 'first';
+					else if (vote == lastVote)
+						var voteClass = 'last';
+					else
+						var voteClass = vote;
+					
+					var voteBox = self.parent().find('span[data-vote=' + vote + ']');
+					voteBox.addClass('voted vote_' + voteClass);
+					
+					var filtered = $('#filter').val();
+					loader.remove();
+					if (filtered != -2)
+					{
+						if (filtered != vote) self.closest('tr').hide();
+					}
+				}
+				else
+				{
+					
+				}
 			},
 		});
 		
@@ -305,18 +338,26 @@ function changeStage()
 			url: '/applications/getstage',
 			data: {'id': application_id, 'stage': stage},
 			type: 'GET',
+			dataType: 'json',
 			beforeSend: function(){
 				loader.css('display', 'inline-block');
 				self.parent().append(loader);
 			},
 			error: function(data){
 				console.log(data);
-				alert(data.error);
+				alert(data);
 				loader.remove();
 			},
 			success: function(data){
 				console.log(data);
-				votebox.replaceWith(data);
+				if (data.html)
+				{
+					votebox.replaceWith(data.html);
+				}
+				else 
+				{
+					alert('An error occured when receiving data');
+				}
 				
 			},
 		});
@@ -400,5 +441,66 @@ function bindSpanHint(){
 				});
 			}
 		}
+	});
+}
+
+function editTranslation()
+{
+	$('.edit_translation').live('click', function(e){
+		e.preventDefault();
+		
+		var self = $(this);
+		var data = {'loc_lang': self.data('lang'),
+					'id': self.data('caption-id')};
+		var parent = self.closest('p');
+		var parentClone = parent.clone();
+		var strong = parent.find('strong');
+		var form = '<textarea name="text" id="text" class="width1 inline"></textarea><p class="submit center"><input type="submit" name="leave" id="leave" value="Cancel" class="submit unprefered"><input type="submit" name="submit" id="submit" value="Save" class="submit prefered"></p>';
+
+		//show form
+		parent.html(strong).append('<br />').append(form);
+		
+		//add existing text
+		var existingTranslation = parentClone.children('span').text();
+		console.log(existingTranslation);
+		if (existingTranslation  != 'empty')
+		{
+			$('#text').val(existingTranslation);
+		}
+		
+		
+		//cancel
+		$('#leave').click(function(){
+			parent.replaceWith(parentClone);
+		});
+		
+		//save form
+		$('#submit').click(function(){
+			
+			var loader = $('#loader').clone().addClass('cloned');
+			var url = '/localizations/' + data['loc_lang'] + '/edit/' + data['id'];
+			data['text'] = $('#text').val();
+			
+			$.ajax({
+				'url': url,
+				'data': {'text': data['text']},
+				'type': 'POST',
+				'dataType': 'json',
+				'beforeSend': function(){
+					loader.css('display', 'inline-block');
+					parent.children('strong').after(loader);
+				},
+				'error': function(data){
+					console.log(data);
+					alert(data.error);
+					
+				},
+				'success': function(data){
+					console.log(data);
+					parentClone.find('span').removeClass().css('color', '#000').html(data.translation);
+					parent.replaceWith(parentClone);
+				}
+			});
+		});
 	});
 }

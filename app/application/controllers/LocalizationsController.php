@@ -23,8 +23,6 @@ class LocalizationsController extends Zefir_Controller_Action
 	{
 		$request = $this->getRequest();
 		$lang = $request->getParam('loc_lang', 'pl');
-
-
 		$id = $request->getParam('id', null);
 
 		if ($id)
@@ -40,6 +38,10 @@ class LocalizationsController extends Zefir_Controller_Action
 				
 			if ($request->isPost())
 			{
+				if ($request->isXMLHttpRequest())
+				{
+					$form->removeElement('csrf');
+				}
 				if ($request->getPost('leave', null))
 				{
 					$this->flashMe('cancel_edit');
@@ -54,8 +56,17 @@ class LocalizationsController extends Zefir_Controller_Action
 					$localization->text = $form->getElement('text')->getValue();
 					$localization->save();
 						
-					$this->flashMe('translation_edited');
-					$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+					if (!$request->isXMLHttpRequest())
+					{
+						$this->flashMe('translation_edited');
+						$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+					}
+					else 
+					{
+						$this->_helper->layout()->disableLayout();
+						$this->_helper->viewRenderer->setNoRender(true);
+						echo Zend_Json::encode(array('translation' => $localization->text));
+					}
 				}
 			}
 			else
@@ -83,7 +94,15 @@ class LocalizationsController extends Zefir_Controller_Action
 			$localization->delete();
 			$this->flashMe('translation_deleted', 'SUCCESS');
 			$data = array(0 => $this->view->url(array('loc_lang' => $lang), 'localization'));
-			$this->_helper->json($data);
+			if ($request->isXMLHttpRequest())
+			{
+				$this->_helper->json($data);
+			}
+			else
+			{
+				$this->flashMe('translation_deleted');
+				$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+			}
 		}
 	}
 }

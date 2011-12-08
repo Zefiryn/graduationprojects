@@ -304,7 +304,8 @@ class ApplicationsController extends Zefir_Controller_Action
 		|| $this->view->user->user_id == $application->user->user_id)
 		{
 			$this->_helper->layout()->disableLayout();
-			
+			$this->_helper->viewRenderer->setNoRender(true);
+						
 			$stages = new Application_Model_Stages();
 			$currentStage = $this->_getCurrentStage();
 			
@@ -318,7 +319,19 @@ class ApplicationsController extends Zefir_Controller_Action
 				$jurors = $jurors->fetchAll();
 				$this->view->votes = $this->_getAllVotes($currentStage, array($application), $jurors);
 			}
-			$this->render('vote_box');
+			else
+			{
+				$this->view->votes = null;
+			}
+			echo Zend_Json::encode(array('html' => 
+					$this->view->partial('applications/vote-box.phtml', array(
+						'application' => $application,
+						'currentStage' => $currentStage,
+						'stages' => $stages->fetchAll(),
+						'votes' => $this->view->votes,
+						'user' => $this->view->user
+					))
+			));
 		}
 		else
 		{
