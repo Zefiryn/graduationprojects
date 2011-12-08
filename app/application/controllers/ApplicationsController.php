@@ -400,6 +400,84 @@ class ApplicationsController extends Zefir_Controller_Action
 			}
 		}
 	}
+	
+	public function disputeAction()
+	{
+		$request = $this->getRequest();
+		
+		$dispute = new Application_Model_Disputes();
+		$data = array('application_id' => $request->getParam('id'), 
+					'user_id' => $this->view->user->user_id );
+		$dispute = $dispute->find($data);
+		
+		if ($dispute->isEmpty())
+		{
+			$dispute->populateFromForm($data);
+			$dispute->save();
+		}
+		
+		if ($request->isXMLHttpRequest())
+		{
+			$application = new Application_Model_Applications($data['application_id']);
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			echo Zend_Json::encode(array('succcess' => $application->application_id, 
+										'dispute' => $this->view->partial('applications/_dispute.phtml', 
+															array('application' => $application))
+							));
+		}
+		else
+		{
+			$this->flashMe('objection_noted');
+			$this->_redirectToRoute(array(), 'applications');
+		}
+		
+	}
+	
+	public function removedisputeAction()
+	{
+		$request = $this->getRequest();
+		$dispute = new Application_Model_Disputes();
+		$data = array('application_id' => $request->getParam('id'), 
+					'user_id' => $this->view->user->user_id );
+		$dispute = $dispute->find($data);
+		
+		if ($this->view->user->user_id == $dispute->user_id || $this->view->user->_role == 'admin')
+		{
+			$dispute->delete();
+			if ($request->isXMLHttpRequest())
+			{
+				$application = new Application_Model_Applications($data['application_id']);
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender(true);
+				echo Zend_Json::encode(array('succcess' => $application->application_id, 
+										'dispute' => $this->view->partial('applications/_dispute.phtml', 
+															array('application' => $application))
+									));
+			}
+			else
+			{
+				$this->flashMe('objection_noted');
+				$this->_redirectToRoute(array(), 'applications');
+			}
+		}
+		else
+		{
+			if ($request->isXMLHttpRequest())
+			{
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender(true);
+				Zend_Json::encode(array('error' => 'no_access'));
+			}
+			else
+			{
+				$this->flashMe('no_access');
+				$this->_redirectToRoute(array(), 'applications');
+			}
+		}
+		
+		
+	}
 
 	protected function _checkFileCache($type = 'new')
 	{

@@ -24,6 +24,7 @@ class Application_Model_Applications extends GP_Application_Model
 	protected $work_type;
 	protected $files;
 	protected $votes;
+	protected $disputes;
 	protected static $_jurorCount;
 
 	protected $_update = FALSE;
@@ -285,6 +286,43 @@ class Application_Model_Applications extends GP_Application_Model
 		{
 			return TRUE;
 		}
+	}
+	
+	public function isDisputed($user)
+	{
+		if ($this->disputes === null)
+		{
+			$this->__get('disputes');
+		}
+		
+		if (!is_array($this->disputes)) $this->disputes = array();
+		
+		foreach($this->disputes as $dispute)
+		{
+			if ($dispute->user_id == $user->user_id)
+			{
+				return TRUE;
+			}
+		}
+		
+		return FALSE;
+	}
+	
+	public function getDispute($user)
+	{
+		if ($this->disputes === null)
+		{
+			$this->__get('disputes');
+		}
+		foreach($this->disputes as $dispute)
+		{
+			if ($dispute->user_id == $user->user_id)
+			{
+				return $dispute;
+			}
+		}
+	
+		return FALSE;
 	}
 
 }

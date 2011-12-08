@@ -163,7 +163,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->allow('juror', array('about'), null);
 		$acl->allow('juror', array('faq'), null);
 		$acl->allow('juror', array('regulations'), null);
-		$acl->allow('juror', array('applications'), array('vote', 'getstage'));
+		$acl->allow('juror', array('applications'), array('vote', 'getstage', 'dispute', 'removedispute'));
 
 		$acl->allow('admin', array('users'), array('new', 'index'));
 		$acl->allow('admin', null, null);

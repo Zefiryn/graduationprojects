@@ -22,7 +22,11 @@ class Application_Model_DbTable_Users extends Zefir_Application_Model_DbTable
 		'applications' => array(
 			'model' => 'Application_Model_Applications',
 			'refColumn' => 'user_id',
-	),
+		),
+		'disputes' => array(
+				'model' => 'Application_Model_Disputes',
+				'refColumn' => 'user_id',
+		),
 	);
 
 	/**

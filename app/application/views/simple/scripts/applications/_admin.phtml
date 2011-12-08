@@ -6,7 +6,13 @@
 	alt="<?php echo $this->translate('send_mail');?>"
 	title="<?php echo $this->translate('send_mail');?>" />
 </a>
-
+<a class="dispute" data-application-id="<?php echo $this->application->application_id?>" 
+	data-marked="<?php echo (int)$this->application->isDisputed($this->user);?>">
+	<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+		class="ui-icon ui-icon-comment no-block"
+		alt="<?php echo $this->translate('mark_to_dispute');?>"
+		title="<?php echo $this->translate('mark_to_dispute');?>" />
+	</a>
 <?php endif;?>
 <a
 	href="<?php echo $this->url(array('id' => $this->application->application_id), 'edit_application');?>">
