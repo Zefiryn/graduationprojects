@@ -1456,6 +1456,47 @@ span.voted_1 {
 	background-color: #00b000;
 }
 
+div.dispute {
+	width: 27px;
+	height: 23px;
+	line-height: 23px;
+	background-image: url('../img/simple/cloud-dark.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+}
+div.dispute.info {
+	position: absolute;
+	margin-left: 140px;
+	margin-top: -20px;	
+}
+span.dispute {
+	font-weight: bold;
+	font-size: 18px;
+	cursor: pointer;
+}
+span.dispute.info {
+	font-size: 10px !important;
+}
+span.hint {
+	background: #000;
+	color: #fff;
+	border: 1px solid #fff;
+	display: block;
+	padding: 3px 3px;
+	position: absolute;
+	box-shadow: 2px 2px 5px #888;
+	font-size: 11px;
+	text-align: left;
+	line-height: 12px;
+	min-width: 90px;
+	display: none;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+
 a.index_application_files:link, a.index_application_files:visited {
 	display: block;
 	float: left;

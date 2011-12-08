@@ -17,6 +17,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		<form name="filterForm" id="filterForm" method="POST" action="">
 			<select name="filter" id="filter">
 				<option value="-2" ><?php echo $this->translate('all_applications')?></option>
+				<option value="-3" ><?php echo $this->translate('marked')?></option>
 				<option value="-1" ><?php echo $this->translate('unrated')?></option>
 				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
 				<option value="<?php echo $i;?>" >
@@ -109,7 +110,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		<?php if (count($this->applications) > 0):?>
 		<!--APPLICATIONS DATA -->
 		<?php foreach ($this->applications as $no => $application):?>
-		<tr class="applicationData" <?php if ($no%2 == 0):?>grey<?php endif;?>">
+		<tr class="applicationData <?php if ($no%2 == 0):?>grey<?php endif;?>" data-application-id="<?php echo $application->application_id?>">
 			<!-- # -->
 			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
 			
@@ -136,7 +137,14 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			<td class="normal" style="width: 35px;"><?php echo $application->work_type->work_type_name;?></td>
 			
 			<!-- SUBJECT -->
-			<td class="normal" style="width: 160px;"><?php echo $application->work_subject;?></td>
+			<td class="normal work_subject" style="width: 160px;">
+				
+				<?php if (count($application->disputes) > 0):?>
+				<?php echo $this->partial('applications/_dispute.phtml', array('application' => $application)); ?>
+				<?php endif;?>
+				
+				<?php echo $application->work_subject;?>
+			</td>
 			
 			
 			<!-- FILES -->
@@ -210,12 +218,27 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php if ($admin):?>
 				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
 				
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block"
+				<img src="<?php echo $this->baseUrl('/img/simple/empty.png');?>" class="ui-icon ui-icon-check no-block"
 					id="check_app<?php echo $application->application_id?>" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
 				
 				<?php echo $this->partial('applications/_admin.phtml', array('application' => $application, 'user' => $this->user));?>
+				
+				<?php else: ?>
+				
+				<!-- DISPUTE BUTTONS FOR JURORS -->
+				<div class="dispute" data-application-id="<?php echo $application->application_id?>" data-marked="<?php echo (int)$application->isDisputed($this->user);?>">
+				
+				<?php if ($application->isDisputed($this->user)):?>
+					<span class="dispute">&ndash;</span>
+					<span class="hint"><?php echo $this->translate('marked_to_dispute');?></span>
+				<?php else: ?>
+					<span class="dispute">&plus;</span>
+					<span class="hint"><?php echo $this->translate('mark_to_dispute');?></span>
+				<?php endif;?>
+				</div>
+				
 				<?php endif;?>
 				
 			</td>	

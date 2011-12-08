@@ -63,7 +63,11 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		'votes' => array(
 			'model' => 'Application_Model_Votes',
 			'refColumn' => 'application_id',
-		), 
+		),
+		'disputes' => array(
+			'model' => 'Application_Model_Disputes',
+			'refColumn' => 'application_id',
+		),
 	);
 
 	/**

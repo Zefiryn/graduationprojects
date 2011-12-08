@@ -1,0 +1,10 @@
+<?php if (count($this->application->disputes) > 0):?>
+<div class="dispute info">
+	<span class="dispute info"><?php echo count($this->application->disputes);?></span>
+	<span class="hint">
+		<?php foreach($this->application->disputes as $dispute):?>
+			<?php echo $dispute->user->getUserFullName();?><br />
+		<?php endforeach;?>
+	</span>
+</div>
+<?php endif;?>

@@ -301,3 +301,16 @@ CREATE TABLE votes (
 		REFERENCES applications(application_id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE TABLE disputes (
+	dispute_id int NOT NULL AUTO_INCREMENT,
+	user_id int(11) not null,
+	application_id smallint(6) not null,
+	PRIMARY KEY (dispute_id),
+	FOREIGN KEY(user_id)
+		REFERENCES users(user_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(application_id)
+		REFERENCES applications(application_id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
