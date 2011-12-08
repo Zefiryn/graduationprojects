@@ -20,17 +20,17 @@ class Application_Form_Localization extends Zefir_Form
 		$name->setAttribs(array('size'=> 55,
 								'maxlength' => 16,
 								'class' => 'width1'))
-		->setLabel('translation')
-		->setDecorators(
-		array(
-		array('TextField'),
-		array('ErrorMsg', array('image' => FALSE)),
-		array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
-		array('MyLabel', array('placement' => 'prepend'))
-		))
-		->addValidators(array(
-		//new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
-		));
+			->setLabel('translation')
+			->setDecorators(
+				array(
+				array('TextField'),
+				array('ErrorMsg', array('image' => FALSE)),
+				array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
+				array('MyLabel', array('placement' => 'prepend'))
+				))
+			->addValidators(array(
+			//new Zend_Validate_Regex('/^['.$this->_regex['L'].$this->_regex['N'].$this->_regex['S'].' ]+$/')
+			));
 		$this->addElement($name);
 
 

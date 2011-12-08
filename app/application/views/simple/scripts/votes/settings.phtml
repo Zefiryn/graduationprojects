@@ -39,7 +39,16 @@
 				</a>
 			</p>
 			<?php foreach($juror->users as $user):?>
-			<p class="list"><?php echo $user->getUserFullName();?></p>			
+			<p class="list">
+				<?php echo $user->getUserFullName();?>
+				<a href="<?php echo $this->url(array('id' => $juror->juror_id, 'user_id' => $user->user_id), 'remove_juror');?>"
+					class="delete"> 
+					<img src="/img/simple/empty.png" class="ui-icon ui-icon-minus no-block" 
+						del="<?php echo $this->translate('remove_user_juror');?>" 
+						alt="<?php echo $this->translate('remove_user_juror');?>" 
+						title="<?php echo $this->translate('remove_user_juror');?>" />
+				</a>
+			</p>			
 			<?php endforeach;?>
 		</div>
 
@@ -94,3 +103,5 @@
 
 	<div class="clear"></div>	
 </div>
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'editions', 'delete_confirm' => $this->translate('delete_confirm')));?>

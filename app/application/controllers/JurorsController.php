@@ -13,6 +13,11 @@ class JurorsController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		if ($request->isPost())
 		{
+			if($request->getParam('leave', null))
+			{
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'vote_settings');
+			}
 			if ($form->isValid($request->getParams()))
 			{
 				$juror = new Application_Model_Jurors();
@@ -32,6 +37,11 @@ class JurorsController extends Zefir_Controller_Action
 		
 		if ($request->isPost())
 		{
+			if($request->getParam('leave', null))
+			{
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'vote_settings');
+			}
 			if ($form->isValid($request->getParams()))
 			{
 				$juror = new Application_Model_Jurors();
@@ -57,6 +67,11 @@ class JurorsController extends Zefir_Controller_Action
 		
 		if ($request->isPost())
 		{
+			if($request->getParam('leave', null))
+			{
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'vote_settings');
+			}
 			if ($form->isValid($request->getParams()))
 			{
 				$id = $form->getElement('juror_id')->getValue();
@@ -72,7 +87,9 @@ class JurorsController extends Zefir_Controller_Action
 		}
 		else
 		{
-			$form->populate(array('juror_id' => $request->getParam('id')));
+			$juror_id = $request->getParam('id');
+			$juror = new Application_Model_Jurors($juror_id);
+			$form->populate($juror->prepareFormArray());
 		}
 		
 		$this->view->form = $form;
@@ -85,8 +102,45 @@ class JurorsController extends Zefir_Controller_Action
 	
 		$juror = new Application_Model_Jurors($id);
 		$juror->delete();
-		$this->flashMe('juror_deleted', 'SUCCESS');
-		$this->_redirectToRoute(array(), 'vote_settings');
+		if (!$request->isXMLHttpRequest())
+		{
+			$this->flashMe('juror_deleted', 'SUCCESS');
+			$this->_redirectToRoute(array(), 'vote_settings');
+		}
+		else
+		{
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			echo Zend_Json::encode(array('link' => $this->view->url(array(), 'vote_settings')));
+		}
+	}
+	
+	public function removeAction()
+	{
+		$request = $this->getRequest();
+		$user_id = $request->getParam('user_id');
+		$juror = new Application_Model_Jurors($request->getParam('id'));
+		
+		foreach($juror->users as $user)
+		{
+			if ($user->user_id == $user_id)
+			{
+				$user->juror_id = null;
+				$user->save();
+			}
+		}
+		
+		if (!$request->isXMLHttpRequest())
+		{
+			$this->flashMe('user_removed_from_juror', 'SUCCESS');
+			$this->_redirectToRoute(array(), 'vote_settings');
+		}
+		else 
+		{
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			echo Zend_Json::encode(array('link' => $this->view->url(array(), 'vote_settings')));
+		}
 	}
 	
 	

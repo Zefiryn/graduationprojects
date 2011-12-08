@@ -24,6 +24,11 @@ class VotesController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		if ($request->isPost())
 		{
+			if($request->getParam('leave', null))
+			{
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array(), 'vote_settings');
+			}
 			if ($form->isValid($request->getParams()))
 			{
 				$stage = new Application_Model_Stages();
