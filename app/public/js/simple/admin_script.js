@@ -52,6 +52,10 @@ $(document).ready(function(){
 	{
 		changeStage();
 	}
+	if ($('span.hint').length)
+	{
+		bindSpanHint();
+	}
 });
 
 function showCaptions()
@@ -256,7 +260,12 @@ function filterForm()
 		
 		val = $(this).val();
 		console.log('Selected ' + val);
-		if (val == -2) 
+		if (val == -3)
+		{
+			$('tr.applicationData').hide();
+			$('div.dispute.info').closest('tr').show();
+		}
+		else if (val == -2) 
 		{
 			$('tr.applicationData').show();
 		}
@@ -265,7 +274,7 @@ function filterForm()
 			$('tr.applicationData').show();
 			$('.voted').each(function(){
 				$(this).closest('tr').hide();
-			})
+			});
 		}
 		else
 		{
@@ -312,5 +321,84 @@ function changeStage()
 			},
 		});
 		
+	});
+}
+
+function bindSpanHint(){
+	
+	$('span.hint').hide();
+	$('div.dispute, a.dispute').live({
+		mouseover: function(e){
+			var self = $(this);
+			var hint = self.children('.hint');
+			hint.show();
+		},
+		mouseout: function(){
+			var self = $(this);
+			self.children('.hint').hide();
+		},
+		click: function(e) {
+			e.preventDefault();
+			var self = $(this);
+			if (!self.hasClass('info'))
+			{
+				self.children('.hint').hide();
+				var appId = self.data('application-id');
+				var marked = self.data('marked');
+				
+				if (marked == 1) 
+				{
+					var url = '/applications/removedispute';
+				}
+				else
+				{
+					var url = '/applications/dispute';
+				}
+				$.ajax({
+					'url': url,
+					'data': {'id': appId},
+					'type': 'POST',
+					'dataType': 'json',
+					'beforeSend': function(){
+						
+					},
+					'error': function(data){
+						console.log(data);
+						alert(data.error);
+						
+					},
+					'success': function(data){
+						var span = self.find('span.dispute');
+						if (marked == 0)
+						{
+							span.html('&ndash;');
+							self.data('marked', '1');
+						}
+						else
+						{
+							span.html('&plus;');
+							self.data('marked', '0');
+						}
+						console.log(data);
+						var row =$('tr[data-application-id="'+ data.succcess +'"]');
+						console.log(row);
+						if (data.dispute != '') {
+							var bubble = row.find('div[class="dispute info"]');
+							if (bubble.length != 0)
+							{
+								bubble.replaceWith(data.dispute);
+							}
+							else
+							{
+								row.find('td.work_subject').prepend(data.dispute);
+							}
+						}
+						else {
+							row.find('div[class="dispute info"]').remove();
+						}
+					},
+				});
+			}
+		}
 	});
 }

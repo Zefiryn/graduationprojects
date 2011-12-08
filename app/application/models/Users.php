@@ -15,6 +15,7 @@ class Application_Model_Users extends GP_Application_Model
 	protected $_role;
 	protected $applications;
 	protected $juror;
+	protected $disputes;
 
 	protected $_dbTableModelName = 'Application_Model_DbTable_Users';
 
