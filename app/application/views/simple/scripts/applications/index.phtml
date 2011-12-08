@@ -187,7 +187,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 							}
 							else 
 							{
-								echo $i;
+								echo $i*$juror->wage;
 							}
 						?>
 					</span>
@@ -221,7 +221,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 											data-stage-id="<?php echo $this->currentStage->stage_id?>" 
 											data-vote="<?php echo $i?>" data-application-id="<?php echo $application->application_id?>"
 											
-									><?php echo  $i; ?></span>
+									><?php echo  $i*$juror_vote['wage']; ?></span>
 								<?php endfor;?>
 							</p>					
 							<p class="clear" style="height: 2px;"></p>	
