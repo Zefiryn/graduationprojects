@@ -24,7 +24,16 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	<p class="votes">
 		<span style="float: left;width: 100px;"><?php echo $this->translate('your_vote');?>:</span>
 	<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-		<span class="vote <?php if (($i*$juror->wage) === $vote) echo 'voted voted_'.$i;?>"
+		<?php
+			$class = '';
+			if (($i*$juror->wage) === $vote) 
+			{
+				if ($i == 0) $class = 'voted vote_first';
+				elseif ($i == $this->currentStage->stage_max_vote) $class = 'voted vote_last';
+				else $class = 'voted vote_'.$i;
+			}
+		?>
+		<span class="vote <?php echo $class?>"
 			data-juror-id="<?php echo $juror->juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
 			data-vote="<?php echo $i?>" data-application-id="<?php echo $this->application->application_id?>">
 			<?php 

@@ -37,7 +37,7 @@ jQuery.fn.deleteWithAjax = function(callback) {
 	this.preventDefault;
 	this.removeAttr('onclick');
 	this.unbind('click', false);
-	this.click(function(e) {
+	this.live('click', function(e) {
 		e.preventDefault();
 		var link = ($(this).attr("href"));
 	

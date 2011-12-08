@@ -23,11 +23,12 @@
 				<strong><?php echo $lang;?></strong>:
 				<?php 
 					if (isset($strings[$caption->name]) && $strings[$caption->name] != null) 
-						echo $strings[$caption->name];
+						echo '<span>' . $strings[$caption->name] . '</span>';
 					else
-						echo '<span style="color:red">empty</span>';
+						echo '<span class="translation_missing" style="color:red">empty</span>';
 				?>
-				<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $lang), 'edit_localization');?>">
+				<a href="<?php echo $this->url(array('id' => $caption->caption_id, 'loc_lang' => $lang), 'edit_localization');?>"
+					class="edit_translation" data-lang="<?php echo $lang;?>" data-caption-id="<?php echo $caption->caption_id;?>">
 					<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 						alt="<?php echo $this->translate('edit');?>" 
 						title="<?php echo $this->translate('edit');?>" />
@@ -59,3 +60,4 @@
 <?php echo $this->partial('partials/delete_dialog.phtml',
 array('title' => 'translation', 'delete_confirm' => $this->translate('translation_delete_confirm')));
 ?>
+<img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>

@@ -44,4 +44,15 @@ class Application_Model_Jurors extends GP_Application_Model
 		}
 	}
 	
+	public function prepareFormArray() 
+	{
+		$users = array();
+		foreach($this->__get('users') as $user)
+		{
+			$users[] = $user->user_id;
+		}
+		
+		return array('juror_id' => $this->juror_id, 'users' => $users);
+	}
+	
 }

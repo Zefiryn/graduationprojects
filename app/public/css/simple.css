@@ -975,6 +975,11 @@ fieldset.upload {
 	width: 700px;
 }
 
+.inline {
+	width: 350px;
+	height: 150px
+}
+
 select.width1 {
 	width: 460px;
 }
@@ -1448,12 +1453,20 @@ span.voted {
 }
 
 
-span.voted_0 {
-	background-color: #e80000;
+span.vote_first {
+	background-color: #da1c1e;
 }
 
-span.voted_1 {
-	background-color: #00b000;
+span.vote_1 {
+	background-color: #f0b708;
+}
+
+span.vote_2 {
+	background-color: #08a1ef;
+}
+
+span.vote_last {
+	background-color: #03d419;
 }
 
 div.dispute {
