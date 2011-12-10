@@ -20,7 +20,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	
 	<?php if ($juror && $this->currentStage->active)  :?>
 	<?php 
-		$vote = $juror->getJurorVote($this->currentStage->stage_id, $this->application->application_id);
+		$vote = $this->application->getJurorVote($this->currentStage->stage_id, $juror->juror_id);
 		$vote = $vote != null ? (int)$vote : $vote;
 	?>
 	<p class="votes">
