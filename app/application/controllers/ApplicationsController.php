@@ -406,6 +406,8 @@ class ApplicationsController extends Zefir_Controller_Action
 			$vote->vote = $post['vote'] * $juror->wage;
 			try {
 				$vote->save();
+				$cache = Zend_Registry::get('cache');
+				$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('table'));
 				echo Zend_Json::encode(array('success' => $post['vote']));
 			}
 			catch (Zend_Exception $e) {
