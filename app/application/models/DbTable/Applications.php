@@ -93,8 +93,8 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		$select = $this->select()
 					->setIntegrityCheck(FALSE)
 					->from(array('a' => $this->_name))
-					->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
-					->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
+					->join(array('u' => $user_table), 'a.user_id = u.user_id')
+					->join(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
 					->order($sort);
 		
 		if ($stage)
@@ -185,6 +185,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 						->where('application_id = ?', $app)
 						->where('stage_id = ?', $stage);
 		$row = $this->fetchRow($select);
+		
 		return $row['votes'];
 	}
 

@@ -220,56 +220,21 @@ class Application_Model_Applications extends GP_Application_Model
 		return $votes;
 	}
 	
-	public function countVotes($stage, $voteVal)
+	public function countScore($stage)
 	{
-		if ($this->votes === null)
+		if ($this->votes == null)
 		{
 			$this->__get('votes');
 		}
-
-		$count = 0;		
-		
-		foreach ($this->votes as $vote)
+		$score = 0;
+		foreach($this->votes as $vote)
 		{
-			if ($vote->stage_id == $stage && $vote->vote == $voteVal)
+			if ($vote->stage_id == $stage)
 			{
-				$count++;
+				$score += $vote->vote;
 			}
 		}
-		
-		return $count;
-	}
-	
-	public function countEmptyVotes($stage)
-	{
-		if ($this->votes === null)
-		{
-			$this->__get('votes');
-		}
-		
-		if( self::$_jurorCount == null)
-		{
-			$jurors = new Application_Model_Jurors();
-			self::$_jurorCount = $jurors->countAll();
-		}
-		
-		if (count($this->votes) == 0)
-		{ 
-			return self::$_jurorCount;
-		}
-		else 
-		{
-			$count = 0;
-			foreach ($this->votes as $vote)
-			{
-				if ($vote->stage_id == $stage)
-				{
-					$count++;
-				}
-			}
-			return self::$_jurorCount - $count;
-		}
-		
+		return $score;
 	}
 	
 	public function inStage($stage)
