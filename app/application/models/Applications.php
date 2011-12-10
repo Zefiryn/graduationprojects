@@ -226,7 +226,7 @@ class Application_Model_Applications extends GP_Application_Model
 		{
 			$this->__get('votes');
 		}
-		$score = 0;
+		$score = null;
 		foreach($this->votes as $vote)
 		{
 			if ($vote->stage_id == $stage)
