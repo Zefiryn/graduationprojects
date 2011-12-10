@@ -51,7 +51,7 @@ $(document).ready(function(){
 	{
 		changeStage();
 	}
-	if ($('span.hint').length)
+	if ($('.dispute').length)
 	{
 		bindSpanHint();
 	}
