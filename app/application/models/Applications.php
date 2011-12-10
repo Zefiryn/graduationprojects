@@ -220,6 +220,23 @@ class Application_Model_Applications extends GP_Application_Model
 		return $votes;
 	}
 	
+	public function getJurorVote($stage_id, $juror_id)
+	{
+		if ($this->votes == null)
+		{
+			$this->__get('votes');
+		}
+		
+		foreach($this->votes as $vote)
+		{
+			if ($vote->stage_id == $stage_id && $vote->juror_id == $juror_id)
+			{
+				return $vote->vote;
+			}
+		}
+		return null;
+	}
+	
 	public function countScore($stage)
 	{
 		if ($this->votes == null)
