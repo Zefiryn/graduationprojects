@@ -81,18 +81,21 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			<p><?php echo nl2br($this->application->work_desc);?></p>
 		</div>
 		
-		<nav class="diploma_nav">
+		<div class="clear"></div>
+		
+		<?php echo $this->partial('applications/vote-box.phtml', 
+								array('user' => $this->user, 'application' => $this->application,
+										'stages' => $this->stages, 'currentStage' => $this->currentStage, 'votes' => $this->votes));
+		?>
+	    </div>
+	    
+	    <nav class="diploma_nav">
 			
 			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
 			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
 			
 		</nav>
-		<div class="clear"></div>
-		<?php echo $this->partial('applications/vote-box.phtml', 
-								array('user' => $this->user, 'application' => $this->application,
-										'stages' => $this->stages, 'currentStage' => $this->currentStage, 'votes' => $this->votes));
-		?>
-    </div>
+	    
 
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
