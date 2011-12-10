@@ -91,11 +91,11 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		
 		 
 		$select = $this->select()
-		->setIntegrityCheck(FALSE)
-		->from(array('a' => $this->_name))
-		->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
-		->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
-		->order($sort);
+					->setIntegrityCheck(FALSE)
+					->from(array('a' => $this->_name))
+					->joinLeft(array('u' => $user_table), 'a.user_id = u.user_id')
+					->joinLeft(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
+					->order($sort);
 		
 		if ($stage)
 		{
@@ -113,7 +113,6 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 			}
 			
 		}
-		
 		return $this->fetchAll($select); 
 	}
 
@@ -402,74 +401,58 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 	
 	public function getAdjacentApplication($application)
 	{
+		$sortedApps = new Zend_Session_Namespace('sortedApps');
+		if (!$sortedApps->keys)
+		{
+			$sort = new Zend_Session_Namespace('app_sort');
+			if (!$sort->sort) $sort->sort = 'surname ASC';
 			
-		$adjacentApplication['previous'] = $this->_getPreviousApplication($application);
-		$adjacentApplication['next'] = $this->_getNextApplication($application);
+			$sort = strstr($sort->sort, 'work_type_id') ? 'a.'.$sort->sort : $sort->sort;
+			$sort = $sort != NULL ? array($sort, 'surname ASC', 'name ASC', 'application_date ASC') : array('application_date ASC', 'surname ASC');
+			
+			$appsModel = new Application_Model_Applications();
+			$apps = $appsModel ->getApplications();
+			
+			$sortedApps->keys = array_keys($apps);
+		}
+		
+		$adjacentApplication['previous'] = $this->_getPreviousApplication($sortedApps->keys, $application);
+		$adjacentApplication['next'] = $this->_getNextApplication($sortedApps->keys, $application);
 		
 		return $adjacentApplication;
 	}
 	
-	protected function _getPreviousApplication($application)
+	protected function _getPreviousApplication($apps, $application)
 	{
-		$select = $this->getAdapter()->query(
-	    		'SELECT * FROM (
-	    			(
-	    			SELECT * FROM users 
-	    				WHERE (users.surname < ? ) AND users.role = "user" 
-	    				ORDER BY surname DESC, name DESC, user_id DESC 
-	    				LIMIT 1
-	    			) 
-	    			UNION 
-	    			
-	    			(
-	    			SELECT * FROM users
-	    			WHERE surname > ?  AND users.role = "user"
-	    			ORDER BY surname DESC, name DESC, user_id DESC
-	    			LIMIT 1
-	    			)
-	    		) as previous',
-		array($application->user->surname, $application->user->surname)
-		);
-			
-		$row = $select->fetch();
-		$applicationClass = get_class($application);
-		$user = new Application_Model_Users();
-		$user->populate($row);
+		$order = array_flip($apps);
+		if ($order[$application->application_id] != 0)
+		{
+			$prevId = $order[$application->application_id] - 1;
+		}
+		else
+		{
+			$prevId = count($apps)-1;
+		}
+		$prev = new Application_Model_Applications($apps[$prevId]);
 		
-		$previousApplication = $user->applications[0];
-		return $previousApplication;
+		return $prev;
 	}
 	
-	protected function _getNextApplication($application)
+	protected function _getNextApplication($apps, $application)
 	{
-		$select = $this->getAdapter()->query(
-	    		'SELECT * FROM (
-	    			(
-	    			SELECT * FROM users 
-	    				WHERE surname > ? AND users.role = "user"
-	    				ORDER BY surname ASC, name ASC, user_id ASC
-	    				LIMIT 1
-	    			) 
-	    			UNION 
-	    			
-	    			(
-	    			SELECT * FROM users 
-	    				WHERE surname < ? AND users.role = "user"
-	    				ORDER BY surname ASC, name ASC, user_id ASC
-	    				LIMIT 1
-	    			)
-	    		) as next',
-		array($application->user->surname, $application->user->surname)
-		);
-			
 		
-		$row = $select->fetch();
-		$applicationClass = get_class($application);
-		$user = new Application_Model_Users();
-		$user->populate($row);
+		$order = array_flip($apps);
+		if ($order[$application->application_id] + 1 < count($apps))
+		{
+			$nextId = $order[$application->application_id] + 1;
+		}
+		else
+		{
+			$nextId = 0;
+		}
+		$next = new Application_Model_Applications($apps[$nextId]);
 		
-		$nextApplication = $user->applications[0];
-		return $nextApplication;
+		return $next;
 	}
 }
 

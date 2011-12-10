@@ -82,7 +82,8 @@ class Application_Model_Applications extends GP_Application_Model
 
 	public function getApplications($sort = NULL, $stage = NULL)
 	{
-		$sort = $sort != NULL ? array($sort,'application_date ASC') : 'application_date ASC';
+		$sort = strstr($sort, 'work_type_id') ? 'a.'.$sort : $sort;
+		$sort = $sort != NULL ? array($sort, 'surname ASC', 'name ASC', 'application_date ASC') : array('application_date ASC', 'surname ASC');
 		
 		$rowset = $this->getDbTable()->getAllApplications($sort, $stage);
 
@@ -90,9 +91,12 @@ class Application_Model_Applications extends GP_Application_Model
 		foreach($rowset as $row)
 		{
 			$application = new $this;
-			$applications[] = $application->populate($row);
+			$applications[$row['application_id']] = $application->populate($row);
 		}
-
+		
+		$sortedApps = new Zend_Session_Namespace('sortedApps');
+		$sortedApps->keys = array_keys($applications);
+		
 		return $applications;
 	}
 
@@ -290,7 +294,7 @@ class Application_Model_Applications extends GP_Application_Model
 	
 	public function isDisputed($user)
 	{
-		if ($this->disputes === null)
+		if ($this->disputes == null)
 		{
 			$this->__get('disputes');
 		}
