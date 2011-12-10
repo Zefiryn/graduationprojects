@@ -1,0 +1,18 @@
+<?php if ($this->juror):?>
+	<?php $wage = $this->juror->wage;?>
+	<?php for($i = 0; $i <= $this->stage->stage_max_vote; $i++):?>
+	<option value="<?php echo $i*$wage;?>" >
+		<?php if ($this->translate('stage_'. $this->stage->order .'_vote_'.$i) != 'stage_'. $this->stage->order .'_vote_'.$i)
+			{ 
+				echo $this->translate('stage_'. $this->stage->order .'_vote_'.$i);
+			}
+			else {
+				echo $this->translate('voted') . ' ' . $i;
+			}
+			?>
+	</option>
+<?php endfor;?>
+
+<?php else: ?>
+
+<?php endif; ?>
