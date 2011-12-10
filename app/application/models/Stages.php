@@ -8,6 +8,7 @@ class Application_Model_Stages extends GP_Application_Model
 	public $order;
 	public $active;
 	public $translate;
+	protected $votes;
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Stages';
 	
