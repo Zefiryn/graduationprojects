@@ -611,7 +611,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$currentSort = $request->getParam('sort', NULL);
 		$lastSort = $sortApplication->sort != null ? $sortApplication->sort : 'surname';
 		 
-		if (strstr($lastSort, $currentSort))
+		if (strstr($lastSort, $currentSort) && $currentSort != null)
 		{
 			$order = substr($lastSort, strpos($lastSort, ' ')+1);
 			$currentSort .= $order == 'ASC' ? ' DESC' : ' ASC';
@@ -619,6 +619,10 @@ class ApplicationsController extends Zefir_Controller_Action
 		elseif ($currentSort != NULL)
 		{
 			$currentSort .= ' ASC';
+		}
+		elseif ($lastSort != NULL)
+		{
+			$currentSort = $lastSort;
 		}
 		else
 		{

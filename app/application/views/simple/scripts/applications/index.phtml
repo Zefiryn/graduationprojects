@@ -79,7 +79,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			
 			<!--2d/3d-->
 			<th class="normal" style="width: 35px;">
-				<a href="<?php echo $this->url(array('sort' => 'work_type_name'), 'applications_sort');?>">
+				<a href="<?php echo $this->url(array('sort' => 'work_type_id'), 'applications_sort');?>">
 				<?php echo $this->translate('work_type');?>
 				</a>
 			</th>
@@ -298,3 +298,4 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
+<img id="loader-white" src="<?php echo $this->baseUrl('/img/simple/ajax-loader-white.gif');?>" alt="performing request"/>

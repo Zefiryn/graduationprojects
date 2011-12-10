@@ -36,8 +36,7 @@ $(document).ready(function(){
 	
 	if ($('p.votes').length)
 	{
-		voting();
-		 
+		voting();		 
 	}
 	if ($('#stageSelectForm').length)
 	{
@@ -395,21 +394,25 @@ function bindSpanHint(){
 				{
 					var url = '/applications/dispute';
 				}
+				var loader = $('#loader-white').clone().addClass('cloned');
+				var span = self.children('span.dispute');
 				$.ajax({
 					'url': url,
 					'data': {'id': appId},
 					'type': 'POST',
 					'dataType': 'json',
 					'beforeSend': function(){
-						
+						loader.css('display', 'inline-block');
+						span.html('').append(loader);
 					},
 					'error': function(data){
 						console.log(data);
 						alert(data.error);
-						
+						loader.remove();
 					},
 					'success': function(data){
-						var span = self.find('span.dispute');
+						loader.remove();
+						
 						if (marked == 0)
 						{
 							span.html('&ndash;');

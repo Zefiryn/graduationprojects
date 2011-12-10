@@ -1,8 +1,9 @@
 <?php 
 $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
-?>
 
+?>
+<?php if ($juror != null || $admin): ?>
 <div class="vote application_data vote_box" data-application-id="<?php echo $this->application->application_id;?>" 
 		data-stage="<?php echo $this->currentStage->order?>">
 	<h3><?php echo $this->translate('voting');?>
@@ -14,6 +15,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	</h3>
 	<p class="clear"></p>
 
+	
 	<?php if ($this->application->inStage($this->currentStage)): ?>	
 	
 	<?php if ($juror && $this->currentStage->active)  :?>
@@ -62,8 +64,16 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<p class="votes">
 					<span class="juror_name"><?php echo $juror_vote['juror_name']?>:</span>
 					<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-						
-						<span class="vote <?php if(($i*$juror_vote['wage']) == $juror_vote['vote']) echo 'voted voted_'.$i;?>" 
+						<?php
+							$class = '';
+							if (($i*$juror_vote['wage']) === $juror_vote['vote']) 
+							{
+								if ($i == 0) $class = 'voted vote_first';
+								elseif ($i == $this->currentStage->stage_max_vote) $class = 'voted vote_last';
+								else $class = 'voted vote_'.$i;
+							}
+						?>
+						<span class="vote <?php echo $class;?>" 
 								data-juror-id="<?php echo $juror_id?>" data-stage-id="<?php echo $this->currentStage->stage_id?>" 
 								data-vote="<?php echo $i?>" data-application-id="<?php echo $this->application->application_id?>">
 								<?php 
@@ -88,5 +98,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	
 	<p><?php echo $this->translate('no_qualified');?></p>	
 	
-	<?php endif;?>			
+	<?php endif;?>
+			
 </div>
+<?php endif;?>
