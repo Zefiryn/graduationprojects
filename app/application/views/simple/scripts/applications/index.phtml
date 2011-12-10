@@ -3,6 +3,7 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('application_d
 Zefir_Pqp_Classes_Console::logSpeed('start rendering');
 $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
+
 ?>
 
 <div id="main">
@@ -19,18 +20,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<option value="-2" ><?php echo $this->translate('all_applications')?></option>
 				<option value="-3" ><?php echo $this->translate('marked')?></option>
 				<option value="-1" ><?php echo $this->translate('unrated')?></option>
-				<?php for($i = 0; $i <= $this->currentStage->stage_max_vote; $i++):?>
-				<option value="<?php echo $i;?>" >
-					<?php if ($this->translate('stage_'. $this->currentStage->order .'_vote_'.$i) != 'stage_'. $this->currentStage->order .'_vote_'.$i)
-						{ 
-							echo $this->translate('stage_'. $this->currentStage->order .'_vote_'.$i);
-						}
-						else {
-							echo $this->translate('voted') . ' ' . $i;
-						}
-						?>
-				</option>
-				<?php endfor;?>
+				<?php echo $this->partial('applications/_filter_options.phtml', array('stage' => $this->currentStage, 'juror' => $juror, 'user' => $this->user));?>
 			</select>
 		</form>
 		</div>
@@ -113,6 +103,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		foreach ($this->applications as $application):?>
 		<tr class="applicationData <?php if ($no%2 == 0):?>grey<?php endif;?>" 
 			data-application-id="<?php echo $application->application_id?>"
+			<?php if($juror) echo 'data-juror-grade="'.$application->getJurorVote($this->currentStage->stage_id, $juror->juror_id).'"'; ?>
 			data-application-score="<?php echo $application->countScore($this->currentStage->stage_id)?>">
 			
 			<!-- # -->
@@ -168,7 +159,8 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		
 			<?php if ($juror && $this->currentStage->active)  :?>
 				<?php 
-					$vote = $juror->getJurorVote($this->currentStage->stage_id, $application->application_id);
+					
+					$vote = $application->getJurorVote($this->currentStage->stage_id, $juror->juror_id);
 					$vote = $vote != null ? (int)$vote : $vote;
 				?>
 				<p class="votes">
@@ -199,7 +191,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php endfor;?>
 				</p>
 				<p class="clear"></p>
-				<?php elseif ($juror && $this->currentState->active == 0):?>
+				<?php elseif ($juror && $this->currentStage->active == 0):?>
 				<p><?php echo $this->translate('stage_closed');?></p>
 					
 				<?php elseif ($admin):?>

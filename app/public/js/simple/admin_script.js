@@ -292,6 +292,7 @@ function filterForm()
 		
 		val = $(this).val();
 		console.log('Selected ' + val);
+		var start = new Date().getTime();
 		if (val == -3)
 		{
 			$('tr.applicationData').hide();
@@ -303,23 +304,15 @@ function filterForm()
 		}
 		else if (val == -1)
 		{
-			$('tr.applicationData').show();
-			$('.voted').each(function(){
-				$(this).closest('tr').hide();
-			});
+			$('tr.applicationData').hide();
+			$('tr.applicationData[data-juror-grade=""]').show();
 		}
 		else
-		{
+		{	
 			$('tr.applicationData').hide();
-			$('.voted').each(function(){
-				var self = $(this);
-				if (self.data('vote') == val)
-				{
-					self.closest('tr').show();
-				} 
-			});
+			$('tr.applicationData[data-juror-grade="'+ val +'"]').show();
 		}
-		
+		console.log((new Date().getTime() - start)/1000);
 		
 	});
 }

@@ -23,7 +23,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$this->view->statistics = $this->_createStatistics($applications);
 		$this->view->applications = $applications;
 		$this->view->stages = $stages->fetchAll();
-		if ($this->view->user->_role == 'admin')
+		if ($this->view->user->_role == 'admin' && $currentStage)
 		{
 			$this->view->votes = $this->_getAllVotes($currentStage, $applications, $jurors);
 		}
@@ -407,7 +407,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			try {
 				$vote->save();
 				$cache = Zend_Registry::get('cache');
-				$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('table'));
+				$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('Application_Model_Jurors'));
 				echo Zend_Json::encode(array('success' => $post['vote']));
 			}
 			catch (Zend_Exception $e) {
@@ -673,7 +673,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		if (!$stage)
 		{
 			$stages = new Application_Model_Stages();
-			$stageObj = $stages->getDbTable()->fetchAll('active = 1', 'order')->current();  
+			$stageObj = $stages->getDbTable()->fetchAll(null, 'order')->current();  
 		}
 		else 
 		{
