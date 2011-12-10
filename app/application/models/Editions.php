@@ -90,13 +90,13 @@ class Application_Model_Editions extends GP_Application_Model
 
 		$select = $this->getDbTable()->select()->setIntegrityCheck(false);
 		$select->from(array('e' => $this->getDbTable()->getTableName()))
-		->joinLeft(array('d' => $diplomaTable->getTableName()), 'd.edition_id = e.edition_id')
-		->joinLeft(array('fd' => $diplomaFieldsTable->getTableName()), 'fd.diploma_id = d.diploma_id')
-		->joinLeft(array('fi' => $diplomaFilesTable->getTableName()), 'fi.diploma_id = d.diploma_id')
-		->joinLeft(array('f' => $fields->getTableName()), 'f.field_id = fd.field_id')
-		->joinLeft(array('l' => $langs->getTableName()), 'fd.lang_id = l.lang_id')
-		->where('e.edition_id = ?', $this->edition_id)
-		->order(array('surname ASC', 'name ASC', 'fi.position ASC'));
+			->joinLeft(array('d' => $diplomaTable->getTableName()), 'd.edition_id = e.edition_id')
+			->joinLeft(array('fd' => $diplomaFieldsTable->getTableName()), 'fd.diploma_id = d.diploma_id')
+			->joinLeft(array('fi' => $diplomaFilesTable->getTableName()), 'fi.diploma_id = d.diploma_id')
+			->joinLeft(array('f' => $fields->getTableName()), 'f.field_id = fd.field_id')
+			->joinLeft(array('l' => $langs->getTableName()), 'fd.lang_id = l.lang_id')
+			->where('e.edition_id = ?', $this->edition_id)
+			->order(array('surname ASC', 'name ASC', 'fi.position ASC'));
 
 
 		$diplomas = array();

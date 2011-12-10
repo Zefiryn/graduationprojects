@@ -15,9 +15,9 @@ class NewsController extends Zefir_Controller_Action
 		$page = $request->getParam('page', 1);
 		
 		if ($this->view->user->role == 'admin')
-			$this->view->news_list = $news->fetchAll(array($page, false));
+			$this->view->news_list = $news->getAll(array($page, false));
 		else
-			$this->view->news_list = $news->fetchAll(array($page, true));
+			$this->view->news_list = $news->getAll(array($page, true));
 
 		$this->view->pages = $news->getPagination();
 
