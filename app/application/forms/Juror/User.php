@@ -24,7 +24,7 @@ class Application_Form_Juror_User extends Zefir_Form
 	
 		$users = new Application_Model_Users();
 		$element = $this->createElement('multiCheckbox', 'users');
-		foreach ($users->fetchAll(array('role = "juror"')) as $user)
+		foreach ($users->getAll(array('role = "juror"')) as $user)
 		{
 			$element->addMultiOption($user->user_id, $user->getUserFullName());
 		}
