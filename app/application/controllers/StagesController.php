@@ -46,6 +46,8 @@ class StagesController extends Zefir_Controller_Action
 			$id = $request->getParam('id');
 			$stage = new Application_Model_Stages($id);
 			$form->populate($stage->toArray());
+			$desc = $this->view->translate('previous_stage_max').': '.$stage->countMaxQualificationScore();
+			$form->getElement('qualification_score')->setDescription($desc);
 		}
 		$this->view->form = $form;
 	}
