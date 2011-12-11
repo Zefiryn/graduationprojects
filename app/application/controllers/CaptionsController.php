@@ -89,8 +89,16 @@ class CAptionsController extends Zefir_Controller_Action
 
 		$caption = new Application_Model_Captions($id);
 		$caption->delete();
-		$this->flashMe('caption_deleted', 'SUCCESS');
-		$this->_redirectToRoute(array(), 'captions');
+		$data = array(0 => $this->view->url(array(), 'captions'));
+		if ($request->isXMLHttpRequest())
+		{
+			$this->_helper->json($data);
+		}
+		else
+		{
+			$this->flashMe('translation_deleted');
+			$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+		}
 
 	}
 }

@@ -276,10 +276,17 @@ function voting()
 						if (filtered != vote) self.closest('tr').hide();
 					}
 				}
+				else if (data.error)
+				{
+					alert(data.error);
+					loader.remove();
+				}
 				else
 				{
-					
+					loader.remove();
+					alert('Unknown error occured');
 				}
+					
 			},
 		});
 		

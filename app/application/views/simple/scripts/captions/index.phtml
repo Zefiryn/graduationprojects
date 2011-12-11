@@ -10,9 +10,10 @@
 		</a>
 	</h1>
 	</h1>
-	<div class="captions">
+	<?php $divide = count($this->captions)/2; ?>
+	<div class="caption">
 
-	<?php foreach($this->captions as $caption):?>
+	<?php foreach($this->captions as $index => $caption):?>
 		<p>
 			<span><?php echo $caption->name;?>
 			</span> <a
@@ -32,7 +33,10 @@
 
 		</p>
 		
-		
+		<?php if (($index + 1) >= $divide):?>
+		</div>
+		<div class="column-right">
+		<?php endif;?>
 		<?php endforeach;?>
 	</div>
 </div>
