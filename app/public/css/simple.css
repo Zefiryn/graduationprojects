@@ -1282,6 +1282,15 @@ a.path_end:link,a.path_end:visited {
 	width: 200px;
 	margin: 0px 20px;
 	font-size: 14px;
+	border:0px solid blue;
+}
+
+.filter_applications .score {
+	width: 30px;
+}
+
+#spanFrame {
+	display: none;	
 }
 
 table.applications {
@@ -1537,6 +1546,7 @@ a.index_application_files:hover {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	background-color: #333;
+	cursor: pointer;
 }
 
 #loader {

@@ -24,7 +24,7 @@ $(document).ready(function(){
 	
 	if ($('.admin_button').length)
 	{
-		$('.ui-icon-check').click(function(){
+		$('.ui-icon-check.click').click(function(){
 			var self = $(this);
 			var id = self.attr('id').substring(6);
 			var checkbox = $('#'+id);
@@ -271,6 +271,14 @@ function voting()
 					
 					var filtered = $('#filter').val();
 					loader.remove();
+					
+					var tr = self.closest('tr');
+					tr.attr('data-application-score', data.appScore);  
+					if (tr.attr('data-juror-grade') != null) 
+					{
+						tr.attr('data-juror-grade', data.grade);
+					}
+					
 					if (filtered != -2)
 					{
 						if (filtered != vote) self.closest('tr').hide();
@@ -297,32 +305,93 @@ function filterForm()
 {
 	$('#filter').change(function(){
 		
-		val = $(this).val();
-		console.log('Selected ' + val);
+		var val = $(this).val();
 		var start = new Date().getTime();
-		if (val == -3)
-		{
-			$('tr.applicationData').hide();
-			$('div.dispute.info').closest('tr').show();
+		var all = $('tr.applicationData');		
+		
+		console.log('Selected ' + val);
+		if (val == -3) 
+		{//marked
+			all.removeClass('grey').hide();
+			$('.dispute.info').closest('tr').each(function(i) {
+				showTableElement(i, $(this));
+			});
 		}
-		else if (val == -2) 
-		{
-			$('tr.applicationData').show();
+		
+		else if (val == -2)
+		{//all
+			all.each(function(i) {
+				showTableElement(i, $(this));
+			});
 		}
+		
 		else if (val == -1)
-		{
-			$('tr.applicationData').hide();
-			$('tr.applicationData[data-juror-grade=""]').show();
+		{//unrated
+			all.removeClass('grey').hide();
+			if ($('tr.applicationData:first').attr('data-juror-grade') != null)
+			{
+				$('tr.applicationData[data-juror-grade=""]').each(function(i){
+					showTableElement(i, $(this));
+				});
+			}
+			else
+			{
+				$('tr.applicationData[data-application-score=""]').each(function(i){
+					showTableElement(i, $(this));
+				});
+			}
 		}
+		
+		else if (val == 'span_above' || val == 'span_below')
+		{//admin span
+			$('#spanFrame').show();
+			
+			$('#filterSpan').click(function(){
+				//sort for admin
+				var span = $('input.score').val();
+				var index = 0;
+				all.removeClass('grey').hide();
+				
+				all.each(function(){
+					var tr = $(this);
+					var score = tr.data('application-score');
+					
+					if (val == 'span_above' && score > span)
+					{
+						showTableElement(index, tr);
+						index = index + 1;
+					}
+					if (val == 'span_below' && score < span)
+					{
+						showTableElement(index, tr);
+						index = index + 1;
+					}
+				});
+			});
+		}
+		
 		else
-		{	
-			$('tr.applicationData').hide();
+		{//juror vote
+			all.hide();
 			$('tr.applicationData[data-juror-grade="'+ val +'"]').show();
 		}
-		console.log((new Date().getTime() - start)/1000);
 		
-	});
+		if (val != 'span_above' && val != 'span_below')
+		{
+			$('#spanFrame').hide();
+		}
+		
+	});		
 }
+
+function showTableElement(i, tr)
+{
+	if (i % 2 == 0) tr.addClass('grey');
+	tr.find('.lp').text(i+1);
+	tr.show();
+}
+
+
 
 function changeStage()
 {

@@ -56,6 +56,7 @@
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
+			    	<?php if ($this->user->_role != 'admin' && $this->user->_role != 'juror'):?>
 			    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="128" height="128" id="G_logo">
 						<param name="movie" value="<?php echo $this->baseUrl('img/simple/logo.swf');?>" />
 						<!--[if !IE]>-->
@@ -68,6 +69,11 @@
 						</object>
 						<!--<![endif]-->
 					</object>
+					<?php else:?>
+					<a href="http://graduationprojects.eu">
+						<img src="<?php echo $this->baseUrl('img/simple/logo-alt.png');?>" alt="Graduation Projects logo" />
+					</a>
+					<?php endif;?>
 			    	<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"
 			    		alt="Gradutation Project Logo"/>
 			    </a>
