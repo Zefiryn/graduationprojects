@@ -50,4 +50,10 @@ class Application_Model_Stages extends GP_Application_Model
 		
 		return $score;
 	}
+	
+	public function countMaxQualificationScore()
+	{
+		$prev = new $this($this->getPreviousStageId());
+		return $prev->getMaxScore();
+	}
 }
