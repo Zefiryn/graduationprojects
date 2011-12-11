@@ -382,37 +382,47 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		$request = $this->getRequest();
 		$post = $request->getPost();
-		
+
 		if (!isset($post['application_id']) 
 			|| !isset($post['stage_id']) 
 			|| !isset($post['juror_id']))
 		{
-			echo Zend_Json::encode(array('error' => 'We ar unable to process your request due to missing data'));
+			echo Zend_Json::encode(array('error' => 'We are unable to process your request due to missing data'));
 		}
 		else
 		{
 			$vote = new Application_Model_Votes();
 			$juror = new Application_Model_Jurors($post['juror_id']);
-			$vote->find(array(
-					'stage_id' => $post['stage_id'], 
-					'juror_id' => $post['juror_id'],
-					'application_id' => $post['application_id']));
+			$stage = new Application_Model_Stages($post['stage_id']);
 			
-			if ($vote->isEmpty())
+			if ($this->view->user->_role == 'admin' || $stage->active == 1)
 			{
-				$vote->populate($post);
+				$vote->find(array(
+						'stage_id' => $post['stage_id'], 
+						'juror_id' => $post['juror_id'],
+						'application_id' => $post['application_id']));
+				
+				if ($vote->isEmpty())
+				{
+					$vote->populate($post);
+				}
+				
+				$vote->vote = $post['vote'] * $juror->wage;
+				try {
+					$vote->save();
+					$cache = Zend_Registry::get('cache');
+					$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('Application_Model_Jurors'));
+					echo Zend_Json::encode(array('success' => $post['vote']));
+				}
+				catch (Zend_Exception $e) {
+					echo Zend_Json::encode(array('error' => $e->getMessage()));
+				}
+			}
+			else
+			{
+				echo Zend_Json::encode(array('error' => $this->view->translate('stage_closed')));
 			}
 			
-			$vote->vote = $post['vote'] * $juror->wage;
-			try {
-				$vote->save();
-				$cache = Zend_Registry::get('cache');
-				$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('Application_Model_Jurors'));
-				echo Zend_Json::encode(array('success' => $post['vote']));
-			}
-			catch (Zend_Exception $e) {
-				echo Zend_Json::encode(array('error' => $e->getMessage()));
-			}
 		}
 	}
 	
