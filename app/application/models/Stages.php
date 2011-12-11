@@ -37,4 +37,17 @@ class Application_Model_Stages extends GP_Application_Model
 		$this->save();
 		return $this;
 	}
+	
+	public function getMaxScore()
+	{
+		$jurors = new Application_Model_Jurors();
+		$score = 0;
+				
+		foreach($jurors->fetchAll() as $juror)
+		{
+			$score += $this->stage_max_vote * $juror->wage;
+		}
+		
+		return $score;
+	}
 }

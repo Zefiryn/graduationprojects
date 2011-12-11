@@ -13,6 +13,14 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	
 	<p class="clear">&nbsp;</p>
 	<div class="filter_applications">
+		<div id="spanFrame" style="width: 120px;">
+			<p>&nbsp;</p>
+			<form name="filterForm" id="filterForm" method="POST" action="">
+				<input type="text" class="score" /> <?php echo $this->translate('points');?>
+				<img src="<?php echo $this->baseUrl('/img/simple/empty.png');?>" class="ui-icon ui-icon-check no-block" id="filterSpan" alt="filter" title="filter"/>
+			</form>
+		</div>
+	
 		<div>
 		<p><?php echo $this->translate('filter_applications')?></p>
 		<form name="filterForm" id="filterForm" method="POST" action="">
@@ -22,6 +30,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<option value="-1" ><?php echo $this->translate('unrated')?></option>
 				<?php echo $this->partial('applications/_filter_options.phtml', array('stage' => $this->currentStage, 'juror' => $juror, 'user' => $this->user));?>
 			</select>
+			
 		</form>
 		</div>
 		
@@ -75,9 +84,16 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			</th>
 			
 			<!--SUBJECT-->
-			<th class="normal" style="width: 160px;">
+			<th class="normal" style="width: 140px;">
 				<a href="<?php echo $this->url(array('sort' => 'work_subject'), 'applications_sort');?>">
 				<?php echo $this->translate('work_subject');?>
+				</a>
+			</th>
+			
+			<!-- DEGREE -->
+			<th class="normal" style="width: 30px;">
+				<a href="<?php echo $this->url(array('sort' => 'degree_id'), 'applications_sort');?>">
+				<?php echo $this->translate('degree');?>
 				</a>
 			</th>
 			
@@ -87,7 +103,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php echo $this->translate('application_files');?>
 			</th>
 			<!--VOTE LINK-->
-			<th class="normal" style="width: 210px;">
+			<th class="normal" style="width: 235px;">
 				<?php echo $this->translate('vote');?>
 			</th>
 			
@@ -107,7 +123,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			data-application-score="<?php echo $application->countScore($this->currentStage->stage_id)?>">
 			
 			<!-- # -->
-			<td class="normal" style="width: 20px;"><?php echo ++$no;?></td>
+			<td class="normal lp" style="width: 20px;"><?php echo ++$no;?></td>
 			
 			<!-- UID -->
 			<td class="normal" style="width: 15px;"><?php echo $application->application_id;?></td>
@@ -132,7 +148,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			<td class="normal" style="width: 35px;"><?php echo $application->work_type->work_type_name;?></td>
 			
 			<!-- SUBJECT -->
-			<td class="normal work_subject" style="width: 160px;">
+			<td class="normal work_subject" style="width: 140px;">
 				
 				<?php if (count($application->disputes) > 0):?>
 				<?php echo $this->partial('applications/_dispute.phtml', array('application' => $application)); ?>
@@ -140,6 +156,9 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				
 				<?php echo $application->work_subject;?>
 			</td>
+			
+			<!-- DEGREE -->
+			<td class="normal" style="width: 30px;"><?php echo $this->translate($application->degree->degree_name);?></td>
 			
 			
 			<!-- FILES -->
@@ -155,7 +174,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 			</td>
 			
 			<!-- VOTES -->
-			<td class="normal" style="width: 210px;">
+			<td class="normal" style="width: 235px;">
 		
 			<?php if ($juror && $this->currentStage->active)  :?>
 				<?php 
@@ -234,7 +253,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<?php if ($admin):?>
 				<input type="checkbox" id="app<?php echo $application->application_id?>" name="app[<?php echo $application->application_id?>]" class="admin_button" />
 				
-				<img src="<?php echo $this->baseUrl('/img/simple/empty.png');?>" class="ui-icon ui-icon-check no-block"
+				<img src="<?php echo $this->baseUrl('/img/simple/empty.png');?>" class="ui-icon ui-icon-check click no-block"
 					id="check_app<?php echo $application->application_id?>" 
 					alt="<?php echo $this->translate('check');?>" 
 					title="<?php echo $this->translate('check');?>"/>
@@ -294,7 +313,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		<?php else: ?>
 		<!-- NO APPLICATIONS -->
 		<tr>
-			<td colspan="10" style="font-size: 24px;text-align: center;padding: 20px 0px;">
+			<td colspan="11" style="font-size: 24px;text-align: center;padding: 20px 0px;">
 				<?php echo $this->translate('no_applications_for_current_selection');?>
 			</td>
 		</tr>		

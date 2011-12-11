@@ -11,8 +11,10 @@
 			}
 			?>
 	</option>
-<?php endfor;?>
+	<?php endfor;?>
 
 <?php else: ?>
+	<option value="span_below"><?php echo $this->translate('below');?></option>
+	<option value="span_above"><?php echo $this->translate('above');?></option>
 
 <?php endif; ?>
