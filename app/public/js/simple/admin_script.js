@@ -60,6 +60,11 @@ $(document).ready(function(){
 	{
 		editTranslation();
 	}
+	
+	if ($('.news_main_image').length)
+	{
+		bindNewsMainImage();
+	}
 });
 
 function showCaptions()
@@ -573,6 +578,40 @@ function editTranslation()
 					parent.replaceWith(parentClone);
 				}
 			});
+		});
+	});
+}
+
+function bindNewsMainImage()
+{
+	$('.news_main_image').click(function(e){
+		
+		e.preventDefault();
+		var self = $(this);
+		var url = self.attr('href');
+		var loader = $('#loader').clone();
+		$.ajax({
+			'url': url,
+			'type': 'POST',
+			'dataType': 'json',
+			'beforeSend': function(){
+				loader.css({
+					'display': 'inline-block',
+					'position': 'absolute',
+					'margin-right': 0,
+					'margin-top' : 0
+					});
+				self.parent().parent().append(loader);
+			},
+			'error' : function(data){
+				loader.remove();
+				console.log(data);
+				alert('An error occured while making the call');
+			},
+			'success': function(data){
+				loader.remove();
+				console.log(data);
+			}
 		});
 	});
 }

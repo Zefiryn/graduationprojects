@@ -1145,6 +1145,20 @@ span.admin {
 	border: 1px solid rgb(0, 221, 179);
 }
 
+.editNews {
+	position: absolute;
+	margin: 0px 0px 0px 202px;
+	background: #fff;
+	border: 1px solid rgb(0, 221, 179);
+}
+
+.editNewsImage {
+	position: absolute;
+	margin: 0px 0px 0px 436px;
+	background: #fff;
+	border: 1px solid rgb(0, 221, 179);
+}
+
 #dialog_delete {
 	visibility: hidden;
 }
