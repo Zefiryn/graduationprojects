@@ -22,11 +22,27 @@
 
 	<div class="column-right">
 
-	<?php foreach($this->news->files as $image):?>
-		<img
+	<?php foreach($this->news->files as $i => $image):?>
+		<div id="file_<?php echo $image->news_file_id?>">
+			<p class="admin editNewsImage">
+				<a href="<?php echo $this->url(array('id' => $this->news->news_id, 'file_id'=> $image->news_file_id), 'news_image_main');?>"
+					class="news_main_image" alt="file_<?php echo $i;?>">
+					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-clipboard no-block"
+						alt="<?php echo $this->translate('set_main_news_image');?>"
+						title="<?php echo $this->translate('set_main_news_image');?>">
+				</a>
+				<a href="<?php echo $this->url(array('id'=> $image->news_file_id), 'news_image_delete');?>"
+					class="remove-image" alt="file_<?php echo $i;?>">
+					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block"
+						alt="<?php echo $this->translate('delete');?>"
+						title="<?php echo $this->translate('delete');?>">
+				</a>
+				
+			</p>
+			<img
 			src="<?php echo $this->baseUrl('assets/images/'.$image->getImage('small'))?>"
 			alt="zdjecie" width="100%" />
-		
+		</div>
 		
 		<?php endforeach;?>
 	</div>
@@ -37,3 +53,5 @@
 <?php echo $this->partial('partials/delete_dialog.phtml',
 array('title' => 'news', 'delete_confirm' => $this->translate('news_delete_confirm')));
 ?>
+
+<img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
