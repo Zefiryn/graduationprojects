@@ -24,6 +24,7 @@
 
 	<?php foreach($this->news->files as $i => $image):?>
 		<div id="file_<?php echo $image->news_file_id?>">
+			<?php if ($this->user->_role == 'admin'):?>
 			<p class="admin editNewsImage">
 				<a href="<?php echo $this->url(array('id' => $this->news->news_id, 'file_id'=> $image->news_file_id), 'news_image_main');?>"
 					class="news_main_image" alt="file_<?php echo $i;?>">
@@ -37,8 +38,8 @@
 						alt="<?php echo $this->translate('delete');?>"
 						title="<?php echo $this->translate('delete');?>">
 				</a>
-				
 			</p>
+			<?php endif;?>
 			<img
 			src="<?php echo $this->baseUrl('assets/images/'.$image->getImage('small'))?>"
 			alt="zdjecie" width="100%" />
