@@ -36,8 +36,11 @@ class Application_Model_DbTable_NewsFiles extends Zefir_Application_Model_DbTabl
 			$file->path = substr($file->path, strpos($file->path, '/cache') + strlen('/cache/'));
 		}
 		$options = Zend_Registry::get('options');
-		$file = $this->_copyFile($file, 'path', $options['upload']['images'], 'news_image', $oldData);
-
+		
+		if ($file->news_file_id == null)
+		{//copy file only for the new row
+			$file = $this->_copyFile($file, 'path', $options['upload']['images'], 'news_image', $oldData);
+		}
 			
 		$row->news_id = $file->news_id;
 		$row->path = $file->path;

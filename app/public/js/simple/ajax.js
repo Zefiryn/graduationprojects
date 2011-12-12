@@ -54,7 +54,7 @@ jQuery.fn.deleteWithAjax = function(callback) {
 			var titleText = $('#ui-dialog-title-dialog-confirm').text();
 			var deleteButton = $('#button_conf').text();
 			var cancelButton = $('#button_close').text();
-	
+			console.log($( "#dialog-confirm" ));
 			$( "#dialog-confirm" ).dialog({
 					draggable: true,
 					resizable: false,
@@ -125,13 +125,14 @@ function removeImage(data)
 		var cached = new Array();
 		var empty = new Array();
 		$('.fileField').each(function(){
-			if ($(this).children('fieldset').children('input[name*="Cache"]').val() != '')
+			var self  = $(this);
+			if (self.children('fieldset').children('input[name*="Cache"]').val() != '')
 			{
-				cached.push($(this));
+				cached.push(self);
 			}
 			else
 			{
-				empty.push($(this));
+				empty.push(self);
 			}
 		});
 		

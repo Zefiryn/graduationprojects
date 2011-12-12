@@ -119,6 +119,7 @@ class Application_Model_News extends GP_Application_Model
 			$this->details[] = $detail;
 		}
 
+		
 		$this->files = array();
 		foreach(explode(',', $values['files']) as $i => $file)
 		{
@@ -127,7 +128,10 @@ class Application_Model_News extends GP_Application_Model
 				$newsFile = new Application_Model_NewsFiles();
 				$newsFile->news_id = $this->news_id;
 				$newsFile->path = trim($file);
-				if ($i == 0) $newsFile->main_image = 1;
+				
+				//set main image for the new news
+				if ($this->news_id == null && $i == 0) $newsFile->main_image = 1;
+				
 				$this->files[] = $newsFile;
 			}
 		}

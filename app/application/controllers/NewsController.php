@@ -114,6 +114,7 @@ class NewsController extends Zefir_Controller_Action
 			$form->populate($news->prepareFormArray());
 		}
 		 
+		$this->view->news = $news;
 		$this->view->form = $form;
 	}
 
@@ -160,7 +161,61 @@ class NewsController extends Zefir_Controller_Action
 		 
 	}
 
-
+	public function deleteImageAction()
+	{
+		$request = $this->getRequest();
+		if ($request->isXmlHttpRequest())
+		{
+			$id = $request->getParam('id');
+	
+			if (ctype_digit($id))
+			{
+				$file = new Application_Model_NewsFiles($id);
+				$file->delete();
+				$this->_helper->json(array("file_id" => $id));
+				
+			}
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'root');
+		}
+	}
+	
+	public function mainImageAction()
+	{
+		$request = $this->getRequest();
+		if ($request->isXmlHttpRequest())
+		{
+			$id = $request->getParam('id');
+			$file_id = $request->getParam('file_id');
+			if (ctype_digit($id))
+			{
+				$news = new Application_Model_News($id);
+				foreach($news->files as $file)
+				{
+					if ($file->news_file_id == $file_id)
+					{
+						$file->main_image = 1;
+						$file->save();
+					}
+					elseif ($file->main_image = 1)
+					{
+						$file->main_image = 0;
+						$file->save();
+					}
+				}
+				$this->_helper->json(array("success" => TRUE));
+	
+			}
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'news');
+		}
+	}
 
 
 }
