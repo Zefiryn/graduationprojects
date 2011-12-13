@@ -10,46 +10,25 @@ array('title' => 'faq', 'delete_confirm' => $this->translate('faq_delete_confirm
 
 	<div style="clear: both; overflow: hidden;" id="faq">
 
-
 	<?php foreach($this->columns as $side => $faqs):?>
 		<div id="<?php echo $side;?>"
 			class="connected column-<?php echo $side;?>">
-				
 
 			<?php foreach($faqs as $i => $faq):?>
-
 			<div id="item_<?php echo $faq->faq_id;?>" class="sort_item">
-
-
 			<?php echo $this->partial('faq/_admin.phtml',
-			array('lang' => $this->lang, 'faq' => $faq));?>
+				array('lang' => $this->lang, 'faq' => $faq));?>
 				<p class="question color">
 					<span class="position" style="font-weight: bold"><?php echo ++$i;?>.
 					</span> <span style="font-weight: bold"><?php echo $faq->faq_question;?>
 					</span> <br />
-					
-					
-					
-					
 					<?php echo  nl2br($faq->faq_answer);?>
 				</p>
 			</div>
-			
-			
-			
-			
 			<?php endforeach; ?>
 		</div>
-		
-		
-		
-		
 		<?php endforeach; ?>
 	</div>
-	
-	
-	
-	
 	
 	<?php if (count($this->columns['left']) == 0):?>
 	<p class="empty">

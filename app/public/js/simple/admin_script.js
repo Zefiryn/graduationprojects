@@ -2,19 +2,35 @@
  * @author zefiryn
  */
 
+//live draggable
+(function ($) {
+    $.fn.liveDraggable = function (opts) {
+        this.live("mousemove", function() {
+            $(this).draggable(opts);
+        });
+    };
+}(jQuery));
+
 $(document).ready(function(){
 	
 	if ($("#regulation").length)
 	{
 		sortElements('#left, #right', "/regulation/sort/", function(){sortNumbers($("#regulation"), "&sect; ", "");}, true);
 	}
+	
 	if ($("#faq").length)
+	{
 		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");}, true);
+	}
 	
 	if ($("#diploma_gallery").length)
 	{
-		var id = $('.dyplom').attr('id');
-		sortColumnElements('#diploma_gallery', "/diploma/" + id + "/sort/");
+		sortColumnElements('#diploma_gallery', function(event, ui){sortDiplomaImages(event, ui, "/diploma/sort/");});
+	}
+	
+	if ($("#newsFiles").length)
+	{
+		sortColumnElements('#newsFiles', function(event, ui){sortNewsFiles(event,ui,"/news/sort");});
 	}
 	
 	if ($('.caption').length)
@@ -63,8 +79,10 @@ $(document).ready(function(){
 	
 	if ($('.news_main_image').length)
 	{
-		bindNewsMainImage();
+		orderNewsImages();
 	}
+	
+	voteSettings();
 });
 
 function showCaptions()
@@ -128,7 +146,7 @@ function sortElements(id, link, sortCallback, disable)
 	}
 }
 
-function sortColumnElements(id, link)
+function sortColumnElements(id, callback)
 {	
 	$( id ).sortable({
 		placeholder: "ui-state-highlight",
@@ -136,8 +154,7 @@ function sortColumnElements(id, link)
 			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
 		update: function(event, ui) {
-			sortDiplomaImages(event, ui, link);
-			//sortColumnElements(id, link);
+			callback(event, ui);
 		}
 	});
 	
@@ -146,19 +163,42 @@ function sortColumnElements(id, link)
 
 function sortDiplomaImages(event, ui, link)
 {
-	var id = ui.item.attr('id');
-	console.log(id);
-	var position = $('.sort_item').index($('#'+id)) + 1;
-	console.log(position);
-	var  url = link + id + "/" + position;
-	console.log(url);
-	
+	var diplomaId = $('.dyplom').attr('id');
+	var fileId = ui.item.attr('id');
+	var position = $('.sort_item').index($('#'+fileId)) + 1;
+	console.log(link);
 	jQuery.ajax({
-        type: "GET",
-        url: url,
+        type: "POST",
+        url: link,
+        data: {'id': diplomaId, 'file_id': fileId, 'position': position},
         global: false,
         success: function(){}, 
-        error: function(){
+        error: function(data){
+        	console.log(data);
+        	alert('An error occurred');
+        }
+	});
+}
+
+function sortNewsFiles(event, ui, link)
+{
+	var newsId = $('#newsFiles').data('news-id');
+	var file = ui.item.attr('id');
+	var position = $('.news_files').index($('#'+file)) + 1;
+	var fileId = $('#'+file).data('file-id');
+	
+	var data = {'news_id': newsId, 'file_id': fileId, 'position': position};
+	console.log(data);
+	jQuery.ajax({
+        type: "post",
+        url: '/news/sort',
+        data: data,
+        dataType: 'json',
+        success: function(data){
+        	console.log(data);
+        }, 
+        error: function(data){
+        	console.log(data);
         	alert('An error occurred');
         }
 	});
@@ -582,36 +622,81 @@ function editTranslation()
 	});
 }
 
-function bindNewsMainImage()
+function voteSettings()
 {
-	$('.news_main_image').click(function(e){
+	$('div.juror_box span.remove_user').live('click', function(){
 		
-		e.preventDefault();
 		var self = $(this);
-		var url = self.attr('href');
-		var loader = $('#loader').clone();
+		var clone = self.closest('div.juror_user_box').clone();
+		var juror_div = self.closest('div.juror_box');
+		var userbox = self.closest('div.juror_user_box');
+		
+		//make ajax call to reset juror assotiation
+		var data = userbox.data();
+		var baseUrl = data.url;
+		
 		$.ajax({
-			'url': url,
+			'url': baseUrl + 'users/reset-juror',
+			'data': {'user_id': data.userId},
 			'type': 'POST',
 			'dataType': 'json',
-			'beforeSend': function(){
-				loader.css({
-					'display': 'inline-block',
-					'position': 'absolute',
-					'margin-right': 0,
-					'margin-top' : 0
-					});
-				self.parent().parent().append(loader);
-			},
-			'error' : function(data){
-				loader.remove();
+			'error': function(data) {
 				console.log(data);
-				alert('An error occured while making the call');
 			},
-			'success': function(data){
-				loader.remove();
-				console.log(data);
+			'success' : function(data) {
+				if (data.success)
+				{
+					userbox.remove();
+					$('#unassigned_jurors').append(clone);
+				}
 			}
 		});
+		
+	});
+	
+	$('div.juror_user_box').liveDraggable({
+		revert: "invalid",
+		cursorAt: { cursor: "move", top: 5 },
+		zIndex: 100,
+		stack: '.juror_box'
+	});
+	$('div.juror_box div.juror_data').droppable({
+		activeClass: "juror_box_area",
+		hoverClass: "juror_box_area_hover",
+		accept: '.juror_user_box',
+		helper: 'clone',
+		activate: function(event, ui) {
+			//$('#unassigned_jurors').append(ui.helper);
+		},
+		drop: function(event, ui){
+			addUserToJuror(ui.helper, $(this));
+		}
+	});
+}
+
+function addUserToJuror(user, juror)
+{
+	user.css({position: 'relative', top: 0, left: 0}).removeClass('ui-draggable');
+	juror.children('.clear').before(user);
+	
+	var data = {'user_id' : user.data('user-id'), 'juror_id': juror.data('juror-id')};
+	var baseUrl = user.data('url');
+	$.ajax({
+		'url': baseUrl + 'users/assign-juror',
+		'data': data,
+		'type': 'POST',
+		'dataType': 'json',
+		'error': function(data, textStatus) {
+			console.log(data);
+			alert('An error occured: ' + textStatus);
+		},
+		'success' : function(data) {
+			if (data.fail) 
+			{
+				alert("An error occured: \n" + data.fail);
+				$('#unassigned_jurors').append(user);
+			}
+			console.log(data);
+		}
 	});
 }

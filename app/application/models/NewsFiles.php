@@ -5,7 +5,7 @@ class Application_Model_NewsFiles extends Zefir_Application_Model
 	public $news_file_id;
 	public $news_id;
 	public $path;
-	public $main_image;
+	public $position;
 	protected $news;
 	protected $_image = array(
 		'property' => 'path',

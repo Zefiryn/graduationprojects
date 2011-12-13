@@ -20,18 +20,16 @@
 		
 	</div>
 
-	<div class="column-right">
+	<div class="column-right" id="newsFiles" data-news-id="<?php echo $this->news->news_id;?>">
 
 	<?php foreach($this->news->files as $i => $image):?>
-		<div id="file_<?php echo $image->news_file_id?>">
+		<div class="news_files" id="file_<?php echo $image->news_file_id?>" data-file-id="<?php echo $image->news_file_id;?>">
 			<?php if ($this->user->_role == 'admin'):?>
 			<p class="admin editNewsImage">
-				<a href="<?php echo $this->url(array('id' => $this->news->news_id, 'file_id'=> $image->news_file_id), 'news_image_main');?>"
-					class="news_main_image" alt="file_<?php echo $i;?>">
-					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-clipboard no-block"
-						alt="<?php echo $this->translate('set_main_news_image');?>"
-						title="<?php echo $this->translate('set_main_news_image');?>">
-				</a>
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+					class="ui-icon ui-icon-arrow-4 no-block enable-sort"
+					alt="<?php echo $this->translate('move');?>"
+					title="<?php echo $this->translate('move');?>">
 				<a href="<?php echo $this->url(array('id'=> $image->news_file_id), 'news_image_delete');?>"
 					class="remove-image" alt="file_<?php echo $i;?>">
 					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block"
