@@ -4,14 +4,12 @@
 <div id="main">
 	<h1>
 	<?php echo $this->translate('edit_news');?></h1>
-		<div class="column-left">
-
-	<?php echo $this->form;?>
+	<div class="column-left">
+		<?php echo $this->form;?>
 	</div>
 
 	<div class="column-right">
-		<p class="label">
-		<?php echo $this->translate('news_files');?></p>
+		<p class="label"><?php echo $this->translate('news_files');?></p>
 		
 		<?php foreach($this->news->files as $i => $file):?>
 		<div id="file_<?php echo $file->news_file_id?>" style="width: 220px;float: left;margin: 5px 5px;">
@@ -33,7 +31,7 @@
 		
 		<iframe id="newsfiles"
 			src="<?php echo $this->url(array(), 'news_image');?>" width="480px"
-			height="500px" scrolling="no" frameborder="0" seamless="seamless" />
+			height="500px" scrolling="no" frameborder="0" seamless="seamless"></iframe>
 	</div>
 	<p class="clearfix"></p>
 

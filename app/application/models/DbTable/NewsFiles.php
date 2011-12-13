@@ -44,7 +44,7 @@ class Application_Model_DbTable_NewsFiles extends Zefir_Application_Model_DbTabl
 			
 		$row->news_id = $file->news_id;
 		$row->path = $file->path;
-		$row->main_image = $file->main_image;
+		$row->position = $file->position;
 
 		if ($row->save())
 		{

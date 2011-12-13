@@ -163,6 +163,8 @@ class NewsController extends Zefir_Controller_Action
 
 	public function deleteImageAction()
 	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 		$request = $this->getRequest();
 		if ($request->isXmlHttpRequest())
 		{
@@ -183,9 +185,16 @@ class NewsController extends Zefir_Controller_Action
 		}
 	}
 	
+	/*
+	 * @deprecated 
+	 * 
+	 * This action is deprecated as news files has order
+	 */
 	public function mainImageAction()
 	{
 		$request = $this->getRequest();
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
 		if ($request->isXmlHttpRequest())
 		{
 			$id = $request->getParam('id');
@@ -209,6 +218,56 @@ class NewsController extends Zefir_Controller_Action
 				$this->_helper->json(array("success" => TRUE));
 	
 			}
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'news');
+		}
+	}
+	
+	public function sortAction()
+	{
+		$request = $this->getRequest();
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
+		if ($request->isXmlHttpRequest())
+		{
+			$id = $request->getParam('news_id', null);
+			$file_id = $request->getParam('file_id', null);
+			$new_position = $request->getParam('position', null);
+			
+			$news = new Application_Model_News($id);
+			
+			$position = 1;
+			foreach ($news->files as $file)
+			{
+				if ($file->news_file_id != $file_id && $position < $new_position)
+				{
+					$file->position = $position ;
+					$file->save();
+				}
+				elseif ($file->news_file_id != $file_id && $position  > $new_position)
+				{
+					$file->position = $position + 1;
+					$file->save();
+				}
+				elseif ($file->news_file_id != $file_id && $position  == $new_position)
+				{
+					$file->position = $position + 1;
+					$file->save();
+				}
+				elseif ($file->news_file_id == $file_id)
+				{
+					$file->position = $new_position;
+					$file->save();
+					$position--;	//reduce position so next file would fill the place
+				}
+				$position++;
+			}
+			
+			$this->_helper->json(array('success' => true));
 		}
 		else
 		{

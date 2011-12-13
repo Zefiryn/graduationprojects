@@ -1,0 +1,35 @@
+<?php $juror = $this->juror?>
+<div class="juror_box" data-juror-id="<?php echo $juror->juror_id;?>">
+	<div class="juror_header">	
+		<p class="box_juror_name"><?php echo $juror->juror_name?>
+		<a href="<?php echo $this->url(array('id' => $juror->juror_id), 'edit_juror');?>">
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-white ui-icon-pencil no-block" 
+				alt="<?php echo $this->translate('edit');?>" 
+				title="<?php echo $this->translate('edit');?>" />
+		</a>
+		<a href="<?php echo $this->url(array('id' => $juror->juror_id), 'delete_juror');?>"
+			class="delete"> 
+			<img src="/img/simple/empty.png" class="ui-icon ui-icon-white ui-icon-trash no-block" 
+				alt="<?php echo $this->translate('delete');?>" 
+				title="<?php echo $this->translate('delete');?>" />
+		</a>
+		</p>
+		<p class="clear"></p>
+	</div>
+	<div class="juror_data" data-juror-id="<?php echo $juror->juror_id;?>">
+		<p>
+			<span class="juror_country"><?php echo $this->translate($juror->country);?></span>,
+			
+			<span class="juror_wage"><?php echo $this->translate('wage');?>: <?php echo $juror->wage;?></span> 
+			
+		</p> 
+		
+		<?php
+			foreach($juror->users as $user)
+			{
+				echo $this->partial('votes/_user_box.phtml', array('user' => $user, 'baseUrl' => $this->baseUrl));
+			}
+		?>
+		<p class="clear">&nbsp;</p>
+	</div>
+</div>
