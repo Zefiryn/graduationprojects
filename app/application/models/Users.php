@@ -144,6 +144,11 @@ class Application_Model_Users extends GP_Application_Model
 
 		return $this;
 	}
+	
+	public function getJurors()
+	{
+		return $this->getAll(array('role = "juror"'));
+	}
 }
 
 

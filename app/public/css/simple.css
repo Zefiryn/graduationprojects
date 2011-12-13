@@ -1625,6 +1625,70 @@ div.caption h3 {
 }
 
 
+/*
+  VOTING SETTINGS
+*/
+div.juror_user_box {
+	float: left;
+	width: auto;
+	border: 1px solid rgba(0,221,179,1);
+	margin: 5px;
+	padding: 3px;
+	background-color: rgba(0,221,179,0.05);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	cursor: move;
+}
+
+div.juror_user_box p {
+	margin: 0px;	
+	z-index: 50;
+}
+div.juror_user_box span.remove_user {
+	font-weight: bold;
+	margin: 0px 2px 0px 6px;
+	cursor: pointer;	
+}
+
+div.juror_box {
+	float: left;
+	width: 300px;
+	min-height: 100px;
+	border: 0px solid rgba(0,221,179,0.5);
+	margin: 0px 30px 20px 0px;	
+}
+
+div.juror_header .box_juror_name {
+	background: rgb(0,221,179);	
+	font-weight: bold;
+	font-size: 16px;
+	padding: 4px 10px;
+	text-align: center;
+	float: left;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+div.juror_header .box_juror_name a {
+	
+}
+
+div.juror_data {
+	border: 1px solid rgba(0,221,179,0.5);
+	margin: 0px;
+	min-height: inherit;
+	overflow: visible;
+}
+.juror_box_area {
+	background-color: rgba(0,221,179,0.1);	
+}
+.juror_box_area_hover {
+	background-color: rgba(0,221,179,0.05);	
+}
 
 .ui-widget-content,.ui-widget-header {
 	background-color: rgba(249, 249, 249, 1) !important;
@@ -1639,6 +1703,10 @@ div.caption h3 {
 
 .ui-icon {
 	background-image: url("images/ui-icons_2cd9b9_256x240.png") !important;
+}
+
+.ui-icon-white {
+	background-image: url("images/ui-icons_ffffff_256x240.png") !important;
 }
 
 .ui-state-default {

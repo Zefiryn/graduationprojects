@@ -261,7 +261,7 @@ function flashMessage()
 		$('#flash').css('margin-top', margin);
 		
 		$('#flash').animate({marginTop: 0}, 1500, 'easeOutBounce');
-		setTimeout("clearFlash()", 2500);
+		setTimeout(function(){clearFlash();}, 2500);
 	}
 }
 

@@ -106,6 +106,9 @@ class Application_Model_News extends GP_Application_Model
 	public function populateFromForm($values)
 	{
 		$values['added'] = $values['added'] != null ? strtotime($values['added']) : time();
+		$files = $values['files'];
+		unset($values['files']);
+				
 		parent::populateFromForm($values);
 
 		$languages = new Application_Model_Languages();
@@ -119,18 +122,27 @@ class Application_Model_News extends GP_Application_Model
 			$this->details[] = $detail;
 		}
 
+		$log = Zend_Registry::get('log');
 		
+		$imgOrder = 1;
+		$t = var_dump($this, true);
+		
+		if ($values['news_id'] != null) 
+		{
+			$this->__get('files');
+			$lastFile = count($this->files);
+			$imgOrder = $this->files[$lastFile-1]->position + 1;
+		}
 		$this->files = array();
-		foreach(explode(',', $values['files']) as $i => $file)
+		
+		foreach(explode(',', $files) as $i => $file)
 		{
 			if (trim($file))
 			{
 				$newsFile = new Application_Model_NewsFiles();
 				$newsFile->news_id = $this->news_id;
 				$newsFile->path = trim($file);
-				
-				//set main image for the new news
-				if ($this->news_id == null && $i == 0) $newsFile->main_image = 1;
+				$newsFile->position = $imgOrder++;
 				
 				$this->files[] = $newsFile;
 			}

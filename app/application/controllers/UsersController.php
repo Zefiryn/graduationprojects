@@ -125,6 +125,58 @@ class UsersController extends Zefir_Controller_Action
 	{
 		// action body
 	}
+	
+	public function resetJurorAction()
+	{
+		//reset juror
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$request = $this->getRequest();	
+		
+		if ($request->isXMLHttpRequest())
+		{
+			$id = $request->getParam('user_id');
+			$user = new Application_Model_Users($id);
+			$user->juror_id = null;
+			$user->save();
+			$this->_helper->json(array('success' => TRUE));
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'root');
+		}
+	}
+	
+	public function assignJurorAction()
+	{
+		//reset juror
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$request = $this->getRequest();
+	
+		if ($request->isXMLHttpRequest())
+		{
+			$user_id = $request->getParam('user_id');
+			$juror_id = $request->getParam('juror_id');
+			
+			try {
+				$user = new Application_Model_Users($user_id);
+				$user->juror_id = $juror_id;
+				$user->save();
+				$this->_helper->json(array('success' => TRUE));
+			}
+			catch (Zend_Exception $e) {
+				$this->_helper->json(array('fail' => $e->getMessage()));
+				
+			}
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'root');
+		}
+	}
 
 	private function sortByRole($users)
 	{
@@ -136,5 +188,6 @@ class UsersController extends Zefir_Controller_Action
 		return $sorted;
 	}
 
+	
 
 }

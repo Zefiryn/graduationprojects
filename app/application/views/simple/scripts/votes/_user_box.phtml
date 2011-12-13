@@ -1,0 +1,7 @@
+<?php $user = $this->user;?>
+<div class="juror_user_box" data-user-id="<?php echo $user->user_id;?>" data-url="<?php echo $this->baseUrl;?>">
+	<p>
+		<span><?php echo $user->getUserFullName();?></span>
+		<span class="remove_user">x</span>		
+	</p>	
+</div>

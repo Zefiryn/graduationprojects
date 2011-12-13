@@ -11,11 +11,13 @@ class VotesController extends Zefir_Controller_Action
 	{
 		$jurors = new Application_Model_Jurors();
 		$stages = new Application_Model_Stages();
-		$form = new Application_Form_VoteSettings();
+		$users = new Application_Model_Users();
 		
-		$this->view->form = $form;
+		
 		$this->view->jurors = $jurors->fetchAll();
 		$this->view->stages = $stages->fetchAll();
+		$this->view->users = $users->getJurors();
+		$this->render('newsettings');
 	}
 	
 	public function newstageAction()
