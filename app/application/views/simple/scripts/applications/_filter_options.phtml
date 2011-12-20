@@ -1,20 +1,71 @@
-<?php if ($this->juror):?>
-	<?php $wage = $this->juror->wage;?>
-	<?php for($i = 0; $i <= $this->stage->stage_max_vote; $i++):?>
-	<option value="<?php echo $i*$wage;?>" >
-		<?php if ($this->translate('stage_'. $this->stage->order .'_vote_'.$i) != 'stage_'. $this->stage->order .'_vote_'.$i)
-			{ 
-				echo $this->translate('stage_'. $this->stage->order .'_vote_'.$i);
-			}
-			else {
-				echo $this->translate('voted') . ' ' . $i;
-			}
-			?>
-	</option>
-	<?php endfor;?>
+<h2 id="filter_options"><?php echo $this->translate('filter');?></h2>
+<p class="clearfix" style="height:1px;">&nbsp;</p>
+<div class="filter">
+	<div class="selectionOption">
+		<p><?php echo $this->translate('voting_stage');?></p>
+		<ul id="stageSelect">
 
-<?php else: ?>
-	<option value="span_below"><?php echo $this->translate('below');?></option>
-	<option value="span_above"><?php echo $this->translate('above');?></option>
+		<?php foreach($this->options['stages'] as $stage):?>
+		<li id="stage<?php echo $stage->order?>" data-stage="<?php echo $stage->order;?>" <?php if ($this->selection['stage'] == $stage->order):?>class="checked"<?php endif;?>>
+			<?php echo $stage->stage_name; ?>
+		</li>
+		<?php endforeach;?>
 
-<?php endif; ?>
+		</ul> 
+	</div>
+
+	<div class="selectionOption">
+		<p><?php echo $this->translate('sort_application');?></p>
+		
+		<ul id="sortSelect">
+			<?php foreach($this->options['sort'] as $caption => $name): ?>
+			<li id="sort_<?php echo $name;?>" data-sort="<?php echo $name;?>" <?php if ($this->selection['sort'] == $name):?>class="checked"<?php endif;?>>
+				<?php echo $this->translate($caption); ?>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		
+	</div>
+	
+	<div class="selectionOption">
+		<p>Order</p>
+
+		<ul id="sortOrder">	
+			<li id="sort_asc" data-sort-order="asc" <?php if ($this->selection['sort_order'] == 'asc'):?>class="checked"<?php endif;?>>
+				<?php echo $this->translate('order_asc'); ?>
+			</li>
+			<li id="sort_desc" data-sort-order="desc" <?php if ($this->selection['sort_order'] == 'desc'):?>class="checked"<?php endif;?>>
+				<?php echo $this->translate('order_desc'); ?>
+			</li>
+		</ul>
+		
+	</div>
+	
+	<div class="selectionOption">
+		<p><?php echo $this->translate('filter_application');?></p>
+		<ul id="filterSelect">
+
+			<?php foreach($this->options['filter'] as $name => $caption):?>
+			<li id="filter_<?php echo $name;?>" data-filter="<?php echo $name;?>" <?php if ($this->selection['filter'] == $name):?>class="checked"<?php endif;?>>
+				<?php echo $this->translate($caption); ?>
+			</li>
+			<?php endforeach; ?>
+
+		</ul>		
+	</div>
+	
+	<div class="selectionOption" id="rangeSelect" style="min-width: 40px;text-align:right;<?php if ($this->selection['filter'] != 'range'):?>display:none;<?php endif;?>">
+		<?php echo $this->translate('range_start');?>: <input type="text" id="rangeStart" name="rangeStart" 
+			<?php if ($this->selection['range']['start'] !== null):?>value="<?php echo $this->selection['range']['start']; ?>"<?php endif;?> />
+		<br />
+		<?php echo $this->translate('range_end');?>: <input type="text" id="rangeEnd" name="rangeEnd" 
+			<?php if ($this->selection['range']['end'] !== null):?>value="<?php echo $this->selection['range']['end']; ?>"<?php endif;?> />
+	</div>
+	
+	
+	<div class="selectionOption" style="margin-top: 42px;">
+		<a id="filter" class="ui-button ui-widget ui-state-default ui-button-text-only" href="">
+			<span class="ui-button-text" style="font-size: 12px !important;"><?php echo $this->translate('filter');?></span>
+		</a>
+	</div>
+</div>

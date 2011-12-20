@@ -56,4 +56,15 @@ class Application_Model_Stages extends GP_Application_Model
 		$prev = new $this($this->getPreviousStageId());
 		return $prev->getMaxScore();
 	}
+	
+	public function getList()
+	{
+		$array = array();
+		foreach($this->fetchAll() as $stage)
+		{
+			$array[$stage->stage_id] = $stage;
+		}
+		
+		return $array;
+	}
 }
