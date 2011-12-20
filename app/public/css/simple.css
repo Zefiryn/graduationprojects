@@ -1436,12 +1436,25 @@ td.admin_column {
 table.stats {
 	width: 300px;
 	margin: 10px 0px 30px 0px;
-	border: 1px solid #3c9;
+	border: 0px solid #3c9;
 	border-collapse: collapse;
 }
-
-table.stats td {
+table.stats tr.header th {
+	background-color: rgba(0, 221, 179, 0.9);
+}
+table.stats tr {
+	margin: 5px;	
+}
+table.stats td, th.normal {
+	margin: 5px;
 	padding: 0px 3px 0px 3px;
+	font-size: 11px;
+	background: rgba(245, 245, 245, 0.5);
+	border-left: 4px solid white;
+	border-bottom: 4px solid white;
+}
+table.stats td:hover {
+	background: rgba(225, 225, 225, 0.9);
 }
 
 .miniature {
@@ -1577,7 +1590,6 @@ span.vote_last {
 div.dispute {
 	width: 27px;
 	height: 23px;
-	line-height: 23px;
 	background-image: url('../img/simple/cloud-dark.png');
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -1587,7 +1599,7 @@ div.dispute {
 }
 div.dispute.info {
 	position: absolute;
-	margin-left: 140px;
+	margin-left: 120px;
 	margin-top: -20px;	
 }
 span.dispute {

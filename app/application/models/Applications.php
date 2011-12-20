@@ -115,7 +115,11 @@ class Application_Model_Applications extends GP_Application_Model
 			elseif ($filter == 'range' && count($range) == 2)
 			{
 				$score = $application->countScore($stage->stage_id, $user);
-				if ($score >= $range['start'] && $score <= $range['end'])
+				
+				$start = $range['start'] == null ? -1 : $range['start'];
+				$end = $range['end'] == null ? 999 : $range['end']; 
+				
+				if ($score >= $start && $score <= $end)
 				{
 					$applications[$row['application_id']] = $application;
 				}

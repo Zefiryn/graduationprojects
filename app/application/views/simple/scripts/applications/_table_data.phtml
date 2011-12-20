@@ -273,7 +273,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	<tr>
 		<th></th> 
 		<?php foreach ($this->statistics['pl'] as $type => $ammount):?>
-		<th><?php echo $this->translate($type);?></th>
+		<th class="normal"><?php echo $this->translate($type);?></th>
 		<?php endforeach;?> 
 	</tr> 
 	<?php foreach($this->statistics as $part => $stats):?>
