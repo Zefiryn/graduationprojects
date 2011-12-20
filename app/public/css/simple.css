@@ -1287,30 +1287,108 @@ a.path_end:link,a.path_end:visited {
 .clearfix {
 	clear: both;
 }
-.filter_applications {
-	margin: 0px 0px 20px 0px;
+#filter_options {
+	cursor: pointer;	
+}
+div.filter {
+	position: absolute;
+	z-index: 50;
+	float: left;
+	border: 0px solid red;	
 }
 
-.filter_applications div {
-	float: right;
-	width: 200px;
-	margin: 0px 20px;
-	font-size: 14px;
-	border:0px solid blue;
+.selectionOption {
+	min-width: 150px;
+	float: left;
+	margin: 10px;
+	padding: 0px;
+	list-style-type: none;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	overflow: hidden;
+}
+.selectionOption p {
+	border-top: 1px solid rgba(0,221,179,0.4);
+	border-left: 1px solid rgba(0,221,179,0.4);
+	border-right: 1px solid rgba(0,221,179,0.4);
+	padding: 5px 5px;
+	margin: 0px;
+	background-color: #f5f5f5;
+	font-weight: bold;
+	height: 20px;	
+	cursor: pointer;
+	text-align: left;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.selectionOption:hover ul li {
+	display: block;
+}
+.selectionOption:hover ul li:last-child {
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom: 1px solid rgba(0,221,179,0.4);
 }
 
-.filter_applications .score {
-	width: 30px;
+.selectionOption ul {
+	margin: 0px;	
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.selectionOption li {
+	background-color: #f5f5f5;
+	display: none;
+	list-style-type: none;
+	padding: 4px;
+	cursor: pointer;
+	border-left: 1px solid rgba(0,221,179,0.4);
+	border-right: 1px solid rgba(0,221,179,0.4);
+}
+.selectionOption li:hover {
+	background-color: #000 !important;
+	color: #fff;	
+}
+.selectionOption li.checked {
+	display: block;
+	background-color: #999;
+	color: #fff;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom: 1px solid rgba(0,221,179,0.4);
+}
+.selectionOption:hover li.checked {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-bottom: 0px;
 }
 
-#spanFrame {
-	display: none;	
+#rangeStart, #rangeEnd {
+	width:45px;
+	margin: 3px 0px;
 }
 
 table.applications {
 	width: 100%;
 	color: #eee;
-	margin: 10px 0px 30px 0px;
+	margin: 85px 0px 30px 0px;
 	padding: 0px;
 	border-collapse: collapse;
 	border: 0px solid #28A279 !important;
@@ -1323,8 +1401,8 @@ table.applications tr {
 table.applications td {
 	color: #000;
 	padding: 5px;
+	font-size: 12px;
 }
-
 tr.header th,tr td {
 	border: 0px solid #fff;
 	margin: 0px;
@@ -1336,6 +1414,8 @@ tr.header th {
 	padding: 10px 2px !important;
 	text-align: left;
 	color: #000;
+	font-weight: bold;
+	font-size: 12px;
 }
 table.applications tr {
 	background: rgba(245,245,245, 0.4);
@@ -1372,7 +1452,7 @@ table.stats td {
 
 div.application_votes {
 	margin: 0px;
-	padding: 0px
+	padding: 0px;
 	border: 0px solid yellow !important;
 }
 
@@ -1407,9 +1487,10 @@ span.vote {
 	height: 20px;
 	line-height: 20px;
 	background-color: #999;
-	margin: 0px 5px;
+	margin: 0px 2px;
 	padding: 0px 8px;
 	cursor: pointer;
+	font-size: 10px;
 }
 
 span.vote:hover, span.admin_vote:hover {
@@ -1423,9 +1504,9 @@ span.admin_vote {
 	width: 18px;
 	height: 18px;
 	line-height: 18px;
-	font-size: 11px;
+	font-size: 10px;
 	background-color: #999;
-	margin: 0px 5px;
+	margin: 0px 2px;
 	cursor: pointer;
 	border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -1728,6 +1809,22 @@ div.juror_data {
 
 .ui-datepicker-next,.ui-datepicker-prev {
 	border: 1px solid rgba(0, 221, 179, 0.5) !important;
+}
+
+.ui-button-text-only, .ui-button-text {
+	font-size: 9px !important;
+	padding: 5px !important;
+	line-height: 14px !important;
+	margin: 0px !important;
+}
+.ui-button {
+	padding: 0px !important;
+	margin: 3px 0px !important;
+}
+
+.ui-state-active {
+	background: #999 !important;
+	color: #fff !important;	
 }
 
 .no-block {

@@ -27,15 +27,7 @@ $(document).ready(function(){
 	
 	if ($('a.application_files').length )
 	{
-		runFancyBox('a.application_files', true);
-		
-		if ($('.miniature').length)
-		{
-			$('.miniature').click(function(){
-				var rel = $(this).attr('rel');
-				$('a.application_files[rel='+rel+']:first-child').click();
-			});
-		}
+		applicationFilesFancyBox();
 	}
 	
 	if ($('a.files').length )
@@ -81,6 +73,21 @@ $(document).ready(function(){
 		});
 	}
 });
+
+function applicationFilesFancyBox() 
+{
+	
+	runFancyBox('a.application_files', true);
+	
+	if ($('.miniature').length)
+	{
+		$('.miniature').click(function(){
+			var rel = $(this).attr('rel');
+			$('a.application_files[rel='+rel+']:first-child').click();
+		});
+	}	
+	
+}
 
 function disableSubmitOnEnter()
 {

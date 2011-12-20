@@ -1,11 +1,12 @@
 .buildpath
 .project
 .settings/
-app/public/assets/cache/
-app/public/assets/miniatures/
-app/public/assets/applications/
-app/public/assets/images/
-app/public/assets/editions/
+app/public/assets/cache/*
+app/public/assets/miniatures/*
+app/public/assets/applications/*
+app/public/assets/images/*
+app/public/assets/editions/*
+app/public/assets/captcha/*
 app/public/.htaccess
 app/cache/*
 app/log/*.log            
