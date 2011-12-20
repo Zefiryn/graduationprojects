@@ -2,7 +2,6 @@
 
 class ApplicationsController extends Zefir_Controller_Action
 {
-
 	public function init()
 	{
 		parent::init();
@@ -14,7 +13,9 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		$currentStage = $this->_getCurrentStage();
 		$application = new Application_Model_Applications();
-		$applications = $application->getApplications($this->_getSort(), $currentStage);
+		
+		$sort = $this->_getSort(). ' ' . $this->_getSortOrder();
+		$applications = $application->getApplications($sort , $currentStage, $this->_getFilter(), $this->_getRange(), $this->view->user);
 		
 		$stages = new Application_Model_Stages();
 		$jurors = new Application_Model_Jurors();
@@ -28,7 +29,18 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->view->votes = $this->_getAllVotes($currentStage, $applications, $jurors);
 		}
 		$this->view->currentStage = $currentStage;
-		
+		$this->view->filterOptions = $this->_getFilterOptions();
+		$this->view->selection = array('stage' => $this->_getCurrentStage()->order,
+										'sort' => $this->_getSort(),
+										'sort_order' => $this->_getSortOrder(),
+										'filter' => $this->_getFilter(),
+										'range' => $this->_getRange());
+		if ($this->getRequest()->isXMLHttpRequest()) 
+		{
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			$this->renderScript('applications/_table_data.phtml');
+		}
 	}
 
 	public function newAction()
@@ -590,7 +602,6 @@ class ApplicationsController extends Zefir_Controller_Action
 
 	protected function _createStatistics($applications)
 	{
-		Zefir_Pqp_Classes_Console::logSpeed('start statistics');
 		$work_type = new Application_Model_WorkTypes();
 		$types = $work_type->getWorkTypes();
 		unset($types[0]);
@@ -615,7 +626,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			$statistics[$application->country][$application->work_type->work_type_name]++;
 			$statistics[$application->country]['all']++;
 		}
-		Zefir_Pqp_Classes_Console::logSpeed('end statistics');
+		
 		return $statistics;
 	}
 
@@ -625,28 +636,63 @@ class ApplicationsController extends Zefir_Controller_Action
 		$sortApplication = new Zend_Session_Namespace('app_sort');
 		 
 		$currentSort = $request->getParam('sort', NULL);
-		$lastSort = $sortApplication->sort != null ? $sortApplication->sort : 'surname';
-		 
-		if (strstr($lastSort, $currentSort) && $currentSort != null)
+
+		if (!$currentSort)
 		{
-			$order = substr($lastSort, strpos($lastSort, ' ')+1);
-			$currentSort .= $order == 'ASC' ? ' DESC' : ' ASC';
+			$currentSort = $sortApplication->sort ? $sortApplication->sort : 'surname';
 		}
-		elseif ($currentSort != NULL)
-		{
-			$currentSort .= ' ASC';
-		}
-		elseif ($lastSort != NULL)
-		{
-			$currentSort = $lastSort;
-		}
-		else
-		{
-			$currentSort = 'surname ASC';
-		}
+		
 		//save current sort
 		$sortApplication->sort = $currentSort;
 		return $currentSort;
+	}
+	
+	protected function _getSortOrder()
+	{
+		$request = $this->getRequest();
+		$sortOrder = new Zend_Session_Namespace('sort_order');
+			
+		$order = $request->getParam('sort_order', NULL);
+	
+		if (!$order)
+		{
+			$order = $sortOrder->order ? $sortOrder->order : 'asc';
+		}
+	
+		//save current sort
+		$sortOrder->order = $order;
+		return $order;
+	}
+	
+	protected function _getFilter() 
+	{
+		$request = $this->getRequest();
+		$savedFilter = new Zend_Session_Namespace('filter');
+		$filter = $request->getParam('filter', null);
+		
+		if (!$filter)
+		{
+			$filter = $savedFilter->filter ? $savedFilter->filter : 'all';
+		}
+		
+		$savedFilter->filter = $filter;
+		return $filter;
+		
+	}
+	
+	protected function _getRange()
+	{
+		$request = $this->getRequest();
+		$savedRange = new Zend_Session_Namespace('range');
+		$range = array(
+			'start' => $request->getParam('rangeStart', $savedRange->start),
+			'end' => $request->getParam('rangeEnd', $savedRange->end),
+		);
+		
+		$savedRange->start = $range['start'];
+		$savedRange->end= $range['end'];
+		
+		return $range;
 	}
 
 
@@ -683,9 +729,13 @@ class ApplicationsController extends Zefir_Controller_Action
 	{
 		$request = $this->getRequest();
 		$stage = $request->getParam('stage', null);
+		$savedStage = new Zend_Session_Namespace('stage');
 
+		$stage = $stage ? $stage :  $savedStage->stage;
+		
 		if (!$stage)
 		{
+			
 			$stageObj = new Application_Model_Stages();
 			$stageObj->populate($stageObj->getDbTable()->fetchAll(null, 'order')->current());
 		}
@@ -695,6 +745,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			$stageObj->getBy('order', $stage);
 		}
 		
+		$savedStage->stage = $stage;
 		return $stageObj;
 	}
 	
@@ -721,5 +772,25 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		return $votes;
 		
+	}
+	
+	protected function _getFilterOptions()
+	{
+		$stages = new Application_Model_Stages();
+		$options = array(
+			'stages' => $stages->getList(),
+			'sort' => array('user_name_and_surname' => 'surname',
+							'country' => 'country',
+							'work_type' => 'work_type_id',
+							'work_subject' => 'work_subject',
+							'degree' => 'degree_id'),
+			'sort_order' => array('asc', 'desc'),
+			'filter' => array('all' => 'all_applications',
+								'disputed' => 'disputed',
+								'unmarked' => 'unmarked',
+								'range' => 'filter_range_point')
+		);
+		
+		return $options;
 	}
 }

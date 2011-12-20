@@ -80,9 +80,10 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 
-	public function getApplications($sort = NULL, $stage = NULL)
+	public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $user)
 	{
 		$sort = strstr($sort, 'work_type_id') ? 'a.'.$sort : $sort;
+		
 		$sort = $sort != NULL ? array($sort, 'surname ASC', 'name ASC', 'application_date ASC') : array('application_date ASC', 'surname ASC');
 		
 		$rowset = $this->getDbTable()->getAllApplications($sort, $stage);
@@ -91,7 +92,35 @@ class Application_Model_Applications extends GP_Application_Model
 		foreach($rowset as $row)
 		{
 			$application = new $this;
-			$applications[$row['application_id']] = $application->populate($row);
+			$application->populate($row);
+			if (!$filter || $filter == 'all') 
+			{
+				$applications[$row['application_id']] = $application;
+			}
+			elseif ($filter == 'unmarked')
+			{
+				
+				if ($application->countScore($stage->stage_id, $user) === null)
+				{
+					$applications[$row['application_id']] = $application;
+				}
+			}
+			elseif ($filter == 'disputed')
+			{
+				if ($application->isDisputed())
+				{
+					$applications[$row['application_id']] = $application;
+				}
+			}
+			elseif ($filter == 'range' && count($range) == 2)
+			{
+				$score = $application->countScore($stage->stage_id, $user);
+				if ($score >= $range['start'] && $score <= $range['end'])
+				{
+					$applications[$row['application_id']] = $application;
+				}
+			}
+			
 		}
 		
 		$sortedApps = new Zend_Session_Namespace('sortedApps');
@@ -237,7 +266,7 @@ class Application_Model_Applications extends GP_Application_Model
 		return null;
 	}
 	
-	public function countScore($stage)
+	public function countScore($stage, $user = null)
 	{
 		if ($this->votes == null)
 		{
@@ -248,7 +277,10 @@ class Application_Model_Applications extends GP_Application_Model
 		{
 			if ($vote->stage_id == $stage)
 			{
-				$score += $vote->vote;
+				if (!$user || $user->_role == 'admin' || $user->juror_id == $vote->juror_id)
+				{
+					$score += $vote->vote;
+				}
 			}
 		}
 		return $score;
@@ -274,7 +306,7 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 	}
 	
-	public function isDisputed($user)
+	public function isDisputed($user = null)
 	{
 		if ($this->disputes == null)
 		{
@@ -285,7 +317,7 @@ class Application_Model_Applications extends GP_Application_Model
 		
 		foreach($this->disputes as $dispute)
 		{
-			if ($dispute->user_id == $user->user_id)
+			if ($user == null || $dispute->user_id == $user->user_id)
 			{
 				return TRUE;
 			}
