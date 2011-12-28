@@ -22,7 +22,7 @@ html {
 }
 
 body {
-	font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	line-height: 1.5;
 	color: #333;
@@ -358,7 +358,7 @@ menu menu a:last-child {
 
 .index_author {
 	color: rgba(0, 0, 0, 0.898);
-	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-style: normal;
 	font-weight: 700;
@@ -381,7 +381,7 @@ menu menu a:last-child {
 
 .author {
 	color: rgba(0, 0, 0, 0.898);
-	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 700;
@@ -425,7 +425,7 @@ a:hover img {
 
 h1 {
 	color: rgb(0, 0, 0);
-	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 1.4;
@@ -435,7 +435,7 @@ h1 {
 
 h2 {
 	color: rgb(0, 0, 0);
-	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 1.4;
