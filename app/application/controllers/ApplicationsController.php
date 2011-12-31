@@ -519,6 +519,22 @@ class ApplicationsController extends Zefir_Controller_Action
 		
 		
 	}
+	
+	public function resultAction() 
+	{
+		if (!$this->_checkResultDate())
+		{
+			$this->flashMe('application_result_before');
+			$this->_redirectToRoute(array(), 'root');
+		}
+		$stage = new Application_Model_Stages();
+		$stage->getFinalStage();
+		
+		$application = new Application_Model_Applications();
+		$applications = $application->getApplications('surname' , $stage, null, null, $this->view->user);
+		$this->view->applications = $applications;
+		
+	}
 
 	protected function _checkFileCache($type = 'new')
 	{
@@ -716,6 +732,20 @@ class ApplicationsController extends Zefir_Controller_Action
 		$appSettings = Zend_Registry::get('appSettings');
 		 
 		if ($appSettings->application_deadline >= time() || $this->view->user->_role == 'admin')
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	protected function _checkResultDate()
+	{
+		$appSettings = Zend_Registry::get('appSettings');
+		
+		if ($appSettings->result_date <= time() || $this->view->user->_role == 'admin')
 		{
 			return TRUE;
 		}

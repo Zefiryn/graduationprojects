@@ -1,0 +1,27 @@
+<div id="main">
+
+
+<?php 
+	$i = 0;
+	foreach($this->applications as $application):?>
+	<div class="diploma">
+		<img
+			src="<?php echo $this->baseUrl('assets/applications/'.$application->files[0]->getImage('thumb'));?>"
+			alt="" style="width: 100%;" />
+		<p class="index_author">
+				<?php echo $application->user->getUserFullName();?> 
+				<span class="country">(<?php echo strtoupper($application->country);?>)</span>
+		</p>
+		<p>
+		<?php  echo $application->work_subject;?></p>
+
+	</div>
+	
+	
+		<?php if (++$i % 4 == 0 or ($i) == count($this->applications)): ?>
+	 	<!-- every 4 diplomas-->
+		<p class="clearfix"></p>
+		<?php endif;?>
+	<?php endforeach;?>	
+
+</div>
