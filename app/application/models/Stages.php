@@ -67,4 +67,12 @@ class Application_Model_Stages extends GP_Application_Model
 		
 		return $array;
 	}
+	
+	public function getFinalStage()
+	{
+		$row = $this->getDbTable()->getFinalStage();
+		$this->populate($row);
+		
+		return $this;
+	}
 }
