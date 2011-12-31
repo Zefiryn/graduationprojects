@@ -489,6 +489,10 @@ p,ul,ol {
 	margin-top: 10px;
 }
 
+strong, b {
+	font-weight: bold;	
+}
+
 .news p {
 	font-family: Arial, Helvetica, sans-serif;
 	margin-top: 5px;
