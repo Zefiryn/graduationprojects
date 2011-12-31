@@ -25,25 +25,25 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		),
 
        'user' => array(
-       	'model' => 'Application_Model_Users',
+       		'model' => 'Application_Model_Users',
 			'column' => 'user_id',
 			'refColumn' => 'user_id'
 		),
 
 		'school' => array(
-       	'model' => 'Application_Model_Schools',
+       		'model' => 'Application_Model_Schools',
 			'column' => 'school_id',
 			'refColumn' => 'school_id'
 		),
 
 		'degree' => array(
-       	'model' => 'Application_Model_Degrees',
+       		'model' => 'Application_Model_Degrees',
 			'column' => 'degree_id',
 			'refColumn' => 'degree_id'
 		),
 
 		'work_type' => array(
-       	'model' => 'Application_Model_WorkTypes',
+       		'model' => 'Application_Model_WorkTypes',
 			'column' => 'work_type_id',
 			'refColumn' => 'work_type_id'
 		),
