@@ -77,6 +77,16 @@ class Application_Model_Diplomas extends GP_Application_Model
 		else
 		return null;
 	}
+	
+	public function getFirstFile()
+	{
+		if ($this->files == null) 
+		{
+			$this->__get('files');
+		}
+		
+		return array_pop($this->files);
+	}
 
 	public function getAuthorName()
 	{

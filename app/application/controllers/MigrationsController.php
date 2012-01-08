@@ -294,6 +294,25 @@ class MigrationsController extends Zefir_Controller_Action
 
 		$this->render('index');
 	}
+	
+	public function fetchAction()
+	{
+		$diplomas = new Application_Model_Diplomas();
+		
+		$set = $diplomas->with(array(
+				'edition',
+				'degree',
+				'work_type',
+				'files',
+				'fields'))->fetchAll();
+		
+		$this->view->diplomas = $set;
+		$this->view->path = array(
+		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+		1 => array('route' => 'diplomas', 'data' => array('edition' => 10), 'name' => array('edition', '2009-2010')),
+		);
+		$this->renderScript('diplomas/index.phtml');
+	}
 
 	public function locAction()
 	{

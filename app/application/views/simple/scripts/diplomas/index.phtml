@@ -6,7 +6,7 @@
 		<a
 			href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">
 			<img
-			src="<?php echo $this->baseUrl('assets/editions/'.$diploma->files[0]->getImage('thumb'));?>"
+			src="<?php echo $this->baseUrl('assets/editions/'.$diploma->getFirstFile()->getImage('thumb'));?>"
 			alt="" style="width: 100%;" />
 		</a>
 		<p class="index_author">
