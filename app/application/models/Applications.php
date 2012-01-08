@@ -80,8 +80,10 @@ class Application_Model_Applications extends GP_Application_Model
 		return $this->getDbTable()->delete($this);
 	}
 
-	public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $user)
+	public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $user = null)
 	{
+		if (!$user) $user = Zend_Registry::get('user');
+		
 		$sort = strstr($sort, 'work_type_id') ? 'a.'.$sort : $sort;
 		
 		$sort = $sort != NULL ? array($sort, 'surname ASC', 'name ASC', 'application_date ASC') : array('application_date ASC', 'surname ASC');
