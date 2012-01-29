@@ -68,13 +68,13 @@ class Application_Model_DbTable_DiplomaFields extends Zefir_Application_Model_Db
 	public function save(Application_Model_DiplomaFields $field)
 	{
 		$select = $this->select()
-		->where('diploma_id = ?', $field->diploma_id)
-		->where('lang_id = ?', $field->lang_id)
-		->where('field_id = ?', $field->field_id);
+					->where('diploma_id = ?', $field->diploma_id)
+					->where('lang_id = ?', $field->lang_id)
+					->where('field_id = ?', $field->field_id);
 		$row = $this->fetchRow($select);
 
 		if ($row)
-		$field->diploma_field_id = $row['diploma_field_id'];
+			$field->diploma_field_id = $row['diploma_field_id'];
 
 		parent::save($field);
 	}

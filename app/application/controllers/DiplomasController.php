@@ -65,7 +65,7 @@ class DiplomasController extends Zefir_Controller_Action
 		}
 		else
 		{
-			$form->populate($diploma->prepareFormArray($this->view->lang));
+			$form->populate($diploma->prepareFormArray());
 		}
 		 
 		$this->view->form = $form;
