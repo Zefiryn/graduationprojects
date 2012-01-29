@@ -1,0 +1,42 @@
+<?php $form = $this->element;
+$appSettings = Zend_Registry::get('appSettings');
+?>
+
+<form action="<?php echo $this->escape($form->getAction()); ?>"
+	method="<?php echo $this->escape($form->getMethod()); ?>"
+	enctype="<?php echo $form->getEnctype(); ?>" class="diploma">
+
+	<div id="diplomaFormLeft">
+		<?php echo $form->csrf->renderViewHelper(); ?>
+		<?php echo $form->diploma_id ?>
+		<?php echo $form->name; ?>
+		<?php echo $form->surname; ?>
+		<?php echo $form->email; ?>	
+		<?php echo $form->supervisor; ?>
+		<?php echo $form->supervisor_degree; ?>
+		<?php echo $form->degree_id; ?>
+	</div>
+	
+	<div id="diplomaFormRight">
+		<ul class="lang_choice">
+		<span><?php echo $this->translate('choose_language')?>: </span>
+		<?php foreach($form->getLanguages() as $lang):?>
+			<li class="choice_<?php echo $lang->lang_code;?>"><?php echo $lang->lang_code;?></li>
+		<?php endforeach;?>
+		</ul> 
+			
+		<?php foreach($form->getLanguages() as $lang):?>
+		<div id="<?php echo $lang->lang_code?>" class="lang_div">
+			<?php echo $form->getSubForm($lang->lang_code);?>	
+		</div>
+		<?php endforeach;?>
+	</div>
+	<p class="clearfix">&nbsp;</p>
+	<fieldset class="submit" style="margin-top:0px">
+		<p class="submit center">
+			<?php echo $form->leave; ?>
+			<?php echo $form->submit; ?>
+		</p>
+	</fieldset>
+		
+</form>

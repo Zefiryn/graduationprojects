@@ -21,7 +21,7 @@ class Application_Form_News extends Zefir_Form
 		$this->setName('NewsForm');
 		$this->setTranslator(Zend_Registry::get('Zend_Translate'));
 		$this->setDecorators(array(
-		array('ViewScript', array('viewScript' => 'forms/_newsForm.phtml'))
+			array('ViewScript', array('viewScript' => 'forms/_newsForm.phtml'))
 		));
 
 		$element = $this->createElement('hidden', 'news_id');

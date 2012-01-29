@@ -55,9 +55,13 @@ $(document).ready(function(){
 		prepareNewsForm();
 	}
 	
-	if ($('.lang_choice').length)
+	if ($('form.newsForm .lang_choice').length)
 	{
 		newsLangChoice();
+	}
+	if ($('form.diploma .lang_choice').length)
+	{
+		diplomaLangChoice();
 	}
 	
 	if ($('#applicationForm').length)
@@ -210,6 +214,31 @@ function newsLangChoice()
 	$('.lang_choice li').click(function(){
 		var lang = $(this).text();
 		$('form div').hide();
+		$('#' + lang).show();
+		$('.current').removeClass('current');
+		$('.choice_' + lang).addClass('current');
+	});
+}
+
+function diplomaLangChoice() 
+{
+	//show first div according to lang settings
+	if ($('.current').length == 0)
+	{
+		var lang = $('.lang-selected').text().toLowerCase(); 
+	}
+	else
+	{
+		var lang = $('.current').text();
+		$('.current').removeClass('current');
+	}
+	$('form div.lang_div').hide();
+	$('#' + lang).show();
+	$('.choice_' + lang).addClass('current');
+	
+	$('.lang_choice li').click(function(){
+		var lang = $(this).text();
+		$('form div.lang_div').hide();
 		$('#' + lang).show();
 		$('.current').removeClass('current');
 		$('.choice_' + lang).addClass('current');
