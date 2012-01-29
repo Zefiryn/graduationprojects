@@ -180,6 +180,17 @@ class Application_Model_Applications extends GP_Application_Model
 		return $data;
 	}
 	
+	public function prepareArchiveArray()
+	{
+		$data = $this->prepareFormArray();
+		$data['graduation_time'] = $this->graduation_time;
+		$data['name'] = $this->__get('user')->name;
+		$data['surname'] = $this->__get('user')->surname;
+		$data['email'] = $this->__get('user')->email;
+		
+		return $data;
+	}
+	
 	public function getAdjacentApplication()
 	{
 		return $this->getDbTable()->getAdjacentApplication($this);
@@ -347,6 +358,60 @@ class Application_Model_Applications extends GP_Application_Model
 		}
 	
 		return FALSE;
+	}
+	
+	public function getWinningApps($edition_id)
+	{
+		$stage = new Application_Model_Stages();
+		$stage->getFinalStage();
+		
+		return $this->getApplications('surname' , $stage, null, null, null);
+	}
+	
+	public function getRemainedApps($apps_keys)
+	{
+		foreach($this->getDbTable()->getRemainedApps($apps_keys) as $app)
+		{
+			$obj = new $this;
+			$set[$app->application_id] = $obj->populate($app);
+		}
+		
+		return $set;
+	}
+	
+	public function archive($app_ids)
+	{
+		$ids = explode(',', $app_ids);
+		$errors  =array('hasError' => false);
+		foreach($ids as $id)
+		{
+			$app = new $this($id);
+			$diploma = new Application_Model_Diplomas();
+			try 
+			{
+				$diploma->createFromApp($app);
+				$errors[$id]['object'] = $diploma;
+			}
+			catch (Zend_Exception $e)
+			{
+				$errors['hasError'] = true;
+				$errors[$id]['error'] = $e->getMessage();
+			}
+		}
+		
+		return $errors;
+	}
+	
+	public function getField($name)
+	{
+		if (is_object($this->__get($name))) 
+		{
+			return $this->$name->__toString();
+		}
+		else
+		{
+			return $this->$name;
+		}
 	}
 
 }

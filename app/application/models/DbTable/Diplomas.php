@@ -109,8 +109,14 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
 
 		$row = $select->fetch();
 		$diplomaClass = get_class($diploma);
-		$previousDiploma = new $diplomaClass($row['diploma_id']);
-		 
+		if ($row)
+		{
+			$previousDiploma = new $diplomaClass($row['diploma_id']);
+		}
+		else 
+		{
+			$previousDiploma = $diploma;
+		}
 		return $previousDiploma;
 	}
 
@@ -139,7 +145,14 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
 
 		$row = $select->fetch();
 		$diplomaClass = get_class($diploma);
-		$nextDiploma = new $diplomaClass($row['diploma_id']);
+		if ($row)
+		{
+			$nextDiploma = new $diplomaClass($row['diploma_id']);
+		}
+		else
+		{
+			$nextDiploma = $diploma;
+		}
 		 
 		return $nextDiploma;
 	}
