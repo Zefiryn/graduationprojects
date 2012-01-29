@@ -19,7 +19,8 @@
 									
 	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror')
 		$this->headScript()->appendFile($this->baseUrl.'js/jquery.design.js')
-							->appendFile($this->baseUrl.'js/simple/admin_script.js?time='.time());?>
+							->appendFile($this->baseUrl.'js/simple/admin_script.js?time='.time())
+							->appendFile($this->baseUrl.'js/simple/edition_archive.js?time='.time());?>
 							
 	<?php $this->headScript()->appendFile($this->baseUrl.'js/simple/ajax.js')
 							 ->appendFile($this->baseUrl.'js/simple/script.js?time='.time()); ?>	

@@ -28,7 +28,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 
 	public function save()
 	{
-		$self = $this->getDbTable()->save($this);
+		$self = parent::save($this);
 
 		if (is_array($this->fields))
 		{
@@ -69,13 +69,13 @@ class Application_Model_Diplomas extends GP_Application_Model
 		}
 
 		if (isset($entry) && $entry != '')
-		return  $entry;
+			return  $entry;
 		elseif (isset($entry_def_lang) && $entry_def_lang != '')
-		return $entry_def_lang;
+			return $entry_def_lang;
 		elseif (isset($entry_pl) && $entry_pl != '')
-		return $entry_pl;
+			return $entry_pl;
 		else
-		return null;
+			return null;
 	}
 	
 	public function getFirstFile()
@@ -148,6 +148,105 @@ class Application_Model_Diplomas extends GP_Application_Model
 
 		return $this;
 	}
+	
+	public function createFromApp($app)
+	{
+		$this->populate($app->prepareArchiveArray());
+		
+		$field = new Application_Model_Fields();
+		$lang = new Application_Model_Languages();
+		
+		foreach($lang->getLanguages() as $lang_id => $code)
+		{
+			foreach($field->fetchAll() as $id => $field)
+			{
+				$diplomaField = new Application_Model_DiplomaFields();
+				$diplomaField->lang_id = $lang_id;
+				$diplomaField->field_id = $id;
+				$entry = $field->field_name;
+				$diplomaField->entry = $app->getField($entry);
+				if ($diplomaField->entry != null) 
+				{
+					$this->addChild($diplomaField, 'fields');
+				}
+			}
+		}
+		
+		$i = 0;
+		
+		$this->_copyFilesFromApplication($app, true);
+		$this->save();
+		return $this;
+		
+	}
+	
+	protected function _copyFilesFromApplication($app, $copyThumbnails = true)
+	{
+		$edition_folder = $this->_createEditionFolder();
+		$diploma_folder = $this->_createDiplomaFolder();
+		
+		$i = 0;
+		foreach($app->files as $file)
+		{
+			$source = APPLICATION_PATH . '/../public/assets/applications/' . $file->path;
+			$dest = $diploma_folder .'/'. substr($file->path, strrpos($file->path, '/') + 1);
+			if (copy($source, $dest))
+			{
+				$path = substr($dest, strpos($dest, $this->edition->edition_name));
+				$diplomaFile = new Application_Model_DiplomaFiles();
+				$diplomaFile->position = ++$i;
+				$diplomaFile->path = $path;
+				if (!$copyThumbnails)
+				{
+					//make thumbnails from scrathc
+					$diplomaFile->resizeImage();
+				}
+				else
+				{
+					//copy thumbnails from applications
+					foreach($diplomaFile->getThumbnails() as $key)
+					{
+						$thumbSource = APPLICATION_PATH . '/../public/assets/applications/' . $file->getImage($key);
+						$thumbDest = $diploma_folder .'/'. substr($file->getImage($key), strrpos($file->getImage($key), '/') + 1);
+						try {
+							copy($thumbSource, $thumbDest);
+						}
+						catch (Zend_Exception $e){
+							//in case copying is not successfull create the thumbnails
+							$diplomaFile->recreateThumbnails();
+						}
+					}
+				}
 
+				$this->addChild($diplomaFile, 'files');
+			}
+		}
+		
+		return $this;
+	}
+	
+	protected function _createDiplomaFolder()
+	{
+		$dir = APPLICATION_PATH . '/../public/assets/editions/' . $this->__get('edition')->edition_name;
+		$name = Zefir_Filter::strToUrl($this->surname . '_' . $this->name);
+		
+		if (!file_exists($dir . '/' . $name))
+		{
+			mkdir($dir . '/' . $name);
+		}
+		
+		return $dir . '/' . $name;
+	}
+
+	protected function _createEditionFolder()
+	{
+		$dir = APPLICATION_PATH . '/../public/assets/editions/' . $this->__get('edition')->edition_name;
+		if (!file_exists($dir))
+		{
+			mkdir($dir);
+		}
+
+		return $dir;
+	}
 }
 

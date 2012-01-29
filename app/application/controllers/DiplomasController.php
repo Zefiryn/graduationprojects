@@ -31,7 +31,7 @@ class DiplomasController extends Zefir_Controller_Action
 		$diploma = new Application_Model_Diplomas($id);
 		$this->view->diploma = $diploma;
 		$this->view->adjacent = $diploma->getAdjacentDiplomas();
-		 
+
 		$this->view->path = array(
 		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
 		1 => array('route' => 'diplomas', 'data' => array('edition' => $diploma->edition->edition_name), 'name' => array('edition', $diploma->edition->edition_name)),

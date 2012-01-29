@@ -281,6 +281,62 @@ menu menu a:last-child {
 	margin-right: 30px;
 	margin-left: 0px;
 }
+.archive_explain {
+	margin: 5px 0px 20px 0px;
+}
+.apps_to_archive  {
+	border-right: 3px double #888;
+	width: 560px;
+	float: left;
+}
+.app_to_archive {
+	border: 0px solid green;
+	width: 120px;
+	float: left;
+	margin: 8px;
+	text-align: center;
+}
+.app_to_archive img {
+	margin: 2px 20px;
+	border: 1px solid #aaa;
+	padding: 2px;
+}
+
+.app_to_archive #loader {
+	position: absolute;
+	margin-left: 52px;
+	margin-top: 28px;
+	border: 0px;
+	background: #fff;
+}
+.app_to_archive img.confirmed, .app_to_archive img.canceled {
+	position: absolute;
+	margin-left: 56px;
+	margin-top: 28px;
+	border: 0px;
+	z-index: 15;
+	padding: 0px;
+	background-color: #fff;
+}
+.app_to_archive p, .remained_app p {
+	line-height: 14px;
+}
+.app_to_archive p.index_author, .remained_app p.index_author {
+	line-height: 16px;
+}
+.remained_apps {
+	width: auto;
+	border: 0px solid green;
+	float: right;
+	margin: 0px 5px;
+}
+.remained_app {
+	border: 0px solid green;
+	width: 100px;
+	float: left;
+	margin: 8px;
+	text-align: center;
+}
 
 .diploma_gallery,.application_gallery {
 	display: block;
