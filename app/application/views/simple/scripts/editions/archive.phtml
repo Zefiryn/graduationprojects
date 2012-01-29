@@ -1,0 +1,68 @@
+<div id="main">
+	<h1><?php echo $this->translate('archive_edition');?></h1>
+	
+	<p class="archive_explain"><?php echo $this->translate('archive_explain');?></p>
+	<form action="" method="post">
+		<input type="hidden" name="apps" value="<?php echo implode(',', array_keys($this->applications));?>"/>
+		<input type="submit" name="confirm_archive" class="confirm_archive" value="<?php echo $this->translate('confirm_archive');?>"/>
+	</form>
+	<p class="clearfix"></p>
+	<div class="apps_to_archive">
+		<h2><?php echo $this->translate('selected_apps');?></h2>
+	<?php 
+		$i = 0;
+		foreach($this->applications as $app_id => $application):?>
+		<div class="app_to_archive" id="app_<?php echo $app_id ; ?>">
+			<img
+				src="<?php echo $this->baseUrl('assets/applications/'.$application->files[0]->getImage('miniature'));?>"
+				alt="" />
+			<p class="index_author">
+					<?php echo $application->user->getUserFullName();?> 
+					<span class="country">(<?php echo strtoupper($application->country);?>)</span>
+			</p>
+			<p>
+			<?php  echo $application->work_subject;?></p>
+	
+		</div>
+	
+	
+		<?php if (++$i % 4 == 0 or ($i) == count($this->applications)): ?>
+	 	<!-- every 4 diplomas-->
+		<p class="clearfix"></p>
+		<?php endif;?>
+	<?php endforeach;?>	
+	
+	</div>
+	
+	<div class="remained_apps">
+		<h2 style="text-align: right;"><?php echo $this->translate('remained_apps');?></h2>
+		<?php 
+			$i = 0;
+			foreach($this->unselected_apps as $app_id => $application):?>
+			<div class="remained_app" id="app_<?php echo $app_id; ?>">
+				<img
+					src="<?php echo $this->baseUrl('assets/applications/'.$application->files[0]->getImage('miniature'));?>"
+					alt="" />
+				<p class="index_author">
+						<?php echo $application->user->getUserFullName();?> 
+						<span class="country">(<?php echo strtoupper($application->country);?>)</span>
+				</p>
+				<p><?php  echo $application->work_subject;?></p>
+			</div>	
+			
+			<?php if (++$i % 3 == 0 || ($i) == count($this->unselected_apps)): ?>
+			<p class="clearfix">&nbsp;</p>
+			<?php endif;?>
+	
+		
+		<?php endforeach;?>
+	</div>
+	
+
+</div>
+
+<img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
+<img id="loader-white" src="<?php echo $this->baseUrl('/img/simple/ajax-loader-white.gif');?>" alt="performing request"/>
+<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-check confirmed" alt="App archived" title="App archived" style="display:none" />
+<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-cancel canceled" alt="App error" title="App error" style="display:none" />
+<div id="saving_end" style="display: none" title="<?php echo $this->translate('saving_status');?>"><p><?php echo $this->translate('edition_has_been_archived'); ?></p></div>

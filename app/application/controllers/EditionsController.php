@@ -97,6 +97,40 @@ class EditionsController extends Zefir_Controller_Action
 		$this->_redirectToRoute(array(), 'editions');
 	}
 
+	public function archiveAction()
+	{
+		$request = $this->getRequest();
+		$id = $request->getParam('id', null);
+		
+		if ($id) 
+		{
+			if ($request->getParam('apps', null))
+			{
+				$apps = $request->getParam('apps');
+				$application = new Application_Model_Applications();
+				$results = $application->archive($apps);
+				if ($results['hasError'] == true) 
+				{
+					unset($results['hasError']);
+					foreach($results as $result)
+					{
+						$result['object']->delete();
+					}
+					$results['hasError'] = true;
+				}
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender(true);
+				echo Zend_Json::encode($results);
+			}
+			else 
+			{
+				$application = new Application_Model_Applications();
+				$applications = $application->getWinningApps($id);
+				$this->view->applications = $applications; 
+				$this->view->unselected_apps = $application->getRemainedApps(array_keys($applications));
+			}
+		}
+	}
 
 }
 

@@ -188,6 +188,16 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		
 		return $row['votes'];
 	}
+	
+	public function getRemainedApps($apps_keys)
+	{
+		$select = $this->select()->setIntegrityCheck(false)
+			->from(array('a' => $this->getTableName()))
+			->join(array('u' => 'users'), 'a.user_id = u.user_id')
+			->where('application_id NOT IN (?)', $apps_keys)
+			->order(array('u.surname', 'u.name'));
+		return parent::fetchAll($select);
+	}
 
 	protected function _addNewSchool($application)
 	{

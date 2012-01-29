@@ -12,6 +12,11 @@ class Application_Model_Schools extends GP_Application_Model
 	{
 		return parent::__construct($id, $options);
 	}
+	
+	public function __toString()
+	{
+		return $this->school_name;
+	}
 
 	public function getSchools()
 	{
