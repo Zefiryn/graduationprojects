@@ -12,8 +12,13 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delet
 	
 	
 	<?php foreach ($this->editions as $id => $edition):?>
-	<p>
+	<p style="width: 150px;">
 		<span class="admin">
+			<a href="<?php echo $this->url(array('edition' => $edition), 'diplomas');?>">
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-zoomin no-block" 
+					alt="<?php echo $this->translate('show_diplomas');?>" 
+					title="<?php echo $this->translate('show_diplomas');?>" />
+			</a>
 			<a href="<?php echo $this->url(array('id' => $id), 'edit_edition');?>">
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 					alt="<?php echo $this->translate('edit');?>" 
