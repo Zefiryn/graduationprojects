@@ -1198,6 +1198,25 @@ span.admin {
 	float: right;
 }
 
+form.diploma {
+	text-align: left;
+	margin-bottom: 30px;
+	padding-bottom: 30px;
+	width: 100%;
+	border: 0px solid red;
+	margin-right: 30px;
+}
+
+form.diploma #diplomaFormLeft {
+	float: left;
+	border: 0px solid green;
+	margin-top: 43px;
+}
+form.diploma #diplomaFormRight {
+	float: right;
+	border: 0px solid blue;
+}
+
 .editApplication {
 	position: absolute;
 	margin: 0px 0px 0px 442px;

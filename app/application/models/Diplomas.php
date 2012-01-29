@@ -103,31 +103,37 @@ class Application_Model_Diplomas extends GP_Application_Model
 		return $this->getDbTable()->getAdjacentDiplomas($this);
 	}
 
-	public function prepareFormArray($lang)
+	public function prepareFormArray()
 	{
-		$language = new Application_Model_Languages();
-
-		return array(
+		$data = array(
 			'diploma_id' => $this->diploma_id,
 			'degree_id' => $this->degree_id,
-			'lang_id' => $language->findLangId($lang),
-			'work_subject' => $this->getField('work_subject', $lang),
-			'work_desc' => $this->getField('work_desc', $lang),
-			'school' => $this->getField('school', $lang),
-			'department' => $this->getField('department', $lang),
 			'supervisor' => $this->supervisor,
 			'supervisor_degree' => $this->supervisor_degree,
 			'name' => $this->name,
 			'surname' => $this->surname,
 			'email' => $this->email
 		);
+		$languages = new Application_Model_Languages();
+		foreach($languages->fetchAll() as $lang)
+		{
+			$data[$lang->lang_code] = array(
+								'lang_id' => $lang->lang_id,
+								'diploma_id' => $this->diploma_id,
+								'school' => $this->getField('school', $lang->lang_code),
+								'department' => $this->getField('department', $lang->lang_code),
+								'work_desc' => $this->getField('work_desc', $lang->lang_code),
+								'work_subject' => $this->getField('work_subject', $lang->lang_code),
+			);
+		}
+
+		return $data;
 	}
 
 	public function populateFieldsFromForm($data)
 	{
 		$field = new Application_Model_Fields();
 		$id = $data['diploma_id'];
-		$lang = $data['lang_id'];
 
 		$this->name = $data['name'];
 		$this->surname = $data['surname'];
@@ -136,16 +142,25 @@ class Application_Model_Diplomas extends GP_Application_Model
 		$this->supervisor_degree = $data['supervisor_degree'];
 		$this->degree_id = $data['degree_id'] != 0 ? $data['degree_id'] : NULL;
 
-		foreach($data['fields'] as $field_name => $entry)
+		$this->fields = array();
+		$languages = new Application_Model_Languages();
+		$fields = new Application_Model_Fields();
+		foreach($languages->fetchAll() as $lang)
 		{
 			$diplomaField = new Application_Model_DiplomaFields();
-			$diplomaField->diploma_id = $id;
-			$diplomaField->lang_id = $lang;
-			$diplomaField->field_id = $field->getField($field_name)->field_id;
-			$diplomaField->entry = $entry;
-			$this->addChild($diplomaField, 'fields');
+			$field_data = $data[$lang->lang_code];
+			foreach($fields->fetchAll() as $fid => $field) 
+			{
+				if (!in_array($field->field_name, array('lang_id', 'diploma_id')))
+				{
+					$diplomaField->diploma_id = $data['diploma_id'];
+					$diplomaField->lang_id = $lang->lang_id;
+					$diplomaField->field_id = $fid;
+					$diplomaField->entry = $field_data[$field->field_name];
+					$this->fields[] = $diplomaField;
+				}
+			}
 		}
-
 		return $this;
 	}
 	
