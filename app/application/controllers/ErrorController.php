@@ -12,7 +12,7 @@ class ErrorController extends Zefir_Controller_Action
 	public function errorAction()
 	{
 		$errors = $this->_getParam('error_handler');
-
+		
 		if (!$errors) {
 			$this->view->message = 'You have reached the error page';
 			return;
@@ -44,6 +44,10 @@ class ErrorController extends Zefir_Controller_Action
 			$this->view->exception = $errors->exception;
 			$this->view->exceptionTrace = explode("\n", $errors->exception->getTraceAsString());
 		}
+		
+		$this->_log($errors->exception->getMessage(), 'error');
+		$this->_log($errors->exception->getTrace(), 'error');
+		
 
 		$this->view->request   = $errors->request;
 	}

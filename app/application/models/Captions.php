@@ -22,7 +22,7 @@ class Application_Model_Captions extends GP_Application_Model
 	public function getTranslationObject($lang)
 	{
 		$lang_id = $this->_getLangId($lang);
-		$this->__get('localizations');
+		
 		foreach ($this->__get('localizations') as $loc)
 		{
 			if ($loc->lang_id == $lang_id)

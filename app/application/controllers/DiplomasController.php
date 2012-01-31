@@ -54,6 +54,11 @@ class DiplomasController extends Zefir_Controller_Action
 		 
 		if ($request->isPost())
 		{
+			if ($request->getParam('leave'))
+			{
+				$this->flashMe('cancel_edit');
+				$this->_redirectToRoute(array('id' => $diploma->diploma_id), 'show_diploma');
+			}
 			if ($form->isValid($request->getPost()))
 			{
 				$diploma->populateFieldsFromForm($form->getValues());
