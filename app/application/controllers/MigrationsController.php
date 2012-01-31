@@ -628,7 +628,9 @@ class MigrationsController extends Zefir_Controller_Action
 	{
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
-		phpinfo();
+		//phpinfo();
+		$t = new Application_Model_Diplomas(2);
+		$t->fields;
 	}
 	
 	public function appAction() {

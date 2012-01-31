@@ -136,7 +136,7 @@ class Application_Model_Localizations extends GP_Application_Model
 
 		foreach($rowset as $row)
 		{
-			$this->_languages[$row['lang_id']] = $row['lang_code'];
+			$this->_languages[$row->lang_id] = $row->lang_code;
 		}
 	}
 }
