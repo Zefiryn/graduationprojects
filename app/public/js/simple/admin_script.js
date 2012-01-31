@@ -529,16 +529,15 @@ function editTranslation()
 		
 		//add existing text
 		var existingTranslation = parentClone.children('span').text();
-		console.log(existingTranslation);
+		//console.log(existingTranslation);
 		if (existingTranslation  != 'empty')
 		{
 			$('#text').val(existingTranslation);
-		}
-		
+		}		
 		
 		//cancel
 		$('#leave').click(function(){
-			parent.replaceWith(parentClone);
+			parent.html(parentClone);
 		});
 		
 		//save form
@@ -556,16 +555,17 @@ function editTranslation()
 				'beforeSend': function(){
 					loader.css('display', 'inline-block');
 					parent.children('strong').after(loader);
+					console.log(this.url);
 				},
 				'error': function(data){
 					console.log(data);
-					alert(data.error);
-					
+					alert('There was an error while performing the request');
+					parent.html(parentClone);
 				},
 				'success': function(data){
 					console.log(data);
 					parentClone.find('span').removeClass().css('color', '#000').html(data.translation);
-					parent.replaceWith(parentClone);
+					parent.html(parentClone);
 				}
 			});
 		});

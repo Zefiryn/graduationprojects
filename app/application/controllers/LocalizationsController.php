@@ -50,23 +50,39 @@ class LocalizationsController extends Zefir_Controller_Action
 				if ($form->isValid($request->getPost()))
 				{
 					$language = new Application_Model_Languages();
-						
 					$localization->caption_id = $caption->caption_id;
 					$localization->lang_id = $language->findLangId($lang);
 					$localization->text = $form->getElement('text')->getValue();
-					$localization->save();
-						
-					if (!$request->isXMLHttpRequest())
-					{
-						$this->flashMe('translation_edited');
-						$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+					try {
+						$localization->save();
+						if (!$request->isXMLHttpRequest())
+						{
+							$this->flashMe('translation_edited');
+							$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+						}
+						else
+						{
+							$this->_helper->layout()->disableLayout();
+							$this->_helper->viewRenderer->setNoRender(true);
+							echo Zend_Json::encode(array('translation' => $localization->text));
+						}
 					}
-					else 
-					{
-						$this->_helper->layout()->disableLayout();
-						$this->_helper->viewRenderer->setNoRender(true);
-						echo Zend_Json::encode(array('translation' => $localization->text));
-					}
+					catch (Zend_Exception $e){
+						$this->_log($e->getMessage(), 'error');
+						$this->_log($e->getTrace(), 'error');
+						if (!$request->isXMLHttpRequest())
+						{
+							$this->flashMe('error_occured');
+							$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+						}
+						else
+						{
+							$this->_helper->layout()->disableLayout();
+							$this->_helper->viewRenderer->setNoRender(true);
+							echo Zend_Json::encode(array('error' => $this->view->translate('saving_error')));
+						}
+					}					
+					
 				}
 			}
 			else
