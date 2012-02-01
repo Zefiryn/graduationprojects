@@ -85,7 +85,8 @@ class Application_Model_Diplomas extends GP_Application_Model
 			$this->__get('files');
 		}
 		
-		return array_pop($this->files);
+		$file = array_shift($this->files);
+		return $file;
 	}
 
 	public function getAuthorName()
@@ -147,10 +148,10 @@ class Application_Model_Diplomas extends GP_Application_Model
 		$fields = new Application_Model_Fields();
 		foreach($languages->fetchAll() as $lang)
 		{
-			$diplomaField = new Application_Model_DiplomaFields();
 			$field_data = $data[$lang->lang_code];
 			foreach($fields->fetchAll() as $fid => $field) 
 			{
+				$diplomaField = new Application_Model_DiplomaFields();
 				if (!in_array($field->field_name, array('lang_id', 'diploma_id')))
 				{
 					$diplomaField->diploma_id = $data['diploma_id'];
