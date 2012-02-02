@@ -13,32 +13,32 @@
 
 $(document).ready(function(){
 	
-	if ($("#regulation").length)
+	if ($("#regulation").length > 0)
 	{
 		sortElements('#left, #right', "/regulation/sort/", function(){sortNumbers($("#regulation"), "&sect; ", "");}, true);
 	}
 	
-	if ($("#faq").length)
+	if ($("#faq").length > 0)
 	{
 		sortElements('#left, #right', "/faq/sort/", function(id){sortNumbers($("#faq"), "", ". ");}, true);
 	}
 	
-	if ($("#diploma_gallery").length)
+	if ($("#diploma_gallery").length > 0)
 	{
 		sortColumnElements('#diploma_gallery', function(event, ui){sortDiplomaImages(event, ui, "/diploma/sort/");});
 	}
 	
-	if ($("#newsFiles").length)
+	if ($("#newsFiles").length > 0)
 	{
 		sortColumnElements('#newsFiles', function(event, ui){sortNewsFiles(event,ui,"/news/sort");});
 	}
 	
-	if ($('.caption').length)
+	if ($('.caption').length > 0)
 	{
 		showCaptions();
 	}
 	
-	if ($('.admin_button').length)
+	if ($('.admin_button').length > 0)
 	{
 		$('.ui-icon-check.click').click(function(){
 			var self = $(this);
@@ -50,19 +50,19 @@ $(document).ready(function(){
 		
 	}
 	
-	if ($('p.votes').length)
+	if ($('p.votes').length > 0)
 	{
 		voting();		 
 	}
-	if ($('.stage_choice').length)
+	if ($('.stage_choice').length > 0)
 	{
 		changeStage();
 	}
-	if ($('#stageSelect').length)
+	if ($('#stageSelect').length > 0)
 	{
 		filterForm();
 	}
-	if ($('.dispute').length)
+	if ($('.dispute').length > 0)
 	{
 		bindSpanHint();
 	}
@@ -70,6 +70,11 @@ $(document).ready(function(){
 	if ($('div.caption'))
 	{
 		editTranslation();
+	}
+	
+	if ($('a.publish_results').length > 0) 
+	{
+		publish_edition();
 	}
 	
 	voteSettings();
@@ -648,5 +653,27 @@ function addUserToJuror(user, juror)
 			}
 			console.log(data);
 		}
+	});
+}
+
+function publish_edition()
+{
+	$('a.publish_results').click(function(e){
+		var self = $(this);
+		e.preventDefault();
+		$.ajax({
+			url : '/editions/publish',
+			data : {'edition_id' : self.data('edition-id')},
+			type: 'post',
+			dataType: 'json',
+			error: function(data) {
+				console.log(data);
+			},
+			success: function(data) {
+				console.log(data);
+				$('img[class*="ui-icon-check"]').removeClass('ui-icon-check').addClass('ui-icon-print');
+				self.find('img').removeClass('ui-icon-print').addClass('ui-icon-check');
+			},
+		});
 	});
 }

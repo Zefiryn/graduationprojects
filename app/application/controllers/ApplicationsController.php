@@ -527,12 +527,27 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->flashMe('application_result_before');
 			$this->_redirectToRoute(array(), 'root');
 		}
-		$stage = new Application_Model_Stages();
-		$stage->getFinalStage();
+		$edition = new Application_Model_Editions();
 		
-		$application = new Application_Model_Applications();
-		$applications = $application->getApplications('surname' , $stage, null, null, $this->view->user);
-		$this->view->applications = $applications;
+		if ($edition->findPublicEdition())
+		{
+			$this->view->diplomas = $edition->diplomas;
+			$this->renderScript('diplomas/index.phtml');
+		}
+		else
+		{
+			$stage = new Application_Model_Stages();
+			$stage->getFinalStage();
+			
+			$application = new Application_Model_Applications();
+			$applications = $application->getApplications('surname' , $stage, null, null, $this->view->user);
+			$this->view->applications = $applications;
+		}
+		
+		$this->view->path = array(
+		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+		1 => array('route' => 'results', 'data' => array(), 'name' => array('best_works_link')),
+		);
 		
 	}
 

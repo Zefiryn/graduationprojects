@@ -11,13 +11,13 @@ class EditionsController extends Zefir_Controller_Action
 	public function indexAction()
 	{
 		$edition = new Application_Model_Editions();
-		$this->view->editions = $edition->getEditions();
+		$this->view->editions = $edition->getEditions('ASC', false);
 	}
 
 	public function showAction()
 	{
 		$edition = new Application_Model_Editions();
-		$this->view->editions = $edition->getEditions();
+		$this->view->editions = $edition->getEditions('ASC', false);
 		$this->render('index');
 	}
 
@@ -130,6 +130,21 @@ class EditionsController extends Zefir_Controller_Action
 				$this->view->unselected_apps = $application->getRemainedApps(array_keys($applications));
 			}
 		}
+	}
+	
+	public function publishAction()
+	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$id  = $this->_request->getParam('edition_id', null);
+		
+		if ($id)
+		{
+			$edition = new Application_Model_Editions($id);
+			$info = $edition->publishResults();
+		}
+		
+		echo json_encode(array($info));
 	}
 
 }
