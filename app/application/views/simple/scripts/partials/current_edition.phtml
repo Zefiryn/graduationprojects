@@ -25,7 +25,7 @@
 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_faq')?>"><?php echo $this->translate('faq_link');?></a> 
 
-			<?php if ($this->publish_results || $this->user->role == 'admin'):?>
+			<?php if (($this->showResults()) || $this->user->role == 'admin'):?>
 			<a href="<?php echo $this->url(array(), 'results')?>"><?php echo $this->translate('best_works_link');?></a>
 			<?php endif;?> 
 			<?php if ($this->show_press || $this->user->role == 'admin'):?>
