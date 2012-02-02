@@ -4,7 +4,7 @@ class Application_Model_Editions extends GP_Application_Model
 {
 	public $edition_id;
 	public $edition_name;
-	public $edition_name2;
+	public $publish_results;
 	protected $applications;
 	protected $diplomas;
 
@@ -27,7 +27,7 @@ class Application_Model_Editions extends GP_Application_Model
 		return $check;
 	}
 
-	public function getEditions($order = 'ASC')
+	public function getEditions($order = 'ASC', $asArray = true)
 	{
 		$select = $this->getDbTable()->select()->order('edition_name '.$order);
 		$rowset = $this->getDbTable()->fetchAll($select);
@@ -35,7 +35,12 @@ class Application_Model_Editions extends GP_Application_Model
 		$editions = array();
 		foreach($rowset as $row)
 		{
-			$editions[$row->edition_id] = $row->edition_name;
+			if ($asArray) {
+				$editions[$row->edition_id] = $row->edition_name;
+			}
+			else {
+				$editions[$row->edition_id] = $row;
+			}
 		}
 
 		return $editions;
@@ -45,10 +50,14 @@ class Application_Model_Editions extends GP_Application_Model
 	public function getEdition($edition, $onlyName = FALSE)
 	{
 		if (ctype_digit($edition) && !$onlyName)
-		$row = $this->getDbTable()->find($edition)->current();
+		{
+			$row = $this->getDbTable()->find($edition)->current();
+		}
 
 		else
-		$row = $this->getDbTable()->fetchRow($this->getDbTable()->select()->where('edition_name = ? ', $edition));
+		{
+			$row = $this->getDbTable()->fetchRow($this->getDbTable()->select()->where('edition_name = ? ', $edition));
+		}
 
 		if ($row)
 		{
@@ -133,6 +142,33 @@ class Application_Model_Editions extends GP_Application_Model
 		}
 
 		return $diplomas;
+	}
+	
+	public function publishResults()
+	{
+		try {
+			if ($this->getDbTable()->resetPublications()) 
+			{
+				$this->publish_results = 1;
+				$this->save();
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+		catch (Zend_Exception $e)
+		{
+			return $e->getMessage();
+		}
+	}
+	
+	public function findPublicEdition()
+	{
+		$this->populate($this->getDbTable()->findPublicEdition());
+
+		return !$this->isEmpty();
 	}
 }
 

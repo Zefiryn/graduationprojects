@@ -23,6 +23,18 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 	)
 	);
 
+	public function resetPublications()
+	{
+		$sql = 'UPDATE ' . $this->getTableName() . ' SET publish_results = 0';
+		return $this->getAdapter()->query($sql);
+	}
+	
+	public function findPublicEdition()
+	{
+		$select = $this->select()->where('publish_results = 1')->order('edition_name DESC')->limit(1);
+		
+		return $this->fetchRow($select);
+	}
 
 }
 

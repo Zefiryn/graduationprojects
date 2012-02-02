@@ -14,11 +14,24 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delet
 	<?php foreach ($this->editions as $id => $edition):?>
 	<p style="width: 150px;">
 		<span class="admin">
-			<a href="<?php echo $this->url(array('edition' => $edition), 'diplomas');?>">
+			<a href="<?php echo $this->url(array('edition' => $edition->edition_name), 'diplomas');?>">
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-zoomin no-block" 
 					alt="<?php echo $this->translate('show_diplomas');?>" 
 					title="<?php echo $this->translate('show_diplomas');?>" />
 			</a>
+			<?php if ($edition->publish_results == 0):?>
+			<a href="#" class="publish_results" data-edition-id="<?php echo $id;?>"> 
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-print no-block" 
+					alt="<?php echo $this->translate('publish_results');?>" 
+					title="<?php echo $this->translate('publish_results');?>" />
+			</a>
+			<?php else:?>
+			<a href="#" class="publish_results" data-edition-id="<?php echo $id;?>">
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-check no-block"
+					alt="<?php echo $this->translate('published');?>"
+					title="<?php echo $this->translate('published');?>" />
+			</a>
+			<?php endif;?>
 			<a href="<?php echo $this->url(array('id' => $id), 'edit_edition');?>">
 				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
 					alt="<?php echo $this->translate('edit');?>" 
@@ -36,10 +49,10 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delet
 					del="<?php echo $this->translate('delete');?>" 
 					alt="<?php echo $this->translate('delete');?>" 
 					title="<?php echo $this->translate('delete');?>" />
-			</a>		
+			</a>
 		</span>
 		
-		<span><?php echo $edition;?></span>
+		<span><?php echo $edition->edition_name;?></span>
 	</p>
 	
 	<?php endforeach;?>
