@@ -1,6 +1,7 @@
 .buildpath
 .project
 .settings/
+app/application/configs/application.ini
 app/public/assets/cache/*
 app/public/assets/miniatures/*
 app/public/assets/applications/*
