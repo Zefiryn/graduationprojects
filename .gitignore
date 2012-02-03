@@ -2,6 +2,7 @@
 .project
 .settings/
 app/application/configs/application.ini
+fds
 app/public/assets/cache/*
 app/public/assets/miniatures/*
 app/public/assets/applications/*
