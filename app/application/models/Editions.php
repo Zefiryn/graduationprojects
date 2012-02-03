@@ -166,8 +166,11 @@ class Application_Model_Editions extends GP_Application_Model
 	
 	public function findPublicEdition()
 	{
-		$this->populate($this->getDbTable()->findPublicEdition());
-
+		$row = $this->getDbTable()->findPublicEdition();
+		if ($row) 
+		{
+			$this->populate($row);
+		}
 		return !$this->isEmpty();
 	}
 }
