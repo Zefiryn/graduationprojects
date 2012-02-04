@@ -46,7 +46,7 @@ class ErrorController extends Zefir_Controller_Action
 		}
 		
 		$this->_log($errors->exception->getMessage(), 'error');
-		$this->_log($errors->exception->getTrace(), 'error');
+		$this->_log($errors->exception->getTraceAsString(), 'error');
 		
 
 		$this->view->request   = $errors->request;

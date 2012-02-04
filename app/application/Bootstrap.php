@@ -26,7 +26,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 */
 	protected function _initConfig()
 	{
-		Zend_Registry::set('options', $this->getOptions());
+		$db_config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/db.ini');
+		$this->setOptions($db_config->toArray());
+		Zend_Registry::set('options', $this->getOptions());		
 
 		//set the db
 		$config = Zend_Registry::get('options');
