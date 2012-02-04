@@ -17,10 +17,17 @@ class Application_Model_News extends GP_Application_Model
 		return parent::__construct($id, $options);
 	}
 
-	public function getPagination()
+	public function getPagination($role = 'user')
 	{
 		$tplSettings = Zend_Registry::get('tplSettings');
-		$rows = $this->getDbTable()->getRowsNum();
+		if ($role != 'admin')
+		{
+			$rows = $this->getDbTable()->getRowsNum(array('published = ?' => 1));
+		}
+		else 
+		{
+			$rows = $this->getDbTable()->getRowsNum();
+		}
 		$pages = (int)ceil($rows/$tplSettings->news_limit);
 
 		return $pages;
