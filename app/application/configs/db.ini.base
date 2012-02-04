@@ -1,0 +1,18 @@
+; Database:
+resources.db.adapter = "PDO_MYSQL"
+resources.db.params.host = 
+resources.db.params.username = 
+resources.db.params.password = 
+resources.db.params.dbname = 
+resources.db.params.charset= "utf8"
+resources.db.params.prefix= ""
+
+; Mail:
+mail.to = 
+mail.from = 
+mail.host = 
+mail.smtp.auth = 
+mail.smtp.ssl = 
+mail.smtp.port = 
+mail.smtp.username = 
+mail.smtp.password = 

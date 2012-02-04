@@ -1,7 +1,8 @@
 .buildpath
 .project
 .settings/
-app/application/configs/application.ini
+app/application/configs/db.ini
+app/application/configs/dbs
 app/public/assets/cache/*
 app/public/assets/miniatures/*
 app/public/assets/applications/*
@@ -13,3 +14,4 @@ app/cache/*
 app/log/*.log            
 app/library/Zefir/*
 app/library/Zefir
+
