@@ -19,7 +19,7 @@ class NewsController extends Zefir_Controller_Action
 		else
 			$this->view->news_list = $news->getAll(array($page, true));
 
-		$this->view->pages = $news->getPagination();
+		$this->view->pages = $news->getPagination($this->view->user->role);
 
 		$this->view->current_page = $request->getParam('page', 1);
 		$this->view->start_pagination = 1;
