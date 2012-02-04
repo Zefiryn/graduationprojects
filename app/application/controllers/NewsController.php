@@ -24,6 +24,12 @@ class NewsController extends Zefir_Controller_Action
 		$this->view->current_page = $request->getParam('page', 1);
 		$this->view->start_pagination = 1;
 		$this->view->end_pagination = $news->getPagination();
+		
+		if ($this->view->end_pagination < $page) 
+		{
+			$this->flashMe('news_page_not_exist');
+			$this->_redirectToRoute(array('page' => 1), 'news_page');
+		}
 
 	}
 
