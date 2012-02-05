@@ -26,6 +26,7 @@
 			rel="cache" >
 			<img src="<?php echo $this->baseUrl('assets/images/'.$file->getImage('thumb'))?>" alt="" />
 		</a>
+		<?php if (++$i % 2 == 0):?><p class="clearfix"></p><?php endif;?>
 		</div>
 		<?php endforeach;?>
 		

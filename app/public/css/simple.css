@@ -268,12 +268,19 @@ menu menu a:last-child {
 .news,.diploma {
 	text-align: left;
 	margin-bottom: 30px;
-	padding-bottom: 30px;
 	width: 220px;
 	float: left;
-	margin-right: 30px;
+	margin-right: 20px;
+	padding: 5px;
+	padding-bottom: 30px;
 }
-
+.news.unpublished {
+	background: rgba(245,245,245,0.4);
+	
+}
+.news.unpublished img.news_photo {
+	opacity: 0.2;
+}
 .dyplom,.application {
 	display: block;
 	float: left;
