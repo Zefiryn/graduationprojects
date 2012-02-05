@@ -10,21 +10,21 @@
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>	
 	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
-	<?php $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
-									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
-									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
-									->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-en.js')
-									->appendFile($this->baseUrl.'js/ckeditor/ckeditor.js');
+	<?php $this->loadScripts($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
+				->loadScripts($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
+				->loadScripts($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
+				->loadScripts($this->baseUrl.'js/i18n/jquery.ui.datepicker-en.js')
+				->loadScripts($this->baseUrl.'js/ckeditor/ckeditor.js');
 									?>
 									
 	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror')
-		$this->headScript()->appendFile($this->baseUrl.'js/jquery.design.js')
-							->appendFile($this->baseUrl.'js/simple/admin_script.js?time='.time())
-							->appendFile($this->baseUrl.'js/simple/edition_archive.js?time='.time());?>
+		$this->loadScripts($this->baseUrl.'js/jquery.design.js')
+			->loadScripts($this->baseUrl.'js/simple/admin_script.js')
+			->loadScripts($this->baseUrl.'js/simple/edition_archive.js');?>
 							
-	<?php $this->headScript()->appendFile($this->baseUrl.'js/simple/ajax.js')
-							 ->appendFile($this->baseUrl.'js/simple/script.js?time='.time()); ?>	
-	<?php echo $this->headScript();?>
+	<?php $this->loadScripts($this->baseUrl.'js/simple/ajax.js')
+				->loadScripts($this->baseUrl.'js/simple/script.js'); ?>	
+	<?php echo $this->loadScripts()->setLink('/load/js?scripts=')->setSeparator(';');?>
 	<script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-284845-5']);

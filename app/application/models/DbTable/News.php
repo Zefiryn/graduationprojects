@@ -29,8 +29,10 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 		if ($args[0])
 		{
 			$tplSettings = Zend_Registry::get('tplSettings');
-			$limit = $args[0] * $tplSettings->news_limit;
-			$offset = ($args[0] - 1) * $tplSettings->news_limit;
+			// set limit and offsett according to role 
+			// admins has additional + at the beginning of the news list
+			$limit = $args[0] * ($tplSettings->news_limit - ($args[1] ? 0 : 1));
+			$offset = ($args[0] - 1) * ($tplSettings->news_limit - ($args[1] ? 0 : 1));
 			$select->limit($limit, $offset);
 		}
 

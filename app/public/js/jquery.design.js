@@ -63,7 +63,7 @@ jQuery.fn.designMode = function(mode) {
  * @return jQuery element - The jQuery element itself, to allow chaining
  */
 jQuery.fn.execCommand = function(cmd, param) {
-	this.each(function() {
+	$(this).each(function() {
 		var doc = $(this).contentDocument();
 		if (doc) {
 			// Use try-catch in case of invalid or unsupported commands
