@@ -25,6 +25,10 @@ class IndexController extends Zefir_Controller_Action
 		$this->view->start_pagination = 1;
 		$this->view->end_pagination = $news->getPagination($this->view->user->role);
 
+		$this->view->path = array(
+								0 => array('route' => 'news', 'data' => array(), 'name' => array('news_link')),
+								1 => array('route' => 'news_page', 'data' => array('page' => $page), 'name' => array('news_page', $page )),
+							);
 		$this->render('news/index', null, true);
 
 	}

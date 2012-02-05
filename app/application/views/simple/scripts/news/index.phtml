@@ -13,17 +13,17 @@
 	<?php endif;?>
 
 	<?php foreach($this->news_list as $id => $news):?>
-  	<div class="news"> 
+  	<div class="news<?php if ($news->published == 0):?> unpublished<?php endif;?>"> 
   		<?php if ($this->user->role == 'admin') {$id = $id + 2;} else {$id = $id + 1;}?>
   		<!-- NEWS PHOTO -->
 	  	<?php if ($news->hasPhoto()):?>
 		  	<?php if ($news->link == ''):?>
 	  		<a href="<?php echo $this->url(array('id' => $news->news_id),'show_news')?>">
-		  		<img src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
+		  		<img class="news_photo" src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
 		  	</a>
 		  	<?php else:?>
 		  	<a href="<?php echo $news->link?>">
-		  		<img src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
+		  		<img class="news_photo" src="<?php echo $this->baseUrl('assets/images/'.$news->getImage('thumb'));?>" alt="zdjecie" width="220" />
 		  	</a>
 		    <?php endif;?>
 	    <?php endif;?>

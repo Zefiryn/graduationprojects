@@ -19,9 +19,9 @@ class DiplomasController extends Zefir_Controller_Action
 
 		$this->view->diplomas = $edition->diplomas;
 		$this->view->path = array(
-		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
-		1 => array('route' => 'diplomas', 'data' => array('edition' => $selected_edition), 'name' => array('edition', $selected_edition)),
-		);
+							0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
+							1 => array('route' => 'diplomas', 'data' => array('edition' => $selected_edition), 'name' => array('edition', $selected_edition)),
+							);
 	}
 
 	public function showAction()

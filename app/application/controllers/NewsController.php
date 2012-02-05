@@ -30,6 +30,10 @@ class NewsController extends Zefir_Controller_Action
 			$this->flashMe('news_page_not_exist');
 			$this->_redirectToRoute(array('page' => 1), 'news_page');
 		}
+		$this->view->path = array(
+								0 => array('route' => 'news', 'data' => array(), 'name' => array('news_link')),
+								1 => array('route' => 'news_page', 'data' => array('page' => $page), 'name' => array('news_page', $page )),
+							);
 
 	}
 
