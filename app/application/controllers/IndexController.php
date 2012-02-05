@@ -23,7 +23,7 @@ class IndexController extends Zefir_Controller_Action
 
 		$this->view->current_page = $request->getParam('page', 1);
 		$this->view->start_pagination = 1;
-		$this->view->end_pagination = $news->getPagination();
+		$this->view->end_pagination = $news->getPagination($this->view->user->role);
 
 		$this->render('news/index', null, true);
 
