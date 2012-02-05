@@ -23,12 +23,14 @@ class Application_Model_News extends GP_Application_Model
 		if ($role != 'admin')
 		{
 			$rows = $this->getDbTable()->getRowsNum(array('published = ?' => 1));
+			$limit = $tplSettings->news_limit;
 		}
 		else 
 		{
 			$rows = $this->getDbTable()->getRowsNum();
+			$limit = $tplSettings->news_limit - 1;
 		}
-		$pages = (int)ceil($rows/$tplSettings->news_limit);
+		$pages = (int)ceil($rows/$limit);
 
 		return $pages;
 	}
