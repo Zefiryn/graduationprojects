@@ -34,6 +34,22 @@ class Application_Model_News extends GP_Application_Model
 
 		return $pages;
 	}
+	
+	public function getPage($role = 'user')
+	{
+		$unpublished = $role == 'admin' ? true : false;
+		$rowset = $this->getDbTable()->getAllInOrder('added DESC', $unpublished);
+		
+		$tplSettings = Zend_Registry::get('tplSettings');
+		$limit = $role == 'admin' ? $tplSettings->news_limit - 1 : $tplSettings->news_limit;
+		foreach($rowset as $i => $row)
+		{
+			if ($row['news_id'] == $this->news_id)
+			{
+				return ceil(++$i/$limit);
+			}
+		}
+	}
 
 	public function getDetail($property, $lang)
 	{

@@ -38,6 +38,17 @@ class Application_Model_DbTable_News extends Zefir_Application_Model_DbTable
 
 		return $this->fetchAll($select);
 	}
+	
+	public function getAllInOrder($order, $unpublished = false)
+	{
+		$select = $this->select()->order($order);
+		
+		if (!$unpublished)
+			$select = $select->where('published = 1');
+		
+		return $this->fetchAll($select);
+		
+	}
 
 }
 
