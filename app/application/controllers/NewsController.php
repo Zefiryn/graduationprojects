@@ -44,14 +44,23 @@ class NewsController extends Zefir_Controller_Action
 		 
 		$news = new Application_Model_News($id);
 
-		$this->view->news = $news;
-		 
-		$link = $news->getDetail('news_title', $this->view->lang) ? $news->getDetail('news_title', $this->view->lang) : $news->link;
-		 
-		$this->view->path = array(
-		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
-		1 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => array($link)),
-		);
+		if ($news->published || $this->view->user->role == 'admin')
+		{
+			$this->view->news = $news;		 
+			$link = $news->getDetail('news_title', $this->view->lang) ? $news->getDetail('news_title', $this->view->lang) : $news->link;
+			$page = $news->getPage($this->view->user->role);
+			 
+			$this->view->path = array(
+									0 => array('route' => 'news', 'data' => array(), 'name' => array('news_link')),
+									1 => array('route' => 'news_page', 'data' => array('page' => $page), 'name' => array('news_page', $page )),
+									2 => array('route' => 'show_news', 'data' => array('id' => $news->news_id), 'name' => array($link)),
+								);
+		}
+		else
+		{
+			$this->flashMe('news_not_exist');
+			$this->_redirect(array(), 'news');
+		}
 	}
 
 	public function newAction()

@@ -276,7 +276,9 @@ menu menu a:last-child {
 }
 .news.unpublished {
 	background: rgba(245,245,245,0.4);
-	
+}
+.news.unpublished h2 a{
+	color: #777;
 }
 .news.unpublished img.news_photo {
 	opacity: 0.2;
