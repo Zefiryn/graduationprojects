@@ -55,7 +55,7 @@
 				$this->addElement($element);
 			}
 
-			$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cs' => 'Czech Republic', 'hu' => 'Hungary');
+			$country = array('pl' => 'Poland', 'sk' => 'Slovakia', 'cz' => 'Czech Republic', 'hu' => 'Hungary');
 			$element = $this->createElement('select', 'country');
 			$element->setAttribs(array('class' => 'width1', 'size' => 1))
 				->setLabel('country')

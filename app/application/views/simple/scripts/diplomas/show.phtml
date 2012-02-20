@@ -3,11 +3,13 @@
 	<div class="diploma_gallery" id="diploma_gallery">
 
 	<?php foreach($this->diploma->files as $file):?>
+	<a href="<?php echo $this->baseUrl('/assets/editions/'. $file->path);?>"
+			class="application_files" rel="images" >
 		<img id="<?php echo $file->file_id?>" class="sort_item"
 			src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>"
 			alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>"
 			class="diploma_image" />
-		
+		</a>
 		
 		<?php endforeach;?>
 	</div>
@@ -17,7 +19,7 @@
 	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
 		<p class="admin">
 			<a
-				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_diploma');?>">
+				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_edit_project');?>">
 				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
 				class="ui-icon ui-icon-pencil no-block"
 				alt="<?php echo $this->translate('edit');?>"
@@ -59,7 +61,7 @@
 		<p class="diploma_data"><?php echo $this->diploma->getField('school', $this->lang);?></p>
 		
 		<?php if ($this->diploma->getField('department', $this->lang) != ''):?>
-		<p class="diploma_field"><?php echo strtolower($this->translate('department'));?></p>
+		<p class="diploma_field"><?php //echo strtolower($this->translate('department'));?></p>
 		<p class="diploma_data"><?php echo $this->diploma->getField('department', $this->lang);?></p>
 		<?php endif; ?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('supervisor'));?></p>
@@ -71,8 +73,8 @@
 		
 		<nav class="diploma_nav">
 			
-			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
-			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->diploma_id, 'lang' => $this->lang), 'lang_show_diploma');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->diploma_id, 'lang' => $this->lang), 'lang_show_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->diploma_id, 'lang' => $this->lang), 'lang_show_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
 			
 		</nav>
     </div>

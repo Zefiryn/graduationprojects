@@ -5,14 +5,14 @@
 
 	<div class="diploma">
 		<a
-			href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">
+			href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_project');?>">
 			<img
 			src="<?php echo $this->baseUrl('assets/editions/'.$diploma->getFirstFile()->getImage('thumb'));?>"
 			alt="" style="width: 100%;" />
 		</a>
 		<p class="index_author">
 			<a
-				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_diploma');?>">
+				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $diploma->diploma_id), 'lang_show_project');?>">
 				<?php echo $diploma->getAuthorName();?> <span class="country">(<?php echo strtoupper($diploma->country);?>)
 			</span> </a>
 		</p>
