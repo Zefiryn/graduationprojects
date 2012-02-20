@@ -9,6 +9,18 @@ CREATE TABLE editions (
 	PRIMARY KEY (edition_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE press (
+	element_id smallint(6) NOT NULL AUTO_INCREMENT,
+	element_path varchar(100) NOT NULL,
+	element_type varchar(30) NOT NULL,
+	element_description varchar(255) NOT NULL,
+	edition_id smallint(6),
+	PRIMARY KEY (element_id),
+	FOREIGN KEY(edition_id)
+		REFERENCES editions(edition_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 CREATE TABLE languages (
 	lang_id int NOT NULL AUTO_INCREMENT,
 	name varchar(60) not null,

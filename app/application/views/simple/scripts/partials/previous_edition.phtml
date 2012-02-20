@@ -8,7 +8,7 @@
 			
 		<?php foreach ($this->edition_list as $edition):?>
 			<?php if ($edition != $this->edition):?>
-			<a href="<?php echo $this->url(array('edition' => $edition, 'lang' => $this->lang), 'lang_diplomas');?>"><?php echo $edition;?></a>
+			<a href="<?php echo $this->url(array('edition' => $edition, 'lang' => $this->lang), 'lang_projects');?>"><?php echo $edition;?></a>
 			<?php endif;?> 
 			<?php endforeach;?>
 		</menu>

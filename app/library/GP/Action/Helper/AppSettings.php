@@ -71,6 +71,8 @@ class GP_Action_Helper_AppSettings extends Zend_Controller_Action_Helper_Abstrac
 		$this->getActionController()->view->edition = $settings->edition->edition_name;
 
 		$editions = new Application_Model_Editions();
-		$this->getActionController()->view->edition_list = $editions->getEditions('DESC');
+		$edition_list = $editions->getEditions('DESC');
+		Zend_Registry::set('edition_list', $edition_list);
+		$this->getActionController()->view->edition_list = $edition_list;
 	}
 }

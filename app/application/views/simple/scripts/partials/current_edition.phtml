@@ -28,9 +28,9 @@
 			<?php if (($this->showResults()) || $this->user->role == 'admin'):?>
 			<a href="<?php echo $this->url(array(), 'results')?>"><?php echo $this->translate('best_works_link');?></a>
 			<?php endif;?> 
-			<?php if ($this->show_press || $this->user->role == 'admin'):?>
-			<a href="#"><?php echo $this->translate('press_link');?></a>
-			<?php endif;?>
+			
+			<a href="<?php echo $this->url(array(), 'press');?>"><?php echo $this->translate('press_link');?></a>
+			
 			 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'contact')?>"><?php echo $this->translate('contact_link');?></a>
 			<?php if ($this->user->role == 'guest'):?>
