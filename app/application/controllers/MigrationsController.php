@@ -7,6 +7,19 @@ class MigrationsController extends Zefir_Controller_Action
 	{
 		parent::init();
 	}
+	
+	public function diplomaslugAction()
+	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
+		$diplomas = new Application_Model_Diplomas();
+		foreach($diplomas->fetchAll() as $diploma)
+		{
+			$diploma->recreateSlug();
+			$diploma->save();
+		}
+	}
 
 	public function indexAction()
 	{

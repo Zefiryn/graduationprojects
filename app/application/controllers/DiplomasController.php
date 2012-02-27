@@ -17,6 +17,7 @@ class DiplomasController extends Zefir_Controller_Action
 
 		$edition->getEdition($selected_edition, TRUE);
 
+		$this->view->edition_name = $edition->edition_name;
 		$this->view->diplomas = $edition->diplomas;
 		$this->view->path = array(
 							0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
@@ -28,14 +29,24 @@ class DiplomasController extends Zefir_Controller_Action
 	{
 		$request = $this->getRequest();
 		$id = $request->getParam('id', null);
-		$diploma = new Application_Model_Diplomas($id);
+		$slug = $request->getParam('slug', null);
+		if ($id)
+		{ 
+			$diploma = new Application_Model_Diplomas($id);
+		}
+		elseif ($slug) 
+		{
+			$diploma = new Application_Model_Diplomas();
+			$diploma->findBySlug($slug);
+			$this->view->edition_name = $request->getParam('edition', null);
+		}
 		$this->view->diploma = $diploma;
 		$this->view->adjacent = $diploma->getAdjacentDiplomas();
 
 		$this->view->path = array(
 		0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
 		1 => array('route' => 'diplomas', 'data' => array('edition' => $diploma->edition->edition_name), 'name' => array('edition', $diploma->edition->edition_name)),
-		2 => array('route' => 'show_diploma', 'data' => array('id' => $diploma->diploma_id), 'name' => array($diploma->getAuthorName())),
+		2 => array('route' => 'slug_project', 'data' => array('slug' => $diploma->slug, 'edition' => $diploma->edition->edition_name), 'name' => array($diploma->getAuthorName())),
 		);
 	}
 

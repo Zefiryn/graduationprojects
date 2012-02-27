@@ -532,6 +532,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		if ($edition->findPublicEdition())
 		{
 			$this->view->diplomas = $edition->diplomas;
+			$this->view->edition_name = $edition->edition_name;
 			$this->renderScript('diplomas/index.phtml');
 		}
 		else
