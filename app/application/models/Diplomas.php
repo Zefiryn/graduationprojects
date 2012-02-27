@@ -6,6 +6,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 	public $edition_id;
 	public $name;
 	public $surname;
+	public $slug;
 	public $email;
 	public $country;
 	public $degree_id;
@@ -196,6 +197,12 @@ class Application_Model_Diplomas extends GP_Application_Model
 		
 	}
 	
+	public function recreateSlug()
+	{
+		$this->slug = $this->_createSlug();
+		return $this;
+	}
+	
 	protected function _copyFilesFromApplication($app, $copyThumbnails = true)
 	{
 		$edition_folder = $this->_createEditionFolder();
@@ -264,5 +271,22 @@ class Application_Model_Diplomas extends GP_Application_Model
 
 		return $dir;
 	}
+	
+	protected function _createSlug()
+	{
+		return Zefir_Filter::strToUrl(str_replace(' ', '-', $this->getAuthorName()));
+	}
+	
+	public function findBySlug($slug)
+	{
+		$row = $this->getDbTable()->findBySlug($slug);
+		
+		if ($row)
+		{
+			$this->populate($row);
+		}
+		
+		return $this;
+	} 
 }
 
