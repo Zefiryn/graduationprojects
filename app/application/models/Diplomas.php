@@ -274,7 +274,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 	
 	protected function _createSlug()
 	{
-		return Zefir_Filter::strToUrl(str_replace(' ', '-', $this->getAuthorName()));
+		return Zefir_Filter::strToUrl($this->getAuthorName());
 	}
 	
 	public function findBySlug($slug)
