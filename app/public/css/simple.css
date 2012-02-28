@@ -957,6 +957,9 @@ p.error {
 	text-align: right;
 	line-height: 12px;
 }
+div.error-div.field-file p.error {
+	text-align: left;
+}
 
 p.error span {
 	background-color: #ca0000;
@@ -1372,6 +1375,31 @@ a.path_end:link,a.path_end:visited {
 	color: #3c9;
 }
 
+p.press_element {
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 24px;
+}
+p.press_element a.press_file {
+	display: inline-block;
+	font-size: 14px;	
+	color: #fff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background: #1AE0BB;
+	padding: 3px 6px;
+}
+p.press_element a.press_edit {
+	display: inline-block;
+	font-size: 14px;	
+	color: #1AE0BB;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background: #eee;
+	padding: 3px 10px;
+}
 .clearfix {
 	clear: both;
 }

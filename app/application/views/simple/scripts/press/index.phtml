@@ -1,7 +1,20 @@
 <div id="main">
-	<h1>
-
-	<?php echo $this->translate('press_header');?></h1>
+	<?php if ($this->user->role == 'admin') echo $this->partial('press/_admin.phtml', array('lang' => $this->lang));?>
+	
+	<h1><?php echo $this->translate('press_header');?></h1>
+	
 	<p class="spacer">&nbsp;</p>
+	
+	<?php foreach($this->press['file'] as $element):?>
+	<p class="press_element">
+		<?php echo $element->element_description;?>:
+		<?php foreach($element->element_path as $file):?>
+		<a href="<?php echo $element->getPath($file);?>" class="press_file"><?php echo strtoupper(Zefir_Filter::getExtension($file));?></a>
+		<?php endforeach;?>
+		<?php if ($this->user->role == 'admin'):?>
+		<a href="<?php echo $this->url(array(), 'new_press_element');?>" class="press_edit">+</a>
+		<?php endif?>
+	</p> 
+	<?php endforeach;?>
 	
 </div>
