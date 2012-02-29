@@ -38,7 +38,7 @@ class Application_Form_Press extends Zefir_Form
 				));
 		$this->addElement($element);
 		
-		$this->_createCsrfElement();
+		//$this->_createCsrfElement();
 		$this->_createStandardSubmit('press_submit');
 		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
 			->setDisplayGroupDecorators(array(

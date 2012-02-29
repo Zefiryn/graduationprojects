@@ -3,10 +3,10 @@
 class Application_Model_Press extends GP_Application_Model
 {
 	public $element_id;
-	public $element_path;
 	public $element_type;
 	public $element_description;
 	public $position;
+	protected $files;
 	protected $_uploadDir = 'press';
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_Press';
@@ -52,26 +52,20 @@ class Application_Model_Press extends GP_Application_Model
 	
 	public function save()
 	{
-		$this->element_path = serialize($this->element_path);
 		$this->element_type = 'file';
 		parent::save();
-	}
-	
-	public function populate($row)
-	{
-		parent::populate($row);
-		if ($this->element_path)
+		
+		if ($this->files != null)
 		{
-			$this->element_path = @unserialize($this->element_path);
+			foreach($this->files as $file)
+			{
+				$file->element_id = $this->element_id;
+				$file->save();
+			}
 		}
-	}
-	
-	public function getPath($file)
-	{
-		$options = Zend_Registry::get('options');
-		$baseUrl = isset($options['resources']['frontController']['baseUrl']) ?  $options['resources']['frontController']['baseUrl'] : '/';
-		$baseUrl .= Zefir_Filter::getLastChar($baseUrl) != '/' ? '/' : null;  
-		return $baseUrl . 'assets/' . $this->_uploadDir .'/' . $file;
+		
+		return $this;
+		
 	}
 }
 

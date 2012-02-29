@@ -33,8 +33,10 @@ class PressController extends Zefir_Controller_Action
 			{
 				$press_element = new Application_Model_Press();
 				$press_element->populate($form->getValues());
-				$press_element->element_path = $this->_saveFile($press_element->getUploadDir(), $form->getElement('element_path')->getDestination());
+				$this->_saveFile($press_element, $form->getElement('element_path')->getDestination());
 				$press_element->save();
+				$this->flashMe('press_added');
+				$this->_redirectToRoute(array(), 'press');
 			}
 		}
 		$this->view->form = $form;
@@ -63,19 +65,25 @@ class PressController extends Zefir_Controller_Action
 	}
 
 
-	protected function _saveFile($folder, $cache)
+	protected function _saveFile($press, $cache)
 	{
+		$folder = $press->getUploadDir();
 		$element_files = array();
 		foreach($_FILES as $file)
 		{
 			$filename = ($file['name']);
-			$cache .= '/'.$filename;
-			if (rename($cache, $folder.'/'.$filename)) 
+			$cache_file = $cache . '/'.$filename;
+			if (!file_exists($cache_file)) 
 			{
-				$element_files[] = $filename;	
+				$cache_file = $file['tmp_name'];
 			}
-			
+			if (rename($cache_file, $folder.'/'.$filename)) 
+			{
+				$press_file = new Application_Model_PressFiles();
+				$press_file->path = $filename;
+				$press->addChild($press_file, 'files');
+			}
 		}
-		return $element_files;
+		return $press;
 	}
 }

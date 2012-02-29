@@ -6,6 +6,12 @@ class Application_Model_DbTable_Press extends Zefir_Application_Model_DbTable
 	protected $_raw_name = 'press';
 	protected $_name;
 	protected $_primary = 'element_id';
+	
+	protected $_hasMany = array(
+			'files' => array(
+					'model' => 'Application_Model_PressFiles',
+					'refColumn' => 'element_id',
+		));
 
 	public function getAllAsType()
 	{
