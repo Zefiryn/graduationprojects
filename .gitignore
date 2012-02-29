@@ -9,6 +9,7 @@ app/public/assets/applications/*
 app/public/assets/images/*
 app/public/assets/editions/*
 app/public/assets/captcha/*
+app/public/assets/press/*
 app/public/.htaccess
 app/cache/*
 app/log/*.log            

@@ -77,6 +77,14 @@ $(document).ready(function(){
 		publish_edition();
 	}
 	
+	if ($('a.press_file').length > 0) 
+	{
+		press_form();
+	}
+	if ($('span.file_remove').length > 0)
+	{
+		remove_press_file();
+	}
 	voteSettings();
 });
 
@@ -675,5 +683,27 @@ function publish_edition()
 				self.find('img').removeClass('ui-icon-print').addClass('ui-icon-check');
 			},
 		});
+	});
+}
+
+function press_form()
+{
+	$('p.press_file').delegate('a.press_file', 'click', function(e){
+		e.preventDefault();
+		var self = $(this);
+		var number = $('div.press_file').length;
+		var file = $('div.press_file:first').clone();
+		var input = file.find('input[type="file"]');
+		input.attr('id', 'element_path_' + number);
+		input.attr('name', 'element_path_' + number);
+		input.attr('value', null);
+		$('div.press_file:last').after(file);
+	});
+}
+
+function remove_press_file()
+{
+	$('span.file_remove').click(function(e){
+		
 	});
 }

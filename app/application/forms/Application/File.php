@@ -63,25 +63,25 @@ class Application_Form_Application_File extends Zefir_Form_SubForm
 
 		$element = new Zend_Form_Element_File('file_'.$number);
 		$element->setDestination(APPLICATION_PATH.'/../public'.$options['upload']['cache'])
-		->setAttribs(array('class' => 'file'))
-		->setRequired(FALSE)
-		->setAllowEmpty(TRUE)
-		->addValidators(array(
-		array('Extension', true, array(false, 'jpg,jpeg')),
-		//not working on production server
-		//array('MimeType', true, array(false, 'image')),
-		array('Size', false, array('max' => $appSettings->max_file_size)),
-		array('ImageSize', false, array('minwidth' => 300,
-                            			'maxwidth' => 1600,
-                            			'minheight' => 300,
-                            			'maxheight' => 1200))
-		))
-		->setDecorators(array(
-		array('File'),
-		array('ErrorMsg'),
-		array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
-		array('MyLabel', array('placement' => 'prepend'))
-		));
+				->setAttribs(array('class' => 'file'))
+				->setRequired(FALSE)
+				->setAllowEmpty(TRUE)
+				->addValidators(array(
+					array('Extension', true, array(false, 'jpg,jpeg')),
+					//not working on production server
+					//array('MimeType', true, array(false, 'image')),
+					array('Size', false, array('max' => $appSettings->max_file_size)),
+					array('ImageSize', false, array('minwidth' => 300,
+			                            			'maxwidth' => 1600,
+			                            			'minheight' => 300,
+			                            			'maxheight' => 1200))
+				))
+				->setDecorators(array(
+					array('File'),
+					array('ErrorMsg'),
+					array('UnderDescription', array('class' => 'description', 'placement' => 'prepend')),
+					array('MyLabel', array('placement' => 'prepend'))
+				));
 		$this->addElement($element);
 	}
 
