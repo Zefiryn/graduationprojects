@@ -143,8 +143,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('press'));
 
 		//clearance
-		$acl->allow(null, array('error', 'index', 'load', 'press'), null);
-		$acl->allow(null, array('about', 'regulations', 'faq'), array('index', 'show'));
+		$acl->allow(null, array('error', 'index', 'load'), null);
+		$acl->allow(null, array('about', 'regulations', 'faq', 'press'), array('index', 'show'));
 		$acl->allow(null, array('auth'), array('index', 'login'));
 		$acl->allow(null, array('users'), array('show', 'edit', 'restore', 'delete'));
 		$acl->allow(null, array('contact'), null);
