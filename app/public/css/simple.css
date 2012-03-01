@@ -354,7 +354,7 @@ menu menu a:last-child {
 	margin-right: 30px;
 }
 
-.diploma_gallery img,.application_gallery img {
+.diploma_gallery img, .application_gallery img {
 	border: none;
 	outline: none;
 	width: 100%;
@@ -362,6 +362,9 @@ menu menu a:last-child {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+}
+.diploma_gallery p.admin img, .application_gallery p.admin img {
+	width: auto;
 }
 
 .diploma_field,.application_field {
@@ -1240,10 +1243,11 @@ form.diploma #diplomaFormRight {
 
 .removeProjectImage {
 	position: absolute;
-	margin: 0px 0px 0px 451px;
+	margin: 0px 0px 0px 442px;
 	background: #fff;
 	border: 1px solid rgb(0, 221, 179);
-	width: 17px;
+	width: auto;
+	overflow: hidden;
 	height: 17px;
 }
 
@@ -1385,8 +1389,9 @@ a.path_end:link,a.path_end:visited {
 	font-weight: normal;
 	color: #3c9;
 }
-div.press_element {margin: 30px 0px;}
+div.press_wrapper {float:left; }
 div.press_wrapper div.press_element:first-child {margin: 0px 0px 30px 0px;}
+div.press_element {margin: 30px 0px 10px 0px;padding-bottom: 20px;border-bottom: 1px dotted #898;}
 div.press_element span.file_description {
 	font-weight: bold;
 	font-size: 24px;
@@ -1432,13 +1437,14 @@ p.press_link_wrap span.file_remove {
 }
 a.press_edit {
 	display: inline-block;
-	font-size: 14px;	
+	font-size: 16px;
+	font-weight: bold;	
 	color: #1AE0BB;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 	background: #eee;
-	padding: 3px 10px;
+	padding: 2px 10px;
 }
 
 .clearfix {

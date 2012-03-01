@@ -4,14 +4,23 @@
 
 	<?php foreach($this->diploma->files as $file):?>
 	<div id="<?php echo $file->file_id?>">
+	<?php if ($this->user->role == 'admin'):?>
 	<p class="admin removeProjectImage">
- 		<a href="<?php echo $this->url(array('id'=> $file->file_id), 'diploma_image_delete');?>"
-			class="remove-image" alt="remove image">
-			<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
-				alt="<?php echo $this->translate('delete');?>" 
-				title="<?php echo $this->translate('delete');?>">
+		
+		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+			class="ui-icon ui-icon-arrow-4 no-block enable-sort"
+			alt="<?php echo $this->translate('move');?>"
+			title="<?php echo $this->translate('move');?>">
+		<a
+			href="<?php echo $this->url(array('id' => $file->file_id), 'diploma_image_delete');?>"
+			class="delete"> <img
+			src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+			class="ui-icon ui-icon-trash no-block"
+			alt="<?php echo $this->translate('delete');?>"
+			title="<?php echo $this->translate('delete');?>">
 		</a>
 	</p>
+	<?php endif;?>
 	<a href="<?php echo $this->baseUrl('/assets/editions/'. $file->path);?>"
 			class="application_files" rel="images" >
 		<img class="sort_item"
@@ -19,8 +28,8 @@
 			alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>"
 			class="diploma_image" />
 	</a>		
-	<p class="clear">&nbsp;</p>
-	</div>		
+	</div>
+	<p class="clear">&nbsp;</p>		
 	<?php endforeach;?>
 	</div>
 
@@ -90,7 +99,8 @@
     </div>
 
 </div>
-
+<?php if ($this->user->role == 'admin'):?>
 <?php echo $this->partial('partials/delete_dialog.phtml',
 array('title' => 'file', 'delete_confirm' => $this->translate('application_image_delete_confirm')));
 ?>
+<?php endif;?>
