@@ -3,15 +3,25 @@
 	<div class="diploma_gallery" id="diploma_gallery">
 
 	<?php foreach($this->diploma->files as $file):?>
+	<div id="<?php echo $file->file_id?>">
+	<p class="admin removeProjectImage">
+ 		<a href="<?php echo $this->url(array('id'=> $file->file_id), 'diploma_image_delete');?>"
+			class="remove-image" alt="remove image">
+			<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
+				alt="<?php echo $this->translate('delete');?>" 
+				title="<?php echo $this->translate('delete');?>">
+		</a>
+	</p>
 	<a href="<?php echo $this->baseUrl('/assets/editions/'. $file->path);?>"
 			class="application_files" rel="images" >
-		<img id="<?php echo $file->file_id?>" class="sort_item"
+		<img class="sort_item"
 			src="<?php echo $this->baseUrl('assets/editions/'.$file->getImage('small'));?>"
 			alt="<?php echo $this->diploma->getField('work_subject', $this->lang);?>"
 			class="diploma_image" />
-		</a>
-		
-		<?php endforeach;?>
+	</a>		
+	<p class="clear">&nbsp;</p>
+	</div>		
+	<?php endforeach;?>
 	</div>
 
 	<div class="dyplom" id="<?php echo $this->diploma->diploma_id?>">
@@ -80,3 +90,7 @@
     </div>
 
 </div>
+
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'file', 'delete_confirm' => $this->translate('application_image_delete_confirm')));
+?>

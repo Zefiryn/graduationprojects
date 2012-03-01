@@ -130,6 +130,35 @@ class DiplomasController extends Zefir_Controller_Action
 		//$this->_helper->viewRenderer->setNoRender(true);
 	}
 
+	public function deleteImageAction()
+	{
+		$request = $this->getRequest();
+		
+		if ($request->isXmlHttpRequest())
+		{
+			$id = $request->getParam('id');
+	
+			if (ctype_digit($id))
+			{
+				//already sent image
+				$file = new Application_Model_DiplomaFiles($id);
+				if ($this->view->user->role == 'admin')
+				{
+					$file->delete();
+					$this->_helper->json(array("file_id" => $id));
+				}
+				else
+				{
+					$this->_helper->json(array("access" => 0), FALSE);
+				}
+			}
+		}
+		else
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'root');
+		}
+	}
 
 }
 
