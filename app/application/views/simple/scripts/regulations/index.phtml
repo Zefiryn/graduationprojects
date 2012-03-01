@@ -9,50 +9,28 @@ array('title' => 'paragraph', 'delete_confirm' => $this->translate('paragraph_de
 	<p class="spacer">&nbsp;</p>
 
 	<div style="clear: both; overflow: hidden;" id="regulation">
-
-
-
 	<?php foreach($this->columns as $side => $regulations):?>
 		<div id="<?php echo $side;?>"
 			class="connected column-<?php echo $side;?>">
-				
 
 			<?php foreach($regulations as $i => $regulation):?>
 			<div id="item_<?php echo $regulation->paragraph_id;?>"
 				class="sort_item">
 
-
 				<?php echo $this->partial('regulations/_admin.phtml',
 					array('lang' => $this->lang, 'regulation' => $regulation));?>
-
 
 				<p class="rule color">
 					<span class="regulation_number" style="font-weight: bold">&sect; <?php echo ++$i;?>
 					</span> <br />
-					
-					
-					
-					
 					<?php echo  nl2br($regulation->paragraph_text);?>
 				</p>
 			</div>
-			
-			
-			
-			
 			<?php endforeach; ?>
 		</div>
-		
-		
-		
-		
 		<?php endforeach; ?>
 	</div>
-	
-	
-	
-	
-	
+
 	<?php if (count($this->columns['left']) == 0):?>
 	<p class="empty">
 		<?php echo $this->translate('no_regulation_defined');?>

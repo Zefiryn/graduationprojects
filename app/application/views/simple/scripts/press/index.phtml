@@ -4,9 +4,13 @@
 	<h1><?php echo $this->translate('press_header');?></h1>
 	
 	<p class="spacer">&nbsp;</p>
-	<div class="press_wrapper">
-		<?php foreach($this->press['file'] as $element):?>
-		<div class="press_element">
+	<div id="press_files" class="press_wrapper">
+		<?php foreach($this->press as $element):?>
+		<div class="press_element sort_item" id="<?php echo $element->element_id;?>">
+			<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+				class="ui-icon ui-icon-arrow-4 no-block enable-sort"
+				alt="<?php echo $this->translate('move');?>"
+				title="<?php echo $this->translate('move');?>" />
 			<span class="file_description"><?php echo $element->element_description;?>:</span>
 			<?php foreach($element->files as $file):?>
 			<p class="press_link_wrap">
@@ -20,6 +24,8 @@
 			<a href="<?php echo $this->url(array(), 'new_press_element');?>" class="press_edit">+</a>
 			<?php endif?>
 		</div> 
+		
 		<?php endforeach;?>
 	</div>
+	<p class="clear">&nbsp;</p>
 </div>

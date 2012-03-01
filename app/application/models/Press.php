@@ -16,16 +16,19 @@ class Application_Model_Press extends GP_Application_Model
 		return parent::__construct($id, $options);
 	}
 
-	public function getAllAsType()
+	public function getAllFiles()
 	{
 		$set = array();
-		foreach ($this->getDbTable()->getAllAsType() as $row)
+		$rowset = $this->getDbTable()->getAllFiles();
+		if ($rowset)
 		{
-			$obj = new $this;
-			$obj->populate($row);
-			$set[$row->element_type][] = $obj;
+			foreach ($rowset as $row)
+			{
+				$obj = new $this;
+				$obj->populate($row);
+				$set[] = $obj;
+			}
 		}
-		
 		return $set;
 	}
 	
@@ -53,6 +56,7 @@ class Application_Model_Press extends GP_Application_Model
 	public function save()
 	{
 		$this->element_type = 'file';
+		if ($this->popsition == null )$this->popsition = $this->getDbTable()->getLastPosition();
 		parent::save();
 		
 		if ($this->files != null)

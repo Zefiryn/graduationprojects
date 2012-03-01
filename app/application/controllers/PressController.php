@@ -12,7 +12,7 @@ class PressController extends Zefir_Controller_Action
 	{
 		$appSettings = Zend_Registry::get('appSettings');
 		$press = new Application_Model_Press();
-		$this->view->press = $press->getAllAsType();
+		$this->view->press = $press->getAllFiles();
 	}
 	
 	public function newAction()
@@ -62,6 +62,43 @@ class PressController extends Zefir_Controller_Action
 		}
 		
 		$this->view->form = $form;
+	}
+	
+	public function sortAction()
+	{
+		$request = $this->getRequest();
+		$element_id = $request->getParam('id', null);
+		$new_position = $request->getParam('position', 1);
+		$elements = new Application_Model_Press();
+			
+		$position = 1;
+		foreach ($elements->fetchAll() as $element)
+		{
+			if ($element->element_id != $element_id && $position < $new_position)
+			{
+				$element->position = $position ;
+				$element->save();
+			}
+			elseif ($element->element_id != $element_id && $position  > $new_position)
+			{
+				$element->position = $position + 1;
+				$element->save();
+			}
+			elseif ($element->element_id != $element_id && $position  == $new_position)
+			{
+				$element->position = $position + 1;
+				$element->save();
+			}
+			elseif ($element->element_id == $element_id)
+			{
+				$element->position = $new_position;
+				$element->save();
+				$position--;	//reduce position so next paragraphs would fill the place
+			}
+			$position++;
+		}
+			
+		$this->_helper->viewRenderer->setNoRender(true);
 	}
 
 

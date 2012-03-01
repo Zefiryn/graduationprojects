@@ -25,12 +25,17 @@ $(document).ready(function(){
 	
 	if ($("#diploma_gallery").length > 0)
 	{
-		sortColumnElements('#diploma_gallery', function(event, ui){sortDiplomaImages(event, ui, "/diploma/sort/");});
+		sortColumnElements('#diploma_gallery', function(event, ui){sortDiplomaImages(event, ui, "/diploma/sort/");}, false);
 	}
 	
 	if ($("#newsFiles").length > 0)
 	{
 		sortColumnElements('#newsFiles', function(event, ui){sortNewsFiles(event,ui,"/news/sort");});
+	}
+	
+	if ($("#press_files").length > 0)
+	{
+		sortColumnElements('#press_files', function(event, ui){sortPressFiles(event, ui, "/press/sort/");}, false);
 	}
 	
 	if ($('.caption').length > 0)
@@ -149,7 +154,7 @@ function sortElements(id, link, sortCallback, disable)
 	}
 }
 
-function sortColumnElements(id, callback)
+function sortColumnElements(id, callback, disable)
 {	
 	$( id ).sortable({
 		placeholder: "ui-state-highlight",
@@ -162,7 +167,31 @@ function sortColumnElements(id, callback)
 		}
 	});
 	
-	$( id ).disableSelection();
+	if (typeof disable == "undefined") {
+	    disable = true;
+	  }
+	console.log(disable);
+	if (disable) {
+		$( id ).disableSelection();
+	}
+	else {
+		$( id ).sortable({
+			disabled: true,
+		});
+		$('.enable-sort').mousedown(function(){
+			
+			$( id ).sortable({
+				disabled: false,
+			});
+		});
+		
+		$('.enable-sort').mouseup(function(){
+			
+			$( id ).sortable({
+				disabled: true,
+			});
+		});
+	}
 }
 
 function sortDiplomaImages(event, ui, link)
@@ -211,6 +240,29 @@ function sortNewsFiles(event, ui, link)
         }
 	});
 }
+
+function sortPressFiles(event, ui, link)
+{
+	var id = ui.item.attr('id');
+	var position = $('.sort_item').index($('#'+id)) + 1;
+	
+	jQuery.ajax({
+        type: "POST",
+        url: link,
+        data: {'id': id, 'position': position},
+        global: false,
+        beforeSend: function(){
+        	console.log(link);
+        	console.log(this.data);
+        },
+        success: function(){}, 
+        error: function(data){
+        	console.log(data);
+        	alert('An error occurred');
+        }
+	});
+}
+
 
 function sort(event, ui, link, sortCallback)
 {

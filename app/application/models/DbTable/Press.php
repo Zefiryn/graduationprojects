@@ -13,10 +13,17 @@ class Application_Model_DbTable_Press extends Zefir_Application_Model_DbTable
 					'refColumn' => 'element_id',
 		));
 
-	public function getAllAsType()
+	public function getAllFiles()
 	{
-		$select = $this->select()->where('element_type != "descripption"')->order('element_type ASC');
+		$select = $this->select()->where('element_type = ?', 'file')->order('position ASC');
 		return $this->fetchAll($select);
+	}
+	
+	public function getLastPosition()
+	{
+		$select = $this->select()->order('position DESC')->limit(1);
+		$row = $this->fetchAll($select)->current();
+		return $row->position;
 	}
 	
 	public function getDescriptionElement()
