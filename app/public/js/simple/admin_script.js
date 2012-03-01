@@ -154,6 +154,7 @@ function sortColumnElements(id, callback)
 	$( id ).sortable({
 		placeholder: "ui-state-highlight",
 		start: function(event, ui) {
+			console.log($('.ui-state-highlight'));
 			 $('.ui-state-highlight').height(ui.helper.height());
 		 },
 		update: function(event, ui) {
@@ -169,12 +170,16 @@ function sortDiplomaImages(event, ui, link)
 	var diplomaId = $('.dyplom').attr('id');
 	var fileId = ui.item.attr('id');
 	var position = $('.sort_item').index($('#'+fileId)) + 1;
-	console.log(link);
+	
 	jQuery.ajax({
         type: "POST",
         url: link,
         data: {'id': diplomaId, 'file_id': fileId, 'position': position},
         global: false,
+        beforeSend: function(){
+        	console.log(link);
+        	console.log(this.data);
+        },
         success: function(){}, 
         error: function(data){
         	console.log(data);

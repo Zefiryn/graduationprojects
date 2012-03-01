@@ -5,6 +5,8 @@ function _ajax_request(url, data, callback, type, method) {
         callback = data;
         data = {};
     }
+    console.log(url);
+	console.log(data);
     return jQuery.ajax({
         type: method,
         url: url,
@@ -28,7 +30,7 @@ jQuery.extend({
         return _ajax_request(url, data, callback, type, 'PUT');
     },
     delete_: function(url, data, callback, type) {
-        return _ajax_request(url, data, callback, type, 'DELETE');
+        return _ajax_request(url, data, callback, type, 'POST');
     }
 });
 
@@ -54,7 +56,7 @@ jQuery.fn.deleteWithAjax = function(callback) {
 			var titleText = $('#ui-dialog-title-dialog-confirm').text();
 			var deleteButton = $('#button_conf').text();
 			var cancelButton = $('#button_close').text();
-			console.log($( "#dialog-confirm" ));
+			
 			$( "#dialog-confirm" ).dialog({
 					draggable: true,
 					resizable: false,
@@ -110,6 +112,7 @@ function removeImage(data)
 	else
 	{
 		console.log(data);
+		$('#'+data.file_id).remove();
 		$('#file_' + data.file_id).remove();
 		$('input[name*="file_id"]').each(function(){
 			console.log($(this));

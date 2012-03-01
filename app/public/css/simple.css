@@ -1238,6 +1238,15 @@ form.diploma #diplomaFormRight {
 	border: 1px solid rgb(0, 221, 179);
 }
 
+.removeProjectImage {
+	position: absolute;
+	margin: 0px 0px 0px 451px;
+	background: #fff;
+	border: 1px solid rgb(0, 221, 179);
+	width: 17px;
+	height: 17px;
+}
+
 .editNews {
 	position: absolute;
 	margin: 0px 0px 0px 202px;
