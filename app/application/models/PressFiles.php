@@ -7,6 +7,11 @@ class Application_Model_PressFiles extends GP_Application_Model
 	public $path;
 	protected $press;
 	protected $_uploadDir = 'press';
+	protected $_image = array(
+			'property' => 'path',
+			'dir' => '/assets/press'
+	);
+	protected $_imageData = array();
 	
 	protected $_dbTableModelName = 'Application_Model_DbTable_PressFiles';
 

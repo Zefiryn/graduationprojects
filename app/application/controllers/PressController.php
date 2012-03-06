@@ -100,6 +100,40 @@ class PressController extends Zefir_Controller_Action
 			
 		$this->_helper->viewRenderer->setNoRender(true);
 	}
+	
+	public function deleteFileAction()
+	{
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
+		if ($this->_request->isXmlHttpRequest())
+		{
+			$id = $this->_request->getParam('id');
+			if (ctype_digit($id)) 
+			{
+				$pressFile = new Application_Model_PressFiles($id);
+				$press = $pressFile->press;
+				if (!$pressFile->isEmpty())
+				{
+					$pressFile->delete();
+					if (count($press->files) == 0)
+					{
+						$press->delete();
+					}
+					echo $this->_helper->json(array("file_id" => $id));
+				}
+				else
+				{
+					echo $this->_helper->json(array("access" => 0), FALSE);
+				}
+			}
+		}
+		else 
+		{
+			$this->flashMe('ajax_only', 'FAILURE');
+			$this->_redirectToRoute(array(), 'press');
+		}
+	}
 
 
 	protected function _saveFile($press, $cache)
@@ -114,6 +148,12 @@ class PressController extends Zefir_Controller_Action
 			{
 				$cache_file = $file['tmp_name'];
 			}
+			
+			//make filename unique
+			$ext = Zefir_Filter::getExtension($filename);
+			$name = substr($filename, 0, strpos($filename, $ext));
+			$filename = substr($name,0,130).time().'.'.$ext;
+			
 			if (rename($cache_file, $folder.'/'.$filename)) 
 			{
 				$press_file = new Application_Model_PressFiles();
