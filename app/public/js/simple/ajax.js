@@ -92,6 +92,7 @@ function ajaxLinks(){
 	
     $('a.delete').deleteWithAjax(redirect);
     $('a.remove-image').deleteWithAjax(removeImage);
+    $('a.remove-press-file').deleteWithAjax(removeFile);
     schoolAutocomplete();
 }
 
@@ -156,6 +157,20 @@ function removeImage(data)
 			$('.column-right div:last-child').after(elem);
 		}
 		hideFileFields();
+	}
+}
+
+function removeFile(data)
+{
+	if (data.access == 0)
+	{
+		console.log(data);
+		alert("You don't have access to this resource");
+	}
+	else
+	{
+		console.log(data);
+		$('#file_' + data.file_id).remove();
 	}
 }
 

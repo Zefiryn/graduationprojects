@@ -86,10 +86,6 @@ $(document).ready(function(){
 	{
 		press_form();
 	}
-	if ($('span.file_remove').length > 0)
-	{
-		remove_press_file();
-	}
 	voteSettings();
 });
 
@@ -170,7 +166,7 @@ function sortColumnElements(id, callback, disable)
 	if (typeof disable == "undefined") {
 	    disable = true;
 	  }
-	console.log(disable);
+
 	if (disable) {
 		$( id ).disableSelection();
 	}
@@ -755,12 +751,5 @@ function press_form()
 		input.attr('name', 'element_path_' + number);
 		input.attr('value', null);
 		$('div.press_file:last').after(file);
-	});
-}
-
-function remove_press_file()
-{
-	$('span.file_remove').click(function(e){
-		
 	});
 }

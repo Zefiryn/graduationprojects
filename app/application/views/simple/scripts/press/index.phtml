@@ -13,10 +13,13 @@
 				title="<?php echo $this->translate('move');?>" />
 			<span class="file_description"><?php echo $element->element_description;?>:</span>
 			<?php foreach($element->files as $file):?>
-			<p class="press_link_wrap">
+			<p class="press_link_wrap" id="file_<?php echo $file->press_file_id;?>">
 				<a href="<?php echo $file->getPath();?>" class="press_file"><?php echo strtoupper(Zefir_Filter::getExtension($file->path));?></a>
 				<?php if ($this->user->role == 'admin') :?>
-				<span class="file_remove" data-press-file-id="<?php echo $file->press_file_id;?>">x</span>
+				<a href="<?php echo $this->url(array('id' => $file->press_file_id), 'press_file_delete');?>"
+					class="remove-press-file">
+					<span class="file_remove">x</span>
+				</a>
 				<?php endif;?>
 			</p>
 			<?php endforeach;?>
@@ -29,3 +32,9 @@
 	</div>
 	<p class="clear">&nbsp;</p>
 </div>
+
+<?php if ($this->user->role == 'admin'):?>
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'file', 'delete_confirm' => $this->translate('press_file_delete_confirm')));
+?>
+<?php endif;?>
