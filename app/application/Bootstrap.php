@@ -221,9 +221,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
 		$viewRenderer->setView($view)
-		->setViewScriptPathSpec(':controller/:action.:suffix')
-		->setViewScriptPathNoControllerSpec(':action.:suffix')
-		->setViewSuffix('phtml');
+					->setViewScriptPathSpec(':controller/:action.:suffix')
+					->setViewScriptPathNoControllerSpec(':action.:suffix')
+					->setViewSuffix('phtml');
 
 		//initialize layout
 		$layout = Zend_Layout::getMvcInstance();

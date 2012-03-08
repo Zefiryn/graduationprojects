@@ -5,6 +5,9 @@ class VotesController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/applications.css', 'simple/forms.css'
+		);
 	}
 	
 	public function settingsAction()

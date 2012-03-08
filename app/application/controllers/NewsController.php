@@ -6,6 +6,9 @@ class NewsController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+			'simple/news.css'
+		);
 	}
 
 	public function indexAction()
