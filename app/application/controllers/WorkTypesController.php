@@ -6,6 +6,9 @@ class WorkTypesController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/forms.css'
+		);
 	}
 
 	public function indexAction()
@@ -27,7 +30,7 @@ class WorkTypesController extends Zefir_Controller_Action
 				
 			if($form->leave->isChecked())
 			{
-				$this->_redirect('/schools');
+				$this->_redirect('/work-types');
 			}
 				
 			elseif ($form->isValid($request->getPost()))
@@ -56,6 +59,9 @@ class WorkTypesController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$form = new Application_Form_WorkType();
 
+		$id = $request->getParam('id', '');
+		$type = new Application_Model_WorkTypes($id);
+			
 		if ($request->isPost())
 		{
 			$form->populate($request->getPost());
@@ -67,7 +73,6 @@ class WorkTypesController extends Zefir_Controller_Action
 				
 			elseif ($form->isValid($request->getPost()))
 			{
-				$type = new Application_Model_WorkTypes();
 				$type->populateFromForm($form->getValues());
 				$type->save();
 				 
@@ -77,10 +82,7 @@ class WorkTypesController extends Zefir_Controller_Action
 		}
 		else
 		{
-			$id = $request->getParam('id', '');
-			$type = new Application_Model_WorkTypes($id);
-			$form->populate($type->prepareFormArray());
-				
+			$form->populate($type->prepareFormArray());				
 		}
 
 		$this->view->form = $form;

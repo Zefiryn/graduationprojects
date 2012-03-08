@@ -6,6 +6,9 @@ class DiplomasController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/projects.css', 'simple/forms.css'
+		);
 	}
 
 	public function indexAction()
@@ -68,7 +71,8 @@ class DiplomasController extends Zefir_Controller_Action
 			if ($request->getParam('leave'))
 			{
 				$this->flashMe('cancel_edit');
-				$this->_redirectToRoute(array('id' => $diploma->diploma_id), 'show_diploma');
+				$this->_redirectToRoute(array('edition' => $diploma->edition->edition_name,
+						'slug' => $diploma->slug), 'slug_project');
 			}
 			if ($form->isValid($request->getPost()))
 			{

@@ -5,11 +5,17 @@
 <?php if (APPLICATION_ENV != 'production'):?>
 <meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE,NOSNIPPET">
 <?php endif;?>
-
+		
 	<?php echo $this->headTitle();?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>	
-	<?php echo $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
+	<?php if (isset($this->css) && is_array($this->css)):?>
+		<?php foreach($this->css as $file):?>
+		<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$file); ?>
+		<?php endforeach;?>
+	<?php endif;?>
+	<?php echo $this->headLink();?>
 	<?php $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')

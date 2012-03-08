@@ -21,6 +21,9 @@ class AboutController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/page.css'
+		);
 	}
 
 	public function indexAction()

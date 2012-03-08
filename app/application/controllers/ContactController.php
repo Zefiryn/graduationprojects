@@ -6,6 +6,9 @@ class ContactController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/forms.css'
+		);
 	}
 
 	public function indexAction()

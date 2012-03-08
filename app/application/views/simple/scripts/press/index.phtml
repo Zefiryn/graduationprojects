@@ -24,7 +24,12 @@
 			</p>
 			<?php endforeach;?>
 			<?php if ($this->user->role == 'admin'):?>
-			<a href="<?php echo $this->url(array(), 'new_press_element');?>" class="press_edit">+</a>
+			<a href="<?php echo $this->url(array('id' => $element->element_id), 'edit_press_element');?>" class="press_edit">
+				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+					class="ui-icon ui-icon-pencil no-block"
+					alt="<?php echo $this->translate('edit');?>"
+					title="<?php echo $this->translate('edit');?>" />
+			</a>
 			<?php endif?>
 		</div> 
 		

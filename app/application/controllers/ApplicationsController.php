@@ -5,6 +5,9 @@ class ApplicationsController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+			'simple/applications.css', 'simple/projects.css'
+		);
 	}
 
 	public function indexAction()
@@ -638,7 +641,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$types = $work_type->getWorkTypes();
 		unset($types[0]);
 
-		$languages = array('cs', 'pl', 'sk', 'hu', 'all');
+		$languages = array('cz', 'pl', 'sk', 'hu', 'all');
 		 
 		$statistics = array();
 		 

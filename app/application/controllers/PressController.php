@@ -6,8 +6,11 @@ class PressController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+			'simple/press.css'
+		);
 	}
-
+	
 	public function indexAction()
 	{
 		$appSettings = Zend_Registry::get('appSettings');
@@ -40,6 +43,43 @@ class PressController extends Zefir_Controller_Action
 			}
 		}
 		$this->view->form = $form;
+	}
+	
+	public function editAction()
+	{
+		$id = $this->_request->getParam('id', null);
+		
+		if ($id) {
+			$press = new Application_Model_Press($id);
+			$form = new Application_Form_Press();
+			$form->getElement('element_path')->setRequired(false);
+			$form->setDecorators(array(
+					array('ViewScript', array('viewScript' => 'forms/_pressForm.phtml'))
+			));
+		
+			if ($this->_request->isPost())
+			{
+				if ($this->_request->getPost('leave', false))
+				{
+					$this->flashMe('cancel_edit', 'SUCCESS');
+					$this->_redirectToRoute(array(), 'press');
+				}
+				elseif ($form->isValid($this->_request->getPost()) || count($form->getMessages()) == 0)
+				{
+					$press_element = new Application_Model_Press();
+					$press_element->populate($form->getValues());
+					$this->_saveFile($press_element, $form->getElement('element_path')->getDestination());
+					$press_element->save();
+					$this->flashMe('press_edited');
+					$this->_redirectToRoute(array(), 'press');
+				}
+			}
+			else 
+			{
+				$form->populate($press->prepareFormArray());
+			}
+		$this->view->form = $form;
+		}
 	}
 	 
 	public function descriptionAction()
