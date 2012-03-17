@@ -6,13 +6,16 @@ class ErrorController extends Zefir_Controller_Action
 	public function init()
 	{
 		parent::init();
+		$this->view->css = array(
+				'simple/error.css'
+		);
 
 	}
 
 	public function errorAction()
 	{
 		$errors = $this->_getParam('error_handler');
-		
+
 		if (!$errors) {
 			$this->view->message = 'You have reached the error page';
 			return;
@@ -26,12 +29,14 @@ class ErrorController extends Zefir_Controller_Action
 				// 404 error -- controller or action not found
 				$this->getResponse()->setHttpResponseCode(404);
 				$this->view->message = 'Page not found';
+				$this->view->code = 404;
 				break;
 			default:
 				// application error
 				$this->getResponse()->setHttpResponseCode(500);
-			$this->view->message = 'Application error';
-			break;
+				$this->view->message = 'Application error';
+				$this->view->code = 500;
+				break;
 		}
 
 		// Log exception, if logger available
@@ -44,12 +49,12 @@ class ErrorController extends Zefir_Controller_Action
 			$this->view->exception = $errors->exception;
 			$this->view->exceptionTrace = explode("\n", $errors->exception->getTraceAsString());
 		}
-		
+
 		$this->_log($errors->exception->getMessage(), 'error');
 		$this->_log($errors->exception->getTraceAsString(), 'error');
-		
 
-		$this->view->request   = $errors->request;
+
+		$this->view->request = $errors->request;
 	}
 
 	public function getLog()
