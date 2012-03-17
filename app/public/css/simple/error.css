@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+div.paper {
+	border: 1px solid #F7F7F7;
+	background: #fcfcfc;
+	padding: 0px;
+	width: 950px;
+	margin: 0px 0px 0px 10px;
+}
+
+div.error-msg {
+	margin: 15px 25px;
+	padding: 0px;
+}
+
+p.shadow {
+	float: left;
+	width: 50%;
+	margin: 1px 0px;
+	background: transparent url('../../img/simple/paper-shadow.gif') no-repeat;
+}
+
+p.shadow-left {
+	background-position: left top;
+}
+p.shadow-right {
+	background-position: right top;
+}
+.error-msg h1 {
+	color: rgba(0, 221, 179, 0.9);
+	border-bottom: 1px solid rgba(0, 221, 179, 0.9);;
+}
+.error-msg h2 {
+	border-bottom: 0px;
+	color: #000;
+	text-align: center;
+	font-size: 34px;
+}
+
+pre {
+	text-align: left;
+}
