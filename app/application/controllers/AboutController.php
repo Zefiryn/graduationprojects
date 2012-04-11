@@ -47,6 +47,7 @@ class AboutController extends Zefir_Controller_Action
 
 	public function editAction()
 	{
+		$this->view->css[] = 'simple/forms.css';
 		$form = new Application_Form_About();
 		 
 		$request = $this->getRequest();
