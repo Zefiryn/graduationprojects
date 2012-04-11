@@ -53,6 +53,8 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->flashMe('application_deadline_has_passed');
 			$this->_redirectToRoute(array(), 'root');
 		}
+		
+		$this->view->css[] = 'simple/forms.css';
 		$appSettings = Zend_Registry::get('appSettings');
 		$options = Zend_Registry::get('options');
 
@@ -131,6 +133,7 @@ class ApplicationsController extends Zefir_Controller_Action
 	public function saveAction()
 	{
 		$request = $this->getRequest();
+		$this->view->css[] = 'simple/forms.css';
 		 
 		if ($request->getParam('confirm'))
 		{
@@ -167,6 +170,7 @@ class ApplicationsController extends Zefir_Controller_Action
 			$this->flashMe('application_deadline_has_passed');
 			$this->_redirectToRoute(array(), 'root');
 		}
+		$this->view->css[] = 'simple/forms.css';
 		$appSettings = Zend_Registry::get('appSettings');
 		$options = Zend_Registry::get('options');
 		$form = new Application_Form_Application('edit');
@@ -395,6 +399,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
 		
+		$this->view->css[] = 'simple/forms.css';
 		$request = $this->getRequest();
 		$post = $request->getPost();
 

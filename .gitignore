@@ -1,6 +1,7 @@
 .buildpath
 .project
 .settings/
+.idea/
 app/application/configs/db.ini
 app/application/configs/dbs
 app/public/assets/cache/*

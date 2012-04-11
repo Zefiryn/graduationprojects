@@ -68,6 +68,7 @@ class NewsController extends Zefir_Controller_Action
 
 	public function newAction()
 	{
+		$this->view->css[] = 'simple/forms.css';
 		$form = new Application_Form_News();
 		$request = $this->getRequest();
 		 
@@ -106,6 +107,7 @@ class NewsController extends Zefir_Controller_Action
 
 	public function editAction()
 	{
+		$this->view->css[] = 'simple/forms.css';
 		$request = $this->getRequest();
 		$form = new Application_Form_News();
 		 
@@ -153,6 +155,7 @@ class NewsController extends Zefir_Controller_Action
 
 	public function uploadAction()
 	{
+		$this->view->css[] = 'simple/forms.css';
 		$request = $this->getRequest();
 		 
 		if ($request->isPost())
@@ -214,6 +217,7 @@ class NewsController extends Zefir_Controller_Action
 	 */
 	public function mainImageAction()
 	{
+		$this->view->css[] = 'simple/forms.css';
 		$request = $this->getRequest();
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
