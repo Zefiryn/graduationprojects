@@ -661,10 +661,10 @@ class ApplicationsController extends Zefir_Controller_Action
 		 
 		foreach ($applications as $application)
 		{
-			$statistics['all'][$application->work_type->work_type_name]++;
-			$statistics['all']['all']++;
-			$statistics[$application->country][$application->work_type->work_type_name]++;
-			$statistics[$application->country]['all']++;
+			isset($statistics['all'][$application->work_type->work_type_name]) ? $statistics['all'][$application->work_type->work_type_name]++ : $statistics['all'][$application->work_type->work_type_name] = 1;
+			isset($statistics['all']['all']) ? $statistics['all']['all']++ : $statistics['all']['all'] = 1; 
+			isset($statistics[$application->country][$application->work_type->work_type_name]) ? $statistics[$application->country][$application->work_type->work_type_name]++ : $statistics[$application->country][$application->work_type->work_type_name] = 1;
+			isset($statistics[$application->country]['all']) ? $statistics[$application->country]['all']++ : $statistics[$application->country]['all'] = 1;
 		}
 		
 		return $statistics;
