@@ -11,8 +11,8 @@
 	</h1>
 	</h1>
 	<?php $divide = count($this->captions)/2; ?>
-	<div class="caption">
-
+	<div class="column-left">
+	
 	<?php foreach($this->captions as $index => $caption):?>
 		<p>
 			<span><?php echo $caption->name;?>
@@ -33,7 +33,7 @@
 
 		</p>
 		
-		<?php if (($index + 1) >= $divide):?>
+		<?php if (($index + 1) == (int)$divide):?>
 		</div>
 		<div class="column-right">
 		<?php endif;?>

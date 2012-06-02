@@ -15,7 +15,22 @@
 	<?php foreach ($this->captions as $index => $caption):?>
 		<div class="caption">
 			<h3>
-			<?php echo $caption->name;?></h3>
+				<span><?php echo $caption->name;?></span>
+				<a
+					href="<?php echo $this->url(array('id' => $caption->caption_id), 'edit_caption');?>">
+					<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+					class="ui-icon ui-icon-pencil no-block"
+					alt="<?php echo $this->translate('edit');?>"
+					title="<?php echo $this->translate('edit');?>">
+				</a> <a
+					href="<?php echo $this->url(array('id' => $caption->caption_id), 'delete_caption');?>"
+					class="delete"> <img
+					src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+					class="ui-icon ui-icon-trash no-block"
+					alt="<?php echo $this->translate('delete');?>"
+					title="<?php echo $this->translate('delete');?>">
+				</a>
+			</h3>
 			
 			
 			<?php foreach($this->translations as $lang => $strings):?>
@@ -46,7 +61,7 @@
 		
 		
 		
-	<?php if (($index + 1) >= $divide):?>
+	<?php if (($index + 1) == (int)$divide):?>
 	</div>
 	<div class="column-right">
 
