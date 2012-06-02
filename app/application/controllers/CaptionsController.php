@@ -32,7 +32,7 @@ class CAptionsController extends Zefir_Controller_Action
 			if ($request->getParam('leave'))
 			{
 				$this->flashMe('cancel_edit');
-				$this->_redirectToRoute(array(), 'captions');
+				$this->_redirectToRoute(array('loc_lang' => $this->view->lang), 'localization');
 			}
 
 			if ($form->isValid($request->getPost()))
@@ -42,7 +42,7 @@ class CAptionsController extends Zefir_Controller_Action
 				$caption->save();
 				 
 				$this->flashMe('caption_added');
-				$this->_redirectToRoute(array(), 'captions');
+				$this->_redirectToRoute(array('loc_lang' => $this->view->lang), 'localization');
 			}
 		}
 		 
@@ -60,7 +60,7 @@ class CAptionsController extends Zefir_Controller_Action
 			if ($request->getParam('leave'))
 			{
 				$this->flashMe('cancel_edit');
-				$this->_redirectToRoute(array(), 'captions');
+				$this->_redirectToRoute(array('loc_lang' => $this->view->lang), 'localization');
 			}
 
 			if ($form->isValid($request->getPost()))
@@ -70,7 +70,7 @@ class CAptionsController extends Zefir_Controller_Action
 				$caption->save();
 				 
 				$this->flashMe('caption_added');
-				$this->_redirectToRoute(array(), 'captions');
+				$this->_redirectToRoute(array('loc_lang' => $this->view->lang), 'localization');
 			}
 		}
 		else
@@ -100,7 +100,7 @@ class CAptionsController extends Zefir_Controller_Action
 		else
 		{
 			$this->flashMe('translation_deleted');
-			$this->_redirectToRoute(array('loc_lang' => $lang), 'localization');
+			$this->_redirectToRoute(array('loc_lang' => $this->view->lang), 'localization');
 		}
 
 	}

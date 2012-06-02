@@ -95,9 +95,10 @@ function showCaptions()
 	$('.caption p').hide();
 	$('span.translation_missing').closest('p').show();
 	
-	$('.caption h3').click(function(){
-		var par = $(this).siblings('p');
-		var visible = $(this).siblings('p:visible');
+	$('.caption h3 span').click(function(){
+		var elem =$(this).parent();
+		var par = elem.siblings('p');
+		var visible = elem.siblings('p:visible');
 		
 		if ((visible.length > 0 && visible.length < par.length) || visible.length == 0)
 		{
