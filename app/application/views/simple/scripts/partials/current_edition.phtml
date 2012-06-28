@@ -5,14 +5,15 @@
 			<span>&rsaquo;</span>
 		</p>
 		<menu>
-			<a
-				href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?>
-			</a>
-			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?>
-			</a>
-			<a
-				href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?>
-			</a>
+			<?php if (($this->showResults()) || $this->user->role == 'admin'):?>
+			<a href="<?php echo $this->url(array(), 'results')?>"><?php echo $this->translate('best_works_link');?></a>
+			<?php endif;?> 
+			
+			<a href="<?php echo $this->url(array('lang' => $this->lang), 'about')?>"><?php echo $this->translate('about_link');?></a>
+			
+			<a href="<?php echo $this->url(array(), 'news')?>"><?php echo $this->translate('news_link');?></a>
+			
+			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_regulation')?>"><?php echo $this->translate('regulation_link');?></a>
 
 			<!-- NEW APPLICATION FOR NOT LOGGED USER-->
 			
@@ -25,9 +26,6 @@
 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_faq')?>"><?php echo $this->translate('faq_link');?></a> 
 
-			<?php if (($this->showResults()) || $this->user->role == 'admin'):?>
-			<a href="<?php echo $this->url(array(), 'results')?>"><?php echo $this->translate('best_works_link');?></a>
-			<?php endif;?> 
 			<?php if ($this->user->role == 'admin'):?>
 			<a href="<?php echo $this->url(array(), 'press');?>"><?php echo $this->translate('press_link');?></a>
 			<?php endif;?>
