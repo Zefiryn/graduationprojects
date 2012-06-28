@@ -9,6 +9,9 @@
 	padding: 5px;
 	padding-bottom: 30px;
 }
+.news.news-new img {
+  background: rgb(203, 46, 102);
+}
 .news.unpublished {
 	background: rgba(245,245,245,0.4);
 }

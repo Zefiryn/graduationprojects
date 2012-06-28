@@ -667,7 +667,8 @@ a.strona-selected:hover {
 }
 
 p.flash {
-	background: #02be00;
+	background: rgb(203, 46, 102);
+	color: #fff;
 	width: 300px;
 	padding: 5px 0px 5px 0px;
 	margin-left: auto;

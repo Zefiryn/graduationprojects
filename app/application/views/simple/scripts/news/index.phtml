@@ -1,8 +1,9 @@
 <div id="main">
 
 	<?php if ($this->user->role == 'admin'):?>
-	<div class="news">
-		<a href="<?php echo $this->url(array(),'new_news')?>"> <img
+	<div class="news news-new">
+		<a href="<?php echo $this->url(array(),'new_news')?>"> 
+			<img
 			src="<?php echo $this->baseUrl('img/simple/new_news.png');?>"
 			alt="<?php echo $this->translate('add_new_news');?>"
 			title="<?php echo $this->translate('add_new_news');?>" />
