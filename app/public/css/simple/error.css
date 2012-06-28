@@ -28,7 +28,6 @@ p.shadow-right {
 }
 .error-msg h1 {
 	color: rgba(203, 46, 102, 0.9);
-	border-bottom: 1px solid rgba(203, 46, 102, 0.9);;
 }
 .error-msg h2 {
 	border-bottom: 0px;

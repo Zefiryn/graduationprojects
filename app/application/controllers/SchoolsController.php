@@ -14,8 +14,7 @@ class SchoolsController extends Zefir_Controller_Action
 	public function indexAction()
 	{
 		$school = new Application_Model_Schools();
-		$schools = $school->getSchools();
-		unset($schools[0]);
+		$schools = $school->getSchools(true);
 		$this->view->schools = $schools;
 	}
 

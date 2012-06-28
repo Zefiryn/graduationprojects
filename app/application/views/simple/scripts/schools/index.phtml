@@ -14,32 +14,34 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('school_delete
 			title="<?php echo $this->translate('add_new_school');?>" />
 		</a>
 	</h1>
-
-	<br />
 	
-	
-	
-	
-	<?php foreach ($this->schools as $id => $school):?>
-	<p>
-		<span style="margin-right: 30px;">
-		<?php echo $school;?>
-		</span>
-		
-		<a href="<?php echo $this->url(array('id' => $id), 'edit_school');?>">
-			<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
-				alt="<?php echo $this->translate('edit');?>" 
-				title="<?php echo $this->translate('edit');?>" />
-		</a>
-		<a href="<?php echo $this->url(array('id' => $id), 'delete_school');?>"
-			class="delete"> 
-			<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
-				del="<?php echo $this->translate('delete');?>" 
-				alt="<?php echo $this->translate('delete');?>" 
-				title="<?php echo $this->translate('delete');?>" />
-		</a>
-	</p>
-	
+	<?php foreach ($this->schools as $type => $school_set):?>
+		<?php if (!empty($school_set)):?>
+		<h3><?php echo $this->translate($type)?></h3>
+		<table style="margin-bottom:30px;">
+			<?php foreach($school_set as $id => $school):?>
+			<tr>
+				<td style="margin-right: 30px;padding: 8px 0px;">
+				<?php echo $school;?>
+				</td>
+				<td>
+				<a href="<?php echo $this->url(array('id' => $id), 'edit_school');?>">
+					<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
+						alt="<?php echo $this->translate('edit');?>" 
+						title="<?php echo $this->translate('edit');?>" />
+				</a>
+				<a href="<?php echo $this->url(array('id' => $id), 'delete_school');?>"
+					class="delete"> 
+					<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
+						del="<?php echo $this->translate('delete');?>" 
+						alt="<?php echo $this->translate('delete');?>" 
+						title="<?php echo $this->translate('delete');?>" />
+				</a>
+				</td>
+			</tr>
+			<?php endforeach;?>
+		</table>
+		<?php endif;?>
 	<?php endforeach;?>
 
 </div>

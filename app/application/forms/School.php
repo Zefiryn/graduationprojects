@@ -23,17 +23,26 @@ class Application_Form_School extends Zefir_Form
 
 		$element = $this->createElement('text', 'school_name');
 		$element->setAttribs(array('class' => 'width2'))
-		->setLabel('school_name')
-		->setDecorators($this->_getZefirDecorators())
-		->setRequired(TRUE)
-		->addValidators(array(
-		new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
-		new Zend_Validate_StringLength(array('min' => 0, 'max' => 60)),
-		new Zefir_Validate_Unique(array(
-        							'table' => 'schools',
-        							'field' => 'school_name',
-									'id' => 'school_id'))
-		));
+						->setLabel('school_name')
+						->setDecorators($this->_getZefirDecorators())
+						->setRequired(TRUE)
+						->addValidators(array(
+								new Zend_Validate_Regex('/^['.$L.$N.$S.'\ ]*$/'),
+								new Zend_Validate_StringLength(array('min' => 0, 'max' => 60)),
+								new Zefir_Validate_Unique(array(
+						        							'table' => 'schools',
+						        							'field' => 'school_name',
+															'id' => 'school_id'))
+							));
+		$this->addElement($element);
+		
+		$country = array(null=> 'Please, select a country', 'pl' => 'Poland', 'sk' => 'Slovakia', 'cz' => 'Czech Republic', 'hu' => 'Hungary');
+		$element = $this->createElement('select', 'school_country');
+		$element->setAttribs(array('class' => 'width1', 'size' => 1))
+						->setLabel('country')
+						->setDecorators($this->_getStandardDecorators())
+						->setMultiOptions($country)
+						->setRequired(TRUE);
 		$this->addElement($element);
 
 		$this->_createCsrfElement();

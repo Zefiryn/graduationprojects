@@ -9,9 +9,6 @@
 	padding: 5px;
 	padding-bottom: 30px;
 }
-.news.news-new img {
-  background: rgb(203, 46, 102);
-}
 .news.news-new a:hover img {
   border-radius: 0px;
   -webkit-border-radius: 0px;
@@ -26,8 +23,6 @@
 .news.unpublished img.news_photo {
 	opacity: 0.2;
 }
-
-
 .news p {
 	font-family: Arial, Helvetica, sans-serif;
 	margin-top: 5px;
@@ -69,14 +64,12 @@
 	position: absolute;
 	margin: 0px 0px 0px 202px;
 	background: #fff;
-	border: 1px solid rgb(203, 46, 102);
 }
 
 .editNewsImage {
 	position: absolute;
 	margin: 0px 0px 0px 436px;
 	background: #fff;
-	border: 1px solid rgb(203, 46, 102);
 }
 
 .lead {
