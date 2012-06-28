@@ -49,8 +49,7 @@
 }
 
 .diploma_data,.application_data {
-	border: 0px solid;
-	color: #000;
+	scolor: #000;
 	margin: 2px 0px 2px 125px;
 	width: 345px;
 	padding: 5px 0px 0px 0px;

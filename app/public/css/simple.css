@@ -818,9 +818,9 @@ div.caption h3 {
 .ui-widget-content,.ui-widget-header {
   background-color: rgba(249, 249, 249, 1) !important;
   background-image: none !important;
-  color: #555 !important;
+  color: #555 !important;  
 }
-
+.ui-datepicker-header {border: 0px !important;} 
 .ui-dialog-titlebar {
   margin-bottom: 5px;
 }
@@ -877,7 +877,7 @@ div.caption h3 {
   font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
   font-size: 14px;
   text-align: left;
-  background: rgba(238, 238, 238, 0.5);
+  background: transparent;
 }
 
 .ui-state-hover {

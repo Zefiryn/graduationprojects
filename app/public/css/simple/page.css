@@ -34,9 +34,7 @@
 }
 
 .new_rule a:hover,.new_question a:hover {
-	background-color: #e4eeec;
 	border: 1px solid #96a9a6;
-	color: #27c1a4;
 	text-decoration: none;
 }
 

@@ -5,17 +5,17 @@
 menu a,menu a:visited,.menu_label {background-color: rgba(203, 46, 102, 0.9);}
 .tekst {border-top-color: rgb(203, 46, 102);}
 h3 {color: rgba(203, 46, 102, 0.9);border-bottom-color: rgba(203, 46, 102, 0.9);}
-a.lang-selected:hover {background-color: rgba(203, 46, 102, 0.7);}
+a.lang:hover,a.lang-selected:hover {background-color: rgba(203, 46, 102, 0.7);}
 .wiecej:hover {background-color: rgba(203, 46, 102, 0.7);}
 a.strona:hover {background-color: rgba(203, 46, 102, 0.7);}
 a.strona-selected:hover {background-color: rgba(203, 46, 102, 0.7);}
+.lang_choice li {background-color: rgba(203, 46, 102, 0.7);}
 p.flash {background: rgb(203, 46, 102);}
 p.img_hint {border: 1px solid rgba(203, 46, 102, 0.2);}
 .ui-state-highlight {border: 1px solid rgba(203, 46, 102, 0.8) !important;}
 a.path_end:link,a.path_end:visited {color: rgb(203, 46, 102);}
 .ui-widget-content,.ui-widget-header {border: 1px solid rgba(203, 46, 102, 0.5) !important;}
 .ui-state-default {border: 1px solid rgba(203, 46, 102, 0.5) !important;}
-.ui-datepicker-next,.ui-datepicker-prev {border: 1px solid rgba(203, 46, 102, 0.5) !important;}
 .ui-state-hover {border: 1px solid rgba(203, 46, 102, 0.3) !important;}
 div.juror_user_box {border: 1px solid rgba(203, 46, 102,1);}
 div.juror_box {border: 0px solid rgba(203, 46, 102,0.5);}
@@ -46,3 +46,4 @@ fieldset.fileFieldset {border: 1px solid rgba(203, 46, 102, 0.2);}
 .work_desc {border-top-color: rgba(203, 46, 102, 0.898);}
 .index_author a:hover {background-color: rgba(203, 46, 102, 0.2);}
 .removeProjectImage {border: 1px solid rgb(203, 46, 102);}
+.new_rule a:hover,.new_question a:hover {background-color: rgba(203, 46, 102, 0.1);color: rgba(203, 46, 102, 1);}
