@@ -1,19 +1,13 @@
-<?php echo $this->partial('partials/lang_menu.phtml',
-array('link' => 'editions/new', 'lang' => $this->lang));
-?>
-<div class="content">
+<div id="main">
 	<h1>
-
 	<?php echo $this->translate('new_edition');?></h1>
 	
 	
 	
-	
+	<?php if ($this->form->csrf->hasErrors()):?>
+	<div id="error-csrf" class="error-div">
+		<p class="error"><?php echo $this->translate('csrf_error')?></p>
+	</div>
+	<?php endif;?>
 	<?php echo $this->form;?>
 </div>
-
-<p class="spacer_small">&nbsp;</p>
-<p class="previous">
-	<a href="<?php echo $this->baseUrl('/admin');?>"> &lt; <?php echo $this->translate('previous_page');?>
-	</a>
-</p>
