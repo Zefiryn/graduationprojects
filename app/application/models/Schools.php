@@ -20,7 +20,7 @@ class Application_Model_Schools extends GP_Application_Model
 
 	public function getSchools()
 	{
-		$rowset = $this->getDbTable()->fetchAll();
+		$rowset = $this->getDbTable()->fetchAll($this->getDbTable()->select()->order('school_name ASC'));
 
 		$select = array(0 => 'choose_new_school');
 		foreach ($rowset as $row)
