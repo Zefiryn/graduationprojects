@@ -44,19 +44,6 @@ class Application_Form_Edition extends Zefir_Form
 		));
 		$this->addElement($element);
 
-		if ($this->_type == 'new')
-		{
-			$element = $this->createElement('checkbox', 'copy_regulation');
-			$element->setAttribs(array('class' => 'checkbox'))
-			->setLabel('copy_regulation', array('tag' => 'label'))
-			->setDecorators($this->_getStandardDecorators())
-			->setRequired(FALSE)
-			->addValidators(array(
-			new Zend_Validate_Regex('/^0|1$/')
-			));
-			$this->addElement($element);
-		}
-
 		$this->_createCsrfElement();
 		$this->_createStandardSubmit('submit');
 		$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')

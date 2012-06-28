@@ -5,8 +5,14 @@ array('title' => 'editions', 'delete_confirm' => $this->translate('edition_delet
 <div id="main">
 	<h1>
 
-	<?php echo $this->translate('editions');?></h1>
-	<br />
+	<?php echo $this->translate('editions');?>
+	<a href="<?php echo $this->baseUrl('/editions/new');?>"> <img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('add_new_edition');?>"
+			title="<?php echo $this->translate('add_new_edition');?>" />
+		</a>
+	</h1>
 	
 	
 	
