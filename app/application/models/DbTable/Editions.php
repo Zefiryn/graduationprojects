@@ -35,6 +35,12 @@ class Application_Model_DbTable_Editions extends Zefir_Application_Model_DbTable
 		
 		return $this->fetchRow($select);
 	}
+	
+	public function save(Application_Model_Editions $edition)
+	{
+		if ($edition->publish_results == null) $edition->publish_results = 0;
+		parent::save($edition);
+	}
 
 }
 
