@@ -54,11 +54,7 @@
 
 			<?php echo $this->translation($this->flash);?></p>
 		</div>
-		
-		
-		
-		
-      	<?php endif;?>
+  	<?php endif;?>
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
@@ -87,7 +83,7 @@
 	  	</div>
 
 		<div class="top-menu">
-		    <?php echo $this->partial('partials/current_edition.phtml', array('lang' => $this->lang, 'edition' => $this->edition, 'user' => $this->user));?>
+		    <?php echo $this->partial('partials/current_edition.phtml', array('lang' => $this->lang, 'edition' => $this->edition, 'user' => $this->user, 'resultsDate' => $this->resultsDate));?>
 		    <?php echo $this->partial('partials/previous_edition.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang));?>
 		    
 		    <?php if ($this->user->role == 'admin'):?>

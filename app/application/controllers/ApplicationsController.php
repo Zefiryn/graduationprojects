@@ -7,7 +7,7 @@ class ApplicationsController extends Zefir_Controller_Action
 		parent::init();
 		$this->view->css = array(
 			'simple/applications.css', 'simple/projects.css'
-		);
+		);		
 	}
 
 	public function indexAction()

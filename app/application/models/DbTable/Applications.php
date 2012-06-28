@@ -89,12 +89,13 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		$work_type = new Application_Model_WorkTypes();
 		$work_type_table = $work_type->getDbTable()->getTablename();
 		
-		 
+		$appSettings = Zend_Registry::get('appSettings');
 		$select = $this->select()
 					->setIntegrityCheck(FALSE)
 					->from(array('a' => $this->_name))
 					->join(array('u' => $user_table), 'a.user_id = u.user_id')
 					->join(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
+					->where('edition_id = ?', $appSettings->current_edition)
 					->order($sort);
 		
 		if ($stage)
