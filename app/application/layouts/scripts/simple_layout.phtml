@@ -21,7 +21,8 @@
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-en.js')
-				->headScript()->appendFile($this->baseUrl.'js/ckeditor/ckeditor.js');
+				//->headScript()->appendFile($this->baseUrl.'js/ckeditor/ckeditor.js')
+				->headScript()->appendFile($this->baseUrl.'js/tiny_mce/jquery.tinymce.js');
 									?>
 									
 	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror')
