@@ -67,17 +67,17 @@
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-style: normal;
-	color: rgba(0, 221, 179, 0.9);
+	color: rgba(203, 46, 102, 0.9);
 	margin-bottom: 6px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: rgba(0, 221, 179, 0.9);
+	border-bottom-color: rgba(203, 46, 102, 0.9);
 	padding: 0px 0px 6px 0px;
 	font-weight: bold;
 }
 
 .work_desc {
-	border-top-color: rgba(0, 221, 179, 0.898);
+	border-top-color: rgba(203, 46, 102, 0.898);
 	border-top-style: solid;
 	border-top-width: 1px;
 	display: block;
@@ -123,7 +123,7 @@
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
 	-o-transition: background-color 300ms;
-	background-color: rgba(0, 221, 179, 0.2);
+	background-color: rgba(203, 46, 102, 0.2);
 }
 
 .author {
@@ -164,7 +164,7 @@ form.diploma #diplomaFormRight {
 	position: absolute;
 	margin: 0px 0px 0px 436px;
 	background: #fff;
-	border: 1px solid rgb(0, 221, 179);
+	border: 1px solid rgb(203, 46, 102);
 	width: auto;
 	overflow: hidden;
 	height: 17px;

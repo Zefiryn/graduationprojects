@@ -63,10 +63,10 @@
 div.juror_user_box {
 	float: left;
 	width: auto;
-	border: 1px solid rgba(0,221,179,1);
+	border: 1px solid rgba(203, 46, 102,1);
 	margin: 5px;
 	padding: 3px;
-	background-color: rgba(0,221,179,0.05);
+	background-color: rgba(203, 46, 102,0.05);
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -87,12 +87,12 @@ div.juror_box {
 	float: left;
 	width: 300px;
 	min-height: 100px;
-	border: 0px solid rgba(0,221,179,0.5);
+	border: 0px solid rgba(203, 46, 102,0.5);
 	margin: 0px 30px 20px 0px;	
 }
 
 div.juror_header .box_juror_name {
-	background: rgb(0,221,179);	
+	background: rgb(203, 46, 102);	
 	font-weight: bold;
 	font-size: 16px;
 	padding: 4px 10px;
@@ -121,16 +121,16 @@ div.juror_header .box_juror_name a {
 
 
 div.juror_data {
-	border: 1px solid rgba(0,221,179,0.5);
+	border: 1px solid rgba(203, 46, 102,0.5);
 	margin: 0px;
 	min-height: inherit;
 	overflow: visible;
 }
 .juror_box_area {
-	background-color: rgba(0,221,179,0.1);	
+	background-color: rgba(203, 46, 102,0.1);	
 }
 .juror_box_area_hover {
-	background-color: rgba(0,221,179,0.05);	
+	background-color: rgba(203, 46, 102,0.05);	
 }
 
 #filter_options {
@@ -155,9 +155,9 @@ div.filter {
 	overflow: hidden;
 }
 .selectionOption p {
-	border-top: 1px solid rgba(0,221,179,0.4);
-	border-left: 1px solid rgba(0,221,179,0.4);
-	border-right: 1px solid rgba(0,221,179,0.4);
+	border-top: 1px solid rgba(203, 46, 102,0.4);
+	border-left: 1px solid rgba(203, 46, 102,0.4);
+	border-right: 1px solid rgba(203, 46, 102,0.4);
 	padding: 5px 5px;
 	margin: 0px;
 	background-color: #f5f5f5;
@@ -182,7 +182,7 @@ div.filter {
 	-moz-border-radius-bottomleft: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
-	border-bottom: 1px solid rgba(0,221,179,0.4);
+	border-bottom: 1px solid rgba(203, 46, 102,0.4);
 }
 
 .selectionOption ul {
@@ -200,8 +200,8 @@ div.filter {
 	list-style-type: none;
 	padding: 4px;
 	cursor: pointer;
-	border-left: 1px solid rgba(0,221,179,0.4);
-	border-right: 1px solid rgba(0,221,179,0.4);
+	border-left: 1px solid rgba(203, 46, 102,0.4);
+	border-right: 1px solid rgba(203, 46, 102,0.4);
 }
 .selectionOption li:hover {
 	background-color: #000 !important;
@@ -217,7 +217,7 @@ div.filter {
 	-moz-border-radius-bottomleft: 5px;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
-	border-bottom: 1px solid rgba(0,221,179,0.4);
+	border-bottom: 1px solid rgba(203, 46, 102,0.4);
 }
 .selectionOption:hover li.checked {
 	border-radius: 0px;
@@ -256,7 +256,7 @@ tr.header th,tr td {
 }
 
 tr.header th {
-	background-color: rgba(0, 221, 179, 0.8);
+	background-color: rgba(203, 46, 102, 0.8);
 	padding: 10px 2px !important;
 	text-align: left;
 	color: #000;
@@ -282,11 +282,11 @@ td.admin_column {
 table.stats {
 	width: 300px;
 	margin: 10px 0px 30px 0px;
-	border: 0px solid #3c9;
+	border: 0px solid rgb(203, 46, 102);
 	border-collapse: collapse;
 }
 table.stats tr.header th {
-	background-color: rgba(0, 221, 179, 0.9);
+	background-color: rgba(203, 46, 102, 0.9);
 }
 table.stats tr {
 	margin: 5px;	
@@ -324,7 +324,7 @@ div.application_votes p{
 }
 
 div.vote.application_data {
-	border-bottom: 3px double rgba(0, 221, 179, 0.9);;
+	border-bottom: 3px double rgba(203, 46, 102, 0.9);;
 	padding: 0px 0px 10px 0px;	
 	margin-top: 20px;
 }
@@ -385,7 +385,7 @@ span.juror_name {
 }
 
 span.stage_choice {
-	background: rgba(0,221,179,1);
+	background: rgba(203, 46, 102,1);
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -478,7 +478,7 @@ span.dispute.info {
 }
 .image_move {
 	display: block;
-	border: 1px solid rgba(0, 221, 179, 0.8);
+	border: 1px solid rgba(203, 46, 102, 0.8);
 	background: rgba(50, 50, 50, 0.1);
 	overflow: hidden;
 }
@@ -487,14 +487,14 @@ span.dispute.info {
 	position: absolute;
 	margin: 0px 0px 0px 442px;
 	background: #fff;
-	border: 1px solid rgb(0, 221, 179);
+	border: 1px solid rgb(203, 46, 102);
 }
 
 .removeProjectImage {
 	position: absolute;
 	margin: 0px 0px 0px 442px;
 	background: #fff;
-	border: 1px solid rgb(0, 221, 179);
+	border: 1px solid rgb(203, 46, 102);
 	width: auto;
 	overflow: hidden;
 	height: 17px;
@@ -503,7 +503,7 @@ span.dispute.info {
 a.index_application_files:link, a.index_application_files:visited {
 	display: block;
 	float: left;
-	border: 1px solid #3c9;
+	border: 1px solid rgb(203, 46, 102);
 	width: 20px;
 	height: 20px;
 	margin: 3px;

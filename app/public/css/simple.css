@@ -6,13 +6,13 @@
 }
 
 ::-moz-selection {
-	background: rgba(0, 221, 179, 0.8);
+	background: rgba(203, 46, 102, 0.8);
 	color: #222;
 	text-shadow: none;
 }
 
 ::selection {
-	background: rgba(0, 221, 179, 0.8);
+	background: rgba(203, 46, 102, 0.8);
 	color: #222;
 	text-shadow: none;
 }
@@ -129,7 +129,7 @@ menu a,menu a:visited,.menu_label {
 	-webkit-font-smoothing: antialiased;
 	font-weight: bold;
 	text-decoration: none;
-	background-color: rgba(0, 221, 179, 0.9);
+	background-color: rgba(203, 46, 102, 0.9);
 	height: 28px;
 	line-height: 29px;
 	color: #fff;
@@ -273,7 +273,7 @@ menu menu a:last-child {
 	display: block;
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: #3C9;
+	border-top-color: rgb(203, 46, 102);
 }
 
 a img {
@@ -319,18 +319,18 @@ h2 a:hover {
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
 	-o-transition: background-color 300ms;
-	background-color: rgba(0, 221, 179, 0.2);
+	background-color: rgba(203, 46, 102, 0.2);
 }
 
 h3 {
 	font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-style: normal;
-	color: rgba(0, 221, 179, 0.9);
+	color: rgba(203, 46, 102, 0.9);
 	margin-bottom: 6px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: rgba(0, 221, 179, 0.9);
+	border-bottom-color: rgba(203, 46, 102, 0.9);
 	padding-bottom: 2px;
 }
 
@@ -419,7 +419,7 @@ a.lang {
 }
 
 a.lang:hover {
-	background-color: rgba(0, 221, 179, 0.7);
+	background-color: rgba(203, 46, 102, 0.7);
 	color: #000;
 	text-decoration: none;
 }
@@ -435,7 +435,7 @@ a.lang-selected {
 }
 
 a.lang-selected:hover {
-	background-color: rgba(0, 221, 179, 0.7);
+	background-color: rgba(203, 46, 102, 0.7);
 	color: #FFF;
 }
 
@@ -458,7 +458,7 @@ a.lang-selected:hover {
 }
 
 .wiecej:hover {
-	background-color: rgba(0, 221, 179, 0.7);
+	background-color: rgba(203, 46, 102, 0.7);
 	-o-transition: background-color 300ms;
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
@@ -601,7 +601,7 @@ a.strona {
 }
 
 a.strona:hover {
-	background-color: rgba(0, 221, 179, 0.7);
+	background-color: rgba(203, 46, 102, 0.7);
 }
 
 a.strona-selected {
@@ -613,7 +613,7 @@ a.strona-selected {
 }
 
 a.strona-selected:hover {
-	background-color: rgba(0, 221, 179, 0.7);
+	background-color: rgba(203, 46, 102, 0.7);
 }
 
 .lang_choice {
@@ -688,7 +688,7 @@ p.img_hint {
 	font-family: "Trebuchet MS", sans-serif;
 	background: #fafafa;
 	padding: 3px;
-	border: 1px solid rgba(0, 221, 179, 0.2);
+	border: 1px solid rgba(203, 46, 102, 0.2);
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	box-shadow: 3px 3px 10px 0px rgb(238, 238, 238);
@@ -715,7 +715,7 @@ span.admin {
 
 .ui-state-highlight {
 	background: rgba(254, 254, 254, 0.5) !important;
-	border: 1px solid rgba(0, 221, 179, 0.8) !important;
+	border: 1px solid rgba(203, 46, 102, 0.8) !important;
 }
 
 .column-left,.column-right {
@@ -753,7 +753,7 @@ nav.path {
 
 a.path_end:link,a.path_end:visited {
 	font-weight: normal;
-	color: #3c9;
+	color: rgb(203, 46, 102);
 }
 
 .clearfix {
@@ -839,7 +839,7 @@ div.caption h3 {
 
 .ui-widget-content,.ui-widget-header {
 	background-color: rgba(249, 249, 249, 1) !important;
-	border: 1px solid rgba(0, 221, 179, 0.5) !important;
+	border: 1px solid rgba(203, 46, 102, 0.5) !important;
 	background-image: none !important;
 	color: #555 !important;
 }
@@ -857,7 +857,7 @@ div.caption h3 {
 }
 
 .ui-state-default {
-	border: 1px solid rgba(0, 221, 179, 0.5) !important;
+	border: 1px solid rgba(203, 46, 102, 0.5) !important;
 	background-color: rgb(245, 245, 245) !important;
 	background-image: none !important;
 	color: #555 !important;
@@ -874,7 +874,7 @@ div.caption h3 {
 }
 
 .ui-datepicker-next,.ui-datepicker-prev {
-	border: 1px solid rgba(0, 221, 179, 0.5) !important;
+	border: 1px solid rgba(203, 46, 102, 0.5) !important;
 }
 
 .ui-button-text-only, .ui-button-text {
@@ -909,7 +909,7 @@ div.caption h3 {
 }
 
 .ui-state-hover {
-	border: 1px solid rgba(0, 221, 179, 0.3) !important;
+	border: 1px solid rgba(203, 46, 102, 0.3) !important;
 	background: #000 !important;
 	color: #fff !important;
 }
