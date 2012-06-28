@@ -12,6 +12,11 @@
 .news.news-new img {
   background: rgb(203, 46, 102);
 }
+.news.news-new a:hover img {
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+}
 .news.unpublished {
 	background: rgba(245,245,245,0.4);
 }
