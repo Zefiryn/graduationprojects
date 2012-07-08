@@ -52,7 +52,10 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 				<span class="country">(<?php echo strtoupper($this->application->country);?>)</span>
 			</span>
 		</p>
-		
+		<?php if ($this->application->work_site != null):?>
+		<p class="application_field"><?php echo strtolower($this->translate('work_site'));?></p>
+		<p class="application_data"><a href="<?php echo $this->application->work_site;?>"><?php echo $this->application->work_site;?></a></p>
+		<?php endif;?>
 		<?php if ($this->application->user->email != null):?>
 		<p class="application_field"><?php echo strtolower($this->translate('e-mail'));?></p>
 		<p class="application_data"><?php echo $this->application->user->email;?></p>
