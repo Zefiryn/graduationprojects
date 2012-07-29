@@ -10,6 +10,7 @@ class Application_Model_Applications extends GP_Application_Model
 	public $department;
 	public $degree_id;
 	public $work_subject;
+	public $work_site;
 	public $work_type_id;
 	public $work_desc;
 	public $supervisor;

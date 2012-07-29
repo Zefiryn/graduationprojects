@@ -49,8 +49,7 @@
 }
 
 .diploma_data,.application_data {
-	border: 0px solid;
-	color: #000;
+	scolor: #000;
 	margin: 2px 0px 2px 125px;
 	width: 345px;
 	padding: 5px 0px 0px 0px;
@@ -67,17 +66,14 @@
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	font-style: normal;
-	color: rgba(0, 221, 179, 0.9);
 	margin-bottom: 6px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: rgba(0, 221, 179, 0.9);
 	padding: 0px 0px 6px 0px;
 	font-weight: bold;
 }
 
 .work_desc {
-	border-top-color: rgba(0, 221, 179, 0.898);
 	border-top-style: solid;
 	border-top-width: 1px;
 	display: block;
@@ -123,7 +119,6 @@
 	-webkit-transition: background-color 300ms;
 	-moz-transition: background-color 300ms;
 	-o-transition: background-color 300ms;
-	background-color: rgba(0, 221, 179, 0.2);
 }
 
 .author {
@@ -164,7 +159,6 @@ form.diploma #diplomaFormRight {
 	position: absolute;
 	margin: 0px 0px 0px 436px;
 	background: #fff;
-	border: 1px solid rgb(0, 221, 179);
 	width: auto;
 	overflow: hidden;
 	height: 17px;

@@ -27,8 +27,7 @@ p.shadow-right {
 	background-position: right top;
 }
 .error-msg h1 {
-	color: rgba(0, 221, 179, 0.9);
-	border-bottom: 1px solid rgba(0, 221, 179, 0.9);;
+	color: rgba(203, 46, 102, 0.9);
 }
 .error-msg h2 {
 	border-bottom: 0px;

@@ -117,7 +117,7 @@ class EditionsController extends Zefir_Controller_Action
 					unset($results['hasError']);
 					foreach($results as $result)
 					{
-						$result['object']->delete();
+						if (isset($result['object'])) $result['object']->delete();
 					}
 					$results['hasError'] = true;
 				}

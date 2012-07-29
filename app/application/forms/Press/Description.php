@@ -27,7 +27,7 @@ class Application_Form_Press_Description extends Zefir_Form
 
 		$element= $this->createElement('textarea', 'element__desscription');
 		$element->setLabel('press_description')
-				->setAttribs(array('class' => 'width1 ckeditor'))
+				->setAttribs(array('class' => 'width1 tinymce'))
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)
 				->addValidators(array(

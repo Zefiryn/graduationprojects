@@ -8,19 +8,21 @@
 		
 	<?php echo $this->headTitle();?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/jquery-ui-1.8.16.custom.css'); ?>
-	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>	
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'/colors.css'); ?>
+	<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$this->template.'.css'); ?>
 	<?php $this->headLink()->appendStylesheet($this->baseUrl.'js/fancybox/jquery.fancybox-1.3.1.css'); ?>
 	<?php if (isset($this->css) && is_array($this->css)):?>
 		<?php foreach($this->css as $file):?>
 		<?php $this->headLink()->appendStylesheet($this->baseUrl.'css/'.$file); ?>
 		<?php endforeach;?>
-	<?php endif;?>
+	<?php endif;?>	
 	<?php echo $this->headLink();?>
 	<?php $this->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-pl.js') 
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-cs.js') 
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-sk.js')
 				->headScript()->appendFile($this->baseUrl.'js/i18n/jquery.ui.datepicker-en.js')
-				->headScript()->appendFile($this->baseUrl.'js/ckeditor/ckeditor.js');
+				//->headScript()->appendFile($this->baseUrl.'js/ckeditor/ckeditor.js')
+				->headScript()->appendFile($this->baseUrl.'js/tiny_mce/jquery.tinymce.js');
 									?>
 									
 	<?php if ($this->user->role == 'admin' || $this->user->role == 'juror')
@@ -54,33 +56,14 @@
 
 			<?php echo $this->translation($this->flash);?></p>
 		</div>
-		
-		
-		
-		
-      	<?php endif;?>
+  	<?php endif;?>
 	  	<div class="header">
 		    <div class="logo">
 			    <a href="<?php echo $this->url(array('lang' => $this->lang), 'main');?>">
-			    	<?php if ($this->user->_role != 'admin' && $this->user->_role != 'juror'):?>
-			    	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="128" height="128" id="G_logo">
-						<param name="movie" value="<?php echo $this->baseUrl('img/simple/logo.swf');?>" />
-						<!--[if !IE]>-->
-						<object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl('img/simple/logo.swf');?>" width="128" height="128">
-						<!--<![endif]-->
-							<a href="http://graduationprojects.eu">
-								<img src="<?php echo $this->baseUrl('img/simple/logo-alt.png');?>" alt="Graduation Projects logo" />
-							</a>
-						<!--[if !IE]>-->
-						</object>
-						<!--<![endif]-->
-					</object>
-					<?php else:?>
-					<a href="http://graduationprojects.eu">
-						<img src="<?php echo $this->baseUrl('img/simple/logo-alt.png');?>" alt="Graduation Projects logo" />
-					</a>
-					<?php endif;?>
-			    	<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"
+						<a href="http://graduationprojects.eu">
+							<img src="<?php echo $this->baseUrl('img/simple/logo-alt.png');?>" alt="Graduation Projects logo" />
+						</a>
+		    		<img src="<?php echo $this->baseUrl('img/simple/graduation-projects-eu_logo_'.$this->lang.'.png');?>"
 			    		alt="Gradutation Project Logo"/>
 			    </a>
 			</div>
@@ -105,11 +88,7 @@
 		<p class="hr"><span>&nbsp;</span></p>
 		
 	</header>
-	
-	
-	
-	
-	
+		
 	<?php if (isset($this->path)):?>
 	<nav class="path">
 	<?php foreach($this->path as $i => $elem):?>
@@ -135,7 +114,7 @@
 			
 			<a href="http://www.2plus3d.pl"><img src="<?php echo $this->baseUrl('img/simple/2plus3d_logo.png');?>" alt="2+3D quaterly" title="2+3D quaterly" /></a>
 			
-			<img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977" title="1977" />
+			<a href="http://kupe.1977.sk"><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977" title="1977" /></a>
 			
 			<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/zamek_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
 			

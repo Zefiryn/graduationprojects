@@ -44,13 +44,6 @@ input,textarea,select {
 	padding: 0px 3px 0px 5px;
 }
 
-input:focus,textarea:focus,select:focus {
-	border: 1px solid #00DDB3;
-	-moz-box-shadow: inset 0 0 6px #00DDB3;
-	-webkit-box-shadow: inset 0 0 6px #00DDB3;
-	box-shadow: inset 0 0 4px #00DDB3;
-}
-
 input[type="file"],select {
 	width: 100%;
 	border: 0px;
@@ -174,7 +167,6 @@ fieldset.fileFieldset {
 	width: 435px;
 	margin-left: 32px;
 	text-align: right;
-	border: 1px solid rgba(0, 221, 179, 0.2);
 }
 
 fieldset.submit {

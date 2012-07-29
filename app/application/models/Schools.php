@@ -4,6 +4,7 @@ class Application_Model_Schools extends GP_Application_Model
 {
 	public $school_id;
 	public $school_name;
+	public $school_country;
 	protected $applications;
 
 	protected $_dbTableModelName = 'Application_Model_DbTable_Schools';
@@ -18,16 +19,26 @@ class Application_Model_Schools extends GP_Application_Model
 		return $this->school_name;
 	}
 
-	public function getSchools()
+	public function getSchools($with_country = false)
 	{
-		$rowset = $this->getDbTable()->fetchAll();
+		if ($with_country) 
+		{
+			$query = $this->getDbTable()->select()->order(array('school_country ASC', 'school_name ASC'));
+		}
+		else 
+		{
+			$query= $this->getDbTable()->select()->order('school_name ASC');
+		} 
+			
+		$rowset = $this->getDbTable()->fetchAll($query);
 
-		$select = array(0 => 'choose_new_school');
+		$select = array('unknown' => array(), 'pl' => array(), 'sk' => array(), 'cz' => array(), 'hu' => array());
+		if (!$with_country) $select = array(0 => 'choose_new_school');
 		foreach ($rowset as $row)
 		{
-			$select[$row->school_id] = $row->school_name;
+			$country = $row->school_country != null ? $row->school_country : 'unknown'; 
+			$with_country ? $select[$country][$row->school_id] = $row->school_name : $select[$row->school_id] = $row->school_name;
 		}
-
 		return $select;
 	}
 
@@ -62,8 +73,10 @@ class Application_Model_Schools extends GP_Application_Model
 
 	public function prepareFormArray()
 	{
-		$data = array(	'school_id' => $this->school_id,
-						'school_name' => $this->school_name);
+		$data = array(	
+						'school_id' => $this->school_id,
+						'school_name' => $this->school_name,
+						'school_country' => $this->school_country);
 
 		return $data;
 	}

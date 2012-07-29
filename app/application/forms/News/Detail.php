@@ -44,7 +44,7 @@ class Application_Form_News_Detail extends Zefir_Form
 
 		$element = $this->createElement('textarea', 'news_text');
 		$element->setLabel('news_text')
-		->setAttribs(array('class' => 'width1 wide ckeditor'))
+		->setAttribs(array('class' => 'width1 wide tinymce'))
 		->setDecorators($this->_getZefirDecorators());
 		$this->addElement($element);
 
