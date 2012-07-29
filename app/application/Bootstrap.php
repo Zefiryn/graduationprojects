@@ -250,7 +250,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		//set the js files
 		$options = Zend_Registry::get('options');
 		$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery.easing.1.3.js');
-		$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-ui-1.8.16.custom.min.js');
+		$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-ui.min.js');
 		$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/jquery-1.7.1.min.js');
 		$view->headScript()->prependFile($options['resources']['frontController']['baseUrl'].'js/console.js');		
 		$view->headScript()->appendFile($options['resources']['frontController']['baseUrl'].'js/fancybox/jquery.fancybox-1.3.1.pack.js');

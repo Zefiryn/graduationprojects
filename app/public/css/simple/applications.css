@@ -69,6 +69,7 @@ div.juror_user_box {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	cursor: move;
+	background: #fff;
 }
 
 div.juror_user_box p {
