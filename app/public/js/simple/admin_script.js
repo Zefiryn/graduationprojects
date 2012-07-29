@@ -671,11 +671,18 @@ function voteSettings()
 		
 	});
 	
-	$('div.juror_user_box').liveDraggable({
+	$('div.juror_user_box').draggable({
 		revert: "invalid",
-		cursorAt: { cursor: "move", top: 5 },
+		cursor: "move", 
+		cursorAt: { top: 5 },
+		scroll: true,
 		zIndex: 100,
-		stack: '.juror_box'
+		stack: '.juror_box',
+		helper: 'clone',
+		appendTo: 'body',
+		start: function(event, ui) {
+			$(this).addClass('drag-start');
+		}
 	});
 	$('div.juror_box div.juror_data').droppable({
 		activeClass: "juror_box_area",
@@ -686,7 +693,7 @@ function voteSettings()
 			//$('#unassigned_jurors').append(ui.helper);
 		},
 		drop: function(event, ui){
-			addUserToJuror(ui.helper, $(this));
+			addUserToJuror(ui.draggable, $(this));			
 		}
 	});
 }
