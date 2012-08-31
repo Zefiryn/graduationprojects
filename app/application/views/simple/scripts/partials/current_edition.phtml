@@ -20,8 +20,6 @@
 			
 			<?php if ($this->user->role != 'user'):?>			 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_application_new')?>"><?php echo $this->translate('form_link');?></a> 
-			<?php else: ?>
-			<a href="<?php echo $this->url(array('id' => $this->user->applications[0]->application_id), 'edit_application')?>"><?php echo $this->translate('edit_application');?></a>
 			<?php endif; ?>
 
 			<a href="<?php echo $this->url(array('lang' => $this->lang), 'lang_faq')?>"><?php echo $this->translate('faq_link');?></a> 

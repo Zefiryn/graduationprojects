@@ -28,6 +28,17 @@ CREATE TABLE languages (
 	PRIMARY KEY (lang_id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+CREATE TABLE pages (
+  page_id smallint(6) NOT NULL AUTO_INCREMENT,
+  page_name varchar(100) NOT NULL,
+  lang_id int NOT NULL,
+  content TEXT NOT NULL,
+  PRIMARY KEY (page_id),
+  FOREIGN KEY(lang_id)
+    REFERENCES languages(lang_id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 CREATE TABLE degrees(
 	degree_id smallint(6) NOT NULL AUTO_INCREMENT,
 	degree_name char(13) NOT NULL,
