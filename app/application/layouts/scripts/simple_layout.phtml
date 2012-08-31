@@ -81,6 +81,10 @@
 		    <?php echo $this->partial('partials/juror_panel.phtml', array('edition_list' => $this->edition_list, 'edition' => $this->edition, 'lang' => $this->lang, 'user' => $this->user));?>
 		    <?php endif;?>
 		    
+		    <?php if ($this->user->role == 'user'):?>
+		    <?php echo $this->partial('partials/user_panel.phtml', array('lang' => $this->lang, 'user' => $this->user));?>
+		    <?php endif;?>
+		    
 		    <?php echo $this->partial('partials/lang_menu.phtml', array('link' => $this->link, 'lang' => $this->lang));?>
 		    
 		</div>

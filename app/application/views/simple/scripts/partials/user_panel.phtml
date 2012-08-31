@@ -1,0 +1,16 @@
+<nav>
+	<menu>
+		<p class="menu_label">
+		<?php echo $this->translate('user_panel')?>
+			<span>&rsaquo;</span>
+		</p>
+		<menu>		
+			<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'user')?>">
+				<?php echo $this->translate('my_account');?>
+			</a>			
+			<a href="<?php echo $this->url(array('id' => $this->user->applications[0]->application_id), 'edit_application')?>">
+				<?php echo $this->translate('edit_application');?>
+			</a>
+		</menu>
+	</menu>
+</nav>
