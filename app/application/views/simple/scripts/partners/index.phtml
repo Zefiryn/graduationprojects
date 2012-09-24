@@ -1,0 +1,38 @@
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'partners', 'delete_confirm' => $this->translate('partner_delete_confirm')));
+?>
+
+<div id="main">
+	<h1><?php echo $this->translate('partners');?>
+		<a href="<?php echo $this->url(array(), 'new_partner');?>"> 
+		<img
+			src="/img/simple/empty.png"
+			class="ui-icon ui-icon-plusthick no-block"
+			alt="<?php echo $this->translate('new_partner');?>"
+			title="<?php echo $this->translate('new_partner');?>" />
+		</a>
+	</h1>
+	
+	<?php foreach ($this->partners as $id => $partner):?>
+	<p style="width: 150px;">
+		<span class="admin">
+			<a href="<?php echo $this->url(array('id' => $id), 'edit_partner');?>">
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
+					alt="<?php echo $this->translate('edit');?>" 
+					title="<?php echo $this->translate('edit');?>" />
+			</a>
+			<a href="<?php echo $this->url(array('id' => $id), 'delete_partner');?>"
+				class="delete"> 
+				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
+					del="<?php echo $this->translate('delete');?>" 
+					alt="<?php echo $this->translate('delete');?>" 
+					title="<?php echo $this->translate('delete');?>" />
+			</a>
+		</span>
+		
+		<span><?php echo $partner->partner_name;?></span>
+	</p>
+	
+	<?php endforeach;?>
+
+</div>

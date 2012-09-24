@@ -1,7 +1,16 @@
-DROP TABLE IF EXISTS about, jurors, news_files, news_details, news, settings,
+DROP TABLE IF EXISTS partners, about, jurors, news_files, news_details, news, settings,
 template_settings, diploma_files, result_files, diploma_fields, result_fields, diplomas, results,
 fields, files, applications, schools, users, faq, regulations, localizations, captions, 
 work_types, degrees, languages, editions;  
+
+CREATE TABLE partners (
+  partner_id smallint(6) NOT NULL AUTO_INCREMENT,
+  partner_name varchar(100) NOT NULL,
+  partner_link varchar (400),
+  partner_type ENUM('organizer', 'media'),
+  partner_file varchar(100) NOT NULL,
+  PRIMARY KEY (partner_id)  
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE editions (
 	edition_id smallint(6) NOT NULL AUTO_INCREMENT,
