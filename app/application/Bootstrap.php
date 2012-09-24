@@ -141,6 +141,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$acl->addResource(new Zend_Acl_Resource('stages'));
 		$acl->addResource(new Zend_Acl_Resource('load'));
 		$acl->addResource(new Zend_Acl_Resource('press'));
+		$acl->addResource(new Zend_Acl_Resource('partners'));
 
 		//clearance
 		$acl->allow(null, array('error', 'index', 'load'), null);
@@ -197,6 +198,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		);
 		Zend_Controller_Action_HelperBroker::addHelper(
 		new GP_Action_Helper_AppSettings()
+		);
+		Zend_Controller_Action_HelperBroker::addHelper(
+				new GP_Action_Helper_Partners()
 		);
 	}
 

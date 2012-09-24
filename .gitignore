@@ -11,6 +11,7 @@ app/public/assets/images/*
 app/public/assets/editions/*
 app/public/assets/captcha/*
 app/public/assets/press/*
+app/public/assets/partners/*
 app/public/.htaccess
 app/cache/*
 app/log/*.log            

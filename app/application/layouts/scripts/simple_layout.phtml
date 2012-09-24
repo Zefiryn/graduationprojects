@@ -1,3 +1,4 @@
+<?php $options = Zend_Registry::get('options');?>
 <?php echo $this->doctype('HTML5') ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -112,28 +113,19 @@
 	<div id="footer">
 		<p class="media-partners">
 			<span class="footer-desc"><?php echo $this->translate('organizers');?></span><br />
-			<a href="http://www.typo.cz"><img src="<?php echo $this->baseUrl('img/simple/typo_logo.png');?>" alt="Typo magazine" title="Typo magazine" /></a>
-			
-			<a href="http://plusminus.hu"><img src="<?php echo $this->baseUrl('img/simple/plus-minus_logo.png');?>" alt="PlusMinus" title="PlusMinus" /></a>
-			
-			<a href="http://www.2plus3d.pl"><img src="<?php echo $this->baseUrl('img/simple/2plus3d_logo.png');?>" alt="2+3D quaterly" title="2+3D quaterly" /></a>
-			
-			<a href="http://kupe.1977.sk"><img src="<?php echo $this->baseUrl('img/simple/1977_logo.png');?>" alt="1977" title="1977" /></a>
-			
-			<a href="http://www.zamekcieszyn.pl"><img src="<?php echo $this->baseUrl('img/simple/zamek_logo.png');?>" alt="Zamek Cieszyn" title="Zamek Cieszyn" /></a>
-			
-			<a href="http://visegradfund.org" id="fund"><img src="<?php echo $this->baseUrl('img/simple/visegrad-fund_logo.png');?>" alt="Visegrad Fund" title="Visegrad Fund"></a>
+			<?php foreach($this->organizers as $partner):?>
+			<a href="<?php echo $partner->getLink();?>" id="<?php echo str_replace(' ', '_',strtolower($partner->partner_name));?>"><img src="<?php echo $this->baseUrl($options['upload']['partners'].'/'.$partner->getImage('small'));?>" alt="<?php echo $partner->partner_name?>" title="<?php echo $partner->partner_name?>" />
+			</a>
+			<?php endforeach;?>			
 			
 			<span class="organizers_info"><?php echo $this->translate('project_organized_by');?></span>
 		</p>
 		<p class="media-partners">
 			<span class="footer-desc"><?php echo $this->translate('media_partners');?></span><br />
-			<a href="http://designeast.eu" title="designeast.eu">
-				<img src="<?php echo $this->baseUrl('/img/simple/designeast_logo.png');?>" alt="designeast.eu" title="designeast.eu" />
+			<?php foreach($this->media as $partner):?>
+			<a href="<?php echo $partner->getLink();?>"><img src="<?php echo $this->baseUrl($options['upload']['partners'].'/'.$partner->getImage('small'));?>" alt="<?php echo $partner->partner_name?>" title="<?php echo $partner->partner_name?>" />
 			</a>
-			<a href="http://www.sdc.sk" title="designum">
-				<img src="<?php echo $this->baseUrl('/img/simple/designum_logo.png');?>" alt="designum" title="designum" />
-			</a>
+			<?php endforeach;?>
 		</p>
 		
 		<p class="creator">
