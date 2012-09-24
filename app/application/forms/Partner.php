@@ -23,7 +23,7 @@ class Application_Form_Partner extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'partner_name');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 			->setLabel('partner_name')
 			->setDecorators($this->_getZefirDecorators())
 			->setRequired(TRUE)
@@ -34,7 +34,7 @@ class Application_Form_Partner extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('text', 'partner_link');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 			->setLabel('partner_link')
 			->setDecorators($this->_getZefirDecorators())
 			->setRequired(TRUE)
@@ -44,7 +44,7 @@ class Application_Form_Partner extends Zefir_Form
 		$this->addElement($element);
 		
 		$element = $this->createElement('select', 'partner_type');
-		$element->setAttribs(array('class' => 'width2'))
+		$element->setAttribs(array('class' => 'width1'))
 			->setLabel('partner_type')
 			->setDecorators($this->_getStandardDecorators())
 			->setMultiOptions(array('organizer' => 'organizer', 'media' => 'media'));
@@ -58,7 +58,7 @@ class Application_Form_Partner extends Zefir_Form
 		$options = Zend_Registry::get('options');
 		$element = new Zend_Form_Element_File('partner_file');
 		$element->setDestination(APPLICATION_PATH.'/../public'.$options['upload']['cache'])
-						->setAttribs(array('class' => 'file width2'))
+						->setAttribs(array('class' => 'file width1'))
 						->setLabel('partner_logo')
 						->setRequired(true)
 						->setAllowEmpty(TRUE)
