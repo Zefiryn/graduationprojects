@@ -204,6 +204,10 @@ select.width1 {
 input.file.width2 {
   width: 270px !important;
 }
+input.file.width1 {
+  width: 450px !important;
+}
+
 
 textarea.error+div.error-div {
 	margin-top: -4px;
