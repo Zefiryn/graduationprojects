@@ -24,7 +24,9 @@
 		<a 	class="form_file"
 			href="<?php echo $this->baseUrl('/assets/images/'.$file->path);?>"
 			rel="cache" >
+			<?php if ($file->getImage('thumb')):?>
 			<img src="<?php echo $this->baseUrl('assets/images/'.$file->getImage('thumb'))?>" alt="" />
+			<?php endif;?>
 		</a>
 		<?php if (++$i % 2 == 0):?><p class="clearfix"></p><?php endif;?>
 		</div>
