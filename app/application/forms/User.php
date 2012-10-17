@@ -42,8 +42,9 @@ class Application_Form_User extends Zefir_Form
 			->setLabel('nick')
 			->setDecorators($this->_getZefirDecorators())
 			->setRequired(TRUE)
+			->setDescription('user_form_nick_field_description')
 			->addValidators(array(
-				new Zend_Validate_Regex('/^['.$L.$N.'\-_!@#$%\^&*\(\)]+$/'),
+				new Zend_Validate_Regex('/^['.$L.$N.'\-_]+$/'),
 				new Zend_Validate_StringLength(array('min' => 3, 'max' => 50)),
 				new Zefir_Validate_Unique(array(
 		        							'table' => 'users',
