@@ -8,6 +8,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 	public $surname;
 	public $slug;
 	public $email;
+	public $show_email;
 	public $country;
 	public $degree_id;
 	public $work_type_id;

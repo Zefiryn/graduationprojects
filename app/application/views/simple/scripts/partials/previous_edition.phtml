@@ -7,7 +7,7 @@
 		<menu>
 			
 		<?php foreach ($this->edition_list as $edition):?>
-			<?php if ($edition != $this->edition):?>
+			<?php if ($edition != $this->edition && $edition < $this->edition):?>
 			<a href="<?php echo $this->url(array('edition' => $edition, 'lang' => $this->lang), 'lang_projects');?>"><?php echo $edition;?></a>
 			<?php endif;?> 
 			<?php endforeach;?>

@@ -158,6 +158,7 @@ class Application_Model_Applications extends GP_Application_Model
 				'school' => $this->school->school_name,
 				'department' => $this->department,
 				'degree_id' => $this->degree_id,
+				'work_site' => $this->work_site,
 				'work_subject' => $this->work_subject,
 				'work_type_id' => $this->work_type_id,
 				'work_desc' => $this->work_desc,
@@ -188,6 +189,7 @@ class Application_Model_Applications extends GP_Application_Model
 		$data['name'] = $this->__get('user')->name;
 		$data['surname'] = $this->__get('user')->surname;
 		$data['email'] = $this->__get('user')->email;
+		$data['show_email'] = $this->__get('user')->show_email;
 		
 		return $data;
 	}

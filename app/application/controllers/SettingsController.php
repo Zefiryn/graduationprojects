@@ -29,7 +29,7 @@ class SettingsController extends Zefir_Controller_Action
 				
 			elseif ($form->isValid($request->getPost()))
 			{
-				$settings = new Application_Model_Settings();
+				$settings = Zend_Registry::get('appSettings');
 				$settings->populateFromForm($form->getValues());
 				$settings->save();
 				$this->flashMe('settings_saved', 'SUCCESS');
