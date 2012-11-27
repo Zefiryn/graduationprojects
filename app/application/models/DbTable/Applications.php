@@ -127,9 +127,14 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 	public function save(Application_Model_Applications $application)
 	{
 		if ($application->application_id != null)
-		$oldData = new Application_Model_Applications($application->application_id);
+		{
+			$oldData = new Application_Model_Applications($application->application_id);
+		}
 		else
-		$oldData = null;
+		{
+			$oldData = null;
+		}
+		var_dump($application->work_site);exit;
 
 		//add new school if any was given
 		$application = $this->_addNewSchool($application);
@@ -192,12 +197,17 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 	
 	public function getRemainedApps($apps_keys)
 	{
-		$select = $this->select()->setIntegrityCheck(false)
-			->from(array('a' => $this->getTableName()))
-			->join(array('u' => 'users'), 'a.user_id = u.user_id')
-			->where('application_id NOT IN (?)', $apps_keys)
-			->order(array('u.surname', 'u.name'));
-		return parent::fetchAll($select);
+	  if (count($apps_keys) > 0) {
+  		$select = $this->select()->setIntegrityCheck(false)
+  			->from(array('a' => $this->getTableName()))
+  			->join(array('u' => 'users'), 'a.user_id = u.user_id')
+  			->where('application_id NOT IN (?)', $apps_keys)
+  			->order(array('u.surname', 'u.name'));			
+  		return parent::fetchAll($select);
+		}
+		else {
+		  return array();
+		}
 	}
 
 	protected function _addNewSchool($application)

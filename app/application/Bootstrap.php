@@ -188,19 +188,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	protected function _initActionHelpers()
 	{
 		Zend_Controller_Action_HelperBroker::addHelper(
-		new Zefir_Action_Helper_UserSession()
+			new Zefir_Action_Helper_UserSession()
 		);
 		Zend_Controller_Action_HelperBroker::addHelper(
-		new Zefir_Action_Helper_Flash()
+			new Zefir_Action_Helper_Flash()
 		);
 		Zend_Controller_Action_HelperBroker::addHelper(
-		new Zefir_Action_Helper_Localization()
+			new Zefir_Action_Helper_Localization()
+		);		
+		Zend_Controller_Action_HelperBroker::addHelper(
+				new Zefir_Action_Helper_Migration()
 		);
 		Zend_Controller_Action_HelperBroker::addHelper(
-		new GP_Action_Helper_AppSettings()
+			new GP_Action_Helper_AppSettings()
 		);
 		Zend_Controller_Action_HelperBroker::addHelper(
-				new GP_Action_Helper_Partners()
+			new GP_Action_Helper_Partners()
 		);
 	}
 

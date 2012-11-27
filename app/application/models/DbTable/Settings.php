@@ -74,7 +74,7 @@ class Application_Model_DbTable_Settings extends Zefir_Application_Model_DbTable
 			throw new Zend_Exception('Couldn\'t save data');
 		}
 		
-		return $object;
+		return $settings;
 	}
 
 }
