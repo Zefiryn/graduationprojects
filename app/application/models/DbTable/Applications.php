@@ -133,8 +133,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		else
 		{
 			$oldData = null;
-		}
-		var_dump($application->work_site);exit;
+		}		
 
 		//add new school if any was given
 		$application = $this->_addNewSchool($application);
