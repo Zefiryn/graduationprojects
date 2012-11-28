@@ -8,8 +8,8 @@
 			<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'user')?>">
 				<?php echo $this->translate('my_account');?>
 			</a>			
-			<a href="<?php echo $this->url(array('id' => $this->user->applications[0]->application_id), 'edit_application')?>">
-				<?php echo $this->translate('edit_application');?>
+			<a href="<?php echo $this->url(array('id' => $this->user->applications[0]->application_id), 'application')?>">
+				<?php echo $this->translate('show_user_application');?>
 			</a>
 		</menu>
 	</menu>

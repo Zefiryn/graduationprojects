@@ -25,7 +25,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 	<div class="application"
 		id="<?php echo $this->application->application_id?>">
 
-		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror'):?>
+		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror' || $this->user->user_id == $this->application->user_id):?>
 		<p class="admin">
 			<a
 				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->application->application_id), 'lang_edit_application');?>">
@@ -90,15 +90,13 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 								array('user' => $this->user, 'application' => $this->application,
 										'stages' => $this->stages, 'currentStage' => $this->currentStage, 'votes' => $this->votes));
 		?>
-	    </div>
-	    
-	    <nav class="diploma_nav">
-			
+		<?php if ($this->user->_role != 'user'):?>
+    <nav class="diploma_nav">
 			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
 			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
-			
 		</nav>
-	    
+		<?php endif;?>
+	</div>
 
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>

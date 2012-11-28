@@ -446,7 +446,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 	protected function _getPreviousApplication($apps, $application)
 	{
 		$order = array_flip($apps);
-		if ($order[$application->application_id] != 0)
+		if (isset($order[$application->application_id]) && $order[$application->application_id] != 0)
 		{
 			$prevId = $order[$application->application_id] - 1;
 		}
@@ -463,7 +463,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 	{
 		
 		$order = array_flip($apps);
-		if ($order[$application->application_id] + 1 < count($apps))
+		if (isset($order[$application->application_id]) && $order[$application->application_id] + 1 < count($apps))
 		{
 			$nextId = $order[$application->application_id] + 1;
 		}
