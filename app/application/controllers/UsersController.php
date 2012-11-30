@@ -120,8 +120,15 @@ class UsersController extends Zefir_Controller_Action
 		$id = $request->getParam('id', '');
 		$user = new Application_Model_Users($id);
 		$user->delete();
-		$this->flashMe('user_deleted', 'SUCCESS');
-		$this->_redirect('users');
+		if ($request->isXMLHttpRequest())
+		{
+			echo $this->_helper->json(array('element_id' => $id));
+		}
+		else 
+		{
+			$this->flashMe('user_deleted', 'SUCCESS');
+			$this->_redirect('users');
+		}
 	}
 
 	public function restoreAction()
