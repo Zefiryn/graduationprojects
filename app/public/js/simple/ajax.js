@@ -90,7 +90,8 @@ jQuery.fn.deleteWithAjax = function(callback) {
 //This will "ajaxify" the links
 function ajaxLinks(){
 	
-    $('a.delete').deleteWithAjax(redirect);
+    $('a.delete').not('.user a.delete').deleteWithAjax(redirect);
+    $('.user a.delete').deleteWithAjax(removeElement);
     $('a.remove-image').deleteWithAjax(removeImage);
     $('a.remove-press-file').deleteWithAjax(removeFile);
     schoolAutocomplete();
@@ -101,6 +102,18 @@ function redirect(data)
 	data.link ? link = data.link : link = data; 
 	window.location.href =  link;
 	
+}
+
+function removeElement(data) {
+	if (data.access == 0)
+	{
+		console.log(data);
+		alert("You don't have access to this resource");
+	}
+	else
+	{
+		$('#element-' + data.element_id).remove();
+	}
 }
 
 function removeImage(data)

@@ -20,7 +20,7 @@
 	<?php foreach ($this->users as $role => $groupedUsers):?>
 		<h3><?php echo $this->translate($role.'s');?></h3>
 		<?php foreach($groupedUsers as $user):?>
-		<div class="user">
+		<div class="user" id="element-<?php echo $user->user_id;?>">
 			<?php if ($this->user->_role == 'admin')
 			{
 				echo $this->partial(
@@ -45,3 +45,6 @@
 		<?php endforeach;?>		
 	<?php endforeach;?>
 </div>
+<?php echo $this->partial('partials/delete_dialog.phtml',
+array('title' => 'translation', 'delete_confirm' => $this->translate('user_delete_confirm')));
+?>
