@@ -141,22 +141,32 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		//check if there is user added
 		if ($application->user_id == null && isset($application->user))
 		$application->user_id = $application->user->user_id;
-		 
-		//save application data
+		 		
+		//save application data		
 		try {
+			//start transaction - until all files are saved
+			$this->getAdapter()->beginTransaction();
+				
 			$application = parent::save($application);
 			$application->user = new Application_Model_Users($application->user_id);
+			//create user directory
+			$userDir = $this->_getUserDir($application, $application->user, $oldData);
+				
+			//copy uploaded files
+			$files = $this->_saveUserFiles($application, $application->user, $userDir, $oldData);
+
+			//commit transaction
+			$this->getAdapter()->commit();
 			 
 		} catch (Zend_Exception $e) {
 
-			throw $e;
+			//roll back
+			$this->getAdapter()->rollBack();
+			
+			//delete files 
+			$this->_deleteApplicationFiles($files);
+			throw $e;			
 		}
-		 
-		//create user directory
-		$userDir = $this->_getUserDir($application, $application->user, $oldData);
-		 
-		//copy uploaded files
-		$this->_saveUserFiles($application, $application->user, $userDir, $oldData);
 		 
 		//$application->files = $files;
 
