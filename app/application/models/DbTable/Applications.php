@@ -145,7 +145,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 		//save application data		
 		try {
 			//start transaction - until all files are saved
-			$this->getAdapter()->beginTransaction();
+			//$transaction = $this->getAdapter()->beginTransaction();
 				
 			$application = parent::save($application);
 			$application->user = new Application_Model_Users($application->user_id);
@@ -156,12 +156,12 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 			$files = $this->_saveUserFiles($application, $application->user, $userDir, $oldData);
 
 			//commit transaction
-			$this->getAdapter()->commit();
+			//$transaction->commit();
 			 
 		} catch (Zend_Exception $e) {
 
 			//roll back
-			$this->getAdapter()->rollBack();
+			//$transaction->rollBack();
 			
 			//delete files 
 			$this->_deleteApplicationFiles($files);
