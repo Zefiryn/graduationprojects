@@ -153,7 +153,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 			$userDir = $this->_getUserDir($application, $application->user, $oldData);
 				
 			//copy uploaded files
-			$this->_saveUserFiles($application, $application->user, $userDir, $oldData);
+			$files = $this->_saveUserFiles($application, $application->user, $userDir, $oldData);
 
 			//commit transaction
 			$this->getAdapter()->commit();
@@ -162,6 +162,9 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
 
 			//roll back
 			$this->getAdapter()->rollBack();
+			
+			//delete files 
+			$this->_deleteApplicationFiles($files);
 			throw $e;			
 		}
 		 
