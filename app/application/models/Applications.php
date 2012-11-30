@@ -216,15 +216,18 @@ class Application_Model_Applications extends GP_Application_Model
 	public function getMiniature($index = 1) 
 	{
 		$this->__get('files');
-		$file = $this->files[$index - 1];
-		$path = $file->getImage('miniature');
 		
-		if (!file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$path))
-		{
-			$this->createMiniature();
+		if (count($this->files) > 0) {
+			$file = $this->files[$index - 1];
+			$path = $file->getImage('miniature');
+			
+			if (!file_exists(APPLICATION_PATH.'/../public/assets/applications/'.$path))
+			{
+				$this->createMiniature();
+			}
+			
+			return $path;
 		}
-		
-		return $path;
 	}
 	
 	public function getVotes($stage)
@@ -324,6 +327,10 @@ class Application_Model_Applications extends GP_Application_Model
 		{
 			return TRUE;
 		}
+	}
+	
+	public function hasFiles() {
+		return count($this->__get('files')) > 0;
 	}
 	
 	public function isDisputed($user = null)
