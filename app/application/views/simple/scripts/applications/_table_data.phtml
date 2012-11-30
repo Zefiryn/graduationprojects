@@ -75,8 +75,10 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 		
 		<!-- MINIATURE -->
 		<td class="left" style="width: 80px;">
+			<?php if ($application->hasFiles()):?>
 			<img src="<?php echo $this->baseUrl('/assets/applications/'.$application->getMiniature()); ?>" 
 				class="miniature" rel="application_<?php echo $application->application_id;?>"/>
+			<?php endif;?>
 		</td>
 		<!-- USER -->
 		<td class="normal username" style="width: 70px;">
