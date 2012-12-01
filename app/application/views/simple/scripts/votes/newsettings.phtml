@@ -1,78 +1,67 @@
 <div id="main">
-	<h1><?php echo $this->translate('vote_settings');?></h1>
-	
-	<h2><?php echo $this->translate('juror_users');?></h2>
-	<div id="unassigned_jurors">
-	<?php foreach($this->users as $user):?>
-		<?php 
-		if ($user->juror_id == null) {
-			echo $this->partial('votes/_user_box.phtml', array('user' => $user, 'baseUrl' => $this->baseUrl));	
-		}?>
-	<?php endforeach?>
-	</div>
-	<p class="clear">&nbsp;</p>
-	<h2>
-		<?php echo $this->translate('jurors');?>
-		<a href="<?php echo $this->url(array(), 'new_juror');?>"> 
-		<img
-			src="/img/simple/empty.png"
-			class="ui-icon ui-icon-plusthick no-block"
-			alt="<?php echo $this->translate('new_juror');?>"
-			title="<?php echo $this->translate('new_juror');?>" />
-		</a>
-	</h2>
+  <h1><?php echo $this->translate('vote_settings');?></h1>
+  
+  <h2><?php echo $this->translate('juror_users');?></h2>
+  <div id="unassigned_jurors">
+  <?php foreach($this->users as $user):?>
+    <?php 
+    if ($user->juror_id == null) {
+      echo $this->partial('votes/_user_box.phtml', array('user' => $user, 'baseUrl' => $this->baseUrl));  
+    }?>
+  <?php endforeach?>
+  </div>
+  <p class="clear">&nbsp;</p>
+  <h2>
+    <?php echo $this->translate('jurors');?>
+    <a href="<?php echo $this->url(array(), 'new_juror');?>"> 
+      <img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block" alt="<?php echo $this->translate('new_juror');?>" title="<?php echo $this->translate('new_juror');?>" />
+    </a>
+  </h2>
 
-	<?php foreach($this->jurors as $i =>  $juror):?>
-		<?php echo $this->partial('votes/_juror_box.phtml', array('juror' => $juror, 'baseUrl' => $this->baseUrl));?>
-		<?php if ($i % 3 == 0 && $i != 0):?>
-		<p class="clear"></p>
-		<?php endif;?>
-	<?php endforeach?>
-	
-	<p class="clear">&nbsp;</p>
-	
-	<h2>
-		<?php echo $this->translate('stages');?>
-		<a href="<?php echo $this->url(array(), 'new_stage');?>"> 
-		<img
-			src="/img/simple/empty.png"
-			class="ui-icon ui-icon-plusthick no-block"
-			alt="<?php echo $this->translate('new_stage');?>"
-			title="<?php echo $this->translate('new_stage');?>" />
-		</a>
-	</h2>
+  <?php foreach($this->jurors as $i =>  $juror):?>
+    <?php echo $this->partial('votes/_juror_box.phtml', array('juror' => $juror, 'baseUrl' => $this->baseUrl));?>
+    <?php if ($i % 3 == 0 && $i != 0):?>
+    <p class="clear"></p>
+    <?php endif;?>
+  <?php endforeach?>
+  
+  <p class="clear">&nbsp;</p>
+  
+  <h2>
+    <?php echo $this->translate('stages');?>
+    <a href="<?php echo $this->url(array(), 'new_stage');?>"> 
+    <img src="/img/simple/empty.png" class="ui-icon ui-icon-plusthick no-block" alt="<?php echo $this->translate('new_stage');?>" title="<?php echo $this->translate('new_stage');?>" />
+    </a>
+  </h2>
 
-	<?php foreach($this->stages as $i =>  $stage):?>
-		<p>
-			<?php echo $stage->stage_name;?>
-			<a href="<?php echo $this->url(array('id' => $stage->stage_id), 'edit_stage');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" 
-					alt="<?php echo $this->translate('edit');?>" 
-					title="<?php echo $this->translate('edit');?>" />
-			</a>
-			<?php if ($stage->active == 1):?>
-			<a href="<?php echo $this->url(array('id' => $stage->stage_id), 'block_stage');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-unlocked no-block" 
-					alt="<?php echo $this->translate('block');?>" 
-					title="<?php echo $this->translate('block');?>" />
-			</a>
-			<?php else: ?>
-			<a href="<?php echo $this->url(array('id' => $stage->stage_id), 'activate_stage');?>">
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-locked no-block" 
-					alt="<?php echo $this->translate('activate');?>" 
-					title="<?php echo $this->translate('activate');?>" />
-			</a>
-			<?php endif;?>
-			<a href="<?php echo $this->url(array('id' => $stage->stage_id), 'delete_stage');?>"
-				class="delete"> 
-				<img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" 
-					del="<?php echo $this->translate('delete');?>" 
-					alt="<?php echo $this->translate('delete');?>" 
-					title="<?php echo $this->translate('delete');?>" />
-			</a>
-		
-		</p>
-	<?php endforeach?>
-	
-	
-</div>
+    <?php foreach($this->stages as $stage):?>
+    <div class="stage-element" id="element-stage-<?php echo $stage->stage_id?>">      
+      <p>
+        <span class="stage-name"><?php echo $stage->stage_name;?></span>
+        <a href="<?php echo $this->url(array('id' => $stage->stage_id), 'edit_stage');?>">
+          <img src="/img/simple/empty.png" class="ui-icon ui-icon-pencil no-block" alt="<?php echo $this->translate('edit');?>" title="<?php echo $this->translate('edit');?>" />
+        </a>      
+        <?php if ($stage->active == 1):?>
+        <a href="<?php echo $this->url(array('id' => $stage->stage_id), 'block_stage');?>">
+          <img src="/img/simple/empty.png" class="ui-icon ui-icon-unlocked no-block" alt="<?php echo $this->translate('block');?>" title="<?php echo $this->translate('block');?>" />
+        </a>
+        <?php else: ?>
+        <a href="<?php echo $this->url(array('id' => $stage->stage_id), 'activate_stage');?>">
+          <img src="/img/simple/empty.png" class="ui-icon ui-icon-locked no-block" alt="<?php echo $this->translate('activate');?>" title="<?php echo $this->translate('activate');?>" />
+        </a>
+        <?php endif;?>
+        <a href="<?php echo $this->url(array('id' => $stage->stage_id), 'delete_stage');?>" class="delete element">
+          <img src="/img/simple/empty.png" class="ui-icon ui-icon-trash no-block" del="<?php echo $this->translate('delete');?>" alt="<?php echo $this->translate('delete');?>" title="<?php echo $this->translate('delete');?>" />
+        </a>    
+        <br />
+        <span class="stage-settings">
+          <?php echo $this->translate('stage_max_vote'); ?>: <?php echo $stage->getMaxScore();?>,
+          <?php echo $this->translate('qualification_score'); ?>: <?php echo $stage->qualification_score;?>,
+        </span>
+      </p>
+    </div>
+    <?php endforeach;?>  
+  
+  </div>
+
+<?php echo $this->partial('partials/delete_dialog.phtml',array('title' => 'translation', 'delete_confirm' => $this->translate('delete_confirm')));?>

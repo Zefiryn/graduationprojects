@@ -122,6 +122,8 @@ class UsersController extends Zefir_Controller_Action
     $user->delete();
     if ($request->isXMLHttpRequest())
     {
+      $this->_helper->layout()->disableLayout();
+      $this->_helper->viewRenderer->setNoRender(true);
       echo $this->_helper->json(array('element_id' => $id));
     }
     else 
