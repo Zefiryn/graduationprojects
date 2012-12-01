@@ -1,26 +1,9 @@
-<p class="admin">
-
-<?php if ($this->user->_role == 'admin'):?>
-	<a
-		href="<?php echo $this->url(array('id' => $this->user->user_id), 'promote_user');?>">
-		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
-		class="ui-icon ui-icon-key no-block"
-		alt="<?php echo $this->translate('promote');?>"
-		title="<?php echo $this->translate('promote');?>" />
-	</a>
-	
-	
-	<?php endif;?>
-	<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'edit_user');?>">
-		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" 
-			alt="<?php echo $this->translate('edit');?>" 
-			title="<?php echo $this->translate('edit');?>" />
-	</a>
-	<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'delete_user');?>"
-		class="delete"> 
-		<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" 
-			del="<?php echo $this->translate('delete');?>" 
-			alt="<?php echo $this->translate('delete');?>" 
-			title="<?php echo $this->translate('delete');?>" />
-	</a>
-</p>
+<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'promote_user');?>">
+  <img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-key no-block" alt="<?php echo $this->translate('promote');?>" title="<?php echo $this->translate('promote');?>" />
+</a>
+<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'edit_user');?>">
+  <img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-pencil no-block" alt="<?php echo $this->translate('edit');?>" title="<?php echo $this->translate('edit');?>" />
+</a>
+<a href="<?php echo $this->url(array('id' => $this->user->user_id), 'delete_user');?>" class="delete"> 
+  <img src="<?php echo $this->baseUrl('img/simple/empty.png');?>" class="ui-icon ui-icon-trash no-block" del="<?php echo $this->translate('delete');?>" alt="<?php echo $this->translate('delete');?>" title="<?php echo $this->translate('delete');?>" />
+</a>
