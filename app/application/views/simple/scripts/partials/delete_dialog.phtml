@@ -1,37 +1,27 @@
 <div id="dialog_delete"
-	style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 300px; top: 374px; left: 523px; display: block; z-index: 1002;"
-	class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable"
-	tabindex="-1" role="dialog"
-	aria-labelledby="ui-dialog-title-dialog-confirm">
-	<div
-		class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-		<span class="ui-dialog-title" id="ui-dialog-title-dialog-confirm"><?php echo $this->translate('delete'); ?>
-		</span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
-			role="button"> <span class="ui-icon ui-icon-closethick"><?php echo $this->translate('close'); ?>
-		</span>
-		</a>
-	</div>
-	<div id="dialog-confirm" class="ui-dialog-content ui-widget-content"
-		style="width: auto; min-height: 0px; height: 53px;">
-		<p>
-			
-		<?php echo $this->translate($this->delete_confirm);?>
-		</p>
-	</div>
-	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-		<div class="ui-dialog-buttonset">
-			<button type="button"
-				class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-				role="button" aria-disabled="false">
-				<span id="button_conf" class="ui-button-text"><?php echo $this->translate('confirm_delete'); ?>
-				</span>
-			</button>
-			<button type="button"
-				class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-				role="button" aria-disabled="false">
-				<span id="button_close" class="ui-button-text"><?php echo $this->translate('close'); ?>
-				</span>
-			</button>
-		</div>
-	</div>
+  style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 300px; top: 374px; left: 523px; display: block; z-index: 1002;"
+  class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable"
+  tabindex="-1" role="dialog"
+  aria-labelledby="ui-dialog-title-dialog-confirm">
+  <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+    <span class="ui-dialog-title" id="ui-dialog-title-dialog-confirm"><?php echo $this->translate('delete'); ?></span>
+    <a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+      <span class="ui-icon ui-icon-closethick"><?php echo $this->translate('close'); ?></span>
+    </a>
+  </div>
+  <div id="dialog-confirm" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 0px; height: 53px;">
+    <p><?php echo $this->translate($this->delete_confirm);?></p>
+  </div>
+  <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+    <div class="ui-dialog-buttonset">
+      <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+        <span id="button_conf" class="ui-button-text"><?php echo $this->translate('confirm_delete'); ?>
+        </span>
+      </button>
+      <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+        <span id="button_close" class="ui-button-text"><?php echo $this->translate('close'); ?>
+        </span>
+      </button>
+    </div>
+  </div>
 </div>

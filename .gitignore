@@ -17,4 +17,4 @@ app/cache/*
 app/log/*.log            
 app/library/Zefir/*
 app/library/Zefir
-
+*.kdev4
