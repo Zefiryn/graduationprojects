@@ -40,19 +40,17 @@ class ErrorController extends Zefir_Controller_Action
 		}
 
 		// Log exception, if logger available
-		if ($log = $this->getLog()) {
-			$log->crit($this->view->message, $errors->exception);
+		if ($log = $this->_startLogger('critical')) {
+			$log->log($this->view->message);
+			$log->log($errors->exception);
+			$log->log(var_export($this->_request->getParams()), true);
 		}
 
 		// conditionally display exceptions
-		if ($this->getInvokeArg('displayExceptions') == true) {
+		if ($this->getInvokeArg('displayExceptions') == true || $this->user->_role == 'admin') {
 			$this->view->exception = $errors->exception;
 			$this->view->exceptionTrace = explode("\n", $errors->exception->getTraceAsString());
 		}
-
-		$this->_log($errors->exception->getMessage(), 'error');
-		$this->_log($errors->exception->getTraceAsString(), 'error');
-
 
 		$this->view->request = $errors->request;
 	}
