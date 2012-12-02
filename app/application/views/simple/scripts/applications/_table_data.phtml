@@ -191,8 +191,8 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
               <p class="votes qualification-status">
                 <span class="juror_name"><?php echo $this->translate('qualification_status');?>:</span>
                 <?php $qualification_status = $application->inStage($this->currentStage->getNextStage());?>
-                <span id="status-qualified" style="<?php if ($qualification_status == false):?>display: none;<?php endif;?>"><?php echo $this->translate('qualified');?></span>
-                <span id="status-notqualified" style="<?php if ($qualification_status == true):?>display: none;<?php endif;?>"><?php echo $this->translate('notqualified');?></span>
+                <span class="qualification_status_info" id="status-qualified" style="<?php if ($qualification_status == false):?>display: none;<?php endif;?>"><?php echo $this->translate('qualified');?></span>
+                <span class="qualification_status_info" id="status-notqualified" style="<?php if ($qualification_status == true):?>display: none;<?php endif;?>"><?php echo $this->translate('notqualified');?></span>
               </p>
               <p class="clear" style="height: 2px;"></p>  
           </div>
