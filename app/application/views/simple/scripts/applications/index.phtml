@@ -1,24 +1,22 @@
-<?php echo $this->partial('partials/delete_dialog.phtml',
-array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
+<?php 
+echo $this->partial('partials/delete_dialog.phtml', array('title' => 'editions', 'delete_confirm' => $this->translate('application_delete_confirm')));
 Zefir_Pqp_Classes_Console::logSpeed('start rendering');
 $admin = $this->user->_role == 'admin' ? TRUE : FALSE;
 $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
-
 ?>
 
 <div id="main">
-	<h1>
-
-	<?php echo $this->translate('applications_header'); ?></h1>
-	
-	<p class="clear">&nbsp;</p>
-	<?php echo $this->partial('applications/_filter_options.phtml', array('selection' => $this->selection, 'options' => $this->filterOptions)); ?>
-	
-	<div class="data">	
-	<?php echo $this->partial('applications/_table_data.phtml', 
-		array('applications' => $this->applications, 'currentStage' => $this->currentStage, 'statistics' => $this->statistics,
-				'user' => $this->user, 'lang' => $this->lang, 'votes' => $this->votes));?>
-	</div>
+  <h1>
+  <?php echo $this->translate('applications_header'); ?></h1>
+  
+  <p class="clear">&nbsp;</p>
+  <?php echo $this->partial('applications/_filter_options.phtml', array('selection' => $this->selection, 'options' => $this->filterOptions)); ?>
+  
+  <div class="data">  
+  <?php echo $this->partial('applications/_table_data.phtml', 
+    array('applications' => $this->applications, 'currentStage' => $this->currentStage, 'statistics' => $this->statistics,
+        'user' => $this->user, 'lang' => $this->lang, 'votes' => $this->votes));?>
+  </div>
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
 <img id="loader-white" src="<?php echo $this->baseUrl('/img/simple/ajax-loader-white.gif');?>" alt="performing request"/>

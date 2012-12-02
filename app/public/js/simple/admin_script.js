@@ -379,6 +379,16 @@ function voting()
           {
             tr.attr('data-juror-grade', data.grade);
           }
+          
+          //show qualification status
+          if (data.qualified == true) {
+            $('#status-qualified').show();
+            $('#status-notqualified').hide();
+          }
+          else {
+            $('#status-qualified').hide();
+            $('#status-notqualified').show();
+          }
         }
         else if (data.error)
         {
