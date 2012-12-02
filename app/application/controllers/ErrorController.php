@@ -30,20 +30,23 @@ class ErrorController extends Zefir_Controller_Action
         $this->getResponse()->setHttpResponseCode(404);
         $this->view->message = 'Page not found';
         $this->view->code = 404;
+        $saveToLog = false;
         break;
       default:
         // application error
         $this->getResponse()->setHttpResponseCode(500);
         $this->view->message = 'Application error';
         $this->view->code = 500;
+        $saveToLog = true;
         break;
     }
 
     // Log exception, if logger available
-    if ($log = $this->_startLogger('critical')) {
+    if ($saveToLog && $log = $this->_startLogger('critical')) {
       $log->log($this->view->message,Zend_Log::DEBUG);
       $log->log($errors->exception,Zend_Log::DEBUG);
-      $log->log(var_export($this->_request->getParams(),true),Zend_Log::DEBUG);
+      $params = var_export($this->_request->getParams(),true);
+      $log->log($params,Zend_Log::DEBUG);
     }
 
     // conditionally display exceptions

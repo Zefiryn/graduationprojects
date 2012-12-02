@@ -468,9 +468,9 @@ class ApplicationsController extends Zefir_Controller_Action
       $this->_helper->layout()->disableLayout();
       $this->_helper->viewRenderer->setNoRender(true);
       echo Zend_Json::encode(array('succcess' => $application->application_id, 
-                    'dispute' => $this->view->partial('applications/_dispute.phtml', 
-                              array('application' => $application))
-              ));
+                              'dispute' => $this->view->partial('applications/_dispute.phtml', 
+                                array('application' => $application))
+                            ));
     }
     else
     {
