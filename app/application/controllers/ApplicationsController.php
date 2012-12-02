@@ -432,7 +432,8 @@ class ApplicationsController extends Zefir_Controller_Action
           $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('Application_Model_Jurors'));
           echo Zend_Json::encode(array('success' => $post['vote'], 
                           'grade' => $vote->vote, 
-                          'appScore' => $app->countScore($post['stage_id'])
+                          'appScore' => $app->countScore($post['stage_id']),
+                          'qualified' => $app->inStage($stage->getNextStage())
                           ));
         }
         catch (Zend_Exception $e) {
@@ -839,6 +840,8 @@ class ApplicationsController extends Zefir_Controller_Action
       'filter' => array('all' => 'all_applications',
                 'disputed' => 'disputed',
                 'unmarked' => 'unmarked',
+                'qualified' => 'qualified',
+                'notqualified' => 'notqualified',
                 'range' => 'filter_range_point')
     );
     

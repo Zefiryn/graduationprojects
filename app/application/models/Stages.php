@@ -25,6 +25,29 @@ class Application_Model_Stages extends GP_Application_Model
     $previous->getBy('order', ($this->order - 1));
     return $previous->stage_id;
   }
+
+  public function getPreviousStage()
+  {
+    $previous = new $this;
+    $previous->getBy('order', ($this->order - 1));
+    return $previous;
+  }
+
+  public function getNextStage()
+  {
+    $next = new $this;
+    $next->getBy('order', ($this->order + 1));
+    return $next;
+  }
+
+  public function getNextStageId()
+  {
+    $previous = new $this;
+    $previous->getBy('order', ($this->order + 1));
+    return $previous->stage_id;
+  }
+
+
   
   public function block()
   {
