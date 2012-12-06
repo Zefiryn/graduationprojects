@@ -81,7 +81,7 @@ class Application_Model_Applications extends GP_Application_Model
     return $this->getDbTable()->delete($this);
   }
 
-  public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $user = null)
+  public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $country = null, $user = null)
   {
     if (!$user) $user = Zend_Registry::get('user');
     
@@ -137,6 +137,13 @@ class Application_Model_Applications extends GP_Application_Model
         $end = $range['end'] == null ? 999 : $range['end']; 
         
         if ($score >= $start && $score <= $end)
+        {
+          $applications[$row['application_id']] = $application;
+        }
+      }
+      elseif ($filter == 'country') {
+        
+        if ($application->country == $country)
         {
           $applications[$row['application_id']] = $application;
         }

@@ -425,6 +425,15 @@ function filterForm()
     {
       $('#rangeSelect').hide();
     }
+    
+    if (self.attr('id') == 'filter_country') 
+    {
+      $('#countrySelect').show();
+    }
+    else 
+    {
+      $('#countrySelect').hide();
+    }
   });
   
   $('#filter').click(function(e){
@@ -437,6 +446,7 @@ function filterForm()
         'filter' : $('#filterSelect li.checked').data('filter'),
         'rangeStart' : $('#rangeStart').val(),
         'rangeEnd' : $('#rangeEnd').val(),
+        'countrySelect' : $('#countrySelectOption').val()
         };
     
     console.log(data);
