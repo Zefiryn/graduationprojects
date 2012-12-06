@@ -61,6 +61,14 @@
     <?php echo $this->translate('range_end');?>: <input type="text" id="rangeEnd" name="rangeEnd" 
       <?php if ($this->selection['range']['end'] !== null):?>value="<?php echo $this->selection['range']['end']; ?>"<?php endif;?> />
   </div>
+
+  <div class="selectionOption" id="countrySelect" style="min-width: 40px;text-align:right;<?php if ($this->selection['filter'] != 'country'):?>display:none;<?php endif;?>">
+    <select id="countrySelectOption" name="countrySelectOption">
+    <?php foreach(array('pl' => 'Poland', 'sk' => 'Slovakia', 'cz' => 'Czech Republic', 'hu' => 'Hungary') as $country => $label):?>
+      <option value="<?php echo $country;?>"><?php echo $this->translate($label);?></option>
+    <?php endforeach;?>
+    </select>
+  </div>
   
   
   <div class="selectionOption" style="margin-top: 42px;">

@@ -18,7 +18,7 @@ class ApplicationsController extends Zefir_Controller_Action
     $application = new Application_Model_Applications();
     
     $sort = $this->_getSort(). ' ' . $this->_getSortOrder();
-    $applications = $application->getApplications($sort , $currentStage, $this->_getFilter(), $this->_getRange(), $this->view->user);
+    $applications = $application->getApplications($sort , $currentStage, $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
     
     $stages = new Application_Model_Stages();
     $jurors = new Application_Model_Jurors();
@@ -733,6 +733,17 @@ class ApplicationsController extends Zefir_Controller_Action
     return $range;
   }
 
+  protected function _getCountrySelection()
+  {
+    $request = $this->getRequest();
+    $savedCountry = new Zend_Session_Namespace('country');
+    $code = $request->getParam('countrySelect', $savedRange->code);
+    
+    $savedCountry->code = $code;
+    
+    return $code;
+  }
+
 
   protected function _sendConfirmationMail($user)
   {
@@ -842,7 +853,8 @@ class ApplicationsController extends Zefir_Controller_Action
                 'unmarked' => 'unmarked',
                 'qualified' => 'qualified',
                 'notqualified' => 'notqualified',
-                'range' => 'filter_range_point')
+                'range' => 'filter_range_point',
+                'country' => 'country')
     );
     
     return $options;
