@@ -48,7 +48,7 @@ class ErrorController extends Zefir_Controller_Action
     }
 
     // conditionally display exceptions
-    if ($this->getInvokeArg('displayExceptions') == true || $this->user->_role == 'admin') {
+    if ($this->getInvokeArg('displayExceptions') == true || $this->view->user->_role == 'admin') {
       $this->view->exception = $errors->exception;
       $this->view->exceptionTrace = explode("\n", $errors->exception->getTraceAsString());
     }
