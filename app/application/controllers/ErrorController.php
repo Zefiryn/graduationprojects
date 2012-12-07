@@ -44,9 +44,7 @@ class ErrorController extends Zefir_Controller_Action
     // Log exception, if logger available
     if ($saveToLog && $log = $this->_startLogger('critical')) {
       $log->log($this->view->message,Zend_Log::DEBUG);
-      $log->log($errors->exception,Zend_Log::DEBUG);
-      $params = var_export($this->_request->getParams(),true);
-      $log->log($params,Zend_Log::DEBUG);
+      $log->log($errors->exception,Zend_Log::DEBUG);      
     }
 
     // conditionally display exceptions
