@@ -18,7 +18,7 @@ class ApplicationsController extends Zefir_Controller_Action
     $application = new Application_Model_Applications();
     
     $sort = $this->_getSort(). ' ' . $this->_getSortOrder();
-    $applications = $application->getApplications($sort , $currentStage, $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
+    $applications = $application->getApplications($sort, $currentStage, $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
     
     $stages = new Application_Model_Stages();
     $jurors = new Application_Model_Jurors();
