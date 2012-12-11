@@ -45,7 +45,7 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
         }
         else 
         {
-          echo $i;
+          echo $i * $juror->wage;
         }
       ?>
     </span>
