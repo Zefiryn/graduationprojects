@@ -8,6 +8,7 @@ class Application_Model_Stages extends GP_Application_Model
   public $order;
   public $active;
   public $translate;
+  public $final;
   protected $votes;
 
   static protected $_jurors;
@@ -109,5 +110,10 @@ class Application_Model_Stages extends GP_Application_Model
     }
 
     return self::$_jurors;
+  }
+
+  public function isFinalStage() 
+  {
+    return $this->final == 1;
   }
 }

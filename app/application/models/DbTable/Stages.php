@@ -21,7 +21,7 @@ class Application_Model_DbTable_Stages extends Zefir_Application_Model_DbTable
 	
 	public function getFinalStage()
 	{
-		$select = $this->select()->order('order DESC')->limit(1);
+		$select = $this->select()->where('final = 1')->limit(1);
 		return $this->fetchRow($select);
 	}
 }

@@ -219,8 +219,11 @@ div.filter {
   width:45px;
   margin: 3px 0px;
 }
-
-table.applications {
+.main .data {
+  clear: both;
+  margin-top: 90px;
+}
+.applications {
   width: 100%;
   color: #eee;
   margin: 85px 0px 30px 0px;
@@ -499,4 +502,47 @@ a.index_application_files:link, a.index_application_files:visited {
 }
 a.index_application_files:hover {
   background: rgba(51, 204, 153, 0.4);
+}
+
+
+.applications.final-stage {
+  width: 480px;
+  float: left;
+  border-right: 3px solid black !important;
+}
+
+.applications.winning-apps {
+  width: 480px;
+  float: left;
+  margin-left: 30px;
+}
+
+.winning-apps .worktype .country {
+  min-height: 200px;
+  overflow: hidden;
+}
+.final-stage .worktype .country h3 {
+  cursor: pointer;
+}
+.applications .worktype {
+  border: 0px solid #000;
+  float: left;
+  width: 50%;
+}
+.applications .worktype .country h3 {
+  border-bottom: 0px;
+}
+
+.applications .worktype .country .app-wrapper {
+  width: 90px;
+  height: 90px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border:3px double #666;
+  text-align: center;
+  background: white;
+}
+.app-drag-contener {
+  background: #eee !important;
 }
