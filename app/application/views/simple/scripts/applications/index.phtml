@@ -13,9 +13,15 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
   <?php echo $this->partial('applications/_filter_options.phtml', array('selection' => $this->selection, 'options' => $this->filterOptions)); ?>
   
   <div class="data">  
+  <?php if ($this->currentStage->isFinalStage()):?>
+  <?php echo $this->partial('applications/_final_stage.phtml', 
+    array('applications' => $this->applications, 'currentStage' => $this->currentStage, 'statistics' => $this->statistics,
+        'user' => $this->user, 'lang' => $this->lang, 'votes' => $this->votes));?>
+  <?php else: ?>
   <?php echo $this->partial('applications/_table_data.phtml', 
     array('applications' => $this->applications, 'currentStage' => $this->currentStage, 'statistics' => $this->statistics,
         'user' => $this->user, 'lang' => $this->lang, 'votes' => $this->votes));?>
+  <?php endif;?>
   </div>
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>

@@ -87,6 +87,10 @@ $(document).ready(function(){
     press_form();
   }
   voteSettings();
+  
+  if ($('.final-stage').length > 0) {
+    finalStage();
+  }
 });
 
 function showCaptions()
@@ -470,6 +474,9 @@ function filterForm()
         document.querySelector('div.data').innerHTML = '';
         document.querySelector('div.data').innerHTML = data;
         applicationFilesFancyBox();
+        if ($('.final-stage').length > 0) {
+          finalStage();
+        }
       }});
   });
     
@@ -779,5 +786,45 @@ function press_form()
     input.attr('name', 'element_path_' + number);
     input.attr('value', null);
     $('div.press_file:last').after(file);
+  });
+}
+
+function finalStage() {
+  
+  $( ".winning-apps" ).height($( ".final-stage").height());
+  $( ".final-stage .country .app-wrapper" ).draggable({
+    revert: "invalid",
+    helper: "clone",
+    containment: "document",
+  });
+  $( ".winning-apps" ).droppable({
+    activeClass: "app-drag-contener",
+    drop: function( event, ui ) {
+      var country = '.country-' + $(ui.draggable).data('country');
+      var type = '.type-' + $(ui.draggable).data('type');
+      var box = $(this).find(country + type);
+      var drag = $(ui.draggable);
+      var home = drag.parent();
+      box.append(drag);
+      var appId = $(ui.draggable).data('app-id');
+      $.ajax({
+        url: '/applications/winningvote',
+        data: {appId: appId},
+        type: 'POST',
+        dataType: 'json',
+        error: function(data){
+          console.log(data);
+          alert(data.error);
+        },
+        success: function(){
+          box.find('.work-count').text(box.find('.app-wrapper').length);
+          home.find('.work-count').text(home.find('.app-wrapper').length);
+        },
+      });
+    }
+  });
+  
+  $('.final-stage .country').on('click', function() {
+    $(this).find('.app-wrapper').toggle();
   });
 }

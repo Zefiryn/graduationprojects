@@ -38,11 +38,19 @@ class ApplicationsController extends Zefir_Controller_Action
                     'sort_order' => $this->_getSortOrder(),
                     'filter' => $this->_getFilter(),
                     'range' => $this->_getRange());
+
     if ($this->getRequest()->isXMLHttpRequest()) 
     {
       $this->_helper->layout()->disableLayout();
       $this->_helper->viewRenderer->setNoRender(true);
-      $this->renderScript('applications/_table_data.phtml');
+      if($currentStage->isFinalStage()) 
+      {
+        $this->renderScript('applications/_final_stage.phtml');
+      }
+      else 
+      {
+        $this->renderScript('applications/_table_data.phtml');
+      }
     }
   }
 
@@ -737,7 +745,7 @@ class ApplicationsController extends Zefir_Controller_Action
   {
     $request = $this->getRequest();
     $savedCountry = new Zend_Session_Namespace('country');
-    $code = $request->getParam('countrySelect', $savedRange->code);
+    $code = $request->getParam('countrySelect', $savedCountry->code);
     
     $savedCountry->code = $code;
     
@@ -859,4 +867,21 @@ class ApplicationsController extends Zefir_Controller_Action
     
     return $options;
   }
+
+  public function winningvoteAction() {
+    $id = $this->_request->getParam('appId', null);
+    if ($id) {
+      try {
+        $app = new Application_Model_Applications($id);      
+        $app->setWinner();
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        echo Zend_Json::encode(array('success' => true));
+      }
+      catch (Exception $e) {
+        echo Zend_Json::encode(array('error' => $e->getMessage()));
+      }
+    }
+  }
 }
+

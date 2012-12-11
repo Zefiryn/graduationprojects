@@ -1,0 +1,35 @@
+<?php if (count($this->applications) > 0):?>
+<div class="applications final-stage">
+<?php foreach ($this->applications as $worktype => $countries):?>
+  <div class="worktype">
+  <h2><?php echo $worktype?></h2>
+  <?php foreach($countries as $code => $apps):?>
+    <div class="country">
+    <h3><?php echo $code; ?>: <span class="work-count"><?php echo count($apps);?></span></h3>
+    <?php foreach($apps as $id => $application):?>
+      <div class="app-wrapper" data-country="<?php echo $code;?>" data-type="<?php echo $worktype;?>" data-app-id="<?php echo $application->application_id;?>">
+        <img src="<?php echo $this->baseUrl('/assets/applications/'.$application->getMiniature()); ?>" 
+              class="miniature" title="<?php echo $application->work_subject;?>"/>
+      </div>
+    <?php endforeach; ?>
+    </div>    
+  <?php endforeach; ?>
+  </div>
+<?php endforeach; ?>
+</div>
+<?php endif;?>
+
+<div class="applications winning-apps">
+  <?php foreach ($this->applications as $worktype => $countries):?>
+  <div class="worktype">
+    <h2><?php echo $worktype?></h2>
+    <?php foreach($countries as $code => $apps):?>
+    <div class="country country-<?php echo $code;?> type-<?php echo $worktype;?>">
+      <h3><?php echo $code; ?>: <span class="work-count">0</span></h3>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <?php endforeach; ?>
+</div>
+
+<p class="clearfix">&nbsp;</p>

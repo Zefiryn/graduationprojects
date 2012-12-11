@@ -96,7 +96,10 @@ class Application_Model_Applications extends GP_Application_Model
     {
       $application = new $this;
       $application->populate($row);
-      if (!$filter || $filter == 'all') 
+      if ($stage->isFinalStage()) {
+        $applications[$application->__get('work_type')->work_type_name][$row['country']][$row['application_id']] = $application;
+      }
+      elseif (!$filter || $filter == 'all') 
       {
         $applications[$row['application_id']] = $application;
       }
@@ -442,6 +445,24 @@ class Application_Model_Applications extends GP_Application_Model
     else
     {
       return $this->$name;
+    }
+  }
+
+  public function setWinner()
+  {
+    $jurors = new Application_Model_Jurors();
+    $stages = new Application_Model_Stages();
+    $stage = $stages->getFinalStage();
+    $max_vote = $stage->stage_max_vote;
+    foreach($jurors->fetchAll() as $juror) {
+      $score = $juror->wage * $max_vote;
+      $vote = new Application_Model_Votes();
+      $vote->stage_id = $stage->stage_id;
+      $vote->juror_id = $juror->juror_id;
+      $vote->application_id = $this->application_id;
+      $vote->vote = $score;
+      $vote->save();
+      //echo '<br /><br />';
     }
   }
 }
