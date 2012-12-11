@@ -24,10 +24,12 @@ class ApplicationsController extends Zefir_Controller_Action
     $jurors = new Application_Model_Jurors();
     $jurors = $jurors->fetchAll();
       
-    $this->view->statistics = $this->_createStatistics($applications);
+    if (!$currentStage->isFinalStage()) {
+      $this->view->statistics = $this->_createStatistics($applications);
+    }
     $this->view->applications = $applications;
     $this->view->stages = $stages->fetchAll();
-    if ($this->view->user->_role == 'admin' && $currentStage)
+    if ($this->view->user->_role == 'admin' && $currentStage && !$currentStage->isFinalStage())
     {
       $this->view->votes = $this->_getAllVotes($currentStage, $applications, $jurors);
     }
@@ -879,6 +881,8 @@ class ApplicationsController extends Zefir_Controller_Action
         echo Zend_Json::encode(array('success' => true));
       }
       catch (Exception $e) {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
         echo Zend_Json::encode(array('error' => $e->getMessage()));
       }
     }
