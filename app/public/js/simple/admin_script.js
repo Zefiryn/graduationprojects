@@ -791,7 +791,23 @@ function press_form()
 
 function finalStage() {
   
-  $( ".winning-apps" ).height($( ".final-stage").height());
+  if ($(".winning-apps").height() < $(".final-stage").height()) {
+    $(".winning-apps").height($(".final-stage").height());
+  }
+  else {
+    $(".final-stage").height($(".winning-apps").height());
+  }
+  
+  for (var type in winners) {
+    for (var country in winners[type]) {
+      $('.winning-apps .country.country-'+country+'.type-'+type+' .work-count').text(winners[type][country]);
+    }
+  }
+  for (var type in qualified) {
+    for (var country in qualified[type]) {
+      $('.final-stage .country.country-'+country+'.type-'+type+' .work-count').text(qualified[type][country]);
+    }
+  }
   $( ".final-stage .country .app-wrapper" ).draggable({
     revert: "invalid",
     helper: "clone",

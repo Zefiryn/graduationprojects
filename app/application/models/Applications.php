@@ -320,6 +320,7 @@ class Application_Model_Applications extends GP_Application_Model
       $this->__get('votes');
     }
     $score = null;
+
     foreach($this->votes as $vote)
     {
       if ($vote->stage_id == $stage)
@@ -457,12 +458,24 @@ class Application_Model_Applications extends GP_Application_Model
     foreach($jurors->fetchAll() as $juror) {
       $score = $juror->wage * $max_vote;
       $vote = new Application_Model_Votes();
-      $vote->stage_id = $stage->stage_id;
-      $vote->juror_id = $juror->juror_id;
-      $vote->application_id = $this->application_id;
+      $vote->find(array(
+            'stage_id' => $stage->stage_id, 
+            'juror_id' => $juror->juror_id,
+            'application_id' => $this->application_id));
+      if ($vote->isEmpty())
+      {
+        $vote->stage_id = $stage->stage_id;
+        $vote->juror_id = $juror->juror_id;
+        $vote->application_id = $this->application_id;
+      }
       $vote->vote = $score;
       $vote->save();
-      //echo '<br /><br />';
     }
+  }
+
+  public function resetWinner() {
+    $stages = new Application_Model_Stages();
+    $stage = $stages->getFinalStage()->deleteVtes($this);
+    
   }
 }

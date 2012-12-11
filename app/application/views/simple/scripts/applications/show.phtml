@@ -4,101 +4,105 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
 ?>
 <div id="main">
 
-	<div class="application_gallery" id="application_gallery">
-	
-	<?php $this->application->getMiniature(); ?>
+  <div class="application_gallery" id="application_gallery">
+  
+  <?php $this->application->getMiniature(); ?>
 
-	<?php foreach($this->application->files as $file):?>
-		<a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
-			class="application_files" rel="images" >
-		<img id="<?php echo $file->file_id?>" class="sort_item"
-			src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small').'?'.time());?>"
-			alt="<?php echo $this->application->work_subject;?>"
-			class="application_image application_files"
-			rel="images"
-			/>
-		</a>
-		
-		<?php endforeach;?>
-	</div>
+  <?php foreach($this->application->files as $file):?>
+    <a href="<?php echo $this->baseUrl('/assets/applications/'.$file->path);?>"
+      class="application_files" rel="images" >
+    <img id="<?php echo $file->file_id?>" class="sort_item"
+      src="<?php echo $this->baseUrl('assets/applications/'.$file->getImage('small').'?'.time());?>"
+      alt="<?php echo $this->application->work_subject;?>"
+      class="application_image application_files"
+      rel="images"
+      />
+    </a>
+    
+    <?php endforeach;?>
+  </div>
 
-	<div class="application"
-		id="<?php echo $this->application->application_id?>">
+  <div class="application"
+    id="<?php echo $this->application->application_id?>">
 
-		<?php if ($this->user->role == 'admin' || $this->user->role == 'juror' || $this->user->user_id == $this->application->user_id):?>
-		<p class="admin">
-			<a
-				href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->application->application_id), 'lang_edit_application');?>">
-				<img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
-				class="ui-icon ui-icon-pencil no-block"
-				alt="<?php echo $this->translate('edit');?>"
-				title="<?php echo $this->translate('edit');?>">
-			</a>
-		</p>
-		
-		
-		<?php endif?>
-		<p class="application_field"><?php echo strtolower($this->translate('edition'));?></p>
-		<p class="application_data application_edition">
-			<?php echo $this->application->edition->edition_name;?>
-		</p>
+    <?php if ($this->user->role == 'admin' || $this->user->role == 'juror' || $this->user->user_id == $this->application->user_id):?>
+    <p class="admin">
+      <a
+        href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->application->application_id), 'lang_edit_application');?>">
+        <img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+        class="ui-icon ui-icon-pencil no-block"
+        alt="<?php echo $this->translate('edit');?>"
+        title="<?php echo $this->translate('edit');?>">
+      </a>
+    </p>
+    
+    
+    <?php endif?>
+    <p class="application_field"><?php echo strtolower($this->translate('edition'));?></p>
+    <p class="application_data application_edition">
+      <?php echo $this->application->edition->edition_name;?>
+    </p>
 
-		<p class="application_field"><?php echo strtolower($this->translate('title'));?></p>
-		<p class="application_data"><?php echo $this->application->work_subject;?></p>
-		<p class="clearfix" ></p>
-		<p class="application_field"><?php echo strtolower($this->translate('author'));?></p>
-		<p class="application_data">
-			<span class="author"><?php echo $this->application->user->getUserFullName();?>
-				<span class="country">(<?php echo strtoupper($this->application->country);?>)</span>
-			</span>
-		</p>
-		
-		<?php if ($this->application->work_site != null):?>
-		<p class="application_field"><?php echo strtolower($this->translate('work_site'));?></p>
-		<p class="application_data"><a href="<?php echo $this->application->work_site;?>"><?php echo $this->application->work_site;?></a></p>
-		<?php endif;?>
-		
-		<?php if ($this->application->user->email != null):?>
-		<p class="application_field"><?php echo strtolower($this->translate('e-mail'));?></p>
-		<p class="application_data"><?php echo $this->application->user->email;?></p>
-		<?php endif;?>
-		
-		<?php if ($this->application->user->phone != null && ($this->user->role == 'admin' || $this->user->user_id == $this->application->user->user_id)):?>
-		<p class="application_field"><?php echo strtolower($this->translate('phone'));?></p>
-		<p class="application_data"><?php echo $this->application->user->phone;?></p>
-		<?php endif;?>
-		
-		<?php if ($this->application->degree->degree_name != null):?>
-		<p class="application_field"><?php echo strtolower($this->translate('degree'));?></p>
-		<p class="application_data"><?php echo $this->translate($this->application->degree->degree_name.'_adjective');?></p>
-		<?php endif;?>
-		
-		<p class="application_field"><?php echo strtolower($this->translate('school'));?></p>
-		<p class="application_data"><?php echo $this->application->school->school_name;?></p>
-		
-		<p class="application_field"></p>
-		<p class="application_data"><?php echo $this->application->department;?></p>
-		
-		<p class="application_field"><?php echo strtolower($this->translate('supervisor'));?></p>
-		<p class="application_data"><?php echo $this->application->getSupervisor();?></p>
-		
-		<div class="work_desc">
-			<p><?php echo nl2br($this->application->work_desc);?></p>
-		</div>
-		
-		<div class="clear"></div>
-		
-		<?php echo $this->partial('applications/vote-box.phtml', 
-								array('user' => $this->user, 'application' => $this->application,
-										'stages' => $this->stages, 'currentStage' => $this->currentStage, 'votes' => $this->votes));
-		?>
-		<?php if ($this->user->_role != 'user'):?>
+    <p class="application_field"><?php echo strtolower($this->translate('title'));?></p>
+    <p class="application_data"><?php echo $this->application->work_subject;?></p>
+    <p class="clearfix" ></p>
+    <p class="application_field"><?php echo strtolower($this->translate('author'));?></p>
+    <p class="application_data">
+      <span class="author"><?php echo $this->application->user->getUserFullName();?>
+        <span class="country">(<?php echo strtoupper($this->application->country);?>)</span>
+      </span>
+    </p>
+    
+    <?php if ($this->application->work_site != null):?>
+    <p class="application_field"><?php echo strtolower($this->translate('work_site'));?></p>
+    <p class="application_data"><a href="<?php echo $this->application->work_site;?>"><?php echo $this->application->work_site;?></a></p>
+    <?php endif;?>
+    
+    <?php if ($this->application->user->email != null):?>
+    <p class="application_field"><?php echo strtolower($this->translate('e-mail'));?></p>
+    <p class="application_data"><?php echo $this->application->user->email;?></p>
+    <?php endif;?>
+    
+    <?php if ($this->application->user->phone != null && ($this->user->role == 'admin' || $this->user->user_id == $this->application->user->user_id)):?>
+    <p class="application_field"><?php echo strtolower($this->translate('phone'));?></p>
+    <p class="application_data"><?php echo $this->application->user->phone;?></p>
+    <?php endif;?>
+    
+    <?php if ($this->application->degree->degree_name != null):?>
+    <p class="application_field"><?php echo strtolower($this->translate('degree'));?></p>
+    <p class="application_data"><?php echo $this->translate($this->application->degree->degree_name.'_adjective');?></p>
+    <?php endif;?>
+    
+    <p class="application_field"><?php echo strtolower($this->translate('school'));?></p>
+    <p class="application_data"><?php echo $this->application->school->school_name;?></p>
+    
+    <p class="application_field"></p>
+    <p class="application_data"><?php echo $this->application->department;?></p>
+    
+    <p class="application_field"><?php echo strtolower($this->translate('supervisor'));?></p>
+    <p class="application_data"><?php echo $this->application->getSupervisor();?></p>
+    
+    <div class="work_desc">
+      <p><?php echo nl2br($this->application->work_desc);?></p>
+    </div>
+    
+    <div class="clear"></div>
+    
+    <?php echo $this->partial('applications/vote-box.phtml', 
+                array('user' => $this->user, 'application' => $this->application,
+                    'stages' => $this->stages, 'currentStage' => $this->currentStage, 'votes' => $this->votes));
+    ?>
+    <?php if ($this->user->_role != 'user'):?>
     <nav class="diploma_nav">
-			<a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
-			<a href="<?php echo $this->url(array('id' => $this->adjacent['next']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
-		</nav>
-		<?php endif;?>
-	</div>
+      <?php if ($this->adjacent['previous']->application_id != null):?>
+      <a href="<?php echo $this->url(array('id' => $this->adjacent['previous']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+      <?php endif;?>
+      <?php if ($this->adjacent['next']->application_id != null):?>
+      <a href="<?php echo $this->url(array('id' => $this->adjacent['next']->application_id), 'application');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+      <?php endif;?>
+    </nav>
+    <?php endif;?>
+  </div>
 
 </div>
 <img id="loader" src="<?php echo $this->baseUrl('/img/simple/ajax-loader.gif');?>" alt="performing request"/>
