@@ -96,10 +96,10 @@ class Application_Model_Applications extends GP_Application_Model
     {
       $application = new $this;
       $application->populate($row);
-      if ($stage->isFinalStage()) {
+      /*if ($stage->isFinalStage()) {
         $applications[$application->__get('work_type')->work_type_name][$row['country']][$row['application_id']] = $application;
       }
-      elseif (!$filter || $filter == 'all') 
+      else*/if (!$filter || $filter == 'all') 
       {
         $applications[$row['application_id']] = $application;
       }
@@ -405,6 +405,7 @@ class Application_Model_Applications extends GP_Application_Model
   
   public function getRemainedApps($apps_keys)
   {
+    $set = array();
     foreach($this->getDbTable()->getRemainedApps($apps_keys) as $app)
     {
       $obj = new $this;

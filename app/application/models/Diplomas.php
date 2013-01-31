@@ -191,7 +191,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 		}
 		
 		$i = 0;
-		
+		$this->slug = $this->_createSlug();
 		$this->_copyFilesFromApplication($app, true);
 		$this->save();
 		return $this;
