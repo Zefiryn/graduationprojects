@@ -79,7 +79,7 @@ class DiplomasController extends Zefir_Controller_Action
 				$diploma->populateFieldsFromForm($form->getValues());
 				$diploma->save();
 				$this->flashMe('diploma_saved');
-				$this->_redirectToRoute(array('id' => $diploma->diploma_id), 'show_diploma');
+				$this->_redirectToRoute(array('slug' => $diploma->slug, 'lang' => $this->view->lang, 'edition' => $diploma->edition->edition_name), 'lang_slug_project');
 			}
 
 		}
@@ -91,10 +91,20 @@ class DiplomasController extends Zefir_Controller_Action
 		$this->view->form = $form;
 	}
 
-	public function deleteAction()
-	{
-		 
-	}
+  public function deleteAction()
+  {
+    $id = $this->getRequest()->getParam('id',null);
+    if ($id) {
+      $diploma = new Application_Model_Diplomas($id);
+      $edition = $diploma->edition->edition_name;
+      $diploma->delete();
+      $this->flashMe('diploma_deleted', 'ERROR');      
+    }
+    else {
+      $this->flashMe('diploma_not_found', 'ERROR');
+    }
+    $this->_redirectToRoute(array('edition' => $edition),'diplomas');
+  }
 
 	public function sortAction()
 	{

@@ -76,11 +76,6 @@ class Application_Model_Applications extends GP_Application_Model
     }
   }
 
-  public function delete()
-  {
-    return $this->getDbTable()->delete($this);
-  }
-
   public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $country = null, $user = null)
   {
     if (!$user) $user = Zend_Registry::get('user');

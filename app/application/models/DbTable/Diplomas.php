@@ -162,5 +162,30 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
 		$select = $this->select()->where('slug = ?', $slug);
 		return $this->fetchRow($select);
 	}
+
+  public function delete(Application_Model_Diplomas $diploma)
+  {
+    $options = Zend_Registry::get('options');
+    
+    //remove files
+    $this->_deleteDiplomaFiles($diploma->files);
+    
+    //remove application
+    parent::delete($diploma);
+  }
+
+  protected function _deleteDiplomaFiles($files)
+  {
+    $options = Zend_Registry::get('options');
+    foreach($files as $file)
+    {
+      $dir = APPLICATION_PATH.'/../public'.$options['upload']['diplomas'].'/'.substr($file->path, 0, strrpos($file->path, '/'));
+      $path = APPLICATION_PATH.'/../public'.$options['upload']['diplomas'].'/'.$file->path;
+      unlink($path);
+      $file->delete();
+    }
+    
+    rmdir($dir);
+  }
 }
 

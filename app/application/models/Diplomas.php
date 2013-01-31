@@ -50,7 +50,7 @@ class Application_Model_Diplomas extends GP_Application_Model
 		return $self;
 	}
 
-	public function getField($field, $lang)
+  public function getField($field, $lang)
 	{
 		if (!is_array($this->fields))
 		$this->__get('fields');
