@@ -278,6 +278,27 @@ class ApplicationsController extends Zefir_Controller_Action
     
   }
 
+  public function archiveAction() {
+    $id = $this->getRequest()->getParam('id', null);
+    if ($id) {
+      $application = new Application_Model_Applications();
+      $results = $application->archive($id);
+        if ($results['hasError'] == true) 
+        { 
+          $this->flashMe($results[$id]['error'], 'ERROR');
+        }
+        else {
+          $this->flashMe('application_archived', 'SUCCESS');
+        }
+    }
+    else {
+      $this->flashMe('application_no_id', 'ERROR');
+    }
+    $this->_helper->layout()->disableLayout();
+    $this->_helper->viewRenderer->setNoRender(true);    
+    $this->_redirectToRoute(array(), 'applications');
+  }
+
   public function showAction()
   {
     $request = $this->getRequest();

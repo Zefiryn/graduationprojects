@@ -44,6 +44,13 @@
 				alt="<?php echo $this->translate('edit');?>"
 				title="<?php echo $this->translate('edit');?>">
 			</a>
+      <a
+        href="<?php echo $this->url(array('lang' => $this->lang, 'id' => $this->diploma->diploma_id), 'lang_delete_project');?>">
+        <img src="<?php echo $this->baseUrl('img/simple/empty.png');?>"
+        class="ui-icon ui-icon-trash no-block"
+        alt="<?php echo $this->translate('delete');?>"
+        title="<?php echo $this->translate('delete');?>">
+      </a>
 
 		</p>
 		
@@ -92,8 +99,8 @@
 		
 		<nav class="diploma_nav">
 			
-			<a href="<?php echo $this->url(array('slug' => $this->adjacent['previous']->slug, 'lang' => $this->lang, 'edition' => $this->edition_name), 'lang_slug_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
-			<a href="<?php echo $this->url(array('slug' => $this->adjacent['next']->slug, 'lang' => $this->lang, 'edition' => $this->edition_name), 'lang_slug_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
+			<a href="<?php echo $this->url(array('slug' => $this->adjacent['previous']->slug, 'lang' => $this->lang, 'edition' => $this->diploma->edition->edition_name), 'lang_slug_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-back.png')?>" /></a>
+			<a href="<?php echo $this->url(array('slug' => $this->adjacent['next']->slug, 'lang' => $this->lang, 'edition' => $this->diploma->edition->edition_name), 'lang_slug_project');?>" class="wiecej"><img src="<?php echo $this->baseUrl('img/simple/bullet-forward.png')?>" /></a>
 			
 		</nav>
     </div>

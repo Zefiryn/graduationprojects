@@ -423,11 +423,11 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     {
       $dir = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.substr($file->path, 0, strrpos($file->path, '/'));
       $path = APPLICATION_PATH.'/../public'.$options['upload']['applications'].'/'.$file->path;
-      //unlink($path);
+      unlink($path);
       $file->delete();
     }
     
-    //rmdir($dir);
+    rmdir($dir);
   }
   
   public function getAdjacentApplication($application)
