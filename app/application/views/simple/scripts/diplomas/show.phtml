@@ -77,6 +77,16 @@
 		<p class="diploma_field"><?php echo strtolower($this->translate('e-mail'));?></p>
 		<p class="diploma_data"><?php echo $this->diploma->email;?></p>
 		<?php endif;?>
+
+    <?php if ($this->diploma->author_portfolio != null):?>
+    <p class="diploma_field"><?php echo strtolower($this->translate('author_portfolio'));?></p>
+    <p class="diploma_data"><a href="<?php echo $this->diploma->author_portfolio;?>"><?php echo $this->diploma->author_portfolio;?></a></p>
+    <?php endif;?>
+
+    <?php if ($this->diploma->work_site != null):?>
+    <p class="diploma_field"><?php echo strtolower($this->translate('work_site'));?></p>
+    <p class="diploma_data"><a href="<?php echo $this->diploma->work_site;?>"><?php echo $this->diploma->work_site;?></a></p>
+    <?php endif;?>
 		
 		<?php if ($this->diploma->degree->degree_name != null):?>
 		<p class="diploma_field"><?php echo strtolower($this->translate('degree'));?></p>
