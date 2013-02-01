@@ -15,7 +15,7 @@ class Application_Model_DbTable_NewsFiles extends Zefir_Application_Model_DbTabl
 	)
 	);
 
-	public function save(Application_Model_NewsFiles $file)
+	public function save(Zefir_Application_Model $file)
 	{
 		if ($file->news_file_id != null)
 		$oldData = new Application_Model_DiplomaFiles($file->news_file_id);
