@@ -410,6 +410,7 @@ a.lang {
   width: 21px;
   line-height: 28px;
   text-align: center;
+  color: #000;
 }
 
 a.lang:hover {

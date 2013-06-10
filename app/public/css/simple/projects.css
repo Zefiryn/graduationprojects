@@ -36,6 +36,16 @@
 	width: auto;
 }
 
+.extra-fields {
+  display: none;
+}
+
+.extra-fields-control {
+  display: block;
+  margin-left: 125px;
+  cursor: pointer;
+}
+
 .diploma_field,.application_field {
 	width: 95px;
 	margin: 5px 30px 0px 0px;
