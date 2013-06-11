@@ -59,6 +59,15 @@
 		<p>
 			<span class="label"><?php echo $this->translate('work_type')?></span>: <?php echo $this->form->getElement('work_type_id')->getMultiOption($data['work_type_id']);?>
 		</p>
+    
+    <?php if ($data['work_type_id'] == 2):?>
+    <p>
+			<span class="label"><?php echo $this->translate('model_3d')?></span>: <?php echo $this->translate($this->form->getElement('model_3d')->getMultiOption($data['model_3d']));?>
+		</p>
+    <p>
+			<span class="label"><?php echo $this->translate('model_scale')?></span>: <?php echo $data['model_scale'];?>
+		</p>
+    <?php endif;?>
 		
 		<p>
 			<span class="label"><?php echo $this->translate('work_site')?></span>: <?php echo $data['work_site'];?>
@@ -66,6 +75,10 @@
 		
 		<p>
 			<span class="label"><?php echo $this->translate('work_desc')?></span>: <?php echo $data['work_desc'];?>
+		</p>
+    
+    <p>
+			<span class="label"><?php echo $this->translate('work_desc_eng')?></span>: <?php echo $data['work_desc_end'];?>
 		</p>
 		
 		<p>

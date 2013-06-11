@@ -12,11 +12,14 @@ class Application_Model_Applications extends GP_Application_Model
   public $work_subject;
   public $work_site;
   public $work_type_id;
+  public $model_3d;
+  public $model_scale;
   public $work_desc;
+  public $work_desc_eng;
   public $supervisor;
   public $supervisor_degree;
   public $graduation_time;
-  public $application_date;
+  public $application_date;  
   public $active;
   protected $edition;
   protected $user;
@@ -44,6 +47,11 @@ class Application_Model_Applications extends GP_Application_Model
     $appSettings = Zend_Registry::get('appSettings');
     parent::populateFromForm($data);
 
+    if ($this->work_type_id == 1) {
+      $this->model_3d = null;
+      $this->model_scale = null;
+    }
+    
     $this->school = new Application_Model_Schools();
     $this->school->populateFromForm(array('school_name' => $data['school']));
 
@@ -180,7 +188,10 @@ class Application_Model_Applications extends GP_Application_Model
         'work_site' => $this->work_site,
         'work_subject' => $this->work_subject,
         'work_type_id' => $this->work_type_id,
+        'model_3d' => $this->model_3d,
+        'model_3d_scale' => $this->model_3d_scale,
         'work_desc' => $this->work_desc,
+        'work_desc_eng' => $this->work_desc_eng,
         'supervisor_degree' => $this->supervisor_degree,
         'supervisor' => $this->supervisor,
         'graduation_time' => date('d-m-Y', $this->graduation_time),

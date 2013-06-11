@@ -44,6 +44,7 @@ fieldset.fileFieldset {border: 1px solid rgba(203, 46, 102, 0.2);}
 .editNewsImage {border: 1px solid rgb(203, 46, 102);}
 .diploma_edition {color: rgba(203, 46, 102, 0.9);border-bottom-color: rgba(203, 46, 102, 0.9);}
 .work_desc {border-top-color: rgba(203, 46, 102, 0.898);}
+.work_desc_eng {border-top-color: rgba(203, 46, 102, 0.898);}
 .index_author a:hover {background-color: rgba(203, 46, 102, 0.2);}
 .removeProjectImage {border: 1px solid rgb(203, 46, 102);}
 .new_rule a:hover,.new_question a:hover {background-color: rgba(203, 46, 102, 0.1);color: rgba(203, 46, 102, 1);}

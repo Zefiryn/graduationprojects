@@ -71,7 +71,7 @@ class ApplicationsController extends Zefir_Controller_Action
     $form = new Application_Form_Application('new');
     $form->setAction($this->view->url(array(), 'application_new'));
     $form->setDecorators(array(
-    array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
+      array('ViewScript', array('viewScript' => 'forms/_applicationForm.phtml'))
     ));
 
     $session = new Zend_Session_Namespace('applicationForm');
@@ -97,6 +97,16 @@ class ApplicationsController extends Zefir_Controller_Action
         
       $cached = $this->_checkFileCache('new');
         
+      $work_type = new Application_Model_WorkTypes();
+      $work3d = array_search('3d', $work_type->getWorkTypes());
+      if ($request->getPost('work_type_id') == $work3d ) {
+        //model_3d required if worktype is 3d
+        $form->getElement('model_3d')->setRequired(true);
+        if ($request->getPost('model_3d') == 1) {
+          //model scale is required if model_3d is true
+          $form->getElement('model_scale')->setRequired(true);        
+        }
+      }
       if ($form->isValid($request->getPost()) || count($form->getMessages()) == 0)
       {
         //form is valid

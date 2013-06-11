@@ -94,6 +94,10 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
       <p><?php echo nl2br($this->application->work_desc);?></p>
     </div>
     
+    <div class="work_desc_eng">
+      <p><?php echo nl2br($this->application->work_desc_eng);?></p>
+    </div>
+    
     <div class="clear"></div>
     
     <?php echo $this->partial('applications/vote-box.phtml', 

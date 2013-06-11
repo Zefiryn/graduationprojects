@@ -14,6 +14,13 @@ $(document).ready(function(){
   if ($('#work_desc').length )
     letterCounter('work_desc', 'word_counter');
   
+  if ($('#work_desc_eng').length )
+    letterCounter('work_desc_eng', 'word_counter_eng');
+  
+  if($('#model_specific_fields').length > 0) {
+    showModelScale();
+  }
+  
   hintImages();
   
   setDateFields();
@@ -355,6 +362,7 @@ function clearFlash()
 
 function letterCounter(id, counter)
 {
+  console.log($('#'+counter));
   $('#'+counter).text($('#'+id).val().length);
   $('#'+id).focusin(function(){
     setInterval("$('#"+counter+"').text($('#"+id+"').val().length)", 10);
@@ -475,4 +483,15 @@ function scrollToError()
   }
     
   
+}
+
+function showModelScale() {
+  $('#work_type_id').on('change', function(){
+    if ($(this).val() == '2') {
+      $('#model_specific_fields').show();
+    }
+    else {
+      $('#model_specific_fields').hide();
+    }
+  });
 }
