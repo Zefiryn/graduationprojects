@@ -153,7 +153,7 @@
       
       $element = $this->createElement('radio', 'model_3d');
 			$element->setAttribs(array('class' => 'checkbox'))
-				->setLabel('model_3d')
+				->setLabel('model')
         ->setMultiOptions(array(
             1=>'Yes', 0 => 'No'
         ))
