@@ -19,3 +19,4 @@ app/library/Zefir/*
 app/library/Zefir
 *.kdev4
 /nbproject
+server.sh
