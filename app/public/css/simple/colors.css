@@ -1,50 +1,50 @@
 @charset "UTF-8";
-::-moz-selection {background: rgba(203, 46, 102, 0.8);}
-::selection {background: rgba(203, 46, 102, 0.8);}
+::-moz-selection {background: rgba(240, 90, 0, 0.8);}
+::selection {background: rgba(240, 90, 0, 0.8);}
 .hr span {border-top: 1px dashed rgb(203, 203, 203);}
-menu a,menu a:visited,.menu_label {background-color: rgba(203, 46, 102, 0.9);}
-.tekst {border-top-color: rgb(203, 46, 102);}
-h3 {color: rgba(203, 46, 102, 0.9);border-bottom-color: rgba(203, 46, 102, 0.9);}
-a.lang:hover,a.lang-selected:hover {background-color: rgba(203, 46, 102, 0.7);}
-.wiecej:hover {background-color: rgba(203, 46, 102, 0.7);}
-a.strona:hover {background-color: rgba(203, 46, 102, 0.7);}
-a.strona-selected:hover {background-color: rgba(203, 46, 102, 0.7);}
-.lang_choice li {background-color: rgba(203, 46, 102, 0.7);}
-p.flash {background: rgb(203, 46, 102);}
-p.img_hint {border: 1px solid rgba(203, 46, 102, 0.2);}
-.ui-state-highlight {border: 1px solid rgba(203, 46, 102, 0.8) !important;}
-a.path_end:link,a.path_end:visited {color: rgb(203, 46, 102);}
-.ui-widget-content,.ui-widget-header {border: 1px solid rgba(203, 46, 102, 0.5) !important;}
-.ui-state-default {border: 1px solid rgba(203, 46, 102, 0.5) !important;}
-.ui-state-hover {border: 1px solid rgba(203, 46, 102, 0.3) !important;}
-div.juror_user_box {border: 1px solid rgba(203, 46, 102,1);}
-div.juror_box {border: 0px solid rgba(203, 46, 102,0.5);}
-div.juror_header .box_juror_name {background: rgb(203, 46, 102);}
-div.juror_data {border: 1px solid rgba(203, 46, 102,0.5);}
-.juror_box_area {background-color: rgba(203, 46, 102,0.1);}
-.juror_box_area_hover { background-color: rgba(203, 46, 102,0.05);}
-.selectionOption p {border-top: 1px solid rgba(203, 46, 102,0.4);border-left: 1px solid rgba(203, 46, 102,0.4);border-right: 1px solid rgba(203, 46, 102,0.4);}
-.selectionOption:hover ul li:last-child {border-bottom: 1px solid rgba(203, 46, 102,0.4);}
-.selectionOption li {border-left: 1px solid rgba(203, 46, 102,0.4);border-right: 1px solid rgba(203, 46, 102,0.4);}
-.selectionOption li.checked {border-bottom: 1px solid rgba(203, 46, 102,0.4);}
-tr.header th {background-color: rgba(203, 46, 102, 0.8);}
-table.stats {border: 0px solid rgb(203, 46, 102);}
-table.stats tr.header th {background-color: rgba(203, 46, 102, 0.9);}
-div.vote.application_data {border-bottom: 3px double rgba(203, 46, 102, 0.9);}
-span.stage_choice {background: rgba(203, 46, 102,1);}
-.image_move {border: 1px solid rgba(203, 46, 102, 0.8);}
-.editApplication { border: 1px solid rgb(203, 46, 102);}
-.removeProjectImage {border: 1px solid rgb(203, 46, 102);}
-a.index_application_files:link, a.index_application_files:visited {border: 1px solid rgb(203, 46, 102);}
-.error-msg h1 {color: rgba(203, 46, 102, 0.9);border-bottom: 1px solid rgba(203, 46, 102, 0.9);}
+menu a,menu a:visited,.menu_label {background-color: rgba(240, 90, 0, 0.9);}
+.tekst {border-top-color: rgb(240, 90, 0);}
+h3 {color: rgba(240, 90, 0, 0.9);border-bottom-color: rgba(240, 90, 0, 0.9);}
+a.lang:hover,a.lang-selected:hover {background-color: rgba(240, 90, 0, 0.7);}
+.wiecej:hover {background-color: rgba(240, 90, 0, 0.7);}
+a.strona:hover {background-color: rgba(240, 90, 0, 0.7);}
+a.strona-selected:hover {background-color: rgba(240, 90, 0, 0.7);}
+.lang_choice li {background-color: rgba(240, 90, 0, 0.7);}
+p.flash {background: rgb(240, 90, 0);}
+p.img_hint {border: 1px solid rgba(240, 90, 0, 0.2);}
+.ui-state-highlight {border: 1px solid rgba(240, 90, 0, 0.8) !important;}
+a.path_end:link,a.path_end:visited {color: rgb(240, 90, 0);}
+.ui-widget-content,.ui-widget-header {border: 1px solid rgba(240, 90, 0, 0.5) !important;}
+.ui-state-default {border: 1px solid rgba(240, 90, 0, 0.5) !important;}
+.ui-state-hover {border: 1px solid rgba(240, 90, 0, 0.3) !important;}
+div.juror_user_box {border: 1px solid rgba(240, 90, 0,1);}
+div.juror_box {border: 0px solid rgba(240, 90, 0,0.5);}
+div.juror_header .box_juror_name {background: rgb(240, 90, 0);}
+div.juror_data {border: 1px solid rgba(240, 90, 0,0.5);}
+.juror_box_area {background-color: rgba(240, 90, 0,0.1);}
+.juror_box_area_hover { background-color: rgba(240, 90, 0,0.05);}
+.selectionOption p {border-top: 1px solid rgba(240, 90, 0,0.4);border-left: 1px solid rgba(240, 90, 0,0.4);border-right: 1px solid rgba(240, 90, 0,0.4);}
+.selectionOption:hover ul li:last-child {border-bottom: 1px solid rgba(240, 90, 0,0.4);}
+.selectionOption li {border-left: 1px solid rgba(240, 90, 0,0.4);border-right: 1px solid rgba(240, 90, 0,0.4);}
+.selectionOption li.checked {border-bottom: 1px solid rgba(240, 90, 0,0.4);}
+tr.header th {background-color: rgba(240, 90, 0, 0.8);}
+table.stats {border: 0px solid rgb(240, 90, 0);}
+table.stats tr.header th {background-color: rgba(240, 90, 0, 0.9);}
+div.vote.application_data {border-bottom: 3px double rgba(240, 90, 0, 0.9);}
+span.stage_choice {background: rgba(240, 90, 0,1);}
+.image_move {border: 1px solid rgba(240, 90, 0, 0.8);}
+.editApplication { border: 1px solid rgb(240, 90, 0);}
+.removeProjectImage {border: 1px solid rgb(240, 90, 0);}
+a.index_application_files:link, a.index_application_files:visited {border: 1px solid rgb(240, 90, 0);}
+.error-msg h1 {color: rgba(240, 90, 0, 0.9);border-bottom: 1px solid rgba(240, 90, 0, 0.9);}
 input:focus,textarea:focus,select:focus {border: 1px solid rgb(203,46,102);-moz-box-shadow: inset 0 0 6px rgb(203,46,102);-webkit-box-shadow: inset 0 0 6px rgb(203,46,102);box-shadow: inset 0 0 4px rgb(203,46,102);}
-fieldset.fileFieldset {border: 1px solid rgba(203, 46, 102, 0.2);}
-.news.news-new img {background: rgb(203, 46, 102);}
-.editNews {border: 1px solid rgb(203, 46, 102);}
-.editNewsImage {border: 1px solid rgb(203, 46, 102);}
-.diploma_edition {color: rgba(203, 46, 102, 0.9);border-bottom-color: rgba(203, 46, 102, 0.9);}
-.work_desc {border-top-color: rgba(203, 46, 102, 0.898);}
-.work_desc_eng {border-top-color: rgba(203, 46, 102, 0.898);}
-.index_author a:hover {background-color: rgba(203, 46, 102, 0.2);}
-.removeProjectImage {border: 1px solid rgb(203, 46, 102);}
-.new_rule a:hover,.new_question a:hover {background-color: rgba(203, 46, 102, 0.1);color: rgba(203, 46, 102, 1);}
+fieldset.fileFieldset {border: 1px solid rgba(240, 90, 0, 0.2);}
+.news.news-new img {background: rgb(240, 90, 0);}
+.editNews {border: 1px solid rgb(240, 90, 0);}
+.editNewsImage {border: 1px solid rgb(240, 90, 0);}
+.diploma_edition {color: rgba(240, 90, 0, 0.9);border-bottom-color: rgba(240, 90, 0, 0.9);}
+.work_desc {border-top-color: rgba(240, 90, 0, 0.898);}
+.work_desc_eng {border-top-color: rgba(240, 90, 0, 0.898);}
+.index_author a:hover {background-color: rgba(240, 90, 0, 0.2);}
+.removeProjectImage {border: 1px solid rgb(240, 90, 0);}
+.new_rule a:hover,.new_question a:hover {background-color: rgba(240, 90, 0, 0.1);color: rgba(240, 90, 0, 1);}
