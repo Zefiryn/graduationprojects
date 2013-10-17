@@ -60,26 +60,13 @@ class Application_Model_Diplomas extends GP_Application_Model
     $options = Zend_Registry::get('options');
     $default_language = $options['i18n']['default_language'];
 
+    $entry = '';
     foreach($this->fields as $diplomaField)
     {
       if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $lang)
       $entry = $diplomaField->entry;
-
-//       if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == 'pl')
-//       $entry_pl = $diplomaField->entry;
-// 
-//       if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $default_language)
-//       $entry_def_lang = $diplomaField->entry;
     }
     return  $entry;
-//     if (isset($entry) && $entry != '' )
-//       return  $entry;
-//     elseif (isset($entry_def_lang) && $entry_def_lang != '')
-//       return $entry_def_lang;
-//     elseif (isset($entry_pl) && $entry_pl != '')
-//       return $entry_pl;
-//     else
-//       return null;
   }
   
   public function getFirstFile()

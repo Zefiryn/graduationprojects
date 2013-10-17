@@ -269,6 +269,13 @@ td.admin_column {
   border-left: 3px solid #fff;
   margin-bottom: 0px;
 }
+td.work_type {
+    text-align: center;
+    width: 65px !important;
+}
+td .application-model {
+  display: block;  
+}
 
 table.stats {
   width: 300px;

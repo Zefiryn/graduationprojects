@@ -91,6 +91,10 @@ $(document).ready(function(){
   if ($('.final-stage').length > 0) {
     finalStage();
   }
+  
+  if ($('.extra-fields').length > 0) {
+    bindExtraFields();
+  }
 });
 
 function showCaptions()
@@ -842,5 +846,12 @@ function finalStage() {
   
   $('.final-stage .country').on('click', function() {
     $(this).find('.app-wrapper').toggle();
+  });
+}
+
+function bindExtraFields() {
+  $('.extra-fields-control').on('click',function(){
+    $('.extra-fields').toggle();
+    $('.extra-fields-control-button').toggle();
   });
 }

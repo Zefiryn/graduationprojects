@@ -149,10 +149,59 @@
 					new Zend_Validate_Digits()
 				));
 			$this->addElement($element);
+      
+      
+      $element = $this->createElement('radio', 'model_3d');
+			$element->setAttribs(array('class' => 'checkbox'))
+				->setLabel('model')
+        ->setMultiOptions(array(
+            1=>'Yes', 0 => 'No'
+        ))
+				->setDecorators(array(
+              array('ViewHelper'),
+              array('Label', array('tag' => 'p', 'class' => 'label', 'placement' => 'prepend')),
+              array('ErrorMsg', array('image' => FALSE)),
+        ))
+        ->setRequired(FALSE);
+			$this->addElement($element);
+      
+      $element = $this->createElement('text', 'model_scale');
+			$element->setAttribs(array('class' => 'width1'))
+							->setLabel('model_scale')
+							->setDecorators(array(
+                  array('TextField'),
+                  array('MyLabel', array('placement' => 'prepend', 'class' => 'label model_scale')),
+                  array('ErrorMsg', array('image' => FALSE)),
+                  array('UnderDescription', array('class' => 'description', 'placement' => 'append')))
+              )
+							->setRequired(FALSE)
+              ->addFilters(array(
+									new Zend_Filter_StringTrim()
+							))
+							->addValidators(array(
+									new Zend_Validate_StringLength(array('min' => 3, 'max' => 20))
+							));
+			$this->addElement($element);
+      
 
 			$element = $this->createElement('textarea', 'work_desc');
 			$element->setAttribs(array('class' => 'desc'))
 				->setLabel('work_desc')
+				->setDescription('work_desc_count')
+				->setDecorators($this->_getZefirDecorators())
+				->setRequired(TRUE)
+				->addFilters(array(
+					new Zend_Filter_StringTrim()
+				))
+				->addValidators(array(
+				//new Zend_Validate_Regex('/^['.$L.$N.$S.$E.$B.' ]+$/'),
+					new Zend_Validate_StringLength(array('max'=>2300, 'encoding' => 'utf8'))
+				));
+			$this->addElement($element);
+      
+      $element = $this->createElement('textarea', 'work_desc_eng');
+			$element->setAttribs(array('class' => 'desc'))
+				->setLabel('work_desc_eng')
 				->setDescription('work_desc_count')
 				->setDecorators($this->_getZefirDecorators())
 				->setRequired(TRUE)

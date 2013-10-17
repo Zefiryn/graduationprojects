@@ -73,17 +73,29 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
     <p class="application_data"><?php echo $this->translate($this->application->degree->degree_name.'_adjective');?></p>
     <?php endif;?>
     
-    <p class="application_field"><?php echo strtolower($this->translate('school'));?></p>
-    <p class="application_data"><?php echo $this->application->school->school_name;?></p>
+    <div class="extra-fields">
+      <p class="application_field"><?php echo strtolower($this->translate('school'));?></p>
+      <p class="application_data"><?php echo $this->application->school->school_name;?></p>
     
-    <p class="application_field"></p>
-    <p class="application_data"><?php echo $this->application->department;?></p>
+      <p class="application_field"></p>
+      <p class="application_data"><?php echo $this->application->department;?></p>
+
+      <p class="application_field"><?php echo strtolower($this->translate('supervisor'));?></p>
+      <p class="application_data"><?php echo $this->application->getSupervisor();?></p>
+    </div>
     
-    <p class="application_field"><?php echo strtolower($this->translate('supervisor'));?></p>
-    <p class="application_data"><?php echo $this->application->getSupervisor();?></p>
-    
+    <?php if ($this->user->role == 'admin'):?>
+    <p class="extra-fields-control">
+      <span class="extra-fields-control-button"><?php echo $this->translate('show school fields');?></span>
+      <span class="extra-fields-control-button" style="display: none;"><?php echo $this->translate('hide school fields');?></span>
+    </p>
+    <?php endif;?>
     <div class="work_desc">
       <p><?php echo nl2br($this->application->work_desc);?></p>
+    </div>
+    
+    <div class="work_desc_eng">
+      <p><?php echo nl2br($this->application->work_desc_eng);?></p>
     </div>
     
     <div class="clear"></div>

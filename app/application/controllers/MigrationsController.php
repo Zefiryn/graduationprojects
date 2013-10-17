@@ -149,8 +149,7 @@ class MigrationsController extends Zefir_Controller_Action
 				
 			if ($Diploma->surname != null)
 			{
-				var_dump($Diploma->surname);
-				var_dump($sim->rowCount());
+				
 			}
 			while ($rim = $sim->fetch())
 			{
