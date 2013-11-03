@@ -270,7 +270,7 @@
 				$this->addSubForm($subForm, 'file_'.$i);
 			}
 
-			$this->_createCsrfElement();
+			//$this->_createCsrfElement();
 			$this->_createStandardSubmit('application_submit');
 			$this->addDisplayGroup(array('leave', 'submit'), 'submitFields')
 			->setDisplayGroupDecorators(array(

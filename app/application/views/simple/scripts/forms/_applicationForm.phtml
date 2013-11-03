@@ -9,19 +9,14 @@ $appSettings = Zend_Registry::get('appSettings');
 
 
 
-	<?php if ($form->csrf->hasErrors()):?>
+	<?php if (is_object($form->csrf) && $form->csrf->hasErrors()):?>
 	<p class="spacer">&nbsp;</p>
 	<div id="error-csrf" class="error-div">
-		<p class="error">
-			
+		<p class="error">			
 		<?php echo $this->translate('csrf_error')?></p>
 	</div>
-	
-	
-	
-	
-	<?php endif;?>
-	<?php echo $form->csrf->renderViewHelper(); ?> 
+  <?php endif;?>
+	<?php if (is_object($form->csrf)) echo $form->csrf->renderViewHelper(); ?> 
 	<?php echo $form->edition_id;?>
 	
 	<div class="column-left">

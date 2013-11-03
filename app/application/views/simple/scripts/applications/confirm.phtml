@@ -98,19 +98,18 @@
 				$file = $this->form->getSubForm('file_'.$i);
 				$cache = 'file_'.$i.'Cache';
 				$id = 'file'.$i.'_id';
-
+        
 				//get the data for delete link
 				if ($file->$id != null)
 					$file_id = $file->$id;
 				else
-					$file_id = substr($file->$cache->getValue(), strrpos($file->$cache->getValue(), '/')+1);
-				
-				if ($file->$cache->getValue() != null):?>
+					$file_id = substr($file->getElement($cache)->getValue(), strrpos($file->getElement($cache)->getValue(), '/')+1);
+				if ($file->getElement($cache)->getValue() != null):?>
 			<div>
 			<a 	class="form_file"
-				href="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>"
+				href="<?php echo $this->baseUrl('/assets/'.$file->getElement($cache)->getValue());?>"
 				rel="cache" >
-				<img src="<?php echo $this->baseUrl('/assets/'.$file->$cache->getValue());?>" alt="" />
+				<img src="<?php echo $this->baseUrl('/assets/'.$file->getElement($cache)->getValue());?>" alt="" />
 			</a>
 			<?php if ($i % 4 == 0):?><p class="clearfix"></p><?php endif;?>
 			</div>
