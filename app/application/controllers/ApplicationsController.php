@@ -29,7 +29,7 @@ class ApplicationsController extends Zefir_Controller_Action
     }
     $this->view->applications = $applications;
     $this->view->stages = $stages->fetchAll();
-    if ($this->view->user->_role == 'admin' && $currentStage && !$currentStage->isFinalStage())
+    if ($this->view->user->_role == 'admin' && $currentStage /* && !$currentStage->isFinalStage()*/)
     {
       $this->view->votes = $this->_getAllVotes($currentStage, $applications, $jurors);
     }
@@ -45,14 +45,14 @@ class ApplicationsController extends Zefir_Controller_Action
     {
       $this->_helper->layout()->disableLayout();
       $this->_helper->viewRenderer->setNoRender(true);
-      if($currentStage->isFinalStage()) 
-      {
-        $this->renderScript('applications/_final_stage.phtml');
-      }
-      else 
-      {
+//      if($currentStage->isFinalStage()) 
+//      {
+//        $this->renderScript('applications/_final_stage.phtml');
+//      }
+//      else 
+//      {
         $this->renderScript('applications/_table_data.phtml');
-      }
+//      }
     }
   }
 
@@ -95,9 +95,6 @@ class ApplicationsController extends Zefir_Controller_Action
         $this->_redirectToRoute(array(), 'root');
       }
         
-      $cached = $this->_checkFileCache('new');
-      $this->_handleFiles($form, $cached);
-      
       $work_type = new Application_Model_WorkTypes();
       $work3d = array_search('3d', $work_type->getWorkTypes());
       if ($request->getPost('work_type_id') == $work3d ) {
@@ -107,14 +104,17 @@ class ApplicationsController extends Zefir_Controller_Action
           //model scale is required if model_3d is true
           $form->getElement('model_scale')->setRequired(true);        
         }
-      }
+      }      
       if ($form->isValid($request->getPost()) || count($form->getMessages()) == 0)
-      {
+      {        
+        $cached = $this->_checkFileCache('new');
+        $this->_handleFiles($form, $cached);      
+      
         //form is valid
         if (!$form->getSubForm('file_1')->getElement('file_1')->hasErrors())
         {
           $form = $this->_createFileOrder($form);
-          $session->form = $form->getValues();
+          $session->form = $form->getValues();          
           $this->view->form = $form;
           $this->view->path = array(
           0 => array('route' => 'root', 'data' => array(), 'name' => array('main_page')),
@@ -628,7 +628,7 @@ class ApplicationsController extends Zefir_Controller_Action
     for($i = 1; $i <= $appSettings->max_files; $i++)
     {
       $sf = $form->getSubForm('file_'.$i);
-      $sf = $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i);
+      $this->_cacheFile($options['upload']['cache'], $sf, 'file_'.$i);
       if ($sf->getElement('file_'.$i.'Cache')->getValue() != null)
       {
         $newFile = TRUE;
