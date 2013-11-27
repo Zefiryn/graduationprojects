@@ -126,6 +126,8 @@ class ApplicationsController extends Zefir_Controller_Action
       }
       else
       {//form has errors
+        $cached = $this->_checkFileCache('new');
+        $this->_handleFiles($form, $cached);      
         $this->_log('Form values:');
         $params= $form->getValues();$params['user']['password']=null;$params['user']['password_check']=null;
         $this->_log($params);
