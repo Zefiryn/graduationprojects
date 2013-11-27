@@ -15,7 +15,7 @@ class ErrorController extends Zefir_Controller_Action
   public function errorAction()
   {
     $errors = $this->_getParam('error_handler');
-
+    
     if (!$errors) {
       $this->view->message = 'You have reached the error page';
       return;
@@ -43,6 +43,7 @@ class ErrorController extends Zefir_Controller_Action
 
     // Log exception, if logger available
     if ($saveToLog && $log = $this->_startLogger('critical')) {
+      $log->log($this->getRequest()->getPathInfo(),Zend_Log::DEBUG);
       $log->log($this->view->message,Zend_Log::DEBUG);
       $log->log($errors->exception,Zend_Log::DEBUG);      
     }
