@@ -131,6 +131,8 @@ class ApplicationsController extends Zefir_Controller_Action
         $this->_log('Form values:');
         $params= $form->getValues();$params['user']['password']=null;$params['user']['password_check']=null;
         $this->_log($params);
+        $this->_log('Form errors:');
+        $this->_log($form->getMessages());
       }
     }
     else
