@@ -97,16 +97,6 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
       <!-- WORK TYPE -->
       <td class="normal work_type" style="width: 35px;">
         <?php echo $application->work_type->work_type_name;?>
-        <?php if ($application->work_type->work_type_name == '3d'):?>
-        <span class="application-model">
-          <?php echo $this->translate('model');?>: <?php echo $application->model_3d == 1 ? $this->translate('Yes') : $this->translate('No');?>
-        </span>
-        <?php if ($application->model_3d == 1 ):?>
-        <span class="application-model">
-          <?php echo $this->translate('model_scale');?>: <?php echo $application->model_scale;?>
-        </span>
-        <?php endif;?>
-        <?php endif;?>
       </td>
       
       <!-- SUBJECT -->
