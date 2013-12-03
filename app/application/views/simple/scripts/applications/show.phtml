@@ -73,6 +73,16 @@ $juror = $this->user->_role == 'juror' ? $this->user->juror : FALSE;
     <p class="application_data"><?php echo $this->translate($this->application->degree->degree_name.'_adjective');?></p>
     <?php endif;?>
     
+    
+    <?php if ($this->application->work_type->work_type_name == '3d'):?>
+    <p class="application_field"><?php echo strtolower($this->translate('model'));?></p>
+    <p class="application_data"><?php echo $this->application->model_3d == 1 ? $this->translate('Yes') : $this->translate('No');?></span>
+    <?php if ($this->application->model_3d == 1 ):?>
+    <p class="application_field"><?php echo strtolower($this->translate('model_scale'));?></p>
+    <p class="application_data"><?php echo $this->application->model_scale;?></p>
+    <?php endif;?>
+    <?php endif;?>
+    
     <div class="extra-fields">
       <p class="application_field"><?php echo strtolower($this->translate('school'));?></p>
       <p class="application_data"><?php echo $this->application->school->school_name;?></p>

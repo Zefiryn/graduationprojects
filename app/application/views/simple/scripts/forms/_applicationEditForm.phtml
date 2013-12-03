@@ -34,6 +34,12 @@ $appSettings = Zend_Registry::get('appSettings');
 		<?php echo $form->work_site;?>
 		
 		<?php echo $form->work_type_id;?>
+    
+    <div id="model_specific_fields" <?php if ($form->work_type_id->getValue() == 2):?>style="display: block;"<?php endif;?>>
+      <?php echo $form->model_3d;?>
+      
+      <?php echo $form->model_scale;?>
+    </div>
 		
 		<p class="label"><?php echo $this->translate($form->work_desc->getLabel());?>:&nbsp;
 		<span style="color: #987878;"><?php echo $this->translate($form->work_desc->getDescription());?></span>
