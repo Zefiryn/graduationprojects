@@ -81,7 +81,7 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
     parent::__construct(array());
   }
 
-  public function getAllApplications($sort, $stage)
+  public function getAllApplications($sort, $stage, $type = null)
   {
     $user = new Application_Model_Users();
     $user_table = $user->getDbTable()->getTablename();
@@ -97,6 +97,10 @@ class Application_Model_DbTable_Applications extends Zefir_Application_Model_DbT
           ->join(array('w' => $work_type_table), 'a.work_type_id= w.work_type_id')
           ->where('edition_id = ?', $appSettings->current_edition)
           ->order($sort);
+    
+    if ($type != null && $type != 'all') {
+      $select->where('w.work_type_name = ?', $type);
+    }
     
     if ($stage)
     {

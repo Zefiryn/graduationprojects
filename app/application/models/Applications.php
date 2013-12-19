@@ -84,7 +84,7 @@ class Application_Model_Applications extends GP_Application_Model
     }
   }
 
-  public function getApplications($sort = NULL, $stage = NULL, $filter = null, $range = array(), $country = null, $user = null)
+  public function getApplications($sort = NULL, $stage = NULL, $work_type = null, $filter = null, $range = array(), $country = null, $user = null)
   {
     if (!$user) $user = Zend_Registry::get('user');
     
@@ -92,7 +92,7 @@ class Application_Model_Applications extends GP_Application_Model
     
     $sort = $sort != NULL ? array($sort, 'surname ASC', 'name ASC', 'application_date ASC') : array('application_date ASC', 'surname ASC');
     
-    $rowset = $this->getDbTable()->getAllApplications($sort, $stage);
+    $rowset = $this->getDbTable()->getAllApplications($sort, $stage, $work_type);
 
     $applications = array();
     foreach($rowset as $row)

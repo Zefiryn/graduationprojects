@@ -4,19 +4,31 @@
   <div class="selectionOption">
     <p><?php echo $this->translate('voting_stage');?></p>
     <ul id="stageSelect">
-
-    <?php foreach($this->options['stages'] as $stage):?>
-    <li id="stage<?php echo $stage->order?>" data-stage="<?php echo $stage->order;?>" <?php if ($this->selection['stage'] == $stage->order):?>class="checked"<?php endif;?>>
-      <?php echo $stage->stage_name; ?>
-    </li>
-    <?php endforeach;?>
-
+      <?php foreach($this->options['stages'] as $stage):?>
+      <li id="stage<?php echo $stage->order?>" data-stage="<?php echo $stage->order;?>" <?php if ($this->selection['stage'] == $stage->order):?>class="checked"<?php endif;?>>
+        <?php echo $stage->stage_name; ?>
+      </li>
+      <?php endforeach;?>
+    </ul> 
+  </div>
+  
+  <div class="selectionOption">
+    <p><?php echo $this->translate('work_type');?></p>
+    <ul id="work_type_select">      
+      <li id="work_type_2d" data-work-type="all" <?php if ($this->selection['work_type'] == 'all'):?>class="checked"<?php endif;?>>
+        <?php echo $this->translate('both');?>
+      </li>
+      <li id="work_type_2d" data-work-type="2d" <?php if ($this->selection['work_type'] == '2d'):?>class="checked"<?php endif;?>>
+        2d
+      </li>
+      <li id="work_type_3d" data-work-type="3d" <?php if ($this->selection['work_type'] == '3d'):?>class="checked"<?php endif;?>>
+        3d
+      </li>
     </ul> 
   </div>
 
   <div class="selectionOption">
-    <p><?php echo $this->translate('sort_application');?></p>
-    
+    <p><?php echo $this->translate('sort_application');?></p>    
     <ul id="sortSelect">
       <?php foreach($this->options['sort'] as $caption => $name): ?>
       <li id="sort_<?php echo $name;?>" data-sort="<?php echo $name;?>" <?php if ($this->selection['sort'] == $name):?>class="checked"<?php endif;?>>

@@ -18,7 +18,7 @@ class ApplicationsController extends Zefir_Controller_Action
     $application = new Application_Model_Applications();
     
     $sort = $this->_getSort(). ' ' . $this->_getSortOrder();
-    $applications = $application->getApplications($sort, $currentStage, $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
+    $applications = $application->getApplications($sort, $currentStage, $this->_getWorkType(), $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
     
     $stages = new Application_Model_Stages();
     $jurors = new Application_Model_Jurors();
@@ -37,6 +37,7 @@ class ApplicationsController extends Zefir_Controller_Action
     $this->view->filterOptions = $this->_getFilterOptions();
     $this->view->selection = array('stage' => $this->_getCurrentStage()->order,
                     'sort' => $this->_getSort(),
+                    'work_type' => $this->_getWorkType(),
                     'sort_order' => $this->_getSortOrder(),
                     'filter' => $this->_getFilter(),
                     'range' => $this->_getRange());
@@ -725,6 +726,23 @@ class ApplicationsController extends Zefir_Controller_Action
     //save current sort
     $sortApplication->sort = $currentSort;
     return $currentSort;
+  }
+  
+  protected function _getWorkType()
+  {
+    $request = $this->getRequest();
+    $type = new Zend_Session_Namespace('work_type');
+     
+    $currentType = $request->getParam('work_type', NULL);
+
+    if (!$currentType)
+    {
+      $currentType = $type->type ? $type->type : 'both';
+    }
+    
+    //save current sort
+    $type->type = $currentType;
+    return $currentType;
   }
   
   protected function _getSortOrder()
