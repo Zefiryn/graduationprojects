@@ -737,7 +737,7 @@ class ApplicationsController extends Zefir_Controller_Action
 
     if (!$currentType)
     {
-      $currentType = $type->type ? $type->type : 'both';
+      $currentType = $type->type ? $type->type : 'all';
     }
     
     //save current sort
