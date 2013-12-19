@@ -450,6 +450,7 @@ function filterForm()
     var data = {
         'stage' : $('#stageSelect li.checked').data('stage'),
         'sort' : $('#sortSelect li.checked').data('sort'),
+        'work_type' : $('#work_type_select li.checked').data('work-type'),
         'sort_order': $('#sortOrder li.checked').data('sort-order'),
         'filter' : $('#filterSelect li.checked').data('filter'),
         'rangeStart' : $('#rangeStart').val(),
