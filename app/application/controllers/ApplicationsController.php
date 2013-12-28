@@ -69,23 +69,22 @@ class ApplicationsController extends Zefir_Controller_Action
     
     $path = APPLICATION_PATH.'/../public/assets/cache/applications_stage'.$currentStage->stage_id.'.csv';
     $handle = fopen($path, 'w');
-    $fields = array('#', 'Numer zgłoszenia', 'Imię i nazwisko', 'Email', 'Tytuł', 'Strona projektu', 'Kraj', 'Typ', 'Dyplom', 'Opis', 'Opis angielski');
+    $fields = array('Imię', 'Nazwisko', 'Tytuł', '2D/3D', 'Kraj', 'E-mail', 'Telefon', 'Szkoła', 'Wydział', 'Promotor', 'Dyplom');
     fputcsv($handle, $fields);
     $i = 1;
     foreach($applications as $application) {
       $fields = array(
-          $i++,
-          $application->application_id,
-          $application->user->getUserFullName(),
-          $application->user->email,
+          $application->user->name,
+          $application->user->surname,          
           $application->work_subject,
-          $application->work_site,
-          $this->view->translate($application->country),
           $application->work_type->work_type_name,
-          $this->view->translate($application->degree->degree_name),
-          $application->work_desc,
-          $application->work_desc_eng
-          
+          $this->view->translate($application->country),
+          $application->user->email,
+          $application->user->phone,
+          $application->school->school_name,
+          $application->department,
+          $application->supervisor_degree .' '.$application->supervisor,
+          $this->view->translate($application->degree->degree_name)
       );
       fputcsv($handle, $fields);
     }
