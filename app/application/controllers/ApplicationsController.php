@@ -24,9 +24,9 @@ class ApplicationsController extends Zefir_Controller_Action
     $jurors = new Application_Model_Jurors();
     $jurors = $jurors->fetchAll();
       
-    if (!$currentStage->isFinalStage()) {
+    //if (!$currentStage->isFinalStage()) {
       $this->view->statistics = $this->_createStatistics($applications);
-    }
+    //}
     $this->view->applications = $applications;
     $this->view->stages = $stages->fetchAll();
     if ($this->view->user->_role == 'admin' && $currentStage /* && !$currentStage->isFinalStage()*/)
@@ -55,6 +55,45 @@ class ApplicationsController extends Zefir_Controller_Action
         $this->renderScript('applications/_table_data.phtml');
 //      }
     }
+  }
+  
+  public function exportAction() {
+    $this->_helper->layout()->disableLayout();
+    $this->_helper->viewRenderer->setNoRender(true);
+    
+    $currentStage = $this->_getCurrentStage();
+    $application = new Application_Model_Applications();
+    
+    $sort = $this->_getSort(). ' ' . $this->_getSortOrder();
+    $applications = $application->getApplications($sort, $currentStage, $this->_getWorkType(), $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
+    
+    $path = APPLICATION_PATH.'/../public/assets/cache/applications_stage'.$currentStage->stage_id.'.csv';
+    $handle = fopen($path, 'w');
+    $fields = array('#', 'Numer zgłoszenia', 'Imię i nazwisko', 'Email', 'Tytuł', 'Strona projektu', 'Kraj', 'Typ', 'Dyplom', 'Opis', 'Opis angielski');
+    fputcsv($handle, $fields);
+    $i = 1;
+    foreach($applications as $application) {
+      $fields = array(
+          $i++,
+          $application->application_id,
+          $application->user->getUserFullName(),
+          $application->user->email,
+          $application->work_subject,
+          $application->work_site,
+          $this->view->translate($application->country),
+          $application->work_type->work_type_name,
+          $this->view->translate($application->degree->degree_name),
+          $application->work_desc,
+          $application->work_desc_eng
+          
+      );
+      fputcsv($handle, $fields);
+    }
+    
+    $response = $this->getResponse();
+    $response->setHeader('Content-type', 'application/octet-stream');
+    $response->setHeader('Content-Disposition', 'attachment; filename="applications_stage'.$currentStage->stage_id.'.csv"');
+    readfile($path);
   }
 
   public function newAction()
