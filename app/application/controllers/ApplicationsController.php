@@ -69,7 +69,7 @@ class ApplicationsController extends Zefir_Controller_Action
     
     $path = APPLICATION_PATH.'/../public/assets/cache/applications_stage'.$currentStage->stage_id.'.csv';
     $handle = fopen($path, 'w');
-    $fields = array('Imię', 'Nazwisko', 'Tytuł', '2D/3D', 'Kraj', 'E-mail', 'Telefon', 'Szkoła', 'Wydział', 'Promotor', 'Dyplom');
+    $fields = array('Imię', 'Nazwisko', 'Tytuł', '2D/3D', 'Kraj', 'Adres', 'E-mail', 'Telefon', 'Szkoła', 'Wydział', 'Promotor', 'Dyplom');
     fputcsv($handle, $fields);
     $i = 1;
     foreach($applications as $application) {
@@ -79,6 +79,7 @@ class ApplicationsController extends Zefir_Controller_Action
           $application->work_subject,
           $application->work_type->work_type_name,
           $this->view->translate($application->country),
+          $application->user->address,
           $application->user->email,
           $application->user->phone,
           $application->school->school_name,
