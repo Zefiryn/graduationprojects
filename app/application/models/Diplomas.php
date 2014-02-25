@@ -271,9 +271,9 @@ class Application_Model_Diplomas extends GP_Application_Model
     return Zefir_Filter::strToUrl($this->getAuthorName());
   }
   
-  public function findBySlug($slug)
+  public function findBySlug($slug, $edition = null)
   {
-    $row = $this->getDbTable()->findBySlug($slug);
+    $row = $this->getDbTable()->findBySlug($slug, $edition);
     
     if ($row)
     {

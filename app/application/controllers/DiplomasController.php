@@ -31,6 +31,7 @@ class DiplomasController extends Zefir_Controller_Action
 	public function showAction()
 	{
 		$request = $this->getRequest();
+    $edition_name = $request->getParam('edition', null);
 		$id = $request->getParam('id', null);
 		$slug = $request->getParam('slug', null);
 		if ($id)
@@ -39,9 +40,11 @@ class DiplomasController extends Zefir_Controller_Action
 		}
 		elseif ($slug) 
 		{
+      $edition = new Application_Model_Editions();
+      $edition->getEditionByName($edition_name);
 			$diploma = new Application_Model_Diplomas();
-			$diploma->findBySlug($slug);
-			$this->view->edition_name = $request->getParam('edition', null);
+			$diploma->findBySlug($slug, $edition);
+			$this->view->edition_name = $edition_name;
 		}
 		$this->view->diploma = $diploma;
 		$this->view->adjacent = $diploma->getAdjacentDiplomas();

@@ -157,9 +157,12 @@ class Application_Model_DbTable_Diplomas extends Zefir_Application_Model_DbTable
 		return $nextDiploma;
 	}
 
-	public function findBySlug($slug)
+	public function findBySlug($slug, $edition)
 	{
 		$select = $this->select()->where('slug = ?', $slug);
+    if ($edition != null) {
+      $select->where('edition_id = ?', $edition->edition_id);
+    }
 		return $this->fetchRow($select);
 	}
 
