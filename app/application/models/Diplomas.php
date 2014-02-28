@@ -63,8 +63,9 @@ class Application_Model_Diplomas extends GP_Application_Model
     $entry = '';
     foreach($this->fields as $diplomaField)
     {
-      if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $lang)
-      $entry = $diplomaField->entry;
+      if ($diplomaField->field->field_name == $field && $diplomaField->lang->lang_code == $lang) {
+        $entry = $diplomaField->entry;
+      }
     }
     return  $entry;
   }
