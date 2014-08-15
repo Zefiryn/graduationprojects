@@ -95,6 +95,52 @@ class ApplicationsController extends Zefir_Controller_Action
     $response->setHeader('Content-Disposition', 'attachment; filename="applications_stage'.$currentStage->stage_id.'.csv"');
     readfile($path);
   }
+  
+  public function fullexportAction() {
+    $this->_helper->layout()->disableLayout();
+    $this->_helper->viewRenderer->setNoRender(true);
+    
+    $currentStage = $this->_getCurrentStage();
+    $application = new Application_Model_Applications();
+    
+    $sort = $this->_getSort(). ' ' . $this->_getSortOrder();
+    $applications = $application->getApplications($sort, $currentStage, $this->_getWorkType(), $this->_getFilter(), $this->_getRange(), $this->_getCountrySelection(), $this->view->user);
+    
+    $path = APPLICATION_PATH.'/../public/assets/cache/applications_stage'.$currentStage->stage_id.'.csv';
+    $handle = fopen($path, 'w');
+    $fields = array(
+        'Imię', 'Nazwisko', 'Tytuł', 'Kraj', 'Adres', 'E-mail', 'Telefon', 'Szkoła', 'Wydział', 'Promotor', 'Dyplom', 'Opis', 'Opis angielski', 'Strona projektu', '2D/3D', 'Model 3D', 'Skala modelu', 'Data obrony');
+        fputcsv($handle, $fields);
+    $i = 1;
+    foreach($applications as $application) {
+      $fields = array(
+          $application->user->name,
+          $application->user->surname,          
+          $application->work_subject,          
+          $this->view->translate($application->country),
+          $application->user->address,
+          $application->user->email,
+          $application->user->phone,
+          $application->school->school_name,
+          $application->department,
+          $application->supervisor_degree .' '.$application->supervisor,
+          $this->view->translate($application->degree->degree_name),
+          $application->work_desc,
+          $application->work_desc_eng,
+          $application->work_site,
+          $application->work_type->work_type_name,
+          $application->model_3d ? 'Tak' : 'Nie',
+          $application->model_scale,
+          date('d.m.Y', $application->graduation_time)
+      );
+      fputcsv($handle, $fields);
+    }
+    
+    $response = $this->getResponse();
+    $response->setHeader('Content-type', 'application/octet-stream');
+    $response->setHeader('Content-Disposition', 'attachment; filename="applications_stage'.$currentStage->stage_id.'.csv"');
+    readfile($path);
+  }
 
   public function newAction()
   {
