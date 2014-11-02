@@ -35,7 +35,7 @@ class Application_Form_Edition extends Zefir_Form
 		->setDecorators($this->_getZefirDecorators())
 		->setRequired(TRUE)
 		->addValidators(array(
-		new Zend_Validate_Regex('/^[0-9]{4}.+[0-9]{4}$/'),
+		new Zend_Validate_Regex('/^[0-9]{4}(.+[0-9]{4})?$/'),
 		new Zend_Validate_StringLength(array('min' => 0, 'max' => 15)),
 		new Zefir_Validate_Unique(array(
         							'table' => 'editions',
