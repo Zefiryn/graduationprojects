@@ -17,10 +17,12 @@ class IndexController extends Zefir_Controller_Action
 		$request = $this->getRequest();
 		$page = $request->getParam('page', 1);
 		
-		if ($this->view->user->role == 'admin')
+		if ($this->view->user->role == 'admin') {
 			$this->view->news_list = $news->getAll(array($page, false));
-		else
+        }
+		else {
 			$this->view->news_list = $news->getAll(array($page, true));
+        }
 
 		$this->view->pages = $news->getPagination($this->view->user->role);
 
