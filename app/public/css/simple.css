@@ -116,7 +116,7 @@ menu {
 }
 
 menu:hover menu,.open_menu {
-  height: 300px;
+  height: 360px;
   -webkit-transition: height 900ms;
   -moz-transition: height 900ms;
   -o-transition: height 900ms;
